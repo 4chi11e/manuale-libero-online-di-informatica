@@ -23,7 +23,7 @@ email: francesco.tormene@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Dispensa Online di Informatica per il Liceo Scientifico delle Scienze Applicate
 baseurl: "/dispensa-di-informatica" # the subpath of your site, e.g. /blog
-# url: "https://4chi11e.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://4chi11e.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  4chi11e
 permalink: pretty
 
