@@ -151,7 +151,7 @@ layout: table_wrappers
         {% endif %}
 
         {% capture footer_custom %}
-          {%- include footer_custom.html -%}
+          {% include footer_custom.html %}
         {% endcapture %}
         {% if footer_custom != "" or site.last_edit_timestamp or site.gh_edit_link %}
           <hr>
