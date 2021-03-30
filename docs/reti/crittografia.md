@@ -830,16 +830,16 @@ Accenniamo qui soltanto al fatto che esistono metodi per dimostrare che un inter
 Questo è un grande risultato, che ha risolto una congettura rimasta aperta per decenni. Il loro algoritmo però non è ancora utilizzato in pratica, perché è molto più lento dei test probabilistici, i quali, del resto, sono *quasi certi* per i primi di centinaia di cifre che servono attualmente in crittografia.
 
 ## Aritmetica modulo n
-Nel seguito N e Z denoteranno rispettivamente l'insieme dei numeri naturali {0,1,2,...} e l'insieme degli interi relativi {...,-2,-1,0,+1,+2,...}.
-Dati a, b in Z ed n > 1 in N, diciamo che * **a** è congruo a **b modulo n** * se a e b divisi per n danno lo stesso resto; in questo caso scriviamo una relazione di equivalenza. a  b mod(n). La relazione di congruenza è una relazione di equivalenza.
+Nel seguito **N** e **Z** denoteranno rispettivamente l'insieme dei numeri naturali {0,1,2,...} e l'insieme degli interi relativi {...,-2,-1,0,+1,+2,...}.
+Dati a, b in **Z** ed n > 1 in N, diciamo che ***a*** *è congruo a* ***b modulo n*** se a e b divisi per n danno lo stesso resto; in questo caso scriviamo una relazione di equivalenza. *a ≡ b* mod(*n*). La relazione di congruenza è una relazione di equivalenza.
 
 Esempio 
 L'aritmetica dei moduli prende in considerazione un gruppo limitato di numeri disposti
 ad anello, un po’ come le ore sul quadrante dell'orologio.\
 Consideriamo ad esempio un quadrante contenente solo 7 numeri, da 0 a 6, corrispondente al modulo 7. \
-Per calcolare 2 + 3 si partirà da 2 e ci si sposterà di 3 numeri, ottenendo 5. Per calcolare 2 + 6 si partirà da 2 e ci si sposterà di 6 numeri. In questo modo, attraversando l'intero anello, si otterrà come risultato 1.
-In pratica: \
-2 + 3 = 5 mod(7) \
+Per calcolare 2 + 3 si partirà da 2 e ci si sposterà di 3 numeri, ottenendo 5. Per calcolare 2 + 6 si partirà da 2 e ci si sposterà di 6 numeri. In questo modo, attraversando l'intero anello, si otterrà come risultato 1.  
+In pratica:  
+2 + 3 = 5 mod(7)  
 2 + 6 = 1 mod(7)
 {: .code-example}
 
@@ -847,31 +847,38 @@ In pratica: \
   <img src="{{site.baseurl}}/assets/images/Crittografia-congruenza-modulo.jpg">
 </div>
 
-Ovviamente a ≡ b mod(n) se e solo se a = n · b + k con k in Z. 
+Ovviamente *a ≡ b* mod(*n*) se e solo se *a = n · b + k* con *k* in ***Z***. 
 
 Per indicare tutti i numeri che differiscono tra di loro per un multiplo di n si usa il nome **classe di resto modulo n** (insieme di numeri che hanno in comune il resto della divisione per n). 
 
 Tali classi sono indicate usando tale resto con una sopralineatura: 
-- 0 <ins>classe di resto modulo 0</ins>: insieme dei numeri interi che divisi per n danno 0; 
-- 1 <ins>classe di resto modulo 1</ins>: insieme dei numeri interi che divisi per n danno 1; 
+- <span class="overline">0</span> <ins>classe di resto modulo 0</ins>: insieme dei numeri interi che divisi per *n* danno 0; 
+- <span class="overline">1</span> <ins>classe di resto modulo 1</ins>: insieme dei numeri interi che divisi per *n* danno 1; 
 - … 
-- n-1 <ins>classe di resto modulo n-1</ins>: insieme dei numeri interi che divisi per n danno n-1; 
+- <span class="overline">n-1</span> <ins>classe di resto modulo n-1</ins>: insieme dei numeri interi che divisi per *n* danno *n*-1; 
 
-Si indica con Z<sub>n</sub> l’**insieme delle classi di resto modulo n**: Z<sub>n</sub> = {0, 1, ..., n-1}. 
+Si indica con **Z**<sub>*n*</sub> l’**insieme delle classi di resto modulo** ***n***: **Z**<sub>*n*</sub> = {<span class="overline">0</span>, <span class="overline">1</span>, ..., <span class="overline">n-1</span>}. 
 
 Sono valide le seguenti proprietà: \
-a + b = a + b \
-a · b = a · b 
+<span class="overline">a</span> + <span class="overline">b</span> = <span class="overline">a + b</span>  
+<span class="overline">a</span> · <span class="overline">b</span> = <span class="overline">a · b</span> 
 
-(esempio mancante)
+<div class="esempio" markdown=1>
+  **Esempio**  
+  Operazioni in Z<sub>5</sub>
+  {: .mb-0 .mt-0}
+
+  ![addizioni e moltiplicazioni in Z5]({{site.baseurl}}/assets/images/operazioni-in-Z5.jpg)
+  {: .ta-c .mb-0 .mt-0}
+</div>
 
 ### Il cifrario di Cesare “generalizzato” con l’aritmetica modulo n
 
 Precedentemente abbiamo parlato del [cifrario di Cesare](#cifratura-di-cesare-ii-secolo-dc) e di come fosse possibile generare messaggi cifrati per mezzo di questo metodo. Vedremo ora come sia possibile generalizzare tale sistema di cifratura utilizzando le classi di resto, e ottenendo così una cifratura che non trasla soltanto le lettere dell’alfabeto, ma le “rimescola”. 
 
-Consideriamo l’insieme delle classi di resto modulo 26, e associamo ad ogni lettera dell’alfabeto una classe di resto modulo 26. Fissiamo due numeri, detti parametri di cifratura, e otteniamo la lettera che sostituirà la lettera indicata dalla classe x con quella individuata dalla classe y per mezzo della formula: 
+Consideriamo l’insieme delle classi di resto modulo 26, e associamo ad ogni lettera dell’alfabeto una classe di resto modulo 26. Fissiamo due numeri, detti **parametri di cifratura**, e otteniamo la lettera che sostituirà la lettera indicata dalla classe <span class="overline">x</span> con quella individuata dalla classe <span class="overline">y</span> per mezzo della formula: 
 
-y = a · x + b 
+<span class="overline">y</span> = <span class="overline">a · x + b</span>
 
 <div class="code-example" markdown="1">
 
@@ -879,41 +886,41 @@ y = a · x + b
 
   |CHIARO|a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|
   | |1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|
-  |y=5x+1 |6|11|16|21|0|5|10|15|20|25|4|9|14|19|24|3|8|13|18|23|2|7|12|17|22|1|
+  |<span class="overline">y</span>=<span class="overline">5·*x*+1</span> |6|11|16|21|0|5|10|15|20|25|4|9|14|19|24|3|8|13|18|23|2|7|12|17|22|1|
   |CIFRATO|F|K|P|U|Z|E|J|O|T|Y|D|I|N|S|X|C|H|M|R|W|B|G|L|Q|V|A|
   {: .fs-4}
 
-Testo chiaro: veni, vidi, vici
+Testo chiaro: veni, vidi, vici  
 Testo cifrato: gzst, gtut, gtpt
 </div>
 
-Risulta evidente che non tutte le scelte dei numeri a e b possono portare a una corretta cifratura e decifratura del messaggio: in particolare, è necessario che ogni lettera dell’alfabeto chiaro sia cifrata con una lettera differente, per evitare ambiguità nell’operazione di decrittazione. 
+Risulta evidente che non tutte le scelte dei numeri *a* e *b* possono portare a una corretta cifratura e decifratura del messaggio: in particolare, è necessario che ogni lettera dell’alfabeto chiaro sia cifrata con una lettera differente, per evitare ambiguità nell’operazione di decrittazione. 
 
-Si può dimostrare che, per avere una “buona” chiave di cifratura, occorre scegliere *a* in modo tale che a abbia inverso in Z<sub>26</sub>.
+Si può dimostrare che, per avere una “buona” chiave di cifratura, occorre scegliere *a* in modo tale che *<span class="overline">a</span>* abbia inverso in ***Z***<sub>26</sub>.
 
 #### Identità di Bézout 
 
-Se *d* = MCD(a, b) allora esistono degli interi *x* e *y* tali che *d* = *a · x + b · y* 
+Se *d* = MCD(*a, b*) allora esistono degli interi *x* e *y* tali che *d* = *a · x + b · y* 
 
 ### Funzione e Teorema di Eulero
 
-La funzione di Eulero *$$\phi$$(n)* **indica il numero di elementi invertibile in *Z<sub>n</sub>***, e può essere anche interpretato come **il numero di interi minori di n e relativamente primi con esso.** Poiché contare le classi invertibili in *Z<sub>n</sub>* è come contare i numeri tra 1 e n-1 che sono coprimi con n, si può affermare che: 
+La funzione di Eulero *$$\phi$$(n)* **indica il numero di elementi invertibile in *Z<sub>n</sub>***, e può essere anche interpretato come **il numero di interi minori di *n* e relativamente primi con esso.** Poiché contare le classi invertibili in ***Z***<sub>*n*</sub> è come contare i numeri tra 1 e *n*-1 che sono coprimi con *n*, si può affermare che: 
 
-  se *n = p* è primo, si ha *$$\phi$$(p) = p - 1*
+  se *n = p* è primo, si ha *$$\phi$$(p) = *p* - 1
   {: .ml-4}
 
 Si ha inoltre: 
 
   se *n = p<sup>r</sup>* con *p* primo, si ha *$$\phi$$(n) = $$\phi$$(p<sup>r</sup>) = p<sup>r-1</sup> · (p - 1)*  
-  se n = p<sup>r1</sup> · ... · p<sub>k</sub><sup>rk</sup> con p<sub>1</sub>,..., p<sub>k</sub> primi diversi tra loro, si ha 
+  se *n = p<sub>1</sub><sup>r1</sup> · ... · p<sub>k</sub><sup>rk</sup>* con *p<sub>1</sub>,..., p<sub>k</sub>* primi diversi tra loro, si ha 
   {: .ml-4}
 
-  $$\phi$$(n) = p<sub>1</sub><sup>r1-1</sup> (p<sub>1</sub>-1) ... p<sub>k</sub><sup>rk-1</sup> (p<sub>k</sub>-1)
+  *$$\phi$$(n) = p<sub>1</sub><sup>r1-1</sup> (p<sub>1</sub>-1) ... p<sub>k</sub><sup>rk-1</sup> (p<sub>k</sub>-1)*
   {: .ta-c}
 
 La funzione di Eulero è alla base dell’importantissimo **Teorema di Eulero**:
 
-<div class="code-example" markdown="1">
+<div class="importante" markdown="1">
   Siano *a* e *n* due numeri interi positivi primi tra loro. Allora:    
   
   ***a<sup>$$\phi$$(n)</sup>* ≡ 1 mod(*n*)**
@@ -941,7 +948,21 @@ Vediamo come si sarebbe potuto ottenere lo stesso risultato con la funzione e il
 
 La cifra finale (il numero di unità) di 13<sup>5</sup> è quindi 3, come risultava dal calcolo diretto.
 
-**manca l'esempio**
+<div class="esempio" markdown=1>
+  **Esempio**
+  Si vogliono calcolare le ultime due cifre decimali (decine e unità) del numero 203<sup>327</sup>.  
+  Le ultime due cifre decimali corrispondono al resto della divisione per 100.  
+  Si procede quindi nel seguente modo:
+  {: .mt-0 .mb-1}
+
+<span class="overline"></span>
+
+  - 203 ≡ 3 mod(100)
+  - <span class="overline">*x*</span> = <span class="overline">203<sup>327</sup></span> = <span class="overline">3</span><sup>327</sup>
+  - *a* = 3; *n* = 100; *$$\phi$$*(100) = *$$\phi$$*(2<sup>2</sup> · 5<sup>2</sup>) = 2<sup>2-1</sup> · (2 - 1) · 5<sup>2-1</sup> · (5 - 1) = 40  
+  quindi: 3<sup>40</sup> ≡ 1 mod(100)
+  - <span class="overline">3</span><sup>327</sup> = <span class="overline">3</span><sup>8·40+7</sup> = (<span class="overline">3</span><sup>40</sup>)<sup>8</sup> · <span class="overline">3</span><sup>7</sup> = <span class="overline">1</span> · <span class="overline">3</span><sup>7</sup> = <span class="overline">2187</span> = <span class="overline">87</span>
+</div>
 
 ## La crittografia a chiave pubblica o asimmetrica
 
@@ -995,8 +1016,30 @@ Questa idea però non è immediatamente traducibile in un modello matematico, in
 
 Tutto ciò risulta evidente dall’esempio che segue.
 
-**(Da sistemare l'esempio)**
-a b c d e f g h i j k l m n o p q r s t u v w x y z H F S U G T A K V D E O Y J B P N X W C Q R I M Z L a b c d e f g h i j k l m n o p q r s t u v w x y z C P M G A T N O J E F W I Q B U R Y H X S D Z K L V 
+<div class="esempio" markdown=1>
+  **Esempio**
+
+  Chiave di Alice
+
+  |a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z
+  |H|F|S|U|G|T|A|K|V|D|E|O|Y|J|B|P|N|X|W|C|Q|R|I|M|Z|L
+  {: .tbl-mini}
+  
+  Chiave di Bob
+
+  |a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z
+  |C|P|M|G|A|T|N|O|J|E|F|W|I|Q|B|U|R|Y|H|X|S|D|Z|K|L|V 
+  {: .tbl-mini}
+
+  <div class="tbl-nowrapper" markdown=1>
+  |MESSAGGIO:|ci vediamo
+  |Cifrato da Alice:|SV RGUVHYB
+  |Ricifrato da Bob:|HD YNSDOLP
+  |Decifrato da Alice:|AJ MQCJLZP
+  |Decifrato da Bob:|EI CNAIYWB
+  {: .invisible .distanzia-colonne-3}
+  </div>
+</div>
 
 Questo problema fu affrontato e risolto negli anni ’70 del secolo scorso dai ricercatori Whitfield Diffie, Martin Hellman e Ralph Merkle.
 
@@ -1007,6 +1050,7 @@ Dalla tabella che segue si può osservare ad esempio come la potenza cresca rego
 |*x*|1|2|3|4|5|6|7|8|9|10|
 |3<sup>*x*</sup>|3|9|27|81|243|729|2187|6561|19683|59049|
 |3<sup>*x*</sup> mod(5)|3|4|2|1|3|4|2|1|3|4|
+{: .ta-r}
 
 Inoltre, dalla tabella si evince come in aritmetica normale sia immediato, dato un valore di x, ricavare il corrispondente valore della funzione, e viceversa, dato il valore della funzione ricavare x. In aritmetica dei moduli il comportamento “imprevedibile” della funzione rende questa inversione estremamente difficile.
 
@@ -1190,15 +1234,20 @@ Supponiamo allora che Bob le voglia mandare un messaggio costituito da vediamo q
 
 1. ricevuto il messaggio Alice ricava *m* mediante la formula *m* = *c<sup>d</sup>* mod(*N*):
 
-  m = 1570<sup>1019</sup> mod(3337) = 688
+  *m* = 1570<sup>1019</sup> mod(3337) = 688
   {: .ta-c}
 
 L’unico modo per Eva di decifrare il messaggio è di avere *d* e quindi di riuscire a ottenere *p* e *q* dalla fattorizzazione di *N*: come detto precedentemente, il processo di fattorizzazione di un numero nei suoi fattori primi è un processo molto lungo, specialmente se si ha a che fare con numeri molto grandi.
 
 La segretezza nella comunicazioni tra Alice e Bob è quindi assicurata!
 
-(manca esempio)
-(manca link)
+**Esempio**  
+Si scelgono due numeri primi *p* = 7, *q* = 17
+si calcola *n = p · q* = 7 · 17 = 119  
+si calcola *$$\phi$$(n)* = (*p* - 1) · (*q* - 1) = 6 · 16 = 96  
+si sceglie *e < $$\phi$$(n)*, relativamente primo con *$$\phi$$(n), e* = 5  
+si determina *d* tale che *d* · *e* mod(96) = 1 e *d* < 96, *d* = 77 (infatti 77 · 5 = 385 = 96 · 4 + 1)
+{: .esempio}
 
 #### Curiosità e considerazioni 
 Samuel Wagstaff, docente di informatica all’Università dell’Indiana, è riuscito a fattorizzare un numero di 167 cifre in centomila ore di tempo computer. Il numero della prova era: 
@@ -1218,11 +1267,12 @@ Fatto sta che il commercio elettronico ha già iniziato a farne uso e alcuni ann
 
 Da quanto esposto nei precedenti paragrafi risulta chiaro che la conoscenza di numeri primi molto “grandi” permette di effettuare cifrature RSA sempre più potenti. La ricerca di tali numeri costituisce quindi, da un po’ di anni a questa parte, un vero e proprio business, e molte aziende hanno come solo scopo quello di trovarne di sempre più grandi. Nella tabella seguente sono riportati alcuni dei numeri scoperti negli ultimi anni. 
 
-(manca immagine sui numeri trovati)
+![numeri primi trovati]({{site.baseurl}}/assets/images/numeri-primi-trovati.jpg)
+
+I numeri della forma 2<sup>*n*</sup> - 1 sono detti numeri di Mersenne e sono indicati con *M<sub>n</sub>*. In generale questi numeri non sono primi, nemmeno se *n* è primo (per esempio *M*<sub>11</sub> = 2047 = 89 · 23); non si sa nemmeno se di numeri di Mersenne primi ce ne siano un numero finito o se siano infiniti.
+{: .thumbnail--testo .float-right .mt-0}
 
 Da molti anni accade che il più grande numero primo noto sia un primo di Mersenne. Chi volesse capovolgere la situazione, e trovare un numero primo "generico" più grande dovrà ancora una volta alzare il tiro (e di parecchio). Il 42-esimo primo di Mersenne ha "appena" 7.816.230 cifre, e sembra piccolo posto accanto al nuovo arrivato.
-
-I numeri della forma 2<sup>*n*</sup> - 1 sono detti numeri di Mersenne e sono indicati con *M<sub>n</sub>*. In generale questi numeri non sono primi, nemmeno se *n* è primo (per esempio *M*<sub>11</sub> = 2047 = 89 · 23); non si sa nemmeno se di numeri di Mersenne primi ce ne siano un numero finito o se siano infiniti. 
 
 Il più recente primo di Mersenne (il 43-esimo) è stato scoperto il 15 Dicembre 2005 da Curtis Cooper e Steven Boone: 
 
@@ -1271,7 +1321,8 @@ e $$ {\pi(2^{127})} $$ come:
   
 e quindi $$ {\pi(2^{128}-\pi(2^{127})) \approx 10^{36}} $$. Stiamo cauti nella stima e diciamo che ne abbiamo almeno 10<sup>30</sup> (in realtà potremmo anche dire con sicurezza 10<sup>35</sup> ). I prodotti di due numeri di questa forma sono allora dell’ordine di 10<sup>60</sup>. Immagazzinarli in forma binaria richiede allora $$ {2^{256} \cdot 10^{60} \approx 2^{256} \cdot 2^{199} = 2^{455}} $$ bit, quindi $$ {2^{452} \approx 10^{136} } $$ byte. Un terabyte è circa 10<sup>12</sup> byte, quindi servirebbe qualcosa come 10<sup>124</sup> terabyte. Troppi anche solo da immaginare: il diametro della Galassia in metri è 10<sup>21</sup>. Più sensato è pensare di fattorizzare N, ma l’unico modo conosciuto è di dividerlo successivamente per 2, 3, e così via. E’ probabile che, nel momento in cui si è ottenuta la fattorizzazione richiesta, la chiave pubblica sia cambiata da parecchi mesi, si faccia un conto approssimativo del tempo richiesto. 
 
-Un numero è detto semiprimo (anche detto biprimo o 2-quasi primo, o pq numero) è un numero naturale che è il prodotto di numeri primi (non necessariamente distinti). I primi numeri semiprimi sono: <span class="fs-2">4, 6, 9, 10, 14, 15, 21, 22, 25, 26, 33, 34, 35, 38, 39, 46, 49, 51, 55, 57, 58, 62, 65, 69, 74, 77, 82, 85, 86, 87, 91, 93, 94, 95, 106, 111, 115, 118, 119, 121, 122, 123, 129, 133, 134, 141, 142, 143, 145, 146, 155, 158, 159, 161, 166, 169, 177, 178, 183, 185, 187.<span>
+Un numero è detto semiprimo (anche detto biprimo o 2-quasi primo, o pq numero) è un numero naturale che è il prodotto di numeri primi (non necessariamente distinti). I primi numeri semiprimi sono: <span class="fs-2">4, 6, 9, 10, 14, 15, 21, 22, 25, 26, 33, 34, 35, 38, 39, 46, 49, 51, 55, 57, 58, 62, 65, 69, 74, 77, 82, 85, 86, 87, 91, 93, 94, 95, 106.<span>
+<!-- 111, 115, 118, 119, 121, 122, 123, 129, 133, 134, 141, 142, 143, 145, 146, 155, 158, 159, 161, 166, 169, 177, 178, 183, 185, 187. -->
 {: .thumbnail--testo .float-right .mt--1}
 
 In matematica, RSA-2048 è il più grande dei numeri RSA (semiprimi grandi che fanno parte del RSA Factoring Challenge), e ad esso è associato il premio più grande per la sua fattorizzazione: 200000 dollari.  
@@ -1280,8 +1331,8 @@ RSA-2048 è un numero con 617 cifre decimali (2048 bits)!
 
 RSA-2048 = 
 {: .mb-0 .clear-both}
-
-  251959084756578934940271832400483985714292821262040320277771378360436 620207075955562640185258807844069182906412495150821892985591491761845 028084891200728449926873928072877767359714183472702618963750149718246 911650776133798590957000973304597488084284017974291006424586918171951 187461215151726546322822168699875491824224336372590851418654620435767 984233871847744479207399342365848238242811981638150106748104516603773 060562016196762561338441436038339044149526344321901146575444541784240 209246165157233507787077498171257724679629263863563732899121548314381 67899885040445364023527381951378636564391212010397122822120720357
+  25195908475657893494027183240048398571429282126204032027777137836043662020707595556264018525880784406918290641249515082189298559149176184502808489120072844992687392807287776735971418347270261896375014971824691165077613379859095700097330459748808428401797429100642458691817195118746121515172654632282216869987549182422433637259085141865462043576798423387184774447920739934236584823824281198163815010674810451660377306056201619676256133844143603833904414952634432190114657544454178424020924616515723350778707749817125772467962926386356373289912154831438167899885040445364023527381951378636564391212010397122822120720357
+  <!-- 251959084756578934940271832400483985714292821262040320277771378360436 620207075955562640185258807844069182906412495150821892985591491761845 028084891200728449926873928072877767359714183472702618963750149718246 911650776133798590957000973304597488084284017974291006424586918171951 187461215151726546322822168699875491824224336372590851418654620435767 984233871847744479207399342365848238242811981638150106748104516603773 060562016196762561338441436038339044149526344321901146575444541784240 209246165157233507787077498171257724679629263863563732899121548314381 67899885040445364023527381951378636564391212010397122822120720357 -->
   {: .ml-4 .mr-4 .fs-4 .mt-0}
 
   
@@ -1313,10 +1364,3 @@ Il più grande numero RSA mai fattorizzato è composto da 200 cifre decimali (66
 - [Pagina originale (in locale) dell'applet per sperimentare gli algoritmi di cifratura antichi]({{site.baseurl}}/assets/documenti/crittografia-cifrari_antichi.html)
 - [Pagina originale (esterna) dell'applet per sperimentare gli algoritmi di cifratura antichi](http://utenti.quipo.it/base5/combinatoria/crittografia2.htm)
 
-
-<script src="{{site.baseurl}}/assets/js/bordi-tabelle.js"></script>
-
-<!-- 
-<ul class="permalink_section">
-  <li><a href="../fonti/crittografia.pdf">Appunti di Crittografia, una introduzione all'algebra moderna - Ing. Emanuele Salvador</a></li>
-</ul> -->
