@@ -403,6 +403,13 @@ a {
   }
 }
 
+.tbl-nowrapper{
+  .table-wrapper{
+    box-shadow: none;
+    width: fit-content;
+  }
+}
+
 // .tbl-cifratura {
 //   th {
 //     text-align: center;
@@ -576,6 +583,47 @@ table.invisible td {
   margin: 0px;
   padding-right: $sp-1;
 }
+// table.stretta,
+// table.stretta td{
+//   width: fit-content !important;
+//   min-width: fit-content !important;
+// }
+
+.tbl-mini th,
+.tbl-mini td{
+  @include fs-2;
+  padding: 2.5px !important;
+  text-align: center;
+}
+
+.distanzia-colonne-1 td,
+.distanzia-colonne-1 th{
+  padding-right: 1em !important;
+  &:last-child{
+    padding-right: 0;
+  }
+}
+.distanzia-colonne-2 td,
+.distanzia-colonne-2 th{
+  padding-right: 2em !important;
+  &:last-child{
+    padding-right: 0;
+  }
+}
+.distanzia-colonne-3 td,
+.distanzia-colonne-3 th{
+  padding-right: 3em !important;
+  &:last-child{
+    padding-right: 0;
+  }
+}
+
+// .tab-fs-1{@include fs-1}
+// .tab-fs-2{@include fs-2}
+// .tab-fs-3{@include fs-3}
+// .tab-fs-4{@include fs-4}
+// .tab-fs-5{@include fs-5}
+
 
 // Index
 .titolone {

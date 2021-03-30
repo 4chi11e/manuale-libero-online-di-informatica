@@ -913,7 +913,7 @@ Si ha inoltre:
 
 La funzione di Eulero è alla base dell’importantissimo **Teorema di Eulero**:
 
-<div class="code-example" markdown="1">
+<div class="importante" markdown="1">
   Siano *a* e *n* due numeri interi positivi primi tra loro. Allora:    
   
   ***a<sup>$$\phi$$(n)</sup>* ≡ 1 mod(*n*)**
@@ -995,8 +995,30 @@ Questa idea però non è immediatamente traducibile in un modello matematico, in
 
 Tutto ciò risulta evidente dall’esempio che segue.
 
-**(Da sistemare l'esempio)**
-a b c d e f g h i j k l m n o p q r s t u v w x y z H F S U G T A K V D E O Y J B P N X W C Q R I M Z L a b c d e f g h i j k l m n o p q r s t u v w x y z C P M G A T N O J E F W I Q B U R Y H X S D Z K L V 
+<div class="esempio" markdown=1>
+  **Esempio**
+
+  Chiave di Alice
+
+  |a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z
+  |H|F|S|U|G|T|A|K|V|D|E|O|Y|J|B|P|N|X|W|C|Q|R|I|M|Z|L
+  {: .tbl-mini}
+  
+  Chiave di Bob
+
+  |a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z
+  |C|P|M|G|A|T|N|O|J|E|F|W|I|Q|B|U|R|Y|H|X|S|D|Z|K|L|V 
+  {: .tbl-mini}
+
+  <div class="tbl-nowrapper" markdown=1>
+  |MESSAGGIO:|ci vediamo
+  |Cifrato da Alice:|SV RGUVHYB
+  |Ricifrato da Bob:|HD YNSDOLP
+  |Decifrato da Alice:|AJ MQCJLZP
+  |Decifrato da Bob:|EI CNAIYWB
+  {: .invisible .distanzia-colonne-3}
+  </div>
+</div>
 
 Questo problema fu affrontato e risolto negli anni ’70 del secolo scorso dai ricercatori Whitfield Diffie, Martin Hellman e Ralph Merkle.
 
@@ -1007,6 +1029,7 @@ Dalla tabella che segue si può osservare ad esempio come la potenza cresca rego
 |*x*|1|2|3|4|5|6|7|8|9|10|
 |3<sup>*x*</sup>|3|9|27|81|243|729|2187|6561|19683|59049|
 |3<sup>*x*</sup> mod(5)|3|4|2|1|3|4|2|1|3|4|
+{: .ta-r}
 
 Inoltre, dalla tabella si evince come in aritmetica normale sia immediato, dato un valore di x, ricavare il corrispondente valore della funzione, e viceversa, dato il valore della funzione ricavare x. In aritmetica dei moduli il comportamento “imprevedibile” della funzione rende questa inversione estremamente difficile.
 
@@ -1190,15 +1213,20 @@ Supponiamo allora che Bob le voglia mandare un messaggio costituito da vediamo q
 
 1. ricevuto il messaggio Alice ricava *m* mediante la formula *m* = *c<sup>d</sup>* mod(*N*):
 
-  m = 1570<sup>1019</sup> mod(3337) = 688
+  *m* = 1570<sup>1019</sup> mod(3337) = 688
   {: .ta-c}
 
 L’unico modo per Eva di decifrare il messaggio è di avere *d* e quindi di riuscire a ottenere *p* e *q* dalla fattorizzazione di *N*: come detto precedentemente, il processo di fattorizzazione di un numero nei suoi fattori primi è un processo molto lungo, specialmente se si ha a che fare con numeri molto grandi.
 
 La segretezza nella comunicazioni tra Alice e Bob è quindi assicurata!
 
-(manca esempio)
-(manca link)
+**Esempio**  
+Si scelgono due numeri primi *p* = 7, *q* = 17
+si calcola *n = p · q* = 7 · 17 = 119  
+si calcola *$$\phi$$(n)* = (*p* - 1) · (*q* - 1) = 6 · 16 = 96  
+si sceglie *e < $$\phi$$(n)*, relativamente primo con *$$\phi$$(n), e* = 5  
+si determina *d* tale che *d* · *e* mod(96) = 1 e *d* < 96, *d* = 77 (infatti 77 · 5 = 385 = 96 · 4 + 1)
+{: .esempio}
 
 #### Curiosità e considerazioni 
 Samuel Wagstaff, docente di informatica all’Università dell’Indiana, è riuscito a fattorizzare un numero di 167 cifre in centomila ore di tempo computer. Il numero della prova era: 
@@ -1218,11 +1246,12 @@ Fatto sta che il commercio elettronico ha già iniziato a farne uso e alcuni ann
 
 Da quanto esposto nei precedenti paragrafi risulta chiaro che la conoscenza di numeri primi molto “grandi” permette di effettuare cifrature RSA sempre più potenti. La ricerca di tali numeri costituisce quindi, da un po’ di anni a questa parte, un vero e proprio business, e molte aziende hanno come solo scopo quello di trovarne di sempre più grandi. Nella tabella seguente sono riportati alcuni dei numeri scoperti negli ultimi anni. 
 
-(manca immagine sui numeri trovati)
+![numeri primi trovati]({{site.baseurl}}/assets/images/numeri-primi-trovati.jpg)
+
+I numeri della forma 2<sup>*n*</sup> - 1 sono detti numeri di Mersenne e sono indicati con *M<sub>n</sub>*. In generale questi numeri non sono primi, nemmeno se *n* è primo (per esempio *M*<sub>11</sub> = 2047 = 89 · 23); non si sa nemmeno se di numeri di Mersenne primi ce ne siano un numero finito o se siano infiniti.
+{: .thumbnail--testo .float-right .mt-0}
 
 Da molti anni accade che il più grande numero primo noto sia un primo di Mersenne. Chi volesse capovolgere la situazione, e trovare un numero primo "generico" più grande dovrà ancora una volta alzare il tiro (e di parecchio). Il 42-esimo primo di Mersenne ha "appena" 7.816.230 cifre, e sembra piccolo posto accanto al nuovo arrivato.
-
-I numeri della forma 2<sup>*n*</sup> - 1 sono detti numeri di Mersenne e sono indicati con *M<sub>n</sub>*. In generale questi numeri non sono primi, nemmeno se *n* è primo (per esempio *M*<sub>11</sub> = 2047 = 89 · 23); non si sa nemmeno se di numeri di Mersenne primi ce ne siano un numero finito o se siano infiniti. 
 
 Il più recente primo di Mersenne (il 43-esimo) è stato scoperto il 15 Dicembre 2005 da Curtis Cooper e Steven Boone: 
 
@@ -1271,7 +1300,8 @@ e $$ {\pi(2^{127})} $$ come:
   
 e quindi $$ {\pi(2^{128}-\pi(2^{127})) \approx 10^{36}} $$. Stiamo cauti nella stima e diciamo che ne abbiamo almeno 10<sup>30</sup> (in realtà potremmo anche dire con sicurezza 10<sup>35</sup> ). I prodotti di due numeri di questa forma sono allora dell’ordine di 10<sup>60</sup>. Immagazzinarli in forma binaria richiede allora $$ {2^{256} \cdot 10^{60} \approx 2^{256} \cdot 2^{199} = 2^{455}} $$ bit, quindi $$ {2^{452} \approx 10^{136} } $$ byte. Un terabyte è circa 10<sup>12</sup> byte, quindi servirebbe qualcosa come 10<sup>124</sup> terabyte. Troppi anche solo da immaginare: il diametro della Galassia in metri è 10<sup>21</sup>. Più sensato è pensare di fattorizzare N, ma l’unico modo conosciuto è di dividerlo successivamente per 2, 3, e così via. E’ probabile che, nel momento in cui si è ottenuta la fattorizzazione richiesta, la chiave pubblica sia cambiata da parecchi mesi, si faccia un conto approssimativo del tempo richiesto. 
 
-Un numero è detto semiprimo (anche detto biprimo o 2-quasi primo, o pq numero) è un numero naturale che è il prodotto di numeri primi (non necessariamente distinti). I primi numeri semiprimi sono: <span class="fs-2">4, 6, 9, 10, 14, 15, 21, 22, 25, 26, 33, 34, 35, 38, 39, 46, 49, 51, 55, 57, 58, 62, 65, 69, 74, 77, 82, 85, 86, 87, 91, 93, 94, 95, 106, 111, 115, 118, 119, 121, 122, 123, 129, 133, 134, 141, 142, 143, 145, 146, 155, 158, 159, 161, 166, 169, 177, 178, 183, 185, 187.<span>
+Un numero è detto semiprimo (anche detto biprimo o 2-quasi primo, o pq numero) è un numero naturale che è il prodotto di numeri primi (non necessariamente distinti). I primi numeri semiprimi sono: <span class="fs-2">4, 6, 9, 10, 14, 15, 21, 22, 25, 26, 33, 34, 35, 38, 39, 46, 49, 51, 55, 57, 58, 62, 65, 69, 74, 77, 82, 85, 86, 87, 91, 93, 94, 95, 106.<span>
+<!-- 111, 115, 118, 119, 121, 122, 123, 129, 133, 134, 141, 142, 143, 145, 146, 155, 158, 159, 161, 166, 169, 177, 178, 183, 185, 187. -->
 {: .thumbnail--testo .float-right .mt--1}
 
 In matematica, RSA-2048 è il più grande dei numeri RSA (semiprimi grandi che fanno parte del RSA Factoring Challenge), e ad esso è associato il premio più grande per la sua fattorizzazione: 200000 dollari.  
@@ -1280,8 +1310,8 @@ RSA-2048 è un numero con 617 cifre decimali (2048 bits)!
 
 RSA-2048 = 
 {: .mb-0 .clear-both}
-
-  251959084756578934940271832400483985714292821262040320277771378360436 620207075955562640185258807844069182906412495150821892985591491761845 028084891200728449926873928072877767359714183472702618963750149718246 911650776133798590957000973304597488084284017974291006424586918171951 187461215151726546322822168699875491824224336372590851418654620435767 984233871847744479207399342365848238242811981638150106748104516603773 060562016196762561338441436038339044149526344321901146575444541784240 209246165157233507787077498171257724679629263863563732899121548314381 67899885040445364023527381951378636564391212010397122822120720357
+  25195908475657893494027183240048398571429282126204032027777137836043662020707595556264018525880784406918290641249515082189298559149176184502808489120072844992687392807287776735971418347270261896375014971824691165077613379859095700097330459748808428401797429100642458691817195118746121515172654632282216869987549182422433637259085141865462043576798423387184774447920739934236584823824281198163815010674810451660377306056201619676256133844143603833904414952634432190114657544454178424020924616515723350778707749817125772467962926386356373289912154831438167899885040445364023527381951378636564391212010397122822120720357
+  <!-- 251959084756578934940271832400483985714292821262040320277771378360436 620207075955562640185258807844069182906412495150821892985591491761845 028084891200728449926873928072877767359714183472702618963750149718246 911650776133798590957000973304597488084284017974291006424586918171951 187461215151726546322822168699875491824224336372590851418654620435767 984233871847744479207399342365848238242811981638150106748104516603773 060562016196762561338441436038339044149526344321901146575444541784240 209246165157233507787077498171257724679629263863563732899121548314381 67899885040445364023527381951378636564391212010397122822120720357 -->
   {: .ml-4 .mr-4 .fs-4 .mt-0}
 
   
@@ -1313,10 +1343,3 @@ Il più grande numero RSA mai fattorizzato è composto da 200 cifre decimali (66
 - [Pagina originale (in locale) dell'applet per sperimentare gli algoritmi di cifratura antichi]({{site.baseurl}}/assets/documenti/crittografia-cifrari_antichi.html)
 - [Pagina originale (esterna) dell'applet per sperimentare gli algoritmi di cifratura antichi](http://utenti.quipo.it/base5/combinatoria/crittografia2.htm)
 
-
-<script src="{{site.baseurl}}/assets/js/bordi-tabelle.js"></script>
-
-<!-- 
-<ul class="permalink_section">
-  <li><a href="../fonti/crittografia.pdf">Appunti di Crittografia, una introduzione all'algebra moderna - Ing. Emanuele Salvador</a></li>
-</ul> -->
