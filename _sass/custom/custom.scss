@@ -147,12 +147,21 @@
 
 $border-color-2: $grey-dk-100;
 
+.mb-0{
+  margin-bottom: 0 !important;
+}
+.mt-0{
+  margin-top: 0 !important;
+}
+
 body{
   color: black;
 }
 ol li::before, ul li::before{
   color: black !important;
 }
+
+$body-heading-color: $purple-300;
 
 h1,
 h2,
@@ -165,7 +174,6 @@ h6 {
   font-weight: 600;
   //line-height: $body-heading-line-height;
   color: $body-heading-color;
-
 }
 
 a {
