@@ -1,0 +1,211 @@
+/* Stile di BASE Cinque */
+/* Regole generali */
+body {
+    width: 640px;
+    padding: 5px;
+    margin: auto;
+    color: #000000;
+    font-size: 1.25em;
+    font-family: arial, sans-serif;
+    
+    border-left: 1px solid #EEEEEE;
+    border-right: 1px solid #EEEEEE;   
+}
+
+/* Intestazioni */
+h1 {
+	color:  #cc0404;
+    	font-size: 1.5em;
+	font-weight: normal;
+	margin-top: 1em;
+	margin-bottom: 0.50em;
+   }
+   
+h2 {
+	color:  #cc0404;
+	font-size: 1.3em;
+	font-weight: normal;
+	margin-top: 1em;
+	margin-bottom: 0.50em;
+    }
+    
+h3 {
+	color:  #cc0404;
+    	font-size: 1.1em;
+	font-weight: normal;
+	margin-top: 1em;
+	margin-bottom: 0.50em;
+   }
+   
+/* Paragrafi */
+/* normale */
+p  {
+    color: #000000;
+    text-align: left;
+    font-size: large;
+    margin-top: 0.2em;
+    margin-bottom: 0em;
+}
+/* didascalia - credit */
+.dida {
+	color: #000000;
+	font-size: 0.9em;
+	font-style: italic;
+	margin-top: 0em;
+	margin-bottom: 1em;
+} 
+.centrato  {
+    text-align: center;
+}
+/* data */ 
+.data
+{
+	margin-top: 2em;
+	margin-bottom: 0.5em;
+	padding: 2px;
+	font-size: 0.80em;
+    	font-weight: normal;
+	color:#555555;
+	border-top: 1px solid #333333;
+}
+/* blockquote - citazioni lunghe */
+blockquote {
+    padding-left: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0em;
+    margin-right: 1em;
+    font-style: italic;
+    border-left: 2px solid #CCCCCC;
+}
+
+/* bibliografia */   
+cite {
+      font-family: "DejaVu Sans Mono", monospace;
+      font-style: normal;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+   }
+   
+   /* preformattato */
+pre {
+     color: #000000;
+     font-family: "DejaVu Sans Mono", monospace;
+     font-size: 1.1em;
+     margin-top: 0.7em;
+     margin-bottom: 0.7em;
+}
+   /* lista ordinata, 1., 2., 3., ...*/
+ol {
+   margin-top: 0.5em;
+   margin-bottom: 0.5em;  
+}
+ol li {
+   color: #000000;
+   font-size: large;
+   margin-top: 0.3em;
+   margin-bottom: 0em;
+}
+
+   /* lista non ordinata (puntata)*/
+ul {
+   color: #000000;
+   margin-top: 0.5em;
+   margin-bottom: 0.5em;
+}
+ul li {
+   color: #000000;
+   font-size: large;
+   margin-top: 0.3em;
+   margin-bottom: 0em;
+}
+
+hr
+{
+	height: 1px;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	border: 0;
+	color: #333333;
+	background-color: #333333;
+}
+
+/* tabelle */
+table {
+	margin-top: 1em;
+	margin-bottom: 1em;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #808080;
+    border-collapse: collapse;
+    background-color: #FFFFFF;
+}
+
+table th {
+    border-width: 1px;
+    padding: 5px;
+    border-style: solid;
+    border-color: #808080;
+}
+
+table td {
+    border-width: 1px;
+    padding: 5px;
+    border-style: solid;
+    border-color: #808080;
+	vertical-align: top;
+	font-size: large;
+}
+/* usato per tabelle invisibili */
+.invisibile
+{
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 0;
+	border: none;
+    background-color: transparent;
+    vertical-align: middle;
+}
+
+a:link { color: blue; }
+a:visited { color: blue; }
+a:focus { color: black; }
+a:hover { color: red; }
+a:active { color: red; }
+
+/*
+------------------------
+Stile della home page
+------------------------
+*/
+/* div che contiene tutto con cornice filetto nero */
+.contenitore
+{
+	width: 640px;
+	padding: 0;
+	margin: 0 auto;
+	background-color: #FFFFFF;
+	border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+}
+/* div che contiene una sezione a sfondo bianco senza nessun bordo, per intestazione sito e contenuti */
+.sezione
+{
+	color: #000000;
+	padding: 5px 20px 5px 20px; /*ALTO DX BASSO SX*/
+	border: none;
+	background-color: #ffffff;
+}
+
+/* div che contiene una sezione a sfondo colorato con bordi sopra e sotto */ 
+.colore
+{
+    padding: 5px 20px 5px 20px; /*ALTO DX BASSO SX*/
+    border-bottom: 1px solid #000000;
+    border-top: 1px solid #000000;
+    background-color: #FFEC8B;
+}
+
+
+/* end */
