@@ -830,16 +830,16 @@ Accenniamo qui soltanto al fatto che esistono metodi per dimostrare che un inter
 Questo è un grande risultato, che ha risolto una congettura rimasta aperta per decenni. Il loro algoritmo però non è ancora utilizzato in pratica, perché è molto più lento dei test probabilistici, i quali, del resto, sono *quasi certi* per i primi di centinaia di cifre che servono attualmente in crittografia.
 
 ## Aritmetica modulo n
-Nel seguito N e Z denoteranno rispettivamente l'insieme dei numeri naturali {0,1,2,...} e l'insieme degli interi relativi {...,-2,-1,0,+1,+2,...}.
-Dati a, b in Z ed n > 1 in N, diciamo che * **a** è congruo a **b modulo n** * se a e b divisi per n danno lo stesso resto; in questo caso scriviamo una relazione di equivalenza. a  b mod(n). La relazione di congruenza è una relazione di equivalenza.
+Nel seguito **N** e **Z** denoteranno rispettivamente l'insieme dei numeri naturali {0,1,2,...} e l'insieme degli interi relativi {...,-2,-1,0,+1,+2,...}.
+Dati a, b in **Z** ed n > 1 in N, diciamo che ***a*** *è congruo a* ***b modulo n*** se a e b divisi per n danno lo stesso resto; in questo caso scriviamo una relazione di equivalenza. *a ≡ b* mod(*n*). La relazione di congruenza è una relazione di equivalenza.
 
 Esempio 
 L'aritmetica dei moduli prende in considerazione un gruppo limitato di numeri disposti
 ad anello, un po’ come le ore sul quadrante dell'orologio.\
 Consideriamo ad esempio un quadrante contenente solo 7 numeri, da 0 a 6, corrispondente al modulo 7. \
-Per calcolare 2 + 3 si partirà da 2 e ci si sposterà di 3 numeri, ottenendo 5. Per calcolare 2 + 6 si partirà da 2 e ci si sposterà di 6 numeri. In questo modo, attraversando l'intero anello, si otterrà come risultato 1.
-In pratica: \
-2 + 3 = 5 mod(7) \
+Per calcolare 2 + 3 si partirà da 2 e ci si sposterà di 3 numeri, ottenendo 5. Per calcolare 2 + 6 si partirà da 2 e ci si sposterà di 6 numeri. In questo modo, attraversando l'intero anello, si otterrà come risultato 1.  
+In pratica:  
+2 + 3 = 5 mod(7)  
 2 + 6 = 1 mod(7)
 {: .code-example}
 
@@ -847,31 +847,38 @@ In pratica: \
   <img src="{{site.baseurl}}/assets/images/Crittografia-congruenza-modulo.jpg">
 </div>
 
-Ovviamente a ≡ b mod(n) se e solo se a = n · b + k con k in Z. 
+Ovviamente *a ≡ b* mod(*n*) se e solo se *a = n · b + k* con *k* in ***Z***. 
 
 Per indicare tutti i numeri che differiscono tra di loro per un multiplo di n si usa il nome **classe di resto modulo n** (insieme di numeri che hanno in comune il resto della divisione per n). 
 
 Tali classi sono indicate usando tale resto con una sopralineatura: 
-- 0 <ins>classe di resto modulo 0</ins>: insieme dei numeri interi che divisi per n danno 0; 
-- 1 <ins>classe di resto modulo 1</ins>: insieme dei numeri interi che divisi per n danno 1; 
+- <span class="overline">0</span> <ins>classe di resto modulo 0</ins>: insieme dei numeri interi che divisi per *n* danno 0; 
+- <span class="overline">1</span> <ins>classe di resto modulo 1</ins>: insieme dei numeri interi che divisi per *n* danno 1; 
 - … 
-- n-1 <ins>classe di resto modulo n-1</ins>: insieme dei numeri interi che divisi per n danno n-1; 
+- <span class="overline">n-1</span> <ins>classe di resto modulo n-1</ins>: insieme dei numeri interi che divisi per *n* danno *n*-1; 
 
-Si indica con Z<sub>n</sub> l’**insieme delle classi di resto modulo n**: Z<sub>n</sub> = {0, 1, ..., n-1}. 
+Si indica con **Z**<sub>*n*</sub> l’**insieme delle classi di resto modulo** ***n***: **Z**<sub>*n*</sub> = {<span class="overline">0</span>, <span class="overline">1</span>, ..., <span class="overline">n-1</span>}. 
 
 Sono valide le seguenti proprietà: \
-a + b = a + b \
-a · b = a · b 
+<span class="overline">a</span> + <span class="overline">b</span> = <span class="overline">a + b</span>  
+<span class="overline">a</span> · <span class="overline">b</span> = <span class="overline">a · b</span> 
 
-(esempio mancante)
+<div class="esempio" markdown=1>
+  **Esempio**  
+  Operazioni in Z<sub>5</sub>
+  {: .mb-0 .mt-0}
+
+  ![addizioni e moltiplicazioni in Z5]({{site.baseurl}}/assets/images/operazioni-in-Z5.jpg)
+  {: .ta-c .mb-0 .mt-0}
+</div>
 
 ### Il cifrario di Cesare “generalizzato” con l’aritmetica modulo n
 
 Precedentemente abbiamo parlato del [cifrario di Cesare](#cifratura-di-cesare-ii-secolo-dc) e di come fosse possibile generare messaggi cifrati per mezzo di questo metodo. Vedremo ora come sia possibile generalizzare tale sistema di cifratura utilizzando le classi di resto, e ottenendo così una cifratura che non trasla soltanto le lettere dell’alfabeto, ma le “rimescola”. 
 
-Consideriamo l’insieme delle classi di resto modulo 26, e associamo ad ogni lettera dell’alfabeto una classe di resto modulo 26. Fissiamo due numeri, detti parametri di cifratura, e otteniamo la lettera che sostituirà la lettera indicata dalla classe x con quella individuata dalla classe y per mezzo della formula: 
+Consideriamo l’insieme delle classi di resto modulo 26, e associamo ad ogni lettera dell’alfabeto una classe di resto modulo 26. Fissiamo due numeri, detti **parametri di cifratura**, e otteniamo la lettera che sostituirà la lettera indicata dalla classe <span class="overline">x</span> con quella individuata dalla classe <span class="overline">y</span> per mezzo della formula: 
 
-y = a · x + b 
+<span class="overline">y</span> = <span class="overline">a · x + b</span>
 
 <div class="code-example" markdown="1">
 
@@ -879,36 +886,36 @@ y = a · x + b
 
   |CHIARO|a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|
   | |1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|
-  |y=5x+1 |6|11|16|21|0|5|10|15|20|25|4|9|14|19|24|3|8|13|18|23|2|7|12|17|22|1|
+  |<span class="overline">y</span>=<span class="overline">5·*x*+1</span> |6|11|16|21|0|5|10|15|20|25|4|9|14|19|24|3|8|13|18|23|2|7|12|17|22|1|
   |CIFRATO|F|K|P|U|Z|E|J|O|T|Y|D|I|N|S|X|C|H|M|R|W|B|G|L|Q|V|A|
   {: .fs-4}
 
-Testo chiaro: veni, vidi, vici
+Testo chiaro: veni, vidi, vici  
 Testo cifrato: gzst, gtut, gtpt
 </div>
 
-Risulta evidente che non tutte le scelte dei numeri a e b possono portare a una corretta cifratura e decifratura del messaggio: in particolare, è necessario che ogni lettera dell’alfabeto chiaro sia cifrata con una lettera differente, per evitare ambiguità nell’operazione di decrittazione. 
+Risulta evidente che non tutte le scelte dei numeri *a* e *b* possono portare a una corretta cifratura e decifratura del messaggio: in particolare, è necessario che ogni lettera dell’alfabeto chiaro sia cifrata con una lettera differente, per evitare ambiguità nell’operazione di decrittazione. 
 
-Si può dimostrare che, per avere una “buona” chiave di cifratura, occorre scegliere *a* in modo tale che a abbia inverso in Z<sub>26</sub>.
+Si può dimostrare che, per avere una “buona” chiave di cifratura, occorre scegliere *a* in modo tale che *<span class="overline">a</span>* abbia inverso in ***Z***<sub>26</sub>.
 
 #### Identità di Bézout 
 
-Se *d* = MCD(a, b) allora esistono degli interi *x* e *y* tali che *d* = *a · x + b · y* 
+Se *d* = MCD(*a, b*) allora esistono degli interi *x* e *y* tali che *d* = *a · x + b · y* 
 
 ### Funzione e Teorema di Eulero
 
-La funzione di Eulero *$$\phi$$(n)* **indica il numero di elementi invertibile in *Z<sub>n</sub>***, e può essere anche interpretato come **il numero di interi minori di n e relativamente primi con esso.** Poiché contare le classi invertibili in *Z<sub>n</sub>* è come contare i numeri tra 1 e n-1 che sono coprimi con n, si può affermare che: 
+La funzione di Eulero *$$\phi$$(n)* **indica il numero di elementi invertibile in *Z<sub>n</sub>***, e può essere anche interpretato come **il numero di interi minori di *n* e relativamente primi con esso.** Poiché contare le classi invertibili in ***Z***<sub>*n*</sub> è come contare i numeri tra 1 e *n*-1 che sono coprimi con *n*, si può affermare che: 
 
-  se *n = p* è primo, si ha *$$\phi$$(p) = p - 1*
+  se *n = p* è primo, si ha *$$\phi$$(p) = *p* - 1
   {: .ml-4}
 
 Si ha inoltre: 
 
   se *n = p<sup>r</sup>* con *p* primo, si ha *$$\phi$$(n) = $$\phi$$(p<sup>r</sup>) = p<sup>r-1</sup> · (p - 1)*  
-  se n = p<sup>r1</sup> · ... · p<sub>k</sub><sup>rk</sup> con p<sub>1</sub>,..., p<sub>k</sub> primi diversi tra loro, si ha 
+  se *n = p<sub>1</sub><sup>r1</sup> · ... · p<sub>k</sub><sup>rk</sup>* con *p<sub>1</sub>,..., p<sub>k</sub>* primi diversi tra loro, si ha 
   {: .ml-4}
 
-  $$\phi$$(n) = p<sub>1</sub><sup>r1-1</sup> (p<sub>1</sub>-1) ... p<sub>k</sub><sup>rk-1</sup> (p<sub>k</sub>-1)
+  *$$\phi$$(n) = p<sub>1</sub><sup>r1-1</sup> (p<sub>1</sub>-1) ... p<sub>k</sub><sup>rk-1</sup> (p<sub>k</sub>-1)*
   {: .ta-c}
 
 La funzione di Eulero è alla base dell’importantissimo **Teorema di Eulero**:
@@ -941,7 +948,21 @@ Vediamo come si sarebbe potuto ottenere lo stesso risultato con la funzione e il
 
 La cifra finale (il numero di unità) di 13<sup>5</sup> è quindi 3, come risultava dal calcolo diretto.
 
-**manca l'esempio**
+<div class="esempio" markdown=1>
+  **Esempio**
+  Si vogliono calcolare le ultime due cifre decimali (decine e unità) del numero 203<sup>327</sup>.  
+  Le ultime due cifre decimali corrispondono al resto della divisione per 100.  
+  Si procede quindi nel seguente modo:
+  {: .mt-0 .mb-1}
+
+<span class="overline"></span>
+
+  - 203 ≡ 3 mod(100)
+  - <span class="overline">*x*</span> = <span class="overline">203<sup>327</sup></span> = <span class="overline">3</span><sup>327</sup>
+  - *a* = 3; *n* = 100; *$$\phi$$*(100) = *$$\phi$$*(2<sup>2</sup> · 5<sup>2</sup>) = 2<sup>2-1</sup> · (2 - 1) · 5<sup>2-1</sup> · (5 - 1) = 40  
+  quindi: 3<sup>40</sup> ≡ 1 mod(100)
+  - <span class="overline">3</span><sup>327</sup> = <span class="overline">3</span><sup>8·40+7</sup> = (<span class="overline">3</span><sup>40</sup>)<sup>8</sup> · <span class="overline">3</span><sup>7</sup> = <span class="overline">1</span> · <span class="overline">3</span><sup>7</sup> = <span class="overline">2187</span> = <span class="overline">87</span>
+</div>
 
 ## La crittografia a chiave pubblica o asimmetrica
 

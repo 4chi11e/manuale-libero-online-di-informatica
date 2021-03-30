@@ -382,6 +382,10 @@ a {
   display: inline;
 }
 
+.overline{
+  text-decoration: overline;
+}
+
 .tbl-fl{
   float: left;
   @extend .mb-4;
@@ -535,13 +539,23 @@ td.bordo-destra-spesso {
 .fs-4 * {
   @include fs-4;
 }
+.fs-3 * {
+  @include fs-3;
+}
+.fs-2 * {
+  @include fs-2;
+}
+.fs-1 * {
+  @include fs-1;
+}
 
 .esempio {
-  padding: 0px $sp-3;
-  margin-bottom: $sp-3;
-  overflow: auto;
-  border: 1px solid $border-color;
-  border-radius: $border-radius;
+  @extend .code-example;
+  // padding: 0px $sp-3;
+  // margin-bottom: $sp-3;
+  // overflow: auto;
+  // border: 1px solid $border-color;
+  // border-radius: $border-radius;
   //position: relative;
   //margin-top: -$sp-4;
 }
