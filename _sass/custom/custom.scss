@@ -153,6 +153,15 @@ $border-color-2: $grey-dk-100;
 .mt-0{
   margin-top: 0 !important;
 }
+.mt--1{
+  margin-top: -0.75em;
+}
+.mt--2{
+  margin-top: -1.5em;
+}
+.mt--3{
+  margin-top: -2.25em;
+}
 
 body{
   color: black;
@@ -212,7 +221,13 @@ th, td{
     //   text-align: left;
     // }
   }
+  &--testo{
+    @extend .thumbnail;
+    line-height: normal;
+    @extend .fs-3;
+  }
 }
+
 
 .thumbnail img {
   margin-bottom: 5px;
@@ -221,7 +236,8 @@ th, td{
 .thumbnail p {
   // margin-bottom: 0px;
   margin: 0px;
-  @extend .fs-2; 
+  @extend .fs-2;
+  // line-height: normal; 
 }
 
 .float-right {
@@ -234,6 +250,11 @@ th, td{
   float: left;
   margin-right: $sp-3;
 }
+
+// .finisce-qui{
+//   position: relative;
+//   top: -300px;
+// }
 
 /*
       img:hover {
