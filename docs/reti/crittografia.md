@@ -881,14 +881,431 @@ Testo chiaro: veni, vidi, vici
 Testo cifrato: gzst, gtut, gtpt
 </div>
 
-CHIARO a b c d e f g h i j k l m n o p q r s t u v w x y z 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 y  5  x  1 6 11 16 21 0 5 10 15 20 25 4 9 14 19 24 3 8 13 18 23 2 7 12 17 22 1 CIFRATO F K P U Z E J O T Y D I N S X C H M R W B G L Q V A Risulta evidente che non tutte le scelte dei numeri a e b possono portare a una corretta cifratura e decifratura del messaggio: in particolare, è necessario che ogni lettera dell’alfabeto chiaro sia cifrata con una lettera differente, per evitare ambiguità nell’operazione di decrittazione. Si può dimostrare che, per avere una “buona” chiave di cifratura, occorre scegliere a in modo tale che a abbia inverso in Z 26 . Identità di Bézout Se d  MCDa, b allora esistono degli interi x e y tali che d  a  x  b  y 7. Funzione e Teorema di Eulero La funzione di Eulero n indica il numero di elementi invertibile in n , e può essere anche interpretato come il numero di interi minori di n e relativamente primi con esso. Poiché contare le classi invertibili in n coprimi con n, si può affermare che: è come contare i numeri tra 1 e n-1 che sono se n  p Si ha inoltre: se n  p r è primo, si ha p  p  1 con p primo, si ha  n   p r  p r 1  p  1 se n  p r1  ...  p rk con p ,..., p primi diversi tra loro, si ha 1 k 1 k  n  p r11 p  1 ...  p rk 1 p  1 1 1 k k La funzione di Eulero è alla base dell’importantissimo Teorema di Eulero: 7.1 Un’applicazione della funzione di Eulero Vedremo ora un’interessante applicazione del Teorema di Eulero, che permette di calcolare, dato un numero in forma di potenza, le cifre decimali del numero stesso scritto in forma posizionale. Partiamo da un caso semplice per chiarire meglio il concetto: supponiamo di voler conoscere la cifra x che indica in numero di unità del numero 135 . In questo caso, una semplice calcolatrice portatile consente di ottenere il risultato 371293 e scoprire così che la cifra cercata è 3. Vediamo come si sarebbe potuto ottenere lo stesso risultato con la funzione e il teorema di Eulero: cercare la cifra che indica il numero di unità di 135 equivale a calcolare il resto della divisione per 10, ossi il numero compreso tra 0 e 9 tale che x  135 in Z10 . - 13  3 mod10, in quanto il resto della divisione per 10 è uguale e pari a 3; - x  135  35 - per il Teorema di Eulero avremo: a  3; n  10;  10   2  5  2  1 5  1  4 - 3 10  34  1mod10 (infatti: 34  81  1mod10) - x  3  3  3  1  3  3 La cifra finale (il numero di unità) di 135 è quindi 3, come risultava dal calcolo diretto. 8. La nascita della crittografia a chiave pubblica Tutti i metodi crittografici visti nei capitoli precedenti sono accomunati da una caratteristica: per tutti i metodi è necessario che mittente e destinatario, prima di scambiarsi un messaggio in codice, si siano accordati su quale “chiave” utilizzare per cifrare e decifrare i messaggi. Non è infatti sufficiente concordare il metodo da usare per nascondere il messaggio, ma è altresì necessario stabilire la chiave da utilizzare per applicare tale metodo. Le chiavi da usare nei sistemi di cui abbiamo parlato nei precedenti capitoli possono essere così riassunte: Metodo Chiave/i Scitala lacedemonica Diametro del cilindro Atbash – Albam - Atba Alfabeto cifrante Cifratura di Cesare Numero che da di quanto viene traslato l’alfabeto chiaro Disco di Leon Battista Alberti Lettera di partenza Tavola di Vigenère Parola chiave Playfair cipher Parola chiave ADFGVX Parola chiave “quadrato” e parola chiave “colonna” Enigma Settaggio della macchina E’ quindi possibile che la chiave sia costituita da un numero o da una o più parole; in ogni caso, due parti che vogliano scambiarsi messaggi in modo “sicuro” devo prima scambiarsi l’informazione costituita dalla chiave. E’ evidente che tale chiave deve rimanere segreta se si vuole che rimanga tale anche il messaggio: nasce quindi il problema di come scambiarsi in modo sicuro la chiave, in altre parole il cosiddetto problema della distribuzione delle chiavi. Possiamo ricordare a questo proposito ciò che ha scritto Simon Singh: “per poter condividere un segreto (tramite un messaggio crittato), due persone dovrebbero già condividere un segreto (la chiave)”. Nei prossimi capitoli vedremo come tale problema fu affrontato e risolto dopo la seconda guerra mondiale portando alla crittografia moderna a chiave pubblica. 8.1 Una scatola e due lucchetti: lo scambio di chiavi secondo Diffie, Hellman e Merkle Il modo migliore per capire come si sia potuti arrivare a concepire e a realizzare un sistema crittografico che non necessita di uno scambio preventivo di chiavi da parte di mittente e destinatario è partire da un esempio. Supponiamo che, per scambiarsi documenti riservati, mittente e destinatario utilizzino una scatola alla quale sia possibile applicare due lucchetti; è dunque possibile procedere nel seguente modo: - il mittente racchiude il messaggio nella scatola e la chiude con il lucchetto del quale solo lui possiede la chiave e spedisce la scatola al destinatario; - il destinatario riceve la scatola ma non può aprirla dato che non ha la chiave del lucchetto; applica a questo punto un altro lucchetto, del quale solo lui possiede la chiave e rimanda la scatola al mittente; - il mittente alla ricezione della scatola toglie il lucchetto che aveva precedentemente applicato e la rispedisce al destinatario; - la scatola che arriva al destinatario è ormai chiusa solo con il lucchetto da lui stesso applicato: egli, quindi, potrà aprirla senza problemi e leggere il messaggio in essa racchiuso, senza che nessun terzo incomodo possa averne sbirciato il contenuto. Questa idea però non è immediatamente traducibile in un modello matematico, in quanto: svolgere il primo passaggio (mettere il primo lucchetto alla scatola) significa partire da certi dati iniziali (scatola senza lucchetti), applicare ad essi una determinata funzione matematica (primo lucchetto) e raggiungere un certo risultato (scatola con un lucchetto); svolgere il secondo passaggio (mettere il secondo lucchetto alla scatola) significa partire dai risultati del primo passaggio (scatola con un lucchetto), applicare ad essi una diversa funzione matematica (secondo lucchetto) e raggiungere un altro risultato (scatola con due lucchetti); il terzo passaggio consiste nell’inversione della funzione utilizzata nel primo passaggio (cioè nel togliere il primo lucchetto messo); il quarto, ovviamente, si realizza invertendo la funzione applicata nel secondo passaggio. Ma in questo modo non si riottenono, in generale, i dati iniziali (scatola senza lucchetto) poiché l’inversione della composizione di due funzioni deve avvenire in ordine contrario rispetto all’ordine di applicazione, cioè va invertita per prima quella applicata per ultima. Tutto ciò risulta evidente dall’esempio che segue. a b c d e f g h i j k l m n o p q r s t u v w x y z H F S U G T A K V D E O Y J B P N X W C Q R I M Z L a b c d e f g h i j k l m n o p q r s t u v w x y z C P M G A T N O J E F W I Q B U R Y H X S D Z K L V Questo problema fu affrontato e risolto negli anni ’70 del secolo scorso dai ricercatori Whitfield Diffie, Martin Hellman e Ralph Merkle. Le funzioni di cui si servirono per risolvere il problema della distribuzione delle chiavi derivano dall’aritmetica dei moduli (vedi par. 6\. ) dove è spesso possibile incontrare funzioni unidirezionali, tali cioè da essere “difficili” da invertire. Dalla tabella che segue si può osservare ad esempio come la potenza cresca regolarmente, mentre nel caso dell’aritmetica dei moduli la variazione della funzione non sia regolare. x 1 2 3 4 5 6 7 8 9 10 3x 3 9 27 81 243 729 2187 6561 19683 59049 3x mod5 3 4 2 1 3 4 2 1 3 4 Inoltre, dalla tabella si evince come in aritmetica normale sia immediato, dato un valore di x, ricavare il corrispondente valore della funzione, e viceversa, dato il valore della funzione ricavare x. In aritmetica dei moduli il comportamento “imprevedibile” della funzione rende questa inversione estremamente difficile. La funzione unidirezionale che fu scelta dai tre ricercatori era del tipo: con p numero primo e Y  p . Per capire come questo metodo consenta a mittente e destinatario di stabilire una chiave segreta senza incontrarsi faremo ricorso a tre persone immaginarie che chiameremo Alice (mittente), Bob (destinatario) e Eva (una terza persona che vuole spiare le conversazioni tra Alice e Bob). Il metodo prevede che Alice e Bob concordino una chiave costituita dai numeri Y e p: l’aspetto affascinante del metodo è che Alice e Bob possono stabilire tali numeri “alla luce del sole”, senza cioè preoccuparsi di tenerli segreti (per esempio ad Eva). Supponiamo che Alice e Bob abbiano deciso di utilizzare: Y  13 p  23 e vediamo con uno schema come possono procedere per stabilire SENZA INCONTRARSI una chiave che rimarrà nota solo a loro due. ALICE BOB Passo 1 Sceglie un numero, supponiamo: 8 e lo tiene segreto Chiameremo questo numero A Sceglie un numero, supponiamo: 5 e lo tiene segreto Chiameremo questo numero B Passo 2 Calcola: Calcola: Y A 138 mod( p) mod23  815730721 mod23  2 Y B 135 mod( p) mod23  371293 mod23  4 Chiameremo questo numero α Chiameremo questo numero β Passo 3 Alice comunica a Bob il valore di α Bob comunica ad Alice il valore di β Lo scambio di queste informazioni può avvenire tranquillamente in chiaro, in quanto un’eventuale intercettazione da parte di Eva non potrebbe comunque consentirle di risalire alla decifratura dei messaggi. Questo perché α e β NON sono la chiave, e quindi è irrilevante che Eva ne venga a conoscenza. Passo 4 Calcola:  A modp Calcola:  B modp 48 mod23  65536 mod23  9 25 mod23  32 mod23  9 La Chiave Alice e Bob hanno ottenuto lo stesso numero che rappresenterà la chiave dei loro messaggi. In base a questo schema abbiamo dunque dimostrato che Alice e Bob possono concordare una chiave senza bisogno di incontrarsi e senza il timore che la chiave stessa sia intercettata da terzi: abbiamo quindi risolto il problema della distribuzione delle chiavi! Per convincercene ulteriormente, vediamo perché ad Eva sia impossibile risalire al valore della chiave. Poiché tutte le comunicazioni dello schema precedente tra Alice e Bob sono in chiaro, Eva potrebbe aver intercettato le seguenti informazioni: - le comunicazioni relative alla scelta di Y e p, e quindi sapere che la funzione è del tipo: 13x mod23; - le comunicazioni del passo 3, e quindi i valori di α e β. Per trovare la chiave, Eva dovrebbe quindi procedere come Alice ed effettuare l’operazione  A modp, oppure come Bob ed effettuare l’operazione  B modp. Ma Eva non conosce i valori di A o di B! D’altronde, tentare di ricavarli invertendo la funzione non sarebbe un compito semplice, in quanto si tratta di una funzione unidirezionale. La dimostrazione pubblica della loro scoperta fu data da Diffie, Hellman e Merkle nel giugno del 1976 alla National Computer Conference. L’introduzione di un metodo che consente a mittente e destinatario di scambiarsi la chiave in modo “sicuro” ha costituito una vera e proprio rivoluzione nel campo della crittografia; l’univo aspetto negativo del sistema Diffie - Hellman - Merkle risiede nell’introdurre una non contemporaneità tra le azioni di destinatario e mittente. Infatti, per applicare il suo “lucchetto” Bob deve attendere di ricevere il messaggio di Alice (supponiamo tramite mail), e la stessa Alice, per rimuovere il suo “lucchetto” deve attendere la risposta di Bob, e così via. Questo aspetto, che per persone che vivono in luoghi con fusi orari differenti può comportare un “ritardo” anche notevole nello scambio delle mail, rappresenta chiaramente un elemento che va contro la natura stessa della posta elettronica, che rappresenta uno dei modi più veloci di scambio delle informazioni. Nel prossimo paragrafo vedremo come questo aspetto sia stato risolto dall’introduzione della crittografia a chiave pubblica. 8.2 RSA Il passo avanti rispetto al metodo di scambio delle chiavi secondo Diffie-Hellman-Merkle avvenne grazie allo sforzo congiunto di tre ricercatori: Ronald Rivest, Adi Shamir e Leonard Adleman, dalle cui iniziali deriva il metodo noto come RSA. Il pregio di questo sistema rispetto al metodo Diffie-Hellman-Merkle è che non richiede uno scambio di informazioni tra Alice e Bob per la costruzione della chiave: questo sistema fa infatti uso di due chiavi, una detta “chiave pubblica ” e una chiamata “chiave privata” e utilizza un metodo di cifratura asimmetrico. In un sistema a chiave asimmetrica la chiave usata per cifrare e quella usata per decifrare non coincidono: è possibile quindi che Alice renda pubblica la chiave da usare per cifrare un messaggio (la sua chiave pubblica) e conservi segreta la chiave da usare per decifrare il messaggio (la sua chiave privata), per essere in grado solo lei di decifrare i messaggi a lei diretti. Il cuore della cifratura asimmetrica sviluppata da Rivest, Shamir e Adlemann è una funzione unidirezionale basata sul concetto di modulo. Il funzionamento del metodo RSA si può schematizzare con i seguenti punti: - si scelgono due numeri primi, p e q ; - si calcola il loro prodotto seguente è modulo N) N  p  q , chiamato modulo (dato che tutta l'aritmetica - si sceglie poi un numero e (chiamato esponente pubblico), più piccolo di N e primo rispetto a  N   p  1 q  1, dove  è la funzione di Eulero; - si calcola il numero d (chiamato esponente privato) tale che e  d  1 modp  1 q  1 La chiave pubblica è rappresentata dalla coppia di numeri N , e, mentre la chiave privata è rappresentata da N , d . Un messaggio m viene cifrato attraverso l'operazione me modN , mentre il messaggio c così ottenuto viene decifrato con cd  med  m1 modN . Il procedimento funziona solo se la chiave e utilizzata per cifrare e la chiave d utilizzata per decifrare sono legate tra loro dalla relazione e  d  1 modN , e quindi quando un messaggio viene cifrato con una delle due chiavi (la chiave pubblica) può essere decifrato solo utilizzando l'altra (la chiave privata). Vediamo in pratica come sia possibile realizzare una cifratura RSA. Per cifrare un messaggio, questo deve essere prima di tutto trasformato in un numero o in una serie di numeri, diciamo m1 , m2 ,..., mk . Questa operazione può essere effettuata utilizzando, ad esempio, il codice ASCII, e trasformando il numero binario ottenuto nel corrispondente in base dieci. Per semplicità, nel prossimo esempio considereremo che il messaggio segreto che si vuole trasmettere consista di un solo numero m , senza preoccuparci del metodo utilizzato per generarlo. Faremo inoltre nuovamente riferimento ai nostri personaggi immaginari, Alice e Bob. Operazioni effettuate da Alice (Generazione delle Chiavi): 1) sceglie due numeri primi p e q : 2) calcola N  p  q : p  47 q  71 3) calcola  N   p  1 q  1: N  47  71  3337 4) sceglie e tale che: e  N  3337  47  1 71  1  3220 e MCDe, N   1 : e  79 5) calcola d tale che: e  d  1 modp  1 q  1 6) la chiave pubblica è: d  791 mod3220  1019 7) la chiave privata è: e, N   79,3337 d , N   1019,3337 Adesso Alice è libera di pubblicare la sua chiave pubblica su Internet, o su un qualsiasi altro elenco disponibile a chiunque voglia scriverle messaggi cifrati. Supponiamo allora che Bob le voglia mandare un messaggio costituito da vediamo quale operazioni deve eseguire. Operazioni effettuate da Bob (Cifratura): 1) calcola c  me modN : m  688 , e c  68879 mod3337  1570 2) c rappresenta il messaggio cifrato che può essere letto (decifrato) solo da chi è in possesso della chiave privata e quindi solo da Alice. Bob può quindi spedire in tutta tranquillità c senza preoccuparsi del fatto che Eva possa intercettarlo, poiché anche in quell’eventualità non sarebbe in grado di volgerlo in chiaro. Operazioni effettuate da Alice (Decifratura): 1) ricevuto il messaggio Alice ricava m mediante la formula m  c d modN : m  15701019 mod3337  688 L’unico modo per Eva di decifrare il messaggio è di avere d e quindi di riuscire a ottenere p e q dalla fattorizzazione di N : come detto precedentemente, il processo di fattorizzazione di un numero nei suoi fattori primi è un processo molto lungo, specialmente se si ha a che fare con numeri molto grandi. La segretezza nella comunicazioni tra Alice e Bob è quindi assicurata! 8.2.1 Curiosità e considerazioni Samuel Wagstaff, docente di informatica all’Università dell’Indiana, è riuscito a fattorizzare un numero di 167 cifre in centomila ore di tempo computer. Il numero della prova era: 163790195580536623921741301546704495839239656848327040249837817092 396946863513212041565096492260805419718247075557971445689690738777 72973038883717449030628887379284041 Questa notizia dovrebbe far riflettere: considerando che ad oggi si scoprono ancora nuovi algoritmi matematici per decrittare sempre più velocemente e che la potenza dei calcolatori aumenta vertiginosamente di mese in mese (e non parliamo dei computers dei laboratori segreti!), sarà una buona scelta affidare dati importantissimi ad un metodo che si basa esclusivamente sulla lentezza dei calcolatori attuali? Bisogna anche notare che una chiave da 1024 bit in un sistema a chiave pubblica, vale circa quanto una a 64 bit di un sistema a chiave simmetrica a causa del fatto che nel sistema a chiave pubblica esiste sempre un legame tra chiave privata e segreta che permette di ridurre le combinazioni necessarie per trovare il codice di accesso. Stabilita tale corrispondenza di sicurezza tra le lunghezze delle chiavi dei due sistemi, è interessante notare quando detto alla conferenza Crypto '93 (notare che sono già passati diversi anni), da M. Wiener del Bell Northern Research, il quale ha descritto come con un milione di dollari sia realizzabile un chip speciale da 50 milioni di test al secondo che, in parallelo ad altri 57.000, può condurre un attacco con successo mediamente in 3,5 ore. Con un costo di 10 milioni di dollari il tempo si abbassa a 21 minuti, e con 100 milioni a disposizione, il codice è infranto in pochi secondi! Fatto sta che il commercio elettronico ha già iniziato a farne uso e alcuni anni fa, il 5 Agosto 1997, il Consiglio dei Ministri Italiano ha approvato il regolamento di attuazione dell’art.15 della legge 57/97, nota anche come legge Bassanini-1, con il quale si stabilisce che l’originale di un documento può essere anche quello depositato su di un file. Tale documento su file ha valore probante sia sul contenuto sia sulla provenienza se corredato da firma elettronica legalmente riconosciuta. 8.2.2 Numeri primi e RSA Da quanto esposto nei precedenti paragrafi risulta chiaro che la conoscenza di numeri primi molto “grandi” permette di effettuare cifrature RSA sempre più potenti. La ricerca di tali numeri costituisce quindi, da un po’ di anni a questa parte, un vero e proprio business, e molte aziende hanno come solo scopo quello di trovarne di sempre più grandi. Nella tabella seguente sono riportati alcuni dei numeri scoperti negli ultimi anni. Da molti anni accade che il più grande numero primo noto sia un primo di Mersenne. Chi volesse capovolgere la situazione, e trovare un numero primo "generico" più grande dovrà ancora una volta alzare il tiro (e di parecchio). Il 42-esimo primo di Mersenne1 ha "appena" 7.816.230 cifre, e sembra piccolo posto accanto al nuovo arrivato. 1 I numeri della forma 2n  1 sono detti numeri di Mersenne e sono indicati con Mn. In generale questi numeri non sono primi, nemmeno se n è primo ( per esempio M11=2047=89·23); non si sa nemmeno se di numeri di Mersenne primi ce ne siano un numero finito o se siano infiniti. Il più recente primo di Mersenne (il 43-esimo) è stato scoperto il 15 Dicembre 2005 da Curtis Cooper e Steven Boone : Esso rappresenta il più grande numero primo noto, con ben 9.152.052 cifre! Siamo a un passo dalla soglia dei 10 milioni di cifre, per la quale la Electronic Frontier Foundation offre 100.000 dollari. Il premio precedente - di 50.000 dollari - è stato assegnato nel 2000 a Nayan Hajratwala il quale, partecipando alla GIMPS (Great Internet Mersenne Prime Search), trovò nel 1999 il 38-esimo primo di Mersenne (2.098.960 cifre). 8.2.3 Attacchi Nel 1977, subito dopo il lancio del sistema di crittografia RSA, Martin Gardner pubblicò su Scientific American un piccolo messaggio cifrato, basato su una chiave costituita da un numero N di 129 cifre, prodotto di due numeri primi molto grandi. Il messaggio e la chiave erano stati forniti da ricercatori del MIT, che offrivano un premio in denaro a chi avesse decrittato il messaggio. A quei tempi si stimò che ci sarebbero voluti all'incirca ventimila anni per scomporre in fattori primi quel numero, con i più veloci calcolatori disponibili. Dopo di allora però ci furono importanti novità, più che sul lato della velocità dei computer, sui metodi per fattorizzare grandi numeri. Inoltre la massiccia diffusione di Internet costituì una variabile imprevista: sotto la guida di alcuni ricercatori, un esercito di 600 volontari di 20 paesi si mise all'opera e dopo non molti mesi di lavoro, nell'Aprile del 1994, la fattorizzazione fu scoperta: si trattava di due numeri, uno di 64 e uno di 65 cifre. Erano passati solo (!) 17 anni dalla pubblicazione della chiave pubblica. Solo per curiosità riportiamo qui i valori dei numeri coinvolti (i volonterosi possono provare ad eseguire il prodotto richiesto, per controllare che non ci siano errori): p = 3490529510847650949147849619903898133417764638493387843990820577 q = 32769132993266709549961988190834461413177642967992942539798288533 N = 11438162575788886766923577997614661201021829672124236256256184293570693524 5733897830597123563958705058989075147599290026879543541 Attualmente chiavi di 1024 bit sono considerate sufficientemente sicure. Tempo medio di attacco: lunghezza chiave tempo richiesto tempo richiesto (bit) a 1 decr/ms a 106 decr/ms 56 255 ms = 1142 anni 10 ore 128 2127 ms ~ 1024 anni ~ 1018 anni 168 2167 ms ~ 1036 anni ~ 1030 anni 8.2.4 La fattorizzazione Discutiamo solo il problema inverso della fattorizzazione. A prima vista, sapendo che si usano numeri primi vicini a 2128 , si potrebbe pensare di costruirsi una tabella dei numeri che sono prodotto di due tali primi. Ma quanti sono? In base al risultato ottenuto da Hadamard sappiamo che: lim   n  1 n n logn dove  n rappresenta il numero di primi minori o uguali a n Dunque possiamo rozzamente valutare  2128 come: 2128 log2128  e  2127  come: 2127  3 1036 36 log2127  2 10 e quindi  2128   2127  1036 . Stiamo cauti nella stima e diciamo che ne abbiamo almeno 1030 (in realtà potremmo anche dire con sicurezza 1035 ). I prodotti di due numeri di questa forma sono allora dell’ordine di 1060 . Immagazzinarli in forma binaria richiede allora 2256 1060  2256  2199  2455 bit, quindi 2452  10136 byte. Un terabyte è circa 1012 byte, quindi servirebbe qualcosa come 10124 terabyte. Troppi anche solo da immaginare: il diametro della Galassia in metri è 1021 . Più sensato è pensare di fattorizzare N, ma l’unico modo conosciuto è di dividerlo successivamente per 2, 3, e così via. E’ probabile che, nel momento in cui si è ottenuta la fattorizzazione richiesta, la chiave pubblica sia cambiata da parecchi mesi, si faccia un conto approssimativo del tempo richiesto. In matematica, RSA-2048 è il più grande dei numeri RSA (semiprimi2 grandi che fanno parte del RSA Factoring Challenge), e ad esso è associato il premio più grande per la sua fattorizzazione: 200000 dollari. RSA-2048 è un numero con 617 cifre decimali (2048 bits)! 2 Un numero è detto semiprimo (anche detto biprimo o 2-quasi primo, o pq numero) è un numero naturale che è il prodotto di numeri primi (non necessariamente distinti). I primi numeri semiprimi sono: 4, 6, 9, 10, 14, 15, 21, 22, 25, 26, 33, 34, 35, 38, 39, 46, 49, 51, 55, 57, 58, 62, 65, 69, 74, 77, 82, 85, 86, 87, 91, 93, 94, 95, 106, 111, 115, 118, 119, 121, 122, 123, 129, 133, 134, 141, 142, 143, 145, 146, 155, 158, 159, 161, 166, 169, 177, 178, 183, 185, 187. RSA-2048 = 251959084756578934940271832400483985714292821262040320277771378360436 620207075955562640185258807844069182906412495150821892985591491761845 028084891200728449926873928072877767359714183472702618963750149718246 911650776133798590957000973304597488084284017974291006424586918171951 187461215151726546322822168699875491824224336372590851418654620435767 984233871847744479207399342365848238242811981638150106748104516603773 060562016196762561338441436038339044149526344321901146575444541784240 209246165157233507787077498171257724679629263863563732899121548314381 67899885040445364023527381951378636564391212010397122822120720357 Il più grande numero RSA mai fattorizzato è composto da 200 cifre decimali (663 bits); probabilmente non si raggiungerà la fattorizzazione di RSA-2048 prima di alcuni decenni. RSAlabs ritiene infatti che i computer e le memorie necessarie per fattorizzare un numero RSA siano: numero computers memoria RSA-760 215000 4 Gb RSA-1024 342000000 170 Gb RSA-1620 1.6 1015 120 Tb 9. Riferimenti Bibliografici Testi Simon Singh, “Codici e Segreti – La storia affascinante dei messaggi cifrati dall’antico Egitto a Internet”. BUR Saggi, Aprile 2005. Frederick W. Winterbotham, “Ultra Secret – La macchina che decifrava i messaggi segreti dell’Asse”. Mursia, 1976. Alessandro Languasco, Alessandro Zaccagnini, “Introduzione alla Crittografia”. HOEPLI Informatica, Milano, 2004. Siti Internet www.dia.unisa.it www.tonycrypt.com w w w . t u r i n g . o r g . u k / t u r i n g w w w . m a t h . a r i z o n a . e d u / ~ d s l / e n i g m a . h t m w w w . r i k s o f t . c o m / i n d e x o k . a s p ? G o t o = c r i t l o g i a . h t m w w w . c o d e s a n d c i p h e r s . o r g . u k www.icosaedro.it/crittografia/chiavi-simmetriche.html www.matematicamente.it/storia/crittografia.htm http://alpha01.dm.unito.it/personalpages/cerruti/ “Quando numeri e figure non saranno più la chiave di tutte le creature, quando quelli che cantano o baciano sapranno più dei profondi eruditi, quando il mondo tornerà ad essere vita libera il vero mondo, quando poi luce e ombra si ricongiungeranno in un genuino chiarore, e quando in fiabe e poesie si riconosceranno le storie eterne del mondo, allora di fronte ad un’unica parola magica si dileguerà tutta la falsità”. Novalis, “Enrico di Ofterdingen”
+Risulta evidente che non tutte le scelte dei numeri a e b possono portare a una corretta cifratura e decifratura del messaggio: in particolare, è necessario che ogni lettera dell’alfabeto chiaro sia cifrata con una lettera differente, per evitare ambiguità nell’operazione di decrittazione. 
 
+Si può dimostrare che, per avere una “buona” chiave di cifratura, occorre scegliere *a* in modo tale che a abbia inverso in Z<sub>26</sub>.
+
+#### Identità di Bézout 
+
+Se d  MCDa, b allora esistono degli interi x e y tali che d  a  x  b  y 
+
+### Funzione e Teorema di Eulero
+
+La funzione di Eulero fi(n) **indica il numero di elementi invertibile in Z<sub>n</sub>**, e può essere anche interpretato come **il numero di interi minori di n e relativamente primi con esso.** Poiché contare le classi invertibili in Z<sub>n</sub> è come contare i numeri tra 1 e n-1 che sono coprimi con n, si può affermare che: 
+
+se n  p è primo, si ha fi(p) = p-1
+{: .ml-4}
+
+Si ha inoltre: 
+
+se n = p<sup>r</sup> con p primo, si ha fi(n) = fi(p<sup>r</sup>) = p<sup>r-1</sup> · (p - 1)  
+se n = p<sup>r1</sup> · ... · p<sub>k</sub><sup>rk</sup> con p<sub>1</sub>,..., p<sub>k</sub> primi diversi tra loro, si ha 
+{: .ml-4}
+
+fi(n) = p<sub>1</sub><sup>r1-1</sup> (p<sub>1</sub>-1) ... p<sub>k</sub><sup>rk-1</sup> (p<sub>k</sub>-1)
+ {: .ta-c}
+
+La funzione di Eulero è alla base dell’importantissimo **Teorema di Eulero**:
+
+<div class="code-example" markdown="1">
+  Siano *a* e *n* due numeri interi positivi primi tra loro. Allora:    
+  
+  **a<sup>fi(n)</sup> = 1 mod(n)**
+  {: .ta-c .fs-5}
+
+</div>s
+
+### Un’applicazione della funzione di Eulero
+
+Vedremo ora un’interessante applicazione del Teorema di Eulero, che permette di calcolare, dato un numero in forma di potenza, le cifre decimali del numero stesso scritto in forma posizionale.
+
+Partiamo da un caso semplice per chiarire meglio il concetto: supponiamo di voler conoscere la cifra x che indica in numero di unità del numero 13<sup>5</sup> 13^5. In questo caso, una semplice calcolatrice portatile consente di ottenere il risultato 371293 e scoprire così che la cifra cercata è 3.
+
+Vediamo come si sarebbe potuto ottenere lo stesso risultato con la funzione e il teorema di Eulero: cercare la cifra che indica il numero di unità di 13^5 equivale a calcolare il resto della divisione per 10, ossia il numero compreso tra 0 e 9 tale che x = 13^5 in Z<sub>10</sub>.
+
+- 13 = 3 mod(10), in quanto il resto della divisione per 10 è uguale e pari a 3;
+
+- x = 13^5 = 3^5
+
+- per il Teorema di Eulero avremo: a = 3; n = 10; fi(10) = fi(2 5) = (2 - 1) (5 - 1) = 4 
+
+- 3<sup>fi(10)</sup> = 3^4 = 1  mod(10)  (infatti: 3^4 = 81 = 1 mod(10)) 
+
+- x = 3^5 = 3^4 3 = 1^4 3 = 3 
+
+La cifra finale (il numero di unità) di 13^5 è quindi 3, come risultava dal calcolo diretto.
+
+**manca l'esempio**
+
+## La crittografia a chiave pubblica o asimmetrica
+
+Tutti i metodi crittografici visti nei capitoli precedenti sono accomunati da una caratteristica: per tutti i metodi è necessario che mittente e destinatario, prima di scambiarsi un messaggio in codice, si siano accordati su quale “chiave” utilizzare per cifrare e decifrare i messaggi. Non è infatti sufficiente concordare il metodo da usare per nascondere il messaggio, ma è altresì necessario stabilire la chiave da utilizzare per applicare tale metodo. 
+
+Le chiavi da usare nei sistemi di cui abbiamo parlato nei precedenti capitoli possono essere così riassunte: 
+
+|**Metodo**|**Chiave/i**|
+|Scitala lacedemonica|Diametro del cilindro|
+|Atbash – Albam - Atba|Alfabeto cifrante|
+|Cifratura di Cesare|Numero che da di quanto viene traslato l’alfabeto chiaro|
+|Disco di Leon Battista Alberti|Lettera di partenza|
+|Tavola di Vigenère|Parola chiave|
+|Playfair cipher|Parola chiave|
+|ADFGVX|Parola chiave “quadrato” e parola chiave “colonna”|
+|Enigma|Settaggio della macchina|
+
+E’ quindi possibile che la chiave sia costituita da un numero o da una o più parole; in ogni caso, due parti che vogliano scambiarsi messaggi in modo “sicuro” devo prima scambiarsi l’informazione costituita dalla chiave. E’ evidente che tale chiave deve rimanere segreta se si vuole che rimanga tale anche il messaggio: nasce quindi il problema di come scambiarsi in modo sicuro la chiave, in altre parole il cosiddetto **problema della distribuzione delle chiavi**. Possiamo ricordare a questo proposito ciò che ha scritto Simon Singh:
+
+> “per poter condividere un segreto (tramite un messaggio crittato), due persone dovrebbero già condividere un segreto (la chiave)”. 
+
+Nei prossimi capitoli vedremo come tale problema fu affrontato e risolto dopo la seconda guerra mondiale portando alla crittografia moderna a chiave pubblica.
+
+### Una scatola e due lucchetti: lo scambio di chiavi secondo Diffie, Hellman e Merkle
+
+Il modo migliore per capire come si sia potuti arrivare a concepire e a realizzare un sistema crittografico che non necessita di uno scambio preventivo di chiavi da parte di mittente e destinatario è partire da un esempio. Supponiamo che, per scambiarsi documenti riservati, mittente e destinatario utilizzino una scatola alla quale sia possibile applicare due lucchetti; è dunque possibile procedere nel seguente modo: 
+
+<div class="thumbnail float-right">
+  <img src="{{site.baseurl}}/assets/images/doppio_lucchetto.jpg" onclick="document.getElementById('doppio_lucchetto').style.display='block'" class="hoverlink">
+</div>
+<!--modal-->
+<div id="doppio_lucchetto" class="modal">
+  <div class="modal--content">
+    <!-- <div class="w3-container"> -->
+      <span onclick="document.getElementById('doppio_lucchetto').style.display='none'" class="modal--close w3-display-topright">&times;</span>
+      <img src="{{site.baseurl}}/assets/images/doppio_lucchetto.jpg" data-toggle="modal" data-target="#doppio_lucchetto">
+      <p>Il principio della Crittografia.</p>
+    <!-- </div> -->
+  </div>
+</div>
+
+- il mittente racchiude il messaggio nella scatola e la chiude con il lucchetto del quale solo lui possiede la chiave e spedisce la scatola al destinatario;
+
+- il destinatario riceve la scatola ma non può aprirla dato che non ha la chiave del lucchetto; applica a questo punto un altro lucchetto, del quale solo lui possiede la chiave e rimanda la scatola al mittente; 
+
+- il mittente alla ricezione della scatola toglie il lucchetto che aveva precedentemente applicato e la rispedisce al destinatario; 
+
+- la scatola che arriva al destinatario è ormai chiusa solo con il lucchetto da lui stesso applicato: egli, quindi, potrà aprirla senza problemi e leggere il messaggio in essa racchiuso, senza che nessun terzo incomodo possa averne sbirciato il contenuto. 
+
+Questa idea però non è immediatamente traducibile in un modello matematico, in quanto: svolgere il primo passaggio (mettere il primo lucchetto alla scatola) significa partire da certi dati iniziali (scatola senza lucchetti), applicare ad essi una determinata funzione matematica (primo lucchetto) e raggiungere un certo risultato (scatola con un lucchetto); svolgere il secondo passaggio (mettere il secondo lucchetto alla scatola) significa partire dai risultati del primo passaggio (scatola con un lucchetto), applicare ad essi una diversa funzione matematica (secondo lucchetto) e raggiungere un altro risultato (scatola con due lucchetti); il terzo passaggio consiste nell’inversione della funzione utilizzata nel primo passaggio (cioè nel togliere il primo lucchetto messo); il quarto, ovviamente, si realizza invertendo la funzione applicata nel secondo passaggio. Ma in questo modo non si riottengono, in generale, i dati iniziali (scatola senza lucchetto) poiché *l'inversione della composizione di due funzioni deve avvenire in ordine contrario rispetto all'ordine di applicazione*, cioè va invertita per prima quella applicata per ultima. 
+
+Tutto ciò risulta evidente dall’esempio che segue.
+
+**(Da sistemare l'esempio)**
+a b c d e f g h i j k l m n o p q r s t u v w x y z H F S U G T A K V D E O Y J B P N X W C Q R I M Z L a b c d e f g h i j k l m n o p q r s t u v w x y z C P M G A T N O J E F W I Q B U R Y H X S D Z K L V 
+
+Questo problema fu affrontato e risolto negli anni ’70 del secolo scorso dai ricercatori Whitfield Diffie, Martin Hellman e Ralph Merkle.
+
+Le funzioni di cui si servirono per risolvere il problema della distribuzione delle chiavi derivano dall'[aritmetica dei moduli](#aritmetica-modulo-n) dove è spesso possibile incontrare funzioni unidirezionali, tali cioè da essere “difficili” da invertire.
+
+Dalla tabella che segue si può osservare ad esempio come la potenza cresca regolarmente, mentre nel caso dell’aritmetica dei moduli la variazione della funzione non sia regolare.
+
+|x|1|2|3|4|5|6|7|8|9|10|
+|3x|3|9|27|81|243|729|2187|6561|19683|59049|
+|3x mod5|3|4|2|1|3|4|2|1|3|4|
+
+Inoltre, dalla tabella si evince come in aritmetica normale sia immediato, dato un valore di x, ricavare il corrispondente valore della funzione, e viceversa, dato il valore della funzione ricavare x. In aritmetica dei moduli il comportamento “imprevedibile” della funzione rende questa inversione estremamente difficile.
+
+La funzione unidirezionale che fu scelta dai tre ricercatori era del tipo: 
+
+**Y<sup>x</sup> mod(p)** con p numero primo e Y < p . 
+{: .ta-c}
+
+Per capire come questo metodo consenta a mittente e destinatario di **stabilire una chiave segreta senza incontrarsi** faremo ricorso a tre persone immaginarie che chiameremo Alice (mittente), Bob (destinatario) e Eva (una terza persona che vuole spiare le conversazioni tra Alice e Bob). 
+
+Il metodo prevede che Alice e Bob concordino una chiave costituita dai numeri Y e p: l’aspetto affascinante del metodo è che Alice e Bob possono stabilire tali numeri “alla luce del sole”, senza cioè preoccuparsi di tenerli segreti (per esempio ad Eva).
+
+Supponiamo che Alice e Bob abbiano deciso di utilizzare: Y = 13, p = 23 e vediamo con uno schema come possono procedere per stabilire **senza incontrarsi** una chiave che rimarrà nota solo a loro due.
+
+<table markdown=1 class=".fs-6">
+    <thead>
+        <tr>
+            <th></th>
+            <th>ALICE</th>
+            <th>BOB</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><em>Passo 1</em></td>
+            <td>
+              Sceglie un numero, supponiamo: 8<br/>
+              e lo tiene <strong>segreto</strong><br/>
+              Chiameremo questo numero A</td>
+            <td>
+              Sceglie un numero, supponiamo: 5<br/>
+              e lo tiene <strong>segreto</strong><br/>
+              Chiameremo questo numero B</td>
+        </tr>
+        <tr>
+          <td><em>Passo 2</em></td>
+          <td>
+            Calcola:<br/>
+            Y^A mod(p)<br/>
+            13^8 mod(23) = 815730721 mod(23) = 2<br/>
+            Chiameremo questo numero α</td>
+          <td>
+            Calcola:<br/>
+            Y^B mod( p)<br/>
+            13^5  mod(23) = 371293  mod(23) = 4<br/>
+            Chiameremo questo numero β</td>
+        </tr>
+        <tr>
+          <td rowspan=2><em>Passo 3</em></td>
+          <td>Alice comunica a Bob il valore di α</td>
+          <td>Bob comunica ad Alice il valore di β</td>
+        </tr>
+        <tr>
+          <td colspan=2>Lo scambio di queste informazioni può avvenire tranquillamente in chiaro, in quanto un’eventuale intercettazione da parte di Eva non potrebbe comunque consentirle di risalire alla decifratura dei messaggi. Questo perché <strong>α e β NON sono la chiave, e quindi è irrilevante che Eva ne venga a conoscenza.</strong></td>
+        </tr>
+        <tr>
+          <td><em>Passo 4</em></td>
+          <td>
+            Calcola:<br/>
+            β^A  mod(p)<br/>
+            4^8  mod(23) = 65536  mod(23) = 9</td>
+          <td>
+            Calcola:<br/>
+            α^B mod(p)<br/>
+            2^5  mod(23) = 32  mod(23) = 9</td>
+        </tr>
+        <tr>
+          <td><em>La Chiave</em></td>
+          <td colspan=2>
+            Alice e Bob hanno ottenuto lo stesso numero che rappresenterà la chiave dei loro messaggi.</td>
+        </tr>
+    </tbody>
+</table>
+
+In base a questo schema abbiamo dunque dimostrato che Alice e Bob possono concordare una chiave senza bisogno di incontrarsi e senza il timore che la chiave stessa sia intercettata da terzi: abbiamo quindi risolto il problema della distribuzione delle chiavi!
+
+Per convincercene ulteriormente, vediamo perché ad Eva sia impossibile risalire al valore della chiave. Poiché tutte le comunicazioni dello schema precedente tra Alice e Bob sono in chiaro, Eva potrebbe aver intercettato le seguenti informazioni: 
+
+- le comunicazioni relative alla scelta di Y e p, e quindi sapere che la funzione è del tipo: 13^x mod(23); 
+- le comunicazioni del passo 3, e quindi i valori di α e β. 
+
+**Per trovare la chiave, Eva dovrebbe quindi procedere come Alice ed effettuare l’operazione β^A mod(p)**, oppure come Bob ed effettuare l’operazione **α^B mod(p)**. Ma Eva non conosce i valori di A o di B! D’altronde, tentare di ricavarli invertendo la funzione non sarebbe un compito semplice, in quanto si tratta di una funzione unidirezionale. 
+
+La dimostrazione pubblica della loro scoperta fu data da Diffie, Hellman e Merkle nel giugno del 1976 alla National Computer Conference. 
+
+L’introduzione di un metodo che consente a mittente e destinatario di scambiarsi la chiave in modo “sicuro” ha costituito una vera e proprio rivoluzione nel campo della crittografia; l’univo aspetto negativo del sistema Diffie - Hellman - Merkle risiede nell’introdurre una non contemporaneità tra le azioni di destinatario e mittente. Infatti, per applicare il suo “lucchetto” Bob deve attendere di ricevere il messaggio di Alice (supponiamo tramite mail), e la stessa Alice, per rimuovere il suo “lucchetto” deve attendere la risposta di Bob, e così via. Questo aspetto, che per persone che vivono in luoghi con fusi orari differenti può comportare un “ritardo” anche notevole nello scambio delle mail, rappresenta chiaramente un elemento che va contro la natura stessa della posta elettronica, che rappresenta uno dei modi più veloci di scambio delle informazioni. 
+
+Nel prossimo paragrafo vedremo come questo aspetto sia stato risolto dall’introduzione della crittografia a chiave pubblica. 
+
+### RSA 
+Il passo avanti rispetto al metodo di scambio delle chiavi secondo Diffie-Hellman-Merkle avvenne grazie allo sforzo congiunto di tre ricercatori: Ronald Rivest, Adi Shamir e Leonard Adleman, dalle cui iniziali deriva il metodo noto come RSA. 
+
+Il pregio di questo sistema rispetto al metodo Diffie-Hellman-Merkle è che non richiede uno scambio di informazioni tra Alice e Bob per la costruzione della chiave: questo sistema fa infatti uso di due chiavi, una detta “chiave pubblica ” e una chiamata “chiave privata” e utilizza un metodo di cifratura asimmetrico. 
+
+In un sistema a chiave asimmetrica la chiave usata per cifrare e quella usata per decifrare non coincidono: è possibile quindi che Alice renda pubblica la chiave da usare per cifrare un messaggio (la sua chiave pubblica) e conservi segreta la chiave da usare per decifrare il messaggio (la sua chiave privata), per essere in grado solo lei di decifrare i messaggi a lei diretti. 
+
+Il cuore della cifratura asimmetrica sviluppata da Rivest, Shamir e Adlemann è una funzione unidirezionale basata sul concetto di modulo. 
+
+Il funzionamento del metodo RSA si può schematizzare con i seguenti punti: 
+
+- si scelgono due numeri primi, *p* e *q* ; 
+- si calcola il loro prodotto *N* = *p* · *q* , chiamato *modulo* (dato che tutta l'aritmetica seguente è in *modulo n*
+- si sceglie poi un numero *e* (chiamato *esponente pubblico*), più piccolo di *N* e primo rispetto a $$ {\phi(N) = (p-1)\cdot(q-1)} $$, dove $${\phi}$$ è la funzione di Eulero; 
+- si calcola il numero d (chiamato *esponente privato*) tale che *e* · *d* ≡ 1 mod((*p*-1)(*q*-1))
+
+La chiave pubblica è rappresentata dalla coppia di numeri (N, e), mentre la chiave privata è rappresentata da (N, d). 
+
+Un messaggio *m* viene cifrato attraverso l'operazione *m<sup>e</sup>* mod(*N*), mentre il messaggio *c* così ottenuto viene decifrato con *c<sup>d</sup>* = *m<sup>ed</sup>* = *m*<sup>1</sup> mod(*N*). Il procedimento funziona solo se la chiave *e* utilizzata per cifrare e la chiave *d* utilizzata per decifrare sono legate tra loro dalla relazione *e* · *d* = 1 mod((*p*-1)·(*q*-1)), e quindi quando un messaggio viene cifrato con una delle due chiavi (la chiave pubblica) può essere decifrato solo utilizzando l'altra (la chiave privata). 
+
+Vediamo in pratica come sia possibile realizzare una cifratura RSA. 
+
+Per cifrare un messaggio, questo deve essere prima di tutto trasformato in un numero o in una serie di numeri, diciamo *m<sub>1</sub>, m<sub>2</sub>,..., m<sub>k</sub>. Questa operazione può essere effettuata utilizzando, ad esempio, il codice ASCII, e trasformando il numero binario ottenuto nel corrispondente in base dieci. Per semplicità, nel prossimo esempio considereremo che il messaggio segreto che si vuole trasmettere consista di un solo numero *m*, senza preoccuparci del metodo utilizzato per generarlo. 
+
+Faremo inoltre nuovamente riferimento ai nostri personaggi immaginari, Alice e Bob. 
+
+#### Operazioni effettuate da Alice (Generazione delle Chiavi):
+
+<ol>
+  <li>
+    sceglie due numeri primi p e q:
+    <p class="ta-c">
+        *p* = 47, *q* = 71
+    </p>
+  </li>
+  <li>
+    calcola *N* = *p*·*q*:
+    <p class="ta-c">
+        *p* = 47, *q* = 71
+    </p>
+  </li>
+  <li>
+    calcola *\(\phi\)(N)* = *(p-1)·(q-1)*:
+    <p class="ta-c">
+        \(\phi\)(3337) = (47-1)·(71-1) = 3220
+    </p>
+  </li>
+  <li>
+    sceglie *e* tale che: *e* < *N* e *MCD(e, \(\phi\)(N))* = 1: 
+    <p class="ta-c">
+        *e* = 79
+    </p>
+  </li>
+  <li>
+    calcola *d* tale che: *e* · *d* = 1 mod((*p*-1)·(*q*-1))
+    <p class="ta-c">
+        *d* = 79<sup>-1</sup> mod(3220) = 1019
+    </p>
+  </li>
+  <li>
+    la chiave pubblica è: 
+    <p class="ta-c">
+        (*e*, *N*) = (79, 3337)
+    </p>
+  </li>
+  <li>
+    la chiave privata è: 
+    <p class="ta-c">
+        (*d*, *N*) = (1019, 3337)
+    </p>
+  </li>
+</ol>
+
+Adesso Alice è libera di pubblicare la sua chiave pubblica su Internet, o su un qualsiasi altro elenco disponibile a chiunque voglia scriverle messaggi cifrati. 
+
+Supponiamo allora che Bob le voglia mandare un messaggio costituito da vediamo quale operazioni deve eseguire. 
+
+#### Operazioni effettuate da Bob (Cifratura): 
+<ol>
+  <li>
+    calcola *c* = *m<sup>e</sup>*  mod(*N*):
+    <p class="ta-c">
+        *p* = 47, *q* = 71
+    </p>
+  </li>
+  <li>
+    *c* rappresenta il messaggio cifrato che può essere letto (decifrato) solo da chi è in possesso della chiave privata e quindi solo da Alice. Bob può quindi spedire in tutta tranquillità c senza preoccuparsi del fatto che Eva possa intercettarlo, poiché anche in quell’eventualità non sarebbe in grado di volgerlo in chiaro. 
+  </li>
+</ol>
+
+#### Operazioni effettuate da Alice (Decifratura):
+
+1. ricevuto il messaggio Alice ricava *m* mediante la formula *m* = *c<sup>d</sup> mod(*N*):
+
+  m = 1570<sup>1019</sup> mod(3337) = 688
+  {: .ta-c}
+
+L’unico modo per Eva di decifrare il messaggio è di avere *d* e quindi di riuscire a ottenere *p* e *q* dalla fattorizzazione di *N*: come detto precedentemente, il processo di fattorizzazione di un numero nei suoi fattori primi è un processo molto lungo, specialmente se si ha a che fare con numeri molto grandi.
+
+La segretezza nella comunicazioni tra Alice e Bob è quindi assicurata!
+
+(manca esempio)
+(manca link)
+
+#### Curiosità e considerazioni 
+Samuel Wagstaff, docente di informatica all’Università dell’Indiana, è riuscito a fattorizzare un numero di 167 cifre in centomila ore di tempo computer. Il numero della prova era: 
+
+  16379019558053662392174130154670449583923965684832704024983781709239694686351321204156509649226080541971824707555797144568969073877772973038883717449030628887379284041
+  {: .ml-4 .mr-4}
+
+Questa notizia dovrebbe far riflettere: considerando che ad oggi si scoprono ancora nuovi algoritmi matematici per decrittare sempre più velocemente e che la potenza dei calcolatori aumenta vertiginosamente di mese in mese (e non parliamo dei computers dei laboratori segreti!), sarà una buona scelta affidare dati importantissimi ad un metodo che si basa esclusivamente sulla lentezza dei calcolatori attuali? 
+
+Bisogna anche notare che una chiave da 1024 bit in un sistema a chiave pubblica, vale circa quanto una a 64 bit di un sistema a chiave simmetrica a causa del fatto che nel sistema a chiave pubblica esiste sempre un legame tra chiave privata e segreta che permette di ridurre le combinazioni necessarie per trovare il codice di accesso. 
+
+Stabilita tale corrispondenza di sicurezza tra le lunghezze delle chiavi dei due sistemi, è interessante notare quando detto alla conferenza Crypto '93 (notare che sono già passati diversi anni), da M. Wiener del Bell Northern Research, il quale ha descritto come con un milione di dollari sia realizzabile un chip speciale da 50 milioni di test al secondo che, in parallelo ad altri 57.000, può condurre un attacco con successo mediamente in 3,5 ore. Con un costo di 10 milioni di dollari il tempo si abbassa a 21 minuti, e con 100 milioni a disposizione, il codice è infranto in pochi secondi! 
+
+Fatto sta che il commercio elettronico ha già iniziato a farne uso e alcuni anni fa, il 5 Agosto 1997, il Consiglio dei Ministri Italiano ha approvato il regolamento di attuazione dell’art.15 della legge 57/97, nota anche come legge Bassanini-1, con il quale si stabilisce che l’originale di un documento può essere anche quello depositato su di un file. Tale documento su file ha valore probante sia sul contenuto sia sulla provenienza se corredato da firma elettronica legalmente riconosciuta. 
+
+#### Numeri primi e RSA 
+
+Da quanto esposto nei precedenti paragrafi risulta chiaro che la conoscenza di numeri primi molto “grandi” permette di effettuare cifrature RSA sempre più potenti. La ricerca di tali numeri costituisce quindi, da un po’ di anni a questa parte, un vero e proprio business, e molte aziende hanno come solo scopo quello di trovarne di sempre più grandi. Nella tabella seguente sono riportati alcuni dei numeri scoperti negli ultimi anni. 
+
+(manca immagine sui numeri trovati)
+
+Da molti anni accade che il più grande numero primo noto sia un primo di Mersenne. Chi volesse capovolgere la situazione, e trovare un numero primo "generico" più grande dovrà ancora una volta alzare il tiro (e di parecchio). Il 42-esimo primo di Mersenne ha "appena" 7.816.230 cifre, e sembra piccolo posto accanto al nuovo arrivato.
+
+I numeri della forma 2<sup>n</sup> - 1 sono detti numeri di Mersenne e sono indicati con *M<sub>n</sub>*. In generale questi numeri non sono primi, nemmeno se *n* è primo (per esempio M<sub>11</sub>=2047=89·23); non si sa nemmeno se di numeri di Mersenne primi ce ne siano un numero finito o se siano infiniti. 
+
+Il più recente primo di Mersenne (il 43-esimo) è stato scoperto il 15 Dicembre 2005 da Curtis Cooper e Steven Boone: 
+
+  **2<sup>30402457</sup> - 1**
+  {: .ta-c}
+
+Esso rappresenta **il più grande numero primo noto**, con ben 9.152.052 cifre! Siamo a un passo dalla soglia dei 10 milioni di cifre, per la quale la Electronic Frontier Foundation offre 100.000 dollari. 
+
+Il premio precedente - di 50.000 dollari - è stato assegnato nel 2000 a Nayan Hajratwala il quale, partecipando alla GIMPS (Great Internet Mersenne Prime Search), trovò nel 1999 il 38-esimo primo di Mersenne (2.098.960 cifre). 
+
+#### Attacchi
+Nel 1977, subito dopo il lancio del sistema di crittografia RSA, Martin Gardner pubblicò su Scientific American un piccolo messaggio cifrato, basato su una chiave costituita da un numero N di 129 cifre, prodotto di due numeri primi molto grandi. Il messaggio e la chiave erano stati forniti da ricercatori del MIT, che offrivano un premio in denaro a chi avesse decrittato il messaggio. A quei tempi si stimò che ci sarebbero voluti all'incirca **ventimila anni** per scomporre in fattori primi quel numero, con i più veloci calcolatori disponibili. Dopo di allora però ci furono importanti novità, più che sul lato della velocità dei computer, sui **metodi per fattorizzare grandi numeri**. Inoltre la massiccia diffusione di Internet costituì una variabile imprevista: sotto la guida di alcuni ricercatori, un esercito di 600 volontari di 20 paesi si mise all'opera e dopo non molti mesi di lavoro, nell'Aprile del 1994, la fattorizzazione fu scoperta: si trattava di due numeri, uno di 64 e uno di 65 cifre. Erano passati solo (!) 17 anni dalla pubblicazione della chiave pubblica. Solo per curiosità riportiamo qui i valori dei numeri coinvolti (i volonterosi possono provare ad eseguire il prodotto richiesto, per controllare che non ci siano errori): 
+
+p = 3490529510847650949147849619903898133417764638493387843990820577  
+q = 32769132993266709549961988190834461413177642967992942539798288533  
+N = 114381625757888867669235779976146612010218296721242362562561842935706935245733897830597123563958705058989075147599290026879543541 
+
+Attualmente chiavi di 1024 bit sono considerate sufficientemente sicure.  
+Tempo medio di attacco: 
+
+| lunghezza chiave | tempo richiesto | tempo richiesto 
+| (bit) | a 1 decr/ms | a 106 decr/ms 
+|56 | 255 ms = 1142 anni | 10 ore 
+|128 | 2127 ms ~ 1024 anni | ~ 1018 anni 
+|168 | 2167 ms ~ 1036 anni | ~ 1030 anni 
+
+#### La fattorizzazione 
+Discutiamo solo il problema inverso della fattorizzazione. A prima vista, sapendo che si usano numeri primi vicini a 2<sup>128</sup>, si potrebbe pensare di costruirsi una tabella dei numeri che sono prodotto di due tali primi. Ma quanti sono?  
+In base al risultato ottenuto da Hadamard sappiamo che: 
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+$$ {\lim\limits_{x \to 1} \frac{\pi(n)}{\frac{n}{log(n)}} = 1} $$
+
+dove *p(n)* rappresenta il numero di primi minori o uguali a *n*.
+
+Dunque possiamo rozzamente valutare $$ {\pi(2^{128})} $$ come: 
+
+$$ {\frac{2^{128}}{log(2^{128})} \approx 3 \cdot 10^{36}} $$
+
+e $$ {\pi(2^{127})} $$ come: 
+
+  $$ {\frac{2^{127}}{log(2^{127})} \approx 2 \cdot 10^{36}} $$ 
+  
+e quindi $$ {\pi(2^{128}-\pi(2^{127})) \approx 10^{36}} $$. Stiamo cauti nella stima e diciamo che ne abbiamo almeno 10<sup>30</sup> (in realtà potremmo anche dire con sicurezza 10<sup>35</sup> ). I prodotti di due numeri di questa forma sono allora dell’ordine di 10<sup>60</sup>. Immagazzinarli in forma binaria richiede allora $$ {2^{256} \cdot 10^{60} \approx 2^{256} \cdot 2^{199} = 2^{455}} $$ bit, quindi $$ {2^{452} \approx 10^{136} } $$ byte. Un terabyte è circa 10<sup>12</sup> byte, quindi servirebbe qualcosa come 10<sup>124</sup> terabyte. Troppi anche solo da immaginare: il diametro della Galassia in metri è 10<sup>21</sup>. Più sensato è pensare di fattorizzare N, ma l’unico modo conosciuto è di dividerlo successivamente per 2, 3, e così via. E’ probabile che, nel momento in cui si è ottenuta la fattorizzazione richiesta, la chiave pubblica sia cambiata da parecchi mesi, si faccia un conto approssimativo del tempo richiesto. 
+
+In matematica, RSA-2048 è il più grande dei numeri RSA (semiprimi grandi che fanno parte del RSA Factoring Challenge), e ad esso è associato il premio più grande per la sua fattorizzazione: 200000 dollari.  
+RSA-2048 è un numero con 617 cifre decimali (2048 bits)! 
+
+  Un numero è detto semiprimo (anche detto biprimo o 2-quasi primo, o pq numero) è un numero naturale che è il prodotto di numeri primi (non necessariamente distinti). I primi numeri semiprimi sono: 4, 6, 9, 10, 14, 15, 21, 22, 25, 26, 33, 34, 35, 38, 39, 46, 49, 51, 55, 57, 58, 62, 65, 69, 74, 77, 82, 85, 86, 87, 91, 93, 94, 95, 106, 111, 115, 118, 119, 121, 122, 123, 129, 133, 134, 141, 142, 143, 145, 146, 155, 158, 159, 161, 166, 169, 177, 178, 183, 185, 187.
+  {: .ml-4 .mr-4 .fs-4}
+
+RSA-2048 = 
+  
+  251959084756578934940271832400483985714292821262040320277771378360436 620207075955562640185258807844069182906412495150821892985591491761845 028084891200728449926873928072877767359714183472702618963750149718246 911650776133798590957000973304597488084284017974291006424586918171951 187461215151726546322822168699875491824224336372590851418654620435767 984233871847744479207399342365848238242811981638150106748104516603773 060562016196762561338441436038339044149526344321901146575444541784240 209246165157233507787077498171257724679629263863563732899121548314381 67899885040445364023527381951378636564391212010397122822120720357
+  {: .ml-4 .mr-4 .fs-4}
+
+  Il più grande numero RSA mai fattorizzato è composto da 200 cifre decimali (663 bits); probabilmente non si raggiungerà la fattorizzazione di RSA-2048 prima di alcuni decenni. RSAlabs ritiene infatti che i computer e le memorie necessarie per fattorizzare un numero RSA siano: 
+  
+  | numero | computers | memoria 
+  | RSA-760 | 215000 | 4 Gb 
+  | RSA-1024 | 342000000 | 170 Gb
+  | RSA-1620 | 1.6·10<sup>15</sup> | 120 Tb 
+
+  
 ## Materiale, Link e riferimenti esterni
 
+- Testi Simon Singh, “Codici e Segreti – La storia affascinante dei messaggi cifrati dall’antico Egitto a Internet”. BUR Saggi, Aprile 2005. 
+- Frederick W. Winterbotham, “Ultra Secret – La macchina che decifrava i messaggi segreti dell’Asse”. Mursia, 1976. 
+- Alessandro Languasco, Alessandro Zaccagnini, “Introduzione alla Crittografia”. HOEPLI Informatica, Milano, 2004. 
+- [www.dia.unisa.it](http://www.dia.unisa.it) 
+- [www.tonycrypt.com](http://www.tonycrypt.com) 
+- [www.turing.org.uk/turing](http://www.turing.org.uk/turing) 
+- [www.math.arizona.edu/~dsl/enigma.htm](http://www.math.arizona.edu/~dsl/enigma.htm) 
+- [www.riksoft.com/indexok.asp?Goto=critlogia.htm](http://www.riksoft.com/indexok.asp?Goto=critlogia.htm) 
+- [www.codesandciphers.org.uk](http://www.codesandciphers.org.uk) 
+- [www.icosaedro.it/crittografia/chiavi-simmetriche.html](http://www.icosaedro.it/crittografia/chiavi-simmetriche.html) 
+- [www.matematicamente.it/storia/crittografia.htm](http://www.matematicamente.it/storia/crittografia.htm) 
+- [http://alpha01.dm.unito.it/personalpages/cerruti/](http://http://alpha01.dm.unito.it/personalpages/cerruti/) 
+- [Appunti di Crittografia, una introduzione all'algebra moderna - Ing. Emanuele Salvador]({{site.baseurl}}/assets/documenti/Crittografia.pdf)
+- [Crittografia su Wikipedia](https://it.wikipedia.org/wiki/Crittografia)
+- [Pagina originale (in locale) dell'applet per sperimentare gli algoritmi di cifratura antichi]({{site.baseurl}}/assets/documenti/crittografia-cifrari_antichi.html)
+- [Pagina originale (esterna) dell'applet per sperimentare gli algoritmi di cifratura antichi](http://utenti.quipo.it/base5/combinatoria/crittografia2.htm)
+
+
+<script src="{{site.baseurl}}/assets/js/bordi-tabelle.js"></script>
+
+<!-- 
 <ul class="permalink_section">
   <li><a href="../fonti/crittografia.pdf">Appunti di Crittografia, una introduzione all'algebra moderna - Ing. Emanuele Salvador</a></li>
-</ul>
-*   [Appunti di Crittografia, una introduzione all'algebra moderna - Ing. Emanuele Salvador](../fonti/crittografia.pdf)
-*   [Crittografia su Wikipedia](https://it.wikipedia.org/wiki/Crittografia)
-*   [Pagina originale (in locale) dell'applet per sperimentare gli algoritmi di cifratura antichi](../fonti/crittografia-cifrari_antichi.html)
-*   [Pagina originale (esterna) dell'applet per sperimentare gli algoritmi di cifratura antichi](http://utenti.quipo.it/base5/combinatoria/crittografia2.htm)
+</ul> -->
