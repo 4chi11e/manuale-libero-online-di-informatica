@@ -6,6 +6,16 @@ parent: Crittografia
 grand_parent: Reti
 ---
 
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<!-- Miei script -->
+<script src="{{site.baseurl}}/assets/js/bordi-tabelle.js"></script>
+<script src="{{site.baseurl}}/assets/js/crittografia-antica.js"></script>
+
+<!-- MathJax -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 # Crittografia Moderna
 {: .no_toc}
 
@@ -56,7 +66,14 @@ Ogni algoritmo generalmente cerca di crittare una stringa di bit attraverso una 
 
 Un problema che affligge la dimensione del blocco è il paradosso del compleanno che rilascia informazioni sulla chiave ogni volta che avviene una collisione (quando due blocchi vengono cifrati allo stesso modo). Possiamo ritenere sicura solo la radice quadrata di tutte le combinazioni possibili. Per esempio con una dimensione di 64 bit, che genererebbe {\displaystyle 2^{64}}{\displaystyle 2^{64}} possibili combinazioni, potremo impiegarne solo {\displaystyle 2^{32}}{\displaystyle 2^{32}} prima di cominciare a rivelare informazioni sulla chiave.
 
-## Numeri primi
+
+## Crittografia asimmetrica
+
+Fino agli anni 1970 gli unici sistemi crittografici esistenti erano simmetrici cioè prevedevano l'utilizzo di un'unica chiave utilizzata sia per cifrare che per decifrare. Per quanto i crittosistemi fossero sicuri ed efficienti rimaneva da risolvere un problema fondamentale, quello della condivisione della chiave. A questo scopo vennero proposte una serie di tecniche che si possono definire di cirittocrafia asimmetrica.
+
+Prima di poter affrontare l'argomento è necessario studiare le basi matematiche che stanno alla base di tutta la crittografia asimmetrica cioè i numeri primi e l'aritmetica dei moduli.
+
+### Numeri primi
 
 Un intero positivo N si dice **primo** se 
 
@@ -86,50 +103,58 @@ La tecnica è la seguente:
 - evidentemente n è coprimo con tutti i q<sub>j</sub> contenuti in Q (cioè non ha fattori in comune con essi): quindi, *tutti i suoi fattori primi sono primi che non stanno in Q*. 
 
 Esempio
-Supponiamo di conoscere soltanto i numeri primi 2 e 3.\
-Allora Q = {2, 3}, n = 2 · 3 + 1 = 7 , che è primo.\
-Si aggiunge 7 a Q e si ottiene Q = {2, 3, 7}.\
-Al passo seguente si ha n = 2 · 3 · 7 + 1 = 43 , che è primo anch’esso.\
-Lo aggiungo al bottino: Q = {2, 3, 7, 43}.\
+Supponiamo di conoscere soltanto i numeri primi 2 e 3.  
+Allora Q = {2, 3}, n = 2 · 3 + 1 = 7 , che è primo.  
+Si aggiunge 7 a Q e si ottiene Q = {2, 3, 7}.  
+Al passo seguente si ha n = 2 · 3 · 7 + 1 = 43 , che è primo anch’esso.  
+Lo aggiungo al bottino: Q = {2, 3, 7, 43}.  
 Si prosegue in questo modo: n = 2 · 3 · 7 · 43 + 1 = 1806 che può essere scomposto in fattori primi come 1806 = 13 · 139 , aggiungendo quindi due nuovi numeri all’insieme Q che diventa Q = {2, 3, 7, 43, 13, 139}.
 {: .code-example}
 
-Denotiamo la successione dei primi in ordine ascendente con p<sub>1</sub> , p<sub>2</sub> ,..., p<sub>n</sub>. \ Avremo allora: p<sub>1</sub> = 2, p<sub>2</sub> = 3, p<sub>3</sub> = 5,... \
+Denotiamo la successione dei primi in ordine ascendente con p<sub>1</sub> , p<sub>2</sub> ,..., p<sub>n</sub>.  
+Avremo allora: p<sub>1</sub> = 2, p<sub>2</sub> = 3, p<sub>3</sub> = 5, ...  
 E inoltre: p<sub>10</sub> = 29, p<sub>100</sub> = 541, p<sub>1000</sub> = 7979, p<sub>10000</sub> = 104709
 
-Una funzione di importanza fondamentale è π(x):
+Una funzione di importanza fondamentale è la [funzione enumerativa dei numeri primi](https://it.wikipedia.org/wiki/Funzione_enumerativa_dei_primi) indicata con π(x):
 
-π(x) = numero dei primi minori o uguali a x
-{: .importante}
+$$\pi(x)$$ = numero dei primi minori o uguali a x
+{: .importante .ta-c}
 
 Si ha quindi: π(10) = 4 perché ci sono 4 primi (2,3,5,7) minori di 10. \
 Alcuni valori di π(x) sono: \
-π(100) = 25 \
-π(1000) = 168 \
-π(10000) = 1229 \
-π(100000) = 9592 \
-π(1000000) = 78498 \
-π(10000000) = 664579 
+*π*(100) = 25 \
+*π*(1000) = 168 \
+*π*(10000) = 1229 \
+*π*(100000) = 9592 \
+*π*(1000000) = 78498 \
+*π*(10000000) = 664579 
 
-Nel 2000 si è arrivati (con algoritmi sofisticati ed una grande rete di computers) a 10<sup>22</sup>: \
-π(10<sup>22</sup>) = 201467286689315906290
+Sulla [pagina](https://en.wikipedia.org/wiki/Prime-counting_function) in inglese di wikipedia dedicata alla funzione π sono riportati valori calcolati e stimati della funzione. Il più grande che possiamo trovare, pubblicato da David Baugh and Kim Walisch nel 2015 è:  
 
-Accenniamo qui soltanto al fatto che un valore approssimato di π(x) può essere stimato per mezzo del **Teorema dei numeri primi** (dimostrato indipendentemente da Hadamard e da De la Vallée Poussin nel 1896) il quale afferma che: π(x) ~ x / log(x). 
+π(10<sup>27</sup>) = 16,352,460,426,841,680,446,427,399
 
-Tra le altre, una conseguenza del teorema dei numeri primi è che la probabilità che un numero x preso a caso sia primo è circa 1 / log(x). 
+Calcolare il valore esatto della funzione π(n) per valori così grandi di n richiede una quantità di calcoli inimmaginabile. Fortunatamente è possibile calcolare un valore approssimato di π(n) per mezzo del **Teorema dei numeri primi** il quale afferma che: 
 
-Esempio
-La probabilità che un intero casuale di 1000 cifre sia primo è circa 1 / log(10<sup>1000</sup>). Tenendo presente che nel Teorema dei numeri primi il logaritmo è in base e: log(10<sup>1000</sup>) = 1000 · log(10) = 2302,59. Quindi, in media, troveremo un numero primo ogni 2302 interi presi a caso.
+$$\pi(x) \approx \frac{x}{log(x)}$$
+{: .ta-c} 
+
+Tra le altre, una conseguenza del teorema dei numeri primi è che la probabilità che un numero x preso a caso sia primo è circa:
+
+$$\frac{1}{log(x)}$$
+{: .ta-c}
+
+**Esempio** 
+La probabilità che un intero casuale di 1000 cifre sia primo è circa 1 / log(10<sup>1000</sup>). Tenendo presente che nel Teorema dei numeri primi il logaritmo è in base *e*: log(10<sup>1000</sup>) = 1000 · log(10) = 2302,59. Quindi, in media, troveremo un numero primo ogni 2302 interi presi a caso.
 {: .code-example}
 
-E' possibile, dato un intero x casuale, provare velocemente che x è primo? \
+E' possibile, dato un intero *x* casuale, provare velocemente che *x* è primo? \
 Naturalmente esiste un metodo ovvio (di forza bruta): dividerlo per gli interi che lo precedono. Oppure, cosa assai più intelligente, mettere in moto un crivello di Eratostene. Entrambi però richiederebbero tempi proibitivi di calcolo anche con numeri di modesta lunghezza, persino utilizzando supercomputers. 
 
 Accenniamo qui soltanto al fatto che esistono metodi per dimostrare che un interno è *probabilmente primo*, con una probabilità di errore che si può rendere piccola a piacere (tra questi ricordiamo il Test di Fermat). Esistono poi anche metodi molto più efficaci, per i quali la probabilità di errore è ancora più bassa. Il punto di forza di tutti questi metodi è che il tempo che impiegano ad eseguire il test su x è **polinomiale**, cioè è esprimibile mediante un polinomio nel *numero delle cifre di x*. Nel 2002 tre ricercatori indiani (Agrawal, Saxena e Cayal) hanno trovato un algoritmo che è *al tempo stesso polinomiale e deterministico* per dimostrare la primalità di un numero. 
 
 Questo è un grande risultato, che ha risolto una congettura rimasta aperta per decenni. Il loro algoritmo però non è ancora utilizzato in pratica, perché è molto più lento dei test probabilistici, i quali, del resto, sono *quasi certi* per i primi di centinaia di cifre che servono attualmente in crittografia.
 
-## Aritmetica modulo n
+### Aritmetica modulo n
 Nel seguito **N** e **Z** denoteranno rispettivamente l'insieme dei numeri naturali {0,1,2,...} e l'insieme degli interi relativi {...,-2,-1,0,+1,+2,...}.
 Dati a, b in **Z** ed n > 1 in N, diciamo che ***a*** *è congruo a* ***b modulo n*** se a e b divisi per n danno lo stesso resto; in questo caso scriviamo una relazione di equivalenza. *a ≡ b* mod(*n*). La relazione di congruenza è una relazione di equivalenza.
 
