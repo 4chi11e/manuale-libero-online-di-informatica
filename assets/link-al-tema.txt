@@ -1,0 +1,10 @@
+https://github.com/pmarsceill/just-the-docs
+https://pmarsceill.github.io/just-the-docs/
+
+trovato col comando: 
+gem environment
+sotto la voce:
+INSTALLATION DIRECTORY: C:/Ruby27-x64/lib/ruby/gems/2.7.0
+dentro gems trovi il gem di just-the-docs con tutti i file
+
+C:\Ruby27-x64\lib\ruby\gems\2.7.0\gems\just-the-docs-0.3.3

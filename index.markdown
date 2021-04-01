@@ -3,7 +3,7 @@ layout: default
 title: Home
 nav_order: 1
 description: "La mia Home"
-has_children: true
+has_children: false
 #permalink: /
 has_toc: false
 ---
@@ -27,4 +27,4 @@ L'idea di creare questo sito nasce dalla necessità di porre rimedio all'inadegu
 
 Per questi motivi, ad inizio 2020, durante il mio secondo anno di insegnamento al Liceo Banfi di Vimercate, mi decido finalmente ad iniziare la creazione di questa dispensa che spero possa essere utile a tutti i miei studenti attuali e futuri, e chissà magari anche a qualche collega e ai suoi studenti.
 
-Il materiale che troverete è di varia provienienza e non è soltanto farina del mio sacco: una parte non trascurabile è stata raccolta e riadattata da wikipedia, altre parti sono state tratte e riadattate da pagine, documenti o eserciziari prodotti da diversi docenti o studenti universitari, alcuni contenuti sono stati infine raccolti da diversi libri di testo di informatica per le scuole superiori. Spero che nessuno si risentirà per aver utilizzato parte del materiale da loro scritto, anche considerando che questa dispensa è completamente gratuita e libera, infatti il codice e liberamente disponibile su un repository pubblico su github all'indirizzo https://github.com/4chi11e/dispensa-di-informatica sotto licenza GNU GPL.
+Il materiale che troverete è di varia provienienza e non è soltanto farina del mio sacco: una parte non trascurabile è stata raccolta e riadattata da wikipedia, altre parti sono state tratte e riadattate da pagine, documenti o eserciziari prodotti da diversi docenti o studenti universitari, alcuni contenuti sono stati infine raccolti da diversi libri di testo di informatica per le scuole superiori. Spero che nessuno si risentirà per aver utilizzato parte del materiale da loro scritto, anche considerando che questa dispensa è completamente gratuita e libera, infatti il codice e liberamente disponibile [qui](https://github.com/4chi11e/dispensa-di-informatica) su un repository pubblico su github sotto licenza GNU GPL.
