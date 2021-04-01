@@ -32,7 +32,7 @@ Si può iniziare a parlare di crittografia moderna a partire dagli anni 1970 qua
 
 Sebbene non consistano in veri e propri sistemi di crittografia, le [funzioni crittografiche di hash](#) hanno un ruolo piuttosto importante nell'ambito della crittografia moderna, essendo utilizzate in diversi ambiti, tra cui, insieme ad RSA, nell'implementazione di sistemi per la [firma digitale](#).
 
-## Sistemi di crittografia simmetrici
+## Crittografia simmetrica
 
 Con [crittografia simmetrica](https://it.wikipedia.org/wiki/Crittografia_simmetrica#:~:text=Con%20crittografia%20simmetrica%2C%20o%20crittografia,performante%20e%20semplice%20da%20implementare.), o crittografia a chiave privata o precondivisa, si intende una tecnica di cifratura in cui la chiave di crittazione è la stessa chiave di decrittazione, rendendo l'algoritmo molto performante e semplice da implementare. Tuttavia presuppone che le due parti siano già in possesso delle chiavi, richiesta che non rende possibile uno scambio di chiavi con questo genere di algoritmi. Lo scambio avviene attraverso algoritmi a chiave asimmetrica o pubblica, generalmente più complessi sia da implementare che da eseguire ma che permettono questo scambio in modo sicuro. Dopodiché la comunicazione verrà crittata usando solo algoritmi a chiave simmetrica per garantire una comunicazione sicura ma veloce.
 
@@ -163,11 +163,14 @@ La debolezza di questi algoritmi risiede proprio nel legame che c'è tra la chia
 
 ## Crittografia asimmetrica
 
-Fino agli anni 1970 gli unici sistemi crittografici esistenti erano simmetrici cioè prevedevano l'utilizzo di un'unica chiave utilizzata sia per cifrare che per decifrare. Per quanto i crittosistemi fossero sicuri ed efficienti rimaneva da risolvere un problema fondamentale, quello della condivisione della chiave. A questo scopo vennero proposte una serie di tecniche che si possono definire di cirittocrafia asimmetrica.
+Fino agli anni 1970 gli unici sistemi crittografici esistenti erano simmetrici cioè prevedevano l'utilizzo di un'unica chiave utilizzata sia per cifrare che per decifrare. Per quanto i crittosistemi fossero sicuri ed efficienti rimaneva da risolvere un problema fondamentale, quello della **condivisione della chiave**. A questo scopo vennero proposte una serie di tecniche che si possono definire di cirittocrafia asimmetrica.
+
+
+### La matematica alla base della crittografia asimmetrica
 
 Prima di poter affrontare l'argomento è necessario studiare le basi matematiche che stanno alla base di tutta la crittografia asimmetrica cioè i numeri primi e l'aritmetica dei moduli.
 
-### Numeri primi
+#### Numeri primi
 
 Un intero positivo N si dice **primo** se 
 
@@ -248,7 +251,8 @@ Accenniamo qui soltanto al fatto che esistono metodi per dimostrare che un inter
 
 Questo è un grande risultato, che ha risolto una congettura rimasta aperta per decenni. Il loro algoritmo però non è ancora utilizzato in pratica, perché è molto più lento dei test probabilistici, i quali, del resto, sono *quasi certi* per i primi di centinaia di cifre che servono attualmente in crittografia.
 
-### Aritmetica modulo n
+#### Aritmetica modulo n
+
 Nel seguito **N** e **Z** denoteranno rispettivamente l'insieme dei numeri naturali {0,1,2,...} e l'insieme degli interi relativi {...,-2,-1,0,+1,+2,...}.
 Dati a, b in **Z** ed n > 1 in N, diciamo che ***a*** *è congruo a* ***b modulo n*** se a e b divisi per n danno lo stesso resto; in questo caso scriviamo una relazione di equivalenza. *a ≡ b* mod(*n*). La relazione di congruenza è una relazione di equivalenza.
 
@@ -291,7 +295,7 @@ Sono valide le seguenti proprietà: \
   {: .ta-c .mb-0 .mt-0}
 </div>
 
-### Il cifrario di Cesare “generalizzato” con l’aritmetica modulo n
+#### Il cifrario di Cesare “generalizzato” con l’aritmetica modulo n
 
 Precedentemente abbiamo parlato del [cifrario di Cesare](#cifratura-di-cesare-ii-secolo-dc) e di come fosse possibile generare messaggi cifrati per mezzo di questo metodo. Vedremo ora come sia possibile generalizzare tale sistema di cifratura utilizzando le classi di resto, e ottenendo così una cifratura che non trasla soltanto le lettere dell’alfabeto, ma le “rimescola”. 
 
@@ -317,11 +321,11 @@ Risulta evidente che non tutte le scelte dei numeri *a* e *b* possono portare a 
 
 Si può dimostrare che, per avere una “buona” chiave di cifratura, occorre scegliere *a* in modo tale che *<span class="overline">a</span>* abbia inverso in ***Z***<sub>26</sub>.
 
-#### Identità di Bézout 
+##### Identità di Bézout 
 
 Se *d* = MCD(*a, b*) allora esistono degli interi *x* e *y* tali che *d* = *a · x + b · y* 
 
-### Funzione e Teorema di Eulero
+#### Funzione e Teorema di Eulero
 
 La funzione di Eulero *$$\phi$$(n)* **indica il numero di elementi invertibile in *Z<sub>n</sub>***, e può essere anche interpretato come **il numero di interi minori di *n* e relativamente primi con esso.** Poiché contare le classi invertibili in ***Z***<sub>*n*</sub> è come contare i numeri tra 1 e *n*-1 che sono coprimi con *n*, si può affermare che: 
 
@@ -347,7 +351,7 @@ La funzione di Eulero è alla base dell’importantissimo **Teorema di Eulero**:
 
 </div>
 
-### Un’applicazione della funzione di Eulero
+#### Un’applicazione della funzione di Eulero
 
 Vedremo ora un’interessante applicazione del Teorema di Eulero, che permette di calcolare, dato un numero in forma di potenza, le cifre decimali del numero stesso scritto in forma posizionale.
 
@@ -383,31 +387,9 @@ La cifra finale (il numero di unità) di 13<sup>5</sup> è quindi 3, come risult
   - <span class="overline">3</span><sup>327</sup> = <span class="overline">3</span><sup>8·40+7</sup> = (<span class="overline">3</span><sup>40</sup>)<sup>8</sup> · <span class="overline">3</span><sup>7</sup> = <span class="overline">1</span> · <span class="overline">3</span><sup>7</sup> = <span class="overline">2187</span> = <span class="overline">87</span>
 </div>
 
-## La crittografia a chiave pubblica o asimmetrica
+### Lo scambio di chiavi secondo Diffie, Hellman e Merkle
 
-Tutti i metodi crittografici visti nei capitoli precedenti sono accomunati da una caratteristica: per tutti i metodi è necessario che mittente e destinatario, prima di scambiarsi un messaggio in codice, si siano accordati su quale “chiave” utilizzare per cifrare e decifrare i messaggi. Non è infatti sufficiente concordare il metodo da usare per nascondere il messaggio, ma è altresì necessario stabilire la chiave da utilizzare per applicare tale metodo. 
-
-Le chiavi da usare nei sistemi di cui abbiamo parlato nei precedenti capitoli possono essere così riassunte: 
-
-|**Metodo**|**Chiave/i**|
-|Scitala lacedemonica|Diametro del cilindro|
-|Atbash – Albam - Atba|Alfabeto cifrante|
-|Cifratura di Cesare|Numero che da di quanto viene traslato l’alfabeto chiaro|
-|Disco di Leon Battista Alberti|Lettera di partenza|
-|Tavola di Vigenère|Parola chiave|
-|Playfair cipher|Parola chiave|
-|ADFGVX|Parola chiave “quadrato” e parola chiave “colonna”|
-|Enigma|Settaggio della macchina|
-
-E’ quindi possibile che la chiave sia costituita da un numero o da una o più parole; in ogni caso, due parti che vogliano scambiarsi messaggi in modo “sicuro” devo prima scambiarsi l’informazione costituita dalla chiave. E’ evidente che tale chiave deve rimanere segreta se si vuole che rimanga tale anche il messaggio: nasce quindi il problema di come scambiarsi in modo sicuro la chiave, in altre parole il cosiddetto **problema della distribuzione delle chiavi**. Possiamo ricordare a questo proposito ciò che ha scritto Simon Singh:
-
-> “per poter condividere un segreto (tramite un messaggio crittato), due persone dovrebbero già condividere un segreto (la chiave)”. 
-
-Nei prossimi capitoli vedremo come tale problema fu affrontato e risolto dopo la seconda guerra mondiale portando alla crittografia moderna a chiave pubblica.
-
-### Una scatola e due lucchetti: lo scambio di chiavi secondo Diffie, Hellman e Merkle
-
-Il modo migliore per capire come si sia potuti arrivare a concepire e a realizzare un sistema crittografico che non necessita di uno scambio preventivo di chiavi da parte di mittente e destinatario è partire da un esempio. Supponiamo che, per scambiarsi documenti riservati, mittente e destinatario utilizzino una scatola alla quale sia possibile applicare due lucchetti; è dunque possibile procedere nel seguente modo: 
+Il modo migliore per capire come si sia potuti arrivare a concepire e a realizzare un sistema crittografico che non necessiti di uno scambio preventivo di chiavi da parte di mittente e destinatario è partire da un esempio. Supponiamo che, per scambiarsi documenti riservati, mittente e destinatario utilizzino una scatola alla quale sia possibile applicare due lucchetti; è dunque possibile procedere nel seguente modo: 
 
 <div class="thumbnail float-right">
   <img src="{{site.baseurl}}/assets/images/doppio_lucchetto.jpg" onclick="document.getElementById('doppio_lucchetto').style.display='block'" class="hoverlink">
@@ -455,14 +437,15 @@ Tutto ciò risulta evidente dall’esempio che segue.
   |Cifrato da Alice:|SV RGUVHYB
   |Ricifrato da Bob:|HD YNSDOLP
   |Decifrato da Alice:|AJ MQCJLZP
-  |Decifrato da Bob:|EI CNAIYWB
+  |Decifrato da Bob:|EI CNAIYWB| che non è "ci vediamo"
   {: .invisible .distanzia-colonne-3}
   </div>
 </div>
 
 Questo problema fu affrontato e risolto negli anni ’70 del secolo scorso dai ricercatori Whitfield Diffie, Martin Hellman e Ralph Merkle.
 
-Le funzioni di cui si servirono per risolvere il problema della distribuzione delle chiavi derivano dall'[aritmetica dei moduli](#aritmetica-modulo-n) dove è spesso possibile incontrare funzioni unidirezionali, tali cioè da essere “difficili” da invertire.
+Le funzioni di cui si servirono per risolvere il problema della distribuzione delle chiavi derivano dall'[aritmetica dei moduli](#aritmetica-modulo-n) dove è spesso possibile incontrare funzioni unidirezionali, funzioni agevoli da calcolare in una direzione ma che diventano computazionalmente
+pesantissime nella direzione opposta (funzione inversa).
 
 Dalla tabella che segue si può osservare ad esempio come la potenza cresca regolarmente, mentre nel caso dell’aritmetica dei moduli la variazione della funzione non sia regolare.
 
@@ -539,7 +522,11 @@ Supponiamo che Alice e Bob abbiano deciso di utilizzare: *Y* = 13, *p* = 23 e ve
         <tr>
           <td><em>Chiave</em></td>
           <td colspan=2>
-            Alice e Bob hanno ottenuto lo stesso numero che rappresenterà la chiave dei loro messaggi.</td>
+              Alice e Bob hanno ottenuto lo stesso numero <em>K</em> che rappresenterà la chiave dei loro messaggi.<br>
+              <p class="ta-c mb-0">
+                <em>K = K<sub>a</sub> = K<sub>b</sub> = Y<sup>A·B</sup> mod(p) = Y<sup>B·A</sup> mod(p) = 13<sup>8·5</sup> mod (23) = 9</em>
+              </p>
+          </td>
         </tr>
     </tbody>
 </table>
@@ -551,13 +538,15 @@ Per convincercene ulteriormente, vediamo perché ad Eva sia impossibile risalire
 - le comunicazioni relative alla scelta di *Y* e *p*, e quindi sapere che la funzione è del tipo: 13<sup>*x*</sup> mod(23); 
 - le comunicazioni del passo 3, e quindi i valori di *α* e *β*. 
 
-**Per trovare la chiave, Eva dovrebbe quindi procedere come Alice ed effettuare l’operazione *β^A* mod(*p*)**, oppure come Bob ed effettuare l’operazione ***α^B* mod(*p*)**. Ma Eva non conosce i valori di A o di B! D’altronde, tentare di ricavarli invertendo la funzione non sarebbe un compito semplice, in quanto si tratta di una funzione unidirezionale. 
+**Per trovare la chiave, Eva dovrebbe quindi procedere come Alice ed effettuare l’operazione *β^A* mod(*p*)**, oppure come Bob ed effettuare l’operazione ***α^B* mod(*p*)**. Ma Eva non conosce i valori di A o di B! D’altronde, tentare di ricavarli invertendo la funzione non sarebbe un compito semplice, in quanto si tratta di una funzione unidirezionale.
+
+Se confrontiamo l'idea originale del doppio lucchetto con la soluzione trovata notiamo che mentre quell'idea cercava di proporre un vero e proprio sistema di cifratura per trasmettere messaggi cifrati, **questo sistema permette solamente di concordare un numero segreto**.
 
 La dimostrazione pubblica della loro scoperta fu data da Diffie, Hellman e Merkle nel giugno del 1976 alla National Computer Conference. 
 
-L’introduzione di un metodo che consente a mittente e destinatario di scambiarsi la chiave in modo “sicuro” ha costituito una vera e proprio rivoluzione nel campo della crittografia; l’univo aspetto negativo del sistema Diffie - Hellman - Merkle risiede nell’introdurre una non contemporaneità tra le azioni di destinatario e mittente. Infatti, per applicare il suo “lucchetto” Bob deve attendere di ricevere il messaggio di Alice (supponiamo tramite mail), e la stessa Alice, per rimuovere il suo “lucchetto” deve attendere la risposta di Bob, e così via. Questo aspetto, che per persone che vivono in luoghi con fusi orari differenti può comportare un “ritardo” anche notevole nello scambio delle mail, rappresenta chiaramente un elemento che va contro la natura stessa della posta elettronica, che rappresenta uno dei modi più veloci di scambio delle informazioni. 
+L’introduzione di un metodo che consente a mittente e destinatario di scambiarsi la chiave in modo “sicuro” ha costituito una vera e proprio rivoluzione nel campo della crittografia; l’unico aspetto negativo del sistema Diffie - Hellman - Merkle risiede nell’introdurre una non contemporaneità tra le azioni di destinatario e mittente. Infatti, per applicare il suo “lucchetto” Bob deve attendere di ricevere il messaggio di Alice (supponiamo tramite mail), e la stessa Alice, per rimuovere il suo “lucchetto” deve attendere la risposta di Bob, e così via. Questo aspetto, che per persone che vivono in luoghi con fusi orari differenti può comportare un “ritardo” anche notevole nello scambio delle mail, rappresenta chiaramente un elemento che va contro la natura stessa della posta elettronica, che rappresenta uno dei modi più veloci di scambio delle informazioni. Detto in termini più tecnici questo sistema è **adatto solo a comunicazioni di tipo sincrono e non a comunicazioni di tipo asincrono**.
 
-Nel prossimo paragrafo vedremo come questo aspetto sia stato risolto dall’introduzione della crittografia a chiave pubblica. 
+Ricapitolando quindi possiamo dire che ***il sistema di Diffie-Hellman-Merkle risolve il problema della condivisione della chiave ma non offre un vero e proprio sistema di cifratura, inoltre è adatto solo a comunicazioni sincrone***. Nel prossimo paragrafo vedremo come queste limitazioni siano state superate dall’introduzione della crittografia a chiave pubblica.
 
 ### RSA 
 Il passo avanti rispetto al metodo di scambio delle chiavi secondo Diffie-Hellman-Merkle avvenne grazie allo sforzo congiunto di tre ricercatori: Ronald Rivest, Adi Shamir e Leonard Adleman, dalle cui iniziali deriva il metodo noto come RSA. 
