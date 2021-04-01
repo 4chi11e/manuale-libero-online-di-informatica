@@ -161,6 +161,20 @@ Non ci interessa approfondire i dettagli tecnici riguardo a questo algoritmo che
 
 La debolezza di questi algoritmi risiede proprio nel legame che c'è tra la chiave e il keystream che non è una sequenza di numeri realmente casuali ma una sequenza di numeri prodotta da un algoritmo deterministico. Nel 2005 infatti è stato trovato un modo per violare una connessione wireless protetta con [WEP](https://it.wikipedia.org/wiki/Wired_Equivalent_Privacy), protocollo di cifratura per le reti Wi-Fi che usa RC4, in meno di un minuto.
 
+### Lunghezza delle chiavi nella crittografia simmetrica
+
+Il governo statunitense impose un serio limite all'esportazione e all'utilizzo di chiavi lunghe. Per molti anni il limite imposto dal governo fu di 40 bit, che per lo standard moderni è un limite ridicolo dato che un semplice computer è in grado in poche ore di verificare tutto lo spazio delle chiavi. Infatti mentre in Europa e nel resto del mondo si diffondevano algoritmi con chiavi lunghe gli Stati Uniti d'America per via di scelte politiche rimanevano costretti a utilizzare chiavi corte. Con la diffusione di internet e del commercio elettronico il Governo degli Stati Uniti fu costretto a cambiare la legge innalzando il limite a 128 bit.
+
+Quando nel 1977 il Data Encryption Standard (DES) venne distribuito dal governo Statunitense la lunghezza della chiave di 56 bit era più che sufficiente, sebbene nel Lucifer, predecessore del DES la chiave fosse già di 112 bit. Ma l'NSA quando approvò il DES decise di ridurre la chiave. Visto che l'NSA è una delle agenzie meglio finanziate dal governo statunitense, si ritiene che già verso la fine degli anni settanta avessero risorse tecnologiche e finanziarie sufficienti per sviluppare una macchina specializzata che forzasse il DES verificando l'intero spazio delle chiavi. Comunque negli anni novanta si dimostrò che il DES era forzabile in un paio di giorni utilizzando macchine specializzate dal costo inferiore al milione di dollari e quindi con costi accessibili a tutte le multinazionali e ovviamente a tutti i Governi. Nel libro Cracking DES (O'Reilly and Associates) viene descritto come la EFF abbia finanziato e costruito una macchina in grado di forzare il DES. Da allora sono sorti anche dei progetti basati su computer distribuito che hanno consentito di forzare chiavi a 56 bit e che attualmente stanno forzando un messaggio a 64 bit codificato con l'algoritmo RC5.
+
+L'algoritmo Skipjack dell'NSA utilizzato dal programma Fortezza utilizza chiavi a 80 bit.
+
+Il DES è stato temporaneamente sostituito dal Triple DES che usa tre chiavi da 56 bit per ottenere una cifratura a 168 bit.
+
+L'Advanced Encryption Standard pubblicato nel 2001 utilizza chiavi da almeno 128 bit e è un grado di utilizzare anche chiavi a 192 o 256 bit. La chiave a 128 bit viene considerata sufficiente per compiti normali mentre l'NSA specifica che per documenti Top secret la chiave deve essere di 192 o 256 bit.
+
+Nel 2003 l'U.S. National Institute for Standards and Technology, NIST, ha proposto di abbandonare tutte le chiavi a 80 bit entro il 2015.
+
 ## Crittografia asimmetrica
 
 Fino agli anni 1970 gli unici sistemi crittografici esistenti erano simmetrici cioè prevedevano l'utilizzo di un'unica chiave utilizzata sia per cifrare che per decifrare. Per quanto i crittosistemi fossero sicuri ed efficienti rimaneva da risolvere un problema fondamentale, quello della **condivisione della chiave**. A questo scopo vennero proposte una serie di tecniche che si possono definire di cirittocrafia asimmetrica.
@@ -596,16 +610,20 @@ Faremo inoltre nuovamente riferimento ai nostri personaggi immaginari, Alice e B
     </p>
   </li>
   <li>
-    sceglie <em>e</em> tale che: <em>e</em> < <em>N</em> e <em>MCD(e, \(\phi\)(N))</em> = 1: 
+    sceglie <em>e</em> tale che: <em>e</em> < <em>\(\phi\)(N)</em> e <em>MCD(e, \(\phi\)(N))</em> = 1 (cioè <em>e</em> coprimo con <em>\(\phi\)(N)</em>): 
     <p class="ta-c">
         <em>e</em> = 79
     </p>
   </li>
   <li>
-    calcola <em>d</em> tale che: <em>e</em> · <em>d</em> = 1 mod((<em>p</em>-1) · (<em>q</em>-1))
+    calcola <em>d</em> tale che: <em>e</em> · <em>d</em> ≡ 1 mod((<em>p</em>-1) · (<em>q</em>-1)):
     <p class="ta-c">
         <em>d</em> = 79<sup>-1</sup> mod(3220) = 1019
     </p>
+    infatti:
+    <p class="ta-c">
+        79 · 1019 = 80501 ≡ 1 mod(3220)
+    </p> 
   </li>
   <li>
     la chiave pubblica è: 
@@ -645,79 +663,44 @@ Supponiamo allora che Bob le voglia mandare un messaggio costituito da vediamo q
   *m* = 1570<sup>1019</sup> mod(3337) = 688
   {: .ta-c}
 
-L’unico modo per Eva di decifrare il messaggio è di avere *d* e quindi di riuscire a ottenere *p* e *q* dalla fattorizzazione di *N*: come detto precedentemente, il processo di fattorizzazione di un numero nei suoi fattori primi è un processo molto lungo, specialmente se si ha a che fare con numeri molto grandi.
-
-La segretezza nella comunicazioni tra Alice e Bob è quindi assicurata!
-
-**Esempio**  
-Si scelgono due numeri primi *p* = 7, *q* = 17
-si calcola *n = p · q* = 7 · 17 = 119  
-si calcola *$$\phi$$(n)* = (*p* - 1) · (*q* - 1) = 6 · 16 = 96  
-si sceglie *e < $$\phi$$(n)*, relativamente primo con *$$\phi$$(n), e* = 5  
-si determina *d* tale che *d* · *e* mod(96) = 1 e *d* < 96, *d* = 77 (infatti 77 · 5 = 385 = 96 · 4 + 1)
-{: .esempio}
-
-#### Curiosità e considerazioni 
-Samuel Wagstaff, docente di informatica all’Università dell’Indiana, è riuscito a fattorizzare un numero di 167 cifre in centomila ore di tempo computer. Il numero della prova era: 
-
-  16379019558053662392174130154670449583923965684832704024983781709239694686351321204156509649226080541971824707555797144568969073877772973038883717449030628887379284041
-  {: .ml-4 .mr-4 .fs-3}
-
-Questa notizia dovrebbe far riflettere: considerando che ad oggi si scoprono ancora nuovi algoritmi matematici per decrittare sempre più velocemente e che la potenza dei calcolatori aumenta vertiginosamente di mese in mese (e non parliamo dei computers dei laboratori segreti!), sarà una buona scelta affidare dati importantissimi ad un metodo che si basa esclusivamente sulla lentezza dei calcolatori attuali? 
-
-Bisogna anche notare che una chiave da 1024 bit in un sistema a chiave pubblica, vale circa quanto una a 64 bit di un sistema a chiave simmetrica a causa del fatto che nel sistema a chiave pubblica esiste sempre un legame tra chiave privata e segreta che permette di ridurre le combinazioni necessarie per trovare il codice di accesso. 
-
-Stabilita tale corrispondenza di sicurezza tra le lunghezze delle chiavi dei due sistemi, è interessante notare quando detto alla conferenza Crypto '93 (notare che sono già passati diversi anni), da M. Wiener del Bell Northern Research, il quale ha descritto come con un milione di dollari sia realizzabile un chip speciale da 50 milioni di test al secondo che, in parallelo ad altri 57.000, può condurre un attacco con successo mediamente in 3,5 ore. Con un costo di 10 milioni di dollari il tempo si abbassa a 21 minuti, e con 100 milioni a disposizione, il codice è infranto in pochi secondi! 
-
-Fatto sta che il commercio elettronico ha già iniziato a farne uso e alcuni anni fa, il 5 Agosto 1997, il Consiglio dei Ministri Italiano ha approvato il regolamento di attuazione dell’art.15 della legge 57/97, nota anche come legge Bassanini-1, con il quale si stabilisce che l’originale di un documento può essere anche quello depositato su di un file. Tale documento su file ha valore probante sia sul contenuto sia sulla provenienza se corredato da firma elettronica legalmente riconosciuta. 
+**L’unico modo per Eva di decifrare il messaggio è di avere *d* e quindi di riuscire a ottenere *p* e *q* dalla fattorizzazione di *N***: come detto precedentemente, il processo di fattorizzazione di un numero nei suoi fattori primi è un processo molto lungo, specialmente se si ha a che fare con numeri molto grandi. La segretezza nella comunicazioni tra Alice e Bob è quindi assicurata!
 
 #### Numeri primi e RSA 
 
-Da quanto esposto nei precedenti paragrafi risulta chiaro che la conoscenza di numeri primi molto “grandi” permette di effettuare cifrature RSA sempre più potenti. La ricerca di tali numeri costituisce quindi, da un po’ di anni a questa parte, un vero e proprio business, e molte aziende hanno come solo scopo quello di trovarne di sempre più grandi. Nella tabella seguente sono riportati alcuni dei numeri scoperti negli ultimi anni. 
+Se da un lato la capacità di fattorizzare numeri ci permette di attaccare RSA, la conoscenza di numeri primi molto “grandi” ci permette di effettuare cifrature RSA sempre più potenti. La ricerca di tali numeri costituisce quindi un vero e proprio business, e molte aziende hanno come solo scopo quello di trovarne di sempre più grandi. 
 
-![numeri primi trovati]({{site.baseurl}}/assets/images/numeri-primi-trovati.jpg)
+<div class="thumbnail float-right">
+  <img src="{{site.baseurl}}/assets/images/crittografia/numeri-primi.png" onclick="document.getElementById('img-numeri-primi').style.display='block'" class="hoverlink">
+  <p>Un grafico aggiornato al 2016 del numero di cifre componenti il più grande numero primo conosciuto. La scala dell'asse delle ordinate è logaritmica. La linea rossa è la curva esponenziale che meglio si adatta al grafico e ha equazione: y = exp(0,187394 t − 360,527), dove t è in anni.</p>
+</div>
+<!--modal-->
+<div id="img-numeri-primi" class="modal">
+  <div class="modal--content">
+    <!-- <div class="w3-container"> -->
+      <span onclick="document.getElementById('img-numeri-primi').style.display='none'" class="modal--close w3-display-topright">&times;</span>
+      <img src="{{site.baseurl}}/assets/images/crittografia/numeri-primi.png" data-toggle="modal" data-target="#img-numeri-primi">
+      <p>Un grafico aggiornato al 2016 del numero di cifre componenti il più grande numero primo conosciuto. La scala dell'asse delle ordinate è logaritmica. La linea rossa è la curva esponenziale che meglio si adatta al grafico e ha equazione: y = exp(0,187394 t − 360,527), dove t è in anni.</p>
+    <!-- </div> -->
+  </div>
+</div>
 
-I numeri della forma 2<sup>*n*</sup> - 1 sono detti numeri di Mersenne e sono indicati con *M<sub>n</sub>*. In generale questi numeri non sono primi, nemmeno se *n* è primo (per esempio *M*<sub>11</sub> = 2047 = 89 · 23); non si sa nemmeno se di numeri di Mersenne primi ce ne siano un numero finito o se siano infiniti.
-{: .thumbnail--testo .float-right .mt-0}
+[Il più grande numero primo conosciuto](https://it.wikipedia.org/wiki/Il_pi%C3%B9_grande_numero_primo_conosciuto) è, a ottobre 2020, 2<sup>82 589 933</sup> − 1, un numero che, se scritto in base 10, è composto da 24 862 048 cifre. Tale numero è stato scoperto il 7 dicembre 2018 da Patrick Laroche nell'ambito del progetto Great Internet Mersenne Prime Search (GIMPS).
 
-Da molti anni accade che il più grande numero primo noto sia un primo di Mersenne. Chi volesse capovolgere la situazione, e trovare un numero primo "generico" più grande dovrà ancora una volta alzare il tiro (e di parecchio). Il 42-esimo primo di Mersenne ha "appena" 7.816.230 cifre, e sembra piccolo posto accanto al nuovo arrivato.
+I numeri della forma 2<sup>*n*</sup> - 1 sono detti numeri di Mersenne e sono indicati con *M<sub>n</sub>*. In generale questi numeri non sono primi, nemmeno se *n* è primo (per esempio *M*<sub>11</sub> = 2047 = 89 · 23); non si sa nemmeno se di numeri di Mersenne primi ce ne siano un numero finito o se siano infiniti. 
 
-Il più recente primo di Mersenne (il 43-esimo) è stato scoperto il 15 Dicembre 2005 da Curtis Cooper e Steven Boone: 
+Dopo il 1992 tutti i numeri primi più grandi conosciuti sono stati numeri primi di Mersenne, l'ultimo numero primo non di Mersenne ad aver detenuto il suddetto record è stato 391 581 × 2216 193 − 1, scoperto nel 1989.
 
-  **2<sup>30402457</sup> - 1**
-  {: .ta-c}
-
-Esso rappresenta **il più grande numero primo noto**, con ben 9.152.052 cifre! Siamo a un passo dalla soglia dei 10 milioni di cifre, per la quale la Electronic Frontier Foundation offre 100.000 dollari. 
-
-Il premio precedente - di 50.000 dollari - è stato assegnato nel 2000 a Nayan Hajratwala il quale, partecipando alla GIMPS (Great Internet Mersenne Prime Search), trovò nel 1999 il 38-esimo primo di Mersenne (2.098.960 cifre). 
-
-#### Attacchi
-Nel 1977, subito dopo il lancio del sistema di crittografia RSA, Martin Gardner pubblicò su Scientific American un piccolo messaggio cifrato, basato su una chiave costituita da un numero N di 129 cifre, prodotto di due numeri primi molto grandi. Il messaggio e la chiave erano stati forniti da ricercatori del MIT, che offrivano un premio in denaro a chi avesse decrittato il messaggio. A quei tempi si stimò che ci sarebbero voluti all'incirca **ventimila anni** per scomporre in fattori primi quel numero, con i più veloci calcolatori disponibili. Dopo di allora però ci furono importanti novità, più che sul lato della velocità dei computer, sui **metodi per fattorizzare grandi numeri**. Inoltre la massiccia diffusione di Internet costituì una variabile imprevista: sotto la guida di alcuni ricercatori, un esercito di 600 volontari di 20 paesi si mise all'opera e dopo non molti mesi di lavoro, nell'Aprile del 1994, la fattorizzazione fu scoperta: si trattava di due numeri, uno di 64 e uno di 65 cifre. Erano passati solo (!) 17 anni dalla pubblicazione della chiave pubblica. Solo per curiosità riportiamo qui i valori dei numeri coinvolti (i volonterosi possono provare ad eseguire il prodotto richiesto, per controllare che non ci siano errori): 
-
-*p* = 3490529510847650949147849619903898133417764638493387843990820577  
-*q* = 32769132993266709549961988190834461413177642967992942539798288533  
-*N* = 
-{: .mb-0}
-
-114381625757888867669235779976146612010218296721242362562561842935706935245733897830597123563958705058989075147599290026879543541 
-{: .ml-4 .mt-0}
-
-Attualmente chiavi di 1024 bit sono considerate sufficientemente sicure.  
-Tempo medio di attacco: 
-
-| lunghezza chiave | tempo richiesto | tempo richiesto 
-| (bit) | a 1 decr/ms | a 106 decr/ms 
-|56 | 255 ms = 1142 anni | 10 ore 
-|128 | 2127 ms ~ 1024 anni | ~ 1018 anni 
-|168 | 2167 ms ~ 1036 anni | ~ 1030 anni 
 
 #### La fattorizzazione 
-Discutiamo solo il problema inverso della fattorizzazione. A prima vista, sapendo che si usano numeri primi vicini a 2<sup>128</sup>, si potrebbe pensare di costruirsi una tabella dei numeri che sono prodotto di due tali primi. Ma quanti sono?  
-In base al risultato ottenuto da Hadamard sappiamo che: 
+
+Abbiamo visto che per attaccare RSA è necessario effettuare la fattorizzazione di N, ma come si fa a fattorizzare un numero così grande? La trattazione approfondita del problema la lasciamo ai matematici ma per capire l'entità del problema facciamo alcuni ragionamenti. 
+
+A prima vista, sapendo che si usano numeri primi vicini a 2<sup>128</sup>, si potrebbe pensare di costruirsi una tabella dei numeri che sono prodotto di due tali primi. Ma quanti sono?  
+In base al teorema dei numeri primi sappiamo che: 
 
 $$ {\lim\limits_{x \to 1} \frac{\pi(n)}{\frac{n}{log(n)}} = 1} $$
 
-dove *p(n)* rappresenta il numero di primi minori o uguali a *n*.
+dove *$$\pi(n)$$* rappresenta il numero di primi minori o uguali a *n*.
 
 Dunque possiamo rozzamente valutare $$ {\pi(2^{128})} $$ come: 
 
@@ -727,29 +710,47 @@ e $$ {\pi(2^{127})} $$ come:
 
   $$ {\frac{2^{127}}{log(2^{127})} \approx 2 \cdot 10^{36}} $$ 
   
-e quindi $$ {\pi(2^{128}-\pi(2^{127})) \approx 10^{36}} $$. Stiamo cauti nella stima e diciamo che ne abbiamo almeno 10<sup>30</sup> (in realtà potremmo anche dire con sicurezza 10<sup>35</sup> ). I prodotti di due numeri di questa forma sono allora dell’ordine di 10<sup>60</sup>. Immagazzinarli in forma binaria richiede allora $$ {2^{256} \cdot 10^{60} \approx 2^{256} \cdot 2^{199} = 2^{455}} $$ bit, quindi $$ {2^{452} \approx 10^{136} } $$ byte. Un terabyte è circa 10<sup>12</sup> byte, quindi servirebbe qualcosa come 10<sup>124</sup> terabyte. Troppi anche solo da immaginare: il diametro della Galassia in metri è 10<sup>21</sup>. Più sensato è pensare di fattorizzare N, ma l’unico modo conosciuto è di dividerlo successivamente per 2, 3, e così via. E’ probabile che, nel momento in cui si è ottenuta la fattorizzazione richiesta, la chiave pubblica sia cambiata da parecchi mesi, si faccia un conto approssimativo del tempo richiesto. 
+e quindi $$ {\pi(2^{128}-\pi(2^{127})) \approx 10^{36}} $$. Stiamo cauti nella stima e diciamo che ne abbiamo almeno 10<sup>30</sup> (in realtà potremmo anche dire con sicurezza 10<sup>35</sup> ). I prodotti di due numeri di questa forma sono allora dell’ordine di 10<sup>60</sup>. Immagazzinarli in forma binaria richiede allora $$ {2^{256} \cdot 10^{60} \approx 2^{256} \cdot 2^{199} = 2^{455}} $$ bit, quindi $$ {2^{452} \approx 10^{136} } $$ byte. Un terabyte è circa 10<sup>12</sup> byte, quindi servirebbe qualcosa come 10<sup>124</sup> terabyte. Troppi anche solo da immaginare: il diametro della Galassia in metri è 10<sup>21</sup>.
+
+Più sensato è pensare di fattorizzare N, ma l’unico modo conosciuto è di dividerlo successivamente per 2, 3, e così via. E’ probabile che, nel momento in cui si è ottenuta la fattorizzazione richiesta, la chiave pubblica sia cambiata da parecchi mesi , si faccia un conto approssimativo del tempo richiesto. 
 
 Un numero è detto semiprimo (anche detto biprimo o 2-quasi primo, o pq numero) è un numero naturale che è il prodotto di numeri primi (non necessariamente distinti). I primi numeri semiprimi sono: <span class="fs-2">4, 6, 9, 10, 14, 15, 21, 22, 25, 26, 33, 34, 35, 38, 39, 46, 49, 51, 55, 57, 58, 62, 65, 69, 74, 77, 82, 85, 86, 87, 91, 93, 94, 95, 106.<span>
 <!-- 111, 115, 118, 119, 121, 122, 123, 129, 133, 134, 141, 142, 143, 145, 146, 155, 158, 159, 161, 166, 169, 177, 178, 183, 185, 187. -->
-{: .thumbnail--testo .float-right .mt--1}
+{: .thumbnail--testo .float-right .mt-0}
 
-In matematica, RSA-2048 è il più grande dei numeri RSA (semiprimi grandi che fanno parte del RSA Factoring Challenge), e ad esso è associato il premio più grande per la sua fattorizzazione: 200000 dollari.  
-RSA-2048 è un numero con 617 cifre decimali (2048 bits)! 
+La RSA Laboratories fondata dai creatori dell'omonimo sistema di crittografia, ha proposto nel 1991 una sfida, la Factoring Challenge, in cui si offrivano premi in denaro a chi riuscisse a fattorizzare una serie di numeri semiprimi da usare come valori di *N* (semiprimi perchè prodotto dei due primi *p* e *q*). In questa pagina sono riportati i risultati raggiunti finora. Nonostante la gara sia stata dichiarata conclusa nel 2007 la ricerca delle soluzioni è ancora in corso e ad oggi (gennaio 2021) il numero più grande fattorizzato è RSA-250 un numero composto da 250 cifre decimali o 829 bits
 
+  RSA-250 =
+  {: .ml-4 .mr-4 .mt-0 .mb-0} 
 
-RSA-2048 = 
-{: .mb-0 .clear-both}
+  2140324650240744961264423072839333563008614715144755017797754920881418023447140136643345519095804679610992851872470914587687396261921557363047454770520805119056493106687691590019759405693457452230589325976697471681738069364894699871578494975937497937
+  {: .ml-5 .mr-4 .mt-0 .fs-3} 
+
+  RSA-250 =
+  {: .ml-4 .mr-4 .mt-0 .mb-0} 
+
+  64135289477071580278790190170577389084825014742943447208116859632024532344630238623598752668347708737661925585694639798853367
+  {: .ml-5 .mr-4 .mt-0 .mb-0 .fs-3}
+
+  ×
+  {: .ml-4 .mr-4 .mt-0 .mb-0} 
+
+  33372027594978156556226010605355114227940760344767554666784520987023841729210037080257448673296881877565718986258036932062711
+  {: .ml-5 .mr-4 .mt-0 .fs-3}
+
+In matematica, RSA-2048 è il più grande dei numeri RSA (semiprimi grandi che fanno parte del RSA Factoring Challenge). RSA-2048 è un numero con 617 cifre decimali (2048 bits) e probabilmente la sua fattorizzazione non varrà raggiunta ancora per alcuni decenni.
+
+  RSA-2048 = 
+  {: .ml-4 .mr-4 .mt-0 .mb-0} 
+
   25195908475657893494027183240048398571429282126204032027777137836043662020707595556264018525880784406918290641249515082189298559149176184502808489120072844992687392807287776735971418347270261896375014971824691165077613379859095700097330459748808428401797429100642458691817195118746121515172654632282216869987549182422433637259085141865462043576798423387184774447920739934236584823824281198163815010674810451660377306056201619676256133844143603833904414952634432190114657544454178424020924616515723350778707749817125772467962926386356373289912154831438167899885040445364023527381951378636564391212010397122822120720357
-  <!-- 251959084756578934940271832400483985714292821262040320277771378360436 620207075955562640185258807844069182906412495150821892985591491761845 028084891200728449926873928072877767359714183472702618963750149718246 911650776133798590957000973304597488084284017974291006424586918171951 187461215151726546322822168699875491824224336372590851418654620435767 984233871847744479207399342365848238242811981638150106748104516603773 060562016196762561338441436038339044149526344321901146575444541784240 209246165157233507787077498171257724679629263863563732899121548314381 67899885040445364023527381951378636564391212010397122822120720357 -->
-  {: .ml-4 .mr-4 .fs-4 .mt-0}
+  {: .ml-5 .mr-4 .mt-0 .fs-3}
 
-  
+#### Lunghezza della chiave in RSA
 
-Il più grande numero RSA mai fattorizzato è composto da 200 cifre decimali (663 bits); probabilmente non si raggiungerà la fattorizzazione di RSA-2048 prima di alcuni decenni. RSAlabs ritiene infatti che i computer e le memorie necessarie per fattorizzare un numero RSA siano: 
+Per quanto riguarda le dimensioni delle chiavi da utilizzare, nel 2003 la RSA ha dichiarato che una sua chiave a 1024 bit è equivalente a una chiave simmetrica a 80 bit, una sua chiave a 2048 bit è equivalente a una chiave simmetrica a 112 bit e la chiave a 3072 bit è equivalente a una chiave a 128 bit. RSA raccomanda di utilizzare chiavi ad almeno 1024 bit se si intende mantenere sicuri i documenti fino al 2010 e di utilizzare una chiave a 2048 bit se si vogliono documenti sicuri fino al 2030. La chiave a 3072 è indicata per i documenti che devono rimanere sicuri oltre il 2030. Un documento della [NIST](https://it.wikipedia.org/wiki/National_Institute_of_Standards_and_Technology) definisce una chiave asimmetrica a 15360 bit equivalente a una chiave simmetrica 256 bit.
 
-| numero | computers | memoria 
-| RSA-760 | 215000 | 4 Gb 
-| RSA-1024 | 342000000 | 170 Gb
-| RSA-1620 | 1.6·10<sup>15</sup> | 120 Tb 
+Quando si sceglie la dimensione della chiave da utilizzare bisogna tenere a mente che per effettuare un qualsiasi attacco è necessario investire una certa quantità di risorse, che si possono tradurre anche in termini economici, e maggiori saranno le risorse investite maggiore sarà la velocità con cui si potrà effettuare l'attacco. Si sarà quindi disposti a fare un attacco solo nel caso le informazioni da scoprire abbiano un valore che valga la spesa richiesta. Ad esempio è interessante notare quanto detto alla conferenza Crypto ‘93 (ormai tantissimi anni fa ma il concetto è valido ancora oggi), da M. Wiener del Bell Northern Research, il quale ha descritto come con un milione di dollari sia realizzabile un chip speciale da 50 milioni di test al secondo che, in parallelo ad altri 57.000, può condurre un attacco con successo mediamente in 3,5 ore. Con un costo di 10 milioni di dollari il tempo si abbassa a 21 minuti, e con 100 milioni a disposizione, il codice è infranto in pochi secondi!
+
 
   
