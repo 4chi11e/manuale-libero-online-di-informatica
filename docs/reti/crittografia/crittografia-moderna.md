@@ -36,6 +36,9 @@ Sebbene non consistano in veri e propri sistemi di crittografia, le [funzioni cr
 
 Con [crittografia simmetrica](https://it.wikipedia.org/wiki/Crittografia_simmetrica#:~:text=Con%20crittografia%20simmetrica%2C%20o%20crittografia,performante%20e%20semplice%20da%20implementare.), o crittografia a chiave privata o precondivisa, si intende una tecnica di cifratura in cui la chiave di crittazione è la stessa chiave di decrittazione, rendendo l'algoritmo molto performante e semplice da implementare. Tuttavia presuppone che le due parti siano già in possesso delle chiavi, richiesta che non rende possibile uno scambio di chiavi con questo genere di algoritmi. Lo scambio avviene attraverso algoritmi a chiave asimmetrica o pubblica, generalmente più complessi sia da implementare che da eseguire ma che permettono questo scambio in modo sicuro. Dopodiché la comunicazione verrà crittata usando solo algoritmi a chiave simmetrica per garantire una comunicazione sicura ma veloce.
 
+I crittosistemi moderni utilizzano diverse tecniche, anche molto complicate, per 
+per rendere pratica e sicura la cifratura. Studiano la storia della crittografia si può notare come nel tempo siano stati teorizzati e formalizzati matematicamente molti metodi. Di seguito andremo ad analizzare solo alcune delle tecniche introdotte negli algoritmi di crittografia moderni, in modo da poterne comprendere a grandi linee il funzionamento.
+
 ### Funzionamento
 
 In questo genere di algoritmi si suppone che entrambe le parti conoscano già la chiave con cui crittare e decrittare il messaggio. Il mittente ha un messaggio **P** (PlainText o testo in chiaro). Il mittente critta il messaggio **P** con la chiave **k** usando un algoritmo di crittografia simmetrica chiamato **S**. Il messaggio risultante sarà **C** (CypherText o messaggio cifrato). In formule diventa:
@@ -64,8 +67,99 @@ La lunghezza della chiave è misurata in bit e ha valori che oscillano tra 32 bi
 
 Ogni algoritmo generalmente cerca di crittare una stringa di bit attraverso una chiave in un'altra stringa di bit della medesima lunghezza. La lunghezza di questa stringa è pari alla dimensione del blocco. Algoritmi ormai datati ma che hanno costituito uno standard per molti anni come il DES, avevano questo valore pari a 64bit in media. Oggi si preferisce adottare dimensioni di almeno 128 bit, numero che cresce nel tempo con l'aumentare della potenza dei computer. Per un alto livello di sicurezza oggi si consigliano 256 bit.
 
-Un problema che affligge la dimensione del blocco è il paradosso del compleanno che rilascia informazioni sulla chiave ogni volta che avviene una collisione (quando due blocchi vengono cifrati allo stesso modo). Possiamo ritenere sicura solo la radice quadrata di tutte le combinazioni possibili. Per esempio con una dimensione di 64 bit, che genererebbe {\displaystyle 2^{64}}{\displaystyle 2^{64}} possibili combinazioni, potremo impiegarne solo {\displaystyle 2^{32}}{\displaystyle 2^{32}} prima di cominciare a rivelare informazioni sulla chiave.
+Un problema che affligge la dimensione del blocco è il [paradosso del compleanno](https://it.wikipedia.org/wiki/Paradosso_del_compleanno) che rilascia informazioni sulla chiave ogni volta che avviene una collisione (quando due blocchi vengono cifrati allo stesso modo). Possiamo ritenere sicura solo la radice quadrata di tutte le combinazioni possibili. Per esempio con una dimensione di 64 bit, che genererebbe 2<sup>64</sup> possibili combinazioni, potremo impiegarne solo 2<sup>32</sup> prima di cominciare a rivelare informazioni sulla chiave.
 
+### Metodi di crittazione a blocchi di cifre
+
+Generalmente la dimensione del blocco scelta è della medesima lunghezza della chiave perché risulta semplice per l'implementazione di un algoritmo. Tuttavia è bene fare attenzione ad alcuni metodi che possono compromettere la sicurezza dell'algoritmo. Nei seguenti algoritmi individuiamo:
+
+*k* è la chiave  
+*P<sub>i</sub>* è l'i-esimo blocco del testo in chiaro  
+*C<sub>i</sub>* è l'i-esimo blocco del testo cifrato  
+
+#### Electronic Code Book (ECB)
+
+
+<img src="{{site.baseurl}}/assets/images/crittografia/Ecb_encryption.png">
+{: .ta-c}
+
+*S(P<sub>i</sub>, k<sub>i</sub>) = C<sub>i</sub>*
+{: .esempio .fs-5 .ta-c}
+
+È l'implementazione più semplice, in cui l'unica cosa che nasconde il testo in chiaro è la chiave (o una parte di essa). Su questo metodo si basano sistemi come il [cifrario di Vigenere](#) e sappiamo che questo metodo risulta essere tanto semplice quanto insicuro. Infatti è sufficiente per l'attaccante raccogliere un numero sufficiente di campioni per poter eseguire un attacco di tipo statistico come il [metoto Kasiski](#). 
+
+#### Cipher Block Chaining (CBC)
+
+<img src="{{site.baseurl}}/assets/images/crittografia/Cbc_encryption.png">
+{: .ta-c}
+
+<div class="esempio fs-5 ta-c" markdown=1>
+
+  *S((IV* ⊕ *P<sub>1</sub>, k<sub>1</sub>) = C<sub>1</sub>*
+  {: .mt-0}
+
+  *S((C<sub>i-1</sub>* ⊕ *P<sub>i</sub>, k<sub>i</sub>) = C<sub>i</sub>*
+  {: .mb-0} 
+    
+</div>
+
+Per superare i limiti di sicurezza di ECB, è necessario l'utilizzo di una tecnica in cui lo stesso blocco di testo in chiaro, se ripetuto, produce blocchi di testo cifrato differenti nonostante sia cifrato sempre con la stessa chiave. Questo è ciò che accade con la modalità CBC, in cui l'input dell'algoritmo di crittografia è il risultato dello [XOR](https://it.wikipedia.org/wiki/Disgiunzione_esclusiva) (indicato con il simbolo ⊕) tra il blocco di testo in chiaro corrente e il blocco di testo cifrato precedente; per ciascun blocco viene utilizzata la stessa chiave.
+
+In fase di decifratura, ciascun blocco di testo cifrato passa attraverso l'algoritmo di decrittografia; il risultato subisce uno XOR con il blocco di testo cifrato precedente, per produrre il blocco di testo in chiaro.
+
+Per produrre il primo blocco di testo cifrato, lo XOR viene effettuato tra un vettore di inizializzazione IV (dall'inglese initialization vector) e il primo blocco di testo in chiaro. In decifratura, l'IV subisce uno XOR con l'output dell'algoritmo di decrittografia in modo da ottenere nuovamente il primo blocco di testo in chiaro.
+
+Il vettore di inizializzazione *IV* deve essere dunque noto non solo al mittente ma anche al destinatario, che tipicamente lo riceve assieme alla chiave.
+
+Esistono altri sistemi basati sullo stesso principio quali Cipher Feedback (CFB), Output Feedback (OFB) o Counter (CTR) che presentano ognuno i propri vantaggi e svantaggi. Puoi approfondire [qui](https://it.wikipedia.org/wiki/Modalit%C3%A0_di_funzionamento_dei_cifrari_a_blocchi#Cipher_Block_Chaining_%28CBC%29) l'argomento.
+
+
+### Esempi di algoritmi
+
+Di seguito sono riportati i tre algorimi di cifratura simmetrica moderna più utilizzati dagli anni 1970 ad oggi.
+
+#### DES (Data Encryption Standard)
+
+
+è uno degli algoritmi a chiave simmetrica più famoso, pubblicato nel 1976 da IBM e scelto come standard per la Federal Information Processing Standard. È diventato in seguito lo standard fino a quando non fu decrittato nel 1997 in 3 giorni di calcolo. Nell'anno successivo fu sufficiente un giorno soltanto impiegando un cluster di computer e con l'avanzare i tempi si riducono ulteriormente. Il suo successore fu 3DES.
+
+Impiega una chiave di 56 bit e opera su blocchi di 64 bit.
+
+Puoi trovare altri dettagli [qui](https://it.wikipedia.org/wiki/Data_Encryption_Standard)
+
+#### 3DES (Triple DES)
+
+Quando DES non fu più sicuro, si cercò un metodo che mantenesse le meccaniche del DES ma che permettesse di avere una chiave più lunga. In questo algoritmo si esegue una tripla crittazione impiegando 3 chiavi DES standard, a 56 bit, ottenendo una chiave a 168 bit. È possibile anche invertire il secondo passaggio, ovvero eseguire una crittazione e una decrittazione. Tuttavia non modifica la sicurezza generale dell'algoritmo.
+
+Anche questo algoritmo oggi non viene più impiegato poiché le tecnologie si stanno evolvendo e molti algoritmi di crittazione non risultano abbastanza forti da sopportare le elevate capacità di calcolo dei computer moderni, soprattutto con l'avvento delle GPGPU (general-purpose computing on graphics processing units ovvero le schede video dei nostri computer). 3DES ha lasciato il posto a AES, il nuovo standard ormai.
+
+Puoi trovare altri dettagli [qui](https://it.wikipedia.org/wiki/Triple_DES)
+
+#### AES (Advanced Encryption Standard)
+
+Nel 1999 si presentarono vari algoritmi candidati a diventare lo standard di crittografia simmetrica. Questi candidati furono MARS proposto dalla IBM, RC6, Serpent, Twofish e Rijndael. Tutti questi algoritmi furono testati per efficienza e sicurezza su varie architetture, sia hardware che software. Tra questi ricevette un feedback positivo Rijndael ([ˈrɛindaːl]) che nel 2000 divenne il nuovo standard con il nome di AES. Fu dapprima impiegato dal governo degli USA e dopodiché il suo successo divenne globale.
+
+AES lavora su blocchi a dimensione fissa di 128 bit. Inizialmente la lunghezza standard per la chiave era di 128 bit ma è stata prevista la possibilità di impiegate chiavi più lunghe da 192 e 256 bit, cosa che con l'aumentare della potenza di calcolo disponibile risulta ormai necessario per buoni livelli di sicurenzza.
+
+Puoi trovare altri dettagli [qui](https://it.wikipedia.org/wiki/Advanced_Encryption_Standard)
+
+### Cifrari a flusso
+
+I cifrari a flusso sono cifrari simmetrici che non lavorano su un blocco di cifre con una chiave delle stesse dimensioni, come nei cifrari visti finora, ma combino la chiave (o una sequenza di numeri da essa derivata) con l'intero messaggio, di solito attraverso operazioni XOR.
+
+I cifrari a flusso sono ispirati al [cifrario di Vernam](#), l'unico sistema crittografico per cui esiste la dimostrazione matematica della sua assoluta sicurezza. L'idea di questi cifrari infatti è quella di imitare l'utilizzo di una chiave lunga come l'intero messaggio, generando in fase di cifratura (e decifratura poichè simmetrico) una **sequenza di numeri pseudocausali** con cui cifrare il messaggio. La differenza col cifrario di Vernam è che in quel caso la chiave è davvero costituita da valori totalmente casuali e imprevedibili, caratteristica che rende il sistema sicuro; in questo caso invece la sequenza di caratteri generata è solo pseudocasuale.
+
+Una sequenza di numeri pseudocasuale è prodotta da un **algoritmo deterministico** il cui stato di partenza dipende da un valore detto comunemente "seed" (seme in inglese) che costituisce in questo contesto la chiave di cifratura. Questa sequenza di numeri non è quindi davvero casuale ma dipende dalla chiave, e a **una stessa chiave corrisponde sempre una stessa sequenza di numeri pseudocasuali**, motivo per cui conoscendo la chiave è possibile generare la stessa sequenza sia in fase di cifratura che di decifratura. L'unica cosa in cui la sequenza assomiglia ad una realmente casuale è che produce le stesse proprietà statistiche (frequenza e distribuzione dei valori...).
+
+Un'altra proprietà significativa di un generatore di numeri casuali è il suo **periodo**, ovvero il **numero di elementi dopo i quali la sequenza si ripete**. In generale più è lungo il periodo e migliore è la qualità del generatore. Nel nostro caso la sequenza prodotta equivarrà alla chiave realmente usata per cifrare i messaggi in chiaro e come sappiamo quando la chiave si ripete è possibile effettuare un attacco.
+
+#### RC4
+
+Un esempio di implementazione particolarmente famoso ed utilizzato in passato di questo sistema è l'algoritmo RC4 che consiste nella generazione di un flusso di bit pseudocasuale (keystream) combinato mediante un'operazione di XOR con il testo in chiaro per ottenere il testo cifrato. L'operazione di decifratura avviene nella stessa maniera, passando in input il testo cifrato ed ottenendo in output il testo in chiaro, questo perché il keystream è lo stesso a partire dalla stessa chiave e lo XOR è un'operazione simmetrica.
+
+Non ci interessa approfondire i dettagli tecnici riguardo a questo algoritmo che puoi approfondire [qui](https://it.wikipedia.org/wiki/RC4), quello che ci interessa analizzare è come algoritmi quali RC4 paghino la propria semplicità e velocità in termini di sicurezza: questa infatti è molto debole e l'algoritmo è violabile con relativa facilità e velocità, tanto che il suo uso non è più consigliabile.
+
+La debolezza di questi algoritmi risiede proprio nel legame che c'è tra la chiave e il keystream che non è una sequenza di numeri realmente casuali ma una sequenza di numeri prodotta da un algoritmo deterministico. Nel 2005 infatti è stato trovato un modo per violare una connessione wireless protetta con [WEP](https://it.wikipedia.org/wiki/Wired_Equivalent_Privacy), protocollo di cifratura per le reti Wi-Fi che usa RC4, in meno di un minuto.
 
 ## Crittografia asimmetrica
 
@@ -164,8 +258,8 @@ ad anello, un po’ come le ore sul quadrante dell'orologio.\
 Consideriamo ad esempio un quadrante contenente solo 7 numeri, da 0 a 6, corrispondente al modulo 7. \
 Per calcolare 2 + 3 si partirà da 2 e ci si sposterà di 3 numeri, ottenendo 5. Per calcolare 2 + 6 si partirà da 2 e ci si sposterà di 6 numeri. In questo modo, attraversando l'intero anello, si otterrà come risultato 1.  
 In pratica:  
-2 + 3 = 5 mod(7)  
-2 + 6 = 1 mod(7)
+2 + 3 ≡ 5 mod(7)  
+2 + 6 ≡ 1 mod(7)
 {: .code-example}
 
 <div class="thumbnail--centrato mt-4 mb-4">
@@ -267,7 +361,7 @@ Vediamo come si sarebbe potuto ottenere lo stesso risultato con la funzione e il
 
 - per il Teorema di Eulero avremo: *a* = 3; *n* = 10; $$\phi$$(10) = $$\phi$$(2 · 5) = (2 - 1) · (5 - 1) = 4 
 
-- 3<sup>*$$\phi$$*(10)</sup> = 3<sup>4</sup> = 1  mod(10)  (infatti: 3<sup>4</sup> = 81 = 1 mod(10)) 
+- 3<sup>*$$\phi$$*(10)</sup> = 3<sup>4</sup> ≡ 1  mod(10)  (infatti: 3<sup>4</sup> = 81 ≡ 1 mod(10)) 
 
 - x = 3<sup>5</sup> = 3<sup>4</sup> · 3 = 1<sup>4</sup> · 3 = 3 
 
@@ -483,7 +577,7 @@ Il funzionamento del metodo RSA si può schematizzare con i seguenti punti:
 
 La chiave pubblica è rappresentata dalla coppia di numeri (*N, e*), mentre la chiave privata è rappresentata da (*N, d*). 
 
-Un messaggio *m* viene cifrato attraverso l'operazione *m<sup>e</sup>* mod(*N*), mentre il messaggio *c* così ottenuto viene decifrato con *c<sup>d</sup>* = *m<sup>e·d</sup>* = *m*<sup>1</sup> mod(*N*). Il procedimento funziona solo se la chiave *e* utilizzata per cifrare e la chiave *d* utilizzata per decifrare sono legate tra loro dalla relazione *e* · *d* = 1 mod((*p*-1)·(*q*-1)), e quindi quando un messaggio viene cifrato con una delle due chiavi (la chiave pubblica) può essere decifrato solo utilizzando l'altra (la chiave privata). 
+Un messaggio *m* viene cifrato attraverso l'operazione *m<sup>e</sup>* mod(*N*), mentre il messaggio *c* così ottenuto viene decifrato con *c<sup>d</sup>* = *m<sup>e·d</sup>* = *m*<sup>1</sup> mod(*N*). Il procedimento funziona solo se la chiave *e* utilizzata per cifrare e la chiave *d* utilizzata per decifrare sono legate tra loro dalla relazione *e* · *d* ≡ 1 mod((*p*-1)·(*q*-1)), e quindi quando un messaggio viene cifrato con una delle due chiavi (la chiave pubblica) può essere decifrato solo utilizzando l'altra (la chiave privata). 
 
 Vediamo in pratica come sia possibile realizzare una cifratura RSA. 
 
