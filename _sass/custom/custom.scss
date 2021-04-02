@@ -226,6 +226,9 @@ th, td{
     line-height: normal;
     @extend .fs-3;
   }
+  &--50{
+    max-width: 50%;
+  }
 }
 
 

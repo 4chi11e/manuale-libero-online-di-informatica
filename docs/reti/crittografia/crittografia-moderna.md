@@ -569,7 +569,9 @@ Il pregio di questo sistema rispetto al metodo Diffie-Hellman-Merkle è che non 
 
 In un sistema a chiave asimmetrica la chiave usata per cifrare e quella usata per decifrare non coincidono: è possibile quindi che Alice renda pubblica la chiave da usare per cifrare un messaggio (la sua chiave pubblica) e conservi segreta la chiave da usare per decifrare il messaggio (la sua chiave privata), per essere in grado solo lei di decifrare i messaggi a lei diretti. 
 
-Il cuore della cifratura asimmetrica sviluppata da Rivest, Shamir e Adlemann è una funzione unidirezionale basata sul concetto di modulo. 
+Il cuore della cifratura asimmetrica sviluppata da Rivest, Shamir e Adlemann è una funzione unidirezionale basata sul concetto di modulo.
+
+#### Funzionamento
 
 Il funzionamento del metodo RSA si può schematizzare con i seguenti punti: 
 
@@ -582,13 +584,42 @@ La chiave pubblica è rappresentata dalla coppia di numeri (*N, e*), mentre la c
 
 Un messaggio *m* viene cifrato attraverso l'operazione *m<sup>e</sup>* mod(*N*), mentre il messaggio *c* così ottenuto viene decifrato con *c<sup>d</sup>* = *m<sup>e·d</sup>* = *m*<sup>1</sup> mod(*N*). Il procedimento funziona solo se la chiave *e* utilizzata per cifrare e la chiave *d* utilizzata per decifrare sono legate tra loro dalla relazione *e* · *d* ≡ 1 mod((*p*-1)·(*q*-1)), e quindi quando un messaggio viene cifrato con una delle due chiavi (la chiave pubblica) può essere decifrato solo utilizzando l'altra (la chiave privata). 
 
+#### Dimostrazione matematica
+
+La decifratura del messaggio è assicurata grazie ad alcuni teoremi matematici; infatti dal calcolo si ottiene:  
+
+$$c^d \pmod{N} = (m^e)^d \pmod{N} = m^{e·d} \pmod{N}$$  
+
+Ma sappiamo che  
+
+$$e·d ≡ 1 \pmod{(p-1)·(q-1)}$$  
+
+di conseguenza abbiamo che  
+
+$$ e · d ≡ 1 \pmod{p-1}, \qquad e · d ≡ 1 \pmod{q-1}$$  
+
+quindi, per il [piccolo teorema di Fermat](https://it.wikipedia.org/wiki/Piccolo_teorema_di_Fermat):  
+
+$$m^{e · d} ≡ m \pmod{p}, \qquad m^{e · d} ≡ m \pmod{q}$$  
+
+Siccome *p* e *q* sono numeri diversi e primi, possiamo applicare il [teorema cinese del resto](https://it.wikipedia.org/wiki/Teorema_cinese_del_resto), ottenendo che  
+
+$$m^{e · d} ≡ m \pmod{p · q}$$  
+
+e quindi che  
+
+$$c^{d} ≡ m \pmod{N}$$
+
+
+#### Esempio di utilizzo (singola cifratura)
+
 Vediamo in pratica come sia possibile realizzare una cifratura RSA. 
 
 Per cifrare un messaggio, questo deve essere prima di tutto trasformato in un numero o in una serie di numeri, diciamo *m<sub>1</sub>, m<sub>2</sub>,..., m<sub>k</sub>*. Questa operazione può essere effettuata utilizzando, ad esempio, il codice ASCII, e trasformando il numero binario ottenuto nel corrispondente in base dieci. Per semplicità, nel prossimo esempio considereremo che il messaggio segreto che si vuole trasmettere consista di un solo numero *m*, senza preoccuparci del metodo utilizzato per generarlo. 
 
 Faremo inoltre nuovamente riferimento ai nostri personaggi immaginari, Alice e Bob. 
 
-#### Operazioni effettuate da Alice (Generazione delle Chiavi):
+##### Operazioni effettuate da Alice (Generazione delle Chiavi):
 
 <ol>
   <li>
@@ -643,7 +674,7 @@ Adesso Alice è libera di pubblicare la sua chiave pubblica su Internet, o su un
 
 Supponiamo allora che Bob le voglia mandare un messaggio costituito da vediamo quale operazioni deve eseguire. 
 
-#### Operazioni effettuate da Bob (Cifratura): 
+##### Operazioni effettuate da Bob (Cifratura): 
 <ol>
   <li>
     calcola <em>c</em> = <em>m<sup>e</sup></em>  mod(<em>N</em>):
@@ -656,7 +687,7 @@ Supponiamo allora che Bob le voglia mandare un messaggio costituito da vediamo q
   </li>
 </ol>
 
-#### Operazioni effettuate da Alice (Decifratura):
+##### Operazioni effettuate da Alice (Decifratura):
 
 1. ricevuto il messaggio Alice ricava *m* mediante la formula *m* = *c<sup>d</sup>* mod(*N*):
 
@@ -664,6 +695,34 @@ Supponiamo allora che Bob le voglia mandare un messaggio costituito da vediamo q
   {: .ta-c}
 
 **L’unico modo per Eva di decifrare il messaggio è di avere *d* e quindi di riuscire a ottenere *p* e *q* dalla fattorizzazione di *N***: come detto precedentemente, il processo di fattorizzazione di un numero nei suoi fattori primi è un processo molto lungo, specialmente se si ha a che fare con numeri molto grandi. La segretezza nella comunicazioni tra Alice e Bob è quindi assicurata!
+
+
+#### Doppia cifratura
+
+
+<div class="thumbnail float-right thumbnail--50">
+  <img src="{{site.baseurl}}/assets/images/crittografia/doppia-codifica.jpg" onclick="document.getElementById('img-doppia-codifica').style.display='block'" class="hoverlink">
+  <p>Schema della doppia cifratura in RSA</p>
+</div>
+<!--modal-->
+<div id="img-doppia-codifica" class="modal">
+  <div class="modal--content">
+    <!-- <div class="w3-container"> -->
+      <span onclick="document.getElementById('img-doppia-codifica').style.display='none'" class="modal--close w3-display-topright">&times;</span>
+      <img src="{{site.baseurl}}/assets/images/crittografia/doppia-codifica.jpg" data-toggle="modal" data-target="#img-doppia-codifica">
+      <p>Dall'immagine si può vedere che Alice non si limita a cifrare il messaggio con la chiave pubblica di Bob ma esegue prima un'altra cifratura con la propria chiave privata; in questo modo Bob, aggiungendo una seconda decifratura con la chiave pubblica di Alice, sarà sicuro che solo Alice può aver cifrato e spedito il messaggio perchè è l'unica persona che conosce la chiave privata di Alice.</p>
+    <!-- </div> -->
+  </div>
+</div>
+
+Con le operazioni fin qui descritte Alice e Bob sono riusciti ad assicurarsi solo il primo dei quattro [obiettivi della crittografia]({{site.baseurl}}/docs/reti/crittografia/crittografia/#obiettivi-della-crittografia): la riservatezza dei dati, ma non non gli altri tre. Per questo motivo RSA prevede una **doppia cifratura**.
+
+Dall'immagine si può vedere che Alice non si limita a cifrare il messaggio con la chiave pubblica di Bob ma esegue prima un'altra cifratura con la propria chiave privata; in questo modo Bob, aggiungendo una seconda decifratura con la chiave pubblica di Alice, sarà sicuro che solo Alice può aver cifrato e spedito il messaggio perchè è l'unica persona che conosce la chiave privata di Alice. Il secondo e il quarto obiettivo: autenticazione dell'utente e non ripudio sono quindi stati raggiunti. 
+
+Nelle comunicazioni digitali, l'autenticazione degli interlocutori è molto importante e nella maggior parte dei protocolli attualmente utilizzati per le comunicazioni sicure (come [TLS](#)) è prevista una fase di autenticazione in cui solitamente viene proprio usato RSA.
+
+Per garantire anche il raggiungimento dell'ultimo obiettivo: l'integrità dei dati, è necessario utilizzare insieme ad RSA altri strumenti, come le [funzioni crittografiche di hash](#), ma questo è vero in generale per tutti i sistemi di comunicazione. 
+
 
 #### Numeri primi e RSA 
 
@@ -691,7 +750,7 @@ I numeri della forma 2<sup>*n*</sup> - 1 sono detti numeri di Mersenne e sono in
 Dopo il 1992 tutti i numeri primi più grandi conosciuti sono stati numeri primi di Mersenne, l'ultimo numero primo non di Mersenne ad aver detenuto il suddetto record è stato 391 581 × 2216 193 − 1, scoperto nel 1989.
 
 
-#### La fattorizzazione 
+#### Attaccare RSA - La fattorizzazione 
 
 Abbiamo visto che per attaccare RSA è necessario effettuare la fattorizzazione di N, ma come si fa a fattorizzare un numero così grande? La trattazione approfondita del problema la lasciamo ai matematici ma per capire l'entità del problema facciamo alcuni ragionamenti. 
 
@@ -704,11 +763,11 @@ dove *$$\pi(n)$$* rappresenta il numero di primi minori o uguali a *n*.
 
 Dunque possiamo rozzamente valutare $$ {\pi(2^{128})} $$ come: 
 
-$$ {\frac{2^{128}}{log(2^{128})} \approx 3 \cdot 10^{36}} $$
+$$ {\frac{2^{128}}{log(2^{128})} \approx 3 · 10^{36}} $$
 
 e $$ {\pi(2^{127})} $$ come: 
 
-  $$ {\frac{2^{127}}{log(2^{127})} \approx 2 \cdot 10^{36}} $$ 
+  $$ {\frac{2^{127}}{log(2^{127})} \approx 2 · 10^{36}} $$ 
   
 e quindi $$ {\pi(2^{128}-\pi(2^{127})) \approx 10^{36}} $$. Stiamo cauti nella stima e diciamo che ne abbiamo almeno 10<sup>30</sup> (in realtà potremmo anche dire con sicurezza 10<sup>35</sup> ). I prodotti di due numeri di questa forma sono allora dell’ordine di 10<sup>60</sup>. Immagazzinarli in forma binaria richiede allora $$ {2^{256} \cdot 10^{60} \approx 2^{256} \cdot 2^{199} = 2^{455}} $$ bit, quindi $$ {2^{452} \approx 10^{136} } $$ byte. Un terabyte è circa 10<sup>12</sup> byte, quindi servirebbe qualcosa come 10<sup>124</sup> terabyte. Troppi anche solo da immaginare: il diametro della Galassia in metri è 10<sup>21</sup>.
 
@@ -753,4 +812,169 @@ Per quanto riguarda le dimensioni delle chiavi da utilizzare, nel 2003 la RSA ha
 Quando si sceglie la dimensione della chiave da utilizzare bisogna tenere a mente che per effettuare un qualsiasi attacco è necessario investire una certa quantità di risorse, che si possono tradurre anche in termini economici, e maggiori saranno le risorse investite maggiore sarà la velocità con cui si potrà effettuare l'attacco. Si sarà quindi disposti a fare un attacco solo nel caso le informazioni da scoprire abbiano un valore che valga la spesa richiesta. Ad esempio è interessante notare quanto detto alla conferenza Crypto ‘93 (ormai tantissimi anni fa ma il concetto è valido ancora oggi), da M. Wiener del Bell Northern Research, il quale ha descritto come con un milione di dollari sia realizzabile un chip speciale da 50 milioni di test al secondo che, in parallelo ad altri 57.000, può condurre un attacco con successo mediamente in 3,5 ore. Con un costo di 10 milioni di dollari il tempo si abbassa a 21 minuti, e con 100 milioni a disposizione, il codice è infranto in pochi secondi!
 
 
+## Funzioni crittografiche di Hash
+
+<div class="thumbnail float-right">
+  <img src="{{site.baseurl}}/assets/images/crittografia/Hash_function.svg" onclick="document.getElementById('img-hash-function').style.display='block'" class="hoverlink">
+  <p markdown=1>Una funzione crittografica di hash al lavoro ([SHA1](https://it.wikipedia.org/wiki/SHA1)). Anche piccole modifiche ai dati di ingresso causano un notevole cambiamento dell'uscita: si tratta del cosiddetto effetto valanga.</p>
+</div>
+<!--modal-->
+<div id="img-hash-function" class="modal">
+  <div class="modal--content">
+    <!-- <div class="w3-container"> -->
+      <span onclick="document.getElementById('img-hash-function').style.display='none'" class="modal--close w3-display-topright">&times;</span>
+      <img src="{{site.baseurl}}/assets/images/crittografia/Hash_function.svg" data-toggle="modal" data-target="#img-hash-function">
+      <p markdown=1>Una funzione crittografica di hash al lavoro ([SHA1](https://it.wikipedia.org/wiki/SHA1)). Anche piccole modifiche ai dati di ingresso causano un notevole cambiamento dell'uscita: si tratta del cosiddetto effetto valanga.</p>
+    <!-- </div> -->
+  </div>
+</div>
+
+Una funzione crittografica di hash, in informatica, è una classe speciale delle funzioni di hash che dispone di alcune proprietà che lo rendono adatto per l'uso nella crittografia.
+
+Si tratta di un algoritmo matematico che mappa dei dati di lunghezza arbitraria (messaggio) in una stringa binaria di dimensione fissa chiamata valore di hash (spesso abbreviato impropriamente per comodità in hash), ma spesso viene indicata anche con altri termini come il termine inglese message digest (o semplicemente digest) oppure, se applicata a un file (o documento), come impronta digitale del file (o documento). Tale funzione di hash è progettata per essere unidirezionale (one-way), ovvero una funzione difficile da invertire: l'unico modo per ricreare i dati di input dall'output di una funzione di hash ideale è quello di tentare una ricerca di [forza-bruta](https://it.wikipedia.org/wiki/Metodo_forza_bruta) di possibili input per vedere se vi è corrispondenza (match). In alternativa, si potrebbe utilizzare una [tabella arcobaleno](https://it.wikipedia.org/wiki/Tabella_arcobaleno) di hash corrispondenti.
+
+La funzione crittografica di hash ideale deve avere alcune proprietà fondamentali:
+
+- deve identificare univocamente il messaggio, non è possibile che due messaggi differenti, pur essendo simili, abbiano lo stesso valore di hash;
+- deve essere deterministico, in modo che lo stesso messaggio si traduca sempre nello stesso hash;
+- deve essere semplice e veloce calcolare un valore hash da un qualunque tipo di dato;
+- deve essere molto difficile o quasi impossibile generare un messaggio dal suo valore hash se non provando tutti i messaggi possibili.
+
+Tali caratteristiche permettono alle funzioni crittografiche di hash di trovare ampio utilizzo in tutti quei contesti in cui sia necessario ottenere un'impronta digitale di un messaggio al fine di poterne poi verificare l'integrità.
+
+### Proprietà
+
+In generale una funzione di hash è progettata per prendere in input una stringa di qualsiasi lunghezza e produrre in output un valore di hash di lunghezza fissa. Per poter essere considerata funzione *crittografica* di hash questa funzione deve essere in grado di resistere a tutti gli attacchi basati sulla crittoanalisi: per fare questo deve rispettare le tre seguenti proprietà:
+
+- Resistenza alla preimmagine:
+> Dato un valore di hash h, deve essere difficile risalire ad un messaggio m con hash(m) = h. Questa proprietà deriva dal concetto di funzione unidirezionale. Funzioni che non dispongono di questa proprietà sono vulnerabili agli attacchi alla preimmagine.
+
+- Resistenza alla seconda preimmagine:
+> Dato un input m1, deve essere difficile trovare un secondo input m2 tale che hash(m1) = hash(m2). Funzioni che non dispongono di questa proprietà sono vulnerabili agli attacchi alla seconda preimmagine.
+
+- Resistenza alla collisione:
+> Dati due messaggi m1 ed m2, deve essere difficile che i due messaggi abbiano lo stesso hash, quindi con hash(m1) = hash(m2). Tale coppia è chiamata collisione di hash crittografica. Questa proprietà a volte è indicata come forte resistenza alla collisione. La resistenza alla collisione implica una resistenza alla seconda preimmagine, ma non implica la resistenza alla preimmagine: rispetto a quest'ultimo, richiede un valore di hash almeno due volte più lungo, altrimenti le collisioni possono essere trovate da un [attacco del compleanno](https://it.wikipedia.org/wiki/Attacco_del_compleanno).
+
+
+Queste proprietà implicano che un eventuale attacco non permetta di rimpiazzare o modificare un messaggio senza conseguenze sul risultante valore di hash. Pertanto, se due stringhe hanno lo stesso digest, si può essere fiduciosi nel pensare che siano identiche. In particolare, la resistenza alla seconda preimmagine dovrebbe impedire ad un avversario maligno di elaborare un messaggio con lo stesso hash di un messaggio che l'avversario stesso non può controllare. La resistenza alla collisione, invece, impedisce all'attaccante di creare due messaggi distinti con lo stesso hash.
+
+### Applicazioni
+
+#### Verifica dell'integrità di un messaggio
+Un'importante applicazione delle funzioni crittografiche di hash è nella verifica dell'integrità di un messaggio. Per mezzo di tali funzioni è possibile determinare, ad esempio, se sono state compiute modifiche ad un messaggio (o ad un file) confrontando il suo hash prima e dopo la trasmissione. Un particolare uso ne viene fatto nella maggior parte degli algoritmi di [firma digitale](#), i quali utilizzano le funzioni di hash al fine di produrre una firma tale da garantire l'autenticità di un messaggio, evitando che un possibile destinatario modifichi un documento firmato da qualcun altro. Per questo motivo il valore di hash viene anche detto impronta digitale del messaggio. La verifica quindi dell'autenticità del valore di hash del messaggio viene considerata come prova di autenticità del messaggio stesso.
+
+#### Identificatore di file o dati
+In quelle applicazioni in cui si necessita di gestire grandi quantitativi di file, un digest dei messaggi può anche essere utile nell'identificazione di essi in maniera affidabile. Diversi sistemi di gestione di codice sorgente, tra cui Git, Mercurial e Monotone, utilizzano il sha1sum (un algoritmo che calcola e verifica gli hash SHA-1) di vari tipi di contenuti (contenuti di file, alberi di directory, informazioni genealogiche, ecc.) per identificarli in modo univoco. Lo stesso obiettivo vuole essere raggiunto dalle reti di condivisione di file peer-to-peer dove, ad esempio, in un link ed2k, un hash di tipo MD4 è combinato con la dimensione del file, fornendo informazioni sufficienti per individuare le origini del file stesso, scaricarlo e verificarne il contenuto. I collegamenti magnetici (magnet links) ne costituisce un altro esempio. Avendo a disposizione funzioni hash di un certo tipo, una delle principali applicazioni delle funzioni crittografiche è quella di consentire la rapida ricerca di dati in una tabella hash. Tuttavia, rispetto alle funzioni di hash standard, le funzioni crittografiche di hash tendono ad essere più dispendiose in termini di calcolo. Per questo motivo, vengono utilizzate in contesti in cui è necessario che gli utenti siano protetti dalla possibilità di contraffazione (creazione di dati con lo stesso digest) da parte di partecipanti potenzialmente dannosi.
+
+#### Verifica delle password
+Nelle applicazioni che necessitano di un'adeguata autenticazione è troppo rischioso memorizzare le password di tutti gli utenti in chiaro, cioè su un file non cifrato, soprattutto nel caso in cui quest'ultimo venga compromesso. Un modo per evitare di andare incontro a una vera e propria violazione della sicurezza è quello di memorizzare solo il valore di hash di ogni password: una volta avvenuta l'autenticazione da parte dell'utente, viene calcolato l'hash della password da lui inserita e il risultato viene confrontato con l'hash memorizzato in precedenza. Spesso, la password viene concatenata con un valore casuale e non segreto, denominato salt, prima ancora che venga applicata la funzione hash. Utilizzati insieme, ma memorizzati separatamente, producono un output che sostituisce le sole password, consentendo dunque agli utenti di autenticarsi. Tenendo in considerazione il sale e il fatto che, generalmente, gli utenti ne possiedono diversi, non è possibile archiviare tabelle di valori di hash pre-computati per le password comuni. Però, come già accennato in precedenza, essendo da un lato le password dei messaggi brevi e le funzioni di hash progettate per essere calcolate rapidamente dall'altro, è possibile essere soggetti ad attacchi di forza bruta (basta considerare che la GPU può provare miliardi di possibili password al secondo). In compenso, esistono delle funzioni, denominate funzioni di stretching della chiave, come PBKDF2, Bcrypt o Scrypt che "potenziano" le password per renderle più sicure di fronte ad un attacco di forza bruta.
+
+#### Proof-of-Work
+Il sistema Proof-of-work è una misura economica per scoraggiare attacchi di tipo denial of service e altri abusi di servizio (come lo spam su una rete) che impone certi lavori da parte del richiedente del servizio, di solito intesi come tempo di elaborazione di un computer. Una caratteristica fondamentale di questi sistemi è la loro asimmetria: il lavoro deve essere moderatamente complesso (ma fattibile) sul lato richiedente, ma nello stesso tempo, per il fornitore di servizi (service provider) risulta semplice da controllare. Un sistema famoso, usato nella generazione di bitcoin e in Hashcash, usa inversioni di hash parziali per verificare che il lavoro sia stato fatto, in modo tale da sbloccare una ricompensa (detto reward di Bitcoin) nel caso di Bitcoin o come un token di buona volontà da inviare via e-mail ad Hashcash. In pratica, il mittente è tenuto a trovare un messaggio il cui valore hash inizia con un numero di bit zero: il lavoro medio che egli deve eseguire per trovare un messaggio valido è esponenziale nel numero di bit zero richiesti nel valore hash. D'altra parte, il destinatario può verificare la validità del messaggio eseguendo una singola funzione hash. Ad esempio, in Hashcash, se ad un mittente venisse richiesto di generare un header il cui valore hash SHA-1 a 160 bit ha come primi 20 bit degli zeri, dovrà in media provare 219 volte prima di trovare un header valido.
+
+#### Generazione di numeri pseudocasuali e chiavi di derivazione
+Le funzioni di hash possono essere impiegate anche per la generazione di stringhe pseudorandom o per la derivazione di chiavi e password da una singola chiave o password sicura.
+
+### Attacchi alle funzioni crittografiche di hash
+
+I possibili attacchi ad una funzione crittografica di hash si possono riassumere in due categorie:
+
+- **Attacco alla preimmagine** cioè trovare il messaggio da cui è stato calcolato un certo valore di hash. 
+> Di solito si vuole fare questo attacco quando si vuole scoprire una password di cui è stato salvato il valore di hash, argomento di cui si è parlato [qui](#verifica-delle-password)
+
+- **Attacco alla seconda preimmagine** che consiste nel trovare una *collisione* ovvero trovare due messaggi che producano lo stesso valore di hash.
+> Trovare delle collisioni permette ad un attaccante di sostituire un messaggio con un messaggio differente che produce lo stesso valore di hash
+
+
+### Algoritmi di hash crittografico
+
+Al giorno d'oggi esistono molte funzioni crittografiche di hash che vengono usate in molti contesti differenti. Nel tempo alcune di esse sono diventate obsolete perchè non più sicure all'aumentare della potenza di calcolo disponibile.
+
+Di seguito sono riportate le funzioni crittografiche di hash più usate. Una lista più completa può essere consultata [qui](https://en.wikipedia.org/wiki/Comparison_of_cryptographic_hash_functions)
+
+#### MD5
+[MD5](https://en.wikipedia.org/wiki/MD5) was designed by Ronald Rivest in 1991 to replace an earlier hash function, MD4, and was specified in 1992 as RFC 1321. Collisions against MD5 can be calculated within seconds which makes the algorithm unsuitable for most use cases where a cryptographic hash is required. MD5 produces a digest of 128 bits (16 bytes).
+
+#### SHA-1
+[SHA-1]() was developed as part of the U.S. Government's Capstone project. The original specification – now commonly called SHA-0 – of the algorithm was published in 1993 under the title Secure Hash Standard, FIPS PUB 180, by U.S. government standards agency NIST (National Institute of Standards and Technology). It was withdrawn by the NSA shortly after publication and was superseded by the revised version, published in 1995 in FIPS  PUB 180-1 and commonly designated SHA-1. Collisions against the full SHA-1 algorithm can be produced using the shattered attack and the hash function should be considered broken. SHA-1 produces a hash digest of 160 bits (20 bytes).
+
+Documents may refer to SHA-1 as just "SHA", even though this may conflict with the other Secure Hash Algorithms such as SHA-0, SHA-2, and SHA-3.
+
+#### SHA-2
+[SHA-2]() (Secure Hash Algorithm 2) is a set of cryptographic hash functions designed by the United States National Security Agency (NSA), first published in 2001. They are built using the Merkle–Damgård structure, from a one-way compression function itself built using the Davies–Meyer structure from a (classified) specialized block cipher.
+
+SHA-2 basically consists of two hash algorithms: SHA-256 and SHA-512. SHA-224 is a variant of SHA-256 with different starting values and truncated output. SHA-384 and the lesser-known SHA-512/224 and SHA-512/256 are all variants of SHA-512. SHA-512 is more secure than SHA-256 and is commonly faster than SHA-256 on 64-bit machines such as AMD64.
+
+The output size in bits is given by the extension to the "SHA" name, so SHA-224 has an output size of 224 bits (28 bytes); SHA-256, 32 bytes; SHA-384, 48 bytes; and SHA-512, 64 bytes.
+
+| Algoritmo e variante | Dimensione dell'output (bit) | Dimensione dello stato interno (bit) |	Dimensione del blocco (bit) |	Max. dimensione del messaggio (bit) |	Dimensione della word (bit)	| Passaggi	| Operazioni	| Collisioni trovate
+|-|-|-|-|-|-|-|-|-|
+**SHA-0** |	160 |	160 |	512 |	2<sup>64</sup> − 1 |	32	| 80	| +,and,or,xor, rotl |	Sì
+**SHA-1** |	160 |	160 |	512 |	2<sup>64</sup> − 1 |	32 |	80 |	+,and,or,xor, rotl |	Attacco [2<sup>63</sup>](https://it.wikipedia.org/wiki/Funzione_crittografica_di_hash#Algoritmi_di_hash_crittografico)
+**SHA-2** (SHA-256/224) |	256/224 |	256 |	512 |	2<sup>64</sup> − 1 |	32 |	64 |	+,and,or,xor,shr, rotr |	Nessuna
+**SHA-2** (SHA-512/384) |	512/384 |	512	| 1024 |	2<sup>128</sup> − 1 |	64 |	80 |	+,and,or,xor,shr, rotr |	Nessuna
+{: .fs-3}
+
+#### SHA-3
+[SHA-3]() (Secure Hash Algorithm 3) was released by NIST on August 5, 2015. SHA-3 is a subset of the broader cryptographic primitive family Keccak. The Keccak algorithm is the work of Guido Bertoni, Joan Daemen, Michael Peeters, and Gilles Van Assche. Keccak is based on a sponge construction which can also be used to build other cryptographic primitives such as a stream cipher. SHA-3 provides the same output sizes as SHA-2: 224, 256, 384, and 512 bits.
+
+Configurable output sizes can also be obtained using the SHAKE-128 and SHAKE-256 functions. Here the -128 and -256 extensions to the name imply the security strength of the function rather than the output size in bits.
+
+
+## Firma digitale
   
+La firma è  la sottoscrizione del proprio nome, o di uno pseudonimo, per chiudere un'opera d'arte o una scrittura, confermarla o renderne noto l'autore. Per questo motivo caratteristiche fondamentali della firma sono la sua unicità e il suo carattere personale. Il termine deriva dalla parola latina *firmus*, nel senso di definito, inamovibile.
+
+La definizione appena data definisce il concetto classico di firma. Con l'avvento della digitalizzazione si è presentata la necessità di avere un corrispettivo digitale della normale firma autografa, qualcosa che permetta di dimostrare l'autenticità di un messaggio o di un documento digitale garantendo a chi legge tale documento che:
+
+1. sia possibile verificare l'identità di chi ha firmato il documento (autenticazione),
+2. il messaggio non sia stato modificato dopo l'apposizione della firma (integrità).
+3. chi firma il documento non possa negare di averlo fatto (non ripudio)
+
+Si può facilmente notare che queste tre condizioni corrispondono ai quattro [obiettivi della crittografia]({{site.baseurl}}/docs/reti/crittografia/crittografia/#obiettivi-della-crittografia) tolto quello riguardante la *riservatezza*, poichè in questo caso il documento non deve essere segreto, ma solo firmato.
+
+Per raggiungere questi obiettivi si ricorre all'utilizzo di due strumenti precedentemente descritti: una funzione crittografica di hash e un algoritmo di crittografia asimmetrica, tipicamente RSA.
+
+L'utilizzo di RSA permette di raggiungere gli obiettivi 1 e 3 poichè il firmatario può generare una coppia di chiavi pubblica privata e:
+1. cifrare il documento con la propria chiave privata,
+2. allegare al documento cifrato i propri dati personali, 
+3. depositare la propria chiave pubblica, insieme ai propri dati personali presso un ente certificatore, che nella pratica in Italia possono essere ad esempio le Poste Italiane o la Camera di Commercio e che garantirà la corrispondenza tra i dati personali e la chiave pubblica;
+
+in questo modo chiunque legga il documento può prelevare la chiave pubblica corrispondente ai dati personali allegati alla firma per decifrare il documento ed essere sicuro dell'identità del firmatario.
+
+Con queste sole operazioni non è però garantita l'integrità del documento. Per raggiungere anche questo obiettivo è necessario usare anche una funzione crittografica di hash la cui principale applicazione è proprio quello di ottenere l'impronta diditale di un documento. La sequenza di operazioni da effettuare va quindi modificata come segue:
+
+1. **calcolare il valore di hash** corrispondente al documento;
+2. **cifrare il valore di hash** calcolato **con la propria chiave privata** e non l'intero documento, anche perchè l'obiettivo non è rendere segreto il documento ma solo firmarlo;
+3. **depositare la propria chiave pubblica**, insieme ai propri dati personali **presso un ente certificatore**, che nella pratica in Italia possono essere ad esempio le Poste Italiane o la Camera di Commercio e che garantirà la corrispondenza tra i dati personali e la chiave pubblica (nessuna differenza rispetto a prima);
+4. **allegare al documento il valore di hash cifrato e i propri dati personali**
+
+in questo modo chiunque legga il documento può prelevare la chiave pubblica corrispondente ai dati personali allegati alla firma per decifrare il valore di hash e ricalcolare da se il valore di hash del documento e confrontare i due valori (quello decifrato dalla firma e quello ottenuto dal documento in chiaro ricevuto); se i due valori coincidono allora si può essere sicuri che documento e firma siano integri e autentici. I tre obiettivi sono stati raggiunti.
+
+
+
+### Contraffare una firma digitale
+
+Ceracare di contraffare una firma o un documento firmato, equivale ad effettuare un attacco a uno o entrambi i sistemi crittografici usati.
+
+Se si vuole modificare il documento senza modificare la firma è necessario trovare una collisione della funzione crittografica di hash ovvero trovare un documento che produca lo stesso hash del documento originale.
+
+Se si vuole firmare un documento con la firma di un'altra persona è necessario attaccare RSA e scoprire la chiave segreta di quella persona.
+
+Entrambi questi scenari sono stati ampiamente trattati nelle sezioni riguardanti gli attacchi alle [funzioni crittografiche di hash]({{site.baseurl}}/docs/reti/crittografia/crittografia-moderna/#attacchi-alle-funzioni-crittografiche-di-hash) e a [RSA]({{site.baseurl}}/docs/reti/crittografia/crittografia-moderna/#attaccare-rsa---la-fattorizzazione).
+
+
+### Come usare nella pratica la firma digitale
+
+Nella pratica per poter utilizzare la firma digitale devo per prima cosa contattare un ente certificatore. In Italia gli enti certificatori, per poter rilasciare firme digitali, devono essere autorizzati da AgID, l'ente nazionale per la digitalizzazione della Pubblica Amministrazione. è possibile reperire [qui](https://www.agid.gov.it/it/piattaforme/firma-elettronica-qualificata/prestatori-di-servizi-fiduciari-attivi-in-italia) una lista completa dei *prestatori di servizi fiduciari* attivi in Italia compresa di link alla pagina di aquisto del servizio che ha un costo che si aggira sui 50€ all'anno. 
+
+Una volta acquistato il servizio, l'ente certificatore si occupa di verificare l'identità di chi ha richiesto il servizio e rilascia uno o più dispositivi accompagnati da un software necessari all'applicazione delle firme ai documenti. I dispositivi possono essere una smart card (che contiene una sim) accompagnata da lettore oppure un'apposita chiavetta usb chiamata *token usb* provvista di sim.
+
+Il software fornito per la firma dei documenti normalmente è in grado di firmare documenti pdf producendo un nuovo file in formato p7m che conterrà sia documento in chiaro che firma. Solitamente è possibile firmare documenti anche di formati differenti anche se il formato pdf è quello più supportato. Nel momento dell'apposizione della firma il software richiederà di poter comunicare con la sim, ricevuta tramite chiavetta o lettore di smart card, dove risiede la chiave privata necessaria per la firma. Per sicurezza l'accesso alla sim è protetto con un pin.
+
+Di seguito è proposto il video informativo creato dalla camera di commercio di Milano, Monza Brianza, Lodi su che cos'è e come ottenere la firma digitale.
+
+<iframe width="560" height="315" style="display: block; margin: auto" src="https://www.youtube.com/embed/EMeIBuimVD4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
