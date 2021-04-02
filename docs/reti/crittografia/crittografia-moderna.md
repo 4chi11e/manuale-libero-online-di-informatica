@@ -846,13 +846,13 @@ Tali caratteristiche permettono alle funzioni crittografiche di hash di trovare 
 
 In generale una funzione di hash è progettata per prendere in input una stringa di qualsiasi lunghezza e produrre in output un valore di hash di lunghezza fissa. Per poter essere considerata funzione *crittografica* di hash questa funzione deve essere in grado di resistere a tutti gli attacchi basati sulla crittoanalisi: per fare questo deve rispettare le tre seguenti proprietà:
 
-- Resistenza alla preimmagine:
+- **Resistenza alla preimmagine**:
 > Dato un valore di hash h, deve essere difficile risalire ad un messaggio m con hash(m) = h. Questa proprietà deriva dal concetto di funzione unidirezionale. Funzioni che non dispongono di questa proprietà sono vulnerabili agli attacchi alla preimmagine.
 
-- Resistenza alla seconda preimmagine:
+- **Resistenza alla seconda preimmagine**:
 > Dato un input m1, deve essere difficile trovare un secondo input m2 tale che hash(m1) = hash(m2). Funzioni che non dispongono di questa proprietà sono vulnerabili agli attacchi alla seconda preimmagine.
 
-- Resistenza alla collisione:
+- **Resistenza alla collisione**:
 > Dati due messaggi m1 ed m2, deve essere difficile che i due messaggi abbiano lo stesso hash, quindi con hash(m1) = hash(m2). Tale coppia è chiamata collisione di hash crittografica. Questa proprietà a volte è indicata come forte resistenza alla collisione. La resistenza alla collisione implica una resistenza alla seconda preimmagine, ma non implica la resistenza alla preimmagine: rispetto a quest'ultimo, richiede un valore di hash almeno due volte più lungo, altrimenti le collisioni possono essere trovate da un [attacco del compleanno](https://it.wikipedia.org/wiki/Attacco_del_compleanno).
 
 
@@ -913,7 +913,7 @@ The output size in bits is given by the extension to the "SHA" name, so SHA-224 
 **SHA-1** |	160 |	160 |	512 |	2<sup>64</sup> − 1 |	32 |	80 |	+,and,or,xor, rotl |	Attacco [2<sup>63</sup>](https://it.wikipedia.org/wiki/Funzione_crittografica_di_hash#Algoritmi_di_hash_crittografico)
 **SHA-2** (SHA-256/224) |	256/224 |	256 |	512 |	2<sup>64</sup> − 1 |	32 |	64 |	+,and,or,xor,shr, rotr |	Nessuna
 **SHA-2** (SHA-512/384) |	512/384 |	512	| 1024 |	2<sup>128</sup> − 1 |	64 |	80 |	+,and,or,xor,shr, rotr |	Nessuna
-{: .fs-3}
+{: .fs-3 .ta-c}
 
 #### SHA-3
 [SHA-3]() (Secure Hash Algorithm 3) was released by NIST on August 5, 2015. SHA-3 is a subset of the broader cryptographic primitive family Keccak. The Keccak algorithm is the work of Guido Bertoni, Joan Daemen, Michael Peeters, and Gilles Van Assche. Keccak is based on a sponge construction which can also be used to build other cryptographic primitives such as a stream cipher. SHA-3 provides the same output sizes as SHA-2: 224, 256, 384, and 512 bits.
@@ -974,7 +974,9 @@ Il software fornito per la firma dei documenti normalmente è in grado di firmar
 
 Di seguito è proposto il video informativo creato dalla camera di commercio di Milano, Monza Brianza, Lodi su che cos'è e come ottenere la firma digitale.
 
-<iframe width="560" height="315" style="display: block; margin: auto" src="https://www.youtube.com/embed/EMeIBuimVD4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-container">
+<iframe src="https://www.youtube.com/embed/EMeIBuimVD4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 
 
