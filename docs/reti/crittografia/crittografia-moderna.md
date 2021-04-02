@@ -890,7 +890,7 @@ I possibili attacchi ad una funzione crittografica di hash si possono riassumere
 
 Al giorno d'oggi esistono molte funzioni crittografiche di hash che vengono usate in molti contesti differenti. Nel tempo alcune di esse sono diventate obsolete perchè non più sicure all'aumentare della potenza di calcolo disponibile.
 
-Di seguito sono riportate le funzioni crittografiche di hash più usate. Una lista più completa può essere consultata [qui](https://en.wikipedia.org/wiki/Comparison_of_cryptographic_hash_functions)
+Di seguito sono riportate le funzioni crittografiche di hash più usate. Una lista più completa può essere consultata [qui](https://en.wikipedia.org/wiki/Comparison_of_cryptographic_hash_functions).
 
 #### MD5
 [MD5](https://en.wikipedia.org/wiki/MD5) was designed by Ronald Rivest in 1991 to replace an earlier hash function, MD4, and was specified in 1992 as RFC 1321. Collisions against MD5 can be calculated within seconds which makes the algorithm unsuitable for most use cases where a cryptographic hash is required. MD5 produces a digest of 128 bits (16 bytes).

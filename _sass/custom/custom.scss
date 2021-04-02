@@ -180,10 +180,18 @@ h5,
 h6 {
   margin-top: 1.2em;
   margin-bottom: 0.8em;
-  font-weight: 600;
+  font-weight: 700;
   //line-height: $body-heading-line-height;
   color: $body-heading-color;
+  text-transform: uppercase;
 }
+
+h1{@include fs-9;}
+h2{@include fs-7;}
+h3{@include fs-6;}
+h4{@include fs-5;}
+h5{@include fs-4;}
+h6{@include fs-4;}
 
 a {
   //display: inline !important;
