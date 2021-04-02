@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0059)http://utenti.quipo.it/base5/combinatoria/crittografia2.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<meta name="Author" content="Gianfranco Bo">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<title>Crittografia 2</title>
+<script language="JavaScript">
+
+function atbash(clair, chiffre, chiffrer){
+	alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	clair.value = clair.value.toUpperCase();
+	chiffre.value = "";
+    k=clair.value.length;
+	n=0;
+	for(var count = 0; count < k; count++){
+		alpha = clair.value.charAt(count);
+		idx = alphabet.indexOf(alpha);
+		if (idx > -1)     // ne (dé)chiffre que les 26 lettres majuscules
+    		{
+ 	  		//if ((n%5==0) && (n>0) && chiffrer) {chiffre.value+=" "};
+	 		n++;
+	  		chiffre.value += alphabet.charAt(25-idx);
+	  	}
+	  	if (idx <= -1)
+	  	{
+	  		chiffre.value+=alpha;
+	 		n++;
+	 	}
+	}
+}
+
+function albam(clair, chiffre, chiffrer){
+	alphabet1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	alphabet2 = 'NOPQRSTUVWXYZABCDEFGHIJKLM';
+	clair.value = clair.value.toUpperCase();
+	chiffre.value = "";
+    k=clair.value.length;
+	n=0;
+	for(var count = 0; count < k; count++){
+		alpha = clair.value.charAt(count);
+		idx = alphabet1.indexOf(alpha);
+		if (idx > -1)     // ne (dé)chiffre que les 26 lettres majuscules
+    		{
+ 	  		//if ((n%5==0) && (n>0) && chiffrer) {chiffre.value+=" "};
+	 		n++;
+	  		chiffre.value += alphabet2.charAt(idx);
+		}
+	  	if (idx <= -1)
+	  	{
+	  		chiffre.value+=alpha;
+	 		n++;
+	 	}
+	}
+}
+
+function atbah(clair, chiffre, chiffrer){
+	alphabet1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	alphabet2 = 'IHGFNDCBARQPOEMLKJZYXWVUTS';
+	clair.value = clair.value.toUpperCase();
+	chiffre.value = "";
+    k=clair.value.length;
+	n=0;
+	for(var count = 0; count < k; count++){
+		alpha = clair.value.charAt(count);
+		idx = alphabet1.indexOf(alpha);
+		if (idx > -1)     // ne (dé)chiffre que les 26 lettres majuscules
+    		{
+ 	  		//if ((n%5==0) && (n>0) && chiffrer) {chiffre.value+=" "};
+	 		n++;
+	  		chiffre.value += alphabet2.charAt(idx);
+		}
+	  	if (idx <= -1)
+	  	{
+	  		chiffre.value+=alpha;
+	 		n++;
+	 	}
+	}
+}
+
+function chiffrer(clair, chiffre, chiffrer){
+     if (document.controle.elements[1].checked){
+		if (chiffrer) {atbash(clair, chiffre, chiffrer)} else {atbash(chiffre, clair, chiffrer)}}
+     else if (document.controle.elements[2].checked){
+		if (chiffrer) {albam(clair, chiffre, chiffrer)} else {albam(chiffre, clair, chiffrer)}}
+     else if (document.controle.elements[3].checked){
+		if (chiffrer) {atbah(clair, chiffre, chiffrer)} else {atbah(chiffre, clair, chiffrer)}}
+}
+
+</script>
+
+<link rel="stylesheet" type="text/css" href="./crittografia-cifrari_antichi_files/stileb5.css">
+</head>
+
+<body>
+
+<p align="left">[<a href="http://utenti.quipo.it/base5/index.htm"><b>HOME - BASE Cinque</b> - <i>Appunti di Matematica ricreativa</i></a>]</p>
+<h1 align="center">Crittografia 2</h1>
+<p align="center"><b>Atbash, Albam, Atbah e altri cifrari</b></p>
+<p align="left"><b><font size="2">Attenzione: questa pagina contiene codice
+javascript. Può essere scaricata e utilizzata senza essere collegati a
+Internet.</font></b></p>
+<p><b>Il cifrario Atbash<br>
+</b>Il libro di <b>Geremia</b> nella <b>Bibbia</b> usa un semplicissimo codice
+monoalfabetico per cifrare la parola Babele.</p>
+<p>"<i>E il re di <b>Sceshac</b> ne berrà dopo di loro."<br>
+Geremia, 25, 26</i></p>
+<p>"<b>Sceshac</b>" è la parola "<b>Babilonia</b>" crittata,
+naturalmente in lingua ebraica.</p>
+<p>Nel cifrario Atbash, la prima lettera dell'alfabeto ebraico (Aleph) viene
+cifrata con l'ultima (Taw), la seconda (Beth) viene cifrata con la penultima (Shin)
+e così via.<br>
+Da queste quattro lettere è derivato il nome di Atbash (A con T, B con SH) per
+questo codice.<br>
+Usando l'alfabeto moderno, l'Atbash ha il seguente cifrario.</p>
+<table border="0" cellpadding="5" cellspacing="0">
+  <tbody><tr>
+    <td>
+      <pre>Chiaro</pre>
+      <pre>Cifrato</pre>
+    </td>
+    <td>
+      <pre>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+| | | | | | | | | | | | | | | | | | | | | | | | | |
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A</pre>
+    </td>
+  </tr>
+</tbody></table>
+<p>Il cifrario Atbash ha la seguente proprietà: crittando due (o un numero pari
+di) volte di seguito un testo, si ottiene il testo originale.</p>
+<p><b>Il cifrario Albam (chiamato anche ROT-13)<br>
+</b>Ad ogni lettera si sostituisce quella che la segue 13 posti più avanti
+nell'alfabeto.</p>
+<table border="0" cellpadding="5" cellspacing="0">
+  <tbody><tr>
+    <td>
+      <pre>Chiaro</pre>
+      <pre>Cifrato</pre>
+    </td>
+    <td>
+      <pre>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+| | | | | | | | | | | | | | | | | | | | | | | | | |
+N O P Q R S T U V W X Y Z A B C D E F G H I J K L M</pre>
+    </td>
+  </tr>
+</tbody></table>
+<p><b>Il cifrario Atbah<br>
+</b>La sostituzione deve soddisfare una relazione di tipo numerico. Le prime
+nove lettere dell'alfabeto sono sostituite in modo tale che la somma della
+lettera da sostituire e della lettera sostituente risulti uguale a 10. Per le
+seguenti 9 lettere dell'alfabeto deve valere una regola simile con somma pari a
+28. Per ultime 8 lettere dell'alfabeto la regola è la stessa, con somma pari a
+45.</p>
+<table border="0" cellpadding="5" cellspacing="0">
+  <tbody><tr>
+    <td>
+      <pre>&nbsp;</pre>
+      <pre>Chiaro</pre>
+      <pre>Cifrato</pre>
+      <p>&nbsp;</p></td>
+    <td>
+      <pre>. . . . . . . . . 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2
+1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+| | | | | | | | | | | | | | | | | | | | | | | | | |
+I H G F N D C B A R Q P O E M L K J Z Y X W V U T S
+. . . . . . . . . 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 1
+9 8 7 6 5 4 3 2 1 8 7 6 5 4 3 2 1 0 6 5 4 3 2 1 0 9</pre>
+    </td>
+  </tr>
+</tbody></table>
+<p align="justify">I cifrari Albam e Atbah, come l'Atbash, sono <b>reversibili</b>,
+cioè, se sono applicati due (o un numero pari di) volte di seguito ad un testo,
+si ottiene il testo originale.</p>
+<p align="justify"><b>Esercizio<br>
+</b>Qui sotto sono scritti tre proverbi.<br>
+Ciascuno di essi è cifrato secondo uno dei cifrari <b>Atbash, Albam, Atbah</b>.<br>
+Il tuo compito è decifrarli.</p>
+<p align="justify">PI CMGGAI ZGIWI PI JMGGAI</p>
+<p align="justify">O'ZOYVIL HF XFR MLM IRVHXR Z HZORIV KLIGZ R UIFGGR KRF' YVOOR</p>
+<p align="justify">PUV SN QN FR SN CRE GER</p>
+<p align="justify"><i>Ultimo aggiornamento: gennaio 2005</i></p>
+<hr>
+<h1 style="text-align: center">Risposte
+&amp; riflessioni</h1>
+<p align="left">Utilizza il seguente programma per verificare le tue soluzioni.<br>
+Inoltre puoi fare tutti gli esperimenti che desideri e preparare i tuoi
+esercizi.</p>
+<p align="left"><b>Come funziona, per decifrare:</b></p>
+<ul>
+  <li>
+    <p align="left">scrivi il messaggio da decifrare nel riquadro
+    "Messaggio cifrato" (puoi anche utilizzare il copia e incolla per
+    testi molto lunghi)</p></li>
+  <li>
+    <p align="left">scegli uno dei tre cifrari, selezionando il corrispondente
+    bottone rotondo (radio button)</p></li>
+  <li>
+    <p align="left">clicca sul pulsante "Decifrare"</p></li>
+</ul>
+<p align="left"><b>Come funziona, per cifrare:</b></p>
+<ul>
+  <li>
+    <p align="left">scrivi il messaggio da cifrare nel riquadro "Messaggio
+    chiaro" (puoi anche utilizzare il copia e incolla per testi molto
+    lunghi)</p></li>
+  <li>
+    <p align="left">scegli uno dei tre cifrari, selezionando il corrispondente
+    bottone rotondo (radio button)</p></li>
+  <li>
+    <p align="left">clicca sul pulsante "Cifrare"</p></li>
+</ul>
+<p align="left"><b>Attenzione</b>: il programma converte i testi in lettere
+maiuscole e cifra/decifra soltanto i caratteri alfabetici. Tutti gli altri
+caratteri, come gli spazi, le virgole, i numeri etc. solo lasciati invariati.</p>
+<form name="controle">
+  <center>
+  <table cellpadding="3" cellspacing="0">
+    <tbody>
+      <tr>
+        <td bgcolor="#E3DAB7" align="center"><font size="2">Messaggio<br>
+          chiaro</font></td>
+        <td bgcolor="#E3DAB7" colspan="6">
+          <p align="center"><font size="2"><b>Messaggio chiaro<br>
+          </b></font><textarea name="clair" rows="10" wrap="virtual" cols="60">UCCELLO IN GABBIA NON CANTA PER AMORE, CANTA PER RABBIA</textarea></p>
+        </td>
+      </tr>
+      <tr>
+        <td align="center"></td>
+        <td align="right" width="10"><input type="radio" checked="" value="1" name="layout"></td>
+        <td align="left">Atbash</td>
+        <td align="right" width="10"><input type="radio" value="2" name="layout"></td>
+        <td align="left">Albam</td>
+        <td align="right" width="10"><input type="radio" value="3" name="layout"></td>
+        <td align="left">Atbah</td>
+      </tr>
+      <tr>
+        <td align="center"></td>
+        <td colspan="6">
+          <p align="center"><input onclick="chiffrer(clair, chiffre, true)" type="button" value="Cifrare">
+          <input onclick="chiffrer(clair, chiffre, false)" type="button" value="Decifrare">
+          <input onclick="clair.value=&#39;&#39;; chiffre.value=&#39;&#39;" type="button" value="Cancellare"></p>
+        </td>
+      </tr>
+      <tr>
+        <td bgcolor="#E3DAB7" align="center"><font size="2">Messaggio<br>
+          cifrato</font></td>
+        <td bgcolor="#E3DAB7" colspan="6">
+          <p align="center"><font size="2"><b>Messaggio cifrato</b></font><br>
+          <textarea name="chiffre" rows="10" wrap="virtual" cols="60"></textarea></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </center>
+</form>
+<hr>
+<p style="text-align: center">Sito Web realizzato da <b>Gianfranco Bo</b></p>
+
+
+
+</body></html>

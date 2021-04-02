@@ -1,0 +1,9 @@
+·
+Φ
+φ
+≡
+
+
+
+
+The default math delimiters are $$...$$ and \[...\] for displayed mathematics, and \(...\) for in-line mathematics. 
