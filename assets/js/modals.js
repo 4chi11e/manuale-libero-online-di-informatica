@@ -1,7 +1,7 @@
 var modal_openers = document.querySelectorAll(".modal__opener");
 var modal_closers = document.querySelectorAll(".modal__closer");
-console.log(modal_openers);
-console.log(modal_closers);
+// console.log(modal_openers);
+// console.log(modal_closers);
 
 // Con i for normali
 // for (let i = 0; i < modal_openers.length; i++) {
@@ -27,7 +27,7 @@ modal_openers.forEach((element) => {
     id = event.target.getAttribute("aprire");
     var el = document.querySelector(id);
     el.classList.toggle("modal--visibile");
-    console.log("Aperto " + id);
+    // console.log("Aperto " + id);
   };
 });
 modal_closers.forEach((element) => {
@@ -35,7 +35,7 @@ modal_closers.forEach((element) => {
     id = event.target.getAttribute("chiudere");
     var el = document.querySelector(id);
     el.classList.toggle("modal--visibile");
-    console.log("Aperto " + id);
+    // console.log("Aperto " + id);
   };
 });
 
