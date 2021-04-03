@@ -7,7 +7,7 @@
         margin-bottom: 20px;
         border: $border $border-color;">
     <h1>
-        Dispensa di Informatica<br>
+        Manuale Libero Online di Informatica<br>
         <small id="peril" style="display: inline-block; padding-bottom: 10px">per il</small><br>
         Liceo Scientifico delle Scienze Applicate
     </h1>	
