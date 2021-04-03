@@ -271,7 +271,7 @@ In pratica:
 {: .code-example}
 
 <div class="thumbnail--centrato mt-4 mb-4">
-  <img src="{{site.baseurl}}/assets/images/Crittografia-congruenza-modulo.jpg">
+  <img src="{{site.baseurl}}/assets/images/crittografia/Crittografia-congruenza-modulo.jpg">
 </div>
 
 Ovviamente *a ≡ b* mod(*n*) se e solo se *a = n · b + k* con *k* in ***Z***. 
@@ -295,7 +295,7 @@ Sono valide le seguenti proprietà: \
   Operazioni in Z<sub>5</sub>
   {: .mb-0 .mt-0}
 
-  ![addizioni e moltiplicazioni in Z5]({{site.baseurl}}/assets/images/operazioni-in-Z5.jpg)
+  ![addizioni e moltiplicazioni in Z5]({{site.baseurl}}/assets/images/crittografia/operazioni-in-Z5.jpg)
   {: .ta-c .mb-0 .mt-0}
 </div>
 
@@ -397,13 +397,13 @@ Il modo migliore per capire come si sia potuti arrivare a concepire e a realizza
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/doppio_lucchetto.jpg" class="modal__opener" aprire="#doppio-lucchetto">
+  <img src="{{site.baseurl}}/assets/images/crittografia/doppio_lucchetto.jpg" class="modal__opener" aprire="#doppio-lucchetto">
 </div>
 <!-- modal -->
 <div id="doppio-lucchetto" class="modal">
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#doppio-lucchetto">&times;</span>
-    <img src="{{site.baseurl}}/assets/images/doppio_lucchetto.jpg">
+    <img src="{{site.baseurl}}/assets/images/crittografia/doppio_lucchetto.jpg">
     <p>Il metodo del doppio lucchetto.</p>
   </div>
 </div>
