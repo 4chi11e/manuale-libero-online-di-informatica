@@ -16,33 +16,19 @@ grand_parent: Reti
 
 ### Scitala lacedemonica
 
-<!-- <div class="thumbnail float-right">
-   <img src="{{site.baseurl}}/assets/images/crittografia-Skytale.png" onclick="document.getElementById('img02').style.display='block'" class="hoverlink">
-   <p class="fs-2">Una ricostruzione di scitala</p>
-
-   <div id="img02" class="w3-modal">
-    <div class="w3-modal-content">
-      <div class="w3-container">
-        <span onclick="document.getElementById('img02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-        <img src="{{site.baseurl}}/assets/images/crittografia-Skytale.png" data-toggle="modal" data-target="#OSI_Model">
-        <p>Una ricostruzione di scitala</p>
-      </div>
-    </div>
-  </div>
-</div> -->
-
+<!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/crittografia-Skytale.png" onclick="document.getElementById('img02').style.display='block'" class="hoverlink">
+  <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-Skytale.png" class="modal__opener" aprire="#img-scitala">
   <p>Una ricostruzione di scitala.</p>
 </div>
-<!--modal-->
-<div id="img02" class="modal">
-  <div class="modal--content">
-    <!-- <div class="w3-container"> -->
-      <span onclick="document.getElementById('img02').style.display='none'" class="modal--close w3-display-topright">&times;</span>
-      <img src="{{site.baseurl}}/assets/images/crittografia-Skytale.png" data-toggle="modal" data-target="#OSI_Model">
-      <p>Una ricostruzione di scitala.</p>
-    <!-- </div> -->
+<!-- modal -->
+<div id="img-scitala" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-scitala">&times;</span>
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-Skytale.png">
+    </div>
+    <p>Una ricostruzione di scitala.</p>
   </div>
 </div>
 
@@ -243,32 +229,19 @@ Nel rinascimento si passò dalla sostituzione monoalfabetica a alla sostituzione
 
 ### Il Disco di Leon Battista Alberti
 
-<!-- <div class="thumbnail float-left">
-   <img src="{{site.baseurl}}/assets/images/crittografia-disco_leonbattista_alberti.gif" onclick="document.getElementById('img03').style.display='block'" class="hoverlink">
-
-   <div id="img03" class="w3-modal">
-    <div class="w3-modal-content">
-      <div class="w3-container">
-        <span onclick="document.getElementById('img03').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-        <img src="{{site.baseurl}}/assets/images/crittografia-disco_leonbattista_alberti.gif" data-toggle="modal" data-target="#OSI_Model">
-        <p>Disco di Leon Battista Alberti</p>
-      </div>
-    </div>
-  </div>
-</div> -->
-
+<!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/crittografia-disco_leonbattista_alberti.gif" onclick="document.getElementById('img03').style.display='block'" class="hoverlink">
-  <p>Disco di Leon Battista Alberti.</p>
+  <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-disco_leonbattista_alberti.gif" class="modal__opener" aprire="#img-disco-leonbattista-alberti">
+  <p>Disco di Leon Battista Alberti</p>
 </div>
-<!--modal-->
-<div id="img03" class="modal">
-  <div class="modal--content">
-    <!-- <div class="w3-container"> -->
-      <span onclick="document.getElementById('img03').style.display='none'" class="modal--close w3-display-topright">&times;</span>
-      <img src="{{site.baseurl}}/assets/images/crittografia-disco_leonbattista_alberti.gif" data-toggle="modal" data-target="#OSI_Model">
-      <p>Disco di Leon Battista Alberti.</p>
-    <!-- </div> -->
+<!-- modal -->
+<div id="img-disco-leonbattista-alberti" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-disco-leonbattista-alberti">&times;</span>
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-disco_leonbattista_alberti.gif">
+    </div>
+    <p>Disco di Leon Battista Alberti</p>
   </div>
 </div>
 
@@ -545,33 +518,19 @@ La prima macchina cifrante fu inventata dal comandante francese Etienne Bazière
 
 ### Enigma
 
-<!-- <div class="thumbnail float-right">
-   <img src="{{site.baseurl}}/assets/images/crittografia-Enigma-Museo_scienza_e_tecnologia_Milano.jpg" onclick="document.getElementById('img03').style.display='block'" class="hoverlink">
-   <p class="fs-2">Macchina Enigma. Esposta presso il <a href="https://it.wikipedia.org/wiki/Museo_nazionale_della_scienza_e_della_tecnologia_Leonardo_da_Vinci">Museo nazionale della scienza e della tecnologia "L. Da Vinci" di Milano</a>.</p>
-
-   <div id="img03" class="w3-modal">
-    <div class="w3-modal-content">
-      <div class="w3-container">
-        <span onclick="document.getElementById('img03').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-        <img src="{{site.baseurl}}/assets/images/crittografia-Enigma-Museo_scienza_e_tecnologia_Milano.jpg" data-toggle="modal" data-target="#OSI_Model">
-        <p>Macchina Enigma. Esposta presso il Museo nazionale della scienza e della tecnologia "L. Da Vinci" di Milano.</p>
-      </div>
-    </div>
-  </div>
-</div> -->
-
+<!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/crittografia-Enigma-Museo_scienza_e_tecnologia_Milano.jpg" onclick="document.getElementById('img04').style.display='block'" class="hoverlink">
+  <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-Enigma-Museo_scienza_e_tecnologia_Milano.jpg" class="modal__opener" aprire="#img-enigma-museo-milano">
   <p>Macchina Enigma. Esposta presso il <a href="https://it.wikipedia.org/wiki/Museo_nazionale_della_scienza_e_della_tecnologia_Leonardo_da_Vinci">Museo nazionale della scienza e della tecnologia "L. Da Vinci" di Milano</a>.</p>
 </div>
-<!--modal-->
-<div id="img04" class="modal">
-  <div class="modal--content">
-    <!-- <div class="w3-container"> -->
-      <span onclick="document.getElementById('img04').style.display='none'" class="modal--close w3-display-topright">&times;</span>
-      <img src="{{site.baseurl}}/assets/images/crittografia-Enigma-Museo_scienza_e_tecnologia_Milano.jpg" data-toggle="modal" data-target="#OSI_Model">
-      <p>Macchina Enigma. Esposta presso il Museo nazionale della scienza e della tecnologia "L. Da Vinci" di Milano.</p>
-    <!-- </div> -->
+<!-- modal -->
+<div id="img-enigma-museo-milano" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-enigma-museo-milano">&times;</span>
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-Enigma-Museo_scienza_e_tecnologia_Milano.jpg">
+    </div>
+    <p>Macchina Enigma. Esposta presso il <a href="https://it.wikipedia.org/wiki/Museo_nazionale_della_scienza_e_della_tecnologia_Leonardo_da_Vinci">Museo nazionale della scienza e della tecnologia "L. Da Vinci" di Milano</a>.</p>
   </div>
 </div>
 
@@ -585,33 +544,19 @@ In linea di principio, Enigma può essere considerata come un'estensione del met
 
 #### Struttura
 
-<!-- <div class="thumbnail float-right">
-   <img src="{{site.baseurl}}/assets/images/crittografia-schema_enigma.jpg" onclick="document.getElementById('img04').style.display='block'" class="hoverlink">
-   <p class="fs-2">Schema del funzionamento della macchina Enigma</p>
-
-   <div id="img04" class="w3-modal">
-    <div class="w3-modal-content">
-      <div class="w3-container">
-        <span onclick="document.getElementById('img04').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-        <img src="{{site.baseurl}}/assets/images/crittografia-schema_enigma.jpg" data-toggle="modal" data-target="#OSI_Model">
-        <p>Schema del funzionamento della macchina Enigma</p>
-      </div>
-    </div>
-  </div>
-</div> -->
-
+<!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/crittografia-schema_enigma.jpg" onclick="document.getElementById('img05').style.display='block'" class="hoverlink">
+  <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-schema_enigma.jpg" class="modal__opener" aprire="#img-schema-enigma">
   <p>Schema del funzionamento della macchina Enigma</p>
 </div>
-<!--modal-->
-<div id="img05" class="modal">
-  <div class="modal--content">
-    <!-- <div class="w3-container"> -->
-      <span onclick="document.getElementById('img05').style.display='none'" class="modal--close w3-display-topright">&times;</span>
-      <img src="{{site.baseurl}}/assets/images/crittografia-schema_enigma.jpg" data-toggle="modal" data-target="#OSI_Model">
-      <p>Schema del funzionamento della macchina Enigma.</p>
-    <!-- </div> -->
+<!-- modal -->
+<div id="img-schema-enigma" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-schema-enigma">&times;</span>
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-schema_enigma.jpg">
+    </div>
+    <p>Schema del funzionamento della macchina Enigma</p>
   </div>
 </div>
 
@@ -619,33 +564,19 @@ La macchina Enigma aveva l'aspetto di una macchina per scrivere con due tastiere
 
 #### Lo scambiatore
 
-<!-- <div class="thumbnail float-right clear-right">
-   <img src="{{site.baseurl}}/assets/images/crittografia-rotore.jpg" onclick="document.getElementById('img05').style.display='block'" class="hoverlink">
-   <p class="fs-2">Macchina Enigma. Esposta presso il Museo nazionale della scienza e della tecnologia "L. Da Vinci" di Milano.</p>
-
-   <div id="img05" class="w3-modal">
-    <div class="w3-modal-content">
-      <div class="w3-container">
-        <span onclick="document.getElementById('img05').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-        <img src="{{site.baseurl}}/assets/images/crittografia-rotore.jpg" data-toggle="modal" data-target="#OSI_Model">
-        <p>Macchina Enigma. Esposta presso il Museo nazionale della scienza e della tecnologia "L. Da Vinci" di Milano.</p>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<div class="thumbnail float-right clear-both mt-4">
-  <img src="{{site.baseurl}}/assets/images/crittografia-rotore.jpg" onclick="document.getElementById('img06').style.display='block'" class="hoverlink">
-  <p>Macchina Enigma. Esposta presso il Museo nazionale della scienza e della tecnologia "L. Da Vinci" di Milano.</p>
+<!-- thumbnail -->
+<div class="thumbnail float-right">
+  <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-rotore.jpg" class="modal__opener" aprire="#img-rotore-enigma">
+  <p>Rotore di una macchina Enigma</p>
 </div>
-<!--modal-->
-<div id="img06" class="modal">
-  <div class="modal--content">
-    <!-- <div class="w3-container"> -->
-      <span onclick="document.getElementById('img06').style.display='none'" class="modal--close w3-display-topright">&times;</span>
-      <img src="{{site.baseurl}}/assets/images/crittografia-rotore.jpg" data-toggle="modal" data-target="#OSI_Model">
-      <p>Macchina Enigma. Esposta presso il Museo nazionale della scienza e della tecnologia "L. Da Vinci" di Milano.</p>
-    <!-- </div> -->
+<!-- modal -->
+<div id="img-rotore-enigma" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-rotore-enigma">&times;</span>
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-rotore.jpg">
+    </div>
+    <p>Rotore di una macchina Enigma</p>
   </div>
 </div>
 
@@ -673,9 +604,8 @@ Combinando insieme tutti gli elementi fin qui osservati si può calcolare il num
 - all’interno dell’**unità cifratrice** i tre scambiatori potevano essere inseriti in diverse posizioni reciproche, così riassumibili: 123, 132, 213, 231, 312, 321. Erano quindi ammesse 3! = 6 diverse posizioni reciproche dei rotori;
 - con il **pannello a prese multiple** i possibili abbinamenti di 12 (6x2) lettere su 26 sono moltissimi, per l’esattezza 100.391.791.500, che si ottiene dalla formula seguente dove p rappresenta il numero di chiavi ed è pari a 6:
 
-<div class="ta-c">
-  <img src="{{site.baseurl}}/assets/images/enigma-possibili-abbinamenti.svg" alt="possibili-abbinamenti" style="margin: auto">
-</div>
+$$ \binom{26}{2p} \cdot (2p-1) \cdot (2p-3) \cdot (2p-5) \cdot ... \cdot 1 = \frac{26!}{(26-2p)! \cdot p! \cdot 2^p} $$
+
 - il numero totale di chiavi si ottiene moltiplicando tra loro le suddette possibilità:
 
 17.576 · 6 · 100.391.791.500 = 105.869.167.644.240.000
@@ -689,9 +619,20 @@ circa 10 milioni di miliardi.
 Vediamo come veniva usata nella pratica una macchina Enigma.  
 Innanzitutto bisogna specificare che gli scambiatori dovevano essere posizionati con un certo assetto prima di iniziare la cifratura di un messaggio e la loro posizione costituiva una vera e propria chiave. L’insieme di tali chiavi giornaliere era contenuta in un cifrario (Figura 9) che doveva essere distribuito mensilmente a tutti gli operatori e che doveva essere, ovviamente, molto ben custodito (torna, anche in questo caso, il **problema della distribuzione delle chiavi**). Gli assetti giornalieri del cifrario venivano usati per tutti i messaggi di una giornata. Per cifrare un messaggio un operatore Enigma posizionava gli scambiatori secondo la chiave giornaliera, digitava il messaggio sulla tastiera della macchina e spediva via radio il risultato al destinatario. Quest’ultimo digitava il messaggio cifrato sulla tastiera della sua macchina Enigma, sulla quale gli scambiatori erano sistemati secondo la stessa chiave giornaliera usata da chi aveva crittato il messaggio, e otteneva il messaggio in chiaro. La semplicità con cui questa operazione era realizzata era dovuta proprio all’introduzione del riflessore.
 
+<!-- thumbnail -->
 <div class="thumbnail--centrato mt-4 mb-4">
-  <img src="{{site.baseurl}}/assets/images/esempio-chiavi-enigma.jpg">
-  <p class="ta-l">Parte di un cifrario tedesco per macchine Enigma.</p>
+  <img src="{{site.baseurl}}/assets/images/crittografia/esempio-chiavi-enigma.jpg" class="modal__opener" aprire="#img-esempio-chiavi-enigma">
+  <p>Parte di un cifrario tedesco per macchine Enigma.</p>
+</div>
+<!-- modal -->
+<div id="img-esempio-chiavi-enigma" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-esempio-chiavi-enigma">&times;</span>
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/crittografia/esempio-chiavi-enigma.jpg">
+    </div>
+    <p>Parte di un cifrario tedesco per macchine Enigma.</p>
+  </div>
 </div>
 
 I passaggi per l’utilizzo di Enigma si possono riassumere con i seguenti punti:
