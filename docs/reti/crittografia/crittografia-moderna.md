@@ -6,16 +6,6 @@ parent: Crittografia
 grand_parent: Reti
 ---
 
-<!-- JQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<!-- Miei script -->
-<script src="{{site.baseurl}}/assets/js/bordi-tabelle.js"></script>
-<script src="{{site.baseurl}}/assets/js/crittografia-antica.js"></script>
-
-<!-- MathJax -->
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
 # Crittografia Moderna
 {: .no_toc}
 
@@ -405,17 +395,16 @@ La cifra finale (il numero di unità) di 13<sup>5</sup> è quindi 3, come risult
 
 Il modo migliore per capire come si sia potuti arrivare a concepire e a realizzare un sistema crittografico che non necessiti di uno scambio preventivo di chiavi da parte di mittente e destinatario è partire da un esempio. Supponiamo che, per scambiarsi documenti riservati, mittente e destinatario utilizzino una scatola alla quale sia possibile applicare due lucchetti; è dunque possibile procedere nel seguente modo: 
 
+<!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/doppio_lucchetto.jpg" onclick="document.getElementById('doppio_lucchetto').style.display='block'" class="hoverlink">
+  <img src="{{site.baseurl}}/assets/images/doppio_lucchetto.jpg" class="modal__opener" aprire="#doppio-lucchetto">
 </div>
-<!--modal-->
-<div id="doppio_lucchetto" class="modal">
-  <div class="modal--content">
-    <!-- <div class="w3-container"> -->
-      <span onclick="document.getElementById('doppio_lucchetto').style.display='none'" class="modal--close w3-display-topright">&times;</span>
-      <img src="{{site.baseurl}}/assets/images/doppio_lucchetto.jpg" data-toggle="modal" data-target="#doppio_lucchetto">
-      <p>Il principio della Crittografia.</p>
-    <!-- </div> -->
+<!-- modal -->
+<div id="doppio-lucchetto" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#doppio-lucchetto">&times;</span>
+    <img src="{{site.baseurl}}/assets/images/doppio_lucchetto.jpg">
+    <p>Il metodo del doppio lucchetto.</p>
   </div>
 </div>
 
@@ -699,19 +688,17 @@ Supponiamo allora che Bob le voglia mandare un messaggio costituito da vediamo q
 
 #### Doppia cifratura
 
-
-<div class="thumbnail float-right thumbnail--50">
-  <img src="{{site.baseurl}}/assets/images/crittografia/doppia-codifica.jpg" onclick="document.getElementById('img-doppia-codifica').style.display='block'" class="hoverlink">
+<!-- thumbnail -->
+<div class="thumbnail float-right  thumbnail--50">
+  <img src="{{site.baseurl}}/assets/images/crittografia/doppia-codifica.jpg" class="modal__opener" aprire="#img-doppia-codifica">
   <p>Schema della doppia cifratura in RSA</p>
 </div>
-<!--modal-->
+<!-- modal -->
 <div id="img-doppia-codifica" class="modal">
-  <div class="modal--content">
-    <!-- <div class="w3-container"> -->
-      <span onclick="document.getElementById('img-doppia-codifica').style.display='none'" class="modal--close w3-display-topright">&times;</span>
-      <img src="{{site.baseurl}}/assets/images/crittografia/doppia-codifica.jpg" data-toggle="modal" data-target="#img-doppia-codifica">
-      <p>Dall'immagine si può vedere che Alice non si limita a cifrare il messaggio con la chiave pubblica di Bob ma esegue prima un'altra cifratura con la propria chiave privata; in questo modo Bob, aggiungendo una seconda decifratura con la chiave pubblica di Alice, sarà sicuro che solo Alice può aver cifrato e spedito il messaggio perchè è l'unica persona che conosce la chiave privata di Alice.</p>
-    <!-- </div> -->
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-doppia-codifica">&times;</span>
+    <img src="{{site.baseurl}}/assets/images/crittografia/doppia-codifica.jpg">
+    <p>Dall'immagine si può vedere che Alice non si limita a cifrare il messaggio con la chiave pubblica di Bob ma esegue prima un'altra cifratura con la propria chiave privata; in questo modo Bob, aggiungendo una seconda decifratura con la chiave pubblica di Alice, sarà sicuro che solo Alice può aver cifrato e spedito il messaggio perchè è l'unica persona che conosce la chiave privata di Alice.</p>
   </div>
 </div>
 
@@ -728,18 +715,17 @@ Per garantire anche il raggiungimento dell'ultimo obiettivo: l'integrità dei da
 
 Se da un lato la capacità di fattorizzare numeri ci permette di attaccare RSA, la conoscenza di numeri primi molto “grandi” ci permette di effettuare cifrature RSA sempre più potenti. La ricerca di tali numeri costituisce quindi un vero e proprio business, e molte aziende hanno come solo scopo quello di trovarne di sempre più grandi. 
 
+<!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/crittografia/numeri-primi.png" onclick="document.getElementById('img-numeri-primi').style.display='block'" class="hoverlink">
+  <img src="{{site.baseurl}}/assets/images/crittografia/numeri-primi.png" class="modal__opener" aprire="#img-numeri-primi">
   <p>Un grafico aggiornato al 2016 del numero di cifre componenti il più grande numero primo conosciuto. La scala dell'asse delle ordinate è logaritmica. La linea rossa è la curva esponenziale che meglio si adatta al grafico e ha equazione: y = exp(0,187394 t − 360,527), dove t è in anni.</p>
 </div>
-<!--modal-->
+<!-- modal -->
 <div id="img-numeri-primi" class="modal">
-  <div class="modal--content">
-    <!-- <div class="w3-container"> -->
-      <span onclick="document.getElementById('img-numeri-primi').style.display='none'" class="modal--close w3-display-topright">&times;</span>
-      <img src="{{site.baseurl}}/assets/images/crittografia/numeri-primi.png" data-toggle="modal" data-target="#img-numeri-primi">
-      <p>Un grafico aggiornato al 2016 del numero di cifre componenti il più grande numero primo conosciuto. La scala dell'asse delle ordinate è logaritmica. La linea rossa è la curva esponenziale che meglio si adatta al grafico e ha equazione: y = exp(0,187394 t − 360,527), dove t è in anni.</p>
-    <!-- </div> -->
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-numeri-primi">&times;</span>
+    <img src="{{site.baseurl}}/assets/images/crittografia/numeri-primi.png">
+    <p>Un grafico aggiornato al 2016 del numero di cifre componenti il più grande numero primo conosciuto. La scala dell'asse delle ordinate è logaritmica. La linea rossa è la curva esponenziale che meglio si adatta al grafico e ha equazione: y = exp(0,187394 t − 360,527), dove t è in anni.</p>
   </div>
 </div>
 
@@ -814,18 +800,19 @@ Quando si sceglie la dimensione della chiave da utilizzare bisogna tenere a ment
 
 ## Funzioni crittografiche di Hash
 
-<div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/crittografia/Hash_function.svg" onclick="document.getElementById('img-hash-function').style.display='block'" class="hoverlink">
+<!-- thumbnail -->
+<div class="thumbnail float-right  thumbnail--50">
+  <img src="{{site.baseurl}}/assets/images/crittografia/Hash_function.svg" class="modal__opener" aprire="#img-hash-function">
   <p markdown=1>Una funzione crittografica di hash al lavoro ([SHA1](https://it.wikipedia.org/wiki/SHA1)). Anche piccole modifiche ai dati di ingresso causano un notevole cambiamento dell'uscita: si tratta del cosiddetto effetto valanga.</p>
 </div>
-<!--modal-->
+<!-- modal -->
 <div id="img-hash-function" class="modal">
-  <div class="modal--content">
-    <!-- <div class="w3-container"> -->
-      <span onclick="document.getElementById('img-hash-function').style.display='none'" class="modal--close w3-display-topright">&times;</span>
-      <img src="{{site.baseurl}}/assets/images/crittografia/Hash_function.svg" data-toggle="modal" data-target="#img-hash-function">
-      <p markdown=1>Una funzione crittografica di hash al lavoro ([SHA1](https://it.wikipedia.org/wiki/SHA1)). Anche piccole modifiche ai dati di ingresso causano un notevole cambiamento dell'uscita: si tratta del cosiddetto effetto valanga.</p>
-    <!-- </div> -->
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-hash-function">&times;</span>
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/crittografia/Hash_function.svg">
+    </div>
+    <p markdown=1>Una funzione crittografica di hash al lavoro ([SHA1](https://it.wikipedia.org/wiki/SHA1)). Anche piccole modifiche ai dati di ingresso causano un notevole cambiamento dell'uscita: si tratta del cosiddetto effetto valanga.</p>
   </div>
 </div>
 
@@ -977,6 +964,4 @@ Di seguito è proposto il video informativo creato dalla camera di commercio di 
 <div class="video-container">
 <iframe src="https://www.youtube.com/embed/EMeIBuimVD4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-
-
 

@@ -49,18 +49,18 @@ Se si guarda alla [storia della crittografia](#) si può notare che la maggior p
 
 ## Il problema dello scambio delle chiavi
 
+<!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/crittografia-cifratura-decifratura.jpg" onclick="document.getElementById('img01').style.display='block'" class="hoverlink">
-  <p>Il principio della Crittografia.</p>
-</div>
-<!--modal-->
-<div id="img01" class="modal">
-  <div class="modal--content">
-    <!-- <div class="w3-container"> -->
-      <span onclick="document.getElementById('img01').style.display='none'" class="modal--close w3-display-topright">&times;</span>
-      <img src="{{site.baseurl}}/assets/images/crittografia-cifratura-decifratura.jpg" data-toggle="modal" data-target="#OSI_Model">
-      <p>Il principio della Crittografia.</p>
-    <!-- </div> -->
+  <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-cifratura-decifratura.jpg" class="modal__opener" aprire="#img-cifratura-decifratura">
+  <p>Il principio della Crittografia.</p></div>
+<!-- modal -->
+<div id="img-cifratura-decifratura" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-cifratura-decifratura">&times;</span>
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-cifratura-decifratura.jpg">
+    </div>
+    <p>Il principio della Crittografia.</p>
   </div>
 </div>
 
