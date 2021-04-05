@@ -26,26 +26,10 @@ has_children: true
 Il **modello OSI** (acronimo di
 [Open Systems Interconnection](https://it.wikipedia.org/wiki/Open_Systems_Interconnection "Open Systems Interconnection"),
 conosciuto anche come **modello ISO/OSI**), in
-[telecomunicazioni](https://it.wikipedia.org/wiki/Telecomunicazioni "Telecomunicazioni")
-e
-[informatica](https://it.wikipedia.org/wiki/Informatica "Informatica"),
-è uno
-[standard](https://it.wikipedia.org/wiki/Standard_(informatica) "Standard (informatica)")
-stabilito nel [1984](https://it.wikipedia.org/wiki/1984 "1984")
-dall'[International Organization for Standardization](https://it.wikipedia.org/wiki/International_Organization_for_Standardization "International Organization for Standardization")
-(ISO), il principale ente di standardizzazione internazionale, il quale
-sentì la necessità di avviare il progetto per la definizione di un
-modello di riferimento a
-[formato aperto](https://it.wikipedia.org/wiki/Formato_aperto "Formato aperto")
-per l'interconnessione di sistemi di
-[computer](https://it.wikipedia.org/wiki/Computer "Computer") (_Basic
-Reference Model_ o standard
-[ISO 7498](https://it.wikipedia.org/wiki/ISO_7498 "ISO 7498")). Tale
-modello stabilisce per
-l'[architettura](https://it.wikipedia.org/wiki/Architettura_di_rete "Architettura di rete")
-logica di rete, una struttura a strati composta da una pila di
-[protocolli di comunicazione di rete](https://it.wikipedia.org/wiki/Protocollo_di_rete "Protocollo di rete")
-suddivisa in 7 livelli, seguendo un modello logico-gerarchico.
+telecomunicazioni e informatica, è uno standard stabilito nel 1984 dall'[International Organization for Standardization](https://it.wikipedia.org/wiki/International_Organization_for_Standardization "International Organization for Standardization") (ISO), il principale ente di standardizzazione internazionale, il quale sentì la necessità di avviare il progetto per la definizione di un
+modello di riferimento a formato aperto per l'interconnessione di sistemi di
+computer (_Basic Reference Model_ o standard ISO 7498). Tale
+modello stabilisce per l'architettura logica di rete, una struttura a strati composta da una pila di [protocolli di comunicazione di rete](https://it.wikipedia.org/wiki/Protocollo_di_rete "Protocollo di rete") suddivisa in 7 livelli, seguendo un modello logico-gerarchico.
 
 A livello implementativo lo standard _[de facto](https://it.wikipedia.org/wiki/De_facto "De facto")_ affermatosi per architetture di rete a livelli è invece il [TCP/IP](https://it.wikipedia.org/wiki/TCP/IP "TCP/IP"), che riprende in parte il modello OSI.
 
@@ -58,26 +42,34 @@ A livello implementativo lo standard _[de facto](https://it.wikipedia.org/wiki/D
 
 ## Caratteristiche
 
+<!-- thumbnail -->
 <div class="thumbnail float-right">
-   <img src="{{"/assets/images/ISO-OSI_-_Rm-osi_parallel_it.svg" | absolute_url }}" onclick="document.getElementById('img02').style.display='block'" class="hoverlink">
-   <p class="fs-2">Parallelo fra imprese (livelli superiori) e sistema postale (livelli inferiori) e il modello ISO/OSI.</p>
-   <!--modal-->
-   <div id="img02" class="w3-modal">
-    <div class="w3-modal-content">
-      <div class="w3-container">
-        <span onclick="document.getElementById('img02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-        <img src="{{"/assets/images/ISO-OSI_-_Rm-osi_parallel_it.svg" | absolute_url }}" data-toggle="modal" data-target="#OSI_Model">
-        <p>Parallelo fra imprese (livelli superiori) e sistema postale (livelli inferiori) e il modello ISO/OSI.</p>
-      </div>
-    </div>
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-parallelo_posta.svg" class="modal__opener" aprire="#img-ISO-OSI-parallelo_posta">
+  <p>Il parallelo mostra anche la divisione tra i livelli superiori e i livelli inferiori</p>
+</div>
+<!-- modal -->
+<div id="img-ISO-OSI-parallelo_posta" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-ISO-OSI-parallelo_posta">&times;</span>
+    <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-parallelo_posta.svg">
+    <p>Il parallelo mostra anche la divisione tra i livelli superiori e i livelli inferiori</p>
   </div>
 </div>
 
-Il modello ISO/OSI, concepito per [reti di telecomunicazioni](https://it.wikipedia.org/wiki/Rete_di_telecomunicazione "Rete di telecomunicazione") a [commutazione di pacchetto](https://it.wikipedia.org/wiki/Commutazione_di_pacchetto "Commutazione di pacchetto"), è costituito da una pila (o stack) di protocolli attraverso i quali viene ridotta la complessità implementativa di un sistema di comunicazione per il networking. In particolare ISO/OSI è costituito da strati (o livelli), i cosiddetti _**layer**_, che definiscono e racchiudono in sé a livello logico uno o più aspetti fra loro correlati della comunicazione fra due [nodi](https://it.wikipedia.org/wiki/Nodo_(informatica) "Nodo (informatica)") di una rete. I layer sono in totale 7 e vanno dal livello fisico (quello del mezzo fisico, ossia del [cavo](https://it.wikipedia.org/wiki/Cavo_elettrico "Cavo elettrico"), delle [onde radio](https://it.wikipedia.org/wiki/Onda_radio "Onda radio") o qualsiasi altro sistema trasmissivo tra cui la [fibra ottica](https://it.wikipedia.org/wiki/Fibra_ottica "Fibra ottica")) fino al livello delle applicazioni, attraverso cui si realizza la comunicazione di _alto livello_.
+Il modello ISO/OSI, concepito per reti a [commutazione di pacchetto](#), è costituito da una pila (o stack) di protocolli attraverso i quali viene ridotta la complessità implementativa del sistema. In particolare ISO/OSI è costituito da  strati (o livelli), i cosiddetti _**layer**_, che definiscono e racchiudono in sé a livello logico uno o più aspetti fra loro correlati della comunicazione fra due nodi di una rete. I layer sono in totale 7 e vanno dal livello fisico, ossia quello del mezzo fisico, del cavo, delle onde radio o qualsiasi altro sistema trasmissivo tra cui la fibra ottica, fino al livello delle applicazioni, attraverso cui si realizza la comunicazione di _alto livello_.
 
-Ogni layer individua un protocollo di comunicazione del livello medesimo. ISO/OSI realizza una **comunicazione per livelli**, cioè dati due nodi A e B, il livello n del nodo A può scambiare [informazioni](https://it.wikipedia.org/wiki/Informazione "Informazione") col livello n del nodo B, ma non con gli altri. Ogni livello in trasmissione realizza la comunicazione col livello corrispondente sui nodi di transito o destinatari usando il [SAP](https://it.wikipedia.org/wiki/Service_Access_Point "Service Access Point") (_service access point_) del livello immediatamente sottostante. Sicché ISO/OSI [incapsula](https://it.wikipedia.org/wiki/Imbustamento "Imbustamento") i messaggi di livello n in messaggi del livello n-1\. Così se A deve inviare, ad esempio, una [e-mail](https://it.wikipedia.org/wiki/E-mail "E-mail") a B, l'applicazione (liv. 7) di A propagherà il messaggio usando il layer sottostante (liv. 6) che a sua volta userà i servizi del layer inferiore, fino ad arrivare alla comunicazione ovvero alla [trasmissione](https://it.wikipedia.org/wiki/Trasmissione_(telecomunicazioni) "Trasmissione (telecomunicazioni)") sul [canale](https://it.wikipedia.org/wiki/Canale_(telecomunicazioni) "Canale (telecomunicazioni)") o [mezzo fisico trasmissivo](https://it.wikipedia.org/wiki/Mezzo_trasmissivo "Mezzo trasmissivo").
+Il modello ISO/OSI è solo un **modello astratto** che non prevede un protocollo specifico per ogni livello. Esistono invece modelli reali come ad esempio TCP/IP che specificano ad ogni livello il protocollo di comunicazione da usare. 
 
-Questa comunicazione multilivello conferisce modularità al sistema permettendo una maggiore semplicità di [progettazione](https://it.wikipedia.org/wiki/Progettazione "Progettazione") e gestione della rete e la possibilità di migliorare, sviluppare e dunque eventualmente sostituire i protocolli dei vari strati cioè [implementare](https://it.wikipedia.org/wiki/Implementazione "Implementazione") e reimplementare con dei protocolli ciascuna delle rispettive funzionalità logiche lasciando inalterate le funzioni altrui.
+ISO/OSI realizza una **comunicazione per livelli**, cioè dati due nodi A e B, il livello n del nodo A può scambiare informazioni col livello n del nodo B, ma non con gli altri. Ogni livello in trasmissione realizza la comunicazione col livello corrispondente sui nodi di transito o destinatari usando i servizi offerti dal livello immediatamente sottostante. Sicché ISO/OSI **incapsula** i messaggi di livello n in messaggi del livello n-1,  così se A deve inviare, ad esempio, una e-mail a B, l'applicazione (liv. 7) di A propagherà il messaggio usando il layer sottostante (liv. 6) che a sua volta userà i servizi del layer inferiore, fino ad arrivare alla comunicazione ovvero alla trasmissione sul canale o mezzo fisico trasmissivo. Il messaggio, una volta raggiunto il computer di B a livello fisico, verrà propagato verso i livelli superiori fino a raggiungere il livello di applicazione. Possiamo quindi dire che ogni livello opera per offrire dei servizi ai livelli superiori e per farlo utilizza i servizi dei livelli inferiori, ad eccezione del livello 1 (fisico) che non ha livelli inferiori, e del livello 7 (applicazione) che offre servizi all'utente.
+
+Questa comunicazione multilivello conferisce modularità al sistema permettendo una maggiore semplicità di progettazione e gestione della rete e la possibilità di migliorare, sviluppare o sostituire il protocollo utlizzato ad un determinato livello senza dover modificare i protocolli degli altri livelli.
+
+Lo sviluppo di questo modello nasce negli anni '80 dalla necessità di creare un modello standard per la creazione di reti di calcolatori che proprio in quegli anni stavano vivendo la loro prima rapida diffusione. Fino a quel momento ogni sistema e quindi ogni rete era sviluppata in maniera autonoma da ogni organizzazione e ciò rendeva difficile interfacciare tra loro i diversi sistemi. ISO/OSI risolve questo problema offrendo uno standard da seguire, in particolare la divisione per livelli ha permesso di interfacciare tra loro sistemi anche molto diversi.
+
+# --ARRIVATO FIN QUI A SISTEMARE--
+
+
+
 
 ### Elenco e funzioni dei livelli
 
