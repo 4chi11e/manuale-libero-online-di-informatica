@@ -254,7 +254,20 @@ Il termine overhead indica quella parte di banda di trasmissione che viene utili
 
 In certi contesti avere alti livelli di overhead può essere inaccettabile. In questi contesti è quindi necessario utilizzare un protocollo come UDP che eliminando la maggior parte dei servizi offerti da TCP riduce al minimo l'overhead sacrificando l'affidabilità della comunicazione. In generale possiamo quindi dire che TCP è preferibile in quei contesti in cui è fondamentale l'integrità dei dati trasmessi (ad es. trasferimento file, posta elettronica, trasferimento pagine web...), UDP è invece preferibile in quei contesti in cui sono presenti stringenti vincoli di banda o tempo di trasmissione (servizi real time, comunicazione p2p, servizio DNS). Più avanti saranno approfonditi alcuni dei servizi qui citati e i motivi della scelta di protocollo fatta.
 
+
+
+
+
+
+
 [Link](https://it.wikipedia.org/wiki/Livello_di_trasporto "Livello di trasporto") alla pagina wikipedia.
+
+
+
+
+
+
+
 
 
 
@@ -398,7 +411,20 @@ TCP/IP è il nome comunemente usato per riferirsi ad un modello costituito da un
 
 
 
+#### [Livello 4: trasporto (Transport Layer)](https://it.wikipedia.org/wiki/Livello_di_trasporto "Livello di trasporto")
 
+_Obiettivo: permettere un trasferimento di dati trasparente e affidabile (implementando anche un controllo degli errori e delle perdite) tra due [host](https://it.wikipedia.org/wiki/Host "Host"). È il primo livello realmente end-to-end, cioè da host sorgente a destinatario._
+
+Si occupa di:
+
+* stabilire, mantenere e terminare una [connessione](https://it.wikipedia.org/wiki/Connessione_(informatica) "Connessione (informatica)"), garantendo il corretto e ottimale funzionamento della sottorete di comunicazione.
+* [controllo della congestione](https://it.wikipedia.org/wiki/Controllo_della_congestione "Controllo della congestione"): evitare che troppi pacchetti dati arrivino allo stesso [router](https://it.wikipedia.org/wiki/Router "Router") contemporaneamente con effetto di perdita di pacchetti stessi.
+
+A differenza dei livelli precedenti, che si occupano di connessioni tra nodi contigui di una rete, il Trasporto (a livello logico) si occupa solo del punto di partenza e di quello finale.
+
+Si occupa anche di effettuare la frammentazione dei dati provenienti dal livello superiore in pacchetti, detti "_segmenti_" e trasmetterli in modo efficiente ed affidabile usando il livello rete ed isolando da questo i livelli superiori. Inoltre, si preoccupa di ottimizzare l'uso delle risorse di rete e di prevenire la congestione.
+
+La sua unità dati fondamentale è il _messaggio di ktm_.
 
 #### [Livello 5: sessione (Session Layer)](https://it.wikipedia.org/wiki/Livello_di_sessione "Livello di sessione")
 
@@ -453,15 +479,103 @@ Come esempio pratico si può pensare ad un sistema per la spedizione della posta
 
 Come mostrato nella figura a fianco, i dati che viaggiano dal livello n di un host al livello n di un altro host, scendono verso il livello fisico del primo host e ad ogni livello vengono incapsulati con l'aggiunta dell'header del livello raggiunto. A livello fisico avviene la comunicazione bit a bit del pacchetto ricevuto dal livello di collegamento, al dispositivo fisico del secondo host. Da lì i dati vengono spediti ai livelli superiori e ad ogni livello viene eliminata l'intestazione (o header) più esterno e tenuto il payload del livello raggiunto.
 
+### Overhead
 
+In generale in informatica la parola **overhead** (in inglese letteralmente in alto, che sta di sopra) serve per definire le risorse accessorie, richieste in sovrappiù rispetto a quelle strettamente necessarie per ottenere un determinato scopo in seguito all'introduzione di un metodo o di un processo più evoluto o più generale. Questo termine, è usato con accezioni differenti in diversi ambiti dell'informatica. Puoi approfondire [qui](https://it.wikipedia.org/wiki/Overhead) l'argomento.  
 
+Nello specifico, parlando di reti, il termine **overhead** indica quella parte di banda di trasmissione che viene utilizzata per spedire, anziché informazione utile, dati aggiuntivi necessari per il particolare protocollo di rete utilizzato. La presenza di molteplici livelli di astrazione si traduce in un sommarsi dell'overhead imposto da ciascun livello con l'aggiunta degli **header**. A seconda della dimensione del pacchetto originale e della dimensione degli header dei vari protocolli, l'overhead potrebbe non essere affatto trascurabile.
 
+Nelle comunicazioni tra computer l'**overhead** non è composto solo dalle intestazioni dei pacchetti, ma è costituito anche e soprattutto da tutto quel **traffico prodotto dai protocolli per coordinare la comunicazione**. Questo aspetto è così importante da determinare la scelta di un protocollo piuttosto di un altro nel caso l'overhead generato da un protocollo sia ritenuto eccessivo.
 
+## Confronto con il TCP/IP
 
+<div class="thumbnail float-right">
+   <img src="{{"/assets/images/ISO-OSI_-_Abbinamento_ISO-OSI_e_TCP-IP.jpg" | absolute_url }}" onclick="document.getElementById('img04').style.display='block'" class="hoverlink">
+   <p class="fs-2">Confronto tra ISO/OSI e TCP/IP</p>
+   <!--modal-->
+   <div id="img04" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('img04').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <img src="{{"/assets/images/ISO-OSI_-_Abbinamento_ISO-OSI_e_TCP-IP.jpg" | absolute_url }}" data-toggle="modal" data-target="#OSI_Model">
+        <p>Confronto tra ISO/OSI e TCP/IP</p>
+      </div>
+    </div>
+  </div>
+</div>
 
+TCP/IP è il nome comunemente usato per riferirsi ad un modello costituito da un insieme di protocolli organizzati in livelli utilizzato nella rete internet. Il suo nome deriva dai due protocolli più uitilizzati, il Transmission Control Protocol (TCP) e l'Internet Protocol (IP). Questo modello, a differenza del modello ISO/OSI, che è un modello teorico, costituisce l'evoluzione delle prime reti locali, disomogenee tra loro, che col tempo hanno avuto la necessità di unirsi gradualmente fino a formare internet. In tale processo, ISO/OSI ha costituito solo un modello teorico per TCP/IP, che conserva alcune sostanziali differenze. Le differenze principali e più evidenti sono costituite dalla riduzione del numero dei livelli adottati da 7 a 4 unificando i tre livelli superiori e i due inferiori. L'unificazione dei livelli superiori è dovuta al fatto che questo modello riguarda la gestione delle funzionalità di rete e non gli aspetti applicativi. L'unione dei due livelli inferiori ci mostra invece la concretezza di questo modello che rispecchia la necessità di unificare le funzionalità dei livelli fisico e collegamento in un unico protocollo, come nei casi dei protocolli ethernet e wifi. I livelli diventano quindi:
 
+* **[Livello di applicazione](https://it.wikipedia.org/wiki/Livello_di_applicazione "Livello di applicazione")** con i protocolli:<br>
+  [BGP](/wiki/Border_Gateway_Protocol "Border Gateway Protocol"), [DHCP](/wiki/Dynamic_Host_Configuration_Protocol "Dynamic Host Configuration Protocol"), [DNS](/wiki/Domain_Name_System "Domain Name System"), [FTP](/wiki/File_Transfer_Protocol "File Transfer Protocol"), [HTTP](/wiki/Hypertext_Transfer_Protocol "Hypertext Transfer Protocol"), [HTTPS](/wiki/HTTPS "HTTPS"), [IMAP](/wiki/Internet_Message_Access_Protocol "Internet Message Access Protocol"), [LDAP](/wiki/Lightweight_Directory_Access_Protocol "Lightweight Directory Access Protocol"), [MGCP](/wiki/Media_Gateway_Control_Protocol "Media Gateway Control Protocol"), [MQTT](/wiki/MQTT "MQTT"), [NNTP](/wiki/Network_News_Transfer_Protocol "Network News Transfer Protocol"), [NTP](/wiki/Network_Time_Protocol "Network Time Protocol"), [POP](/wiki/Post_Office_Protocol "Post Office Protocol"), [ONC/RPC](/wiki/Open_Network_Computing_Remote_Procedure_Call "Open Network Computing Remote Procedure Call"), [RTP](/wiki/Real-time_Transport_Protocol "Real-time Transport Protocol"), [RTSP](/wiki/Real_Time_Streaming_Protocol "Real Time Streaming Protocol"), [RIP](/wiki/Routing_Information_Protocol "Routing Information Protocol"), [SIP](/wiki/Session_Initiation_Protocol "Session Initiation Protocol"), [SMTP](/wiki/Simple_Mail_Transfer_Protocol "Simple Mail Transfer Protocol"), [SNMP](/wiki/Simple_Network_Management_Protocol "Simple Network Management Protocol"), [SSH](/wiki/Secure_Shell "Secure Shell"), [Telnet](/wiki/Telnet "Telnet"), [TLS/SSL](/wiki/Transport_Layer_Security "Transport Layer Security"), [XMPP](/wiki/XMPP "XMPP"), [_altri..._](/wiki/Category:Application_layer_protocols "Category:Application layer protocols")
+* **[Livello di trasporto](https://it.wikipedia.org/wiki/Livello_di_trasporto "Livello di trasporto")** con i protocolli:<br>
+  [TCP](/wiki/Transmission_Control_Protocol "Transmission Control Protocol"), [UDP](/wiki/User_Datagram_Protocol "User Datagram Protocol"), [DCCP](/wiki/Datagram_Congestion_Control_Protocol "Datagram Congestion Control Protocol"), [SCTP](/wiki/Stream_Control_Transmission_Protocol "Stream Control Transmission Protocol"), [RSVP](/wiki/Resource_Reservation_Protocol "Resource Reservation Protocol"), [_altri..._](/wiki/Category:Transport_layer_protocols "Category:Transport layer protocols")
+* **[Livello di rete](https://it.wikipedia.org/wiki/Livello_di_rete "Livello di rete")** con i protocolli:<br>
+  [IP](/wiki/Internet_Protocol "Internet Protocol") ([IPv4](/wiki/IPv4 "IPv4"), [IPv6](/wiki/IPv6 "IPv6")), [ICMP](/wiki/Internet_Control_Message_Protocol "Internet Control Message Protocol"), [ICMPv6](/wiki/Internet_Control_Message_Protocol_for_IPv6 "Internet Control Message Protocol for IPv6"), [ECN](/wiki/Explicit_Congestion_Notification "Explicit Congestion Notification"), [IGMP](/wiki/Internet_Group_Management_Protocol "Internet Group Management Protocol"), [IPsec](/wiki/IPsec "IPsec"), [_altri..._](/wiki/Category:Internet_layer_protocols "Category:Internet layer protocols")
+* **[Livello di accesso alla rete](https://it.wikipedia.org/wiki/Livello_di_accesso_alla_rete "Livello di accesso alla rete")** con i protocolli:<br>
+  [ARP](/wiki/Address_Resolution_Protocol "Address Resolution Protocol"), [NDP](/wiki/Neighbor_Discovery_Protocol "Neighbor Discovery Protocol"), [OSPF](/wiki/Open_Shortest_Path_First "Open Shortest Path First"), [Tunnels](/wiki/Tunneling_protocol "Tunneling protocol") ([L2TP](/wiki/Layer_2_Tunneling_Protocol "Layer 2 Tunneling Protocol")), [PPP](/wiki/Point-to-Point_Protocol "Point-to-Point Protocol"), [MAC](/wiki/Medium_access_control "Medium access control") ([Ethernet](/wiki/Ethernet "Ethernet"), [Wi-Fi](/wiki/Wi-Fi "Wi-Fi"), [DSL](/wiki/Digital_subscriber_line "Digital subscriber line"), [ISDN](/wiki/Integrated_Services_Digital_Network "Integrated Services Digital Network"), [FDDI](/wiki/Fiber_Distributed_Data_Interface "Fiber Distributed Data Interface"), [_altri..._](/wiki/Category:Link_protocols "Category:Link protocols")
 
+<!-- versione a lista
+* [Livello di applicazione](https://it.wikipedia.org/wiki/Livello_di_applicazione "Livello di applicazione") con i protocolli:
+  * [BGP](/wiki/Border_Gateway_Protocol "Border Gateway Protocol")
+  * [DHCP](/wiki/Dynamic_Host_Configuration_Protocol "Dynamic Host Configuration Protocol")
+  * [DNS](/wiki/Domain_Name_System "Domain Name System")
+  * [FTP](/wiki/File_Transfer_Protocol "File Transfer Protocol")
+  * [HTTP](/wiki/Hypertext_Transfer_Protocol "Hypertext Transfer Protocol")
+  * [HTTPS](/wiki/HTTPS "HTTPS")
+  * [IMAP](/wiki/Internet_Message_Access_Protocol "Internet Message Access Protocol")
+  * [LDAP](/wiki/Lightweight_Directory_Access_Protocol "Lightweight Directory Access Protocol")
+  * [MGCP](/wiki/Media_Gateway_Control_Protocol "Media Gateway Control Protocol")
+  * [MQTT](/wiki/MQTT "MQTT")
+  * [NNTP](/wiki/Network_News_Transfer_Protocol "Network News Transfer Protocol")
+  * [NTP](/wiki/Network_Time_Protocol "Network Time Protocol")
+  * [POP](/wiki/Post_Office_Protocol "Post Office Protocol")
+  * [ONC/RPC](/wiki/Open_Network_Computing_Remote_Procedure_Call "Open Network Computing Remote Procedure Call")
+  * [RTP](/wiki/Real-time_Transport_Protocol "Real-time Transport Protocol")
+  * [RTSP](/wiki/Real_Time_Streaming_Protocol "Real Time Streaming Protocol")
+  * [RIP](/wiki/Routing_Information_Protocol "Routing Information Protocol")
+  * [SIP](/wiki/Session_Initiation_Protocol "Session Initiation Protocol")
+  * [SMTP](/wiki/Simple_Mail_Transfer_Protocol "Simple Mail Transfer Protocol")
+  * [SNMP](/wiki/Simple_Network_Management_Protocol "Simple Network Management Protocol")
+  * [SSH](/wiki/Secure_Shell "Secure Shell")
+  * [Telnet](/wiki/Telnet "Telnet")
+  * [TLS/SSL](/wiki/Transport_Layer_Security "Transport Layer Security")
+  * [XMPP](/wiki/XMPP "XMPP")
+  * [_altri..._](/wiki/Category:Application_layer_protocols "Category:Application layer protocols")
+* [Livello di trasporto](https://it.wikipedia.org/wiki/Livello_di_trasporto "Livello di trasporto")
+  * [TCP](/wiki/Transmission_Control_Protocol "Transmission Control Protocol")
+  * [UDP](/wiki/User_Datagram_Protocol "User Datagram Protocol")
+  * [DCCP](/wiki/Datagram_Congestion_Control_Protocol "Datagram Congestion Control Protocol")
+  * [SCTP](/wiki/Stream_Control_Transmission_Protocol "Stream Control Transmission Protocol")
+  * [RSVP](/wiki/Resource_Reservation_Protocol "Resource Reservation Protocol")
+  * [_altri..._](/wiki/Category:Transport_layer_protocols "Category:Transport layer protocols")
+* [Livello di rete](https://it.wikipedia.org/wiki/Livello_di_rete "Livello di rete")
+  * [IP](/wiki/Internet_Protocol "Internet Protocol")
+    * [IPv4](/wiki/IPv4 "IPv4")
+    * [IPv6](/wiki/IPv6 "IPv6")
+  * [ICMP](/wiki/Internet_Control_Message_Protocol "Internet Control Message Protocol")
+  * [ICMPv6](/wiki/Internet_Control_Message_Protocol_for_IPv6 "Internet Control Message Protocol for IPv6")
+  * [ECN](/wiki/Explicit_Congestion_Notification "Explicit Congestion Notification")
+  * [IGMP](/wiki/Internet_Group_Management_Protocol "Internet Group Management Protocol")
+  * [IPsec](/wiki/IPsec "IPsec")
+  * [_altri..._](/wiki/Category:Internet_layer_protocols "Category:Internet layer protocols")
+* [Livello di accesso alla rete](https://it.wikipedia.org/wiki/Livello_di_accesso_alla_rete "Livello di accesso alla rete")
+  * [ARP](/wiki/Address_Resolution_Protocol "Address Resolution Protocol")
+  * [NDP](/wiki/Neighbor_Discovery_Protocol "Neighbor Discovery Protocol")
+  * [OSPF](/wiki/Open_Shortest_Path_First "Open Shortest Path First")
+  * [Tunnels](/wiki/Tunneling_protocol "Tunneling protocol")
+    * [L2TP](/wiki/Layer_2_Tunneling_Protocol "Layer 2 Tunneling Protocol")
+  * [PPP](/wiki/Point-to-Point_Protocol "Point-to-Point Protocol")
+  * [MAC](/wiki/Medium_access_control "Medium access control")
+    * [Ethernet](/wiki/Ethernet "Ethernet")
+    * [Wi-Fi](/wiki/Wi-Fi "Wi-Fi")
+    * [DSL](/wiki/Digital_subscriber_line "Digital subscriber line")
+    * [ISDN](/wiki/Integrated_Services_Digital_Network "Integrated Services Digital Network")
+    * [FDDI](/wiki/Fiber_Distributed_Data_Interface "Fiber Distributed Data Interface")
+  * [_altri..._](/wiki/Category:Link_protocols "Category:Link protocols")
+-->
 
+Nella prossima sezione sarà analizzata nel dettaglio la suite di protocolli appartenenti a TCP/IP (cioè alla rete internet) e le loro funzionalità. 
 
 ## Link e riferimenti esterni
 

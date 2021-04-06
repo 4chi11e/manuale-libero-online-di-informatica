@@ -233,26 +233,25 @@ th, td{
     //   text-align: left;
     // }
   }
+  p {
+    // margin-bottom: 0px;
+    margin: 0px;
+    @extend .fs-2;
+    // line-height: normal; 
+  }
+
+  img {
+    margin-bottom: 5px;
+    //margin: auto !important;
+  }
+
   &--testo{
     @extend .thumbnail;
     line-height: normal;
-    @extend .fs-3;
   }
   &--50{
     max-width: 50%;
   }
-}
-
-
-.thumbnail img {
-  margin-bottom: 5px;
-  //margin: auto !important;
-}
-.thumbnail p {
-  // margin-bottom: 0px;
-  margin: 0px;
-  @extend .fs-2;
-  // line-height: normal; 
 }
 
 .float-right {

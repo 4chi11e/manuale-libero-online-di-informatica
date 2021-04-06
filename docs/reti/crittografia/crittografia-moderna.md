@@ -759,9 +759,9 @@ e quindi $$ {\pi(2^{128}-\pi(2^{127})) \approx 10^{36}} $$. Stiamo cauti nella s
 
 Più sensato è pensare di fattorizzare N, ma l’unico modo conosciuto è di dividerlo successivamente per 2, 3, e così via. E’ probabile che, nel momento in cui si è ottenuta la fattorizzazione richiesta, la chiave pubblica sia cambiata da parecchi mesi , si faccia un conto approssimativo del tempo richiesto. 
 
-Un numero è detto semiprimo (anche detto biprimo o 2-quasi primo, o pq numero) è un numero naturale che è il prodotto di numeri primi (non necessariamente distinti). I primi numeri semiprimi sono: <span class="fs-2">4, 6, 9, 10, 14, 15, 21, 22, 25, 26, 33, 34, 35, 38, 39, 46, 49, 51, 55, 57, 58, 62, 65, 69, 74, 77, 82, 85, 86, 87, 91, 93, 94, 95, 106.<span>
+Un numero semiprimo (anche detto biprimo o 2-quasi primo, o pq numero) è un numero naturale che è il prodotto di numeri primi (non necessariamente distinti). I primi numeri semiprimi sono: <span class="fs-2">4, 6, 9, 10, 14, 15, 21, 22, 25, 26, 33, 34, 35, 38, 39, 46, 49, 51, 55, 57, 58, 62, 65, 69, 74, 77, 82, 85, 86, 87, 91, 93, 94, 95, 106.<span>
 <!-- 111, 115, 118, 119, 121, 122, 123, 129, 133, 134, 141, 142, 143, 145, 146, 155, 158, 159, 161, 166, 169, 177, 178, 183, 185, 187. -->
-{: .thumbnail--testo .float-right .mt-0}
+{: .thumbnail--testo .float-right .mt-0 .fs-3}
 
 La RSA Laboratories fondata dai creatori dell'omonimo sistema di crittografia, ha proposto nel 1991 una sfida, la Factoring Challenge, in cui si offrivano premi in denaro a chi riuscisse a fattorizzare una serie di numeri semiprimi da usare come valori di *N* (semiprimi perchè prodotto dei due primi *p* e *q*). In questa pagina sono riportati i risultati raggiunti finora. Nonostante la gara sia stata dichiarata conclusa nel 2007 la ricerca delle soluzioni è ancora in corso e ad oggi (gennaio 2021) il numero più grande fattorizzato è RSA-250 un numero composto da 250 cifre decimali o 829 bits
 
