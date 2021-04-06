@@ -70,7 +70,7 @@ Generalmente la dimensione del blocco scelta è della medesima lunghezza della c
 #### Electronic Code Book (ECB)
 
 
-<img src="{{site.baseurl}}/assets/images/crittografia/Ecb_encryption.png">
+<img src="{{site.baseurl}}/assets/images/reti/crittografia/Ecb_encryption.png">
 {: .ta-c}
 
 *S(P<sub>i</sub>, k<sub>i</sub>) = C<sub>i</sub>*
@@ -80,7 +80,7 @@ Generalmente la dimensione del blocco scelta è della medesima lunghezza della c
 
 #### Cipher Block Chaining (CBC)
 
-<img src="{{site.baseurl}}/assets/images/crittografia/Cbc_encryption.png">
+<img src="{{site.baseurl}}/assets/images/reti/crittografia/Cbc_encryption.png">
 {: .ta-c}
 
 <div class="esempio fs-5 ta-c" markdown=1>
@@ -271,7 +271,7 @@ In pratica:
 {: .code-example}
 
 <div class="thumbnail--centrato mt-4 mb-4">
-  <img src="{{site.baseurl}}/assets/images/crittografia/Crittografia-congruenza-modulo.jpg">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/Crittografia-congruenza-modulo.jpg">
 </div>
 
 Ovviamente *a ≡ b* mod(*n*) se e solo se *a = n · b + k* con *k* in ***Z***. 
@@ -295,7 +295,7 @@ Sono valide le seguenti proprietà: \
   Operazioni in Z<sub>5</sub>
   {: .mb-0 .mt-0}
 
-  ![addizioni e moltiplicazioni in Z5]({{site.baseurl}}/assets/images/crittografia/operazioni-in-Z5.jpg)
+  ![addizioni e moltiplicazioni in Z5]({{site.baseurl}}/assets/images/reti/crittografia/operazioni-in-Z5.jpg)
   {: .ta-c .mb-0 .mt-0}
 </div>
 
@@ -397,13 +397,13 @@ Il modo migliore per capire come si sia potuti arrivare a concepire e a realizza
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/crittografia/doppio_lucchetto.jpg" class="modal__opener" aprire="#doppio-lucchetto">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/doppio_lucchetto.jpg" class="modal__opener" aprire="#doppio-lucchetto">
 </div>
 <!-- modal -->
 <div id="doppio-lucchetto" class="modal">
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#doppio-lucchetto">&times;</span>
-    <img src="{{site.baseurl}}/assets/images/crittografia/doppio_lucchetto.jpg">
+    <img src="{{site.baseurl}}/assets/images/reti/crittografia/doppio_lucchetto.jpg">
     <p>Il metodo del doppio lucchetto.</p>
   </div>
 </div>
@@ -690,14 +690,14 @@ Supponiamo allora che Bob le voglia mandare un messaggio costituito da vediamo q
 
 <!-- thumbnail -->
 <div class="thumbnail float-right  thumbnail--50">
-  <img src="{{site.baseurl}}/assets/images/crittografia/doppia-codifica.jpg" class="modal__opener" aprire="#img-doppia-codifica">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/doppia-codifica.jpg" class="modal__opener" aprire="#img-doppia-codifica">
   <p>Schema della doppia cifratura in RSA</p>
 </div>
 <!-- modal -->
 <div id="img-doppia-codifica" class="modal">
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-doppia-codifica">&times;</span>
-    <img src="{{site.baseurl}}/assets/images/crittografia/doppia-codifica.jpg">
+    <img src="{{site.baseurl}}/assets/images/reti/crittografia/doppia-codifica.jpg">
     <p>Dall'immagine si può vedere che Alice non si limita a cifrare il messaggio con la chiave pubblica di Bob ma esegue prima un'altra cifratura con la propria chiave privata; in questo modo Bob, aggiungendo una seconda decifratura con la chiave pubblica di Alice, sarà sicuro che solo Alice può aver cifrato e spedito il messaggio perchè è l'unica persona che conosce la chiave privata di Alice.</p>
   </div>
 </div>
@@ -717,14 +717,14 @@ Se da un lato la capacità di fattorizzare numeri ci permette di attaccare RSA, 
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/crittografia/numeri-primi.png" class="modal__opener" aprire="#img-numeri-primi">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/numeri-primi.png" class="modal__opener" aprire="#img-numeri-primi">
   <p>Un grafico aggiornato al 2016 del numero di cifre componenti il più grande numero primo conosciuto. La scala dell'asse delle ordinate è logaritmica. La linea rossa è la curva esponenziale che meglio si adatta al grafico e ha equazione: y = exp(0,187394 t − 360,527), dove t è in anni.</p>
 </div>
 <!-- modal -->
 <div id="img-numeri-primi" class="modal">
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-numeri-primi">&times;</span>
-    <img src="{{site.baseurl}}/assets/images/crittografia/numeri-primi.png">
+    <img src="{{site.baseurl}}/assets/images/reti/crittografia/numeri-primi.png">
     <p>Un grafico aggiornato al 2016 del numero di cifre componenti il più grande numero primo conosciuto. La scala dell'asse delle ordinate è logaritmica. La linea rossa è la curva esponenziale che meglio si adatta al grafico e ha equazione: y = exp(0,187394 t − 360,527), dove t è in anni.</p>
   </div>
 </div>
@@ -802,7 +802,7 @@ Quando si sceglie la dimensione della chiave da utilizzare bisogna tenere a ment
 
 <!-- thumbnail -->
 <div class="thumbnail float-right  thumbnail--50">
-  <img src="{{site.baseurl}}/assets/images/crittografia/Hash_function.svg" class="modal__opener" aprire="#img-hash-function">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/Hash_function.svg" class="modal__opener" aprire="#img-hash-function">
   <p markdown=1>Una funzione crittografica di hash al lavoro ([SHA1](https://it.wikipedia.org/wiki/SHA1)). Anche piccole modifiche ai dati di ingresso causano un notevole cambiamento dell'uscita: si tratta del cosiddetto effetto valanga.</p>
 </div>
 <!-- modal -->
@@ -810,7 +810,7 @@ Quando si sceglie la dimensione della chiave da utilizzare bisogna tenere a ment
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-hash-function">&times;</span>
     <div class="modal__content__img-container"> 
-      <img src="{{site.baseurl}}/assets/images/crittografia/Hash_function.svg">
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/Hash_function.svg">
     </div>
     <p markdown=1>Una funzione crittografica di hash al lavoro ([SHA1](https://it.wikipedia.org/wiki/SHA1)). Anche piccole modifiche ai dati di ingresso causano un notevole cambiamento dell'uscita: si tratta del cosiddetto effetto valanga.</p>
   </div>

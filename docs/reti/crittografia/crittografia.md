@@ -8,16 +8,6 @@ has_children: true
 has_toc: true
 ---
 
-<!-- JQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<!-- Miei script -->
-<script src="{{site.baseurl}}/assets/js/bordi-tabelle.js"></script>
-<script src="{{site.baseurl}}/assets/js/crittografia-antica.js"></script>
-
-<!-- MathJax -->
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
 # Crittografia
 {: .no_toc}
 
@@ -51,14 +41,14 @@ Se si guarda alla [storia della crittografia](#) si può notare che la maggior p
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-cifratura-decifratura.jpg" class="modal__opener" aprire="#img-cifratura-decifratura">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/crittografia-cifratura-decifratura.jpg" class="modal__opener" aprire="#img-cifratura-decifratura">
   <p>Il principio della Crittografia.</p></div>
 <!-- modal -->
 <div id="img-cifratura-decifratura" class="modal">
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-cifratura-decifratura">&times;</span>
     <div class="modal__content__img-container"> 
-      <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-cifratura-decifratura.jpg">
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/crittografia-cifratura-decifratura.jpg">
     </div>
     <p>Il principio della Crittografia.</p>
   </div>
