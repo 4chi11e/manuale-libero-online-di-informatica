@@ -34,7 +34,7 @@ modello di riferimento a formato aperto per l'interconnessione di sistemi di
 computer (_Basic Reference Model_ o standard ISO 7498). Tale
 modello stabilisce per l'architettura logica di rete, una struttura a strati composta da una pila di [protocolli di comunicazione di rete](https://it.wikipedia.org/wiki/Protocollo_di_rete "Protocollo di rete") suddivisa in 7 livelli, seguendo un modello logico-gerarchico.
 
-A livello implementativo lo standard _[de facto](https://it.wikipedia.org/wiki/De_facto "De facto")_ affermatosi per architetture di rete a livelli è invece il [TCP/IP](https://it.wikipedia.org/wiki/TCP/IP "TCP/IP"), che riprende in parte il modello OSI.
+A livello implementativo lo standard _[de facto](https://it.wikipedia.org/wiki/De_facto "De facto")_ affermatosi per architetture di rete a livelli è invece il [TCP/IP](https://it.wikipedia.org/wiki/TCP/IP "TCP/IP"), che riprende in parte il modello OSI. Nella [sezione dedicata al modello TCP/IP](#) verranno analizzati nel dettaglio i protocolli specifici utilizzati e le loro funzionalità.
 
 ## Indice
 {: .no_toc .text-delta }
@@ -172,7 +172,7 @@ _Obiettivo: rendere i livelli superiori indipendenti dai meccanismi e dalle tecn
 
 La sua unità dati fondamentale è il _pacchetto_.
 
-Il protocollo di rete più usato è il protocollo IP (Internet Protocol) usato in tutte le reti TCP/IP.
+Il protocollo di rete più usato è il protocollo IP (Internet Protocol) usato in tutte le reti TCP/IP. Nella sezione dedicata al protocollo IP verranno analizzate nel dettaglio le operazioni effettuate nel livello di rete.
 
 [Link](https://it.wikipedia.org/wiki/Livello_di_rete "Livello di rete") alla pagina wikipedia.
 
@@ -197,6 +197,126 @@ Un router è un dispositivo di rete di livello 3 usato per collegare sottoreti d
 Mentre gli switch si occupano di collegare dispositivi all'interno di una stessa rete identificandoli per mezzo di indirizzi MAC, i router si occupano di collegare diverse reti utilizzando indirizzi di livello di rete che permettendo loro di effettuare il routing dei pacchetti tra reti differenti. Ogni protocollo di rete effettua queste operazioni in maniera differente. Nel capitolo riguardante il [protocollo IP](#) verrà trattato nel dettaglio questo argomento.
 
 Spesso le reti sono organizzate gerarchicamente tra loro e i router sono quindi solitamente costruiti per rispettare tale ordine. Spesso quindi i router presentano una porta per la connessione alla rete "esterna" e una o più porte fisiche per i collegamenti verso la rete "interna". A volte possiedono anche antenne per fornire connessione Wi-Fi alla rete interna.
+
+
+
+
+## ISO/OSI e TCP/IP
+
+<!-- ISO/OSI è il modello teorico su cui sono state sviluppate le reti moderne. Nello sviluppo della rete internet si è però sviluppato uno standard di fatto che viene normalmente chiamata, per sineddoche, suite di protocolli TCP/IP o più brevemente modello TCP/IP. Nella [prossima sezione]({{site.baseurl}}/docs/reti/ISO-OSI/tcp-ip/) saranno analizzati nel dettaglio questa suite di protocolli e le loro funzionalità. -->
+
+<!-- thumbnail -->
+<div class="thumbnail float-right">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-layers.png" class="modal__opener" aprire="#ISO-OSI-TCP-IP-layers">
+  <p>Il modello TCP-IP (dx) in confronto al modello ISO/OSI (sx)</p>
+</div>
+<!-- modal -->
+<div id="ISO-OSI-TCP-IP-layers" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#ISO-OSI-TCP-IP-layers">&times;</span>
+    <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-layers.png">
+    <p>Il modello TCP-IP (dx) in confronto al modello ISO/OSI (sx)</p>
+  </div>
+</div>
+
+TCP/IP è il nome comunemente usato per riferirsi ad un modello costituito da un insieme di protocolli organizzati in livelli utilizzato nella rete internet. Il suo nome deriva dai due protocolli più uitilizzati, il Transmission Control Protocol (TCP) e l'Internet Protocol (IP). Questo modello, a differenza del modello ISO/OSI, che è un modello teorico, costituisce l'evoluzione delle prime reti locali, disomogenee tra loro, che col tempo hanno avuto la necessità di unirsi gradualmente fino a formare internet. In tale processo, ISO/OSI ha costituito solo un modello teorico per TCP/IP, che conserva alcune sostanziali differenze. Le differenze principali e più evidenti sono costituite dalla riduzione del numero dei livelli adottati da 7 a 4 unificando i tre livelli superiori e i due inferiori. L'unificazione dei livelli superiori è dovuta al fatto che questo modello riguarda la gestione delle funzionalità di rete e non gli aspetti applicativi. L'unione dei due livelli inferiori ci mostra invece la concretezza di questo modello che rispecchia la necessità di unificare le funzionalità dei livelli fisico e collegamento in un unico protocollo, come nei casi dei protocolli ethernet e wifi. I livelli diventano quindi:
+
+<!-- thumbnail -->
+<div class="thumbnail float-right">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-protocolli.jpg" class="modal__opener" aprire="#ISO-OSI-TCP-IP-protocolli">
+  <p>Il modello TCP-IP (dx) in confronto al modello ISO/OSI (sx)</p>
+</div>
+<!-- modal -->
+<div id="ISO-OSI-TCP-IP-protocolli" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#ISO-OSI-TCP-IP-protocolli">&times;</span>
+    <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-protocolli.jpg">
+    <p>Il modello TCP-IP (dx) in confronto al modello ISO/OSI (sx)</p>
+  </div>
+</div>
+
+* **[Livello di applicazione](https://it.wikipedia.org/wiki/Livello_di_applicazione "Livello di applicazione")** con i protocolli:<br>
+  [BGP](/wiki/Border_Gateway_Protocol "Border Gateway Protocol"), [DHCP](/wiki/Dynamic_Host_Configuration_Protocol "Dynamic Host Configuration Protocol"), [DNS](/wiki/Domain_Name_System "Domain Name System"), [FTP](/wiki/File_Transfer_Protocol "File Transfer Protocol"), [HTTP](/wiki/Hypertext_Transfer_Protocol "Hypertext Transfer Protocol"), [HTTPS](/wiki/HTTPS "HTTPS"), [IMAP](/wiki/Internet_Message_Access_Protocol "Internet Message Access Protocol"), [LDAP](/wiki/Lightweight_Directory_Access_Protocol "Lightweight Directory Access Protocol"), [MGCP](/wiki/Media_Gateway_Control_Protocol "Media Gateway Control Protocol"), [MQTT](/wiki/MQTT "MQTT"), [NNTP](/wiki/Network_News_Transfer_Protocol "Network News Transfer Protocol"), [NTP](/wiki/Network_Time_Protocol "Network Time Protocol"), [POP](/wiki/Post_Office_Protocol "Post Office Protocol"), [ONC/RPC](/wiki/Open_Network_Computing_Remote_Procedure_Call "Open Network Computing Remote Procedure Call"), [RTP](/wiki/Real-time_Transport_Protocol "Real-time Transport Protocol"), [RTSP](/wiki/Real_Time_Streaming_Protocol "Real Time Streaming Protocol"), [RIP](/wiki/Routing_Information_Protocol "Routing Information Protocol"), [SIP](/wiki/Session_Initiation_Protocol "Session Initiation Protocol"), [SMTP](/wiki/Simple_Mail_Transfer_Protocol "Simple Mail Transfer Protocol"), [SNMP](/wiki/Simple_Network_Management_Protocol "Simple Network Management Protocol"), [SSH](/wiki/Secure_Shell "Secure Shell"), [Telnet](/wiki/Telnet "Telnet"), [TLS/SSL](/wiki/Transport_Layer_Security "Transport Layer Security"), [XMPP](/wiki/XMPP "XMPP"), [_altri..._](/wiki/Category:Application_layer_protocols "Category:Application layer protocols")
+* **[Livello di trasporto](https://it.wikipedia.org/wiki/Livello_di_trasporto "Livello di trasporto")** con i protocolli:<br>
+  [TCP](/wiki/Transmission_Control_Protocol "Transmission Control Protocol"), [UDP](/wiki/User_Datagram_Protocol "User Datagram Protocol"), [DCCP](/wiki/Datagram_Congestion_Control_Protocol "Datagram Congestion Control Protocol"), [SCTP](/wiki/Stream_Control_Transmission_Protocol "Stream Control Transmission Protocol"), [RSVP](/wiki/Resource_Reservation_Protocol "Resource Reservation Protocol"), [_altri..._](/wiki/Category:Transport_layer_protocols "Category:Transport layer protocols")
+* **[Livello di rete](https://it.wikipedia.org/wiki/Livello_di_rete "Livello di rete")** con i protocolli:<br>
+  [IP](/wiki/Internet_Protocol "Internet Protocol") ([IPv4](/wiki/IPv4 "IPv4"), [IPv6](/wiki/IPv6 "IPv6")), [ICMP](/wiki/Internet_Control_Message_Protocol "Internet Control Message Protocol"), [ICMPv6](/wiki/Internet_Control_Message_Protocol_for_IPv6 "Internet Control Message Protocol for IPv6"), [ECN](/wiki/Explicit_Congestion_Notification "Explicit Congestion Notification"), [IGMP](/wiki/Internet_Group_Management_Protocol "Internet Group Management Protocol"), [IPsec](/wiki/IPsec "IPsec"), [_altri..._](/wiki/Category:Internet_layer_protocols "Category:Internet layer protocols")
+* **[Livello di accesso alla rete](https://it.wikipedia.org/wiki/Livello_di_accesso_alla_rete "Livello di accesso alla rete")** con i protocolli:<br>
+  [ARP](/wiki/Address_Resolution_Protocol "Address Resolution Protocol"), [NDP](/wiki/Neighbor_Discovery_Protocol "Neighbor Discovery Protocol"), [OSPF](/wiki/Open_Shortest_Path_First "Open Shortest Path First"), [Tunnels](/wiki/Tunneling_protocol "Tunneling protocol") ([L2TP](/wiki/Layer_2_Tunneling_Protocol "Layer 2 Tunneling Protocol")), [PPP](/wiki/Point-to-Point_Protocol "Point-to-Point Protocol"), [MAC](https://it.wikipedia.org/wiki/Media_Access_Control "Medium access control") ([Ethernet](/wiki/Ethernet "Ethernet"), [Wi-Fi](/wiki/Wi-Fi "Wi-Fi"), [DSL](/wiki/Digital_subscriber_line "Digital subscriber line"), [ISDN](/wiki/Integrated_Services_Digital_Network "Integrated Services Digital Network"), [FDDI](/wiki/Fiber_Distributed_Data_Interface "Fiber Distributed Data Interface"), [_altri..._](/wiki/Category:Link_protocols "Category:Link protocols")
+
+<!-- versione a lista
+* [Livello di applicazione](https://it.wikipedia.org/wiki/Livello_di_applicazione "Livello di applicazione") con i protocolli:
+  * [BGP](/wiki/Border_Gateway_Protocol "Border Gateway Protocol")
+  * [DHCP](/wiki/Dynamic_Host_Configuration_Protocol "Dynamic Host Configuration Protocol")
+  * [DNS](/wiki/Domain_Name_System "Domain Name System")
+  * [FTP](/wiki/File_Transfer_Protocol "File Transfer Protocol")
+  * [HTTP](/wiki/Hypertext_Transfer_Protocol "Hypertext Transfer Protocol")
+  * [HTTPS](/wiki/HTTPS "HTTPS")
+  * [IMAP](/wiki/Internet_Message_Access_Protocol "Internet Message Access Protocol")
+  * [LDAP](/wiki/Lightweight_Directory_Access_Protocol "Lightweight Directory Access Protocol")
+  * [MGCP](/wiki/Media_Gateway_Control_Protocol "Media Gateway Control Protocol")
+  * [MQTT](/wiki/MQTT "MQTT")
+  * [NNTP](/wiki/Network_News_Transfer_Protocol "Network News Transfer Protocol")
+  * [NTP](/wiki/Network_Time_Protocol "Network Time Protocol")
+  * [POP](/wiki/Post_Office_Protocol "Post Office Protocol")
+  * [ONC/RPC](/wiki/Open_Network_Computing_Remote_Procedure_Call "Open Network Computing Remote Procedure Call")
+  * [RTP](/wiki/Real-time_Transport_Protocol "Real-time Transport Protocol")
+  * [RTSP](/wiki/Real_Time_Streaming_Protocol "Real Time Streaming Protocol")
+  * [RIP](/wiki/Routing_Information_Protocol "Routing Information Protocol")
+  * [SIP](/wiki/Session_Initiation_Protocol "Session Initiation Protocol")
+  * [SMTP](/wiki/Simple_Mail_Transfer_Protocol "Simple Mail Transfer Protocol")
+  * [SNMP](/wiki/Simple_Network_Management_Protocol "Simple Network Management Protocol")
+  * [SSH](/wiki/Secure_Shell "Secure Shell")
+  * [Telnet](/wiki/Telnet "Telnet")
+  * [TLS/SSL](/wiki/Transport_Layer_Security "Transport Layer Security")
+  * [XMPP](/wiki/XMPP "XMPP")
+  * [_altri..._](/wiki/Category:Application_layer_protocols "Category:Application layer protocols")
+* [Livello di trasporto](https://it.wikipedia.org/wiki/Livello_di_trasporto "Livello di trasporto")
+  * [TCP](/wiki/Transmission_Control_Protocol "Transmission Control Protocol")
+  * [UDP](/wiki/User_Datagram_Protocol "User Datagram Protocol")
+  * [DCCP](/wiki/Datagram_Congestion_Control_Protocol "Datagram Congestion Control Protocol")
+  * [SCTP](/wiki/Stream_Control_Transmission_Protocol "Stream Control Transmission Protocol")
+  * [RSVP](/wiki/Resource_Reservation_Protocol "Resource Reservation Protocol")
+  * [_altri..._](/wiki/Category:Transport_layer_protocols "Category:Transport layer protocols")
+* [Livello di rete](https://it.wikipedia.org/wiki/Livello_di_rete "Livello di rete")
+  * [IP](/wiki/Internet_Protocol "Internet Protocol")
+    * [IPv4](/wiki/IPv4 "IPv4")
+    * [IPv6](/wiki/IPv6 "IPv6")
+  * [ICMP](/wiki/Internet_Control_Message_Protocol "Internet Control Message Protocol")
+  * [ICMPv6](/wiki/Internet_Control_Message_Protocol_for_IPv6 "Internet Control Message Protocol for IPv6")
+  * [ECN](/wiki/Explicit_Congestion_Notification "Explicit Congestion Notification")
+  * [IGMP](/wiki/Internet_Group_Management_Protocol "Internet Group Management Protocol")
+  * [IPsec](/wiki/IPsec "IPsec")
+  * [_altri..._](/wiki/Category:Internet_layer_protocols "Category:Internet layer protocols")
+* [Livello di accesso alla rete](https://it.wikipedia.org/wiki/Livello_di_accesso_alla_rete "Livello di accesso alla rete")
+  * [ARP](/wiki/Address_Resolution_Protocol "Address Resolution Protocol")
+  * [NDP](/wiki/Neighbor_Discovery_Protocol "Neighbor Discovery Protocol")
+  * [OSPF](/wiki/Open_Shortest_Path_First "Open Shortest Path First")
+  * [Tunnels](/wiki/Tunneling_protocol "Tunneling protocol")
+    * [L2TP](/wiki/Layer_2_Tunneling_Protocol "Layer 2 Tunneling Protocol")
+  * [PPP](/wiki/Point-to-Point_Protocol "Point-to-Point Protocol")
+  * [MAC](/wiki/Medium_access_control "Medium access control")
+    * [Ethernet](/wiki/Ethernet "Ethernet")
+    * [Wi-Fi](/wiki/Wi-Fi "Wi-Fi")
+    * [DSL](/wiki/Digital_subscriber_line "Digital subscriber line")
+    * [ISDN](/wiki/Integrated_Services_Digital_Network "Integrated Services Digital Network")
+    * [FDDI](/wiki/Fiber_Distributed_Data_Interface "Fiber Distributed Data Interface")
+  * [_altri..._](/wiki/Category:Link_protocols "Category:Link protocols")
+-->
+
+[Link](https://it.wikipedia.org/wiki/Suite_di_protocolli_Internet "Suite di protocolli Internet") alla pagina wikipedia.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -302,8 +422,6 @@ Nelle comunicazioni tra computer l'**overhead** non è composto solo dalle intes
   </div>
 </div>
 
-_Lo stesso argomento in dettaglio: **[Suite di protocolli Internet](https://it.wikipedia.org/wiki/Suite_di_protocolli_Internet "Suite di protocolli Internet")**_.
-
 TCP/IP è il nome comunemente usato per riferirsi ad un modello costituito da un insieme di protocolli organizzati in livelli utilizzato nella rete internet. Il suo nome deriva dai due protocolli più uitilizzati, il Transmission Control Protocol (TCP) e l'Internet Protocol (IP). Questo modello, a differenza del modello ISO/OSI, che è un modello teorico, costituisce l'evoluzione delle prime reti locali, disomogenee tra loro, che col tempo hanno avuto la necessità di unirsi gradualmente fino a formare internet. In tale processo, ISO/OSI ha costituito solo un modello teorico per TCP/IP, che conserva alcune sostanziali differenze. Le differenze principali e più evidenti sono costituite dalla riduzione del numero dei livelli adottati da 7 a 4 unificando i tre livelli superiori e i due inferiori. L'unificazione dei livelli superiori è dovuta al fatto che questo modello riguarda la gestione delle funzionalità di rete e non gli aspetti applicativi. L'unione dei due livelli inferiori ci mostra invece la concretezza di questo modello che rispecchia la necessità di unificare le funzionalità dei livelli fisico e collegamento in un unico protocollo, come nei casi dei protocolli ethernet e wifi. I livelli diventano quindi:
 
 * **[Livello di applicazione](https://it.wikipedia.org/wiki/Livello_di_applicazione "Livello di applicazione")** con i protocolli:<br>
@@ -374,6 +492,8 @@ TCP/IP è il nome comunemente usato per riferirsi ad un modello costituito da un
     * [FDDI](/wiki/Fiber_Distributed_Data_Interface "Fiber Distributed Data Interface")
   * [_altri..._](/wiki/Category:Link_protocols "Category:Link protocols")
 -->
+
+Nella prossima sezione sarà analizzata nel dettaglio la suite di protocolli appartenenti a TCP/IP (cioè alla rete internet) e le loro funzionalità. 
 
 ## Link e riferimenti esterni
 
