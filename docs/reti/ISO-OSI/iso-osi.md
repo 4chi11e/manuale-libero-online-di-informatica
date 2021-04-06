@@ -7,19 +7,22 @@ has_children: true
 ---
 
 # Modello ISO/OSI
+{: .no_toc}
 
+<!-- thumbnail -->
 <div class="thumbnail float-right">
-   <img src="{{"/assets/images/ISO-OSI_-_OSI_Model_v1.svg" | absolute_url }}" onclick="document.getElementById('img01').style.display='block'" class="hoverlink">
-   <p class="fs-2">Il modello di riferimento OSI</p>
-   <!--modal-->
-   <div id="img01" class="w3-modal">
-    <div class="w3-modal-content">
-      <div class="w3-container">
-        <span onclick="document.getElementById('img01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-        <img src="{{"/assets/images/ISO-OSI_-_OSI_Model_v1.svg" | absolute_url }}" data-toggle="modal" data-target="#OSI_Model">
-        <p>Il modello di riferimento OSI</p>
-      </div>
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/OSI_Model_v1-ita.png" class="modal__opener" aprire="#img-modello-ISO-OSI">
+  <p>Il modello di riferimento OSI</p>
+</div>
+<!-- modal -->
+<div id="img-modello-ISO-OSI" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-modello-ISO-OSI">&times;</span>
+    <div class="modal__content__img-container--double">
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/OSI_Model_v1-eng.png">
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/OSI_Model_v1-ita.png">
     </div>
+    <p>Il modello di riferimento OSI in italiano e in inglese</p>
   </div>
 </div>
 
@@ -34,10 +37,9 @@ modello stabilisce per l'architettura logica di rete, una struttura a strati com
 A livello implementativo lo standard _[de facto](https://it.wikipedia.org/wiki/De_facto "De facto")_ affermatosi per architetture di rete a livelli è invece il [TCP/IP](https://it.wikipedia.org/wiki/TCP/IP "TCP/IP"), che riprende in parte il modello OSI.
 
 ## Indice
-
 {: .no_toc .text-delta }
 
-1. TOC
+- TOC
 {:toc}
 
 ## Caratteristiche
@@ -45,18 +47,18 @@ A livello implementativo lo standard _[de facto](https://it.wikipedia.org/wiki/D
 <!-- thumbnail -->
 <div class="thumbnail float-right">
   <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-parallelo_posta.svg" class="modal__opener" aprire="#img-ISO-OSI-parallelo_posta">
-  <p>Il parallelo mostra anche la divisione tra i livelli superiori e i livelli inferiori</p>
+  <p>Parallelo tra sistema di gestione della posta fisica e rete informatica basata sul modello ISO-OSI. Il parallelo mostra anche la divisione tra i livelli superiori e i livelli inferiori</p>
 </div>
 <!-- modal -->
 <div id="img-ISO-OSI-parallelo_posta" class="modal">
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-ISO-OSI-parallelo_posta">&times;</span>
     <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-parallelo_posta.svg">
-    <p>Il parallelo mostra anche la divisione tra i livelli superiori e i livelli inferiori</p>
+    <p>Parallelo tra sistema di gestione della posta fisica e rete informatica basata sul modello ISO-OSI. Il parallelo mostra anche la divisione tra i livelli superiori e i livelli inferiori</p>
   </div>
 </div>
 
-Il modello ISO/OSI, concepito per reti a [commutazione di pacchetto](#), è costituito da una pila (o stack) di protocolli attraverso i quali viene ridotta la complessità implementativa del sistema. In particolare ISO/OSI è costituito da  strati (o livelli), i cosiddetti _**layer**_, che definiscono e racchiudono in sé a livello logico uno o più aspetti fra loro correlati della comunicazione fra due nodi di una rete. I layer sono in totale 7 e vanno dal livello fisico, ossia quello del mezzo fisico, del cavo, delle onde radio o qualsiasi altro sistema trasmissivo tra cui la fibra ottica, fino al livello delle applicazioni, attraverso cui si realizza la comunicazione di _alto livello_.
+Il modello ISO/OSI, concepito per reti a [commutazione di pacchetto](#), è costituito da una pila (o stack) di protocolli attraverso i quali viene ridotta la complessità implementativa del sistema. In particolare ISO/OSI è costituito da  strati (o livelli), i cosiddetti _**layer**_, che definiscono e racchiudono in sé a livello logico uno o più aspetti fra loro correlati della comunicazione fra due nodi di una rete. I layer sono in totale 7 e vanno dal livello fisico, ossia quello del mezzo fisico, del cavo, delle onde radio o qualsiasi altro sistema trasmissivo tra cui la fibra ottica, fino al livello delle applicazioni, attraverso cui si realizza la comunicazione di _alto livello_. I livelli vengono anche divisi in due gruppi: i primi tre considerati _media layers_ perchè legati alla gestione dei dispositivi di rete_ e gli ultimi quattro chiamati _host layers_ perchè si occupano delle operazioni che avvengono solo sugli host.
 
 Il modello ISO/OSI è solo un **modello astratto** che non prevede un protocollo specifico per ogni livello. Esistono invece modelli reali come ad esempio TCP/IP che specificano ad ogni livello il protocollo di comunicazione da usare. 
 
@@ -66,14 +68,11 @@ Questa comunicazione multilivello conferisce modularità al sistema permettendo 
 
 Lo sviluppo di questo modello nasce negli anni '80 dalla necessità di creare un modello standard per la creazione di reti di calcolatori che proprio in quegli anni stavano vivendo la loro prima rapida diffusione. Fino a quel momento ogni sistema e quindi ogni rete era sviluppata in maniera autonoma da ogni organizzazione e ciò rendeva difficile interfacciare tra loro i diversi sistemi. ISO/OSI risolve questo problema offrendo uno standard da seguire, in particolare la divisione per livelli ha permesso di interfacciare tra loro sistemi anche molto diversi.
 
-# --ARRIVATO FIN QUI A SISTEMARE--
 
+## Elenco e funzioni dei livelli
+Di seguito sono descritte le funzionalità offerte da ogni livello. Per i livelli inferiori saranno anche descritti i principali dispositivi di rete che operano a tale livello. É importante sottolineare il fatto che un dispositivo di livello N opera su tutti i livelli fino al livello N poichè ogni protocollo per funzionare necessita delle funzionalità offerte dai livelli inferiori (per maggiori dettagli vedi il capitolo sull'[incapsulamento](#incapsulamento)).  
 
-
-
-### Elenco e funzioni dei livelli
-
-#### [Livello 1: fisico (Physical Layer)](https://it.wikipedia.org/wiki/Livello_fisico "Livello fisico")
+### Livello 1: fisico (Physical Layer)
 
 _Obiettivo: trasmettere un flusso di dati non strutturati attraverso un collegamento fisico, occupandosi della forma e dei livelli di tensione del segnale. Ha a che fare con le procedure meccaniche ed elettroniche necessarie a stabilire, mantenere e disattivare un collegamento fisico._
 
@@ -82,26 +81,85 @@ Semplicemente: si occupa di controllare la rete, gli [hardware](https://it.wikip
 In questo livello si decidono:
 
 * Il numero di bit in un collegamento (PROB)
-* Le [tensioni](https://it.wikipedia.org/wiki/Tensione_elettrica "Tensione elettrica") scelte per rappresentare i valori logici dei [bit](https://it.wikipedia.org/wiki/Bit "Bit") trasmessi;
-* La durata in microsecondi del [segnale](https://it.wikipedia.org/wiki/Segnale_(fisica) "Segnale (fisica)") che identifica un bit;
+* Le tensioni scelte per rappresentare i valori logici dei bit trasmessi;
+* La durata in microsecondi del segnale che identifica un bit;
 * La [modulazione](https://it.wikipedia.org/wiki/Modulazione "Modulazione") e la [codifica](https://it.wikipedia.org/wiki/Codifica "Codifica") utilizzata;
-* L'eventuale trasmissione simultanea in due direzioni ([Half-Duplex o Full-Duplex](https://it.wikipedia.org/wiki/Duplex "Duplex"));
-* La forma e la meccanica dei [connettori](https://it.wikipedia.org/wiki/Interfaccia_video#Tipi_di_connettori "Interfaccia video") usati per collegare l'hardware al [mezzo trasmissivo](https://it.wikipedia.org/wiki/Mezzo_trasmissivo "Mezzo trasmissivo").
+* L'eventuale trasmissione simultanea in due direzioni Half-Duplex o Full-Duplex;
+* La forma e la meccanica dei connettori usati per collegare l'hardware al mezzo trasmissivo.
 
-#### [Livello 2: collegamento dati (Datalink Layer)](https://it.wikipedia.org/wiki/Livello_di_collegamento_dati "Livello di collegamento dati")
+I protocolli più famosi che operano a questo livello sono:
+- Bluetooth
+- DSL (Digital Subscriber Line)
+- Ethernet (opera anche a livello 2)
+- Wi-Fi (opera anche a livello 2)
+- Wi-Max (opera anche a livello 2)
 
-_Obiettivo: permettere il trasferimento_ affidabile _di dati attraverso il livello fisico. Invia frame di dati con la necessaria sincronizzazione ed effettua un [controllo degli errori](https://it.wikipedia.org/wiki/Rilevazione_e_correzione_d%27errore "Rilevazione e correzione d'errore") e delle perdite di segnale. Tutto ciò consente di far apparire, al livello superiore, il mezzo fisico come una [linea di trasmissione](https://it.wikipedia.org/wiki/Linea_di_trasmissione "Linea di trasmissione") esente da errori di trasmissione._
+#### Hub
+<!-- thumbnail -->
+<div class="thumbnail float-right">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/hub.jpg" class="modal__opener" aprire="#img-hub">
+  <p>Un hub Ethernet da 4 porte.</p>
+</div>
+<!-- modal -->
+<div id="img-hub" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-hub">&times;</span>
+    <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/hub.jpg">
+    <p>Un hub Ethernet da 4 porte.</p>
+  </div>
+</div>
+L'hub è un disposivo di rete di livello fisico che funge da nodo di smistamento dati di una rete di comunicazione dati organizzata con una topologia logica a bus e di topologia fisica a stella. 
 
-Questo livello si occupa in primis di formare i dati da inviare attraverso il livello fisico, [incapsulando](https://it.wikipedia.org/wiki/Imbustamento "Imbustamento") il pacchetto proveniente dallo strato superiore in un nuovo [pacchetto](https://it.wikipedia.org/wiki/Pacchetto_(reti) "Pacchetto (reti)") provvisto di un nuovo _[header](https://it.wikipedia.org/wiki/Header "Header")_ (intestazione) e _tail_ (coda), usati anche per sequenze di controllo. Questa frammentazione dei dati in specifici pacchetti è detta _framing_ e i singoli pacchetti sono i _[frame](https://it.wikipedia.org/wiki/Data_frame "Data frame")_.
+Questo dispositivo, operando a livello 1, non ha nessuna logica interna e si occupa solamente di ritrasmettere i segnali ricevuti da una porta su tutte le altre in broadcast. Per questo motivo una rete che utilizzi un hub, nonostante abbia una topologia fisica a stella con l'hub al cento, è di fatto una rete con topologia logica a bus ereditando i difetti di entrambe le topologie. Viste queste limitazioni un hub normalmente non ha un alto numero di porte.
 
-Come [controllo di errore](https://it.wikipedia.org/wiki/Controllo_di_errore "Controllo di errore"), per ogni pacchetto ricevuto, il destinatario invia al mittente un pacchetto **ACK** (_acknowledgement_, conferma) contenente lo stato della trasmissione: il mittente deve ripetere l'invio dei pacchetti mal trasmessi e di quelli che non hanno ricevuto riscontro/risposta. Per ottimizzare l'invio degli [ACK](https://it.wikipedia.org/wiki/ACK_(informatica) "ACK (informatica)"), si usa una tecnica detta **Piggybacking**, che consiste nell'accodare ai messaggi in uscita gli ACK relativi ad una [connessione](https://it.wikipedia.org/wiki/Connessione_(informatica) "Connessione (informatica)") in entrata, per ottimizzare l'uso del livello fisico. I pacchetti ACK possono anche essere raggruppati e mandati in blocchi.
+Attualmente la tecnologia degli hub è considerata obsoleta, poiché largamente soppiantata dall'uso degli switch che, operando a livello 2, è in grado di decidere su quale porta ritrasmettere i segnali risolvendo il problema della collisioni.
 
-Questo livello si occupa anche di controllare il flusso di dati ([controllo di flusso](https://it.wikipedia.org/wiki/Controllo_di_flusso "Controllo di flusso")): in caso di sbilanciamento della [velocità di trasmissione](https://it.wikipedia.org/wiki/Velocit%C3%A0_di_trasmissione "Velocità di trasmissione") tra mittente e destinatario, si occupa di rallentare l'operazione della macchina più veloce, accordandola all'altra e minimizzando così le perdite dovute a sovraccarico sul destinatario.
+[Link](https://it.wikipedia.org/wiki/Livello_fisico "Livello fisico") alla pagina wikipedia.
 
-La sua unità dati fondamentale è il _frame_.
+### Livello 2: Collegamento dati (Datalink layer)
 
-#### [Livello 3: rete (Network Layer)](https://it.wikipedia.org/wiki/Livello_di_rete "Livello di rete")
+_Obiettivo: permettere il trasferimento_ affidabile _di dati tra due nodi contigui nella rete attraverso il livello fisico. Invia frame di dati con la necessaria sincronizzazione ed effettua un [controllo degli errori](https://it.wikipedia.org/wiki/Rilevazione_e_correzione_d%27errore "Rilevazione e correzione d'errore") e delle perdite di segnale. Tutto ciò consente di far apparire, al livello superiore, il mezzo fisico come una linea di trasmissione esente da errori di trasmissione._
 
+Questo livello si occupa in primis di formare i dati da inviare attraverso il livello fisico, [incapsulando](#incapsulamento) il pacchetto proveniente dallo strato superiore in un nuovo pacchetto provvisto di un nuovo _[header](https://it.wikipedia.org/wiki/Header "Header")_ (intestazione) e _tail_ (coda), usati anche per sequenze di controllo. Questa frammentazione dei dati in specifici pacchetti è detta _framing_ e i singoli pacchetti sono i _frame_. 
+
+Le intestazioni contengono una serie di informazioni riguardanti il frame (detti _metadati_ ossia informazioni sui dati) che servono ai protocolli di livello 2 per gestire la trasmissione o effettuare il controllo degli errori. Due informazioni particolarmente importanti contenute negli header sono gli indirizzi di identificazione del mittente e del destinatario del frame detti _indirizzi MAC_. 
+
+Come [controllo di errore](https://it.wikipedia.org/wiki/Controllo_di_errore "Controllo di errore"), per ogni pacchetto ricevuto, il destinatario invia al mittente un pacchetto **ACK** (_acknowledgement_, conferma) che ne conferma la corretta ricezione: il mittente deve ripetere l'invio dei pacchetti mal trasmessi e di quelli che non hanno ricevuto riscontro/risposta.
+
+Questo livello si occupa anche di controllare il flusso di dati controllo di flusso: in caso di sbilanciamento della velocità di trasmissione tra mittente e destinatario, si occupa di rallentare l'operazione della macchina più veloce, accordandola all'altra e minimizzando così le perdite dovute a sovraccarico sul destinatario.
+
+I protocolli più famosi che operano a questo livello sono:
+
+- Ethernet (opera anche a livello 1)
+- Wi-Fi (opera anche a livello 1)
+- Point-to-Point Protocol (PPP)
+
+[Link](https://it.wikipedia.org/wiki/Livello_di_collegamento_dati "Livello di collegamento dati") alla pagina wikipedia.
+
+#### Switch
+
+<!-- thumbnail -->
+<div class="thumbnail float-right">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/switch-rack.jpg" class="modal__opener" aprire="#switch-rack">
+  <p>Porzione di armadio rack contenente diversi switch a 24 porte</p>
+</div>
+<!-- modal -->
+<div id="switch-rack" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#switch-rack">&times;</span>
+    <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/switch-rack.jpg">
+    <p>Porzione di armadio rack contenente diversi switch a 24 porte</p>
+  </div>
+</div>
+
+Uno switch è un dispositivo di rete di livello 2, usato per collegare computer appartenenti ad una stessa rete solitamente all'interno di una stanza o di un piano di un edificio. A differenza degli hub precedentemente descritti, gli switch operano sul livello di collegamento dati (livello 2) e sono in grado di leggere nell'intestazione di ogni frame l'indirizzo MAC di destinazione e scegliere la porta corretta su cui ritrasmettere il frame. In questo modo viene creato un dominio di collisione separato per ciascuna porta dello switch cioè ogni dispositivo collegato a una porta dello switch può trasferire dati in qualsiasi momento senza che le trasmissioni interferiscano con quelle di un altro dispositivo risolvendo il cosiddetto _problema delle collisioni_. Gli switch possono quindi gestire diverse decine di collegamenti contemporaneamente (si trovano facilmente switch da 24 o 48 porte).
+
+Essendo un dispositivo di livello 2, lo switch opera sia sul livello 1 che sul livello 2.
+
+Spesso si trovano in commercio dispositivi che vengono definiti switch ma che in realtà offrono funzionalità di livello più alto tipiche dei router.
+
+
+### Livello 3: rete (Network Layer)
 _Obiettivo: rendere i livelli superiori indipendenti dai meccanismi e dalle tecnologie di trasmissione usate per la connessione e prendersi carico della consegna a destinazione dei pacchetti._
 
 È responsabile di:
@@ -109,10 +167,47 @@ _Obiettivo: rendere i livelli superiori indipendenti dai meccanismi e dalle tecn
 * [routing](https://it.wikipedia.org/wiki/Instradamento#Routing "Instradamento"): scelta ottimale del percorso di rete da utilizzare per garantire la consegna delle informazioni dal mittente al destinatario, scelta svolta dal [router](https://it.wikipedia.org/wiki/Router "Router") attraverso dei particolari [algoritmi di Routing](https://it.wikipedia.org/wiki/Protocolli_di_routing "Protocolli di routing") e [tabelle di routing](https://it.wikipedia.org/wiki/Routing_table "Routing table").
 * conversione dei dati nel passaggio fra una rete ed un'altra con diverse caratteristiche, come il protocollo di rete utilizzato (_internet-working_). Deve, quindi:
   * tradurre gli indirizzi di rete;
-  * valutare la necessità di frammentare i pacchetti dati se la nuova rete ha una diversa [Maximum Transmission Unit](https://it.wikipedia.org/wiki/Maximum_Transmission_Unit "Maximum Transmission Unit") (MTU);
+  * valutare la necessità di frammentare i pacchetti dati se la nuova rete prevede una diversa dimensione dei pacchetti;
   * valutare la necessità di gestire diversi protocolli attraverso l'impiego di [gateway](https://it.wikipedia.org/wiki/Gateway_(informatica) "Gateway (informatica)").
 
 La sua unità dati fondamentale è il _pacchetto_.
+
+Il protocollo di rete più usato è il protocollo IP (Internet Protocol) usato in tutte le reti TCP/IP.
+
+[Link](https://it.wikipedia.org/wiki/Livello_di_rete "Livello di rete") alla pagina wikipedia.
+
+#### Router
+
+<!-- thumbnail -->
+<div class="thumbnail float-right">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/router.jfif" class="modal__opener" aprire="#router">
+  <p>Router domestico dotato sia di porte fisiche che di antenne per il Wi-Fi</p>
+</div>
+<!-- modal -->
+<div id="router" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#router">&times;</span>
+    <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/router.jfif">
+    <p>Router domestico dotato sia di porte fisiche che di antenne per il Wi-Fi</p>
+  </div>
+</div>
+
+Un router è un dispositivo di rete di livello 3 usato per collegare sottoreti diverse e che si occupa di instradare i pacchetti fra le diverse sottoreti. Il router spesso opera anche come "gestore" di una determinata sottorete fornendo una serie di servizi agli host collegati a quella sottorete.
+
+Mentre gli switch si occupano di collegare dispositivi all'interno di una stessa rete identificandoli per mezzo di indirizzi MAC, i router si occupano di collegare diverse reti utilizzando indirizzi di livello di rete che permettendo loro di effettuare il routing dei pacchetti tra reti differenti. Ogni protocollo di rete effettua queste operazioni in maniera differente. Nel capitolo riguardante il [protocollo IP](#) verrà trattato nel dettaglio questo argomento.
+
+Spesso le reti sono organizzate gerarchicamente tra loro e i router sono quindi solitamente costruiti per rispettare tale ordine. Spesso quindi i router presentano una porta per la connessione alla rete "esterna" e una o più porte fisiche per i collegamenti verso la rete "interna". A volte possiedono anche antenne per fornire connessione Wi-Fi alla rete interna.
+
+
+
+
+
+
+
+
+# --ARRIVATO FIN QUI A SISTEMARE--
+
+
 
 #### [Livello 4: trasporto (Transport Layer)](https://it.wikipedia.org/wiki/Livello_di_trasporto "Livello di trasporto")
 
