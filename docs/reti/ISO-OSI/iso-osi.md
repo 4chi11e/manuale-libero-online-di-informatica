@@ -499,15 +499,26 @@ Puoi approfondire l'argomento alla [pagina](https://en.wikipedia.org/wiki/Transp
 
 ### Livello 7: applicazione (Application Layer) - ANCORA DA SCRIVERE
 
-_Obiettivo: interfacciare utente e macchina._
+_Obiettivo: permettere alle applicazioni di comunicare con applicazioni in esecuzione su un altro host._
 
-Fornisce un insieme di protocolli che operano a stretto contatto con le [applicazioni](https://it.wikipedia.org/wiki/Applicazione_(informatica) "Applicazione (informatica)"). Potrebbe essere errato identificare un'applicazione utente come parte del livello applicazione.
+Il livello 7 prende il nome di "applicazione" poichè fornisce alle applicazioni i protocolli necessari alla comunicazione con applicazioni che sono eseguite su altri host. Non bisogna quindi confondere applicazioni e protocolli utilizzati. 
 
-I protocolli delle applicazioni tipiche di questo livello realizzano operazioni come ad esempio:
+Esistono moltissimi protocolli utilizzati dalle applicazioni per svolgere svariati compiti come: trasferimento file, terminale virtuale, posta elettronica, risoluzione di nomi di dominio...
 
-* Trasferimento [file](https://it.wikipedia.org/wiki/File "File")
-* [Terminale virtuale](https://it.wikipedia.org/wiki/Terminale_virtuale "Terminale virtuale")
-* [Posta elettronica](https://it.wikipedia.org/wiki/Posta_elettronica "Posta elettronica")
+Di seguito sono descritti i protocolli di livello applicazione più comuni.
+
+#### HTTP
+
+##### Cookies
+##### HTTPS
+
+#### FTP 
+#### Protocolli per la posta elettronica
+
+#### DNS
+
+
+
 
 
 ## Link e riferimenti esterni
