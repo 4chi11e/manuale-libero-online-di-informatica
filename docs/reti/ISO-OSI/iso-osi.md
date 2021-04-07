@@ -3,7 +3,7 @@ layout: default
 title: ISO/OSI
 nav_order: 1
 parent: Reti
-has_children: true
+has_children: false
 ---
 
 # Modello ISO/OSI
