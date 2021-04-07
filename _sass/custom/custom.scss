@@ -601,6 +601,16 @@ td.bordo-destra-spesso {
   @include fs-4;
 }
 
+#versioni-tls-ssl{
+  @extend .tbl-fr;
+}
+@media (max-width: 1050px){
+  #versioni-tls-ssl{
+    float: none;
+  }
+}
+
+
 .fs-5 * {
   @include fs-5;
 }
