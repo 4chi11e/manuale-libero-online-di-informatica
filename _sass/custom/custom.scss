@@ -145,8 +145,16 @@
 //     }
 //   }
 
-$border-color-2: $grey-dk-100;
 
+
+
+// Variabili
+$border-color-2: $grey-dk-100;
+$nav-width: 264px !default;
+$nav-width-md: 260px !default;
+
+
+// Margini
 .mb-0{
   margin-bottom: 0 !important;
 }
@@ -203,6 +211,12 @@ a {
   overflow-wrap: break-word !important;
   //white-space: pre-wrap;
   //color: red;
+}
+
+.site-title{
+  // @include fs-5;
+  // margin-left: -20px;
+  padding-right: 0px;
 }
 
 table{
