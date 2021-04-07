@@ -235,50 +235,50 @@
   </g>
 <!-- ================================================ -->
   <g style="text-anchor:middle" systemLanguage="es">
-   <text y="-26.3051" x="80">data unit</text>
-   <text y="-26.3051" x="250">layers</text>
-   <text y="31.3882" x="78.9818">Data</text>
-   <text y="97.3882" x="78.9818">Data</text>
-   <text y="163.388" x="78.9818">Data</text>
-   <text y="229.388" x="78.9818">Segments</text>
-   <text y="318.494" x="79.04">Packets</text>
-   <text y="384.494" x="79.04">Frames</text>
-   <text y="450.494" x="79.04">Bits</text>
+   <text y="-26.3051" x="80">unidad de datos</text>
+   <text y="-26.3051" x="250">nivel o capa</text>
+   <text y="31.3882" x="78.9818">Dato</text>
+   <text y="97.3882" x="78.9818">Dato</text>
+   <text y="163.388" x="78.9818">Dato</text>
+   <text y="229.388" x="78.9818">Segmento</text>
+   <text y="318.494" x="79.04">Paquete</text>
+   <text y="384.494" x="79.04">Trama</text>
+   <text y="450.494" x="79.04">Bit</text>
    <text y="18" x="248.982">
-    <tspan>Nivel de Aplicación</tspan>
+    <tspan>Nivel de aplicación</tspan>
     <tspan x="248.982" font-size="10pt" dy="22">servicios de red a aplicaciones</tspan>
    </text>
    <text y="82" x="248.982">
-    <tspan>Nivel de Presentación</tspan>
+    <tspan>Nivel de presentación</tspan>
     <tspan x="248.982" font-size="10pt" dy="22">representación de los datos</tspan>
    </text>
    <text y="150" x="248.982">
-    <tspan>Nivel de Sesión</tspan>
+    <tspan>Nivel de sesión</tspan>
     <tspan x="248.982" font-size="10pt" dy="16">comunicación entre dispositivos</tspan>
     <tspan x="248.982" font-size="10pt" dy="16">de la red</tspan>
    </text>
    <text y="214" x="248.982">
-    <tspan>Nivel de Transporte</tspan>
-    <tspan x="248.982" font-size="10pt" dy="16">conexión extremo-a-extremo</tspan>
-    <tspan x="248.982" font-size="10pt" dy="16">y fiabilidad de los datos</tspan>
+    <tspan>Nivel de transporte</tspan>
+    <tspan x="248.982" font-size="10pt" dy="16">conexión de extremo a extremo</tspan>
+    <tspan x="248.982" font-size="10pt" dy="16">y control de flujo de datos</tspan>
    </text>
    <text y="303" x="249.04">
-    <tspan>Nivel de Red</tspan>
-    <tspan x="248.982" font-size="10pt" dy="16">determinación de ruta e</tspan>
+    <tspan>Nivel de red</tspan>
+    <tspan x="248.982" font-size="10pt" dy="16">determinación de ruta y</tspan>
     <tspan x="248.982" font-size="10pt" dy="16">direccionamiento lógico (IP)</tspan>
    </text>
    <text y="369" x="249.04">
-    <tspan>Nivel de Enlace de Datos</tspan>
+    <tspan>Nivel de enlace de datos</tspan>
     <tspan x="248.982" font-size="10pt" dy="16">direccionamiento físico</tspan>
     <tspan x="248.982" font-size="10pt" dy="16">(MAC y LLC)</tspan>
    </text>
    <text y="435" x="249.04">
-    <tspan>Nivel Físico</tspan>
+    <tspan>Nivel físico</tspan>
     <tspan x="248.982" font-size="10pt" dy="22">señal y transmisión binaria</tspan>
    </text>
    <g font-size="24.062">
-    <text y="127" x="-50" transform="rotate(-90 -50 127)">Host Layers</text>
-    <text y="384" x="-50" transform="rotate(-90 -50 384)">Media Layers</text>
+    <text y="127" x="-50" transform="rotate(-90 -50 127)">Capas del anfitrión</text>
+    <text y="384" x="-50" transform="rotate(-90 -50 384)">Capas del medio</text>
    </g>
   </g>
 <!-- ================================================ -->

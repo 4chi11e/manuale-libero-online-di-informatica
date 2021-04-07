@@ -18,7 +18,7 @@ grand_parent: Reti
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-Skytale.png" class="modal__opener" aprire="#img-scitala">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/crittografia-Skytale.png" class="modal__opener" aprire="#img-scitala">
   <p>Una ricostruzione di scitala.</p>
 </div>
 <!-- modal -->
@@ -26,7 +26,7 @@ grand_parent: Reti
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-scitala">&times;</span>
     <div class="modal__content__img-container"> 
-      <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-Skytale.png">
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/crittografia-Skytale.png">
     </div>
     <p>Una ricostruzione di scitala.</p>
   </div>
@@ -231,7 +231,7 @@ Nel rinascimento si passò dalla sostituzione monoalfabetica a alla sostituzione
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-disco_leonbattista_alberti.gif" class="modal__opener" aprire="#img-disco-leonbattista-alberti">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/crittografia-disco_leonbattista_alberti.gif" class="modal__opener" aprire="#img-disco-leonbattista-alberti">
   <p>Disco di Leon Battista Alberti</p>
 </div>
 <!-- modal -->
@@ -239,7 +239,7 @@ Nel rinascimento si passò dalla sostituzione monoalfabetica a alla sostituzione
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-disco-leonbattista-alberti">&times;</span>
     <div class="modal__content__img-container"> 
-      <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-disco_leonbattista_alberti.gif">
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/crittografia-disco_leonbattista_alberti.gif">
     </div>
     <p>Disco di Leon Battista Alberti</p>
   </div>
@@ -520,7 +520,7 @@ La prima macchina cifrante fu inventata dal comandante francese Etienne Bazière
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-Enigma-Museo_scienza_e_tecnologia_Milano.jpg" class="modal__opener" aprire="#img-enigma-museo-milano">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/crittografia-Enigma-Museo_scienza_e_tecnologia_Milano.jpg" class="modal__opener" aprire="#img-enigma-museo-milano">
   <p>Macchina Enigma. Esposta presso il <a href="https://it.wikipedia.org/wiki/Museo_nazionale_della_scienza_e_della_tecnologia_Leonardo_da_Vinci">Museo nazionale della scienza e della tecnologia "L. Da Vinci" di Milano</a>.</p>
 </div>
 <!-- modal -->
@@ -528,7 +528,7 @@ La prima macchina cifrante fu inventata dal comandante francese Etienne Bazière
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-enigma-museo-milano">&times;</span>
     <div class="modal__content__img-container"> 
-      <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-Enigma-Museo_scienza_e_tecnologia_Milano.jpg">
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/crittografia-Enigma-Museo_scienza_e_tecnologia_Milano.jpg">
     </div>
     <p>Macchina Enigma. Esposta presso il <a href="https://it.wikipedia.org/wiki/Museo_nazionale_della_scienza_e_della_tecnologia_Leonardo_da_Vinci">Museo nazionale della scienza e della tecnologia "L. Da Vinci" di Milano</a>.</p>
   </div>
@@ -546,7 +546,7 @@ In linea di principio, Enigma può essere considerata come un'estensione del met
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-schema_enigma.jpg" class="modal__opener" aprire="#img-schema-enigma">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/crittografia-schema_enigma.jpg" class="modal__opener" aprire="#img-schema-enigma">
   <p>Schema del funzionamento della macchina Enigma</p>
 </div>
 <!-- modal -->
@@ -554,7 +554,7 @@ In linea di principio, Enigma può essere considerata come un'estensione del met
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-schema-enigma">&times;</span>
     <div class="modal__content__img-container"> 
-      <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-schema_enigma.jpg">
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/crittografia-schema_enigma.jpg">
     </div>
     <p>Schema del funzionamento della macchina Enigma</p>
   </div>
@@ -566,7 +566,7 @@ La macchina Enigma aveva l'aspetto di una macchina per scrivere con due tastiere
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-rotore.jpg" class="modal__opener" aprire="#img-rotore-enigma">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/crittografia-rotore.jpg" class="modal__opener" aprire="#img-rotore-enigma">
   <p>Rotore di una macchina Enigma</p>
 </div>
 <!-- modal -->
@@ -574,7 +574,7 @@ La macchina Enigma aveva l'aspetto di una macchina per scrivere con due tastiere
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-rotore-enigma">&times;</span>
     <div class="modal__content__img-container"> 
-      <img src="{{site.baseurl}}/assets/images/crittografia/crittografia-rotore.jpg">
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/crittografia-rotore.jpg">
     </div>
     <p>Rotore di una macchina Enigma</p>
   </div>
@@ -621,7 +621,7 @@ Innanzitutto bisogna specificare che gli scambiatori dovevano essere posizionati
 
 <!-- thumbnail -->
 <div class="thumbnail--centrato mt-4 mb-4">
-  <img src="{{site.baseurl}}/assets/images/crittografia/esempio-chiavi-enigma.jpg" class="modal__opener" aprire="#img-esempio-chiavi-enigma">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/esempio-chiavi-enigma.jpg" class="modal__opener" aprire="#img-esempio-chiavi-enigma">
   <p>Parte di un cifrario tedesco per macchine Enigma.</p>
 </div>
 <!-- modal -->
@@ -629,7 +629,7 @@ Innanzitutto bisogna specificare che gli scambiatori dovevano essere posizionati
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-esempio-chiavi-enigma">&times;</span>
     <div class="modal__content__img-container"> 
-      <img src="{{site.baseurl}}/assets/images/crittografia/esempio-chiavi-enigma.jpg">
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/esempio-chiavi-enigma.jpg">
     </div>
     <p>Parte di un cifrario tedesco per macchine Enigma.</p>
   </div>
