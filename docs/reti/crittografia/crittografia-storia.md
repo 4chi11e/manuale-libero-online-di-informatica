@@ -645,7 +645,9 @@ I passaggi per l’utilizzo di Enigma si possono riassumere con i seguenti punti
 Oltre alle chiavi contenute nei cifrari, veniva anche utilizzata una chiave di messaggio usata per regolare il nuovo assetto: tale chiave era trasmessa due volte di seguito all’inizio di ogni messaggio, con l’assetto della chiave giornaliera (fu proprio questa ripetizione della chiave di messaggio all’inizio di ogni testo trasmesso il punto di partenza che permise al matematico Marian Rejewski di far breccia nel codice Enigma).
 
 <div class="esempio" markdown="1">
-  **Esempio**
+  
+**Esempio**
+{: .mt-0 .fs-5}
 
 **Cifratura**
 {: .mb-0}
@@ -664,7 +666,7 @@ Oltre alle chiavi contenute nei cifrari, veniva anche utilizzata una chiave di m
 - Digita le prime sei lettere del messaggio ricevuto, ottenendo PGH PGH
 - Posiziona gli scambiatori secondo la chiave di messaggio
 - Digita il resto del testo cifrato sulla tastiera ottenendo il testo in chiaro
-  {: .mb-0}
+{: .mb-0}
 
 </div>
 
