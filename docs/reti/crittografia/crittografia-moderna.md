@@ -403,7 +403,9 @@ Il modo migliore per capire come si sia potuti arrivare a concepire e a realizza
 <div id="doppio-lucchetto" class="modal">
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#doppio-lucchetto">&times;</span>
-    <img src="{{site.baseurl}}/assets/images/reti/crittografia/doppio_lucchetto.jpg">
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/doppio_lucchetto.jpg">
+    </div>
     <p>Il metodo del doppio lucchetto.</p>
   </div>
 </div>
@@ -697,7 +699,9 @@ Supponiamo allora che Bob le voglia mandare un messaggio costituito da vediamo q
 <div id="img-doppia-codifica" class="modal">
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-doppia-codifica">&times;</span>
-    <img src="{{site.baseurl}}/assets/images/reti/crittografia/doppia-codifica.jpg">
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/doppia-codifica.jpg">
+    </div>
     <p>Dall'immagine si può vedere che Alice non si limita a cifrare il messaggio con la chiave pubblica di Bob ma esegue prima un'altra cifratura con la propria chiave privata; in questo modo Bob, aggiungendo una seconda decifratura con la chiave pubblica di Alice, sarà sicuro che solo Alice può aver cifrato e spedito il messaggio perchè è l'unica persona che conosce la chiave privata di Alice.</p>
   </div>
 </div>
@@ -724,7 +728,9 @@ Se da un lato la capacità di fattorizzare numeri ci permette di attaccare RSA, 
 <div id="img-numeri-primi" class="modal">
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-numeri-primi">&times;</span>
-    <img src="{{site.baseurl}}/assets/images/reti/crittografia/numeri-primi.png">
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/numeri-primi.png">
+    </div>
     <p>Un grafico aggiornato al 2016 del numero di cifre componenti il più grande numero primo conosciuto. La scala dell'asse delle ordinate è logaritmica. La linea rossa è la curva esponenziale che meglio si adatta al grafico e ha equazione: y = exp(0,187394 t − 360,527), dove t è in anni.</p>
   </div>
 </div>
