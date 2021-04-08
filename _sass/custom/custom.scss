@@ -125,8 +125,9 @@ li {
   border-radius: 4px;
   padding: 5px;
   //width: 275px;
-  width: fit-content;
-  max-width: 40%;
+  // width: fit-content;
+  // max-width: 40%;
+  width: 40%;
   &--centrato{
     @extend .thumbnail;
     // display: inline-block;
@@ -142,12 +143,14 @@ li {
     // margin-bottom: 0px;
     margin: 0px;
     @extend .fs-2;
+    text-align: left;
     // line-height: normal; 
   }
 
   img {
     margin-bottom: 5px;
     //margin: auto !important;
+    min-width: 100%;
   }
 
   &--testo{
@@ -155,7 +158,16 @@ li {
     line-height: normal;
   }
   &--50{
-    max-width: 50%;
+    @extend .thumbnail;
+    width: 50%;
+    // p {
+    //   margin: 0px;
+    //   @extend .fs-3;
+    // }
+  }
+  &--25{
+    @extend .thumbnail;
+    width: 25%;
   }
 }
 
@@ -258,6 +270,14 @@ li {
 
 .esempio {
   @extend .code-example;
+
+  *:first-child{
+    margin-top: 0;
+  }
+
+  *:last-child{
+    margin-bottom: 0;
+  }
 }
 
 .importante {
@@ -267,6 +287,31 @@ li {
   border: 2px solid $border-color-2;
   border-radius: $border-radius;
   @include fs-5;
+}
+
+// ---------------- Sistema di incolonnamento --------------------------------------
+
+.colonna-2{
+  width: 47.5%;
+  float: left;
+}
+*.colonna-2:first-child{
+  margin-right: 2.5%;
+}
+*.colonna-2:last-child{
+  margin-left: 2.5%;
+}
+@media (max-width:992px){
+  .colonna-2{
+    width: 100%;
+  }
+  *.colonna-2:first-child{
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  *.colonna-2:last-child{
+    margin-left: 0;
+  }
 }
 
 
@@ -439,6 +484,12 @@ td.bordo-destra-spesso {
 // .tab-fs-4{@include fs-4}
 // .tab-fs-5{@include fs-5}
 
+.tbl-creative-commons{
+  img{
+    height: 40px;
+  }
+}
+
 // -------------------- Fine Tabelle -----------------------------------------------
 
 
@@ -589,6 +640,13 @@ a {
   }
 }
 
+
+// -------------------- Clearfix ---------------------------------------
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
 // -------------------- Non so che cosa faccia ---------------------------------------
 
