@@ -85,6 +85,13 @@ li {
 
 // -------------------- Elementi specifici ----------------------------------------
 
+.formula{
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+
+
 // è il titolo che si trova sopra il nav
 .site-title{
   // @include fs-5;

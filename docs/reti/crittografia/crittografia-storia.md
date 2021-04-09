@@ -605,6 +605,7 @@ Combinando insieme tutti gli elementi fin qui osservati si può calcolare il num
 - con il **pannello a prese multiple** i possibili abbinamenti di 12 (6x2) lettere su 26 sono moltissimi, per l’esattezza 100.391.791.500, che si ottiene dalla formula seguente dove p rappresenta il numero di chiavi ed è pari a 6:
 
 $$ \binom{26}{2p} \cdot (2p-1) \cdot (2p-3) \cdot (2p-5) \cdot ... \cdot 1 = \frac{26!}{(26-2p)! \cdot p! \cdot 2^p} $$
+{: .formula}
 
 - il numero totale di chiavi si ottiene moltiplicando tra loro le suddette possibilità:
 
