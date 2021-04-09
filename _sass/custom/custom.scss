@@ -92,6 +92,23 @@ li {
   padding-right: 0px;
 }
 
+#tornasu{
+  position: fixed;
+  bottom: 20px;
+  right: 25px;
+  display: none;
+  // padding: 10px;
+
+  img {
+    width: 35px;
+    // height: 35px;
+  }
+
+  &--visible{
+    display: block;
+  }
+}
+
 #polibio-tbl {
   @extend .float-right;
   @extend .ml-6;
@@ -487,6 +504,10 @@ td.bordo-destra-spesso {
 .tbl-creative-commons{
   img{
     height: 40px;
+  }
+  td:nth-child(1),
+  td:nth-child(2){
+    text-align: center;
   }
 }
 
