@@ -296,13 +296,35 @@ A livello globale, poche giurisdizioni consentono l'attribuzione al pubblico dom
 
 Appare chiaro come il progetto CC Zero sia fortemente influenzato dal diritto anglosassone e ancor più da quello statunitense, in cui le possibilità di "rinunciare" ai diritti su un'opera sono decisamente maggiori - in numero e ampiezza - rispetto all'ordinamento giuridico italiano.
 
+### Modelli di business per software open source
+
+Le aziende il cui centro commerciale si concentra sullo sviluppo di software open source utilizzano una varietà di modelli di business per risolvere la sfida di come fare soldi fornendo software che è per definizione concesso in licenza gratuitamente. Ciascuna di queste strategie aziendali si basa sulla premessa che gli utenti di tecnologie open source sono disposti ad acquistare funzionalità software aggiuntive con licenze proprietarie o ad acquistare altri servizi o elementi di valore che integrano il software open source che è fondamentale per il business.
+
+Esistono diversi tipi di modelli di business per realizzare profitti utilizzando software open source (OSS) o finanziare la creazione e lo sviluppo e la manutenzione continui. Di seguito è riportato un elenco degli attuali modelli di business commerciali legali e esistenti nel contesto del software open source e delle licenze open source. L'accettazione di questi approcci varia; alcuni di questi approcci sono consigliati (come open core e servizi di vendita), altri sono accettati, mentre altri ancora sono considerati controversi o addirittura non etici dalla comunità open source.
+
+- Vendere servizi come formazione supporto tecnico o consulenza
+- Vendere articoli di merchandising (magliette tazze...)
+- Associare al software open source servizi, ad esempio fornire un servizio basato sul software open source (ad es. servizi in cloud da server che eseguono software open source)
+- Chiedere donazioni volontarie
+- Crowdfunding
+- Doppia licenza o open core: parte del software open source e parte proprietario
+- Vendita di certificati e uso del marchio
+- Vendita di componenti aggiuntivi proprietari
+- Vendita di sistemi di aggiornamento proprietari
+- Open sourcing a fine vita o ritardato
+- Finanziamenti pubblici o privati
+
+Risulta evidente che le opportunità di business sono moltissime e ne sono state riportate solo alcune. Se vuoi approfondire l'argomento, in [questa pagina](https://it.qaz.wiki/wiki/Business_models_for_open-source_software) puoi trovare tutte le spiegazioni dettagliate con esempi di ogni modello di business.
+
 
 ## Riferimenti esterni
 
-- [Diritto d'autore su Wikipedia](https://it.wikipedia.org/wiki/Diritto_d%27autore).
-- [Storia del diritto d'autore su Wikipedia](https://it.wikipedia.org/wiki/Storia_del_diritto_d%27autore).
-- [Revolution OS](https://www.youtube.com/watch?v=1o9RaSdGlOI), documentario sulla storia del software libero e open source.
-
-
+- [_Diritto d'autore_](https://it.wikipedia.org/wiki/Diritto_d%27autore) su Wikipedia.
+- [_Storia del diritto d'autore_](https://it.wikipedia.org/wiki/Storia_del_diritto_d%27autore) su Wikipedia.
+- [_Software libero_](https://it.wikipedia.org/wiki/Software_libero) su Wikipedia
+- [_Revolution OS_](https://www.youtube.com/watch?v=1o9RaSdGlOI), documentario sulla storia del software libero e open source su Youtube.
+- [_GNU General Public License_](https://it.wikipedia.org/wiki/GNU_General_Public_License) su Wikipedia.
+- [_Licenze Creative Commons_](https://it.wikipedia.org/wiki/Licenze_Creative_Commons) su Wikipedia.
+- [_Modelli di business per software open source_](https://it.qaz.wiki/wiki/Business_models_for_open-source_software).
 
 
