@@ -505,17 +505,205 @@ Il livello 7 prende il nome di "applicazione" poichè fornisce alle applicazioni
 
 Esistono moltissimi protocolli utilizzati dalle applicazioni per svolgere svariati compiti come: trasferimento file, terminale virtuale, posta elettronica, risoluzione di nomi di dominio...
 
-Di seguito sono descritti i protocolli di livello applicazione più comuni.
+Prima di trattare nello specifico le funzionalità offerte dai vari protocolli è necessario conoscere alcuni aspetti generali della comunicazione a livello applicazione.
 
-#### HTTP
+#### URI e URL
+lo Uniform Resource Identifier (in acronimo URI) è una sequenza di caratteri che identifica universalmente ed univocamente una risorsa. Un URI può essere classificato come qualcosa che definisce posizioni (URL) o nomi (URN) o entrambi.
 
-##### Cookies
-##### HTTPS
+Un __URN__ (Uniform Resource Name) è un URI che identifica una risorsa mediante un "nome" in un particolare dominio di nomi ("namespace"). Un URN può quindi essere usato per identificare una risorsa, senza lasciarne intendere l'ubicazione o come ottenerne una rappresentazione. Per esempio l'URN urn:isbn:0-395-36341-1 è un URI che mappa universalmente e univocamente un libro mediante il suo identificativo, o nome, (0-395-36341-1) nel namespace dei codici ISBN, ma non suggerisce dove e come possiamo ottenere una copia di tale libro. Si noti che, da RFC8141, un URN è un URI assegnata sotto lo schema URI "urn".
 
-#### FTP 
-#### Protocolli per la posta elettronica
+Un __URL__ (Uniform Resource Locator) è un URI che identifica una risorsa tramite la sua "collocazione" ("location"). Di fatto, non identifica la risorsa per nome, ma con il modo con cui la si può reperire. Per esempio, l'URL http://www.example.com/ è un URI che identifica una risorsa (l'home page di un sito web) e lascia intendere che una rappresentazione di tale risorsa (il codice HTML della versione corrente di tale home page) è ottenibile via HTTP da un host di rete chiamato www.example.com.
+
+Lo schema completo di una URL è del tipo (non tutte le componenti sono obbligatorie):
+
+`<scheme>://<domain>:<port>/<path>?<querystring>#<fragmentid>`
+
+esempi di url sono:
+
+- ftp://ftp.is.co.za/rfc/rfc1808.txt  -  schema per servizi FTP
+- http://www.math.uio.no/faq/compression-faq/part1.html  -  schema per servizi HTTP
+- file://C:/Folder1/SubFolder2/file%20text.txt  -  schema per un file nel file system locale
+- mailto:mduerst@ifi.unizh.ch - schema per indirizzi di posta elettronica
+- news:comp.infosystems.www.servers.unix - schema per newsgroup e articoli Usenet
+- telnet://melvyl.ucop.edu/ - schema per servizi interattivi telnet
+- irc://irc.freenode.net/wikipedia-it - schema per IRC
+- spotify:artist:6wWVKhxIU2cEi0K81v7HvP - schema per brani su Spotify
+- usb://Samsung/SCX-4x21%20Series?serial=8P36BADL316673B.&interface=1 - Esempio di stampante in ambiente Linux
+
+I protocolli di livello applicazione usano normalmente gli URL, ma è stato detto in precedenza che per creare un canale di comunicazione tra due host si crea una socket che è formata da indirizzo IP e porta. In questo caso l'indirizzo IP non è indicato, si identifica invece l'host contenente la risorsa per mezzo di un _nome di dominio_, indicato nella struttura dell'url come _domain_. Per instaurare una comunicazione è necessario quindi l'utilizzo di un servizio che converta i nomi di dominio in indirizzi IP, questo servizio è il Domain Name System (DNS).
 
 #### DNS
+{: .titolo-3}
+
+il sistema dei nomi di dominio (in inglese: Domain Name System, DNS), è un sistema utilizzato per assegnare nomi ai nodi della rete (host). Questi nomi sono utilizzabili, mediante una traduzione, di solito chiamata "risoluzione", al posto degli indirizzi IP originali. Il servizio è realizzato tramite un database distribuito, costituito dai server DNS. Il DNS ha una struttura gerarchica ad albero rovesciato ed è diviso in domini (com, org, it, ecc.). Ad ogni dominio o nodo corrisponde un nameserver, che conserva un database con le informazioni di alcuni domini di cui è responsabile e si rivolge ai nodi successivi quando deve trovare informazioni che appartengono ad altri domini.
+
+Ogni nome di dominio termina con un "." (punto). Ad esempio l'indirizzo wikipedia.org termina con il punto. La stringa che segue il punto finale è chiamata "dominio radice" (DNS root zone). I server responsabili del dominio radice sono i cosiddetti root nameservers. Essi possiedono l'elenco dei server autoritativi di tutti i domini di primo livello (TLD) riconosciuti e lo forniscono in risposta a ciascuna richiesta. I root nameserver sono 13 in tutto il mondo, di cui 10 negli Stati Uniti, due in Europa (Inghilterra e Svezia) e uno in Giappone.
+
+##### Storia
+{: .no_toc}
+
+Il DNS fu ideato il 23 giugno 1983 da Paul Mockapetris, Jon Postel e Craig Partridge; le specifiche originali sono descritte nello standard RFC 882. Nel 1987 vennero pubblicati commenti allo standard RFC del DNS, con i nomi RFC 1034 e RFC 1035 rendendo obsolete le specifiche precedenti.
+
+##### Descrizione
+{: .no_toc}
+
+Il nome DNS denota anche il protocollo di livello 7 che regola il funzionamento del servizio, i programmi che lo implementano, i server su cui questi vengono elaborati, l'insieme di questi server che cooperano per fornire il servizio più intelligente.
+
+I nomi DNS, o "nomi di dominio" o "indirizzi mnemonici", sono una delle caratteristiche più visibili di Internet. L'operazione di conversione da nome a indirizzo IP è detta "risoluzione DNS"; la conversione da indirizzo IP a nome è detta "risoluzione inversa".
+
+In pratica, il DNS è un registro universale cioè un database distribuito, con una struttura gerarchica, che archivia i nomi mnemonici di dominio e la loro associazione ai relativi indirizzi IP specifici.
+
+###### Motivazioni ed utilizzi
+{: .no_toc}
+
+- La possibilità di attribuire un nome testuale facile da memorizzare a un server (ad esempio un sito world wide web) migliora di molto l'uso del servizio, in quanto gli esseri umani trovano più facile ricordare nomi testuali (mentre gli host e i router sono raggiungibili utilizzando gli indirizzi IP numerici). Per questo, il DNS è fondamentale per l'ampia diffusione di internet anche tra utenti non tecnici, ed è una delle sue caratteristiche più visibili.
+- È possibile attribuire più nomi allo stesso indirizzo IP (o viceversa) per rappresentare diversi servizi o funzioni forniti da uno stesso host (o più host che erogano lo stesso servizio). Questa "flessibilità" risulta utile in molti casi:
+> - Nel caso in cui si debba sostituire il server che ospita un servizio, o si debba modificare il suo indirizzo IP, è sufficiente modificare il record DNS, senza dover intervenire sui client.
+> - Utilizzando nomi diversi per riferirsi ai diversi servizi erogati da uno stesso host (registrati quindi con lo stesso indirizzo IP), è possibile spostare una parte dei servizi su un altro host (con diverso indirizzo IP, già predisposto a fornire i servizi in oggetto). Modificando quindi sul server DNS i record dei nomi associati ai servizi da spostare e registrando il nuovo IP al posto di quello vecchio, si otterrà lo spostamento automatico delle nuove richieste di tutti i client su questo nuovo host, senza interruzione dei servizi.
+> - Un utilizzo molto popolare di questa possibilità è il cosiddetto virtual hosting, basato sui nomi, una tecnica per cui un web server dotato di una singola interfaccia di rete e di singolo indirizzo IP può ospitare più siti web, usando l'indirizzo alfanumerico trasmesso nell'header HTTP per identificare il sito per cui viene fatta la richiesta.
+> - Facendo corrispondere a un nome più indirizzi IP, il carico dei client che richiedono quel nome viene distribuito sui diversi server associati agli IP registrati, ottenendo un aumento delle prestazioni complessive del servizio e una tolleranza ai guasti (ma è necessario assicurarsi che i diversi server siano sempre allineati, ovvero offrano esattamente lo stesso servizio ai client).
+- La risoluzione inversa è utile per identificare l'identità di un host, o per leggere il risultato di un traceroute.
+- Il DNS viene usato da numerose tecnologie in modo poco visibile agli utenti, per organizzare le informazioni necessarie al funzionamento del servizio.
+
+###### Nomi di dominio
+{: .no_toc}
+
+Un nome di dominio è costituito da una serie di stringhe separate da punti, ad esempio it.wikipedia.org. e sono organizzati a livelli. A differenza degli indirizzi IP, dove la parte più importante del numero è la prima cifra partendo da sinistra, in un nome DNS la parte più importante è la prima partendo da destra.
+
+La parte più a destra è detta dominio di primo livello (o TLD, Top Level Domain), e ce ne sono centinaia che possono essere scelti, per esempio .org o .it.
+
+Un dominio di secondo livello, a differenza del dominio di primo livello che è formato da parole "fisse" e limitate, è formato da una parola scelta a piacimento. Questa parola deve il più possibile essere legata a quello che ci identifica e a quello che vogliamo comunicare. Il dominio di secondo livello è quindi formato da due parti, per esempio wikipedia.org, e così via.
+
+Il dominio di terzo livello è il figlio del dominio di secondo livello, infatti, prendendo come esempio wikipedia.org, un dominio di terzo livello sarà: stuff.wikipedia.org. Ogni ulteriore elemento specifica quindi un'ulteriore suddivisione. Quando un dominio di secondo livello viene registrato all'assegnatario, questo è autorizzato a usare i nomi di dominio relativi ai successivi livelli, come some.other.stuff.wikipedia.org (dominio di quinto livello) e così via.
+
+Un nome di dominio, come per esempio it.wikipedia.org, può essere parte di un URL, come http://it.wikipedia.org/wiki/Treno, o di un indirizzo e-mail, come per esempio apache@it.wikipedia.org. È anche possibile connettersi a un sito con il protocollo telnet oppure usare una connessione FTP usando il suo nome a dominio.
+
+##### Sistema DNS in Internet
+Qualsiasi rete IP può usare il DNS per implementare un suo sistema di nomi privato. Tuttavia, il termine "nome di dominio" è più comunemente utilizzato quando esso si riferisce al sistema pubblico dei DNS su Internet. Il sistema del DNS è organizzato in modo gerarchico secondo quello che viene chiamato un _albero rovesciato_. 
+
+In cima alla gerarchia si trovano 13 server universali detti _root server_ i quali devono conoscere le collocazioni di tutti i server che gestiscono i nomi di dominio di primo livello. Tutti i server di secondo livello devono conoscere gli IP dei root server i quali non hanno un nome di dominio ma solo IP noti.
+
+I server di secondo livello si occupano di gestire i nomi di dominio che competono loro, esisteranno quindi uno o più server di secondo livello che gestiscono il dominio .com altri che gestiscono il dominio .it...
+
+Esistono poi altri server ad un livello inferiore che gestiscono i vari domini registrati. In alcuni casi ad un dominio di secondo livello corrisponde un server DNS che gestisce quel dominio compreso tutti i nomi di livello successivo ad esso associati. In molti casi invece i nomi di dominio sono registrati presso server che gestiscono un gran numero di nomi di dominio come ad esempio Aruba, AWS...
+
+Ogni volta che un host vuole risolvere un nome di dominio di cui non conosca già l'IP corrispondente, interroga un server DNS o nameserver a sua scelta il quale se conosce la risposta la manda all'host, in alternativa inoltra la domanda ad un altro server ritenuto più competente per quel dominio. La struttura gerarchica ad albero del sistema DNS permette in un numero limitato di passaggi di raggiungere il server competente per lo specifico nome richiesto.
+
+
+#### HTTP
+{: .titolo-3}
+
+HTTP (HyperText Transfer Protocol - protocollo di trasferimento di un ipertesto) è un protocollo a livello applicativo usato come principale sistema per la trasmissione d'informazioni sul web in una architettura client-server. Le specifiche del protocollo sono gestite dal World Wide Web Consortium (W3C). Un server HTTP generalmente resta in ascolto delle richieste dei client sulla porta 80 usando il protocollo TCP a livello di trasporto.
+
+##### Storia
+{: .no_toc}
+
+La prima versione dell'HTTP, la 0.9, risale alla fine degli anni 1980 e costituiva, insieme con il linguaggio HTML e gli URL, il nucleo base del World Wide Web (WWW) sviluppata da Tim Berners-Lee al CERN di Ginevra per la condivisione delle informazioni tra la comunità dei fisici delle alte energie. Prima di HTTP il protocollo di riferimento per tali scopi era il più semplice e leggero FTP. La prima versione effettivamente disponibile del protocollo, la HTTP/1.0, venne implementata dallo stesso Berners-Lee nel 1991 e riconosciuta come standard nel 1996.
+
+Negli anni il WWW conobbe un successo crescente e divennero evidenti alcuni limiti della versione 1.0 del protocollo, in particolare:
+
+- l'impossibilità di ospitare più siti web sullo stesso server (virtual host);
+- il mancato riuso delle connessioni disponibili;
+- l'insufficienza dei meccanismi di sicurezza.
+
+Per far fronte ai primi due problemi il protocollo venne aggiornato alla versione 1.1 nel 1999 (e poi alla 2.0 nel 2014). Per risolvere i problemi di sicurezza è stato sviluppato invece HTTPS che sfrutta protocolli crittografici a livello di presentazione.
+
+##### Funzionamento
+{: .no_toc}
+
+L'HTTP è un protocollo che lavora con un'architettura di tipo client/server: il client esegue una richiesta e il server restituisce la risposta mandata da un altro host. Nell'uso comune il client corrisponde al browser ed il server la macchina su cui risiede il sito web. Vi sono quindi due tipi di messaggi HTTP: messaggi richiesta e messaggi risposta.
+
+HTTP differisce da altri protocolli di livello 7 come FTP, per il fatto che le connessioni vengono generalmente chiuse una volta che una particolare richiesta (o una serie di richieste correlate) è stata soddisfatta. Questo comportamento rende il protocollo HTTP ideale per il World Wide Web, in cui le pagine molto spesso contengono dei collegamenti (link) a pagine ospitate da altri server diminuendo così il numero di connessioni attive limitandole a quelle effettivamente necessarie con aumento quindi di efficienza (minor carico e occupazione) sia sul client che sul server. Talvolta però pone problemi agli sviluppatori di contenuti web, perché la natura senza stato (_stateless_) della sessione di navigazione costringe ad utilizzare dei metodi alternativi - tipicamente basati sui [cookie](#cookies) - per conservare lo stato dell'utente.
+
+# MANCANO I MECCANISMI DI FUNZIONAMENTO CON GLI ESEMPI
+
+##### Tipo di connessione
+{: .no_toc}
+
+Il client può chiedere al server, nel messaggio di richiesta, di utilizzare due tipi di comunicazione:
+
+- __non persistente__: per ogni richiesta e relativa risposta, viene stabilita una connessione TCP dedicata;
+- __persistente__: ogni richiesta e relativa risposta è trasferita utilizzando la stessa connessione TCP; è il comportamento predefinito di HTTP 1.1. 
+
+Da un lato, le connessioni non persistenti introducono una latenza aggiuntiva rispetto a quelle persistenti perchè aprire e chiudere una connessione TCP introduce dell'overhead.
+D'altro canto, le connessioni persistenti precludono il parallelismo nelle comunicazioni, giacché il client che abbia diverse richieste da inviare allo stesso server è costretto ad evaderle sequenzialmente, una dopo l'altra. Per queste ragioni, i browser solitamente sfruttano le complementarità prestazionali delle due politiche di comunicazione per massimizzare la loro efficienza: solitamente aprono con ogni server diverse connessioni TCP in parallelo, su cui comunicano con strategia persistente.
+
+##### Streaming HTTP
+{: .no_toc}
+
+La fruizione nelle pagine WEB di materiale multimediale, quale audio o video viene gestito in modo del tutto analogo al download dei file, tramite un caricamento progressivo o distribuzione progressiva, in cui il file viene scaricato in modo progressivo dall'inizio alla fine (tramite i protocolli Real Time Streaming Protocol e Real-time Transport Protocol) e nel caso il bit-rate sia eccessivo per la rete che lo trasporta può verificarsi un continuo ricaricamento del buffer
+
+##### Cookies
+{: .titolo-4}
+
+Il protocollo HTTPè un protocollo _stateless_ cioè non tiene traccia dello stato della connessione. Se la comunicazione si limitasse all'uso delle funzionalità offerte da HTTP quindi ad ogni richiesta di un client il server risponderebbe come se fosse la prima volta che il client comunica con lui. Per tenere traccia dello stato della comunicazione sono quindi stati introdotti i cookies che funzionano come dei gettoni identificativi che i server rilasciano ai client e in cui memorizzano informazioni a lungo termine.
+
+I server inviano i cookie nella risposta HTTP al client e ci si aspetta che i web browser salvino e inviino i cookie al server, ogni qual volta si facciano richieste aggiuntive al web server. Tale riconoscimento permette di realizzare meccanismi di autenticazione usati ad esempio per i login; di memorizzare dati utili alla sessione di navigazione, come le preferenze sull'aspetto grafico o linguistico del sito; di tracciare la navigazione dell'utente, ad esempio per fini statistici o pubblicitari; di associare dati memorizzati dal server, ad esempio il contenuto del carrello di un negozio elettronico.
+
+Date le implicazioni per la riservatezza dei naviganti del web, l'uso dei cookie è categorizzato e disciplinato negli ordinamenti giuridici di numerosi paesi, tra cui quelli europei, inclusa l'Italia. Tra le varie regole dettate dalla legge, quella più evidente per l'utente è che i server devono ricevere un esplicito permesso da parte dell'utente per poter utilizzare i cookies. 
+
+In termini pratici e non specialistici, un cookie è simile ad un piccolo file, memorizzato nel computer da siti web durante la navigazione, utile a salvare le preferenze e a migliorare le prestazioni dei siti web. In questo modo si ottimizza l'esperienza di navigazione da parte dell'utente.
+
+Nel dettaglio, un cookie è una stringa di testo di piccole dimensioni inviata da un web server ad un web client (di solito un browser) e poi rimandata indietro dal client al server (senza subire modifiche) ogni volta che il client accede alla stessa porzione dello stesso dominio web. I cookie sono stati originariamente introdotti per fornire un modo agli utenti di memorizzare gli oggetti che volevano acquistare, mentre navigavano nel sito web (il cosiddetto "carrello della spesa").
+
+Oggi, tuttavia, il contenuto del carrello di un utente viene immagazzinato in un database sul server, piuttosto che in un cookie sul client. Per tenere traccia a quale utente è assegnato il carrello della spesa, il server Web invia un cookie al client che contiene un identificatore di sessione univoco (tipicamente, una lunga serie di lettere e numeri). Poiché i cookie vengono inviati al server ad ogni richiesta del client, l'identificatore di sessione sarà inviato al server ogni volta che l'utente visita una pagina sul sito web, ciò permette al server di sapere quale carrello deve fornire all'utente.
+
+Poiché i cookie di sessione contengono solo un identificatore di sessione univoco, questo rende la quantità di informazioni personali che un sito web può memorizzare virtualmente illimitata. Il sito non si limita alle restrizioni in materia di quanto possa essere lunga la stringa di testo che compone un cookie. I cookie di sessione possono anche contribuire a migliorare i tempi di caricamento delle pagine, dal momento che la quantità di informazioni in un cookie di sessione è piccolo e richiede poca banda.
+
+I cookie vengono spesso erroneamente ritenuti veri e propri programmi e ciò genera errate convinzioni. In realtà essi sono semplici blocchi di dati, incapaci, da soli, di compiere qualsiasi azione sul computer. In particolare non possono essere né spyware, né virus. Ciononostante i cookie provenienti da alcuni siti sono catalogati come spyware da molti prodotti anti-spyware perché rendono possibile l'individuazione dell'utente. I moderni browser permettono agli utenti di decidere se accettare o no i cookie, ma l'eventuale rifiuto rende alcuni oggetti inutilizzabili. Ad esempio, gli shopping cart implementati con i cookie non funzionano in caso di rifiuto.
+
+La grande varietà esistente di cookie nel mondo del web rende difficile una loro classificazione. È possibile comunque stilarne una tassonomia generale separandoli in diverse categorie. 
+
+L'attributo principale tramite cui possiamo dividere i cookie è il loro ciclo di vita, il quale ci permette di distinguerli in:
+
+- __Cookie di sessione__: questi cookie non vengono memorizzati in modo persistente sul dispositivo dell'utente e vengono cancellati alla chiusura del browser. A differenza di altri cookie, i cookie di sessione non hanno una data di scadenza, ed in base a questo il browser riesce ad identificarli come tali.
+- __Cookie persistenti__: invece di svanire alla chiusura del browser, come vale per i cookie di sessione, i cookie persistenti scadono ad una data specifica o dopo un determinato periodo di tempo. Ciò significa che, per l'intera durata di vita del cookie (che può essere lunga o breve a seconda della data di scadenza decisa dai suoi creatori), le sue informazioni verranno trasmesse al server ogni volta che l'utente visita il sito web, o ogni volta che l'utente visualizza una risorsa appartenente a tale sito da un altro sito (ad esempio un annuncio pubblicitario). Per questo motivo, i cookie persistenti possono essere utilizzati dagli inserzionisti per registrare le informazioni sulle abitudini di navigazione web di un utente per un periodo prolungato di tempo. Tuttavia, essi sono utilizzati anche per motivi "legittimi " (come ad esempio mantenere gli utenti registrati nel loro account sui siti web, al fine di evitare, ad ogni visita, l'inserimento delle credenziali per l'accesso ai siti web).
+
+È possibile poi classificare i cookie in base alla provenienza in:
+
+- __Cookie di prima parte__: normalmente, l'attributo di dominio di un cookie corrisponderà al dominio che viene visualizzato nella barra degli indirizzi del browser web; sono i cookie inviati al browser direttamente dal sito che si sta visitando. Questo è chiamato un cookie di prima parte. Possono essere sia persistenti sia di sessione; sono gestiti direttamente dal proprietario e/o responsabile del sito e vengono utilizzati, ad esempio, per garantirne il funzionamento tecnico o tenere traccia di preferenze espresse in merito all'uso del sito stesso.
+- __Cookie di terza parte__: i cookie di terze parti, appartengono a domini diversi da quello mostrato nella barra degli indirizzi. Questi tipi di cookie appaiono in genere quando le pagine web sono dotate di contenuti, come ad esempio banner pubblicitari, da siti web esterni. Questo implica la possibilità di monitoraggio della cronologia di navigazione dell'utente, ed è spesso usato dagli inserzionisti, nel tentativo di servire annunci rilevanti e personalizzati per ciascun utente. Per esempio, supponiamo che un utente visiti www.example.org. Questo sito web contiene un annuncio da ad.foxytracking.com, che, una volta scaricato, imposta un cookie che appartiene al dominio della pubblicità (ad.foxytracking.com). Quindi, l'utente visita un altro sito web, www.foo.com, che contiene anche un annuncio da ad.foxytracking.com/, e che stabilisce anche un cookie appartenente a quel dominio (ad.foxytracking.com). Alla fine, entrambi questi cookie saranno inviati al venditore quando si caricano le loro pubblicità o visitando il loro sito web. L'inserzionista può quindi utilizzare questi cookie per costruire una cronologia di navigazione degli utenti in tutti i siti che hanno gli annunci di questo inserzionista. La maggior parte dei moderni browser web contengono delle impostazioni di privacy che sono in grado di bloccare i cookie di terze parti.
+
+Esistono molti altri tipi di cookie, se vuoi approfondire l'argomento puoi farlo [qui](https://it.wikipedia.org/wiki/Cookie)
+
+
+
+##### HTTPS
+{: .titolo-4}
+
+<!-- thumbnail -->
+<div class="thumbnail float-right">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/HTTPS_icon.png" class="modal__opener" aprire="#img-HTTPS_icon">
+  <p>Icona del lucchetto di HTTPS seguita dall'inizio di un URL che usa HTTPS</p></div>
+<!-- modal -->
+<div id="img-HTTPS_icon" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-HTTPS_icon">&times;</span>
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/HTTPS_icon.png">
+    </div>
+    <p>Icona del lucchetto di HTTPS seguita dall'inizio di un URL che usa HTTPS</p>
+  </div>
+</div>
+
+L'HyperText Transfer Protocol over Secure Socket Layer (HTTPS), (anche noto come HTTP over TLS, HTTP over SSL e HTTP Secure) è un protocollo per la comunicazione sicura attraverso una rete di computer utilizzato su reti TCP/IP quali internet. Consiste nella comunicazione tramite il protocollo HTTP (Hypertext Transfer Protocol) all'interno di una connessione criptata, dal Transport Layer Security (TLS) o dal suo predecessore, Secure Sockets Layer (SSL) (protocolli di livello 6). Come HTTP utilizza TCP ma generalmente sulla porta 443. I servizi aggiuntivi offerti dall'uso dei protocolli di cifratura sono:
+
+- cifratura del traffico;
+- verifica di integrità del traffico (la correzione degli errori è già offerta da TCP ma TLS protegge da malevoli modifiche fatte da terzi);
+- autenticazione del server;
+- autenticazione dell'utente (in realtà spesso non avviene).
+
+HTTP non è criptato, quindi è vulnerabile alle intercettazioni e ad attacchi man-in-the-middle: gli attaccanti possono ottenere l'accesso ad account di siti web con informazioni sensibili, o modificare le pagine web per iniettare al loro interno dei malware o della pubblicità malevola. HTTPS è progettato per resistere a tali attacchi ed è considerato sicuro contro di essi (con eccezione delle versioni più obsolete e deprecate del protocollo SSL).
+
+Le URL del protocollo HTTPS iniziano con https:// e utilizzano la porta 443 di default, mentre le URL HTTP cominciano con http:// e utilizzano la porta 80. Normalmente nei browser viene anche usata l'icona di un lucchetto per indicare che la connessione in corso è cifrata è che il server si è correttamente autenticato (si è sicuri dell'identità del server).
+
+Per comprendere meglio le funzionalità offerte da HTTPS è necessario studiare il funzionamento di TLS nella [sezione](#transport-layer-security-tls) ad esso dedicata. è anche possibile approfondire l'argomento sulla [pagina Wikipedia](https://it.wikipedia.org/wiki/HTTPS) dedicata a HTTPS
+
+#### FTP 
+{: .titolo-3}
+
+#### Protocolli per la posta elettronica
+
 
 
 

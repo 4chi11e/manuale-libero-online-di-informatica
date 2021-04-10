@@ -51,20 +51,49 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: 1.2em;
-  margin-bottom: 0.8em;
+  // margin-top: 1.2em;
+  // margin-bottom: 0.8em;
+  // line-height: $body-heading-line-height;
   font-weight: 700;
-  //line-height: $body-heading-line-height;
   color: $body-heading-color;
   text-transform: uppercase;
 }
 
-h1{@include fs-9;}
-h2{@include fs-7;}
-h3{@include fs-6;}
-h4{@include fs-5;}
-h5{@include fs-4;}
-h6{@include fs-4;}
+.titolo-1{
+  @include fs-9;
+  font-weight: 700;
+}
+.titolo-2{
+  @include fs-7;
+  font-weight: 700;
+}
+.titolo-3{
+  @include fs-6;
+  font-weight: 700;
+}
+.titolo-4{
+  @include fs-5;
+  font-weight: 700;
+}
+.titolo-5{
+  @include fs-4;
+  font-weight: 600;
+}
+.titolo-6{
+  @include fs-3;
+  font-weight: 600;
+}
+
+
+h1{@extend .titolo-1;}
+h2{@extend .titolo-2;}
+h3{@extend .titolo-3;}
+h4{@extend .titolo-4;}
+h5{@extend .titolo-5;}
+h6{@extend .titolo-6;}
+
+
+
 
 p{
   text-align: justify;
@@ -84,6 +113,11 @@ li {
 
 
 // -------------------- Elementi specifici ----------------------------------------
+
+.formula{
+  max-width: 100%;
+  overflow-x: auto;
+}
 
 // è il titolo che si trova sopra il nav
 .site-title{
