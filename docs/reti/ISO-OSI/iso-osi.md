@@ -581,14 +581,15 @@ Un nome di dominio, come per esempio it.wikipedia.org, può essere parte di un U
 ##### Sistema DNS in Internet
 Qualsiasi rete IP può usare il DNS per implementare un suo sistema di nomi privato. Tuttavia, il termine "nome di dominio" è più comunemente utilizzato quando esso si riferisce al sistema pubblico dei DNS su Internet. Il sistema del DNS è organizzato in modo gerarchico secondo quello che viene chiamato un _albero rovesciato_. 
 
-In cima alla gerarchia si trovano 13 server universali detti _root server_ i quali devono conoscere le collocazioni di tutti i server che gestiscono i nomi di dominio di primo livello. Tutti i server di secondo livello devono conoscere gli IP dei root server i quali non hanno un nome di dominio ma solo IP noti.
+In cima alla gerarchia si trovano 13 server universali detti _root server_ i quali devono conoscere almeno le collocazioni di tutti nameserver di primo livello. I root server hanno nomi di dominio che vanno da a.root-servers.net a m.rootservers.net e i loro IP sono noti ([qui](https://it.wikipedia.org/wiki/Root_nameserver#Elenco_dei_root_nameserver) puoi trovare la lista oltre ad altri approfondimenti).
 
-I server di secondo livello si occupano di gestire i nomi di dominio che competono loro, esisteranno quindi uno o più server di secondo livello che gestiscono il dominio .com altri che gestiscono il dominio .it...
+I server di primo livello si occupano di gestire i nomi di dominio che competono loro, esisteranno quindi uno o più server di primo livello che gestiscono il dominio .com altri che gestiscono il dominio .it...
 
 Esistono poi altri server ad un livello inferiore che gestiscono i vari domini registrati. In alcuni casi ad un dominio di secondo livello corrisponde un server DNS che gestisce quel dominio compreso tutti i nomi di livello successivo ad esso associati. In molti casi invece i nomi di dominio sono registrati presso server che gestiscono un gran numero di nomi di dominio come ad esempio Aruba, AWS...
 
-Ogni volta che un host vuole risolvere un nome di dominio di cui non conosca già l'IP corrispondente, interroga un server DNS o nameserver a sua scelta il quale se conosce la risposta la manda all'host, in alternativa inoltra la domanda ad un altro server ritenuto più competente per quel dominio. La struttura gerarchica ad albero del sistema DNS permette in un numero limitato di passaggi di raggiungere il server competente per lo specifico nome richiesto.
+Ogni volta che un host vuole risolvere un nome di dominio di cui non conosca già l'IP corrispondente, interroga un server DNS o nameserver a sua scelta il quale se conosce la risposta la manda all'host, in alternativa può decidere se inoltrare la domanda ad un server di livello più basso (se il nome di dominio fa parte di un suo sottodominio) o ad uno di livello più alto (se la domanda riguarda un dominio che non gli compete). La struttura gerarchica ad albero del sistema DNS permette in un numero limitato di passaggi di raggiungere il server competente per lo specifico nome richiesto. 
 
+Teoricamente per arrivare ad ogni spazio di dominio si dovrebbe passare spesso dai rootserver che però sono pochi per riuscire a servire continuamente tutti gli host del mondo. Nella pratica però la maggior parte delle informazioni fornite dai root nameserver non cambia molto spesso e viene memorizzata in varie cache da una gerarchia di server DNS cui si rivolgono i singoli computer prima di interrogare i nameserver principali; anzi, quando viene fatta una richiesta di informazioni la risposta contiene anche l'informazione su per quanto tempo essa può essere ritenuta valida, proprio per rendere le richieste di risoluzione DNS ai root nameserver relativamente rare.
 
 #### HTTP
 {: .titolo-3}
