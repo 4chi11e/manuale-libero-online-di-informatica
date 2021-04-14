@@ -497,7 +497,7 @@ Puoi approfondire l'argomento alla [pagina](https://en.wikipedia.org/wiki/Transp
 
 
 
-### Livello 7: applicazione (Application Layer) - ANCORA DA SCRIVERE
+### Livello 7: applicazione (Application Layer) - ANCORA DA FINIRE
 
 _Obiettivo: permettere alle applicazioni di comunicare con applicazioni in esecuzione su un altro host._
 
@@ -620,6 +620,22 @@ Per far fronte ai primi due problemi il protocollo venne aggiornato alla version
 {: .no_toc}
 
 L'HTTP è un protocollo che lavora con un'architettura di tipo client/server: il client esegue una richiesta e il server restituisce la risposta mandata da un altro host. Nell'uso comune il client corrisponde al browser ed il server la macchina su cui risiede il sito web. Vi sono quindi due tipi di messaggi HTTP: messaggi richiesta e messaggi risposta.
+
+<!-- thumbnail -->
+<div class="thumbnail--50 float-right">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/http-request-response.png" class="modal__opener" aprire="#img-http-request-response">
+  <p>Schema di funzionamento di una richiesta di risorsa (una pagina web) da parte di un browser (client) e conseguente risposta di un server HTTP</p>
+</div>
+<!-- modal -->
+<div id="img-http-request-response" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-http-request-response">&times;</span>
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/http-request-response.png">
+    </div>
+    <p>Schema di funzionamento di una richiesta di risorsa (una pagina web) da parte di un browser (client) e conseguente risposta di un server HTTP</p>
+  </div>
+</div>
 
 HTTP differisce da altri protocolli di livello 7 come FTP, per il fatto che le connessioni vengono generalmente chiuse una volta che una particolare richiesta (o una serie di richieste correlate) è stata soddisfatta. Questo comportamento rende il protocollo HTTP ideale per il World Wide Web, in cui le pagine molto spesso contengono dei collegamenti (link) a pagine ospitate da altri server diminuendo così il numero di connessioni attive limitandole a quelle effettivamente necessarie con aumento quindi di efficienza (minor carico e occupazione) sia sul client che sul server. Talvolta però pone problemi agli sviluppatori di contenuti web, perché la natura senza stato (_stateless_) della sessione di navigazione costringe ad utilizzare dei metodi alternativi - tipicamente basati sui [cookie](#cookies) - per conservare lo stato dell'utente.
 
