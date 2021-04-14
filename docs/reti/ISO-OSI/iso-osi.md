@@ -53,7 +53,9 @@ A livello implementativo lo standard _[de facto](https://it.wikipedia.org/wiki/D
 <div id="img-ISO-OSI-parallelo_posta" class="modal">
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-ISO-OSI-parallelo_posta">&times;</span>
-    <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-parallelo_posta.svg">
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-parallelo_posta.svg">
+    </div>
     <p>Parallelo tra sistema di gestione della posta fisica e rete informatica basata sul modello ISO-OSI. Il parallelo mostra anche la divisione tra i livelli superiori e i livelli inferiori</p>
   </div>
 </div>
@@ -73,14 +75,17 @@ Lo sviluppo di questo modello nasce negli anni '80 dalla necessità di creare un
 <!-- thumbnail -->
 <div class="thumbnail float-right">
   <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/incapsulamento.png" class="modal__opener" aprire="#img-ISO-OSI-incapsulamento">
-  <p>Percorso dei dati e incapsulamento durante una comunicazione</p>
+  <p>Percorso dei dati e incapsulamento durante una comunicazione.</p>
 </div>
 <!-- modal -->
 <div id="img-ISO-OSI-incapsulamento" class="modal">
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-ISO-OSI-incapsulamento">&times;</span>
-    <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/incapsulamento.png">
-    <p>Percorso dei dati e incapsulamento durante una comunicazione</p>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/incapsulamento.png">
+    </div>
+    <p>Percorso dei dati e incapsulamento durante una comunicazione.</p>
+    <p>Sul lato sinistro è indicato il percorso dei dati dal livello 7 al livello 1 durante il quale ai dati vengono aggiunti ad ogni livello le intestazioni del livello (ad es. AH, application header, al livello 7, poi PH, presentation header, al livello 6..., al livello datalink si aggiunge anche un tail). Sul lato destro è mostrato il percorso inverso durante il quale vengono "spacchettati" i dati ad ogni livello</p>
   </div>
 </div>
 
@@ -96,14 +101,16 @@ Come mostrato nella figura a fianco, i dati che viaggiano dal livello n di un ho
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-layers.png" class="modal__opener" aprire="#ISO-OSI-TCP-IP-layers">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-layers.png" class="modal__opener" aprire="#img-ISO-OSI-TCP-IP-layers">
   <p>Il modello TCP-IP (dx) in confronto al modello ISO/OSI (sx)</p>
 </div>
 <!-- modal -->
-<div id="ISO-OSI-TCP-IP-layers" class="modal">
+<div id="img-ISO-OSI-TCP-IP-layers" class="modal">
   <div class="modal__content">
-    <span class="modal__closer modal__closer--topright" chiudere="#ISO-OSI-TCP-IP-layers">&times;</span>
-    <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-layers.png">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-ISO-OSI-TCP-IP-layers">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-layers.png">
+    </div>
     <p>Il modello TCP-IP (dx) in confronto al modello ISO/OSI (sx)</p>
   </div>
 </div>
@@ -114,14 +121,16 @@ Di seguito è riportata una lista che associa ad ogni livello della pila TCP/IP 
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-protocolli.jpg" class="modal__opener" aprire="#ISO-OSI-TCP-IP-protocolli">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-protocolli.jpg" class="modal__opener" aprire="#img-ISO-OSI-TCP-IP-protocolli">
   <p>Il modello TCP-IP (dx) in confronto al modello ISO/OSI (sx)</p>
 </div>
 <!-- modal -->
-<div id="ISO-OSI-TCP-IP-protocolli" class="modal">
+<div id="img-ISO-OSI-TCP-IP-protocolli" class="modal">
   <div class="modal__content">
-    <span class="modal__closer modal__closer--topright" chiudere="#ISO-OSI-TCP-IP-protocolli">&times;</span>
-    <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-protocolli.jpg">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-ISO-OSI-TCP-IP-protocolli">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-protocolli.jpg">
+    </div>
     <p>Il modello TCP-IP (dx) in confronto al modello ISO/OSI (sx)</p>
   </div>
 </div>
@@ -231,7 +240,9 @@ I protocolli più famosi che operano a questo livello sono:
 <div id="img-hub" class="modal">
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#img-hub">&times;</span>
-    <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/hub.jpg">
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/hub.jpg">
+    </div>
     <p>Un hub Ethernet da 4 porte.</p>
   </div>
 </div>
@@ -267,14 +278,16 @@ I protocolli più famosi che operano a questo livello sono:
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/switch-rack.jpg" class="modal__opener" aprire="#switch-rack">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/switch-rack.jpg" class="modal__opener" aprire="#img-switch-rack">
   <p>Porzione di armadio rack contenente diversi switch a 24 porte</p>
 </div>
 <!-- modal -->
-<div id="switch-rack" class="modal">
+<div id="img-switch-rack" class="modal">
   <div class="modal__content">
-    <span class="modal__closer modal__closer--topright" chiudere="#switch-rack">&times;</span>
-    <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/switch-rack.jpg">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-switch-rack">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/switch-rack.jpg">
+    </div>
     <p>Porzione di armadio rack contenente diversi switch a 24 porte</p>
   </div>
 </div>
@@ -307,14 +320,16 @@ Il protocollo di rete più usato è il protocollo IP (Internet Protocol) usato i
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/router.jfif" class="modal__opener" aprire="#router">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/router.jfif" class="modal__opener" aprire="#img-router">
   <p>Router domestico dotato sia di porte fisiche che di antenne per il Wi-Fi</p>
 </div>
 <!-- modal -->
-<div id="router" class="modal">
+<div id="img-router" class="modal">
   <div class="modal__content">
-    <span class="modal__closer modal__closer--topright" chiudere="#router">&times;</span>
-    <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/router.jfif">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-router">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/router.jfif">
+    </div>
     <p>Router domestico dotato sia di porte fisiche che di antenne per il Wi-Fi</p>
   </div>
 </div>
@@ -816,4 +831,20 @@ Per comprendere meglio le funzionalità offerte da HTTPS è necessario studiare 
 
 ## Link e riferimenti esterni
 
-* [ISO/OSI su Wikipedia](https://it.wikipedia.org/wiki/Modello_OSI)
+- [ISO/OSI su Wikipedia](https://it.wikipedia.org/wiki/Modello_OSI)
+- [Incapsulamento su Wikipedia](https://it.wikipedia.org/wiki/Imbustamento)
+- [TCP/IP su Wikipedia](https://it.wikipedia.org/wiki/Suite_di_protocolli_Internet)
+- [Livello di trasporto su Wikipedia](https://it.wikipedia.org/wiki/Transmission_Control_Protocol)
+- [Porte su Wikipedia](https://it.wikipedia.org/wiki/Porta_(reti))
+- [Socket su Wikipedia](https://it.wikipedia.org/wiki/Socket_(reti))
+- Elenco delle porte su Wikipedia [in italiano](https://it.wikipedia.org/wiki/Porte_TCP_e_UDP_standard) e [in inglese](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers) (più approfondito)
+- [TCP su Wikipedia](https://it.wikipedia.org/wiki/Transmission_Control_Protocol#Confronto_con_UDP)
+- [UDP su Wikipedia](https://it.wikipedia.org/wiki/User_Datagram_Protocol)
+- [Peer to Peer su Wikipedia](https://it.wikipedia.org/wiki/Peer-to-peer)
+- [TLS su Wikipedia](https://en.wikipedia.org/wiki/Transport_Layer_Security)
+- [URI su Wikipedia](https://it.wikipedia.org/wiki/Uniform_Resource_Locator)
+- [DNS su Wikipedia](https://it.wikipedia.org/wiki/Domain_Name_System)
+- [Articolo sui DNS pubblici](https://www.worldcomputing.it/computer/internet/44-elenco-migliori-veloci-affidabili-server-dns-pubblici-gratuiti.html)
+- [HTTP su Wikipedia](https://it.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
+- [Cookies su Wikipedia](https://it.wikipedia.org/wiki/Cookie)
+- [HTTPS su Wikipedia](https://it.wikipedia.org/wiki/HTTPS)
