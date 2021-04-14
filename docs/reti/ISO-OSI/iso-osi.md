@@ -340,8 +340,8 @@ Mentre gli switch si occupano di collegare dispositivi all'interno di una stessa
 
 Spesso le reti sono organizzate gerarchicamente tra loro e i router sono quindi solitamente costruiti per rispettare tale ordine. Spesso quindi i router presentano una porta per la connessione alla rete "esterna" e una o più porte fisiche per i collegamenti verso la rete "interna". A volte possiedono anche antenne per fornire connessione Wi-Fi alla rete interna.
 
-(Da fare tutta la parte sul protocollo IP)
-
+### Protocollo IP 
+<!-- DA FARE -->
 
 ## Livello 4: Trasporto (Transport Layer)
 
@@ -825,9 +825,12 @@ Per comprendere meglio le funzionalità offerte da HTTPS è necessario studiare 
 #### FTP 
 {: .titolo-3}
 
+<!-- DA FARE -->
+
 #### Protocolli per la posta elettronica
 {: .titolo-3}
 
+<!-- DA FARE -->
 
 ## Link e riferimenti esterni
 
