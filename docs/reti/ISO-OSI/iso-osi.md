@@ -610,7 +610,7 @@ La prima versione dell'HTTP, la 0.9, risale alla fine degli anni 1980 e costitui
 
 Negli anni il WWW conobbe un successo crescente e divennero evidenti alcuni limiti della versione 1.0 del protocollo, in particolare:
 
-- l'impossibilità di ospitare più siti web sullo stesso server (virtual host);
+- l'impossibilità di ospitare più siti web sullo stesso server ([virtual hosting](https://it.wikipedia.org/wiki/Virtual_hosting), argomento interessante ma complesso, non lo tratteremo);
 - il mancato riuso delle connessioni disponibili;
 - l'insufficienza dei meccanismi di sicurezza.
 
