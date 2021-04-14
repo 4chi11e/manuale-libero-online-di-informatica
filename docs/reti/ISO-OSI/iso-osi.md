@@ -578,7 +578,9 @@ Il dominio di terzo livello è il figlio del dominio di secondo livello, infatti
 
 Un nome di dominio, come per esempio it.wikipedia.org, può essere parte di un URL, come http://it.wikipedia.org/wiki/Treno, o di un indirizzo e-mail, come per esempio apache@it.wikipedia.org. È anche possibile connettersi a un sito con il protocollo telnet oppure usare una connessione FTP usando il suo nome a dominio.
 
-##### Sistema DNS in Internet
+###### Sistema DNS in Internet
+{: .no_toc}
+
 Qualsiasi rete IP può usare il DNS per implementare un suo sistema di nomi privato. Tuttavia, il termine "nome di dominio" è più comunemente utilizzato quando esso si riferisce al sistema pubblico dei DNS su Internet. Il sistema del DNS è organizzato in modo gerarchico secondo quello che viene chiamato un _albero rovesciato_. 
 
 In cima alla gerarchia si trovano 13 server universali detti _root server_ i quali devono conoscere almeno le collocazioni di tutti nameserver di primo livello. I root server hanno nomi di dominio che vanno da a.root-servers.net a m.rootservers.net e i loro IP sono noti ([qui](https://it.wikipedia.org/wiki/Root_nameserver#Elenco_dei_root_nameserver) puoi trovare la lista oltre ad altri approfondimenti).
@@ -621,9 +623,94 @@ L'HTTP è un protocollo che lavora con un'architettura di tipo client/server: il
 
 HTTP differisce da altri protocolli di livello 7 come FTP, per il fatto che le connessioni vengono generalmente chiuse una volta che una particolare richiesta (o una serie di richieste correlate) è stata soddisfatta. Questo comportamento rende il protocollo HTTP ideale per il World Wide Web, in cui le pagine molto spesso contengono dei collegamenti (link) a pagine ospitate da altri server diminuendo così il numero di connessioni attive limitandole a quelle effettivamente necessarie con aumento quindi di efficienza (minor carico e occupazione) sia sul client che sul server. Talvolta però pone problemi agli sviluppatori di contenuti web, perché la natura senza stato (_stateless_) della sessione di navigazione costringe ad utilizzare dei metodi alternativi - tipicamente basati sui [cookie](#cookies) - per conservare lo stato dell'utente.
 
-# MANCANO I MECCANISMI DI FUNZIONAMENTO CON GLI ESEMPI
+###### Messaggio di richiesta
+{: .no_toc}
 
-##### Tipo di connessione
+Il messaggio di richiesta è composto di quattro parti:
+
+    GET /wiki/Pagina_principale HTTP/1.1  
+    Host: it.wikipedia.org  
+    User-Agent: Mozilla/5.0 (compatible; Konqueror/3.2; Linux) (KHTML, like Gecko)  
+    Accept: text/html, image/jpeg, image/png, text/*, image/*, */*  
+    Accept-Charset: iso-8859-1, utf-8;q=0.5, *;q=0.5  
+    Accept-Language: it  
+    Connection: Keep-Alive
+
+- riga di richiesta (request line): che a sua volta è composta da:  
+> - metodo (i primi tre dei seguenti metodi sono i più importanti e usati)
+>> - GET: usato per richiedere una risorsa, è possibile aggiungere parametri all'url
+>> - POST: usato per inviare al server una serie di coppie di valori *name=value* usate come input per la risorsa richiesta indicata dall'URL
+>> - HEAD: simile a get ma richiede come risposta solo l'header e non il body, allo scopo di avere solo informazioni sulla risorsa, di solito per testare accessibilità alla risorsa o scoprire se sono disponibili modifiche dall'ultima richiesta
+>> - PUT:
+>> - DELETE: 
+>> - PATCH
+>> - TRACE
+>> - OPTIONS
+>> - CONNECT
+> - URL
+> - Versione del protocollo
+- sezione header (informazioni aggiuntive), i più comuni sono:
+> - Host: nome del server a cui si riferisce l'URL; è obbligatorio nelle richieste conformi HTTP/1.1 perché permette l'uso dei virtual host basati sui nomi.
+> - User-Agent: identificazione del tipo di client: tipo browser, produttore, versione...
+> - Cookie: utilizzati dalle applicazioni web per archiviare e recuperare informazioni a lungo termine sul lato client; spesso usati per memorizzare un token di autenticazione o per tracciare le attività dell'utente.
+- riga vuota (CRLF: i 2 caratteri carriage return e line feed), essenzialmente un separatore tra intestazione e body;
+- body (corpo del messaggio), usato quando ci sono effettivamente dati da trasferire (non è il caso del GET, lo è invece del POST).
+
+###### Messaggio di risposta
+{: .no_toc}
+
+    HTTP/1.1 200 OK
+    Date: Fri, 22 Feb 2019 10:50:37 GMT
+    Content-Type: text/html; charset=UTF-8
+    Content-Length: 22208
+    Connection: keep-alive
+    Server: mw1215.eqiad.wmnet
+    Content-language: it
+    Content-Encoding: gzip
+    Last-Modified: Fri, 22 Feb 2019 08:46:20 GMT
+    Age: 20548
+    Cache-Control: private, s-maxage=0, max-age=0, must-revalidate
+    Vary: Accept-Encoding,Cookie,Authorization
+    [...]
+    
+    <!DOCTYPE html>
+    <html class="client-nojs" lang="it" dir="ltr">
+    <head>
+    <meta charset="UTF-8"/>
+    <title>Wikipedia, l'enciclopedia libera</title>
+    [...]
+    </body>
+    </html>
+
+Il messaggio di risposta è di tipo testuale ed è composto da quattro parti:
+
+- riga di stato (status-line):<br>ha una grande importanza soprattutto per gli sviluppatori poichè qui è indicato un codice a tre cifre che indica il tipo di risposta che può appartenere alle seguenti categorie:
+> - 1xx: Informational (messaggi informativi)
+> - 2xx: Successful (la richiesta è stata soddisfatta), ad es.:  
+>> - 200 OK. Il server ha fornito correttamente il contenuto nella sezione body.
+> - 3xx: Redirection (non c'è risposta immediata, ma la richiesta è sensata e viene detto come ottenere la risposta) ad es.:  
+>> - 301 Moved Permanently. La risorsa che abbiamo richiesto non è raggiungibile perché è stata spostata in modo permanente.  
+>> - 302 Found. La risorsa è raggiungibile con un altro URI indicato nel header Location. Di norma i browser eseguono la richiesta all'URI indicato in modo automatico senza interazione dell'utente.
+> - 4xx: Client error (la richiesta non può essere soddisfatta perché sbagliata)  
+>> - 400 Bad Request. La risorsa richiesta non è comprensibile al server.  
+>> - 404 Not Found. La risorsa richiesta non è stata trovata e non se ne conosce l'ubicazione. Di solito avviene quando l'URI è stato indicato in modo incorretto, oppure è stato rimosso il contenuto dal server.  
+> - 5xx: Server error (la richiesta non può essere soddisfatta per un problema interno del server)  
+>> - 500 Internal Server Error. Il server non è in grado di rispondere alla richiesta per un suo problema interno.  
+>> - 502 Bad Gateway. Il server web che agisce come reverse proxy non ha ottenuto una risposta valida dal server di upstream.  
+>> - 505 HTTP Version Not Supported. La versione di http non è supportata.
+- sezione header, i più comuni sono:
+> - Server. Indica il tipo e la versione del server. Può essere visto come l'equivalente dell'header di richiesta User-Agent
+> - Content-Type. Indica il tipo di contenuto restituito come:
+>> - text/html Documento HTML
+>> - text/plain Documento di testo non formattato
+>> - text/xml Documento XML
+>> - image/jpeg Immagine di formato JPEG
+- riga vuota (CRLF: i 2 caratteri carriage return e line feed);
+- body (contenuto della risposta).
+
+In questa sezione sono stati riportati solo due esempi di messaggi HTTP, una richiesta di tipo GET e una risposta possibile a tale domanda. Sulla [pagina di Wikipedia](https://it.wikipedia.org/wiki/Hypertext_Transfer_Protocol) da cui sono state tratte queste informazioni è possibile trovare molti altri [esempi](https://it.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Esempi_di_messaggi_HTTP) ed approfondimenti. 
+
+###### Tipo di connessione
 {: .no_toc}
 
 Il client può chiedere al server, nel messaggio di richiesta, di utilizzare due tipi di comunicazione:
@@ -642,7 +729,7 @@ La fruizione nelle pagine WEB di materiale multimediale, quale audio o video vie
 ##### Cookies
 {: .titolo-4}
 
-Il protocollo HTTPè un protocollo _stateless_ cioè non tiene traccia dello stato della connessione. Se la comunicazione si limitasse all'uso delle funzionalità offerte da HTTP quindi ad ogni richiesta di un client il server risponderebbe come se fosse la prima volta che il client comunica con lui. Per tenere traccia dello stato della comunicazione sono quindi stati introdotti i cookies che funzionano come dei gettoni identificativi che i server rilasciano ai client e in cui memorizzano informazioni a lungo termine.
+Il protocollo HTTP è un protocollo _stateless_ cioè non tiene traccia dello stato della connessione. Se la comunicazione si limitasse all'uso delle funzionalità offerte da HTTP quindi ad ogni richiesta di un client il server risponderebbe come se fosse la prima volta che il client comunica con lui. Per tenere traccia dello stato della comunicazione sono quindi stati introdotti i cookies che funzionano come dei gettoni identificativi che i server rilasciano ai client e in cui memorizzano informazioni a lungo termine.
 
 I server inviano i cookie nella risposta HTTP al client e ci si aspetta che i web browser salvino e inviino i cookie al server, ogni qual volta si facciano richieste aggiuntive al web server. Tale riconoscimento permette di realizzare meccanismi di autenticazione usati ad esempio per i login; di memorizzare dati utili alla sessione di navigazione, come le preferenze sull'aspetto grafico o linguistico del sito; di tracciare la navigazione dell'utente, ad esempio per fini statistici o pubblicitari; di associare dati memorizzati dal server, ad esempio il contenuto del carrello di un negozio elettronico.
 
@@ -671,7 +758,6 @@ L'attributo principale tramite cui possiamo dividere i cookie è il loro ciclo d
 - __Cookie di terza parte__: i cookie di terze parti, appartengono a domini diversi da quello mostrato nella barra degli indirizzi. Questi tipi di cookie appaiono in genere quando le pagine web sono dotate di contenuti, come ad esempio banner pubblicitari, da siti web esterni. Questo implica la possibilità di monitoraggio della cronologia di navigazione dell'utente, ed è spesso usato dagli inserzionisti, nel tentativo di servire annunci rilevanti e personalizzati per ciascun utente. Per esempio, supponiamo che un utente visiti www.example.org. Questo sito web contiene un annuncio da ad.foxytracking.com, che, una volta scaricato, imposta un cookie che appartiene al dominio della pubblicità (ad.foxytracking.com). Quindi, l'utente visita un altro sito web, www.foo.com, che contiene anche un annuncio da ad.foxytracking.com/, e che stabilisce anche un cookie appartenente a quel dominio (ad.foxytracking.com). Alla fine, entrambi questi cookie saranno inviati al venditore quando si caricano le loro pubblicità o visitando il loro sito web. L'inserzionista può quindi utilizzare questi cookie per costruire una cronologia di navigazione degli utenti in tutti i siti che hanno gli annunci di questo inserzionista. La maggior parte dei moderni browser web contengono delle impostazioni di privacy che sono in grado di bloccare i cookie di terze parti.
 
 Esistono molti altri tipi di cookie, se vuoi approfondire l'argomento puoi farlo [qui](https://it.wikipedia.org/wiki/Cookie)
-
 
 
 ##### HTTPS
@@ -709,10 +795,7 @@ Per comprendere meglio le funzionalità offerte da HTTPS è necessario studiare 
 {: .titolo-3}
 
 #### Protocolli per la posta elettronica
-
-
-
-
+{: .titolo-3}
 
 
 ## Link e riferimenti esterni
