@@ -431,7 +431,7 @@ Il funzionamento delle reti P2P ibride e soprattutto quello delle reti P2P pure 
 Spesso viene associato al termine peer to peer il termine pirateria. É vero che in molti casi le reti P2P vengono usate per la condivisione di file protetti da diritto d'autore ma di per sé il peer to peer è una pratica assolutamente legittima. Il motivo per cui questo modello è quello preferito per la condivisione illegale di file è che la natura distribuita della rete ne impedisce il controllo o la censura. Mentre è molto semplice controllare ed eventualmetne spegnere un server causando la totale interruzione del servizio offerto, è praticamente impossibile chiudere una rete P2P soprattuto una pura o ibrida. 
 
 
-### Livello 5: sessione (Session Layer)
+## Livello 5: sessione (Session Layer)
 
 _Obiettivo: controllare la comunicazione tra applicazioni. Instaurare, mantenere ed abbattere connessioni (sessioni) tra applicazioni cooperanti. Si occupa anche della sincronia di invio/ricezione messaggi. In pratica si occupa di gestire intere sessioni di comunicazione tra host._
 
@@ -446,7 +446,7 @@ Per approfondire l'argomento è possibile consultare la [pagina wikipedia](https
 
 
 
-### Livello 6: presentazione (Presentation Layer)
+## Livello 6: presentazione (Presentation Layer)
 
 _Obiettivo: trasformare i dati forniti dalle applicazioni in un formato standardizzato e offrire servizi di comunicazione come la [crittografia](# "Crittografia"), la [compressione](https://it.wikipedia.org/wiki/Compressione_dati "Compressione dati") e la riformattazione dei dati._
 
@@ -456,13 +456,13 @@ La compressione dei dati ha un ruolo molto importante nelle comunicazioni in ret
 
 Esistono diversi protocolli che utilizzano la crittografia per instaurare comunicazioni sicure nei più svariati contesti, come ad esempio PGP o SSH. Di seguito ci concentreremo su un protocollo particolarmente importante, il TLS.
 
-#### Transport Layer Security (TLS)
+### Transport Layer Security (TLS)
 
 **Transport Layer Security (TLS)** e il suo predecessore **Secure Sockets Layer (SSL)** sono dei protocolli crittografici di presentazione che permettono una comunicazione sicura dalla sorgente al destinatario (end-to-end) su reti TCP/IP (come ad esempio Internet) fornendo autenticazione, integrità dei dati e confidenzialità operando al di sopra del livello di trasporto.
 
 Diverse versioni del protocollo sono ampiamente utilizzate in applicazioni come i browser, l'e-mail, la messaggistica istantanea e il voice over IP. Un esempio di applicazione di SSL/TLS è nel protocollo HTTPS, che appunto significa HTTP over SSL.
 
-##### Storia
+#### Storia
 Lo stack protocollare TCP/IP di Internet, diversamente dal modello ISO/OSI, non prevede di per sé funzionalità di sicurezza per motivi storici legati all'uso principale della rete ai suoi primordi (semplice scambio di dati tra ricercatori nella comunità scientifica), e solo successivamente con l'apertura della Rete a fini pubblici le problematiche di sicurezza sono diventate via via sempre più importanti da cui la necessità di inserire degli strati aggiuntivi che si occupino appunto di sicurezza.
 
 <div id="versioni-tls-ssl" markdown=1>
@@ -484,7 +484,7 @@ Lo stack protocollare TCP/IP di Internet, diversamente dal modello ISO/OSI, non 
 
 Le prime implementazioni di SSL erano limitate a cifratura a chiave simmetrica di soli 40 bit a causa delle restrizioni imposte dal governo statunitense sull'esportazione di tecnologie crittografiche, per motivi di sicurezza nazionale. In altri termini, la limitazione della dimensione delle chiavi a 40 bit è stata esplicitamente imposta per rendere la cifratura abbastanza debole da potere essere forzata (tramite l'uso di tecniche di ricerca brute force) dalle autorità giudiziarie che volessero decifrare il traffico cifrato, ma sufficientemente resistente agli attacchi da parte di entità con minori disponibilità di risorse tecnologico-finanziarie. Dopo diversi anni di controversie pubbliche, cause e l'ammissione da parte del governo statunitense di disponibilità sul mercato di prodotti per la cifratura migliori (sia all'interno che al di fuori degli Stati Uniti), alcuni aspetti delle restrizioni sono stati modificati. Le implementazioni moderne utilizzano chiavi per la cifratura simmetrica a 128 (o più) bit.
 
-##### Funzionamento
+#### Funzionamento
 I servizi offerti da TLS sono tre:
 1. cifratura dei dati,
 2. autenticazione dei partecipanti alla comunicazione,
@@ -501,7 +501,7 @@ Questa fase è quindi a sua volta divisa in due:
 3. **Cifratura simmetrica e autenticazione dei messaggi**.  
 Questa fase consiste nella trasmissione dei dati veri e propri e ciò avviene per mezzo di un algoritmo di cifratura simmetrico che è molto più veloce e sicuro rispetto ad uno asimmetrico. In questa fase si utilizza anche una funzione crittografica di hash allo scopo di verificare che i dati ricevuti siano identici ai dati trasmessi evitando sia errori di trasmissione che eventuali manomissioni.
 
-##### Algoritmi utilizzati
+#### Algoritmi utilizzati
 All'interno di una sessione tipicamente vengono utilizzati i seguenti protocolli:
 - Per lo scambio di chiavi: [RSA]({{site.baseurl}}/docs/reti/crittografia/crittografia-moderna/#rsa), [Diffie-Hellman]({{site.baseurl}}/docs/reti/crittografia/crittografia-moderna/#lo-scambio-di-chiavi-secondo-diffie-hellman-e-merkle), ECDH, SRP, PSK (pre-shared key o chiave precondivisa)
 - Per l'autenticazione: [RSA]({{site.baseurl}}/docs/reti/crittografia/crittografia-moderna/#rsa), DSA, ECDSA
@@ -512,7 +512,7 @@ Puoi approfondire l'argomento alla [pagina](https://en.wikipedia.org/wiki/Transp
 
 
 
-### Livello 7: applicazione (Application Layer)
+## Livello 7: applicazione (Application Layer)
 
 _Obiettivo: permettere alle applicazioni di comunicare con applicazioni in esecuzione su un altro host._
 
@@ -522,7 +522,7 @@ Esistono moltissimi protocolli utilizzati dalle applicazioni per svolgere svaria
 
 Prima di trattare nello specifico le funzionalità offerte dai vari protocolli è necessario conoscere alcuni aspetti generali della comunicazione a livello applicazione.
 
-#### URI e URL
+### URI e URL
 lo Uniform Resource Identifier (in acronimo URI) è una sequenza di caratteri che identifica universalmente ed univocamente una risorsa. Un URI può essere classificato come qualcosa che definisce posizioni (URL) o nomi (URN) o entrambi.
 
 Un __URN__ (Uniform Resource Name) è un URI che identifica una risorsa mediante un "nome" in un particolare dominio di nomi ("namespace"). Un URN può quindi essere usato per identificare una risorsa, senza lasciarne intendere l'ubicazione o come ottenerne una rappresentazione. Per esempio l'URN urn:isbn:0-395-36341-1 è un URI che mappa universalmente e univocamente un libro mediante il suo identificativo, o nome, (0-395-36341-1) nel namespace dei codici ISBN, ma non suggerisce dove e come possiamo ottenere una copia di tale libro. Si noti che, da RFC8141, un URN è un URI assegnata sotto lo schema URI "urn".
@@ -547,19 +547,19 @@ esempi di url sono:
 
 I protocolli di livello applicazione usano normalmente gli URL, ma è stato detto in precedenza che per creare un canale di comunicazione tra due host si crea una socket che è formata da indirizzo IP e porta. In questo caso l'indirizzo IP non è indicato, si identifica invece l'host contenente la risorsa per mezzo di un _nome di dominio_, indicato nella struttura dell'url come _domain_. Per instaurare una comunicazione è necessario quindi l'utilizzo di un servizio che converta i nomi di dominio in indirizzi IP, questo servizio è il Domain Name System (DNS).
 
-#### DNS
+### DNS
 {: .titolo-3}
 
 il sistema dei nomi di dominio (in inglese: Domain Name System, DNS), è un sistema utilizzato per assegnare nomi ai nodi della rete (host). Questi nomi sono utilizzabili, mediante una traduzione, di solito chiamata "risoluzione", al posto degli indirizzi IP originali. Il servizio è realizzato tramite un database distribuito, costituito dai server DNS. Il DNS ha una struttura gerarchica ad albero rovesciato ed è diviso in domini (com, org, it, ecc.). Ad ogni dominio o nodo corrisponde un nameserver, che conserva un database con le informazioni di alcuni domini di cui è responsabile e si rivolge ai nodi successivi quando deve trovare informazioni che appartengono ad altri domini.
 
 Ogni nome di dominio termina con un "." (punto). Ad esempio l'indirizzo wikipedia.org termina con il punto. La stringa che segue il punto finale è chiamata "dominio radice" (DNS root zone). I server responsabili del dominio radice sono i cosiddetti root nameservers. Essi possiedono l'elenco dei server autoritativi di tutti i domini di primo livello (TLD) riconosciuti e lo forniscono in risposta a ciascuna richiesta. I root nameserver sono 13 in tutto il mondo, di cui 10 negli Stati Uniti, due in Europa (Inghilterra e Svezia) e uno in Giappone.
 
-##### Storia
+#### Storia
 {: .no_toc}
 
 Il DNS fu ideato il 23 giugno 1983 da Paul Mockapetris, Jon Postel e Craig Partridge; le specifiche originali sono descritte nello standard RFC 882. Nel 1987 vennero pubblicati commenti allo standard RFC del DNS, con i nomi RFC 1034 e RFC 1035 rendendo obsolete le specifiche precedenti.
 
-##### Descrizione
+#### Descrizione
 {: .no_toc}
 
 Il nome DNS denota anche il protocollo di livello 7 che regola il funzionamento del servizio, i programmi che lo implementano, i server su cui questi vengono elaborati, l'insieme di questi server che cooperano per fornire il servizio più intelligente.
@@ -568,7 +568,7 @@ I nomi DNS, o "nomi di dominio" o "indirizzi mnemonici", sono una delle caratter
 
 In pratica, il DNS è un registro universale cioè un database distribuito, con una struttura gerarchica, che archivia i nomi mnemonici di dominio e la loro associazione ai relativi indirizzi IP specifici.
 
-###### Motivazioni ed utilizzi
+##### Motivazioni ed utilizzi
 {: .no_toc}
 
 - La possibilità di attribuire un nome testuale facile da memorizzare a un server (ad esempio un sito world wide web) migliora di molto l'uso del servizio, in quanto gli esseri umani trovano più facile ricordare nomi testuali (mentre gli host e i router sono raggiungibili utilizzando gli indirizzi IP numerici). Per questo, il DNS è fondamentale per l'ampia diffusione di internet anche tra utenti non tecnici, ed è una delle sue caratteristiche più visibili.
@@ -580,7 +580,7 @@ In pratica, il DNS è un registro universale cioè un database distribuito, con 
 - La risoluzione inversa è utile per identificare l'identità di un host, o per leggere il risultato di un traceroute.
 - Il DNS viene usato da numerose tecnologie in modo poco visibile agli utenti, per organizzare le informazioni necessarie al funzionamento del servizio.
 
-###### Nomi di dominio
+##### Nomi di dominio
 {: .no_toc}
 
 Un nome di dominio è costituito da una serie di stringhe separate da punti, ad esempio it.wikipedia.org. e sono organizzati a livelli. A differenza degli indirizzi IP, dove la parte più importante del numero è la prima cifra partendo da sinistra, in un nome DNS la parte più importante è la prima partendo da destra.
@@ -593,7 +593,7 @@ Il dominio di terzo livello è il figlio del dominio di secondo livello, infatti
 
 Un nome di dominio, come per esempio it.wikipedia.org, può essere parte di un URL, come http://it.wikipedia.org/wiki/Treno, o di un indirizzo e-mail, come per esempio apache@it.wikipedia.org. È anche possibile connettersi a un sito con il protocollo telnet oppure usare una connessione FTP usando il suo nome a dominio.
 
-###### Sistema DNS in Internet
+##### Sistema DNS in Internet
 {: .no_toc}
 
 Qualsiasi rete IP può usare il DNS per implementare un suo sistema di nomi privato. Tuttavia, il termine "nome di dominio" è più comunemente utilizzato quando esso si riferisce al sistema pubblico dei DNS su Internet. Il sistema del DNS è organizzato in modo gerarchico secondo quello che viene chiamato un _albero rovesciato_. 
@@ -613,12 +613,12 @@ Teoricamente per arrivare ad ogni spazio di dominio si dovrebbe passare spesso d
 Esistono alcuni nameserver che non gestiscono uno spazio di dominio particolare ma per motivi vari (analisi del traffico dati per scopi privati?) offrono gratuitamente il servizio DNS aggiungendo in alcuni casi anche altri servizi come ad esempio il blocco di siti pericolosi. [Qui](https://www.worldcomputing.it/computer/internet/44-elenco-migliori-veloci-affidabili-server-dns-pubblici-gratuiti.html) puoi trovare un articolo che descrive 12 diversi DNS pubblici.
 
 
-#### HTTP
+### HTTP
 {: .titolo-3}
 
 HTTP (HyperText Transfer Protocol - protocollo di trasferimento di un ipertesto) è un protocollo a livello applicativo usato come principale sistema per la trasmissione d'informazioni sul web in una architettura client-server. Le specifiche del protocollo sono gestite dal World Wide Web Consortium (W3C). Un server HTTP generalmente resta in ascolto delle richieste dei client sulla porta 80 usando il protocollo TCP a livello di trasporto.
 
-##### Storia
+#### Storia
 {: .no_toc}
 
 La prima versione dell'HTTP, la 0.9, risale alla fine degli anni 1980 e costituiva, insieme con il linguaggio HTML e gli URL, il nucleo base del World Wide Web (WWW) sviluppata da Tim Berners-Lee al CERN di Ginevra per la condivisione delle informazioni tra la comunità dei fisici delle alte energie. Prima di HTTP il protocollo di riferimento per tali scopi era il più semplice e leggero FTP. La prima versione effettivamente disponibile del protocollo, la HTTP/1.0, venne implementata dallo stesso Berners-Lee nel 1991 e riconosciuta come standard nel 1996.
@@ -631,7 +631,7 @@ Negli anni il WWW conobbe un successo crescente e divennero evidenti alcuni limi
 
 Per far fronte ai primi due problemi il protocollo venne aggiornato alla versione 1.1 nel 1999 (e poi alla 2.0 nel 2014). Per risolvere i problemi di sicurezza è stato sviluppato invece HTTPS che sfrutta protocolli crittografici a livello di presentazione.
 
-##### Funzionamento
+#### Funzionamento
 {: .no_toc}
 
 L'HTTP è un protocollo che lavora con un'architettura di tipo client/server: il client esegue una richiesta e il server restituisce la risposta mandata da un altro host. Nell'uso comune il client corrisponde al browser ed il server la macchina su cui risiede il sito web. Vi sono quindi due tipi di messaggi HTTP: messaggi richiesta e messaggi risposta.
@@ -654,7 +654,7 @@ L'HTTP è un protocollo che lavora con un'architettura di tipo client/server: il
 
 HTTP differisce da altri protocolli di livello 7 come FTP, per il fatto che le connessioni vengono generalmente chiuse una volta che una particolare richiesta (o una serie di richieste correlate) è stata soddisfatta. Questo comportamento rende il protocollo HTTP ideale per il World Wide Web, in cui le pagine molto spesso contengono dei collegamenti (link) a pagine ospitate da altri server diminuendo così il numero di connessioni attive limitandole a quelle effettivamente necessarie con aumento quindi di efficienza (minor carico e occupazione) sia sul client che sul server. Talvolta però pone problemi agli sviluppatori di contenuti web, perché la natura senza stato (_stateless_) della sessione di navigazione costringe ad utilizzare dei metodi alternativi - tipicamente basati sui [cookie](#cookies) - per conservare lo stato dell'utente.
 
-###### Messaggio di richiesta
+##### Messaggio di richiesta
 {: .no_toc}
 
 Il messaggio di richiesta è composto di quattro parti:
@@ -687,7 +687,7 @@ Il messaggio di richiesta è composto di quattro parti:
 - riga vuota (CRLF: i 2 caratteri carriage return e line feed), essenzialmente un separatore tra intestazione e body;
 - body (corpo del messaggio), usato quando ci sono effettivamente dati da trasferire (non è il caso del GET, lo è invece del POST).
 
-###### Messaggio di risposta
+##### Messaggio di risposta
 {: .no_toc}
 
     HTTP/1.1 200 OK
@@ -741,7 +741,7 @@ Il messaggio di risposta è di tipo testuale ed è composto da quattro parti:
 
 In questa sezione sono stati riportati solo due esempi di messaggi HTTP, una richiesta di tipo GET e una risposta possibile a tale domanda. Sulla [pagina di Wikipedia](https://it.wikipedia.org/wiki/Hypertext_Transfer_Protocol) da cui sono state tratte queste informazioni è possibile trovare molti altri [esempi](https://it.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Esempi_di_messaggi_HTTP) ed approfondimenti. 
 
-###### Tipo di connessione
+##### Tipo di connessione
 {: .no_toc}
 
 Il client può chiedere al server, nel messaggio di richiesta, di utilizzare due tipi di comunicazione:
@@ -752,12 +752,12 @@ Il client può chiedere al server, nel messaggio di richiesta, di utilizzare due
 Da un lato, le connessioni non persistenti introducono una latenza aggiuntiva rispetto a quelle persistenti perchè aprire e chiudere una connessione TCP introduce dell'overhead.
 D'altro canto, le connessioni persistenti precludono il parallelismo nelle comunicazioni, giacché il client che abbia diverse richieste da inviare allo stesso server è costretto ad evaderle sequenzialmente, una dopo l'altra. Per queste ragioni, i browser solitamente sfruttano le complementarità prestazionali delle due politiche di comunicazione per massimizzare la loro efficienza: solitamente aprono con ogni server diverse connessioni TCP in parallelo, su cui comunicano con strategia persistente.
 
-##### Streaming HTTP
+#### Streaming HTTP
 {: .no_toc}
 
 La fruizione nelle pagine WEB di materiale multimediale, quale audio o video viene gestito in modo del tutto analogo al download dei file, tramite un caricamento progressivo o distribuzione progressiva, in cui il file viene scaricato in modo progressivo dall'inizio alla fine (tramite i protocolli Real Time Streaming Protocol e Real-time Transport Protocol) e nel caso il bit-rate sia eccessivo per la rete che lo trasporta può verificarsi un continuo ricaricamento del buffer
 
-##### Cookies
+#### Cookies
 {: .titolo-4}
 
 Il protocollo HTTP è un protocollo _stateless_ cioè non tiene traccia dello stato della connessione. Se la comunicazione si limitasse all'uso delle funzionalità offerte da HTTP quindi ad ogni richiesta di un client il server risponderebbe come se fosse la prima volta che il client comunica con lui. Per tenere traccia dello stato della comunicazione sono quindi stati introdotti i cookies che funzionano come dei gettoni identificativi che i server rilasciano ai client e in cui memorizzano informazioni a lungo termine.
@@ -791,7 +791,7 @@ L'attributo principale tramite cui possiamo dividere i cookie è il loro ciclo d
 Esistono molti altri tipi di cookie, se vuoi approfondire l'argomento puoi farlo [qui](https://it.wikipedia.org/wiki/Cookie)
 
 
-##### HTTPS
+#### HTTPS
 {: .titolo-4}
 
 <!-- thumbnail -->
@@ -822,14 +822,14 @@ Le URL del protocollo HTTPS iniziano con https:// e utilizzano la porta 443 di d
 
 Per comprendere meglio le funzionalità offerte da HTTPS è necessario studiare il funzionamento di TLS nella [sezione](#transport-layer-security-tls) ad esso dedicata. è anche possibile approfondire l'argomento sulla [pagina Wikipedia](https://it.wikipedia.org/wiki/HTTPS) dedicata a HTTPS
 
-#### FTP 
+### FTP 
 {: .titolo-3}
 
 File Transfer Protocol (FTP) (protocollo di trasferimento file), in informatica e nelle telecomunicazioni, è un protocollo di livello applicazioni per la trasmissione di dati tra host basato su TCP e con architettura di tipo client-server.
 
 Il protocollo usa connessioni TCP distinte per trasferire i dati e per controllare i trasferimenti e richiede autenticazione del client tramite nome utente e password, sebbene il server possa essere configurato per connessioni anonime con credenziali fittizie. Dato che FTP trasmette in chiaro sia tali credenziali sia ogni altra comunicazione, e visto che non dispone di meccanismi di autenticazione del server presso il client, il protocollo è spesso reso sicuro utilizzando un sottostrato SSL/TLS e tale variante è chiamata FTPS. L'acronimo SFTP designa invece un altro protocollo che, pur essendo molto simile a quest'ultimo dal punto di vista funzionale, è alquanto diverso da quello tecnologico: SSH File Transfer Protocol.
 
-##### Cenni storici
+#### Cenni storici
 {: .no_toc}
 
 FTP è uno dei primi protocolli definiti della Rete Internet e ha subito una lunga evoluzione negli anni. La prima specifica, sviluppata presso il MIT, risale al 1971 (RFC-114). L'attuale specifica fa riferimento all'RFC-959.
@@ -841,7 +841,7 @@ Gli obiettivi principali di FTP descritti nella sua RFC ufficiale furono:
 - Risolvere in maniera trasparente incompatibilità tra differenti sistemi di stoccaggio file tra host.
 - Trasferire dati in maniera affidabile ed efficiente.
 
-##### Descrizione
+#### Descrizione
 {: .no_toc}
 
 FTP_model.png
@@ -868,7 +868,7 @@ Creazione di directory.
 Navigazione tra directory.
 FTP fornisce inoltre un sistema di autenticazione in chiaro (non criptato) degli accessi. Il client che si connette potrebbe dover fornire delle credenziali a seconda delle quali gli saranno assegnati determinati privilegi per poter operare sul filesystem. L'autenticazione cosiddetta "anonima" prevede che il client non specifichi nessuna password di accesso e che lo stesso abbia privilegi che sono generalmente di "sola lettura".
 
-##### Comandi
+#### Comandi
 {: .no_toc}
 
 Lista dei comandi definiti nella RFC-959.
@@ -911,7 +911,7 @@ Lista dei comandi definiti nella RFC-959.
 {: .code-size-smaller}
 
 
-##### Codici di risposta
+#### Codici di risposta
 {: .no_toc}
 
 - 1xx: Risposta positiva preliminare. L'azione richiesta è incominciata ma ci sarà un'altra risposta a indicare che essa è effettivamente completata.
@@ -927,7 +927,7 @@ Lista dei comandi definiti nella RFC-959.
 - x5x: Risposta relativa al file-system.
 
 
-##### Problemi relativi alla sicurezza
+#### Problemi relativi alla sicurezza
 {: .no_toc}
 
 La specifica originale di FTP non prevede alcuna cifratura per i dati scambiati tra client e server. Questo comprende nomi utenti, password, comandi, codici di risposta e file trasferiti i quali possono essere "sniffati" o visionati da malintenzionati in determinate situazioni (esempio: ambienti intranet).
@@ -935,7 +935,7 @@ La specifica originale di FTP non prevede alcuna cifratura per i dati scambiati 
 Il problema è comune a diversi altri protocolli utilizzati prima della diffusione di SSL quali HTTP, TELNET e SMTP. Per ovviare al problema è stata definita una nuova specifica che aggiunge al protocollo FTP originale un layer di cifratura SSL/TLS più una nuova serie di comandi e codici di risposta. Il protocollo prende il nome di FTPS ed è definito nella RFC-4217. Da non confondersi con SFTP che è comunque una valida alternativa per ovviare al problema descritto.
 
 
-##### Applicazioni che utilizzano FTP
+#### Applicazioni che utilizzano FTP
 {: .no_toc}
 
 FileZilla, Fire Downloader, JDownloader sono alcuni dei tanti gestori di download che permettono di trasferire i dati mediante connessione FTP.
@@ -943,7 +943,7 @@ FileZilla, Fire Downloader, JDownloader sono alcuni dei tanti gestori di downloa
 Tuttavia nei sistemi operativi, in genere, si può effettuare l'accesso anche tramite riga di comando.
 
 
-##### Server FTP
+#### Server FTP
 {: .no_toc}
 
 Alcuni server FTP popolari sono:
@@ -954,7 +954,7 @@ Alcuni server FTP popolari sono:
 - VsFTPd (Unix)
 - ProFTPd (Unix)
 
-#### Posta elettronica
+### Posta elettronica
 {: .titolo-3}
 
 La posta elettronica, in inglese e-mail (abbreviazione di electronic mail), è un servizio Internet grazie al quale ogni utente abilitato può inviare e ricevere dei messaggi utilizzando un computer o altro dispositivo elettronico (come palmare, smartphone, tablet) connesso in rete attraverso un proprio account di posta registrato presso un fornitore del servizio.
@@ -964,7 +964,7 @@ La posta elettronica, in inglese e-mail (abbreviazione di electronic mail), è u
 Rappresenta la controparte digitale ed elettronica della posta ordinaria e cartacea. A differenza di quest'ultima, il ritardo con cui arriva dal mittente al destinatario è normalmente di pochi secondi/minuti, anche se vi sono delle eccezioni che ritardano il servizio fino a qualche ora. Per questo in generale di fatto ha rappresentato una rivoluzione nel modo di inviare e ricevere posta con la possibilità di allegare qualsiasi tipo di documento e immagini digitali entro certi limiti di dimensioni in byte.
 
 
-##### Modello di servizio
+#### Modello di servizio
 {: .no_toc}
 
 Scopo del servizio di posta elettronica è il trasferimento di messaggi da un utente a un altro attraverso un sistema di comunicazione dati che coinvolge i client agli estremi (attraverso opportuni software di posta elettronica) e dei server di posta attivi presso i rispettivi fornitori del servizio come nodi di raccolta/smistamento dei messaggi interni alla rete.
@@ -980,7 +980,7 @@ La _consegna al destinatario dei messaggi inviati non è garantita_. Nel caso un
 Il mittente può anche richiedere una conferma di consegna o di lettura dei messaggi inviati, però il destinatario è normalmente in grado di decidere se vuole inviare o meno tale conferma. Il significato della conferma di lettura può essere ambiguo, in quanto aver visualizzato un messaggio per pochi secondi in un client non significa averlo letto, compreso o averne condiviso il contenuto.
 
 
-##### Indirizzi di posta elettronica
+#### Indirizzi di posta elettronica
 {: .no_toc}
 
 A ciascuna casella sono associati uno o più indirizzi di posta elettronica necessari per identificare il destinatario. Questi hanno la forma nomeutente@dominio, dove nomeutente è un nome scelto dall'utente o dall'amministratore del server, che identifica in maniera univoca un utente (o un gruppo di utenti), e dominio è un nome DNS.
@@ -990,7 +990,7 @@ L'indirizzo di posta elettronica può contenere qualsiasi carattere alfabetico e
 Esempio di indirizzo elettronico: test@esempio.com
 
 
-##### Architettura del sistema di posta elettronica
+#### Architettura del sistema di posta elettronica
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
@@ -1019,7 +1019,7 @@ I client richiedono la configurazione dei server da contattare, e sono quindi ad
 
 POP3s, SMTPs, IMAPs (e HTTPs) sono le versioni cifrate dei comuni protocolli di posta elettronica. Vari servizi di gestione della posta offrono la possibilità di una connessione cifrata con il protocollo Secure Sockets Layer (SSL, superato da TLS), inserendo nel programma client (es. Outlook Express) un parametro di posta in arrivo/posta in uscita (es. pops.[provider].it e smtps.[provider].it) oppure scegliendo una porta predefinita e spuntando le opzioni per la connessione SSL e l'autenticazione sicura.
 
-##### Simple Mail Transfer Protocol
+#### SMTP - Simple Mail Transfer Protocol
 Simple Mail Transfer Protocol (SMTP) è un protocollo standard per la trasmissione di email. Inizialmente proposto nella RFC 788 nel 1981, poi aggiornato con RFC 821 nel 1982 ed ulteriormente modificato nel 2008 con l’introduzione di extended SMTP (RFC 1869 e RFC 5321), che è il protocollo attualmente in uso.
 
 Anche se i server di posta elettronica utilizzano SMTP per inviare e ricevere mail, i client mail a livello utente utilizzano SMTP solo per inviare il messaggio al server mail, il quale si occupa dell’invio del messaggio stesso. Per recuperare i messaggi, le applicazioni client usano solitamente protocolli come IMAP o POP3.
@@ -1032,7 +1032,7 @@ Anche se sistemi proprietari (come Microsoft Exchange e IBM Notes) e sistemi web
 
 Non entreremo nei dettagli tecnici di questo protocollo che puoi approfondire [qui](https://it.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol)
 
-##### Post Office Protocol
+#### POP - Post Office Protocol
 Il Post Office Protocol (detto anche POP) è un protocollo di livello applicativo di tipo client-server che ha il compito di permettere, mediante autenticazione, l'accesso da parte del client ad un account di posta elettronica presente su un host server e scaricare le e-mail dell'account stesso. Il protocollo per inviare posta è invece il protocollo SMTP.
 
 Il POP (nella versione 3 detta comunemente POP3) rimane in attesa sulla porta 110 del server (di default, ma può anche essere diversa) per una connessione TCP da parte di un client.
@@ -1043,7 +1043,7 @@ Anche con il protocollo POP3 si può impostare la cifratura, per evitare che le 
 
 Oltre che con un classico client, un account di posta in entrata con protocollo POP può essere configurato in qualsiasi applicazione software che possa ricevere posta elettronica.
 
-##### Internet Message Access Protocol
+#### IMAP - Internet Message Access Protocol
 L'Internet Message Access Protocol (IMAP), a volte anche chiamato Interactive Mail Access Protocol, è un protocollo di comunicazione per la ricezione di e-mail da parte del client.
 
 Il significato "Interactive Mail Access Protocol" è stato valido fino alla versione 3, dalla quarta in poi è cambiato in "Internet Message Access Protocol". L'attuale versione è la "4 (revisione 1)".
@@ -1054,7 +1054,7 @@ La **porta** predefinita del demone IMAP sull'host è la **143**. Se si utilizza
 
 Oltre che con un classico client, un account di posta in entrata con protocollo IMAP può essere configurato in qualsiasi applicazione software che possa ricevere posta elettronica.
 
-##### Differenze tra IMAP e POP
+#### Differenze tra IMAP e POP
 {: .no_toc}
 
 Entrambi i protocolli permettono ad un client (programma di posta elettronica oppure servizio di webmail) di accedere, leggere e cancellare le e-mail da un server, ma con alcune differenze. Con entrambi i protocolli, il client scarica la posta direttamente sul PC, eventualmente cancellandola dal server, ma è altresì possibile conservare copia delle proprie e-mail sul server (opzione da selezionare in fase di configurazione), e scaricarle in un secondo momento da altri computer. IMAP, a differenza di POP, permette procedure complesse di sincronizzazione. Ecco un elenco delle caratteristiche dell'IMAP ma non del POP:
@@ -1080,15 +1080,15 @@ Nelle specifiche dell'IMAP è descritto come un server può far sapere agli uten
 
 Dati i molteplici vantaggi introdotti dal protocollo IMAP, il protocollo POP sta cadendo in disuso.
 
-##### Messaggi di posta elettronica
+#### Messaggi di posta elettronica
 {: .no_toc}
 
-###### Busta
+##### Busta
 {: .no_toc}
 
 Per busta si intendono le informazioni a corredo del messaggio che vengono scambiate tra server attraverso il protocollo SMTP, principalmente gli indirizzi di posta elettronica del mittente e dei destinatari. Queste informazioni normalmente corrispondono a quelle che è possibile ritrovare nelle intestazioni, ma possono esserci delle differenze.
 
-###### Intestazioni
+##### Intestazioni
 {: .no_toc}
 
 Le intestazioni sono informazioni di servizio che servono a controllare l'invio del messaggio, o a tener traccia delle manipolazioni che subisce. Ciascuna intestazione è costituita da una riga di testo, con un nome seguito dal carattere ':' e dal corrispondente valore.
@@ -1104,7 +1104,7 @@ Alcune di queste vengono definite direttamente dall'utente. Tra le principali si
 - Data: contiene la data e l'ora in cui il messaggio è stato scritto.
 Nota: è considerata cattiva educazione anche la pratica di inviare messaggi a un grande numero di destinatari e, in maniera particolare, se contengono allegati in formato proprietario che non tutti i destinatari potrebbero essere in grado di leggere, come Microsoft Word. Qualora si dovesse inviare un messaggio a un certo numero di destinatari (≥2) dei quali non si è certi che intendano rendere noto agli altri destinatari il proprio indirizzo elettronico (ciò che accade normalmente), è considerato netiquette inviare a sé stessi il messaggio (porre il proprio indirizzo come destinatario) e inserire in ccn (copia conoscenza nascosta) gli altri destinatari. Infatti i destinatari-ccn non si vedono reciprocamente.
 
-###### Intestazioni di servizio
+##### Intestazioni di servizio
 {: .no_toc}
 
 Altre intestazioni vengono aggiunte dai programmi che manipolano il messaggio.
@@ -1115,7 +1115,7 @@ Altre intestazioni segnalano ad esempio che il messaggio è stato valutato da qu
 
 Il Message-ID: (Identificativo del messaggio) è un codice costruito dal client su cui il messaggio è stato composto, che dovrebbe permettere di identificare univocamente un messaggio.
 
-###### Corpo e allegati
+##### Corpo e allegati
 {: .no_toc}
 
 Il corpo del messaggio è composto dal contenuto informativo che il mittente vuol comunicare ai destinatari.
@@ -1127,7 +1127,7 @@ Gli allegati vengono utilizzati anche per comporre un messaggio di posta elettro
 Dato che la banda del canale (Internet) e la dimensione della casella di posta elettronica (sul server) non sono illimitate, è considerata cattiva educazione inviare messaggi di grosse dimensioni. Secondo la netiquette un messaggio di posta elettronica dovrebbe rimanere al di sotto di 50-100 kB. Per ridurre le dimensioni di un messaggio contenente allegati di grosse dimensioni, si possono inviare semplicemente gli URI degli allegati, rendendo questi ultimi reperibili in altro modo, ad esempio via FTP o HTTP. Inoltre, molti server impongono limiti massimi alla dimensione del messaggio da trasmettere, che devono essere presi in considerazione se si inviano messaggi di grosse dimensioni.
 
 
-##### Abusi e attacchi
+#### Abusi e attacchi
 
 Il principale utilizzo improprio della posta elettronica è lo ***spam***, l'invio massiccio a molti utenti di messaggi indesiderati, in genere di natura pubblicitaria-commerciale. Secondo alcune fonti, l'incidenza di questi messaggi raggiungerebbe i due terzi del traffico totale di posta elettronica.
 
@@ -1165,7 +1165,7 @@ Una forma particolare di phishing che sfrutta sofisticate tecniche di ingegneria
 - **Email Injection**<br>
 L'Email Injection è una vulnerabilità di sicurezza che può verificarsi nelle applicazioni di posta elettronica. È l'equivalente e-mail dell'HTTP Header Injection. Come gli attacchi SQL injection, questa vulnerabilità appartiene a una classe generale di vulnerabilità che si verifica quando un linguaggio di programmazione è incorporato in un altro.
 
-##### Posta elettronica certificata
+#### Posta elettronica certificata
 
 La Posta elettronica certificata è un servizio di posta elettronica erogato nel solo Stato italiano che permette di ottenere la garanzia legale del ricevimento del messaggio da parte del destinatario e della integrità del messaggio ricevuto. Non prevede invece la segretezza del contenuto del messaggio o la certificazione del mittente, e pone parecchi problemi nell'uso con soggetti esteri.
 
@@ -1180,7 +1180,7 @@ I gestori di posta elettronica certificata sono soggetti privati che devono poss
 Le pubbliche amministrazioni possono essere gestori di posta elettronica certificata, ma in tal caso gli indirizzi rilasciati hanno validità solo limitatamente agli scambi di mail fra il titolare dell'indirizzo e l'Amministrazione che lo ha rilasciato.
 
 
-##### Email HTML
+#### Email HTML
 {: .no_toc}
 
 L'e-mail HTML è l'uso di un sottoinsieme di HTML per fornire funzionalità di formattazione e markup semantico nelle e-mail che non sono disponibili con testo normale. Il testo è disposto per adattarsi alla larghezza della finestra di visualizzazione, invece di spezzare uniformemente ogni riga a 78 caratteri (definito in RFC 5322, che era necessario sui terminali più vecchi). Consente l'inclusione in linea di immagini, tabelle, diagrammi o formule matematiche come immagini, che sono altrimenti difficili da trasmettere (tipicamente usando l'arte ASCII).
@@ -1194,7 +1194,7 @@ Inoltre è possibile inserire nel layout di una email HTML dei video attraverso 
 Molti permettono di aprire l'email HTML ricevuta nel browser attraverso un link, in caso la visualizzazione sul programma di posta sia scarsa.
 
 
-###### Vulnerabilità
+##### Vulnerabilità
 {: .no_toc}
 
 L'HTML consente di visualizzare un collegamento come testo arbitrario, in modo che, anziché visualizzare l'URL completo, un collegamento possa mostrarne solo una parte o semplicemente un nome di destinazione intuitivo. Questo può essere utilizzato negli attacchi di phishing, in cui gli utenti sono indotti a credere che un collegamento punti al sito Web di una fonte autorevole (come una banca), visitandolo e rivelando involontariamente dettagli personali (come i numeri di conto bancario) a un truffatore.
