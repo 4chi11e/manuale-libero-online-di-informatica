@@ -4,21 +4,22 @@ title: Livello 3 - Rete
 nav_order: 3
 parent: ISO/OSI
 grand_parent: Reti
-has_children: False
+has_children: True
 ---
 
 # Livello 3: Rete (Network Layer)
+
 {: .no_toc}
 
 _Obiettivo: rendere i livelli superiori indipendenti dai meccanismi e dalle tecnologie di trasmissione usate per la connessione e prendersi carico della consegna a destinazione dei pacchetti._
 
 È responsabile di:
 
-* [routing](https://it.wikipedia.org/wiki/Instradamento#Routing "Instradamento"): scelta ottimale del percorso di rete da utilizzare per garantire la consegna delle informazioni dal mittente al destinatario, scelta svolta dal [router](https://it.wikipedia.org/wiki/Router "Router") attraverso dei particolari [algoritmi di Routing](https://it.wikipedia.org/wiki/Protocolli_di_routing "Protocolli di routing") e [tabelle di routing](https://it.wikipedia.org/wiki/Routing_table "Routing table").
-* conversione dei dati nel passaggio fra una rete ed un'altra con diverse caratteristiche, come il protocollo di rete utilizzato (_internet-working_). Deve, quindi:
-  * tradurre gli indirizzi di rete;
-  * valutare la necessità di frammentare i pacchetti dati se la nuova rete prevede una diversa dimensione dei pacchetti;
-  * valutare la necessità di gestire diversi protocolli attraverso l'impiego di [gateway](https://it.wikipedia.org/wiki/Gateway_(informatica) "Gateway (informatica)").
+- [routing](https://it.wikipedia.org/wiki/Instradamento#Routing "Instradamento"): scelta ottimale del percorso di rete da utilizzare per garantire la consegna delle informazioni dal mittente al destinatario, scelta svolta dal [router](https://it.wikipedia.org/wiki/Router "Router") attraverso dei particolari [algoritmi di Routing](https://it.wikipedia.org/wiki/Protocolli_di_routing "Protocolli di routing") e [tabelle di routing](https://it.wikipedia.org/wiki/Routing_table "Routing table").
+- conversione dei dati nel passaggio fra una rete ed un'altra con diverse caratteristiche, come il protocollo di rete utilizzato (_internet-working_). Deve, quindi:
+  - tradurre gli indirizzi di rete;
+  - valutare la necessità di frammentare i pacchetti dati se la nuova rete prevede una diversa dimensione dei pacchetti;
+  - valutare la necessità di gestire diversi protocolli attraverso l'impiego di [gateway](<https://it.wikipedia.org/wiki/Gateway_(informatica)> "Gateway (informatica)").
 
 La sua unità dati fondamentale è il _pacchetto_.
 
@@ -50,8 +51,7 @@ Mentre gli switch si occupano di collegare dispositivi all'interno di una stessa
 
 Spesso le reti sono organizzate gerarchicamente tra loro e i router sono quindi solitamente costruiti per rispettare tale ordine. Spesso quindi i router presentano una porta per la connessione alla rete "esterna" e una o più porte fisiche per i collegamenti verso la rete "interna". A volte possiedono anche antenne per fornire connessione Wi-Fi alla rete interna.
 
-
-## Protocollo IP 
+## Protocollo IP
 
 Internet Protocol (IP), in telecomunicazioni e informatica, è un protocollo di rete, che si occupa di indirizzamento/instradamento, appartenente alla suite di protocolli Internet TCP/IP su cui è basato il funzionamento della rete Internet.
 
@@ -74,18 +74,14 @@ Anche se l'indirizzamento indiretto altro non è che una successione di instrada
 
 ### Indirizzo IP
 
-Un indirizzo IP è un numero (sequenza di bit che varia di lunghezza in base alla versione del protocollo) che identifica univocamente un'interfaccia di un host connessa alla rete fisica. L'indirizzo IP è assegnato propriamente all'interfaccia (ad esempio una scheda di rete) e non all'host, perché è questa ad essere connessa alla rete. Un router, ad esempio, ha diverse interfacce e per ognuna occorre un indirizzo IP. Sarebbe quindi impreciso dire che un indirizzo IP identifica univocamente un host.
+Un indirizzo IP è un numero (sequenza di bit che varia di lunghezza in base alla versione del protocollo) che identifica univocamente un'interfaccia di un host connessa alla rete fisica. L'indirizzo IP è assegnato propriamente all'interfaccia (ad esempio una scheda di rete) e non all'host, perché è questa ad essere connessa alla rete. Un router, ad esempio, ha diverse interfacce e per ognuna occorre un indirizzo IP. Sarebbe quindi impreciso dire che un indirizzo IP identifica univocamente un host anche se in molti casi è vero.
 
 Gli indirizzi IP sono indicati negli header dei pacchetti IP e sono essenziali per permettere l'instradamento dei pacchetti. Analogamente a quanto succede per un indirizzo stradale od un numero di telefono ci permettono di identificare univocamente sorgente e destinazione di una comunicazione.
 
 L'indirizzo IP si compone di due parti: indicatore di rete (Net_ID) e indicatore di host (Host_ID); la parte Net_ID è assegnata all'ICANN che a sua volta delega organizzazioni regionali (Europa, Asia, ecc) che a loro volta delegano altre organizzazioni (per l'Italia GARR).
 
 - La prima parte quindi identifica la rete, chiamata network o routing prefix (Net_ID) ed è utilizzato per l'instradamento a livello di sottoreti.
-- La seconda parte invece identifica, all'interno della rete, l'host (o l'interfaccia in IPv6) e le eventuali sottoreti (Host_ID) ed è utilizzato per l'instradamento a livello locale dell'host una volta raggiunta la sottorete locale di destinazione, cui segue la traduzione o risoluzione in indirizzo MAC per l'effettiva consegna del pacchetto dati al destinatario con i protocolli della rete locale.
-
-Con l'introduzione del CIDR è possibile creare sottoreti, a differenza del sistema a classi, che prevedeva il rispetto delle reti imposte con conseguente spreco di indirizzi IP.
-
-Con lo scopo di ridurre la necessità di indirizzi IP, sono stati assegnati tre blocchi di indirizzi IP per le reti private, classe A, classe B e classe C. Se un'organizzazione decide di utilizzare uno di questi IP, non ha bisogno di coordinarsi con ICANN o con qualsiasi altro registro Internet.
+- La seconda parte invece identifica, all'interno della rete, l'host (o l'interfaccia in IPv6) e le eventuali sottoreti (Host_ID) ed è utilizzato per l'instradamento a livello locale dell'host una volta raggiunta la sottorete locale di destinazione, cui segue la traduzione o risoluzione in indirizzo MAC per l'effettiva consegna del pacchetto dati al destinatario con i protocolli di livello 2 della rete locale (che possono variare tra sottoreti diverse).
 
 ### IPv4
 
@@ -105,12 +101,878 @@ Con lo scopo di ridurre la necessità di indirizzi IP, sono stati assegnati tre 
   </div>
 </div>
 
-
 L'indirizzo IPv4 è costituito da 32 bit (4 byte) suddiviso in 4 gruppi da 8 bit (1 byte), separati ciascuno da un punto (notazione dotted, es. 11001001.00100100.10101111.00001111). Ciascuno di questi 4 byte è poi convertito in formato decimale di più facile identificazione, che semplifica la lettura e la memorizzazione da parte di noi umani, (quindi ogni numero varia tra 0 e 255 essendo 2<sup>8</sup>=256, ovvero le combinazioni disponibili ci dicono quanti numeri possiamo utilizzare in ogni gruppo identificato dal punto). Un esempio di indirizzo IPv4 è 172.16.254.1 che corrisponde a una notazione binaria.
 
-Nello standard IPv4 (Internet Protocol versione 4), essendo costituito da 32 bit, le combinazioni utilizzabili sono 2<sup>32</sup> pari a circa 4 miliardi. All'inizio, 1981, sembravano tanti, tuttavia oggi sono pochi poiché se ognuno di noi ha diversi dispositivi connessi ad internet, questi avranno degli indirizzi IP univoci. Basti pensare che molte persone posseggono uno smartphone, un computer e una smart TV, quindi 3 indirizzi IP. Sono quindi state identificate due soluzioni: la separazione tra *indirizzi privati* e *indirizzi pubblici*, e il passaggio al protocollo IPv6 che utilizza indirizzi più lunghi (128 bit). Queste soluzioni saranno descritte nel dettaglio più avanti.
+Nello standard IPv4 (Internet Protocol versione 4), essendo costituito da 32 bit, le combinazioni utilizzabili sono 2<sup>32</sup> pari a circa 4 miliardi. All'inizio, 1981, sembravano tanti, tuttavia oggi sono pochi poiché se ognuno di noi ha diversi dispositivi connessi ad internet, questi avranno degli indirizzi IP univoci. Basti pensare che molte persone posseggono uno smartphone, un computer e una smart TV, quindi 3 indirizzi IP. Sono quindi state identificate due soluzioni: la separazione tra _indirizzi privati_ e _indirizzi pubblici_, e il passaggio al protocollo IPv6 che utilizza indirizzi più lunghi (128 bit). Queste soluzioni saranno descritte nel dettaglio più avanti.
 
+#### Subnet Mask
 
+La maschera di sottorete o subnet mask è una sequeza di bit lunga come gli indirizzi IP (quindi 32 bit in IPv4) che permette di separare Host_ID e Net_ID di un indirizzo IP. Per effettuare la separazione nelle due parti si effettua una operazione di AND logico tra indirizzo IP e subnet mask la quale ha tutti i bit corrispondenti al Net_ID con valore 1 e tutti i bit corrispondenti all'Host_ID con valore 0.
+
+La subnet mask può essere rappresentata in diversi modi:
+
+1. sequenza di 1 e 0 che è il modo in cui è effettivamente memorizzata ed utilizzada dai computer ma è scomodo per gli esseri umani, ad esempio 11111111.11111111.11111111.11100000;
+2. rappresentazione dotted decimal simile agli indirizzi IP, ad esempio 255.255.255.224 che corrisponde a 11111111.11111111.11111111.11100000
+3. rappresentazione CIDR che indica a fianco degli indirizzi IP il numero di bit a 1 della corrispondente subnet mask, ad esempio in 192.168.32.97/27 la subnet mask è di nuovo 11111111.11111111.11111111.11100000
+
+Di seguito vediamo in pratica come viene utilizzata la subnet mask vista negli esempi precedenti.
+
+Supponiamo che il protocollo IP del nostro computer sia configurato come segue:
+
+- indirizzo IP: 192.168.32.97
+- maschera di sottorete: 255.255.255.224
+
+e che vogliamo spedire un pacchetto all'indirizzo IP 192.168.32.130;
+
+Prima di tutto trasformiamo in notazione binaria gli indirizzi IP e la maschera di sottorete:
+
+```
+192.168.032.097 = 11000000.10101000.00100000.01100001
+192.168.032.130 = 11000000.10101000.00100000.10000010
+
+255.255.255.224 = 11111111.11111111.11111111.11100000
+```
+
+{: .fs-3}
+
+Allora il livello IP calcolerà per l'indirizzo sorgente:
+
+```
+11000000.10101000.00100000.01100001 AND      (192.168.032.097)
+11111111.11111111.11111111.11100000 =        (255.255.255.224)
+-------------------------------------
+11000000.10101000.00100000.01100000          (192.168.032.096)
+```
+
+{: .fs-3}
+
+Ora ripetiamo l'operazione con l'IP di destinazione:
+
+```
+11000000.10101000.00100000.10000010 AND      (192.168.032.130)
+11111111.11111111.11111111.11100000 =        (255.255.255.224)
+-------------------------------------
+11000000.10101000.00100000.10000000          (192.168.032.128)
+```
+
+{: .fs-3}
+
+I risultati 192.168.32.96 e 192.168.32.128 indicano due sottoreti differenti, e quindi le macchine appartengono a sottoreti differenti. I due indirizzi ottenuti inoltre non indicano alcun host ma identificano un'intera sottorete. Esistono due indirizzi particolari in ogni rete che non possono essere utilizzati da nessun host e sono:
+
+1. l'**indirizzo di rete** che è il primo indirizzo della rete, quello che presenta tutti 0 nell'Host_ID come nel caso dei due indirizzi ottenuti nell'esempio precedente: 192.168.32.96/27 e 192.168.32.128/27, questi indirizzi identificano le reti e non degli host;
+2. l'**indirizzo di broadcast** che è l'ultimo indirizzo della rete, quello che presenta tutti 1 nell'Host_ID; questo indirizzo non è specifico di nessun host ma serve per indicare tutti gli host della rete (ad esempio in una comunicazione broadcast a tutti gli host della rete).
+
+se prendiamo in esame la rete 192.168.32.96/27 vediamo che:
+
+```
+Indirizzo di rete:      11000000.10101000.00100000.01100000     (192.168.032.096)
+Indirizzo di broadcast: 11000000.10101000.00100000.01111111     (255.255.255.127)
+Subnet mask:            11111111.11111111.11111111.11100000     (255.255.255.224)
+```
+
+{: .fs-3}
+
+possiamo quindi calcolare quanti sono gli indirizzi disponibili per gli host all'interno della rete: 2<sup>5</sup> - 2 = 30, questo perchè i bit che compongono l'Host_ID sono 5 e quindi avremmo 2<sup>5</sup> indirizzi possibili, ma il primo e l'ultimo sono l'indirizzo di rete e l'indirizzo di broadcast e non possono essere usati, da cui il -2.
+
+Si noti che la maschera di sottorete è un numero, mentre la sottorete rappresenta un insieme di indirizzi IP. È quindi possibile, e del tutto normale, che sottoreti differenti (es 192.168.0.0/16, 132.144.0.0/16) abbiano la stessa maschera di sottorete (in questo caso: 255.255.0.0). Al contrario è possibile che due indirizzi IP identici possano indicare reti diverse (di dimensioni differenti) usando subnet mask diverse, ad esempio 192.168.0.0/16 è una rete molto più grande di 192.168.0.0/24 che è una sottorete della prima rete.
+
+<hr>
+
+La seguente tabella esemplifica i metodi di utilizzo della rappresentazione delle sottoreti.
+
+<table class="tabelle-sottoreti">
+    <tbody>
+        <tr>
+            <th>Notazione CIDR</th>
+            <th>Host Bits</th>
+            <th>Maschera</th>
+            <th>Host nella sottorete</th>
+            <th>Uso tipico
+            </th>
+        </tr>
+        <tr>
+            <td align="right">/8</td>
+            <td>24</td>
+            <td>255.0.0.0</td>
+            <td align="right">16777214 = 2<sup>24</sup> - 2</td>
+            <td>Allocazione più grande possibile per IANA
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/9</td>
+            <td>23</td>
+            <td>255.128.0.0</td>
+            <td align="right">8388608 = 2<sup>23</sup></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/10</td>
+            <td>22</td>
+            <td>255.192.0.0</td>
+            <td align="right">4194304 = 2<sup>22</sup></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/11</td>
+            <td>21</td>
+            <td>255.224.0.0</td>
+            <td align="right">2097152 = 2<sup>21</sup></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/12</td>
+            <td>20</td>
+            <td>255.240.0.0</td>
+            <td align="right">1048576 = 2<sup>20</sup></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/13</td>
+            <td>19</td>
+            <td>255.248.0.0</td>
+            <td align="right">524288 = 2<sup>19</sup></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/14</td>
+            <td>18</td>
+            <td>255.252.0.0</td>
+            <td align="right">262144 = 2<sup>18</sup></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/15</td>
+            <td>17</td>
+            <td>255.254.0.0</td>
+            <td align="right">131072 = 2<sup>17</sup></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/16</td>
+            <td>16</td>
+            <td>255.255.0.0</td>
+            <td align="right">65536 = 2<sup>16</sup></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/17</td>
+            <td>15</td>
+            <td>255.255.128.0</td>
+            <td align="right">32768 = 2<sup>15</sup></td>
+            <td>ISP / grandi aziende
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/18</td>
+            <td>14</td>
+            <td>255.255.192.0</td>
+            <td align="right">16384 = 2<sup>14</sup></td>
+            <td>ISP / grandi aziende
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/19</td>
+            <td>13</td>
+            <td>255.255.224.0</td>
+            <td align="right">8192 = 2<sup>13</sup></td>
+            <td>ISP / grandi aziende
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/20</td>
+            <td>12</td>
+            <td>255.255.240.0</td>
+            <td align="right">4096 = 2<sup>12</sup></td>
+            <td>Piccoli ISP / grandi aziende
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/21</td>
+            <td>11</td>
+            <td>255.255.248.0</td>
+            <td align="right">2048 = 2<sup>11</sup></td>
+            <td>Piccoli ISP / grandi aziende
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/22</td>
+            <td>10</td>
+            <td>255.255.252.0</td>
+            <td align="right">1024 = 2<sup>10</sup></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/23</td>
+            <td>9</td>
+            <td>255.255.254.0</td>
+            <td align="right">512 = 2<sup>9</sup></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/24</td>
+            <td>8</td>
+            <td>255.255.255.0</td>
+            <td align="right">256 = 2<sup>8</sup></td>
+            <td>LAN ampia
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/25</td>
+            <td>7</td>
+            <td>255.255.255.128</td>
+            <td align="right">128 = 2<sup>7</sup></td>
+            <td>LAN ampia
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/26</td>
+            <td>6</td>
+            <td>255.255.255.192</td>
+            <td align="right">64 = 2<sup>6</sup></td>
+            <td>Piccola LAN
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/27</td>
+            <td>5</td>
+            <td>255.255.255.224</td>
+            <td align="right">32 = 2<sup>5</sup></td>
+            <td>Piccola LAN
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/28</td>
+            <td>4</td>
+            <td>255.255.255.240</td>
+            <td align="right">16 = 2<sup>4</sup></td>
+            <td>Piccola LAN
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/29</td>
+            <td>3</td>
+            <td>255.255.255.248</td>
+            <td align="right">8 = 2³</td>
+            <td>La più piccola rete multi-host
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/30</td>
+            <td>2</td>
+            <td>255.255.255.252</td>
+            <td align="right">4 = 2²</td>
+            <td>"Glue network" (collegamenti punto-punto)
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/31</td>
+            <td>1</td>
+            <td>255.255.255.254</td>
+            <td align="right">2 = 2<sup>1</sup></td>
+            <td>Usato raramente, collegamenti punto-punto
+            </td>
+        </tr>
+        <tr>
+            <td align="right">/32</td>
+            <td>0</td>
+            <td>255.255.255.255</td>
+            <td align="right">1 = 2<sup>0</sup></td>
+            <td>Route verso un singolo host
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+Un'analisi più approfondita di come sono formate le reti a seconda della subnet mask è la seguente in cui per semplicità sono riportate solo le reti con CIDR da 24 a 29.
+
+<table class="tabelle-sottoreti">
+    <tbody>
+        <tr>
+            <th>CIDR</th>
+            <th>Maschera</th>
+            <th>Indirizzi totali</th>
+            <th>Rete</th>
+            <th>Intervalli indirizzi</th>
+            <th>Broadcast
+            </th>
+        </tr>
+        <tr valign="top">
+            <td align="right">/24</td>
+            <td>255.255.255.0</td>
+            <td>256
+            </td>
+            <td>0
+            </td>
+            <td>1-254
+            </td>
+            <td>255
+            </td>
+        </tr>
+        <tr valign="top">
+            <td align="right">/25</td>
+            <td>255.255.255.128</td>
+            <td>128
+            </td>
+            <td>0<br />128
+            </td>
+            <td>1-126<br />129-254
+            </td>
+            <td>127<br />255
+            </td>
+        </tr>
+        <tr valign="top">
+            <td align="right">/26</td>
+            <td>255.255.255.192</td>
+            <td>64
+            </td>
+            <td>0<br />64<br />128<br />192
+            </td>
+            <td>1-62<br />65-126<br />129-190<br />193-254
+            </td>
+            <td>63<br />127<br />191<br />255
+            </td>
+        </tr>
+        <tr valign="top">
+            <td align="right">/27</td>
+            <td>255.255.255.224</td>
+            <td>32
+            </td>
+            <td>0<br />32<br />64<br />96<br />128<br />160<br />192<br />224
+            </td>
+            <td>1-30<br />33-62<br />65-94<br />97-126<br />129-158<br />161-190<br />193-222<br />225-254
+            </td>
+            <td>31<br />63<br />95<br />127<br />159<br />191<br />223<br />255
+            </td>
+        </tr>
+        <tr valign="top">
+            <td align="right">/28</td>
+            <td>255.255.255.240</td>
+            <td>16
+            </td>
+            <td>0<br />16<br />32<br />48<br />64<br />80<br />96<br />112<br />128<br />144<br />160<br />176<br />192<br />208<br />224
+                <p>240
+                </p>
+            </td>
+            <td>1-14<br />17-30<br />33-46<br />49-62<br />65-78<br />81-94<br />97-110<br />113-126<br />129-142<br />145-158<br />161-174<br />177-190<br />193-206<br />209-222<br />225-238
+                <p>241-254
+                </p>
+            </td>
+            <td>15<br />31<br />47<br />63<br />79<br />95<br />111<br />127<br />143<br />159<br />175<br />191<br />207<br />223<br />239
+                <p>255
+                </p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td align="right">/29</td>
+            <td>255.255.255.248</td>
+            <td>8
+            </td>
+            <td>0<br />8<br />16<br />24<br />32<br />40<br />48<br />56<br />64<br />72<br />80<br />88<br />96<br />104<br />112<br />120<br />128<br />136<br />144<br />152<br />160<br />168<br />176<br />184<br />192<br />200<br />208<br />216<br />224<br />232<br />240<br />248<br />
+            </td>
+            <td>1-6<br />9-14<br />17-22<br />25-30<br />33-38<br />41-46<br />49-54<br />57-62<br />65-70<br />73-78<br />81-86<br />89-94<br />97-102<br />105-110<br />113-118<br />121-126<br />129-134<br />137-142<br />145-150<br />153-158<br />161-166<br />169-174<br />177-182<br />185-190<br />193-198<br />201-206<br />209-214<br />217-222<br />225-230<br />233-238<br />241-246<br />249-254<br />
+            </td>
+            <td>7<br />15<br />23<br />31<br />39<br />47<br />55<br />63<br />71<br />79<br />87<br />95<br />103<br />111<br />119<br />127<br />135<br />143<br />151<br />159<br />167<br />175<br />183<br />191<br />199<br />207<br />215<br />223<br />231<br />239<br />247<br />255<br />
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+#### Classi di indirizzi IP
+
+Le classi di indirizzi IP (o classful addressing) sono una formalità per dividere lo spazio di indirizzamento IPv4 introdotta nel 1981 ed in uso fino all'introduzione del Classless Inter-Domain Routing (CIDR) che le ha sostituite nel 1993. Le classi vengono ancora oggi studiate e utilizzate poichè all'interno delle reti private vengono spesso utilizzati sistemi di indirizzamento basati sul sistema delle classi utilizzato come standard (non obbligatorio) per l'assegnamento degli indirizzi.
+
+Questo sistema di indirizzamento basato sulla classe prevede che dai primi bit di un indirizzo IP si possa determinare la classe e di conseguenza la maschera di sottorete. Di seguito è riportata la tabella riassuntiva delle classi di indirizzamento.
+
+<table id="tabella-classi-IP">
+    <tbody>
+        <tr>
+            <th colspan="2">
+            </th>
+            <th>Utilizzo bit<br />(<span style="color:#32CD32">N</span>: Network; <span style="color:#FA8072">H</span>:
+                Host)
+            </th>
+            <th>Maschera di sottorete
+            </th>
+            <th>Reti disponibili
+            </th>
+            <th>Host disponibili per rete
+            </th>
+            <th>Range decimale<br><br>
+                primo byte
+            </th>
+            <th>Range binario<br><br>
+                primo byte
+            </th>
+            <th>Note
+            </th>
+            <th>Indirizzi totali
+            </th>
+        </tr>
+        <tr>
+            <th rowspan="5">Classe
+            </th>
+            <th style="padding:0 1em">A
+            </th>
+            <td style="font-family:monospace"><span style="color:#32CD32"><b>0</b>NNNNNNN</span>.<span
+                    style="color:#FA8072">HHHHHHHH</span>.<span style="color:#FA8072">HHHHHHHH</span>.<span
+                    style="color:#FA8072">HHHHHHHH</span>
+            </td>
+            <td>255.0.0.0 <small>/8</small>
+            </td>
+            <td>127
+                <p>(1° byte)
+                </p>
+            </td>
+            <td>(errato 16&#160;777&#160;216)
+                <p>16.777.214
+                </p>
+            </td>
+            <td>1-127 = 128
+                <p>indirizzi
+                </p>
+            </td>
+            <td>00000001 -
+                <p>01111110
+                </p>
+            </td>
+            <td>Loopback address
+            </td>
+            <td>(errato 2&#160;147&#160;483&#160;392)
+                <p>2.130.706.648 =
+                </p>
+                <p>127x256<sup>3</sup>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <th>B
+            </th>
+            <td style="font-family:monospace"><span style="color:#32CD32"><b>10</b>NNNNNN</span>.<span
+                    style="color:#32CD32">NNNNNNNN</span>.<span style="color:#FA8072">HHHHHHHH</span>.<span
+                    style="color:#FA8072">HHHHHHHH</span>
+            </td>
+            <td>255.255.0.0 <small>/16</small>
+            </td>
+            <td>16&#160;384 (1° e 2° byte)
+            </td>
+            <td>(errato 65&#160;536)
+                <p>65.534
+                </p>
+            </td>
+            <td>128-191 = 64 indirizzi
+            </td>
+            <td>10000000 -
+                <p>10111111
+                </p>
+            </td>
+            <td>
+            </td>
+            <td>(errato 1&#160;073&#160;709&#160;056)
+                <p>1.073.741.824 = 64x256<sup>3</sup>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <th>C
+            </th>
+            <td style="font-family:monospace"><span style="color:#32CD32"><b>110</b>NNNNN</span>.<span
+                    style="color:#32CD32">NNNNNNNN</span>.<span style="color:#32CD32">NNNNNNNN</span>.<span
+                    style="color:#FA8072">HHHHHHHH</span>
+            </td>
+            <td>255.255.255.0 <small>/24</small>
+            </td>
+            <td>2&#160;097&#160;152 (1°, 2° e 3° byte)
+            </td>
+            <td>(errato 256)
+                <p>254
+                </p>
+            </td>
+            <td>192-223 = 32 indirizzi
+            </td>
+            <td>11000000 -
+                <p>11011111
+                </p>
+            </td>
+            <td>
+            </td>
+            <td>(errato 532&#160;676&#160;608)
+                <p>536.870.912 =
+                </p>
+                <p>32x256<sup>3</sup>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <th>D
+            </th>
+            <td style="font-family:monospace"><b>1110</b>XXXX.XXXXXXXX.XXXXXXXX.XXXXXXXX
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>224-239 = 16 indirizzi
+            </td>
+            <td>11100000 -
+                <p>11101111
+                </p>
+            </td>
+            <td>Indirizzo <a href="/wiki/Multicast" title="Multicast">multicast</a>
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <th>E
+            </th>
+            <td style="font-family:monospace"><b>1111</b>XXXX.XXXXXXXX.XXXXXXXX.XXXXXXXX
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>240-255 = 16 indirizzi
+            </td>
+            <td>11110000 -
+                <p>11111111
+                </p>
+            </td>
+            <td>Per usi futuri
+                <p>ed esperimenti
+                </p>
+            </td>
+            <td>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+In questo modo il tipo di classe si può determinare sulla base dei bit più significativi.
+
+Vediamo come:
+
+**Classe A**<br>
+Il primo byte rappresenta la rete; gli altri tre gli host per ogni rete.<br>
+In notazione decimale gli IP variano nel modo seguente: 1-127.H.H.H;<br>
+La maschera di rete è 255.0.0.0 (o anche detta /8 in quanto i bit di rete sono 8);<br>
+Questi indirizzi in binario iniziano con il bit 0.
+
+**Classe B**<br>
+I primi due byte rappresentano la rete; gli altri due gli host per ogni rete.<br>
+In notazione decimale gli IP variano nel modo seguente: 128-191.N.H.H;<br>
+N varia da 0 a 255.<br>
+La maschera di rete è 255.255.0.0 (o anche detta /16 in quanto i bit di rete sono 16);<br>
+Questi indirizzi in binario iniziano con i bit 10.
+
+**Classe C**<br>
+I primi tre byte rappresentano la rete; l'ultimo gli host per ogni rete.<br>
+In notazione decimale gli IP variano nel modo seguente: 192-223.N.N.H;<br>
+La maschera di rete è 255.255.255.0 (o anche detta /24 in quanto i bit di rete sono 24);<br>
+Questi indirizzi in binario iniziano con i bit 110.
+
+**Classe D**<br>
+È riservata agli indirizzi multicast.<br>
+In notazione decimale gli IP variano nel modo seguente: 224-239.x.x.x;<br>
+Non è definita una maschera di rete, essendo tutti e 32 i bit dell'indirizzo utilizzati per indicare un gruppo, non un singolo host;<br>
+Questi indirizzi in binario iniziano con i bit 1110.
+
+**Classe E**<br>
+Riservata per usi futuri;<br>
+In notazione decimale gli IP variano nel modo seguente: 240-255.x.x.x;<br>
+Non è definita una maschera di rete;<br>
+Questi indirizzi in binario iniziano con i bit 1111.
+
+_Esempio:_<br>
+Se occorresse analizzare l'indirizzo IP 130.165.4.2 privo di maschera di rete e fosse necessario trovarne la classe di appartenenza, si potrebbe iniziare considerando che convertito in binario il primo ottetto (il numero 130) risulterebbe 10000010, ovverosia un numero appartenente alla classe B proprio perché gli indirizzi di classe B iniziano con i primi bit a 10.
+
+_Esempio:_<br>
+Se fosse necessario calcolare a mano il numero di reti e di host disponibili negli indirizzi di classe B, si effettuano i seguenti calcoli:<br>
+Numero di reti: 2<sup>14 (bit di rete)</sup> = 16.384<br>
+Numero di host: 2<sup>16 (bit di host)</sup> - 2 (in quanto si escludono l'indirizzo di rete e quello di broadcast) = 65.536 - 2 = 65.534
+
+Per il calcolo della rete si effettua 2<sup>14</sup> in quanto questo è il calcolo per trovare tutte le combinazioni possibili su 14 bit. Infatti in classe B vi sono 16 bit utilizzati per la rete (vedere riferimenti alla tabella: In classe B il numero di bit per la rete N è 16) ma considerando che i primi 2 bit sono sempre fissi a 10, allora i bit che veramente possono variare scendono a 14.
+
+Analogo discorso per il calcolo degli host, dove si effettua 2<sup>16</sup> in quanto questo è il calcolo per trovare tutte le combinazioni possibili di host su 16 bit disponibili a tale scopo (vedere riferimenti alla tabella: In classe B il numero di bit per gli host H è 16). È molto importante sottolineare come non siano mai considerati host sia l'indirizzo di broadcast (tutti i bit degli host H a 1) che l'indirizzo di rete (tutti i bit degli host H a 0); per cui nel calcolo degli host si sottrae sempre 2 al risultato ottenuto proprio per escludere questi due indirizzi particolari che non sono host.
+
+L'intervallo di indirizzi utilizzati da ogni classe sono indicati nello schema successivo mediante _notazione decimale puntata_ o _dotted decimal notation_
+
+<table class="wikitable">
+    <tbody>
+        <tr>
+            <th>Classe
+            </th>
+            <th>Bit iniziali
+            </th>
+            <th>Inizio intervallo
+            </th>
+            <th>Fine intervallo
+            </th>
+        </tr>
+        <tr>
+            <td>A</td>
+            <td>0 (00000001)</td>
+            <td>1.0.0.0</td>
+            <td>127.255.255.255
+            </td>
+        </tr>
+        <tr>
+            <td>B</td>
+            <td>10</td>
+            <td>128.0.0.0</td>
+            <td>191.255.255.255
+            </td>
+        </tr>
+        <tr>
+            <td>C</td>
+            <td>110</td>
+            <td>192.0.0.0</td>
+            <td>223.255.255.255
+            </td>
+        </tr>
+        <tr>
+            <td>D (multicast)</td>
+            <td>1110</td>
+            <td>224.0.0.0</td>
+            <td>239.255.255.255
+            </td>
+        </tr>
+        <tr>
+            <td>E</td>
+            <td>1111</td>
+            <td>240.0.0.0</td>
+            <td>255.255.255.255
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+Alcuni indirizzi sono riservati per usi speciali (RFC 3330).
+
+<table class="wikitable">
+    <tbody>
+        <tr>
+            <th>Indirizzi
+            </th>
+            <th>CIDR
+            </th>
+            <th>Funzione
+            </th>
+            <th>RFC
+            </th>
+            <th>Classe
+            </th>
+            <th>Totale # indirizzi
+            </th>
+        </tr>
+        <tr>
+            <td>0.0.0.0 - 0.255.255.255</td>
+            <td>0.0.0.0/8</td>
+            <td>Indirizzi zero</td>
+            <td><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc1700">RFC
+                    1700</a></td>
+            <td>A</td>
+            <td>16.777.216
+            </td>
+        </tr>
+        <tr>
+            <td>10.0.0.0 - 10.255.255.255</td>
+            <td>10.0.0.0/8</td>
+            <td><a href="/wiki/Indirizzo_IP_privato" title="Indirizzo IP privato">IP privati</a></td>
+            <td><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc1918">RFC
+                    1918</a></td>
+            <td>A</td>
+            <td>16.777.216
+            </td>
+        </tr>
+        <tr>
+            <td>127.0.0.0 - 127.255.255.255</td>
+            <td>127.0.0.0/8</td>
+            <td><a href="/wiki/Interfaccia_di_loopback" title="Interfaccia di loopback">Localhost Loopback Address</a>
+            </td>
+            <td><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc1700">RFC
+                    1700</a></td>
+            <td>A</td>
+            <td>16.777.216
+            </td>
+        </tr>
+        <tr>
+            <td>169.254.0.0 - 169.254.255.255</td>
+            <td>169.254.0.0/16</td>
+            <td><a href="/wiki/Indirizzo_link_local" title="Indirizzo link local">Indirizzo link local</a></td>
+            <td><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc3330">RFC
+                    3330</a></td>
+            <td>B</td>
+            <td>65.536
+            </td>
+        </tr>
+        <tr>
+            <td>172.16.0.0 - 172.31.255.255</td>
+            <td>172.16.0.0/12</td>
+            <td><a href="/wiki/Indirizzo_IP_privato" title="Indirizzo IP privato">IP privati</a></td>
+            <td><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc1918">RFC
+                    1918</a></td>
+            <td>B</td>
+            <td>1.048.576
+            </td>
+        </tr>
+        <tr>
+            <td>192.0.2.0 - 192.0.2.255</td>
+            <td>192.0.2.0/24</td>
+            <td>Documentation and Examples</td>
+            <td><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc3330">RFC
+                    3330</a></td>
+            <td>C</td>
+            <td>256
+            </td>
+        </tr>
+        <tr>
+            <td>192.88.99.0 - 192.88.99.255</td>
+            <td>192.88.99.0/24</td>
+            <td><a href="/wiki/IPv6" title="IPv6">IPv6</a> to <a href="/wiki/IPv4" title="IPv4">IPv4</a> relay <a
+                    href="/wiki/Anycast" title="Anycast">Anycast</a></td>
+            <td><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc3068">RFC
+                    3068</a></td>
+            <td>C</td>
+            <td>256
+            </td>
+        </tr>
+        <tr>
+            <td>192.168.0.0 - 192.168.255.255</td>
+            <td>192.168.0.0/16</td>
+            <td><a href="/wiki/Indirizzo_IP_privato" title="Indirizzo IP privato">IP privati</a></td>
+            <td><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc1918">RFC
+                    1918</a></td>
+            <td>C</td>
+            <td>65.536
+            </td>
+        </tr>
+        <tr>
+            <td>198.18.0.0 - 198.19.255.255</td>
+            <td>198.18.0.0/15</td>
+            <td>Network Device <a href="/wiki/Benchmark_(informatica)" title="Benchmark (informatica)">Benchmark</a>
+            </td>
+            <td><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc2544">RFC
+                    2544</a></td>
+            <td>C</td>
+            <td>131.072
+            </td>
+        </tr>
+        <tr>
+            <td>224.0.0.0 - 239.255.255.255</td>
+            <td>224.0.0.0/4</td>
+            <td><a href="/wiki/Multicast" title="Multicast">Multicast</a></td>
+            <td><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc3171">RFC
+                    3171</a></td>
+            <td>D</td>
+            <td>268.435.456
+            </td>
+        </tr>
+        <tr>
+            <td>240.0.0.0 - 255.255.255.255</td>
+            <td>240.0.0.0/4</td>
+            <td>Riservato</td>
+            <td><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc1700">RFC
+                    1700</a></td>
+            <td>E</td>
+            <td>268.435.456
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+Vista la limitatezza del numero di indirizzi disponibili, a lungo andare, le classi di tipo C si sono rivelate troppo poche per le esigenze di indirizzamento e si è dovuto assegnare subnet di grana più fine anche all'interno delle classi A e B. A partire dal 1993 si abbandonò quindi il concetto di classful routing in favore del Classless Inter-Domain Routing (CIDR).
+
+#### CIDR - Classless Inter-Domain Routing
+Il CIDR (Classless Inter-Domain Routing) è un nuovo schema di indirizzamento introdotto nel 1993 per sostituire lo schema classful secondo il quale tutti gli indirizzi IP appartengono ad una specifica classe (classe A, B e C).
+
+Questo nuovo schema di indirizzamento consente una migliore gestione degli indirizzi di rete (evitando sprechi), che diventano sempre più scarsi con il crescere di Internet ed, inoltre, migliora le prestazioni dell'instradamento IP, grazie ad una più efficiente organizzazione delle tabelle di routing.
+
+Con il sistema delle classi la divisione tra parte Net_ID e Host_ID doveva sempre avvenire tra un byte e l'altro dell'indirizzo IP avendo come uniche subnet mask disponibili:
+
+```
+255. 0 . 0 . 0  -  11111111.00000000.00000000.00000000  -  Classe A
+255.255. 0 . 0  -  11111111.11111111.00000000.00000000  -  Classe B
+255.255.255. 0  -  11111111.11111111.11111111.00000000  -  Classe C
+```
+{: .fs-3}
+
+CIDR invece permette, in un indirizzo IP, di definire quale parte indichi la sotto rete e quale gli host, in maniera "continua" ovvero senza la suddivisione a blocchi del tipo classfull. In pratica è possibile avere subnet mask come:
+
+```
+255.240. 0 . 0  - 11111111.11110000.00000000.00000000
+255.255.255.224 - 11111111.11111111.11111111.11100000
+```
+{: .fs-3}
+
+La notazione usata per esprimere indirizzi CIDR è la seguente: a.b.c.d/x , dove x è il numero di bit (contati partendo dal più significativo a sinistra) che compongono la parte di indirizzo della rete. I rimanenti y = (32 - x) bit consentono di calcolare il numero di host della sottorete pari a 2<sup>y</sup> - 2. Il -2 è dovuto al fatto che il primo e l'ultimo indirizzo di ogni rete non sono assegnabili ad alcun host, in quanto riservati rispettivamente come indirizzo della rete in generale (usato ad esempio nelle tabelle dei router) e come indirizzo di broadcast (ovvero un indirizzo che comprende indistintamente ogni altro indirizzo all'interno di quella rete: viene usato ad esempio in alcuni protocolli di routing).
+
+Un esempio di indirizzo IP rappresentato secondo na notazione CIDR è 192.168.1.128/25 che rappresenta una sottorete più piccola di una classica rete di classe C. La notazione introdotta è molto compatta e comoda, in maniera classica potremmo invece scrivere:
+
+- indirizzo IP: 192.168.1.128
+- subnet mask (dotted decimal): 255.255.255.128
+- subnet mask (binario): 11111111.11111111.11111111.10000000
+
+#### Sottoreti e Subnetting
+
+L'operazione di subnetting rompe una rete in piccoli intervalli, che possono utilizzare lo spazio di indirizzi esistenti. Questa operazione può essere effettuata o per motivi organizzativi, di sicurezza o per impedire eccessivi tassi di collisione dei pacchetti (se la separazione è anche fisica).  
+
+<!-- thumbnail -->
+<div class="thumbnail float-right">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/subnetting.png" class="modal__opener" aprire="#img-subnetting">
+  <p>Un esempio di comunicazione mascherata. In questo caso è l'indirizzo di A che è mascherato</p>
+</div>
+<!-- modal -->
+<div id="img-subnetting" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-subnetting">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/subnetting.png">
+    </div>
+    <p>Un esempio di comunicazione mascherata. In questo caso è l'indirizzo di A che è mascherato</p>
+  </div>
+</div>
+
+Quando si vuole separare una rete in più sottoreti è necessario lavorare sui bit dell'indirizzo e sulla subnet mask della rete di partenza. La parte di Net_ID non può variare ed è possibile operare solo sui bit riguardanti l'Host_ID. Per chiarire il procedimento si procederà con un esempio.
+
+Data la rete di partenza 192.168.1.0/24 (una classica rete privata di classe C) si vuole separare la rete in 3 differenti sottoreti. Gli indirizzi disponibili sono quelli che vanno da 192.168.1.0 a 192.168.1.255.
+
+```
+Subnet mask:      1111 1111 . 1111 1111 . 1111 1111 . 0000 0000
+Primo indirizzo:  1100 0000 . 1010 1000 . 0000 0001 . 0000 0000
+Ultimo indirizzo: 1100 0000 . 1010 1000 . 0000 0001 . 1111 1111
+```
+{: fs-3}
+
+Per ottenere 3 sottoreti è necessario utilizzare i primi 2 bit dell'Host_ID e aggiungerli al Net_ID in modo da poter distinguere le 3 nuove sottoreti. Devo utilizzare 2 bit poichè in binario per poter rappresentare 3 numeri diversi mi servono almeno 2 bit perchè 2<sup>2</sup> = 4 > 3
+
+```
+Nuova subnet mask:      1111 1111 . 1111 1111 . 1111 1111 . 1100 0000
+Indirizzo sottorete 1:  1100 0000 . 1010 1000 . 0000 0001 . 0000 0000
+Indirizzo sottorete 2:  1100 0000 . 1010 1000 . 0000 0001 . 0100 0000
+Indirizzo sottorete 3:  1100 0000 . 1010 1000 . 0000 0001 . 1000 0000
+Indirizzo sottorete 4:  1100 0000 . 1010 1000 . 0000 0001 . 1100 0000
+```
+{: fs-3}
+
+In questo modo in realtà è possibile ottenere 4 sottoreti di cui ne vengono utilizzate solo 3.
+
+##### Esercizi sul subnetting
+Per padroneggiare l'argomento è necessario fare pratica con esercizi che richiedano di applicare gli argomenti fin qui esposti in diverse situazioni. A [questa pagina](http://www.edutecnica.it/sistemi/retix/retix.htm) è possibile trovare una serie di esercizi con soluzioni.
+[Qui]({{ site.baseurl }}{% link docs/reti/ISO-OSI/esercizi-subnetting.md %}) li ho salvati in locale
 
 #### Indirizzi pubblici e privati
 
@@ -124,7 +986,7 @@ Per poter far comunicare tra loro host appartenenti a differenti reti private in
 
 Il **network address translation** o **NAT**, ovvero traduzione degli indirizzi di rete, conosciuto anche come network masquerading, è una tecnica che consiste nel modificare gli indirizzi IP contenuti negli header dei pacchetti in transito su un sistema, solitamente un router (o un firewall ma per motivi diversi da quelli qui esposti, principalmente per la sicurezza), all'interno di una comunicazione tra due o più host.
 
-Nel caso di comunicazione tra due host appartenenti a reti private diverse il NAT serve a fare in modo che entrambi gli host che stanno comunicando possano scrivere come IP di destinazione un indirizzo IP pubblico, quindi uivoco, che possa essere instradato correttamente tra le diverse sottoreti. Ogni host penserà di parlare con il router dell'altra sottorete, che è l'unico host di tale sottorete ad essere visibile al mondo (poichè ha un indirizzo pubbico). I router quindi devono continuamente effettuare la *traduzione degli indirizzi di rete* quando inoltrano i pacchetti all'interno della propria sottorete verso il destinatario.
+Nel caso di comunicazione tra due host appartenenti a reti private diverse il NAT serve a fare in modo che entrambi gli host che stanno comunicando possano scrivere come IP di destinazione un indirizzo IP pubblico, quindi uivoco, che possa essere instradato correttamente tra le diverse sottoreti. Ogni host penserà di parlare con il router dell'altra sottorete, che è l'unico host di tale sottorete ad essere visibile al mondo (poichè ha un indirizzo pubbico). I router quindi devono continuamente effettuare la _traduzione degli indirizzi di rete_ quando inoltrano i pacchetti all'interno della propria sottorete verso il destinatario.
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
@@ -142,11 +1004,11 @@ Nel caso di comunicazione tra due host appartenenti a reti private diverse il NA
   </div>
 </div>
 
-Un esempio pratico di comunicazione che richiede l'utilizzo del NAT è costituito dal computer che stai usando per leggere questa pagina che si trova in una rete privata che deve comunicare col server su cui risiede la pagina che deve essere scaricata. Nell'immagine a fianco di esempio il computer è indicato dall'host A, il router della tua rete da R e il server da B. Considera che tra R e B ci saranno tanti altri nodi appartenenti alla rete internet, così come tra A ed R è possibile che ci siano altri nodi interni alla rete locale. 
+Un esempio pratico di comunicazione che richiede l'utilizzo del NAT è costituito dal computer che stai usando per leggere questa pagina che si trova in una rete privata che deve comunicare col server su cui risiede la pagina che deve essere scaricata. Nell'immagine a fianco di esempio il computer è indicato dall'host A, il router della tua rete da R e il server da B. Considera che tra R e B ci saranno tanti altri nodi appartenenti alla rete internet, così come tra A ed R è possibile che ci siano altri nodi interni alla rete locale.
 
 A conosce l'indirizzo di B che è pubblico e scrive nell'intestazione dei pacchetti il proprio indirizzo come mittente e l'indirizzo di B come destinatario. Quando i pacchetti arrivano a R, R modifica l'indirizzo mittente col proprio indirizzo, un indirizzo pubblico, perchè altrimenti B non sarebbe in grado di rispondere poichè l'indirizzo di A è privato e nessuno nella rete internet saprebbe a chi mandare i pacchetti oppure li manderebbero alla persona sbagliata che ha un indirizzo IP pubblico identico all'indirizzo IP privato di A. B quindi risponde indicando come destinatario R e non A. R quindi quando riceve i pacchetti da B sostituisce l'indirizzo di destinazione, che B ha indicato come R, scrivendo A e inoltrando i pacchetti verso A. Eventuali nodi interni alla rete sono quindi in grado di far arrivare i pacchetti ad A.
 
-Si pone però un problema: un router, in questo caso R, riceve continuamente pacchetti da e verso molteplici host, come fa quindi a sapere quali pacchetti sono quelli che B sta effettivamente mandando ad A e non a qualcun'altro all'interno della stessa sottorete (o anche solamente al router stesso)? 
+Si pone però un problema: un router, in questo caso R, riceve continuamente pacchetti da e verso molteplici host, come fa quindi a sapere quali pacchetti sono quelli che B sta effettivamente mandando ad A e non a qualcun'altro all'interno della stessa sottorete (o anche solamente al router stesso)?
 
 Per implementare il NAT, un router ha bisogno di effettuare il tracciamento delle connessioni, ovvero di tenere traccia di tutte le connessioni che lo attraversano. Per "connessione" in questo contesto si intende un flusso bidirezionale di pacchetti tra due host, identificati da particolari caratteristiche a livelli superiori a quello di rete (IP):
 
@@ -160,7 +1022,7 @@ Come precedentemente accennato il NAT è effettuato anche per motivi di sicurezz
 
 ### Gestione e assegnamento degli indirizzi a livello internazionale
 
-Gli indirizzi IP pubblici e i range di indirizzi sono rilasciati e regolamentati dall'ICANN tramite una serie di organizzazioni delegate. 
+Gli indirizzi IP pubblici e i range di indirizzi sono rilasciati e regolamentati dall'ICANN tramite una serie di organizzazioni delegate.
 
 La parte Net_ID degli indirizzi è assegnata dall'ICANN mentre l'assegnazione della parte Host_ID è delegata al richiedente che eventualmente può suddividerla ulteriormente per la creazione di altre sottoreti logiche (subnetting) evitando duplicazioni e sprechi di indirizzi.
 
@@ -168,21 +1030,28 @@ Gli indirizzi IP possono essere assegnati in maniera permanente (per esempio un 
 
 Nel tempo gli indirizzi IPv4 disponibili sono diminuiti progressivamente diventando una risosa scarsa, molto richiesta e quindi costosa. La difficile implementazione a livello globale dell'IPv6 ha portato all'introduzione di nuovi concetti, che hanno rivoluzionato la teoria e la pratica delle reti. Vanno citati l'abbandono del concetto di classi di indirizzi IP e il conseguente utilizzo sempre maggiore di indirizzi classless (privi del concetto di classe), la maschera di sottorete, la riorganizzazione gerarchica degli indirizzi mediante utilizzo massivo di NAT.
 
-L'utilizzo di queste tecniche ha prolungato di molti anni la vita di IPv4, ma non ha risolto davvero il problema, infatti nell'autunno del 2020 sono stati venduti gli ultimi blocchi di indirizzi IP disponibili rendendo inevitabile il passaggio all'IPv6. 
+L'utilizzo di queste tecniche ha prolungato di molti anni la vita di IPv4, ma non ha risolto davvero il problema, infatti nell'autunno del 2020 sono stati venduti gli ultimi blocchi di indirizzi IP disponibili rendendo inevitabile il passaggio all'IPv6.
 
 ### IPv6
 
 ### Impostazioni di rete fondamentali
 
+Mettendo insieme i concetti visti finora possiamo capire come un computer abbia bisogno di alcune informazioni fondamentali per poter comunicare all'interno di una rete di calcolatori. Queste informazioni sono:
+
+1. indirizzo IP, assegnabile manualmente o ottenibile tramite DHCP;
+2. subnet mask necessaria a separare Net_ID e Host_ID
+3. indirizzo IP del gateway predefinito necessario al protocollo IP per sapere a chi indirizzare i pacchetti destinati a host esterni alla propria rete;
+4. indirizzo IP di un server DNS che permetta di convertire i nomi di dominio in indirizzi IP (in realtà questa informazione non è strettamente necessaria al funzionamento del protocollo IP)
+
 #### Conoscere l'indirizzo in uso
+
 Per conoscere il proprio indirizzo IP, maschera di sottorete e gateway in qualsiasi sistema operativo Unix-like (come nei sistemi Linux o in macOS) è sufficiente aprire una shell e digitare il comando ifconfig (o ipconfig, a seconda della distribuzione in uso).
 
-Nei sistemi operativi Microsoft Windows, invece, con il comando ipconfig, dal prompt dei comandi, si possono avere le informazioni desiderate. Tale comando non è sempre già installato. Nel caso non lo fosse già, per installarlo si deve eseguire un doppio click sul file suptools.msi nella cartella \Support\Tools nel CD di installazione[7].
+Nei sistemi operativi Microsoft Windows, invece, con il comando ipconfig, dal prompt dei comandi (per aprirlo cerca il programma "cmd" in start), si possono avere le informazioni desiderate. per ottenere informazioni aggiuntive si può aggiungere il parametro -all (il comando diventa "ipconfig -all"). In questo modo è possibile vedere non solo le quattro informazioni sopra indicate ma anche una serie di altri dati come l'indirizzo MAC delle interfacce di rete, l'indirizzo del server DHCP e molto altro.
 
-Mediante il ping e il traceroute (comandi del DOS, oppure programmi scritti in altri linguaggi) viene inviato un pacchetto "di prova" per misurare rispettivamente il tempo di risposta e il percorso geografico della connessione attiva.
+Mediante il ping e il traceroute (comandi del DOS, oppure programmi scritti in altri linguaggi) viene inviato un pacchetto "di prova" per misurare rispettivamente il tempo di risposta e il percorso geografico della connessione attiva. Non è detto che un host sia impostato per rispondere ai ping che vengono loro inviati. Puoi provare ad eseguire il comando "ping www.google.com" e il computer dovrebbe prima risolvere il nome di dominio nell'indirizzo IP relativo e poi spedire dei pacchetti particolari a tale indirizzo e misurare il tempo di risposta a tali messaggi. Eseguento invece il comando "tracert www.google.com" verranno contattati tutti i nodi da percorrere dal tuo computer al server www.google.com e potrai vedere i loro identificativi sia sotto forma di nomi di dominio (credo), se ci sono, che di indirizzi IP, oltre ai tempi di risposta.
 
-Chi naviga utilizzando un router, usando tali comandi visualizzerà le informazioni relative alla propria rete privata. Le informazioni riguardo all'IP pubblico (assegnato al router) sono disponibili nel pannello di configurazione del router stesso oppure è possibile visualizzarlo tramite un sito apposito[8].
-
+Chi naviga utilizzando un router, usando tali comandi visualizzerà le informazioni relative alla propria rete privata. Le informazioni riguardo all'IP pubblico (assegnato al router) sono disponibili nel pannello di configurazione del router stesso oppure è possibile visualizzarlo tramite un sito apposito.
 
 ## Link e riferimenti esterni
 
@@ -191,4 +1060,6 @@ Chi naviga utilizzando un router, usando tali comandi visualizzerà le informazi
 - [Internet Protocol su Wikipedia](https://it.wikipedia.org/wiki/Internet_Protocol)
 - [Indirizzo IP su Wikipedia](https://it.wikipedia.org/wiki/Indirizzo_IP)
 - [NAT su Wikipedia](https://it.wikipedia.org/wiki/Network_address_translation)
-
+- [Classi di indirizzi IP su Wikipedia](https://it.wikipedia.org/wiki/Classi_di_indirizzi_IP)
+- [Maschera di sottorete o subnet mask su Wikipedia](https://it.wikipedia.org/wiki/Maschera_di_sottorete)
+- [Esercizi di subnetting su www.edutecnica.it](http://www.edutecnica.it/sistemi/retix/retix.htm)

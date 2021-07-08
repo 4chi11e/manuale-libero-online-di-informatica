@@ -1,0 +1,62 @@
+---
+layout: default
+title: Esercizi Subnetting
+nav_order: 1
+parent: Livello 3 - Rete
+grand_parent: ISO/OSI
+has_children: False
+---
+
+Esercizio 1
+Dato l'indirizzo IP 200.110.12.0 con maschera di sottorete 255.255.255.224, specificare quante sottoreti e quanti host
+per sottorete si possono ottenere.
+
+[ 8 subnet | 30 host ciascuna ]
+Esercizio 2
+Dato l'indirizzo IP 200.110.12.0 partizionare la rete da esso individuata in 12 sottoreti specificando il numero di host
+che appartengono a ciascuna sottorete e indicare l'indirizzo ip del terzo host appartenente alla settima sottorete,
+
+[ 200.110.12.99 ]
+Esercizio 3
+Determinare l'indirizzo di rete, la lunghezza del suo prefisso e la maschera di sottorete, necessari per individuare la
+subnet che contiene il seguente intervallo di indirizzi IP
+200.110.12.32 - 200.110.12.63.
+
+[ 200.110.12.0/26 ]
+Esercizio 4
+Determinare l'indirizzo di rete, la maschera di sottorete e l'indirizzo di broadcast del seguente blocco di indirizzi IP
+130.1.10.32/20 .
+
+[ 130.1.0.0 | 255.255.240.0 | 130.1.15.255 ]
+Esercizio 5
+192.168.23.87/26 e 192.168.23.67/26 appartengono alla stessa rete?
+
+Esercizio 6
+Dopo aver verificato che i due indirizzi 130.37.23.100 e 130.37.22.150 subnet mask 255.255.254.0, sono sulla stessa
+subnet; determina gli host con indirizzo di valore maggiore e quello con valore minore della subnet e l'indirizzo di
+broadcast della stessa.
+
+[ 130.37.23.254 | 130.37.22.1 | 130.37.23.255 ]
+Esercizio 7
+Dato l'indirizzo IP 131.175.21.1/22 ; determina l'indirizzo di rete, la maschera di sottorete , l'indirizzo di
+broadcast, il numero di subnet ed il numero di host per ciascuna subnet.
+
+[ 131.175.20.0 | 255.255.252.0 | 131.175.23.255 ]
+Esercizio 8
+Indicare l'indirizzo del primo e dell'ultimo host della 30a sottorete dell'indirizzo
+150.12.0.0/22 calcola anche l'indirizzo del primo e dell'ultimo host della 50a subnet.
+
+[ 1°host della 30a sub=150.12.116.1 | ultimo h della 30a sub =150.12.119.25
+1°host della 50a sub =150.12.200.1 | ultimo h della 50a sub =150.12.203.254]
+Esercizio 9
+Indicare l'indirizzo del 20° host della 10a subnet relativa all'indirizzo di rete 180.180.0.0 con subnet mask
+255.255.240.0.
+
+[ 180.180.144.20 ]
+Esercizio 10
+Viene assegnato un indirizzo IP 199.10.10.0 (classe C), per eseguire il cablaggio di una rete collocata in un edificio
+scolastico come indicato in figura.
+
+0
+Volendo realizzare una sottorete per ogni aula elenca si nota che è necessario avere almeno 8 host per oogni sottorete.
+Elenca l'indirizzo IP per ogni host della rete rappresentata.
