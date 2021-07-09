@@ -15,26 +15,32 @@ has_children: False
     host per sottorete si possono ottenere.
 </p>
 
-<span class="soluzione-toggler" totoggle="#es01-semplice">Visualizza soluzione</span> <span class="soluzione-semplice"
-    id="es01-semplice">[ 8 subnet | 30 host ciascuna ]</span>
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es01-semplice">Visualizza la soluzione</p>
+    <div class="soluzione soluzione-semplice" id="es01-semplice">
+        <p>[ 8 subnet | 30 host ciascuna ]</p>
+    </div>
+</div>
 
-<p class="soluzione-toggler" totoggle="#es01-completa">Visualizza soluzione completa di procedimenti</p>
-
-<div class="soluzione-completa" id="es01-completa">
-    <p>
-        L'indirizzo inizia con un numero maggiore di 192, si tratta di una classe C.<br>
-        La suddivisione fra subnet e host viene fatta sul 4° ottetto.
-    </p>
-    <p>Osservando la subnet mask abbiamo</p>
-    <p>255.255.255.224 = 11111111.11111111.11111111.11100000</p>
-    <p>Quindi gli host appartenenti alla rete avranno indirizzi del tipo</p>
-    <p>200.110.12.ssshhhhh</p>
-    <p>
-        ci saranno 3 bit dedicati alle subnet e 5 tiservati agli host per un totale di:<br>
-        2<sup>3</sup>8 subnet da<br>
-        2<sup>5</sup> - 2 = 30 host ciascuna
-    </p>
-
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es01-completa">Visualizza la soluzione completa di procedimenti</p>
+    
+    <div class="soluzione soluzione-completa" id="es01-completa">
+        <p>
+            L'indirizzo inizia con un numero maggiore di 192, si tratta di una classe C.<br>
+            La suddivisione fra subnet e host viene fatta sul 4° ottetto.
+        </p>
+        <p>Osservando la subnet mask abbiamo</p>
+        <p>255.255.255.224 = 11111111.11111111.11111111.11100000</p>
+        <p>Quindi gli host appartenenti alla rete avranno indirizzi del tipo</p>
+        <p>200.110.12.ssshhhhh</p>
+        <p>
+            ci saranno 3 bit dedicati alle subnet e 5 tiservati agli host per un totale di:<br>
+            2<sup>3</sup> = 8 subnet da<br>
+            2<sup>5</sup> - 2 = 30 host ciascuna
+        </p>
+    
+    </div>
 </div>
 
 

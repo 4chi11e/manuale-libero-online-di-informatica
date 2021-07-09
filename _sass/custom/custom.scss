@@ -34,6 +34,11 @@ $border-color-2: $grey-dk-100;
 }
 
 // -------------------- Stili generali ------------------------------------------
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   color: black;
 }
@@ -201,7 +206,8 @@ li {
 
 #tabella-classi-IP {
   // copiato da assets/css/just-the-docs-default.css riga 420
-  td, th{
+  td,
+  th {
     border-bottom: 1px solid rgba(238, 235, 238, 0.5);
     border-bottom-width: 1px;
     border-bottom-style: solid;
@@ -382,23 +388,46 @@ li {
   @include fs-5;
 }
 
-
 // ---------------- Esercizi subnetting -------------------------------------------
 
-.soluzione-semplice{
-  display: none;
+.soluzione-container {
+  overflow-y: hidden;
+  border: $border $border-color;
+  border-radius: $border-radius;
+  margin: 12px 0px;
 }
 
-.soluzione-semplice__visibile{
-  display: inline;
+.soluzione-toggler {
+  margin: 6px 0px;
+  color: $link-color;
+  margin: 0;
+  padding: 4px 4px;
 }
 
-.soluzione-completa{
-  display: none;
+.soluzione {
+  // display: none;
+  height: 0px;
+  overflow-y: hidden;
+  padding: 0px 12px;
+
+  // border: 1px solid red;
+
+  :first-child {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
+  :last-child {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+  }
 }
 
-.soluzione-completa__visibile{
-  display: block;
+.soluzione__visibile {
+  // display: block;
+  height: fit-content;
+  border-top: $border $border-color;
+  padding-top: 6px;
+  padding-bottom: 6px;  
 }
 
 
