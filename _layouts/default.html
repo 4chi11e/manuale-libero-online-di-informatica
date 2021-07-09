@@ -99,19 +99,29 @@ layout: table_wrappers
         </nav>
       {% endif %}
     </div>
+
+<!-- barra di navigazione in alto -->
     <div id="main-content-wrap" class="main-content-wrap">
       {% unless page.url == "/" %}
         {% if page.parent %}
           {%- for node in pages_list -%}
             {%- if node.parent == nil -%}
-              {%- if page.parent == node.title or page.grand_parent == node.title -%}
+              {%- if page.parent == node.title or page.grand_parent == node.title or page.grand_grand_parent == node.title -%}
                 {%- assign first_level_url = node.url | absolute_url -%}
               {%- endif -%}
               {%- if node.has_children -%}
                 {%- assign children_list = pages_list | where: "parent", node.title -%}
                 {%- for child in children_list -%}
-                  {%- if page.url == child.url or page.parent == child.title -%}
+                  {%- if page.url == child.url or page.parent == child.title or page.grand_parent == child.title -%}
                     {%- assign second_level_url = child.url | absolute_url -%}
+                  {%- endif -%}
+                  {%- if child.has_children -%}
+                    {%- assign grand_children_list = pages_list | where: "parent", child.title -%}
+                    {%- for grand_child in grand_children_list -%}
+                      {%- if page.url == grand_child.url or page.parent == grand_child.title%}
+                        {%- assign third_level_url = grand_child.url | absolute_url -%}
+                      {%- endif -%}
+                    {%- endfor -%}
                   {%- endif -%}
                 {%- endfor -%}
               {%- endif -%}
@@ -119,7 +129,11 @@ layout: table_wrappers
           {%- endfor -%}
           <nav aria-label="Breadcrumb" class="breadcrumb-nav">
             <ol class="breadcrumb-nav-list">
-              {% if page.grand_parent %}
+              {% if page.grand_grand_parent %}
+              <li class="breadcrumb-nav-list-item"><a href="{{ first_level_url }}">{{ page.grand_grand_parent }}</a></li>
+              <li class="breadcrumb-nav-list-item"><a href="{{ second_level_url }}">{{ page.grand_parent }}</a></li>
+              <li class="breadcrumb-nav-list-item"><a href="{{ third_level_url }}">{{ page.parent }}</a></li>
+              {% elsif page.grand_parent %}
                 <li class="breadcrumb-nav-list-item"><a href="{{ first_level_url }}">{{ page.grand_parent }}</a></li>
                 <li class="breadcrumb-nav-list-item"><a href="{{ second_level_url }}">{{ page.parent }}</a></li>
               {% else %}
