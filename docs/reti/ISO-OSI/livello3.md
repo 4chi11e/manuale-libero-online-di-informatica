@@ -972,7 +972,7 @@ In questo modo in realtà è possibile ottenere 4 sottoreti di cui ne vengono ut
 
 ##### Esercizi sul subnetting
 Per padroneggiare l'argomento è necessario fare pratica con esercizi che richiedano di applicare gli argomenti fin qui esposti in diverse situazioni. A [questa pagina](http://www.edutecnica.it/sistemi/retix/retix.htm) è possibile trovare una serie di esercizi con soluzioni.
-[Qui]({{ site.baseurl }}{% link docs/reti/ISO-OSI/esercizi-subnetting.md %}) li ho salvati in locale
+[Qui]({{ site.baseurl }}{% link docs/reti/ISO-OSI/esercizi-subnetting.html %}) li ho salvati in locale.
 
 #### Indirizzi pubblici e privati
 

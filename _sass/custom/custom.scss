@@ -382,6 +382,26 @@ li {
   @include fs-5;
 }
 
+
+// ---------------- Esercizi subnetting -------------------------------------------
+
+.soluzione-semplice{
+  display: none;
+}
+
+.soluzione-semplice__visibile{
+  display: inline;
+}
+
+.soluzione-completa{
+  display: none;
+}
+
+.soluzione-completa__visibile{
+  display: block;
+}
+
+
 // ---------------- Sistema di incolonnamento --------------------------------------
 
 .colonna-2 {

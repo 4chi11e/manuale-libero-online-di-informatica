@@ -7,12 +7,40 @@ grand_parent: ISO/OSI
 has_children: False
 ---
 
-Esercizio 1
-Dato l'indirizzo IP 200.110.12.0 con maschera di sottorete 255.255.255.224, specificare quante sottoreti e quanti host
-per sottorete si possono ottenere.
+<h1>Esercizi sul Subnetting</h1>
 
-[ 8 subnet | 30 host ciascuna ]
-Esercizio 2
+<h2>Esercizio 1</h2>
+
+<p>Dato l'indirizzo IP 200.110.12.0 con maschera di sottorete 255.255.255.224, specificare quante sottoreti e quanti
+    host per sottorete si possono ottenere.
+</p>
+
+<span class="soluzione-toggler" totoggle="#es01-semplice">Visualizza soluzione</span> <span class="soluzione-semplice"
+    id="es01-semplice">[ 8 subnet | 30 host ciascuna ]</span>
+
+<p class="soluzione-toggler" totoggle="#es01-completa">Visualizza soluzione completa di procedimenti</p>
+
+<div class="soluzione-completa" id="es01-completa">
+    <p>
+        L'indirizzo inizia con un numero maggiore di 192, si tratta di una classe C.<br>
+        La suddivisione fra subnet e host viene fatta sul 4° ottetto.
+    </p>
+    <p>Osservando la subnet mask abbiamo</p>
+    <p>255.255.255.224 = 11111111.11111111.11111111.11100000</p>
+    <p>Quindi gli host appartenenti alla rete avranno indirizzi del tipo</p>
+    <p>200.110.12.ssshhhhh</p>
+    <p>
+        ci saranno 3 bit dedicati alle subnet e 5 tiservati agli host per un totale di:<br>
+        2<sup>3</sup>8 subnet da<br>
+        2<sup>5</sup> - 2 = 30 host ciascuna
+    </p>
+
+</div>
+
+
+
+<h2>Esercizio 2</h2> 
+
 Dato l'indirizzo IP 200.110.12.0 partizionare la rete da esso individuata in 12 sottoreti specificando il numero di host
 che appartengono a ciascuna sottorete e indicare l'indirizzo ip del terzo host appartenente alla settima sottorete,
 
@@ -60,3 +88,7 @@ scolastico come indicato in figura.
 0
 Volendo realizzare una sottorete per ogni aula elenca si nota che è necessario avere almeno 8 host per oogni sottorete.
 Elenca l'indirizzo IP per ogni host della rete rappresentata.
+
+
+
+<script src="{{site.baseurl}}/assets/js/esercizi-subnetting.js"></script>
