@@ -8,12 +8,18 @@ has_children: True
 ---
 
 # Livello 3: Rete (Network Layer)
-
 {: .no_toc}
 
 _Obiettivo: rendere i livelli superiori indipendenti dai meccanismi e dalle tecnologie di trasmissione usate per la connessione e prendersi carico della consegna a destinazione dei pacchetti._
 
-È responsabile di:
+## Indice
+{: .no_toc .text-delta }
+
+- TOC
+{:toc}
+
+## Funzionalità
+Il livello di rete è responsabile di:
 
 - [routing](https://it.wikipedia.org/wiki/Instradamento#Routing "Instradamento"): scelta ottimale del percorso di rete da utilizzare per garantire la consegna delle informazioni dal mittente al destinatario, scelta svolta dal [router](https://it.wikipedia.org/wiki/Router "Router") attraverso dei particolari [algoritmi di Routing](https://it.wikipedia.org/wiki/Protocolli_di_routing "Protocolli di routing") e [tabelle di routing](https://it.wikipedia.org/wiki/Routing_table "Routing table").
 - conversione dei dati nel passaggio fra una rete ed un'altra con diverse caratteristiche, come il protocollo di rete utilizzato (_internet-working_). Deve, quindi:
@@ -23,33 +29,8 @@ _Obiettivo: rendere i livelli superiori indipendenti dai meccanismi e dalle tecn
 
 La sua unità dati fondamentale è il _pacchetto_.
 
-Il protocollo di rete più usato è il protocollo IP (Internet Protocol) usato in tutte le reti TCP/IP. Nella sezione dedicata al protocollo IP verranno analizzate nel dettaglio le operazioni effettuate nel livello di rete.
+Il protocollo di rete più usato è il protocollo IP (Internet Protocol) usato in tutte le reti TCP/IP. Lo studio di questo protocollo permetterà di comprendere nel dettaglio tutte le funzionalità normalmente offerte da questo livello. 
 
-[Link](https://it.wikipedia.org/wiki/Livello_di_rete "Livello di rete") alla pagina wikipedia.
-
-## Router
-
-<!-- thumbnail -->
-<div class="thumbnail float-right">
-  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/router.jfif" class="modal__opener" aprire="#img-router">
-  <p>Router domestico dotato sia di porte fisiche che di antenne per il Wi-Fi</p>
-</div>
-<!-- modal -->
-<div id="img-router" class="modal">
-  <div class="modal__content">
-    <span class="modal__closer modal__closer--topright" chiudere="#img-router">&times;</span>
-    <div class="modal__content__img-container">   
-      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/router.jfif">
-    </div>
-    <p>Router domestico dotato sia di porte fisiche che di antenne per il Wi-Fi</p>
-  </div>
-</div>
-
-Un router è un dispositivo di rete di livello 3 usato per collegare sottoreti diverse e che si occupa di instradare i pacchetti fra le diverse sottoreti. Il router spesso opera anche come "gestore" di una determinata sottorete fornendo una serie di servizi agli host collegati a quella sottorete.
-
-Mentre gli switch si occupano di collegare dispositivi all'interno di una stessa rete identificandoli per mezzo di indirizzi MAC, i router si occupano di collegare diverse reti utilizzando indirizzi di livello di rete che permettendo loro di effettuare il routing dei pacchetti tra reti differenti. Ogni protocollo di rete effettua queste operazioni in maniera differente. Nel capitolo riguardante il [protocollo IP](#) verrà trattato nel dettaglio questo argomento.
-
-Spesso le reti sono organizzate gerarchicamente tra loro e i router sono quindi solitamente costruiti per rispettare tale ordine. Spesso quindi i router presentano una porta per la connessione alla rete "esterna" e una o più porte fisiche per i collegamenti verso la rete "interna". A volte possiedono anche antenne per fornire connessione Wi-Fi alla rete interna.
 
 ## Protocollo IP
 
@@ -1038,20 +1019,95 @@ L'utilizzo di queste tecniche ha prolungato di molti anni la vita di IPv4, ma no
 
 Mettendo insieme i concetti visti finora possiamo capire come un computer abbia bisogno di alcune informazioni fondamentali per poter comunicare all'interno di una rete di calcolatori. Queste informazioni sono:
 
-1. indirizzo IP, assegnabile manualmente o ottenibile tramite DHCP;
+1. indirizzo IP, assegnabile manualmente o ottenibile automaticamente tramite [DHCP](#dhcp);
 2. subnet mask necessaria a separare Net_ID e Host_ID
 3. indirizzo IP del gateway predefinito necessario al protocollo IP per sapere a chi indirizzare i pacchetti destinati a host esterni alla propria rete;
-4. indirizzo IP di un server DNS che permetta di convertire i nomi di dominio in indirizzi IP (in realtà questa informazione non è strettamente necessaria al funzionamento del protocollo IP)
+4. indirizzo IP di un server DNS che permetta di convertire i nomi di dominio in indirizzi IP (in realtà questa informazione non è strettamente necessaria al funzionamento del protocollo IP). Anche questa impostazione può essere indicata manualmente o ottenuta automaticamente tramite DHCP.
 
-#### Conoscere l'indirizzo in uso
+#### DHCP
+il Dynamic Host Configuration Protocol (in acronimo DHCP, lett. "protocollo di configurazione IP dinamica") è un protocollo che permette ai dispositivi che si collegano ad una certa rete locale di ricevere automaticamente le impostazioni di rete necessarie a comunicare nella rete. Le impostazioni principali da ricevere sono le quattro descritte nel paragrafo precedente sulle [impostazioni di rete fondamentali][#Impostazioni_di_rete_fondamentali] (ne esistono altre ma meno rilevanti e non saranno trattate). I vantaggi offerti dal poter ottenere automaticamente tutte le impostazioni in maniera automatica invece che manuale sono:
 
-Per conoscere il proprio indirizzo IP, maschera di sottorete e gateway in qualsiasi sistema operativo Unix-like (come nei sistemi Linux o in macOS) è sufficiente aprire una shell e digitare il comando ifconfig (o ipconfig, a seconda della distribuzione in uso).
+1. l'inserimento manuale è molto oneroso su reti di grandi dimensioni
+2. l'inserimento manuale può facilmente portare ad errori di inserimento o duplicazione di indirizzi
+3. le impostazioni vengono assegnate dinamicamente, quest'aspetto implica che:
+   1. semplicità nella modifica delle impostazioni per tutta la rete
+   2. assegnare indirizzi solo agli host effettivamente collegati alla rete con risparmio nell'uso di indirizzi IP; in reti di grandi dimensioni questo può essere molto vantaggioso
+   3. di contro è più difficile identificare un dispositivo in rete tramite indirizzo IP perchè questo è variabile, sarà quindi necessario affidarsi a servizi come DNS (Windows ad esempio assegna dei nomi ai computer che si collegano alle reti locali in modo che possano riconoscersi tra loro).
+
+##### Richiesta e attribuzione dell'indirizzo
+
+DHCP utilizza il protocollo UDP, le porte registrate sono la 67 per il server e la 68 per il client.
+
+Quando un calcolatore vuole ottenere un indirizzo tramite DHCP, attiva il processo DHCP client. In questo momento, il calcolatore non ha un indirizzo IP valido, quindi può operare solo a livello 2 o collegamento.
+
+<!-- thumbnail -->
+<div class="thumbnail float-right">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/DHCP_session.svg" class="modal__opener" aprire="#DHCP_session">
+  <p>Un'immagine che mostra una sessione tipica DHCP</p>
+</div>
+<!-- modal -->
+<div id="DHCP_session" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#DHCP_session">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/DHCP_session.svg">
+    </div>
+    <p>Un'immagine che mostra una sessione tipica DHCP</p>
+  </div>
+</div>
+
+
+
+La procedura descritta dal protocollo consta di diversi handshake tra client e server, ovvero scambio di pacchetti, ovviamente tutti incapsulati in frame di livello datalink, come Ethernet:
+
+- In primis, il client invia un pacchetto chiamato DHCPDISCOVER in broadcast, con indirizzo IP sorgente messo convenzionalmente a 0.0.0.0, e destinazione 255.255.255.255 (indirizzo di broadcast).
+- Il pacchetto è ricevuto da tutti gli host presenti nello stesso dominio di broadcast, e quindi da eventuali server DHCP presenti, i quali possono rispondere (o meno) con un pacchetto di DHCPOFFER in cui propongono un indirizzo IP e gli altri parametri di configurazione al client. Questo pacchetto di ritorno è indirizzato all'indirizzo di livello datalink del client (al suo MAC address - non ha ancora un indirizzo IP) ovvero in unicast.
+- Il client aspetta per un certo tempo di ricevere una o più offerte, dopodiché ne seleziona una, e invia un pacchetto di DHCPREQUEST (o DHCPACCEPT) in broadcast, indicando all'interno del pacchetto, con il campo "server identifier", quale server ha selezionato. Anche questo pacchetto raggiunge tutti i server DHCP presenti sulla rete (direttamente o tramite un relay).
+- Il server che è stato selezionato conferma l'assegnazione dell'indirizzo con un pacchetto di DHCPACK (nuovamente indirizzato in broadcast all'indirizzo di livello datalink del client, possibilmente attraverso un relay); gli altri server vengono automaticamente informati che la loro offerta non è stata scelta dal client, e che sulla sottorete è presente un altro server DHCP.
+
+
+##### Scadenza e rinnovo degli indirizzi
+
+A questo punto, il client è autorizzato a usare l'indirizzo ricevuto per un tempo limitato, detto tempo di lease. Prima della scadenza, dovrà tentare di rinnovarlo inviando un nuovo pacchetto DHCPREQUEST al server, che gli risponderà con un DHCPACK se vuole prolungare l'assegnazione dell'indirizzo. Questi sono normali pacchetti IP unicast scambiati tra due calcolatori che hanno indirizzi validi. Se il client non riesce a rinnovare l'indirizzo, tornerà allo stato iniziale cercando di farsene attribuire un altro.
+
+
+##### Sicurezza
+
+Ci sarebbero tante considerazioni da fare sugli aspetti legati alla sicurezza nell'uso di DHCP ma sarebbe troppo lungo. Se ti interessa l'argomento puoi approfondirlo sulla pagina Wikipedia dedicata a DHCP a partire da [qui](https://it.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol#Identificazione_e_autenticazione_dei_client).
+
+#### Conoscere le impostazioni di rete del proprio PC
+
+Per conoscere le impostazioni di rete del proprio computer, in qualsiasi sistema operativo Unix-like (come nei sistemi Linux o in macOS) è sufficiente aprire una shell e digitare il comando ifconfig (o ipconfig, a seconda della distribuzione in uso).
 
 Nei sistemi operativi Microsoft Windows, invece, con il comando ipconfig, dal prompt dei comandi (per aprirlo cerca il programma "cmd" in start), si possono avere le informazioni desiderate. per ottenere informazioni aggiuntive si può aggiungere il parametro -all (il comando diventa "ipconfig -all"). In questo modo è possibile vedere non solo le quattro informazioni sopra indicate ma anche una serie di altri dati come l'indirizzo MAC delle interfacce di rete, l'indirizzo del server DHCP e molto altro.
 
 Mediante il ping e il traceroute (comandi del DOS, oppure programmi scritti in altri linguaggi) viene inviato un pacchetto "di prova" per misurare rispettivamente il tempo di risposta e il percorso geografico della connessione attiva. Non è detto che un host sia impostato per rispondere ai ping che vengono loro inviati. Puoi provare ad eseguire il comando "ping www.google.com" e il computer dovrebbe prima risolvere il nome di dominio nell'indirizzo IP relativo e poi spedire dei pacchetti particolari a tale indirizzo e misurare il tempo di risposta a tali messaggi. Eseguento invece il comando "tracert www.google.com" verranno contattati tutti i nodi da percorrere dal tuo computer al server www.google.com e potrai vedere i loro identificativi sia sotto forma di nomi di dominio (credo), se ci sono, che di indirizzi IP, oltre ai tempi di risposta.
 
 Chi naviga utilizzando un router, usando tali comandi visualizzerà le informazioni relative alla propria rete privata. Le informazioni riguardo all'IP pubblico (assegnato al router) sono disponibili nel pannello di configurazione del router stesso oppure è possibile visualizzarlo tramite un sito apposito.
+
+## Router
+
+<!-- thumbnail -->
+<div class="thumbnail float-right">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/router.jfif" class="modal__opener" aprire="#img-router">
+  <p>Router domestico dotato sia di porte fisiche che di antenne per il Wi-Fi</p>
+</div>
+<!-- modal -->
+<div id="img-router" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-router">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/router.jfif">
+    </div>
+    <p>Router domestico dotato sia di porte fisiche che di antenne per il Wi-Fi</p>
+  </div>
+</div>
+
+Un router è un dispositivo di rete di livello 3 usato per collegare sottoreti diverse e che si occupa di instradare i pacchetti fra le diverse sottoreti. Il router spesso opera anche come "gestore" di una determinata sottorete fornendo una serie di servizi agli host collegati a quella sottorete.
+
+Mentre gli switch si occupano di collegare dispositivi all'interno di una stessa rete identificandoli per mezzo di indirizzi MAC, i router si occupano di collegare diverse reti utilizzando indirizzi di livello di rete che permettendo loro di effettuare il routing dei pacchetti tra reti differenti. Ogni protocollo di rete effettua queste operazioni in maniera differente. Nel capitolo riguardante il [protocollo IP](#) verrà trattato nel dettaglio questo argomento.
+
+Spesso le reti sono organizzate gerarchicamente tra loro e i router sono quindi solitamente costruiti per rispettare tale ordine. Spesso quindi i router presentano una porta per la connessione alla rete "esterna" e una o più porte fisiche per i collegamenti verso la rete "interna". A volte possiedono anche antenne per fornire connessione Wi-Fi alla rete interna.
 
 ## Link e riferimenti esterni
 
@@ -1063,3 +1119,4 @@ Chi naviga utilizzando un router, usando tali comandi visualizzerà le informazi
 - [Classi di indirizzi IP su Wikipedia](https://it.wikipedia.org/wiki/Classi_di_indirizzi_IP)
 - [Maschera di sottorete o subnet mask su Wikipedia](https://it.wikipedia.org/wiki/Maschera_di_sottorete)
 - [Esercizi di subnetting su www.edutecnica.it](http://www.edutecnica.it/sistemi/retix/retix.htm)
+- [DHCP su Wikipedia](https://it.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol)
