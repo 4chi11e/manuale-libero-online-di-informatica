@@ -82,9 +82,124 @@ L'indirizzo IP si compone di due parti: indicatore di rete (Net_ID) e indicatore
   </div>
 </div>
 
-L'indirizzo IPv4 è costituito da 32 bit (4 byte) suddiviso in 4 gruppi da 8 bit (1 byte), separati ciascuno da un punto (notazione dotted, es. 11001001.00100100.10101111.00001111). Ciascuno di questi 4 byte è poi convertito in formato decimale di più facile identificazione, che semplifica la lettura e la memorizzazione da parte di noi umani, (quindi ogni numero varia tra 0 e 255 essendo 2<sup>8</sup>=256, ovvero le combinazioni disponibili ci dicono quanti numeri possiamo utilizzare in ogni gruppo identificato dal punto). Un esempio di indirizzo IPv4 è 172.16.254.1 che corrisponde a una notazione binaria.
+L'indirizzo IPv4 è costituito da 32 bit (4 byte) suddiviso in 4 gruppi da 8 bit (1 byte), separati ciascuno da un punto (notazione dotted, es. 11001001.`00100100.10101111.00001111`). Ciascuno di questi 4 byte è poi convertito in formato decimale di più facile identificazione, che semplifica la lettura e la memorizzazione da parte di noi umani, (quindi ogni numero varia tra 0 e 255 essendo 2<sup>8</sup>=256, ovvero le combinazioni disponibili ci dicono quanti numeri possiamo utilizzare in ogni gruppo identificato dal punto). Un esempio di indirizzo IPv4 è 172.16.254.1 che corrisponde a una notazione binaria.
 
 Nello standard IPv4 (Internet Protocol versione 4), essendo costituito da 32 bit, le combinazioni utilizzabili sono 2<sup>32</sup> pari a circa 4 miliardi. All'inizio, 1981, sembravano tanti, tuttavia oggi sono pochi poiché se ognuno di noi ha diversi dispositivi connessi ad internet, questi avranno degli indirizzi IP univoci. Basti pensare che molte persone posseggono uno smartphone, un computer e una smart TV, quindi 3 indirizzi IP. Sono quindi state identificate due soluzioni: la separazione tra _indirizzi privati_ e _indirizzi pubblici_, e il passaggio al protocollo IPv6 che utilizza indirizzi più lunghi (128 bit). Queste soluzioni saranno descritte nel dettaglio più avanti.
+
+
+#### Il pacchetto
+
+Per chi non si occupi direttamente della gestione dei pacchetti non è particolarmente rilevante conoscere in dettaglio la struttura del pacchetto IPv4 ma è bene almeno averne un'idea generale, per completezza è di seguito rappresentata e descritta.
+
+L'header del pacchetto IPv4 consiste in 13 campi di cui 1 opzionale (segnalato nello schema con sfondo rosso) e chiamato con il nome di Options.
+
+<table class="sistema-bordi-multi-riga-colonna" style="margin: 0 auto; text-align: center;">
+    <tbody>
+        <tr align="center">
+            <th width="4%">+
+            </th>
+            <th colspan="4" width="12%">Bits 0–3
+            </th>
+            <th colspan="4" width="12%">4–7
+            </th>
+            <th colspan="8" width="24%">8–15
+            </th>
+            <th colspan="3" width="9%">16–18
+            </th>
+            <th colspan="13" width="39%">19–31
+            </th>
+        </tr>
+        <tr align="center">
+            <th>0
+            </th>
+            <td colspan="4">Version
+            </td>
+            <td colspan="4">Internet<br />Header length
+            </td>
+            <td colspan="8"><a href="/wiki/Type_of_Service" title="Type of Service">Type of Service</a><br />(adesso <a
+                    href="/wiki/Differentiated_services" title="Differentiated services">DiffServ</a> e <a
+                    href="/w/index.php?title=Explicit_Congestion_Notification&amp;action=edit&amp;redlink=1" class="new"
+                    title="Explicit Congestion Notification (la pagina non esiste)">ECN</a>)
+            </td>
+            <td colspan="16">Total Length
+            </td>
+        </tr>
+        <tr align="center">
+            <th>32
+            </th>
+            <td colspan="16">Identification
+            </td>
+            <td colspan="3">Flags
+            </td>
+            <td colspan="13">Fragment Offset
+            </td>
+        </tr>
+        <tr align="center">
+            <th>64
+            </th>
+            <td colspan="8">Time to Live
+            </td>
+            <td colspan="8">Protocol
+            </td>
+            <td colspan="16">Header Checksum
+            </td>
+        </tr>
+        <tr align="center">
+            <th>96
+            </th>
+            <td colspan="32">Source Address
+            </td>
+        </tr>
+        <tr align="center">
+            <th>128
+            </th>
+            <td colspan="32">Destination Address
+            </td>
+        </tr>
+        <tr align="center">
+            <th>160
+            </th>
+            <td colspan="32" bgcolor="#FFDDDD">Options (facoltativo)
+            </td>
+        </tr>
+        <tr align="center">
+            <th>160<br />o<br />192+
+            </th>
+            <td colspan="32">&#160;<br />Data<br />&#160;
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+- **Versione** [4 bit] - Indica la versione del pacchetto IP: per IPv4, ha valore 4 (da qui il nome IPv4);
+- **Internet Header Length** (IHL) [4 bit] - Indica la lunghezza (in word da 32 bit) dell'header del pacchetto IP ovvero l'offset del campo dati; tale lunghezza può variare da 5 word (20 byte) a 15 word (60 byte) a seconda della presenza e della lunghezza del campo facoltativo Options;
+- **Type of Service** (TOS) [8 bit] - Nelle specifiche iniziali del protocollo (RFC 791), questi bit servivano all'host mittente per specificare il modo e in particolare la precedenza con cui l'host ricevente doveva trattare il datagramma:
+    - bit 0-2: Precedenza
+    - bit 3: Latenza (0 = normale, 1 = bassa)
+    - bit 4: Throughput (0 = normale, 1 = alto)
+    - bit 5: Affidabilità (0 = normale, 1 = alta)
+    - bit 6-7: Riservati per usi futuri
+  
+    Ad esempio un host poteva scegliere una bassa latenza, mentre un altro preferire un'alta affidabilità. Nella pratica questo uso del campo TOS non ha preso largamente piede.
+    Dopo molte sperimentazioni e ricerche, recentemente questi 8 bit sono stati ridefiniti ed hanno la funzione di Differentiated services (DiffServ) nell'IETF e Explicit Congestion Notification (ECN) codepoints (vedi RFC 3168), necessari per le nuove tecnologie basate sullo streaming dei dati in tempo reale, come per esempio il Voice over IP (VoIP) usato per lo scambio interattivo dei dati vocali;
+
+- **Total Length** [16 bit] - Indica la dimensione (in byte) dell'intero pacchetto, comprendendo header e dati; tale lunghezza può variare da un minimo di 20 byte (header minimo e campo dati vuoto) ad un massimo di 65535 byte. In ogni momento, ad ogni host è richiesto di essere in grado di gestire datagrammi aventi una dimensione minima di 576 byte mentre sono autorizzati, se necessario, a frammentare datagrammi di dimensione maggiore;
+- **Identification** [16 bit] - Utilizzato, come da specifiche iniziali, per identificare in modo univoco i vari frammenti in cui può essere stato "spezzato" un pacchetto IP. Alcune sperimentazioni successive hanno però suggerito di utilizzare questo campo per altri scopi, come aggiungere la funzionalità di tracciamento dei pacchetti;
+- **Flags** [3 bit] - Bit utilizzati per il controllo del protocollo e della frammentazione dei datagrammi:
+Reserved - sempre settato a 0. Come pesce d'aprile, in RFC 3514 si è proposto di utilizzarlo come "Evil bit";
+DF (Don't Fragment) - se settato a 1 indica che il pacchetto non deve essere frammentato; se tale pacchetto non può essere inoltrato da un host senza essere frammentato, viene semplicemente scartato. Questo può risultare utile per "ispezionare" la capacità di gestione dei vari host del percorso di routing;
+MF (More Fragments) - se settato a 0 indica che il pacchetto è l'ultimo frammento o il solo frammento del pacchetto originario, pertanto tutti gli altri suoi frammenti hanno il bit MF settato a 1. Naturalmente, questo bit sarà sempre 0 anche in tutti i datagrammi che non sono stati frammentati.
+- **Fragment Offset** [13 bit] - Indica l'offset (misurato in blocchi di 8 byte) di un particolare frammento relativamente all'inizio del pacchetto IP originale: il primo frammento ha offset 0. L'offset massimo risulta pertanto pari a {\displaystyle 2^{16}-8}{\displaystyle 2^{16}-8}65528 byte che, includendo l'header, potrebbe eccedere la dimensione massima di 65535 byte di un pacchetto IP;
+- **Time to live** (TTL) [8 bit] - Indica il tempo di vita (time to live) del pacchetto, necessario per evitarne la persistenza indefinita sulla rete nel caso in cui non si riesca a recapitarlo al destinatario. Storicamente il TTL misurava i "secondi di vita" del pacchetto, mentre ora esso misura il numero di "salti" da nodo a nodo della rete: ogni router che riceve il pacchetto prima di inoltrarlo ne decrementa il TTL (modificando di conseguenza anche il campo Header Checksum), quando questo arriva a zero il pacchetto non viene più inoltrato ma scartato. Tipicamente, quando un pacchetto viene scartato per esaurimento del TTL, viene automaticamente inviato un messaggio ICMP al mittente del pacchetto, specificando il codice di Richiesta scaduta; la ricezione di questo messaggio ICMP è alla base del meccanismo di traceroute;
+- **Protocol** [8 bit] - Indica il codice associato al protocollo utilizzato nel campo dati del pacchetto IP: per esempio al protocollo TCP è associato il codice 6, ad UDP il codice 17, mentre ad IPv6 è associato il codice 41. La lista dei codici dei vari protocolli, inizialmente definita in RFC 790, è mantenuta e gestita dalla Internet Assigned Numbers Authority.
+- **Header Checksum** [16 bit] - È un campo usato per il controllo degli errori dell'header. Ad ogni hop, il checksum viene ricalcolato (secondo la definizione data in RFC 791) e confrontato con il valore di questo campo: se non c'è corrispondenza il pacchetto viene scartato. È da notare che non viene effettuato alcun controllo sulla presenza di errori nel campo Data deputandolo ai livelli superiori;
+- **Source address** [32 bit] - Indica l'indirizzo IP associato all'host del mittente del pacchetto.
+Da notare che questo indirizzo potrebbe non essere quello del "vero" mittente nel caso di traduzioni mediante NAT. Infatti, qualora un host intermedio effettui questa traduzione, sostituisce l'indirizzo del mittente con uno proprio, premurandosi poi di ripristinare l'indirizzo originario su tutti i messaggi di risposta che gli arrivano destinati al mittente originario;
+- **Destination address** [32 bit] - Indica l'indirizzo IP associato all'host del destinatario del pacchetto e segue le medesime regole del campo Source address;
+- **Options** - Opzioni (facoltative e non molto usate) per usi più specifici del protocollo, come informazioni sui router;
+Si ricorda che il valore del campo IHL deve essere sufficientemente grande da includere anche tutte le opzioni e, nel caso queste siano più corte di una word, il padding necessario a completare i 32 bit. Inoltre, nel caso in cui la lista di opzioni non coincida con la fine dell'header, occorre aggiungere in coda ad essa un marcatore EOL (End of Options List).
+C'è da notare infine che, potendo causare problemi di sicurezza, l'uso delle opzioni LSSR e SSRR (Loose e Strict Source and Record Route) è scoraggiato e molti router bloccano i datagrammi che contengono queste opzioni.
+
 
 #### Subnet Mask
 
@@ -92,18 +207,18 @@ La maschera di sottorete o subnet mask è una sequeza di bit lunga come gli indi
 
 La subnet mask può essere rappresentata in diversi modi:
 
-1. sequenza di 1 e 0 che è il modo in cui è effettivamente memorizzata ed utilizzada dai computer ma è scomodo per gli esseri umani, ad esempio 11111111.11111111.11111111.11100000;
-2. rappresentazione dotted decimal simile agli indirizzi IP, ad esempio 255.255.255.224 che corrisponde a 11111111.11111111.11111111.11100000
-3. rappresentazione CIDR che indica a fianco degli indirizzi IP il numero di bit a 1 della corrispondente subnet mask, ad esempio in 192.168.32.97/27 la subnet mask è di nuovo 11111111.11111111.11111111.11100000
+1. sequenza di 1 e 0 che è il modo in cui è effettivamente memorizzata ed utilizzada dai computer ma è scomodo per gli esseri umani, ad esempio `11111111.11111111.11111111.11100000`;
+2. rappresentazione dotted decimal simile agli indirizzi IP, ad esempio 255.255.255.224 che corrisponde a `11111111.11111111.11111111.11100000`
+3. rappresentazione CIDR che indica a fianco degli indirizzi IP il numero di bit a 1 della corrispondente subnet mask, ad esempio in `192.168.32.97/27` la subnet mask è di nuovo `11111111.11111111.11111111.11100000`
 
 Di seguito vediamo in pratica come viene utilizzata la subnet mask vista negli esempi precedenti.
 
 Supponiamo che il protocollo IP del nostro computer sia configurato come segue:
 
-- indirizzo IP: 192.168.32.97
-- maschera di sottorete: 255.255.255.224
+- indirizzo IP: `192.168.32.97`
+- maschera di sottorete: `255.255.255.224`
 
-e che vogliamo spedire un pacchetto all'indirizzo IP 192.168.32.130;
+e che vogliamo spedire un pacchetto all'indirizzo IP `192.168.32.130`;
 
 Prima di tutto trasformiamo in notazione binaria gli indirizzi IP e la maschera di sottorete:
 
@@ -113,7 +228,6 @@ Prima di tutto trasformiamo in notazione binaria gli indirizzi IP e la maschera 
 
 255.255.255.224 = 11111111.11111111.11111111.11100000
 ```
-
 {: .fs-3}
 
 Allora il livello IP calcolerà per l'indirizzo sorgente:
@@ -124,7 +238,6 @@ Allora il livello IP calcolerà per l'indirizzo sorgente:
 -------------------------------------
 11000000.10101000.00100000.01100000          (192.168.032.096)
 ```
-
 {: .fs-3}
 
 Ora ripetiamo l'operazione con l'IP di destinazione:
@@ -135,12 +248,11 @@ Ora ripetiamo l'operazione con l'IP di destinazione:
 -------------------------------------
 11000000.10101000.00100000.10000000          (192.168.032.128)
 ```
-
 {: .fs-3}
 
-I risultati 192.168.32.96 e 192.168.32.128 indicano due sottoreti differenti, e quindi le macchine appartengono a sottoreti differenti. I due indirizzi ottenuti inoltre non indicano alcun host ma identificano un'intera sottorete. Esistono due indirizzi particolari in ogni rete che non possono essere utilizzati da nessun host e sono:
+I risultati `192.168.32.96` e `192.168.32.128` indicano due sottoreti differenti, e quindi le macchine appartengono a sottoreti differenti. I due indirizzi ottenuti inoltre non indicano alcun host ma identificano un'intera sottorete. Esistono due indirizzi particolari in ogni rete che non possono essere utilizzati da nessun host e sono:
 
-1. l'**indirizzo di rete** che è il primo indirizzo della rete, quello che presenta tutti 0 nell'Host_ID come nel caso dei due indirizzi ottenuti nell'esempio precedente: 192.168.32.96/27 e 192.168.32.128/27, questi indirizzi identificano le reti e non degli host;
+1. l'**indirizzo di rete** che è il primo indirizzo della rete, quello che presenta tutti 0 nell'Host_ID come nel caso dei due indirizzi ottenuti nell'esempio precedente: `192.168.32.96/27` e `192.168.32.128/27`, questi indirizzi identificano le reti e non degli host;
 2. l'**indirizzo di broadcast** che è l'ultimo indirizzo della rete, quello che presenta tutti 1 nell'Host_ID; questo indirizzo non è specifico di nessun host ma serve per indicare tutti gli host della rete (ad esempio in una comunicazione broadcast a tutti gli host della rete).
 
 se prendiamo in esame la rete 192.168.32.96/27 vediamo che:
@@ -150,7 +262,6 @@ Indirizzo di rete:      11000000.10101000.00100000.01100000     (192.168.032.096
 Indirizzo di broadcast: 11000000.10101000.00100000.01111111     (255.255.255.127)
 Subnet mask:            11111111.11111111.11111111.11100000     (255.255.255.224)
 ```
-
 {: .fs-3}
 
 possiamo quindi calcolare quanti sono gli indirizzi disponibili per gli host all'interno della rete: 2<sup>5</sup> - 2 = 30, questo perchè i bit che compongono l'Host_ID sono 5 e quindi avremmo 2<sup>5</sup> indirizzi possibili, ma il primo e l'ultimo sono l'indirizzo di rete e l'indirizzo di broadcast e non possono essere usati, da cui il -2.
@@ -648,37 +759,37 @@ Vediamo come:
 
 **Classe A**<br>
 Il primo byte rappresenta la rete; gli altri tre gli host per ogni rete.<br>
-In notazione decimale gli IP variano nel modo seguente: 1-127.H.H.H;<br>
-La maschera di rete è 255.0.0.0 (o anche detta /8 in quanto i bit di rete sono 8);<br>
+In notazione decimale gli IP variano nel modo seguente: `1-127.H.H.H`;<br>
+La maschera di rete è `255.0.0.0` (o anche detta /8 in quanto i bit di rete sono 8);<br>
 Questi indirizzi in binario iniziano con il bit 0.
 
 **Classe B**<br>
 I primi due byte rappresentano la rete; gli altri due gli host per ogni rete.<br>
-In notazione decimale gli IP variano nel modo seguente: 128-191.N.H.H;<br>
+In notazione decimale gli IP variano nel modo seguente: `128-191.N.H.H`;<br>
 N varia da 0 a 255.<br>
-La maschera di rete è 255.255.0.0 (o anche detta /16 in quanto i bit di rete sono 16);<br>
+La maschera di rete è `255.255.0.0` (o anche detta /16 in quanto i bit di rete sono 16);<br>
 Questi indirizzi in binario iniziano con i bit 10.
 
 **Classe C**<br>
 I primi tre byte rappresentano la rete; l'ultimo gli host per ogni rete.<br>
 In notazione decimale gli IP variano nel modo seguente: 192-223.N.N.H;<br>
-La maschera di rete è 255.255.255.0 (o anche detta /24 in quanto i bit di rete sono 24);<br>
+La maschera di rete è `255.255.255.0` (o anche detta /24 in quanto i bit di rete sono 24);<br>
 Questi indirizzi in binario iniziano con i bit 110.
 
 **Classe D**<br>
 È riservata agli indirizzi multicast.<br>
-In notazione decimale gli IP variano nel modo seguente: 224-239.x.x.x;<br>
+In notazione decimale gli IP variano nel modo seguente: `224-239.x.x.x`;<br>
 Non è definita una maschera di rete, essendo tutti e 32 i bit dell'indirizzo utilizzati per indicare un gruppo, non un singolo host;<br>
 Questi indirizzi in binario iniziano con i bit 1110.
 
 **Classe E**<br>
 Riservata per usi futuri;<br>
-In notazione decimale gli IP variano nel modo seguente: 240-255.x.x.x;<br>
+In notazione decimale gli IP variano nel modo seguente: `240-255.x.x.x`;<br>
 Non è definita una maschera di rete;<br>
 Questi indirizzi in binario iniziano con i bit 1111.
 
 _Esempio:_<br>
-Se occorresse analizzare l'indirizzo IP 130.165.4.2 privo di maschera di rete e fosse necessario trovarne la classe di appartenenza, si potrebbe iniziare considerando che convertito in binario il primo ottetto (il numero 130) risulterebbe 10000010, ovverosia un numero appartenente alla classe B proprio perché gli indirizzi di classe B iniziano con i primi bit a 10.
+Se occorresse analizzare l'indirizzo IP `130.165.4.2` privo di maschera di rete e fosse necessario trovarne la classe di appartenenza, si potrebbe iniziare considerando che convertito in binario il primo ottetto (il numero 130) risulterebbe 10000010, ovverosia un numero appartenente alla classe B proprio perché gli indirizzi di classe B iniziano con i primi bit a 10.
 
 _Esempio:_<br>
 Se fosse necessario calcolare a mano il numero di reti e di host disponibili negli indirizzi di classe B, si effettuano i seguenti calcoli:<br>
@@ -691,7 +802,7 @@ Analogo discorso per il calcolo degli host, dove si effettua 2<sup>16</sup> in q
 
 L'intervallo di indirizzi utilizzati da ogni classe sono indicati nello schema successivo mediante _notazione decimale puntata_ o _dotted decimal notation_
 
-<table class="wikitable">
+<table>
     <tbody>
         <tr>
             <th>Classe
@@ -743,7 +854,7 @@ L'intervallo di indirizzi utilizzati da ogni classe sono indicati nello schema s
 
 Alcuni indirizzi sono riservati per usi speciali (RFC 3330).
 
-<table class="wikitable">
+<table>
     <tbody>
         <tr>
             <th>Indirizzi
@@ -903,9 +1014,9 @@ La notazione usata per esprimere indirizzi CIDR è la seguente: a.b.c.d/x , dove
 
 Un esempio di indirizzo IP rappresentato secondo na notazione CIDR è 192.168.1.128/25 che rappresenta una sottorete più piccola di una classica rete di classe C. La notazione introdotta è molto compatta e comoda, in maniera classica potremmo invece scrivere:
 
-- indirizzo IP: 192.168.1.128
-- subnet mask (dotted decimal): 255.255.255.128
-- subnet mask (binario): 11111111.11111111.11111111.10000000
+- indirizzo IP: `192.168.1.128`
+- subnet mask (dotted decimal): `255.255.255.128`
+- subnet mask (binario): `11111111.11111111.11111111.10000000`
 
 #### Sottoreti e Subnetting
 
@@ -1011,9 +1122,180 @@ Gli indirizzi IP possono essere assegnati in maniera permanente (per esempio un 
 
 Nel tempo gli indirizzi IPv4 disponibili sono diminuiti progressivamente diventando una risosa scarsa, molto richiesta e quindi costosa. La difficile implementazione a livello globale dell'IPv6 ha portato all'introduzione di nuovi concetti, che hanno rivoluzionato la teoria e la pratica delle reti. Vanno citati l'abbandono del concetto di classi di indirizzi IP e il conseguente utilizzo sempre maggiore di indirizzi classless (privi del concetto di classe), la maschera di sottorete, la riorganizzazione gerarchica degli indirizzi mediante utilizzo massivo di NAT.
 
-L'utilizzo di queste tecniche ha prolungato di molti anni la vita di IPv4, ma non ha risolto davvero il problema, infatti nell'autunno del 2020 sono stati venduti gli ultimi blocchi di indirizzi IP disponibili rendendo inevitabile il passaggio all'IPv6.
+L'utilizzo di queste tecniche ha prolungato di molti anni la vita di IPv4, ma non ha risolto davvero il problema, infatti gli ultimi cinque blocchi /8 di indirizzi IPv4 sono stati assegnati dallo IANA il 3 febbraio 2011 e in Italia nell'autunno del 2020 sono stati venduti gli ultimi blocchi di indirizzi IP di classi inferiori rendendo inevitabile il passaggio all'IPv6.
+
 
 ### IPv6
+
+IPv6 è la versione dell'Internet Protocol designata come successore dell'IPv4. Tale protocollo introduce alcuni nuovi servizi e semplifica molto la configurazione e la gestione delle reti IP.
+
+La sua caratteristica più importante è il più ampio spazio di indirizzamento:
+
+IPv6 riserva 128 bit per gli indirizzi IP e gestisce 2128 (circa 3,4 × 1038) indirizzi;
+IPv4 riserva 32 bit per l'indirizzamento e gestisce 232 (circa 4,3 × 109) indirizzi.
+Quantificando con un esempio, per ogni metro quadrato di superficie terrestre, ci sono 655.570.793.348.866.943.898.599 indirizzi IPv6 unici (cioè 655.571 miliardi di miliardi o 655 triliardi), ma solo 0,000007 IPv4 (cioè solo 7 IPv4 ogni milione di metri quadrati). Per dare un'idea delle grandezze in uso, se si paragona l'indirizzo singolo ad un Quark (grandezza nell'ordine di 1 attometro), con IPv4 si raggiungerebbe il diametro dell'elica del DNA (di pochi nanometri), mentre con IPv6 si raggiungerebbe il centro della Via lattea dalla Terra (tre decine di millenni-luce). L'adozione su vasta scala di IPv6 e quindi del formato per gli indirizzi IP risolverebbe indefinitamente il problema dell'esaurimento degli indirizzi IPv4.
+
+
+#### Storia
+
+L'ICANN rese disponibile il protocollo IPv6 sui root nameserver dal 20 luglio 2004, ma solo dal 4 febbraio 2008 iniziò l'inserimento dei primi indirizzi IPv6 nel sistema di risoluzione dei nomi. Il 3 febbraio 2011 la IANA ha assegnato gli ultimi blocchi di indirizzo IPv4 ai 5 RIR (un blocco /8 ciascuno), anche se il protocollo IPv4 verrà utilizzato fino al 2025 circa, per dare il tempo necessario ad adeguarsi
+
+#### Caratteristiche
+
+##### L'indirizzamento
+
+Il cambiamento più rilevante nel passaggio dall'IPv4 all'IPv6 è la lunghezza dell'indirizzo di rete. L'indirizzo IPv6, come definito nel RFC 2373 e nel RFC 2374 è lungo 128 bit, cioè 32 cifre esadecimali, che sono normalmente utilizzate nella scrittura dell'indirizzo come descritto più avanti.
+
+Questo cambiamento porta il numero di indirizzi esprimibili dall'IPv6 a 2<sup>128</sup> = 16<sup>32</sup> ≈ 3,4 × 1038.
+
+Una delle critiche allo spazio di indirizzamento di 128 bit è che potrebbe essere ampiamente sovradimensionato. Bisogna considerare che la ragione di un indirizzamento così ampio non è da associare alla volontà di assicurare un numero sufficiente di indirizzi, quanto al tentativo di porre rimedio alla frammentazione dello spazio di indirizzamento IPv4, conseguenza, tra le altre cose, della limitazione dello spazio di indirizzamento e della poca possibilità di prevedere a medio-lungo termine la richiesta di indirizzi. È infatti possibile che un singolo operatore di telecomunicazione abbia assegnati numerosi blocchi di indirizzi non contigui.
+
+Come per IPv4 anche IPv6 prevede che l'instradamento sia realizzato sulla base di prefissi (oggetto delle rotte) di lunghezza variabile. Normalmente tali prefissi sono non più lunghi di 64 bit, in modo da consentire l'impiego dei 64 bit meno significativi con il solo ruolo di identificare un terminale (analogo alla divisione Net_ID e Host_ID dell'IPv4). Questo vale anche per l'accesso ad Internet di una normale abitazione, a cui verrebbero assegnati almeno 2<sup>64</sup> (1,8×10<sup>19</sup>) indirizzi pubblici, mentre per realtà che dispongono di una struttura di rete articolata in più segmenti di LAN occorre assegnare un arco di indirizzi ancora più grande (ad es. un prefisso di 56 bit, vedi RFC 6177). I primi 10 bit dell'indirizzo IPv6 descrivono genericamente il tipo di computer e l'uso che questo fa della connessione (telefono VoIP, PDA, data server, telefonia mobile ecc.)
+
+Questa caratteristica svincola virtualmente il protocollo IPv6 dalla topologia della rete fisica, permettendo per esempio di avere lo stesso indirizzo IPv6 a prescindere dal particolare Internet service provider (ISP) che si sta usando (il cosiddetto IP personale) rendendo quindi l'indirizzo IPv6 simile ad un numero di telefono. Queste nuove caratteristiche complicano però il routing IPv6 che deve tenere conto di mappe di instradamento più complesse rispetto all'IPv4; proprio le nuove proprietà dell'indirizzamento rappresentano anche i potenziali talloni d'Achille del protocollo.
+
+
+##### Notazione per gli indirizzi IPv6
+
+Gli indirizzi IPv6 sono composti di 128 bit e sono rappresentati come 8 gruppi, separati da due punti, di 4 cifre esadecimali (ovvero 8 word di 16 bit ciascuna) in cui le lettere vengono scritte in forma minuscola. Ad esempio `2001:0db8:85a3:0000:1319:8a2e:0370:7344` rappresenta un indirizzo IPv6 valido.
+
+Se uno dei gruppi – come nell'esempio – è composto da una sequenza di quattro zeri può essere contratto ad un solo zero: `2001:0db8:85a3:0:1319:8a2e:0370:7344`.
+
+Inoltre, una sequenza di zeri contigui (e una soltanto) composta da 2 o più gruppi può essere contratta con la semplice sequenza `::` ovvero `2001:0db8:0000:0000:0000:8a2e:0370:7344` corrisponde a `2001:0db8:0:0:0:8a2e:0370:7344` o ancora più sinteticamente a `2001:0db8::8a2e:0370:7344`
+
+Seguendo le regole prima menzionate, se più sequenze simili si susseguono, è possibile ometterle tutte; di seguito vengono riportate varie rappresentazioni dello stesso indirizzo:
+
+```
+2001:0db8:0000:0000:0000:0000:1428:57ab
+2001:0db8:0000:0000::1428:57ab
+2001:0db8:0:0:0:0:1428:57ab
+2001:0db8:0::0:1428:57ab
+2001:0db8::1428:57ab
+```
+
+Tuttavia `2001:0db8::25de::cade` non è un indirizzo valido, poiché non è possibile definire quante sequenze siano presenti nelle due lacune.
+
+Inoltre possono essere omessi anche gli zeri iniziali di ogni gruppo: `2001:0db8:02de::0e13` corrisponde a `2001:db8:2de::e13`
+
+Gli ultimi 32 bit possono essere scritti in decimale (nella notazione dotted decimal):
+
+            ::ffff:192.168.89.9
+
+è uguale a
+
+            ::ffff:c0a8:5909
+
+ma diverso da:
+
+            ::192.168.89.9
+
+o da:
+
+            ::c0a8:5909
+
+rendendo così la sintassi IPv6 retrocompatibile con quella IPv4 con evidenti benefici.
+
+La forma di scrittura `::ffff:1.2.3.4` è chiamata IPv4-mapped address.
+
+Il formato `::1.2.3.4` è un IPv4-compatible address, tuttavia l'uso di questo formato è sconsigliato in quanto esso è stato deprecato
+
+Gli indirizzi IPv4 sono facilmente trasformabili in formato IPv6. Ad esempio, se l'indirizzo decimale IPv4 è `135.75.43.52` (in esadecimale, 874B2B34), può essere convertito in `0000:0000:0000:0000:0000:FFFF:874b:2b34` (oppure in notazione ibrida `0000:0000:0000:0000:FFFF:135.74.43.52`) o più brevemente `::ffff:874b:2b34`. Anche in questo caso è possibile l'uso della notazione ibrida (IPv4-compatible address), usando la forma `::ffff:135.75.43.52`.
+
+##### Indirizzi speciali
+
+È stato definito un certo numero di indirizzi con significati particolari. Di seguito sono riportati solo i più usati:
+
+- `::/128` - l'indirizzo composto da tutti zeri, detto unspecified address, viene utilizzato per indicare l'assenza di indirizzo e viene utilizzato esclusivamente a livello software, corrisponde a 0.0.0.0 in IPv4;
+- `::1/128` - l'indirizzo di loopback è un indirizzo associato al dispositivo di rete che ripete come eco tutti i pacchetti che gli sono indirizzati. Corrisponde a 127.0.0.1 in IPv4;
+- `::ffff:0:0/96` - l'indirizzo IPv4-mapped address è utilizzato nei dispositivi dual stack;
+- `fc00::/7` - il prefisso Unique Local Addresses (ULA) è valido esclusivamente all'interno dell'organizzazione. Il suo uso è analogo alle classi private della versione IPv4 (gli IP ULA non vengono ruotati su internet).
+- `ff00::/8` - il prefisso di multicast è utilizzato per gli indirizzi di multicast.
+
+
+##### Il pacchetto IPv6
+
+Per chi non si occupi direttamente della gestione dei pacchetti non è particolarmente rilevante conoscere in dettaglio la struttura del pacchetto IPv6 ma è bene almeno averne un’idea generale, per completezza è di seguito rappresentata e descritta.
+
+Il pacchetto IPv6, come ogni altro pacchetto di un altro strato protocollare, si compone di due parti principali: l'header e il payload. L'header è costituito dai primi 40 byte del pacchetto e contiene 8 campi, 5 in meno rispetto all'IPv4.
+
+<table class="sistema-bordi-multi-riga-colonna" style="margin: 0 auto; text-align: center;">
+    <tbody>
+        <tr align="center">
+            <th width="4%">+
+            </th>
+            <th colspan="4" width="8%">Bit 0–3
+            </th>
+            <th colspan="8" width="20%">4–11
+            </th>
+            <th colspan="4" width="8%">12–15
+            </th>
+            <th colspan="8" width="20%">16–23
+            </th>
+            <th colspan="8" width="20%">24–31
+            </th>
+        </tr>
+        <tr align="center">
+            <th>0-31
+            </th>
+            <td colspan="4">Version
+            </td>
+            <td colspan="8">Traffic Class
+            </td>
+            <td colspan="20">Flow Label
+            </td>
+        </tr>
+        <tr align="center">
+            <th>32-63
+            </th>
+            <td colspan="16">Payload Length
+            </td>
+            <td colspan="8">Next Header
+            </td>
+            <td colspan="8">Hop Limit
+            </td>
+        </tr>
+        <tr align="center">
+            <th>64<br />-<br />191
+            </th>
+            <td colspan="32">Source Address (128 bit)
+            </td>
+        </tr>
+        <tr align="center">
+            <th>192<br />-<br />319
+            </th>
+            <td colspan="32">Destination Address (128 bit)
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+- **Version** [4 bit] - Indica la versione del datagramma IP: per IPv6, ha valore 6 (da qui il nome IPv6).
+- **Traffic Class** [8 bit] - Si traduce come "classe di traffico", permette di gestire le code by priority assegnando ad ogni pacchetto una classe di priorità rispetto ad altri pacchetti provenienti dalla stessa sorgente. Viene usata nel controllo della congestione.
+- **Flow Label** [20 bit] - Usata dal mittente per etichettare una sequenza di pacchetti come se fossero nello stesso flusso. Supporta la gestione del QoS (Quality of Service), consentendo ad esempio di specificare quali etichette abbiano via libera rispetto ad altre. Al momento, questo campo è ancora in fase sperimentale.
+- **Payload Length** [16 bit] - È la dimensione del payload, ovvero il numero di byte di tutto ciò che viene dopo l'header. Da notare che eventuali estensioni dell'header (utili ad esempio per l'instradamento o per la frammentazione) sono considerate payload, e quindi conteggiate nella lunghezza del carico. Se il suo valore è 65.535 byte, si tratta di un pacchetto di dimensione massima, anche detto Jumbogram.
+- **Next Header** [8 bit] - Indica quale tipo di intestazione segue l'header di base IPv6. Molto simile al campo protocol dell'header IPv4, del quale usa gli stessi valori.
+- **Hop Limit** [8 bit] - È il limite di salti consentito, praticamente il Time to live. Il suo valore viene decrementato di 1 ogni volta che il pacchetto passa da un router: quando arriva a zero viene scartato.
+- **Source Address** [128 bit] - Indica l'indirizzo IP del mittente del pacchetto.
+- **Destination** Address [128 bit] - Indica l'indirizzo IP del destinatario del pacchetto.
+La parte successiva contiene il carico utile (payload in inglese) lungo come minimo 1280 byte o 1500 byte se la rete supporta un MTU variabile. Il carico utile può raggiungere i 65.535 byte in modalità standard o può essere di dimensioni maggiori in modalità "jumbo payload".
+
+
+#### Transizione all'IPv6
+
+Nel luglio 2007 è stato presentato un Internet Draft che presenta il piano di transizione per trasformare la rete Internet, principalmente basata su protocollo IPv4, in una nuova forma principalmente basata su IPv6.(http://www.ripe.net/info/faq/IPv6-deployment.html#3) Dal momento che è praticamente certo che molti vecchi calcolatori rimarranno online senza venire aggiornati, e macchine IPv6 ed IPv4 conviveranno sulla rete per decenni, il meccanismo adottato per gestire questo periodo transitorio è il cosiddetto dual stack: ogni sistema operativo che supporta IPv6 comunicherà con le macchine IPv4 grazie a un secondo stack di protocolli IPv4 che opera in parallelo a quello IPv6. Quando il computer si connetterà ad un'altra macchina in Internet, il DNS assieme all'indirizzo di rete comunicherà anche l'informazione riguardo quale stack usare (v4 o v6) e quali protocolli sono supportati dall'altra macchina.
+
+Vantaggi:
+
+- Transizione morbida: possibilità di liquidare gli investimenti già fatti in hardware/software senza dover sostenere nuove spese prima del necessario;
+- Piena compatibilità fra vecchie e nuove macchine e applicazioni;
+
+Svantaggi:
+
+- Necessità di supportare in maniera estesa l'IPv4 nella Internet e negli apparati connessi.
+- Essere raggiungibili dall'universo IPv4 durante la fase di transizione costringe a mantenere un indirizzo IPv4 o una qualche forma di NAT nei gateway router. Si aggiunge quindi un livello di complessità che rende la teorica disponibilità di indirizzi non immediata.
+- Problemi architetturali: in particolare non sarà possibile supportare pienamente il multihoming IPv6.
+
+Sino a quando la connettività non sarà largamente disponibile e supportata nativamente in IPv6 dall'infrastruttura di rete, è necessario utilizzare un meccanismo di trasporto dei pacchetti IPv6 su rete IPv4 tramite la tecnologia del tunneling. Questi tunnel funzionano tramite l'incapsulamento dei pacchetti IPv6 in pacchetti IPv4. Queste tecniche non sono qui oggetto di studio.
 
 ### Impostazioni di rete fondamentali
 
@@ -1105,9 +1387,11 @@ Chi naviga utilizzando un router, usando tali comandi visualizzerà le informazi
 
 Un router è un dispositivo di rete di livello 3 usato per collegare sottoreti diverse e che si occupa di instradare i pacchetti fra le diverse sottoreti. Il router spesso opera anche come "gestore" di una determinata sottorete fornendo una serie di servizi agli host collegati a quella sottorete.
 
-Mentre gli switch si occupano di collegare dispositivi all'interno di una stessa rete identificandoli per mezzo di indirizzi MAC, i router si occupano di collegare diverse reti utilizzando indirizzi di livello di rete che permettendo loro di effettuare il routing dei pacchetti tra reti differenti. Ogni protocollo di rete effettua queste operazioni in maniera differente. Nel capitolo riguardante il [protocollo IP](#) verrà trattato nel dettaglio questo argomento.
+Mentre gli switch si occupano di collegare dispositivi all'interno di una stessa rete identificandoli per mezzo di indirizzi MAC, i router si occupano di collegare diverse reti utilizzando indirizzi di livello di rete che permettendo loro di effettuare il routing dei pacchetti tra reti differenti. Ogni protocollo di rete effettua queste operazioni in maniera differente. Nel capitolo riguardante il [protocollo IP](#protocollo-ip) è stato trattato nel dettaglio questo argomento.
 
 Spesso le reti sono organizzate gerarchicamente tra loro e i router sono quindi solitamente costruiti per rispettare tale ordine. Spesso quindi i router presentano una porta per la connessione alla rete "esterna" e una o più porte fisiche per i collegamenti verso la rete "interna". A volte possiedono anche antenne per fornire connessione Wi-Fi alla rete interna.
+
+Per poter implementare il NAT i router devono essere in grado di operare parzialmente a livello di trasporto per poter analizzare le connessioni TCP e UDP.
 
 ## Link e riferimenti esterni
 

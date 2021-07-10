@@ -20,6 +20,15 @@ $border-color-2: $grey-dk-100;
 .mb-0 {
   margin-bottom: 0 !important;
 }
+.mb--1 {
+  margin-bottom: -0.75em;
+}
+.mb--2 {
+  margin-bottom: -1.5em;
+}
+.mb--3 {
+  margin-bottom: -2.25em;
+}
 .mt-0 {
   margin-top: 0 !important;
 }
@@ -128,6 +137,17 @@ li {
   }
 }
 
+code{
+  @extend .fs-3;
+}
+
+.text-delta {
+  @include fs-3;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
 // -------------------- Elementi specifici ----------------------------------------
 
 .formula {
@@ -222,11 +242,12 @@ li {
   }
 }
 
+
 // -------------------- Thumbnail -------------------------------------------------
 
 .thumbnail {
   border: $border $border-color;
-  border-radius: 4px;
+  border-radius: $border-radius;
   padding: 5px;
   //width: 275px;
   // width: fit-content;
@@ -242,6 +263,12 @@ li {
     //   display: inline-block;
     //   text-align: left;
     // }
+  }
+  &--w100{
+    @extend .thumbnail;
+    width: 100%;
+    margin: auto;
+    text-align: center;
   }
   p {
     // margin-bottom: 0px;
@@ -273,6 +300,18 @@ li {
     @extend .thumbnail;
     width: 25%;
   }
+}
+
+.tright{
+  float: right;
+  clear: right;
+  @extend .ml-4;
+}
+
+.tleft {
+  float: left;
+  clear: left;
+  @extend .mr-3;
 }
 
 // -------------------- Modals -------------------------------------------------------
@@ -563,6 +602,20 @@ table.invisible td {
   }
 }
 
+.sistema-bordi-multi-riga-colonna{
+  td,
+  th {
+    border-bottom: 1px solid rgba(238, 235, 238, 0.5);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(238, 235, 238, 0.5);
+    border-left: 1px solid #eeebee;
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: rgb(238, 235, 238);
+  }
+}
+
 .tab {
   // Padding spacer utilities
 
@@ -747,6 +800,10 @@ a {
   clear: right;
 }
 
+.clear-left{
+  clear: left;
+}
+
 .clear-both {
   clear: both;
 }
@@ -778,6 +835,8 @@ a {
 .overline {
   text-decoration: overline;
 }
+
+
 // -------------------- Fine Helpers -------------------------------------------------
 
 // -------------------- Impostazioni di stampa ---------------------------------------
