@@ -621,19 +621,9 @@ Vediamo come veniva usata nella pratica una macchina Enigma.
 Innanzitutto bisogna specificare che gli scambiatori dovevano essere posizionati con un certo assetto prima di iniziare la cifratura di un messaggio e la loro posizione costituiva una vera e propria chiave. L’insieme di tali chiavi giornaliere era contenuta in un cifrario (Figura 9) che doveva essere distribuito mensilmente a tutti gli operatori e che doveva essere, ovviamente, molto ben custodito (torna, anche in questo caso, il **problema della distribuzione delle chiavi**). Gli assetti giornalieri del cifrario venivano usati per tutti i messaggi di una giornata. Per cifrare un messaggio un operatore Enigma posizionava gli scambiatori secondo la chiave giornaliera, digitava il messaggio sulla tastiera della macchina e spediva via radio il risultato al destinatario. Quest’ultimo digitava il messaggio cifrato sulla tastiera della sua macchina Enigma, sulla quale gli scambiatori erano sistemati secondo la stessa chiave giornaliera usata da chi aveva crittato il messaggio, e otteneva il messaggio in chiaro. La semplicità con cui questa operazione era realizzata era dovuta proprio all’introduzione del riflessore.
 
 <!-- thumbnail -->
-<div class="thumbnail--centrato mt-4 mb-4">
+<div class="thumbnail--w100 mt-4 mb-4">
   <img src="{{site.baseurl}}/assets/images/reti/crittografia/esempio-chiavi-enigma.jpg" class="modal__opener" aprire="#img-esempio-chiavi-enigma">
   <p>Parte di un cifrario tedesco per macchine Enigma.</p>
-</div>
-<!-- modal -->
-<div id="img-esempio-chiavi-enigma" class="modal">
-  <div class="modal__content">
-    <span class="modal__closer modal__closer--topright" chiudere="#img-esempio-chiavi-enigma">&times;</span>
-    <div class="modal__content__img-container"> 
-      <img src="{{site.baseurl}}/assets/images/reti/crittografia/esempio-chiavi-enigma.jpg">
-    </div>
-    <p>Parte di un cifrario tedesco per macchine Enigma.</p>
-  </div>
 </div>
 
 I passaggi per l’utilizzo di Enigma si possono riassumere con i seguenti punti:

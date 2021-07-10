@@ -208,9 +208,170 @@ Di seguito è riportata una lista che associa ad ogni livello della pila TCP/IP 
 
 Nelle pagine successive sono descritte le funzionalità offerte da ogni livello mantenendo la suddivisione in sette livelli del modello ISO/OSI. Per i livelli inferiori saranno anche descritti i principali dispositivi di rete che operano a tale livello. É importante sottolineare il fatto che un dispositivo di livello N opera su tutti i livelli fino al livello N poichè ogni protocollo per funzionare necessita delle funzionalità offerte dai livelli inferiori come visto nella sezione dedicata all'[incapsulamento](#incapsulamento).
 
+## Dispositivi e livelli
+
+Esistono molti tipi di dispositivi che operano a diversi livelli della pila ISO/OSI fornendo quindi ognuno diverse funzionalità. Di seguito sono riportati e brevemente descritti i dispositivi più comuni.
+
+### Livello 1 - Fisico
+
+<!-- thumbnail -->
+<div class="thumbnail tright mb-2">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/Schema_ripetitore.jpg" class="modal__opener" aprire="#img-schema_ripetitore">
+  <p>Schema di comunicazione tra host per mezzo di un ripetitore</p>
+</div>
+<!-- modal -->
+<div id="img-schema_ripetitore" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-schema_ripetitore">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/Schema_ripetitore.jpg">
+    </div>
+    <p>Schema di comunicazione tra host per mezzo di un ripetitore</p>
+  </div>
+</div>
+
+<!-- thumbnail -->
+<div class="thumbnail tright  mb-2">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ethernet_hub.jpg" class="modal__opener" aprire="#img-ethernet_hub">
+  <p>Foto di un hub</p>
+</div>
+<!-- modal -->
+<div id="img-ethernet_hub" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-ethernet_hub">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/ethernet_hub.jpg">
+    </div>
+    <p>Foto di un hub. Il basso numero di porte è dovuto all'incapacità di risolvere il problema delle collisioni</p>
+  </div>
+</div>
+
+- Modem
+- Repeater
+- Hub
+
+Sono dispositivi attivi, componenti di reti telematiche: il repeater connette fra loro due reti, mentre l'hub consente connessioni di più host.
+
+L'appartenenza al livello 1 del modello ISO/OSI implica che il traffico si considera per bit, cioè per semplice sequenza di stati logici uno e zero, non raggruppati in nessun modo. Operando a livello 1, inoltre, repeater e hub non gestiscono l'arbitraggio dell'accesso al mezzo trasmissivo, e lasciano che gli host collegati lo facciano tramite l'algoritmo CSMA/CD. Quindi la connessione di un host a un hub non può che essere half-duplex. Operano nell'ambito del medesimo dominio di collisione, per cui il traffico di qualsiasi nodo, le collisioni ed i frame ritrasmessi vengono replicati su tutte le porte dell'hub, sottraendo quindi banda passante in egual misura ad ogni utenza della rete.
+
+L'hub è un componente ormai obsoleto e viene sostituito dallo switch.
+
+### Livello 2 - Collegamento
+
+<!-- thumbnail -->
+<div class="thumbnail tright  mb-2">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/schema_bridge.jpg" class="modal__opener" aprire="#img-schema_bridge">
+  <p>Schema di comunicazione tra host per mezzo di un bridge</p>
+</div>
+<!-- modal -->
+<div id="img-schema_bridge" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-schema_bridge">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/schema_bridge.jpg">
+    </div>
+    <p>Schema di comunicazione tra host per mezzo di un bridge</p>
+  </div>
+</div>
+
+- Bridge
+- Switch
+
+I due dispositivi suddetti sono molto simili e operano al livello 2 del modello OSI. Sono dispositivi "intelligenti" che operano mediante "auto-apprendimento" e sono, quindi, plug-and-play e non si limitano a replicare il segnale, ma agiscono sui frame ricevuti instradandoli verso la destinazione esatta. Mediante queste loro capacità essi tengono i domini di collisione separati, col vantaggio di occupare banda passante solo sulle porte effettivamente interessate dal traffico, lasciando libere le altre. Operano anche sulla gestione dei frame per cui se trovano la rete occupata utilizzano un buffer per immagazzinare i frame attendendo che la rete si liberi. Lo switch, rispetto al bridge, ha interfacce multiple per cui consente il collegamento diretto di più host e fornisce prestazioni migliori grazie ad algoritmi di gestione dei frame più sofisticati.
+
+<!-- thumbnail -->
+<div class="thumbnail tright  mb-2">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/switch.jpg" class="modal__opener" aprire="#img-switch">
+  <p>Foto di unp switch</p>
+</div>
+<!-- modal -->
+<div id="img-switch" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-switch">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/switch.jpg">
+    </div>
+    <p>Foto di uno switch. L'alto numero di porte (24) è permesso dalla risoluzione del problema delle collisioni</p>
+  </div>
+</div>
+
+Operando a livello 2 del modello ISO/OSI, lo switch è in grado di identificare l'Indirizzo MAC del mittente e del destinatario del frame; lo switch dispone di una memoria volatile (MAC table), che viene riempita con le associazioni fra le porte ed i MAC osservati su di esse, in modo da poter tracciare istantaneamente le connessioni fra porte in funzione dei frame stessi. L'isolamento fra i domini di collisione permette di non impiegare il CSMA/CD, adottando la modalità full-duplex sulle porte e raddoppiando la banda passante aggregata delle stesse; ciò inoltre evita la propagazione di collisioni e di frame non inerenti alla specifica porta.
+
+L'operatività a livello di frame, inoltre, permette di intervenire sulla distribuzione degli stessi; gli switch di tipo managed (gestiti) possono essere configurati in modo da supportare (ad esempio) VLAN port-based, aggregazione (802.3ad/LACP), controllo d'accesso basato sugli indirizzi MAC o su autenticazione (802.1x), STP (802.1D), RSTP (802.1w), QoS MAC-based (802.1p). Caratteristica importante di uno switch è la sua banda passante aggregata, indicata come la capacità effettiva del suo hardware di gestire un determinato traffico e si esprime in bps (bit per secondo); altra caratteristica importante è il forward rate, cioè la capacità di instradare frames al netto del tempo di processo, e si esprime in pps (pacchetti per secondo).
+
+è molto comune imbattersi in dispositivi che vengono chiamati switch ma che in realtà offrono funzionalità di livello più elevato e che sono quindi di fatto dei router.
+
+### Livello 3 - Rete
+
+<!-- thumbnail -->
+<div class="thumbnail tright mb-2">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/schema_router.jpg" class="modal__opener" aprire="#img-schema_router">
+  <p>Schema di comunicazione tra host per mezzo di un router</p>
+</div>
+<!-- modal -->
+<div id="img-schema_router" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-schema_router">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/schema_router.jpg">
+    </div>
+    <p>Schema di comunicazione tra host per mezzo di un router</p>
+  </div>
+</div>
+
+<!-- thumbnail -->
+<div class="thumbnail tright mb-2">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/gateway_firewall.svg" class="modal__opener" aprire="#img-gateway_firewall">
+  <p>Schema di un firewall</p>
+</div>
+<!-- modal -->
+<div id="img-gateway_firewall" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-gateway_firewall">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/gateway_firewall.svg">
+    </div>
+    <p>Schema di un firewall</p>
+  </div>
+</div>
+
+<!-- thumbnail -->
+<div class="thumbnail tright mb-2">
+  <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/proxy_concept_it.svg" class="modal__opener" aprire="#img-proxy_concept_it">
+  <p>Schema di funzionamento di un proxy</p>
+</div>
+<!-- modal -->
+<div id="img-proxy_concept_it" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-proxy_concept_it">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/proxy_concept_it.svg">
+    </div>
+    <p>Schema di funzionamento di un proxy</p>
+  </div>
+</div>
+
+- Router
+- Firewall (lavora anche a livello di trasporto e di applicazione)
+
+Il router opera al livello 3 ed oltre della gerarchia di protocolli ISO/OSI, gestendo le informazioni a livello di packet, con capacità di identificare mittente e destinatario logici (es. indirizzo IP). La capacità di operare a livello di protocollo, permette di definire configurazioni selettive come routing (instradamento), lista di controllo degli accessi basate su IP, VLAN basate su protocollo e gestione della qualità del servizio (prioritizzazione dei pacchetti).
+
+Il router, per la realtà complessa nella quale può trovarsi ad operare, può impiegare protocolli di gestione del traffico di tipo evoluto, come algoritmi di routing (es. RIP, IGRP, EIGRP, OSPF, IS-IS), algoritmi di ricerca del percorso migliore e di risoluzione di errori di percorso.
+
+### Livello 4 - Trasporto
+
+- Firewall (lavora anche a livello di rete e di applicazione)
+
+### Livello applicativo
+
+- Gateway
+- Firewall (lavora anche a livello di rete e di trasporto)
+- Proxy
 
 ## Link e riferimenti esterni
+{: .clear-both}
 
 - [ISO/OSI su Wikipedia](https://it.wikipedia.org/wiki/Modello_OSI)
 - [Incapsulamento su Wikipedia](https://it.wikipedia.org/wiki/Imbustamento)
 - [TCP/IP su Wikipedia](https://it.wikipedia.org/wiki/Suite_di_protocolli_Internet)
+- [Dispositivi di rete su Wikipedia](https://it.wikipedia.org/wiki/Dispositivo_di_rete)

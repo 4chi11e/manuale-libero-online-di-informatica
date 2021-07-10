@@ -1,0 +1,277 @@
+---
+layout: default
+title: Esercizi Subnetting
+nav_order: 1
+parent: Livello 3 - Rete
+grand_parent: ISO/OSI
+grand_grand_parent: Reti
+has_children: False
+---
+
+<h1>Esercizi sul Subnetting</h1>
+
+<h2>Esercizio 1</h2>
+
+<p>Dato l'indirizzo IP 200.110.12.0 con maschera di sottorete 255.255.255.224, specificare quante sottoreti e quanti
+    host per sottorete si possono ottenere.
+</p>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es01-semplice">Visualizza la soluzione</p>
+    <div class="soluzione soluzione-semplice" id="es01-semplice">
+        <p>[ 8 subnet | 30 host ciascuna ]</p>
+    </div>
+</div>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es01-completa">Visualizza la soluzione completa di procedimenti</p>
+
+    <div class="soluzione soluzione-completa" id="es01-completa">
+        <p>
+            L'indirizzo inizia con un numero maggiore di 192, si tratta di una classe C.<br>
+            La suddivisione fra subnet e host viene fatta sul 4° ottetto.
+        </p>
+        <p>Osservando la subnet mask abbiamo</p>
+        <p>255.255.255.224 = 11111111.11111111.11111111.11100000</p>
+        <p>Quindi gli host appartenenti alla rete avranno indirizzi del tipo</p>
+        <p>200.110.12.ssshhhhh</p>
+        <p>
+            ci saranno 3 bit dedicati alle subnet e 5 tiservati agli host per un totale di:<br>
+            2<sup>3</sup> = 8 subnet da<br>
+            2<sup>5</sup> - 2 = 30 host ciascuna
+        </p>
+
+    </div>
+</div>
+
+
+
+<h2>Esercizio 2</h2>
+
+<p>Dato l'indirizzo IP 200.110.12.0 partizionare la rete da esso individuata in 12 sottoreti specificando il numero di
+    host
+    che appartengono a ciascuna sottorete e indicare l'indirizzo ip del terzo host appartenente alla settima sottorete,
+</p>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es02-semplice">Visualizza la soluzione</p>
+    <div class="soluzione soluzione-semplice" id="es02-semplice">
+        <p>[ 200.110.12.99 ]</p>
+    </div>
+</div>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es02-completa">Visualizza la soluzione completa di procedimenti</p>
+
+    <div class="soluzione soluzione-completa" id="es02-completa">
+        <p>
+            <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/esercizi-subnetting/2.png">
+        </p>
+    </div>
+</div>
+
+
+
+<h2>Esercizio 3</h2>
+
+<p>Determinare l'indirizzo di rete, la lunghezza del suo prefisso e la maschera di sottorete, necessari per individuare
+    la subnet che contiene il seguente intervallo di indirizzi IP 200.110.12.32 - 200.110.12.63.
+</p>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es03-semplice">Visualizza la soluzione</p>
+    <div class="soluzione soluzione-semplice" id="es03-semplice">
+        <p>[ 200.110.12.0/26 ]</p>
+    </div>
+</div>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es03-completa">Visualizza la soluzione completa di procedimenti</p>
+
+    <div class="soluzione soluzione-completa" id="es03-completa">
+        <p>
+            <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/esercizi-subnetting/3.png">
+        </p>
+    </div>
+</div>
+
+
+
+<h2>Esercizio 4</h2>
+
+<p>Determinare l'indirizzo di rete, la maschera di sottorete e l'indirizzo di broadcast del seguente blocco di indirizzi
+    IP
+    130.1.10.32/20.
+</p>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es04-semplice">Visualizza la soluzione</p>
+    <div class="soluzione soluzione-semplice" id="es04-semplice">
+        <p>[ 130.1.0.0 | 255.255.240.0 | 130.1.15.255 ]</p>
+    </div>
+</div>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es04-completa">Visualizza la soluzione completa di procedimenti</p>
+
+    <div class="soluzione soluzione-completa" id="es04-completa">
+        <p>
+            <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/esercizi-subnetting/4.png">
+        </p>
+    </div>
+</div>
+
+
+
+<h2>Esercizio 5</h2>
+
+<p>192.168.23.87/26 e 192.168.23.67/26 appartengono alla stessa rete?
+</p>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es05-semplice">Visualizza la soluzione</p>
+    <div class="soluzione soluzione-semplice" id="es05-semplice">
+        <p>Sì, 192.158.23.64/26</p>
+    </div>
+</div>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es05-completa">Visualizza la soluzione completa di procedimenti</p>
+
+    <div class="soluzione soluzione-completa" id="es05-completa">
+        <p>
+            <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/esercizi-subnetting/5.png">
+        </p>
+    </div>
+</div>
+
+
+
+<h2>Esercizio 6</h2>
+
+<p>Dopo aver verificato che i due indirizzi 130.37.23.100 e 130.37.22.150 subnet mask 255.255.254.0, sono sulla stessa
+    subnet; determina gli host con indirizzo di valore maggiore e quello con valore minore della subnet e l'indirizzo di
+    broadcast della stessa.
+</p>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es06-semplice">Visualizza la soluzione</p>
+    <div class="soluzione soluzione-semplice" id="es06-semplice">
+        <p>[ 130.37.23.254 | 130.37.22.1 | 130.37.23.255 ]</p>
+    </div>
+</div>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es06-completa">Visualizza la soluzione completa di procedimenti</p>
+
+    <div class="soluzione soluzione-completa" id="es06-completa">
+        <p>
+            <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/esercizi-subnetting/6.png">
+        </p>
+    </div>
+</div>
+
+
+
+<h2>Esercizio 7</h2>
+
+<p>Dato l'indirizzo IP 131.175.21.1/22 ; determina l'indirizzo di rete, la maschera di sottorete , l'indirizzo di
+    broadcast, il numero di subnet ed il numero di host per ciascuna subnet.
+</p>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es07-semplice">Visualizza la soluzione</p>
+    <div class="soluzione soluzione-semplice" id="es07-semplice">
+        <p>[ 131.175.20.0 | 255.255.252.0 | 131.175.23.255 ]</p>
+    </div>
+</div>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es07-completa">Visualizza la soluzione completa di procedimenti</p>
+
+    <div class="soluzione soluzione-completa" id="es07-completa">
+        <p>
+            <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/esercizi-subnetting/7.png">
+        </p>
+    </div>
+</div>
+
+
+
+<h2>Esercizio 8</h2>
+
+<p>Indicare l'indirizzo del primo e dell'ultimo host della 30a sottorete dell'indirizzo
+    150.12.0.0/22 calcola anche l'indirizzo del primo e dell'ultimo host della 50a subnet.
+</p>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es08-semplice">Visualizza la soluzione</p>
+    <div class="soluzione soluzione-semplice" id="es08-semplice">
+        <p>[ 1°host della 30a sub = 150.12.116.1 | ultimo h della 30a sub = 150.12.119.25 <br>&nbsp
+            1°host della 50a sub = 150.12.200.1 | ultimo h della 50a sub = 150.12.203.254 ]</p>
+    </div>
+</div>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es08-completa">Visualizza la soluzione completa di procedimenti</p>
+
+    <div class="soluzione soluzione-completa" id="es08-completa">
+        <p>
+            <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/esercizi-subnetting/8.png">
+        </p>
+    </div>
+</div>
+
+
+
+<h2>Esercizio 9</h2>
+
+<p>Indicare l'indirizzo del 20° host della 10a subnet relativa all'indirizzo di rete 180.180.0.0 con subnet mask
+    255.255.240.0.
+</p>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es09-semplice">Visualizza la soluzione</p>
+    <div class="soluzione soluzione-semplice" id="es09-semplice">
+        <p>[ 180.180.144.20 ]</p>
+    </div>
+</div>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es09-completa">Visualizza la soluzione completa di procedimenti</p>
+
+    <div class="soluzione soluzione-completa" id="es09-completa">
+        <p>
+            <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/esercizi-subnetting/9.png">
+        </p>
+    </div>
+</div>
+
+
+
+<h2>Esercizio 10</h2>
+
+<p>Viene assegnato un indirizzo IP 199.10.10.0 (classe C), per eseguire il cablaggio di una rete collocata in un
+    edificio
+    scolastico come indicato in figura.
+</p>
+<p class="ta-c">
+    <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/esercizi-subnetting/10-img-testo.png">
+</p>
+<p>Volendo realizzare una sottorete per ogni aula elenca l'indirizzo IP per ogni host della rete rappresentata. Si nota
+    che è necessario avere almeno 8 host per ogni sottorete.
+</p>
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#es10-completa">Visualizza la soluzione completa di procedimenti</p>
+
+    <div class="soluzione soluzione-completa" id="es10-completa">
+        <p>
+            <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/esercizi-subnetting/10.png">
+        </p>
+    </div>
+</div>
+
+
+
+<script src="{{site.baseurl}}/assets/js/esercizi-subnetting.js"></script>
