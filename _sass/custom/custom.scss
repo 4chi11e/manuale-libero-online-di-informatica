@@ -842,7 +842,8 @@ a {
 // -------------------- Impostazioni di stampa ---------------------------------------
 @media print {
   .side-bar,
-  .page-header {
+  .page-header,
+  #tornasu {
     display: none;
   }
   .main-content {
