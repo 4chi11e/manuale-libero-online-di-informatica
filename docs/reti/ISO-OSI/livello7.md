@@ -11,8 +11,6 @@ has_children: False
 # Livello 7: applicazione (Application Layer)
 {: .no_toc}
 
-_Obiettivo: permettere alle applicazioni di comunicare con applicazioni in esecuzione su un altro host._
-
 Il livello 7 prende il nome di "applicazione" poichè fornisce alle applicazioni i protocolli necessari alla comunicazione con applicazioni che sono eseguite su altri host. Non bisogna quindi confondere applicazioni e protocolli utilizzati. 
 
 ## Indice
@@ -20,6 +18,8 @@ Il livello 7 prende il nome di "applicazione" poichè fornisce alle applicazioni
 
 - TOC
 {:toc}
+
+_Obiettivo: permettere alle applicazioni di comunicare con applicazioni in esecuzione su un altro host._
 
 ## Protocolli
 
