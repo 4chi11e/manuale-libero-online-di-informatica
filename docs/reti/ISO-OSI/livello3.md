@@ -1131,7 +1131,7 @@ IPv6 è la versione dell'Internet Protocol designata come successore dell'IPv4. 
 
 La sua caratteristica più importante è il più ampio spazio di indirizzamento:
 
-IPv6 riserva 128 bit per gli indirizzi IP e gestisce 2128 (circa 3,4 × 1038) indirizzi;
+IPv6 riserva 128 bit per gli indirizzi IP e gestisce 2<sup>128</sup> (circa 3,4 × 10<sup>38</sup>) indirizzi;
 IPv4 riserva 32 bit per l'indirizzamento e gestisce 232 (circa 4,3 × 109) indirizzi.
 Quantificando con un esempio, per ogni metro quadrato di superficie terrestre, ci sono 655.570.793.348.866.943.898.599 indirizzi IPv6 unici (cioè 655.571 miliardi di miliardi o 655 triliardi), ma solo 0,000007 IPv4 (cioè solo 7 IPv4 ogni milione di metri quadrati). Per dare un'idea delle grandezze in uso, se si paragona l'indirizzo singolo ad un Quark (grandezza nell'ordine di 1 attometro), con IPv4 si raggiungerebbe il diametro dell'elica del DNA (di pochi nanometri), mentre con IPv6 si raggiungerebbe il centro della Via lattea dalla Terra (tre decine di millenni-luce). L'adozione su vasta scala di IPv6 e quindi del formato per gli indirizzi IP risolverebbe indefinitamente il problema dell'esaurimento degli indirizzi IPv4.
 
@@ -1146,7 +1146,7 @@ L'ICANN rese disponibile il protocollo IPv6 sui root nameserver dal 20 luglio 20
 
 Il cambiamento più rilevante nel passaggio dall'IPv4 all'IPv6 è la lunghezza dell'indirizzo di rete. L'indirizzo IPv6, come definito nel RFC 2373 e nel RFC 2374 è lungo 128 bit, cioè 32 cifre esadecimali, che sono normalmente utilizzate nella scrittura dell'indirizzo come descritto più avanti.
 
-Questo cambiamento porta il numero di indirizzi esprimibili dall'IPv6 a 2<sup>128</sup> = 16<sup>32</sup> ≈ 3,4 × 1038.
+Questo cambiamento porta il numero di indirizzi esprimibili dall'IPv6 a 2<sup>128</sup> = 16<sup>32</sup> ≈ 3,4 × 10<sup>38</sup>.
 
 Una delle critiche allo spazio di indirizzamento di 128 bit è che potrebbe essere ampiamente sovradimensionato. Bisogna considerare che la ragione di un indirizzamento così ampio non è da associare alla volontà di assicurare un numero sufficiente di indirizzi, quanto al tentativo di porre rimedio alla frammentazione dello spazio di indirizzamento IPv4, conseguenza, tra le altre cose, della limitazione dello spazio di indirizzamento e della poca possibilità di prevedere a medio-lungo termine la richiesta di indirizzi. È infatti possibile che un singolo operatore di telecomunicazione abbia assegnati numerosi blocchi di indirizzi non contigui.
 
