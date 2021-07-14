@@ -45,7 +45,7 @@ I numeri di porta sono raggruppati in tre diverse categorie:
 A questo [link](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers) è possibile trovare l'elenco di tutte le associazioni tra porte e servizi registrate.
 
 ## Le socket
-Definito il significato di porta è possibile quindi comprendere come una connessione tra due host a livello di trasporto sia definita da una coppia di valori: un indirizzo IP che identifica l'host, e un numero di porta che indica la connessione logica a quel determinato host. Quando un'applicazione vuole instaurare una connessione con un'applicazione di un altro host collegato in rete, crea una socket che è la struttura dati che identifica una specifica connessione. 
+Definito il significato di porta è possibile quindi comprendere come una connessione tra due host a livello di trasporto sia definita da una coppia di valori: un indirizzo IP che identifica l'host, e un numero di porta che indica la connessione logica a quel determinato host. Quando un'applicazione vuole instaurare una connessione con un'applicazione di un altro host collegato in rete, crea una socket che è la struttura dati che, contenendo IP e porta, identifica una specifica connessione. 
 
 ## Protocolli di livello 4: TCP e UDP
 Nello stack protocollare Internet, i protocolli di trasporto più utilizzati sono:
