@@ -297,11 +297,120 @@ Sono state sviluppate diverse tecniche per regolare l'utilizzo del canale di com
 
 ### Tecniche di commutazione
 
+<!-- thumbnail -->
+<div class="thumbnail tright mb-2">
+  <img src="{{site.baseurl}}/assets/images/reti/commutazione.png" class="modal__opener" aprire="#img-commutazione">
+  <p>Schema di un nodo con diversi canali di ingresso e uscita. Il nodo deve effettuare la commutazione (switching) inoltrando il flusso di dati proveniente da un canale di ingresso ad un canale di uscita</p>
+</div>
+<!-- modal -->
+<div id="img-commutazione" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-commutazione">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/commutazione.png">
+    </div>
+    <p>Schema di un nodo con diversi canali di ingresso e uscita. Il nodo deve effettuare la commutazione (switching) inoltrando il flusso di dati proveniente da un canale di ingresso ad un canale di uscita</p>
+  </div>
+</div>
+
+In una rete normalmente è necessario gestire comunicazioni che avvengono tra host che non sono direttamente collegati fra loro, in questo caso le informazioni devono transitare da nodi intermedi tra sorgente e destinatario. Ogni nodo ha dei canali da cui possono arrivare informazioni e deve stabilire in quale (o quali) altro canale inoltrare la comunicazione, questo processo di scelta e inoltro si chiama **commutazione** o **switching**.
+
+Quando sarà trattato il livello 3 (rete) della pila ISO-OSI sarà evidente come la commutazione riguardi proprio il livello di rete e in particolare sia effettuata dai router.
+
+Esistono diverse modalità di commutazione e ognuna caratterizza fortemente la rete che la utilizza tanto da rendere queste reti molto diverse l'una dall'altra. Le modalità di commutazione identificano tre principali tipologie di rete:
+
+- le reti commutazione di circuito (circuit switching)
+- le reti a commutazione di messaggio (message switching) (poco rilevanti non le tratteremo)
+- le reti a commutazione di pacchetto (packet switching)
+
+
+
 #### Commutazione di circuito
 
-#### Commutazione di messaggio
+<!-- thumbnail -->
+<div class="thumbnail tright mb-2">
+  <img src="{{site.baseurl}}/assets/images/reti/commutazione_di_circuito.png" class="modal__opener" aprire="#img-commutazione_di_circuito">
+  <p>Schema di una rete a commutazione di circuito</p>
+</div>
+<!-- modal -->
+<div id="img-commutazione_di_circuito" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-commutazione_di_circuito">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/commutazione_di_circuito.png">
+    </div>
+    <p>Schema di una rete a commutazione di circuito</p>
+  </div>
+</div>
+
+Le reti a commutazione di circuito sono caratteristiche delle **reti analogiche** che sono le reti più vecchie. Nelle reti analogiche c'è la necessità di creare un canale fisico dedicato o circuito all'intera comunicazione poichè esso deve essere attraversato da un segnale analogico continuo. I nodi interni della rete devono quindi formare un canale all'inizio della comunicazione e lo devono mantenere fino alla fine della comunicazione. Per capire il funzionamento di questa rete basta pensare a come funzionavano le vecchie reti telefoniche: quando veniva fatta una telefonata, il centralino doveva creare un canale fisico dal dispositivo chiamante fino al dispositivo ricevente, originariamente queste operazioni venivano fatte addirittura a mano e successivamente da dispositivi elettromeccanici. Solo alla fine della chiamata i nodi interni potevano interrompere il circuito e formarne di nuovi per altre comunicazioni.
+
+Questo tipo di rete presenta comunicazioni chiaramente [connection-oriented](#modalità-di-comunicazione)
+
 
 #### Commutazione di pacchetto
+
+<!-- thumbnail -->
+<div class="thumbnail tright mb-2">
+  <img src="{{site.baseurl}}/assets/images/reti/commutazione_di_pacchetto_datagram.png" class="modal__opener" aprire="#img-commutazione_di_pacchetto_datagram">
+  <p>Schema di una rete a commutazione di pacchetto di tipo datagram. I pacchetti numerati in ordine di trasmissione possono percorrere percorsi diversi.</p>
+</div>
+<!-- modal -->
+<div id="img-commutazione_di_pacchetto_datagram" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-commutazione_di_pacchetto_datagram">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/commutazione_di_pacchetto_datagram.png">
+    </div>
+        <p>Schema di una rete a commutazione di pacchetto di tipo datagram. I pacchetti numerati in ordine di trasmissione possono percorrere percorsi diversi.</p>
+  </div>
+</div>
+
+Se nelle comunicazioni analogiche c'è la necessità di creare un canale dedicato, con le **comunicazioni digitali** non c'è più questa necessità. Nelle comunicazioni digitali la comunicazione consiste in un flusso di bit che vengono raggruppati in pacchetti. Non è assolutamente necessario che i pacchetti percorrano i canali di comunicazione tutti insieme ma possono percorrere percorsi diversi nella rete anche mischiandosi a pacchetti riguardanti altre comunicazioni, l'importante è che il destinatario li riceva e sia in grado di ricostruire il flusso di bit originale. Tutto questo comporta importanti vantaggi rispetto ad una rete a commutazione di circuito:
+  
+- non è necessario dedicare un canale esclusivamente ad una comunicazione, su di esso possono transitarne quante se ne vogliono, purchè il canale abbia sifficiente capacità trasmissiva;
+- i flussi di pacchetti possono eseguire percorsi differenti distribuendo il traffico da nodi e canali più trafficati ad altri più liberi
+
+Risulta chiaro quindi come le reti a commutazione di pacchetto siano molto più efficienti delle reti a commutazione di circuito nel gestire le risorse di rete.
+
+Le reti a commutazione di circuito, non riservando risorse dedicate per la comunicazione presentano uno svantaggio piuttosto rilevante: non offrono garanzie sulla banda disponibile, aspetto molto rilevante in comunicazioni real-time. Questo limite è parzialmente superato consentendo di aggiungere livelli di priorità ai pacchetti in transito.
+
+Le reti a commutazione di pacchetto si suddividono in due categorie:
+
+<!-- thumbnail -->
+<div class="thumbnail tright mb-2">
+  <img src="{{site.baseurl}}/assets/images/reti/commutazione_di_pacchetto_datagram.png" class="modal__opener" aprire="#img-commutazione_di_pacchetto_datagram">
+    <p>Schema di una rete a commutazione di pacchetto di tipo datagram. I pacchetti numerati in ordine di trasmissione possono percorrere percorsi diversi.</p>
+</div>
+<!-- modal -->
+<div id="img-commutazione_di_pacchetto_datagram" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-commutazione_di_pacchetto_datagram">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/commutazione_di_pacchetto_datagram.png">
+    </div>
+    <p>Schema di una rete a commutazione di pacchetto di tipo datagram. I pacchetti numerati in ordine di trasmissione possono percorrere percorsi diversi.</p>
+  </div>
+</div>
+
+<!-- thumbnail -->
+<div class="thumbnail tright mb-2">
+  <img src="{{site.baseurl}}/assets/images/reti/commutazione_di_pacchetto_canale_virtuale.png" class="modal__opener" aprire="#img-commutazione_di_pacchetto_canale_virtuale">
+    <p>Schema di una rete a commutazione di pacchetto a canali virtuali. I pacchetti numerati in ordine di trasmissione percorrono solo il circuito virtuale.</p>
+</div>
+<!-- modal -->
+<div id="img-commutazione_di_pacchetto_canale_virtuale" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-commutazione_di_pacchetto_canale_virtuale">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/reti/commutazione_di_pacchetto_canale_virtuale.png">
+    </div>
+    <p>Schema di una rete a commutazione di pacchetto a canali virtuali. I pacchetti numerati in ordine di trasmissione percorrono solo il circuito virtuale.</p>
+  </div>
+</div>
+
+- di tipo **datagram**: i pacchetti possono percorrere percorsi diversi;
+- a **canali virtuali**: i pacchetti appartenenti ad una sessione di comunicazione seguono tutti lo stesso percorso andando a formare un circuito virtuale (e non fisico come nel circuit switching) tra host comunicanti. Questa soluzione permette di risolvere il problema delle comunicazioni real-time con un opportuna configurazione dei nodi intermedi che possono dedicare una determinata quantità di banda al circuito virtuale. In questo caso come nella commutazione di circuito, è necessario inataurare la connessione tra i due estremi del circuito virtuale.
 
 
 ## Architettura della rete internet
