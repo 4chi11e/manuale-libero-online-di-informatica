@@ -10,6 +10,12 @@ has_children: False
 # Livello 6: presentazione (Presentation Layer)
 {: .no_toc}
 
+## Indice
+{: .no_toc .text-delta }
+
+- TOC
+{:toc}
+
 _Obiettivo: trasformare i dati forniti dalle applicazioni in un formato standardizzato e offrire servizi di comunicazione come la [crittografia](# "Crittografia"), la [compressione](https://it.wikipedia.org/wiki/Compressione_dati "Compressione dati") e la riformattazione dei dati._
 
 In breve questo livello si occupa di tutto ciò che riguarda la forma che devono assumere i dati prodotti dalle applicazioni prima che vengano inoltrati ai livelli inferiori per essere trasmessi nella rete.
