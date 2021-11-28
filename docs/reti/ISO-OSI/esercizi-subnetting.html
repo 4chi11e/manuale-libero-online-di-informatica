@@ -12,8 +12,8 @@ has_children: False
 
 <h2>Esercizio 1</h2>
 
-<p>Dato l'indirizzo IP 200.110.12.0 con maschera di sottorete 255.255.255.224, specificare quante sottoreti e quanti
-    host per sottorete si possono ottenere.
+<p>Dato l'indirizzo IP 200.110.12.0, specificare quante sottoreti e quanti
+    host per sottorete si possono ottenere con la maschera di sottorete 255.255.255.224.
 </p>
 
 <div class="soluzione-container">
@@ -81,7 +81,7 @@ has_children: False
 <div class="soluzione-container">
     <p class="soluzione-toggler" totoggle="#es03-semplice">Visualizza la soluzione</p>
     <div class="soluzione soluzione-semplice" id="es03-semplice">
-        <p>[ 200.110.12.0/26 ]</p>
+        <p>[ 200.110.12.32/27 ]</p>
     </div>
 </div>
 
@@ -89,6 +89,9 @@ has_children: False
     <p class="soluzione-toggler" totoggle="#es03-completa">Visualizza la soluzione completa di procedimenti</p>
 
     <div class="soluzione soluzione-completa" id="es03-completa">
+        <p>
+            La soluzione di seguito è errata perchè aggiunge solo 2 bit alla subnet-mask invece che 3
+        </p>
         <p>
             <img src="{{site.baseurl}}/assets/images/reti/ISO-OSI/esercizi-subnetting/3.png">
         </p>
