@@ -1367,6 +1367,22 @@ Mediante il ping e il traceroute (comandi del DOS, oppure programmi scritti in a
 
 Chi naviga utilizzando un router, usando tali comandi visualizzerà le informazioni relative alla propria rete privata. Le informazioni riguardo all'IP pubblico (assegnato al router) sono disponibili nel pannello di configurazione del router stesso oppure è possibile visualizzarlo tramite un sito apposito.
 
+## Protocollo ARP
+
+Finora si è parlato delle funzionalità offerte dal livello 3, in particolare quelle del protocollo IP. Come indicato in generale nella descrizione del modello ISO/OSI ogni livello necessita delle funzionalità offerte dal livello inferiore e deve quindi interagire con esso, IP infatti quando decide la destinazione dei pacchetti da inviare (che sia ad un altro host interno alla rete o il gateway) deve chiedere al livello 2 di spedire effettivamente i pacchetti. 
+
+L'interazione tra i due livelli presenta però un problema, IP identifica gli host per mezzo degli indirizzi IP mentre i protocolli di livello 2 come ethernet o wifi identificano le interfacce di rete per mezzo degli indririzzi MAC. É quindi necessario che esista un sistema per associare gli indirizzi IP all'indirizzo MAC dello stesso dispositivo. Il protocollo che fornisce tale servizio è il protocollo ARP.
+
+Ogni volta che un calcolatore vuole inviare un pacchetto ad un certo indirizzo IP, il protocollo ARP interviene per scoprire a quale indirizzo MAC corrisponde e comunicarlo al protocollo di livello 2 che deve incapsulare il pacchetto e spedirlo. Il protocollo ARP tiene traccia delle risposte precedentemente ottenute in una apposita memoria o cache (ARP cache) per evitare di dover utilizzare continuamente ARP prima di inviare ciascun pacchetto al destinatario (il che comporterebbe un notevole ritardo nelle comunicazioni ed una maggiore complessità nella gestione del traffico). Le informazioni contenute nella cache ARP vengono cancellate dopo un certo periodo dall'ultima occorrenza, tipicamente dopo 5 minuti. 
+
+
+### Funzionamento
+
+L'host che vuole conoscere il MAC address di un altro host, di cui conosce l'indirizzo IP, invia in broadcast, a livello 2, una richiesta ARP (pacchetto di ARP Request) contenente il proprio indirizzo MAC e l'indirizzo IP del destinatario di cui si vuole conoscere il MAC Address. Tutti i calcolatori della sottorete ricevono la richiesta: in ciascuno di essi il protocollo ARP verifica, confrontando l'IP proprio con quello inviato, se viene richiesto il proprio MAC Address. L'host di destinazione che riconoscerà il proprio indirizzo IP nel pacchetto di ARP-request, provvederà ad inviare una risposta (ARP Reply) contenente il proprio MAC direttamente all'host mittente (quindi in unicast).
+
+Per altri dettagli sul funzionamento del protocollo ARP puoi guardare [qui](https://it.wikipedia.org/wiki/Address_Resolution_Protocol).
+
+
 ## Router
 
 <!-- thumbnail -->
@@ -1404,3 +1420,4 @@ Per poter implementare il NAT i router devono essere in grado di operare parzial
 - [Maschera di sottorete o subnet mask su Wikipedia](https://it.wikipedia.org/wiki/Maschera_di_sottorete)
 - [Esercizi di subnetting su www.edutecnica.it](http://www.edutecnica.it/sistemi/retix/retix.htm)
 - [DHCP su Wikipedia](https://it.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol)
+- [Protocollo ARP su Wikipedia](https://it.wikipedia.org/wiki/Address_Resolution_Protocol)
