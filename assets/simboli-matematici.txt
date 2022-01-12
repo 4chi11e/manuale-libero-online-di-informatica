@@ -4,6 +4,16 @@
 ≡
 
 É
+È   https://www.compart.com/en/unicode/U+00C8
 
+π
+
+₁ https://www.compart.com/en/unicode/U+2081
+₂
+₃
+₄
+₅
+
+ₙ
 
 The default math delimiters are $$...$$ and \[...\] for displayed mathematics, and \(...\) for in-line mathematics. 
