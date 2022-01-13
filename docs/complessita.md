@@ -173,8 +173,76 @@ La funzione *T(n)* esprime il numero di passi base necessari affinchè l'algorit
 
 ancora da inserire
 
+### Complessità asintotica
 
+Una volta che è stata definita correttamente la complessità di tempo in termini di numero passi base in funzione della dimensione dell'input è possibile porsi l'obiettivo di confrontare gli algoritmi tra di loro. 
 
+Immaginiamo di aver trovato una serie di algoritmi con diversi tempi di calcolo e volerli confrontare tra loro. Supponendo che un passo base richieda 1 microsecondo (10<sup>-6</sup> s) per essere eseguito è possibile costruire la seguente tabella che rappresenta i tempi di esecuzione in secondi dei diversi algoritmi al crescere della dimensione dell'input
+
+|                   | n = 10                | n=100                     | n=1000                | n=10<sup>6</sup>              |
+| log(n)            | 10<sup>-6</sup>       | 2·10<sup>-6</sup>         | 3·10<sup>-6</sup>     | 6·10<sup>-6</sup>             |
+| √n                | 3·10<sup>-6</sup>     | 10<sup>-5</sup>           | 3·10<sup>-5</sup>     | 10<sup>-3</sup>               |
+| n+5               | 15·10<sup>-6</sup>    | 10<sup>-4</sup>           | 10<sup>-3</sup>       | 1 s                           |
+| 2·n               | 2·10<sup>-5</sup>     | 2·10<sup>-4</sup>         | 2·10<sup>-3</sup>     | 2 s                           |
+| n·log(n)          | 2·10<sup>-5</sup>     | 2·10<sup>-4</sup>         | 2·10<sup>-3</sup>     | 2 s                           |
+| n<sup>2</sup>     | 10<sup>-4</sup>       | 10<sup>-2</sup>           | 1 s                   | 10<sup>6</sup> (~12 gg)       |
+| n<sup>2</sup>+n   | 10<sup>-4</sup>       | 10<sup>-2</sup>           | 1 s                   | 10<sup>6</sup> (~12 gg)       |
+| n<sup>3</sup>     | 10<sup>-3</sup>       | 1 s                       | 10<sup>5</sup> (~1 g) | 10<sup>12</sup> (~300 secoli) |
+| 2<sup>n</sup>     | 10<sup>-3</sup>       | 10<sup>14</sup> secoli    | 10<sup>293</sup> anni | ----                          |
+{: #tabella-tempi-di-calcolo}
+
+Guardando i risultati si possono subito fare due importanti considerazioni:
+
+- per valori di n piccoli tutti gli algoritmi hanno tempi di calcolo accettabili
+- per valori di n grandi gli algoritmi differiscono enormemente
+
+Capiamo subito quindi che per vautare la velocità o meglio la complessità di un algoritmo è necessario studiare il suo comportamento per valori di n grandi cioè, detto in termini matematici, studiare l'andamento asintotico di *T(n)*.
+
+Concentrandoci quindi sugli andamenti asintotici possiamo osservare che gli algoritmi si possono dividere in gruppi che hanno un andamento simile:
+
+- il primo, che ha un andamento logaritmico, mantiene sempre valori di *T(n)* estremamente bassi rimanendo sempre allo stesso ordine di grandezza
+- il secondo, che è un polinomio con grado inferiore a 1, cresce molto lentamente mantenendosi su frazioni di secondo anche con n grandi
+- terzo e quarto, che hanno andamento lineare, crescono lentamente mantenendo sempre buoni tempi di calcolo; la presenza di un coefficiente (2) non modifica significativamente la situazione
+- il quinto, che combina un andamento lineare con uno logaritmico, non si discosta dai tempi lineari
+- gli altri algoritmi con andamento polinomiale con grado superiore a 1, presentano tempi di calcolo accettabili finchè la dimensione dell'input non è troppo grande, poi i tempi diventano inaccettabili
+- l'ultimo, che ha un andamento esponenziale, all'aumentare di n raggiunge molto in fretta tempi di calcolo inaccettabili
+
+Queste osservazioni ci permettono di raggruppare in categorie di tempi di calcolo e quindi categorie di complessità temporale i vari algoritmi sulla base dell'andamento asintotico dei tempi di calcolo. Le categorie sono:
+
+- costante (tempo che non dipende da n ma è fisso)
+- logaritmico
+- polinomiale con grado inferiore a 1
+- lineare (polinomiale con grado uguale a 1)
+- pseudolineare (n·log(n))
+- polinomiale (con grado maggiore di 1)
+- esponenziale
+- fattoriale
+- n<sup>n</sup>
+
+Nella lista sono state aggiunte per completezza alcune classi non presenti nell'esempio precedente.
+
+#### Notazioni di complessità asintotica
+
+Per chi conosce la matematica il concetto di andamento asintotico dovrebbe essere chiaro ma è compunque importante trattare questo concetto in maggior dettaglio poichè nella teoria della complessità computazionale sono utilizzate diverse notazioni per esprimere la complessità degli algoritmi (e quindi dei problemi). Di seguito sono descritte le tre notazioni utilizzate.
+
+##### O-grande
+
+La funzione O-grande è utilizzata per indicare un limite asintotico superiore della nostra funzione T(n) infatti è definita in questo modo:
+
+$$ f(x) \in O(g(n)) \text{ per } n \to \infty $$
+
+se e solo se
+
+$$ \exists x_0 \in \Bbb{R}, \; c > 0 \quad : \quad |f(n)| ≤ c|g(x)| \ ∀ x > x_0 $$
+
+Prendiamo ad esempio due funzioni:
+
+- $f(n) = 6n^4-2n^3+5$
+- $g(n) = n^4$
+
+possiamo dire che $ f(n) \in O(g(n)) $ per $ x \to \infty $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ ha solamente un coefficiente (6) che la rende superiore a $g(n)$ ma la definizione ci consente di scegliere un opportuno coefficiente $c$ per cui moltiplicare $g(n)$ che permette a $g(n)$ di essere superiore a $f(n)$.
+
+In pratica stiamo dicendo che la funzione $f(n)$ ha un andamento asintotico limitato superiormente dalla funzione $g(n)$, senza considerare i coefficienti che come abbiamo visto analizzando [questa](#tabella-tempi-di-calcolo) tabella non sono rilevanti nel considerare gli andamenti asintotici.
 
 
 

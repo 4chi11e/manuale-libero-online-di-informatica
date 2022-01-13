@@ -2,6 +2,15 @@
 Φ
 φ
 ≡
+~
+∈
+∞
+→
+∃
+∄
+ℝ
+≤
+∀
 
 É
 È   https://www.compart.com/en/unicode/U+00C8
