@@ -10,7 +10,14 @@
 ∄
 ℝ
 ≤
+≥
 ∀
+∧
+∨
+Ω
+Θ   theta maiuscola
+θ   theta minuscola
+
 
 É
 È   https://www.compart.com/en/unicode/U+00C8

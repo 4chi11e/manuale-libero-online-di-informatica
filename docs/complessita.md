@@ -223,32 +223,125 @@ Nella lista sono state aggiunte per completezza alcune classi non presenti nell'
 
 #### Notazioni di complessità asintotica
 
-Per chi conosce la matematica il concetto di andamento asintotico dovrebbe essere chiaro ma è compunque importante trattare questo concetto in maggior dettaglio poichè nella teoria della complessità computazionale sono utilizzate diverse notazioni per esprimere la complessità degli algoritmi (e quindi dei problemi). Di seguito sono descritte le tre notazioni utilizzate.
+Per chi conosce la matematica il concetto di andamento asintotico dovrebbe essere chiaro ma è compunque importante trattare questo concetto in maggior dettaglio poichè nella teoria della complessità computazionale sono utilizzate diverse notazioni per esprimere la complessità degli algoritmi (e quindi dei problemi). Notare che quando si parla di complessità solitamente se non si specifica nient'altro si dà per scontato che si sta parlando di complessità temporale ma le notazioni di seguito descritte sono valide anche per le complessità spaziale, di IO e di trasmissione.
 
 ##### O-grande
 
-La funzione O-grande è utilizzata per indicare un limite asintotico superiore della nostra funzione T(n) infatti è definita in questo modo:
+La funzione O-grande (leggi o grande) è utilizzata per indicare un limite asintotico superiore della nostra funzione T(n) infatti è definita in questo modo:
 
 $$ f(x) \in O(g(n)) \text{ per } n \to \infty $$
 
 se e solo se
 
-$$ \exists x_0 \in \Bbb{R}, \; c > 0 \quad : \quad |f(n)| ≤ c|g(x)| \ ∀ x > x_0 $$
+$$ \exists x_0 \in \Bbb{R}, \; c > 0 \quad : \quad f(n) ≤ c · g(x) \ ∀ x > x_0 $$
 
 Prendiamo ad esempio due funzioni:
 
 - $f(n) = 6n^4-2n^3+5$
 - $g(n) = n^4$
 
-possiamo dire che $ f(n) \in O(g(n)) $ per $ x \to \infty $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ ha solamente un coefficiente (6) che la rende superiore a $g(n)$ ma la definizione ci consente di scegliere un opportuno coefficiente $c$ per cui moltiplicare $g(n)$ che permette a $g(n)$ di essere superiore a $f(n)$.
+possiamo dire che $ f(n) \in O(g(n)) $ per $ x \to \infty $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ ha solamente un coefficiente (6) che la rende superiore a $g(n)$ ma la definizione ci consente di scegliere un opportuno coefficiente $c$ per cui moltiplicare $g(n)$ che permette a $g(n)$ di essere superiore a $f(n)$  da un certo valore di n in poi.
 
-In pratica stiamo dicendo che la funzione $f(n)$ ha un andamento asintotico limitato superiormente dalla funzione $g(n)$, senza considerare i coefficienti che come abbiamo visto analizzando [questa](#tabella-tempi-di-calcolo) tabella non sono rilevanti nel considerare gli andamenti asintotici.
+In pratica stiamo dicendo che la funzione $f(n)$ ha un andamento asintotico limitato superiormente dalla funzione $g(n)$, senza considerare i coefficienti che come abbiamo visto analizzando [questa](#tabella-tempi-di-calcolo) tabella non sono rilevanti nel considerare gli andamenti asintotici. In altre parole $f(n)$ cresce al massimo come $g(n)$.
+
+È necessario fare una precisazione sulla notazione O-grande: è vero che $f(n) \in O(g(n))$ ma è anche vero che $f(n) \in O(n^5)$ e che $f(n) \in O(2^n)$ poichè entrambe queste relazioni soddisfano la definizione di O-grande e sia $n^5$ che $2^n$ rappresentano un limite oltre il quale $f(n)$ non potrà mai andare asintoticamente. Nonostante sia possibile quindi individuare infinite funzioni superiori a $f(n)$ ha senso individuare solo la funzione più piccola e semplice che indichi il limite superiore di crescita asintotica di $f(n)$.
+
+|$T(n)$         |O-grande   |andamento      |
+|-              |-          |-              |
+|$34$           |$O(1)$     |costante       |
+|$7+3log(n)$    |$O(log(n))$|logaritmico    |
+|$7n+12$        |$O(n)$     |lineare        |
+|$2n+5 log(n)$  |$O(n)$     |lineare        |
+|$2n · 5log(n)$ |$O(n)$     |pseudolineare  |
+|$3n^2+5n$      |$O(n^2)$   |quadratico     |
+|$2n+5 n·m$     |$O(n^2)$   |quadratico     |
+|$2n+5 n·m$     |$O(n^2)$   |quadratico     |
+|$3^n+5n^3$     |$O(2^n)$   |esponenziale   |
+|$3^n+5n^3 + n!$|$O(n!)$    |fattoriale     |
+
+Conoscendo la matematica si può arrivare a conclusioni piuttosto semplici ma importanti che nel loro insieme possono essere chiamate ***algebra degli O-grandi***:
+
+- $f(n) \in O(h(n))$ e $g(n) \in O(h(n)) \Rightarrow f(n) + g(n) \in O(h(n))$
+- $f(n) \in O(h(n))$ e $g(n) \in O(i(n)) \Rightarrow f(n) · g(n) \in O(h(n) · i(n))$
+- $an^k \in O(n^k)$
+- $n^k \in O(n^k+i)$ per ogni $i$ positivo
+- $f(n) \in O(g(n))$ e $g(n) \in O(h(n)) \Rightarrow f(n) \in O(h(n))$ (proprietà transitiva)
+
+Nel calcolare la complessità di blocchi di codice si possono invece fare le seguenti osservazioni:
+
+- **Teorema della somma**: la complessità di un blocco costituito da più blocchi in sequenza è quella del blocco di complessità maggiore,
+- **Teorema del prodotto**: la complessità di un blocco costituito da più blocchi annidati è data dal prodotto delle complessità dei blocchi componenti.
+
+Con questi strumenti è possibile calcolare la complessità di qualsiasi algoritmo.
+
+Nonostante la notazione O-grande sia quella più comunemente usata non è nè l'unica nè la più precisa, ne esistono infatti altre due molto importanti.
+
+##### Ω-grande
+
+La funzione Ω-grande (leggi omega grande) è una funzione piuttosto simile alla funzione O-grande ma è utilizzata per indicare un limite asintotico inferiore della nostra funzione T(n) infatti è definita in questo modo:
+
+$$ f(x) \in Ω(g(n)) \text{ per } n \to \infty $$
+
+se e solo se
+
+$$ \exists x_0 \in \Bbb{R}, \; c > 0 \quad : \quad f(n) ≥ c·g(x) \ ∀ x > x_0 $$
+
+Prendiamo anche in questo caso le due funzioni:
+
+- $f(n) = 6n^4-2n^3+5$
+- $g(n) = n^4$
+
+possiamo dire che $ f(n) \in Ω(g(n)) $ per $ x \to \infty $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ e secondo la definizione possiamo scegliere un opportuno coefficiente $c$ per cui moltiplicare $g(n)$ che permette a $g(n)$ di essere inferiore a $f(n)$ da un certo valore di n in poi.
+
+In pratica stiamo dicendo che la funzione $f(n)$ ha un andamento asintotico limitato inferiormente dalla funzione $g(n)$, senza considerare i coefficienti che sono irrilevanti. In altre parole $f(n)$ cresce almeno come $g(n)$.
+
+Anche in questo caso è necessario fare una precisazione: è vero che $f(n) \in O(g(n))$ ma è anche vero che $f(n) \in O(n^3)$ e che $f(n) \in O(log(n))$ poichè entrambe queste relazioni soddisfano la definizione di Ω-grande e sia $n^3$ che $log(n)$ sono sicuramente inferiori a $f(n)$ per $ x \to \infty $. Nonostante sia possibile quindi individuare infinite funzioni inferiori a $f(n)$ ha senso individuare solo la funzione più grande e semplice che indichi il limite minimo di crescita asintotica di $f(n)$.
+
+##### Θ-grande
+
+La notazione Θ-grande (leggi teta grande) è una funzione che permette di unire in un'unica notazione le caratteristiche delle due funzioni precedenti, essa indica infatti in modo preciso l'andamento asintotico della funzione T(n). Θ-grande è definita come:
+
+$$ f(x) \in Θ(g(n)) \text{ per } n \to \infty $$
+
+se e solo se
+
+$$ \exists x_0 \in \Bbb{R}, \; c_1 > 0, c_2 > 0  \quad : \quad c_1·g(x) ≤ f(n) ≤ c_2·g(x)  \ ∀ x > x_0 $$
+
+Prendiamo anche in questo caso le due funzioni:
+
+- $f(n) = 6n^4-2n^3+5$
+- $g(n) = n^4$
+
+possiamo dire che $ f(n) \in Θ(g(n)) $ per $ x \to \infty $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ e secondo la definizione possiamo scegliere due opportuni coefficienti $c_1$ e $c_2$ per cui moltiplicare $g(n)$ e ottenere due valori uno inferiore e uno superiore a $f(n)$ da un certo valore di n in poi.
+
+In pratica stiamo dicendo che la funzione $f(n)$ ha un andamento asintotico uguale a quello della funzione $g(n)$, senza considerare i coefficienti che sono irrilevanti. In altre parole $f(n)$ cresce asintoticamente come $g(n)$, nè più nè meno.
+
+### Confronto tra algoritmi
+
+Una volta calcolate le complessità degli algoritmi espresse con le notazioni O-grande o Θ-grande è immediato effettuare un confronto tra due algoritmi, basta conoscere l'ordine degli infiniti studiati in matematica.
+
+Per il calcolo della complessità c'è però un problema che non è ancora stato preso in considerazione. Per capire di che problema si tratta consideriamo un esempio reale: un algoritmo di ordinamento di un vettore. A prescindere dal tipo di algoritmo è evidente che il tempo di calcolo non dipenderà solo dalla dimensione del vettore (la dimensione n dell'input) ma anche dalla situazione iniziale del vettore. L'ordinamento di un vettore già ordinato richiederà un tempo molto breve, mentre l'ordinamento di un vettore completamente disordinato richiederà molto più tempo. Ci rendiamo facilmente conto che possiamo distinguere tre diverse situazioni che corrispondono a tre complessità potenzialmente molto diverse tra loro:
+
+- caso migliore: è il caso o insieme di casi col minor tempo di calcolo (a parità di n), in questo caso un vettore già ordinato
+- caso peggiore: è il caso o insieme di casi col maggior tempo di calcolo (a parità di n)
+- caso medio: ipotetico vettore il cui tempo di calcolo è il tempo medio di calcolo di tutte le istanze del problema
+
+Quando si considera la complessità computazionale si fa riferimento al caso peggiore e se non viene specificato nulla si dà per scontato che ci si sta riferendo a quello. Solitamente invece il caso migliore è considerato poco rilevante nel valutare la complessità dell'algoritmo, infatti mentre il caso migliore è solo un caso particolare e fortunato con un tempo di calcolo particolarmente basso il caso peggiore è quello che ci indica effettivamente la capacità dell'algoritmo di trovare la soluzione corretta in qualsiasi situazione.
+
+Per caso medio, a differenza degli altri due, non ci si riferisce ad un caso o ad un insieme di casi reali ma si indende un ipotetico caso il cui tempo di calcolo è il tempo medio di calcolo su tutte le possibili istanze del problema. Non è detto che sia possibile calcolare a priori il tempo medio di calcolo, spesso infatti è necessario calcolare effettivamente il tempo medio per l'esecuzione dell'algoritmo su tante istanze casuali diverse. Il valore ottenuto è un valore molto utile da conoscere perchè indica mediamente in quanto tempo è possibile trovare la soluzione del problema. 
+
+Non è detto che in applicazioni reali venga scelto di utilizzare l'algoritmo che abbia la complessità minore che è vautata nel caso peggiore. Un esempio noto è il quick sort, il più usato algoritmo di ordinamento di vettori che ha complessità $Θ(n^2)$ nel caso peggiore e $Θ(n·log(n))$ nel caso medio. Quick sort infatti è preferibile ad altri algoritmi come merge sort che hanno complessità $Θ(n·log(n))$ anche nel caso peggiore e questo a causa di una serie di altri fattori come la complessità spaziale o altri dettagli legati a dettagli implementativi.
+
+Può essere molto interessante approfondire lo studio delle complessità degli algoritmi di ordinamento a partire da [qui](https://it.wikipedia.org/wiki/Algoritmo_di_ordinamento).
+
+
+## La complessità dei problemi
 
 
 
-## Altre cose da considerare e aggiungere
 
 ### Complessità intrinseca di un problema
+
 Un problema di cui si conosce un algoritmo, con la relativa complessità computazionale potrebbe, in futuro,
 essere risolto algoritmicamente in un altro modo, magari più efficiente (ad esempio con complessità di tempo
 inferiore)
@@ -277,7 +370,7 @@ indipendentemente da quella che può essere una possibile strategia di soluzione
 è dimostrata l’esistenza di lower-bound. Due esempi famosi sono il problema della ricerca di un elemento in una
 tabella che è equivalente alla ricerca di una parola in un dizionario e il problema dell’ordinamento di una lista di oggetti (siano parole, numeri, ecc…). Nel primo caso il lower-bound è *log(n)*, cioè nessun algoritmo (basato su confronto di elementi) può impiegare, nel worst-case, meno di *log(n)* operazioni in presenza di una tabella con n elementi. Nel secondo caso è stato dimostrato che un qualsiasi algoritmo che ordina un insieme di n elementi non può effettuare (nel worst-case) meno di *n·log(n)* operazioni elementari.
 
-
+## Altre cose da considerare e aggiungere
 
 ## altro materiale
 
@@ -291,4 +384,7 @@ https://it.wikipedia.org/wiki/Teoria_della_complessit%C3%A0_computazionale
 
 
 ## Riferimenti esterni
+- [Teoria della complessità computazionale su Wikipedia](https://it.wikipedia.org/wiki/Teoria_della_complessit%C3%A0_computazionale)
+- [Notazione O-grande su Wikipedia](https://it.wikipedia.org/wiki/O-grande)
+- [Algoritmi di ordinamento su Wikipedia](https://it.wikipedia.org/wiki/Algoritmo_di_ordinamento)
 - [Complessità intrinseca di un problema](http://dsc.unisa.it/alberto/Alberto/09-10/IG/Dispense/Dispense%204.3%20-%20Complessit%C3%A0%20Intrinseca.pdf): dispensa del Prof. Alberto Postiglione per il corso "Concetti di Base su Algoritmi, Strutture Dati e Programmazione" dell'Università degli Studi di Salerno.
