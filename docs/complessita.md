@@ -184,11 +184,11 @@ Immaginiamo di aver trovato una serie di algoritmi con diversi tempi di calcolo 
 | √n                | 3·10<sup>-6</sup>     | 10<sup>-5</sup>           | 3·10<sup>-5</sup>     | 10<sup>-3</sup>               |
 | n+5               | 15·10<sup>-6</sup>    | 10<sup>-4</sup>           | 10<sup>-3</sup>       | 1 s                           |
 | 2·n               | 2·10<sup>-5</sup>     | 2·10<sup>-4</sup>         | 2·10<sup>-3</sup>     | 2 s                           |
-| n·log(n)          | 2·10<sup>-5</sup>     | 2·10<sup>-4</sup>         | 2·10<sup>-3</sup>     | 2 s                           |
+| n·log(n)          | 10<sup>-5</sup>       | 2·10<sup>-4</sup>         | 3·10<sup>-3</sup>     | 6 s                           |
 | n<sup>2</sup>     | 10<sup>-4</sup>       | 10<sup>-2</sup>           | 1 s                   | 10<sup>6</sup> (~12 gg)       |
-| n<sup>2</sup>+n   | 10<sup>-4</sup>       | 10<sup>-2</sup>           | 1 s                   | 10<sup>6</sup> (~12 gg)       |
-| n<sup>3</sup>     | 10<sup>-3</sup>       | 1 s                       | 10<sup>5</sup> (~1 g) | 10<sup>12</sup> (~300 secoli) |
-| 2<sup>n</sup>     | 10<sup>-3</sup>       | 10<sup>14</sup> secoli    | 10<sup>293</sup> anni | ----                          |
+| n<sup>2</sup>+n   | 1,1·10<sup>-4</sup>   | 1,01·10<sup>-2</sup>      | 1 s                   | 10<sup>6</sup> (~12 gg)       |
+| n<sup>3</sup>     | 10<sup>-3</sup>       | 1 s                       | 10<sup>3</sup> (~1 g) | 10<sup>12</sup> (~30 secoli)  |
+| 2<sup>n</sup>     | 10<sup>-3</sup>       | 10<sup>14</sup> secoli    | 10<sup>285</sup> secoli | ----                        |
 {: #tabella-tempi-di-calcolo}
 
 Guardando i risultati si possono subito fare due importanti considerazioni:
@@ -337,50 +337,162 @@ Può essere molto interessante approfondire lo studio delle complessità degli a
 
 ## La complessità dei problemi
 
-
-
+Finora si è parlato della complessità degli algoritmi dando per scontato un concetto cioè che la complessità di un problema è dato dalla complessità del miglior algoritmo disponibile che lo risolve. Algoritmo e problema però sono due cose diverse e non è detto che al momento sia stato scoperto il milgior algoritmo possibile per un determinato problema. Ci si chiede quindi se sia possibila valutare la complessità intrinseca di un problema a prescindere dagli algoritmi al momento noti.
 
 ### Complessità intrinseca di un problema
 
-Un problema di cui si conosce un algoritmo, con la relativa complessità computazionale potrebbe, in futuro,
-essere risolto algoritmicamente in un altro modo, magari più efficiente (ad esempio con complessità di tempo
-inferiore)
+Un problema di cui si conosce un algoritmo, con la relativa complessità computazionale potrebbe, in futuro, essere risolto algoritmicamente in un altro modo, magari più efficiente (ad esempio con complessità di tempo inferiore)
+
 - Fino a che punto è possibile “migliorare” la soluzione di un problema?
-- Fino a che punto possiamo sperare che qualcuno in futuro possa formulare un algoritmo migliore per
-risolvere il nostro problema?
+- Fino a che punto possiamo sperare che qualcuno in futuro possa formulare un algoritmo migliore per risolvere il nostro problema?
 - Ci sono limiti al di sotto dei quali non è possibile scendere?
 
-Per alcuni problemi la risposta è affermativa: si conosce il limite oltre il quale nessun algoritmo può scendere,
-per ingegnoso che possa essere.
+Per alcuni problemi la risposta è affermativa: si conosce il limite oltre il quale nessun algoritmo può scendere, per ingegnoso che possa essere.
 
-Si parla di **“lower bound” del problema, ovvero il numero minimo di operazioni che qualsiasi
-soluzione al problema comporta** e che dipende dalla struttura stessa del problema mentre è indipendente da
-un qualsiasi algoritmo, anche sofisticatissimo.
-Il lower bound di un problema è una proprietà intrinseca dello stesso (spesso facciamo riferimento ad esso
-chiamandolo complessità intrinseca del problema), ed è un’informazione importantissima per chi sviluppa
-software.
+Si parla di **“lower bound” del problema, ovvero il numero minimo di operazioni che qualsiasi soluzione al problema comporta** e che dipende dalla struttura stessa del problema mentre è indipendente da un qualsiasi algoritmo, anche sofisticatissimo. Il lower bound di un problema è una proprietà intrinseca dello stesso (spesso facciamo riferimento ad esso chiamandolo complessità intrinseca del problema), ed è un’informazione importantissima per chi sviluppa software.
 
-La conoscenza del lower-bound di un problema ha un’importanza fondamentale: ci permette di non perdere
-tempo nella ricerca di un algoritmo più veloce, che non può esistere. Abbiamo così la certezza che nessun
-“genio” (neanche fra 10.000 anni) potrà mai trovare un algoritmo che sia più veloce del lower-bound del
-problema.
+La conoscenza del lower-bound di un problema ha un’importanza fondamentale: ci permette di non perdere tempo nella ricerca di un algoritmo più veloce, che non può esistere. Abbiamo così la certezza che nessun “genio” (neanche fra 10.000 anni) potrà mai trovare un algoritmo che sia più veloce del lower-bound del problema.
 
-La dimostrazione di lower-bound è difficile. Bisogna analizzare, ad esempio, la natura del problema,
-indipendentemente da quella che può essere una possibile strategia di soluzione. Sono pochi i problemi di cui si
-è dimostrata l’esistenza di lower-bound. Due esempi famosi sono il problema della ricerca di un elemento in una
-tabella che è equivalente alla ricerca di una parola in un dizionario e il problema dell’ordinamento di una lista di oggetti (siano parole, numeri, ecc…). Nel primo caso il lower-bound è *log(n)*, cioè nessun algoritmo (basato su confronto di elementi) può impiegare, nel worst-case, meno di *log(n)* operazioni in presenza di una tabella con n elementi. Nel secondo caso è stato dimostrato che un qualsiasi algoritmo che ordina un insieme di n elementi non può effettuare (nel worst-case) meno di *n·log(n)* operazioni elementari.
+La dimostrazione di lower-bound è difficile. Bisogna analizzare, ad esempio, la natura del problema, indipendentemente da quella che può essere una possibile strategia di soluzione. Sono pochi i problemi di cui si è dimostrata l’esistenza di lower-bound. Due esempi famosi sono il problema della ricerca di un elemento in una tabella che è equivalente alla ricerca di una parola in un dizionario e il problema dell’ordinamento di una lista di oggetti (siano parole, numeri, ecc…). Nel primo caso il lower-bound è $log(n)$, cioè nessun algoritmo (basato su confronto di elementi) può impiegare, nel worst-case, meno di $log(n)$ operazioni in presenza di una tabella con n elementi. Nel secondo caso è stato dimostrato che un qualsiasi algoritmo che ordina un insieme di n elementi non può effettuare (nel worst-case) meno di $n·log(n)$ operazioni elementari.
+
+### Tipologia di problemi
+
+I problemi possono essere di varia natura e in base al tipo quesito che pongono è possibile classificarli in quattro gruppi:
+- problemi di **decisione**: un problema è di decisione se chiede di dare una risposta del tipo vero o falso, ad esempio dato un numero n determinare se esso è primo;
+- problemi di **ricerca**: sono quei problemi che chiedono di trovare una soluzione corretta in un insieme di soluzioni possibili, ad esempio trovare un fattore primo di un numero può essere espresso come problema di ricerca che consiste nel trovare in un insieme di coppie (n, p) una coppia per cui p è un fattore primo di n;
+- problemi di **conteggio** o **enumerazione**: sono quei problemi che chiedono di trovare il numero di soluzioni ad un dato problema di ricerca, ad esempio dato un numero n contare il numero di fattori primi di n;
+- problema di **ottimizzazione**: sono quei problemi in cui si chiede di trovare la miglior soluzione possibile nell'insieme di tutte le soluzioni possibili di un problema di ricerca, ad esempio dato un grafo G trovare un insieme indipendente di G di dimensione massima.
+- problema di **funzione**: sono quei problemi in cui ci si aspetta una singolo output per ogni input, ma l'output è più complesso di quello di un problema di decisione, cioè, non è solo sì o no;esempi notevoli includono il problema del commesso viaggiatore, che richiede la strada presa dal commesso viaggiatore, e il problema della fattorizzazione degli interi, che richiede la lista dei fattori.
+
+Nonostante questi problemi siano apparentemente di natura molto diversa è in realtà possibile trasformare ogni problema in un problema di decisione riformulandolo opportunamente senza modificare il grado di complessità del problema. Le modalità in cui è possibile effettuare tale operazione sono complesse e richiederebbero uno studio più approfondito della teoria della computazione, basti sapere che è possibile farlo. Questo concetto è importante perchè ci permette di dire che nonostante i problemi si possano presentare sotto forme molto diverse, il modo in cui questo viene presentato non influisce sulla sua complessità poichè esso può essere riformulato in altri termini senza influire sulla sua complessità intrinseca. Sarà quindi ora possibile iniziare a catalogare i problemi in base alla loro complessità
+
+### Problemi computabili e non computabili
+
+Preso un problema, di qualsiasi tipo esso sia, è possibile fare una prima catalogazione tra problemi risolvibili e problemi non risolvibli o comunque non sempre risolvibili. Preso l'insieme di tutti i possibili problemi immaginabili, il primo sottoinsieme è infatti l'insieme dei problemi **computabili** o **decidibili**. Tutti gli altri problemi saranno quindi chiamati **non computabili** o **indecidibili**
+
+Un problema P si dice computabile quando esiste un algoritmo A che lo risolve, cioè applicando ad A una qualunque istanza I di P ne fornisce l'esatta soluzione in un numero finito di passi.
+{: .importante}
+
+È importante sottolineare che l'algoritmo deve trovare la soluzione per ogni istanza del problema e che lo deve fare in un numero finito di passi, cioè in un tempo finito, impiegare un tempo infinito significherebbe infatti non trovare mai la soluzione.
+
+La domanda che ci si pone è: i due sottoinsiemi appena identificati sono entrambi non vuoti? Sicuramente esistono problemi che sappiamo risolvere e problemi che non siamo in grado di risolvere, ma siamo proprio sicuri che i problemi che attualmente non siamo in grado di risolvere non possano avere una soluzione a noi sconosciuta? A questa domanda si è cercato di dare risposta per molto tempo e alla fine dell'800 con la teoria degli infiniti si era già riusciti a dare una risposta affermativa ma non era ancora stato formulato un problema per cui fosse anche stata dimostrata l'indecidibilità. Nel 1936 Alan Touring riuscì a dimostrare l'indecidibilità di un problema, il problema della terminazione (halting problem).
+
+#### Problema della terminazione
+
+Il problema della terminazione (dall'inglese Halting problem, tradotto anche con problema dell'arresto o problema della fermata) chiede se sia sempre possibile, descritto un algoritmo e un determinato ingresso finito, stabilire se l'algoritmo in questione termina o continua la sua esecuzione all'infinito. È stato dimostrato che non può esistere un algoritmo generale in grado di risolvere il problema per tutti i possibili ingressi. La versione più nota del problema è quella proposta nel 1936 dal matematico Alan Turing, insieme alla dimostrazione della sua indecidibilità.
+
+##### Dimostrazione
+
+Si supponga per assurdo che esista un algoritmo che prende in ingresso un qualsiasi altro algoritmo a avente un ingresso finito d ed è in grado di stabilire se a termina in tempo finito (restituendo il valore true) o se non termina (restituendo in questo caso il valore false).
+
+
+```java
+// halts() restituisce true se il suo input termina, false altrimenti
+boolean C(a, d):
+    return halts(a(d));
+```
+
+Essendo per la macchina sia a sia d sequenze indistinte di simboli, è possibile passare come secondo parametro di C lo stesso algoritmo a, ovvero eseguire C(a,a).
+
+Sia ora loop un programma che non termina mai (ad esempio while true do done): è possibile costruire un altro algoritmo chiamato K che, prendendo in ingresso a, esegue loop non restituendo alcun valore se C(a,a) restituisce true, mentre restituisce true se C(a,a) restituisce false. Ovvero:
+
+```java
+// loop() è una funzione che non termina
+boolean K(a):
+  if C(a,a) loop();
+    return true;
+```
+
+Quindi K termina restituendo il valore true solo se l'algoritmo a con ingresso a non termina, altrimenti K continua a eseguire loop ciclando all'infinito senza restituire alcun valore.
+
+Passando all'algoritmo K lo stesso K, ovvero K(K), questo algoritmo termina, restituendo il valore true, solo se l'algoritmo K con input K non termina. Ovvero K(K) termina se e solo se K(K) non termina, il che è una contraddizione che prova essere assurda l'ipotesi iniziale sull'esistenza di un algoritmo C che, dato un qualsiasi algoritmo a e un suo input d, è in grado di stabilire se a(d) termina o non termina.
+
+### Problemi trattabili e intrattabili
+
+Nell'analizzare la complessità degli algoritmi sono state identificate diverse classi di complessità e si è visto che ci sono classi di complessità per cui all'aumentare della dimensione dell'input il tempo di esecuzione rimane molto contenuto, per altri il tempo aumenta considerevolmente ma rimane ancora gestibile, ci sono altri casi, come ad esempio per la complessità esponenziale, in cui i tempi di calcolo diventano velocemente proibitivi. è evidente quindi che i problemi, possano essere catalogati tra problemi trattabili, quelli il cui tempo di calcolo non cresce in modo eccessivo, e quelli in cui i tempi di calcolo diventano proibitivi.
+
+Di seguito sono riportati i tempi di esecuzione di algoritmi con diverse complessità di calcolo al variare della dimensione dell'input dando come tempo di esecuzione di un passo base 1 microsecondo (10<sup>-6</sup> s)
+
+|                   | n = 10                | n=100                     | n=1000                | n=10<sup>6</sup>              |
+| log(n)            | 10<sup>-6</sup>       | 2·10<sup>-6</sup>         | 3·10<sup>-6</sup>     | 6·10<sup>-6</sup>             |
+| √n                | 3·10<sup>-6</sup>     | 10<sup>-5</sup>           | 3·10<sup>-5</sup>     | 10<sup>-3</sup>               |
+| n                 | 10<sup>-5</sup>       | 10<sup>-4</sup>           | 10<sup>-3</sup>       | 1 s                           |
+| n·log(n)          | 10<sup>-5</sup>       | 2·10<sup>-4</sup>         | 3·10<sup>-3</sup>     | 6 s                           |
+| n<sup>2</sup>     | 10<sup>-4</sup>       | 10<sup>-2</sup>           | 1 s                   | 10<sup>6</sup> (~12 gg)       |
+| n<sup>3</sup>     | 10<sup>-3</sup>       | 1 s                       | 10<sup>3</sup> (~1 g) | 10<sup>12</sup> (~30 secoli)  |
+| 2<sup>n</sup>     | 10<sup>-3</sup>       | 10<sup>14</sup> secoli    | 10<sup>285</sup> secoli | ----                        |
+{: #tabella-tempi-di-calcolo-2}
+
+Guardando i risultati si può intuire che è possibile suddividere ulteriormente i problemi in problemi risolvibili velocimente e problemi trattabili ma trattabili solo quando n non cresce eccessivamente. Per un programmatore questa distinzione è importante poichè nella realtà passare da un tempo di calcolo quadratico ad uno pseudolineare rappresenta un salto di qualità decisamente notevole. Effettivamente i tempi polinomiali con esponente maggiore di 1 non sono particolarmente efficienti e ci si chiede se non sia opportuno ritenere anche i problemi con tale complessità intrattabili. Intanto è già evidente la differenza con i problemi esponenziali, inoltre è interessante osservare come cambiano i tempi di calcolo al variare della capacità computazionale dei calcolatori.
+
+Nella seguente tabella sono riportati i miglioramenti ottenibili, in termini di dimensioni delle istanze risolvibili, per diverse funzioni di complessità, al migliorare della tecnologia dei calcolatori. con $x_i$ è indicata la dimensione di un'istanza risolvibile attualmente in un minuto per la i-esima funzione di complessità.
+
+| T(n)  | Computer odierno  | Computer 100 volte più veloce | computer 10.000 volte più veloce  |
+|-------|-------------------|-------------------------------|-----------------------------------|
+| $n$   |$x_1$              |$100·x_1$                      |$10.000·x_1$                       |
+| $n^2$ |$x_2$              |$10·x_3$                       |$100·x_3$                          |
+| $n^3$ |$x_3$              |$4,6·x_3$                      |$21,5·x_3$                         |
+| $n^5$ |$x_4$              |$2,5·x_4$                      |$6,3·x_4$                          |
+| $2^n$ |$x_5$              |$x_5+6,6$                      |$x_5+13,2$                         |
+| $3^n$ |$x_6$              |$x_6+4,2$                      |$x_6+8,4$                          |
+{: .ta-c}
+
+Osservando i risultati riportati in tabella e considerando che, come indicato dalla [legge di Moore](https://it.wikipedia.org/wiki/Legge_di_Moore), la potenza di calcolo dei calcolatori aumenta esponenzialmente raddoppiando ogni anno, è lecito aspettarsi che un problema di complessità polinomiale oggi ritenuto intrattabile perchè presenta una dimensione dell'input troppo grande, diventerà trattabile in futuro con l'aumento delle capacità computazionali dei computer. Non si può dire la stessa cosa per i problemi esponenziali. Guardando il modo in cui sono stati ottenuti i risultati si può capire meglio quale sia l'entità dei miglioramenti ottenibili.
+
+Considerando che:
+
+$$ \text{tempo di esecuzione} = \text{tempo esecuzione passo base} · \text{numero passi base} $$
+
+$$ 60s = tepb · T(n) $$
+
+$$ T(n) = \frac{60s}{tepb} $$
+
+Se indichiamo con $n$ la dimensione dell'input per cui l'esecuzione dell'algoritmo richiede 1 minuto con un computer di riferimento, e con $n_x$ la dimensione dell'input per cui l'esecuzione dell'algoritmo richiede 1 minuto con un computer x volte più potente otteniamo che:  
+
+- algoritmo polinomiale di esponente k: 
+
+$$n^k = \frac{60s}{tepb} $$
+
+$$n_x^k = \frac{60s}{tepb/x} $$
+
+$$n_x = \sqrt[k]{x}$$
+
+- algoritmo esponenziale di base k:
+
+$$k^n = \frac{60s}{tepb} $$
+
+$$k^{n_x} = \frac{60s}{tepb/x} $$
+
+$$n_x=n+log_k(x)$$
+
+Bisogna poi ricordare che l'umento della potenza di calcolo x avviene in modo esponenziale. Per i problemi con complessità polinomiale significa quindi un miglioramento più che lineare nella dimensione dell'input infatti l'esponenziale domina la radice. Si può dire quindi che problemi di complessità polinomiale sono di per sè trattabili e il limite della dimensione dell'input che siamo in grado di gestire è puramente tecnologico.
+
+Non si può fare la stessa osservazione per quanto riguarda i problemi esponenziali, per cui l'umento delle prestazioni esponenziale viene annullato dal logaritmo che è proprio la funzione inversa dell'esponenziale.
+
+Possiamo quindi concludere che:
+
+la distinzione tra problemi trattabili e intrattabili corrisponde alla distinzione tra problemi con complessità polinomiale e problemi con complessità esponenziale.
+{: .importante}
+
+A scanso di errori (che gli studenti fanno molto spesso) è importante ricordare che i problemi intrattabili rientrano comunque nella categoria dei problemi computabili infatti i tempi di calcolo sono per noi inaccettabili ma finiti.
+
 
 ## Altre cose da considerare e aggiungere
 
-## altro materiale
+### Classi di complessità P e NP
 
-https://it.wikipedia.org/wiki/Problema_computazionale
+- [P (complessità)](https://it.wikipedia.org/wiki/P_(complessit%C3%A0))
+- [NP (complessità)](https://it.wikipedia.org/wiki/NP_(complessit%C3%A0))
 
-https://it.wikipedia.org/wiki/Teoria_della_complessit%C3%A0_computazionale
+#### Classe NPC o NP-Completa
 
+- [NP-completo su Wikipedia](https://it.wikipedia.org/wiki/NP-completo)
 
+#### P vs NP
 
+- [Classi di complessità P e NP su Wikipedia](https://it.wikipedia.org/wiki/Classi_di_complessit%C3%A0_P_e_NP)
 
+## Risolvere problemi intrattabili
 
 
 ## Riferimenti esterni
@@ -388,3 +500,6 @@ https://it.wikipedia.org/wiki/Teoria_della_complessit%C3%A0_computazionale
 - [Notazione O-grande su Wikipedia](https://it.wikipedia.org/wiki/O-grande)
 - [Algoritmi di ordinamento su Wikipedia](https://it.wikipedia.org/wiki/Algoritmo_di_ordinamento)
 - [Complessità intrinseca di un problema](http://dsc.unisa.it/alberto/Alberto/09-10/IG/Dispense/Dispense%204.3%20-%20Complessit%C3%A0%20Intrinseca.pdf): dispensa del Prof. Alberto Postiglione per il corso "Concetti di Base su Algoritmi, Strutture Dati e Programmazione" dell'Università degli Studi di Salerno.
+- [Problema computazionale su Wikipedia](https://it.wikipedia.org/wiki/Problema_computazionale)
+- [Problema della terminazione su Wikipedia](https://it.wikipedia.org/wiki/Problema_della_terminazione)
+- [Legge di Moore su Wikipedia](https://it.wikipedia.org/wiki/Legge_di_Moore)
