@@ -300,6 +300,15 @@ code{
     @extend .thumbnail;
     width: 25%;
   }
+  &--33 {
+    @extend .thumbnail;
+    width: 33%;
+  }
+  @media (max-width: 992px) {
+    &--33 {
+      width: 100%;
+    }
+  } 
 }
 
 .tright{
@@ -313,6 +322,14 @@ code{
   clear: left;
   @extend .mr-3;
 }
+
+.fila-di-thumbnail{
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+
 
 // -------------------- Modals -------------------------------------------------------
 

@@ -476,23 +476,285 @@ la distinzione tra problemi trattabili e intrattabili corrisponde alla distinzio
 
 A scanso di errori (che gli studenti fanno molto spesso) è importante ricordare che i problemi intrattabili rientrano comunque nella categoria dei problemi computabili infatti i tempi di calcolo sono per noi inaccettabili ma finiti.
 
-
-## Altre cose da considerare e aggiungere
+Così come fatto in precedenza per i problemi indecidibili è necessario chiedersi se l'insieme dei problemi intrattabili o esponenziali è effettivamente un insieme non vuoto, infatti non basta non conoscere un algoritmo polinomiale che risolva un problema per sostenere che tale problema abbia complessità esponenziale, ma è necessaria una dimostrazione. Nel 1973 fu dimostrata per la prima volta la natura esponenziale di un problema, quello di stabilire  se  due espressioni  regolari  descrivono  lo  stesso  insieme  di  stringhe.
 
 ### Classi di complessità P e NP
 
-- [P (complessità)](https://it.wikipedia.org/wiki/P_(complessit%C3%A0))
-- [NP (complessità)](https://it.wikipedia.org/wiki/NP_(complessit%C3%A0))
+L'insieme dei problemi che sono risolvibili in tempo polinomiale è chiamato P che stà appunto per "polinomiale". Sono esempi di problemi P tutte le operazioni aritmetiche, decidere se un numero è primo... 
 
-#### Classe NPC o NP-Completa
+Esiste poi una particolare classe di problemi che non sono risolvibili in tempo polinomiale ma per cui, è possibile verificare in tempo polinomiale se una specifica soluzione del problema sia corretta oppure no chiamata NP. Un esempio di questo tipo di problemi è il gioco del sudoku per cui non è possibile trovare la soluzione corretta in tempo polinomiale ma è un problema P verificare che una certa soluzione sia corretta. Sebbene questo esempio sia abbastanza intuitivo non è facile da formalizzare e dimostrare. Un secondo famosissimo esempio è il problema di trovare in un grafo un ciclo hamiltoniano cioè un cammino chiuso che includa tutti i nodi del grafo una sola volta (il primo e l'ultimo nodo per chiudere il cammino sono lo stesso nodo che può quindi ripetersi). Il problema è detto anche "problema del commesso viaggiatore" che deve raggiungere tutti i luoghi su una mappa evitando di passare più volte nello stesso posto.
 
-- [NP-completo su Wikipedia](https://it.wikipedia.org/wiki/NP-completo)
+Il nome NP deriva da "non-deterministico polinomiale" e per capire questa definizione è necessario spiegare il significato di determinismo. Un algoritmo è deterministico quando dato un certo stato dell'esecuzione, l'azione successiva può essere soltanto una, determinata dallo stato attuale. Si dice invece non deterministico un algoritmo che in un certo stato di esecuzione può svolgere azioni differenti, tale scelta può avvenire secondo i criteri più disparati (spesso probabilistici). Normalmente quindi un algoritmo non deterministico può dare risultati differenti a partire da uno stesso input.
 
-#### P vs NP
+Nel caso dei problemi NP il concetto di non determinismo in realtà è diverso e un po' particolare. Prendendo ad esempio il problema del ciclo hamiltoniano possiamo immaginare un algoritmo che ogni volta che deve scegliere il prossimo nodo del grafo da visitare (nella realtà scegliere la strada ad un bivio) è in grado di esplorare contemporaneamente tutti i percorsi possibili. In pratica in questo contesto un algoritmo non deterministico è inteso come un algoritmo eseguito con infinita capacità di parallelismo. Se un algoritmo con tali caratteristiche è in grado di risolvere un problema in tempo polinomiale allora tale problema è un problema NP.
 
-- [Classi di complessità P e NP su Wikipedia](https://it.wikipedia.org/wiki/Classi_di_complessit%C3%A0_P_e_NP)
+Poiché  un  algoritmo  deterministico  può  essere  visto  come  caso  particolare  di  un algoritmo  non-deterministico  −  o  anche,  più  semplicemente,  poiché  un  problema risolvibile  in  tempo  polinomiale  è  evidentemente  verificabile  in  tempo  polinomiale −  la  classe  P  è  inclusa  nella  classe  NP.  Sul  viceversa  ci  sono  forti  dubbi,  sebbene nessuno  sia  ancora  riuscito  a  dimostrare  che  P  sia  inclusa  strettamente  in  NP,  ossia che  per  almeno  uno  dei  problemi  in  NP  non  esistano  algoritmi  risolutivi  tempo-polinomiali.  In  effetti,  si  tratta  di  una  delle  più  importanti  questioni  aperte  nella teoria  della  complessità  computazionale. In rete cercando "P vs NP" è possibile trovare molte informazioni a riguardo tra cui un interessante video (che puoi trovare [qui](https://www.youtube.com/watch?v=YX40hbAHx3s)) che ti consiglio di guardare che spiega in maniera chiara ed intuitiva la natura del problema oltre che descrivere le classi P ed NP.
 
-## Risolvere problemi intrattabili
+Per approfondire la natura del problema è necessario studiare un sottoinsieme particolare di NP, la classe dei problemi NP-completi.
+
+#### Classe dei problemi NPC o NP-Completi
+
+Dagli  anni  ’70  del  secolo  scorso,  sono  stati  individuati  parecchi  tra  i  problemi  “più difficili”  della  classe  NP,  detti  NP-completi:  ciò  significa  che  qualunque  problema  in NP  può  essere  “trasformato”,  in  tempo  polinomiale,  in  uno  di  essi.  In  particolare,  i dati  in  ingresso  per  il  primo  problema  sono  presi  da  un  algoritmo  tempo-polinomiale,  che  produce  i  dati  in  ingresso  per  il  secondo  problema,  in  modo  tale che  la  risposta  del  secondo  problema  sia  esattamente  quella  che  darebbe  il  primo. Dunque,  tutti  i  problemi  appartenenti  alla  sottoclasse  degli  NP-completi  presentano lo  stesso  livello  di  difficoltà  (intesa  come  laboriosità  richiesta  per  risolverli)  e ognuno  di  essi  può  essere  trasformato  efficientemente  in  ciascun  altro  appartenente alla  stessa  sottoclasse.
+
+Tutto  ciò  implica  che,  qualora  si  trovasse  un  algoritmo  tempo-polinomiale  per risolvere  uno  qualsiasi  dei  problemi  NP-completi,  ecco  che  si  sarebbe  trovata  una soluzione  efficiente  per  tutti  i  problemi  in  NP,  e  quindi  l’intera  classe  NP “collasserebbe”  nella  classe  P. 
+
+Per  concludere  che  le  due  classi  sono  diverse,  sarebbe  invece  sufficiente  provare  la non  esistenza  di  un  algoritmo  tempo-polinomiale  per  uno  qualsiasi  dei  problemi  in NP. In  un  fondamentale  articolo  del  1971,  Stephen  A.  Cook  dimostrò  che  qualsiasi problema  in  NP  può  essere  trasformato  nel  problema  della  soddisfacibilità,  e  quindi fu  questo  il  primo  problema  NP-completo  ad  essere  individuato. 
+
+Il problema della soddisfacibilità (SAT) è così definito: data  una  proposizione  formata  dalla congiunzione  (o and locico, ∧)  di  clausole,  ciascuna  costituita  da  una  disgiunzione  (or logico, ∨)  di letterali  (cioè  di  variabili  booleane  o  di  loro  negazioni),  stabilire  se  esiste  una assegnazione  di  valori  di  verità  alle  variabili  che  vi  occorrono,  tale  che  la proposizione  risulti  vera (esempio di proposizione formata da tre clausole:   $(\lnot x_1 ∨ x_2 ∨ \lnot x_3) ∧ (x_1) ∧ (\lnot x_2 ∨ x_3)$).
+
+Qui non ci addentreremo nell'analisi del problema che puoi approfondire [qui](https://it.wikipedia.org/wiki/Soddisfacibilit%C3%A0_booleana#:~:text=La%20soddisfacibilit%C3%A0%20booleana%2C%20o%20soddisfacibilit%C3%A0,il%20valore%20di%20verit%C3%A0%20vero.)
+
+Negli anni seguenti furono trovati moltissimi problemi che possono essere trasformati in tempo polinomiale in SAT (o viceversa) andando ad ingrandire l'insieme dei problemi NPC.
+
+#### Altre considerazioni su P e NP
+
+Nonostante la classe NP indichi nella sua definizione il fatto che essi possano essere risolti in tempo polinomiale è importante sottolineare che questo può avvenire solo se si ha a disposizione un grado di parallelismo infinito, ma questo nella realtà non è possibile. Con i computer reali che usiamo tutti i giorni è possibile eseguire solamente algoritmi deterministici e sebbene a volte si possa riuscire ad ottenere un certo grado di parallelismo questo è molto limitato e di certo non infinito. Per questo motivo con i computer reali i problemi considerati appartenenti ad NP e non a P sono attualmente risolvibili solo in tempi esponenziali e questo rimarrà vero a meno che non si trovi un algoritmo con complessità polinomiale per un problema NP di fatto spostando il problema in P. Se questo problema fosse un problema NPC, l'intera classe NP collasserebbe in P.
+
+#### Classe EXP o a tempo-esponenziale
+
+La classe di complessità più vicina alle classi P e NP è la classe dei probemi con complessità esponenziale. I problemi per cui è possibile almeno verificare se una soluzione sia corretta in tempo polinomiale ricadono nell'insieme NP, esistono però problemi per cui nemmeno questo è possibile, ad esempio nel gioco degli scacchi non solo è difficile dire quale sia la mossa migliore da fare, ma non è nemmeno possibile verificare se una mossa o una serie di mosse siano quelle migliori. Problemi come questo fanno parte della classe dei problemi EXP o a tempo-esponenziale. 
+
+### Algoritmi probabilistici
+
+Esistono moltisimi problemi di cui non si conosce una soluzione polinomiale ma per cui è necessario trovare la soluzione in moltissime applicazioni come quelle legate alla crittografia, basti pensare che fino a pochi anni fa non era nota una soluzione polinomiale per verificare la primalità di un numero. Per questo motivo è necessario trovare dei sistemi che ci permettano di trovare in tempi accettabili delle soluzioni accettabili. Che cosa intendiamo però per accettabili? è possibile ad esempio trovare soluzioni approssimate o soluzioni che siano esatte ma solo con un certo grado di sicurezza. Algoritmi che siano in grado di fornire tali soluzioni sono gli algoritmi probabilistici. 
+
+Gli algoritmi probabilistici sono quegli algoritmi che quando devono prendere una decisione possono farlo in modo casuale, salla base di un estrazione di un valore casuale. L'estrazione di un numero casuale in informatica è però un problema piuttosto delicato, infatti i generatori di numeri casuali reali sono molto costosi e difficili da reperire poichè sono basati su sistemi quantistici particolari, nella quasi totalità dei casi quindi gli algoritmi probabilistici si basano sulla generazione di sequenze di numeri pseudo-casuali e la costruzione di questi generatori e la loro non prevedibilità da parte di terzi è alla base della sicurezza di molti sistemi crittografici.
+
+Un generatore di numeri pseudo-casuali è una funzione deterministica in grado di generare una sequenza di valori x<sub>1</sub>, . . . , x<sub>n</sub> indistinguibile da un’altra sequenza di valori casuali y<sub>1</sub>, . . . , y<sub>n</sub> in tempo polinomiale.
+
+Esistono essenzialmente tre tipi di algoritmi probabilistici:
+
+- **Algoritmi numerici**: per fornire un risultato approssimato con una certa *confidenza*.<br>
+    Esempio: Con probabilità 90% la risposta è 60 ± 1. Più volte si esegue l’algoritmo, maggiore diventa la precisione o la confidenza.
+- **Algoritmi di Monte Carlo**: per fornire un risultato esatto con alta probabilità benché talvolta possano fornire una risposta errata.<br>
+    Esempio: Con probabilità 99%, la risposta è 60. Più si esegue l’algoritmo, maggiore diventa la probabilità che il risultato sia esatto (vedi [classe BPP](#classe-bpp)).
+- **Algoritmi Las Vegas** per fornire un risultato esatto con certezza ma in un tempo probabilistico, in pratica ho una certa probabilità che la risposta venga data in un certo tempo. L’algoritmo può anche non rispondere poichè per stare nei tempi stabiliti l'esecuzione viene fermata (vedi [classe ZPP](#classe-zpp))<br>.
+    Esempio: La risposta è 60.
+
+Per capire meglio il comportamento di questi algoritmi assumiamo che si voglia costruire un algoritmo probabilistico che stampi le date di eventi storici. Alla domanda “Quando Cristoforo Colombo scoprì l’America?”, le risposte che si possono ottenere dai tre tipi di algoritmi, eseguiti per 5 volte consecutive, sono del tipo:
+
+- Algoritmo numerico:  1490 ± 10, 1485 ± 10, 1492 ± 10, 1491 ± 10,
+1492 ± 10;
+- Algoritmo di Monte Carlo: 1492, 1500, 1492, 1492, 1491;
+- Algoritmo Las Vegas: 1492, no ouput, 1492, 1492, no output.
+
+Questi metodi ci permettono quindi di ottenere soluzioni più o meno approssimate o sicure a problemi per cui ottenere una soluzione esatta richiederebbe un tempo non polinomiale. Il grado di approssimazione o di sicurezza della soluzione può essere deciso a priori aumentando o diminuendo il tempo di calcolo.
+
+Gli argoritmi probabilistici ci consentono di identificare nuove classi di problemi risolti con questo genere di algoritmi.
+
+### Classe BPP
+
+La classe dei problemi BPP (*Bounded-error Probabilistic Polynomial time*, "tempo polinomiale probabilistico con errore limitato") contiene quei problemi che richiedono un tempo polinomiale per avere una soluzione probabilistica corretta. Più precisamente, essi sono risolvibili in tempo polinomiale da un algoritmo probabilistico (la definizione reale dice "da una macchina di Turing probabilistica" ma si dovrebbe approfondire l'argomento che è lungo), con una probabilità di errore al massimo di 1/3 per tutte le istanze.
+
+<div class="thumbnail tright mb-2 ta-c">
+<table>
+    <tbody>
+        <tr>
+            <th colspan="3">Algoritmo BPP (1 esecuzione)
+            </th>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td colspan="2">Risposta prodotta
+            </td>
+        </tr>
+        <tr>
+            <td>Risposta<br />corretta
+            </td>
+            <td>SÌ
+            </td>
+            <td>NO
+            </td>
+        </tr>
+        <tr>
+            <td>SÌ
+            </td>
+            <td>≥ 2/3
+            </td>
+            <td>≤ 1/3
+            </td>
+        </tr>
+        <tr>
+            <td>NO
+            </td>
+            <td>≤ 1/3
+            </td>
+            <td>≥ 2/3
+            </td>
+        </tr>
+        <tr>
+            <th colspan="3">Algoritmo BPP (<i>k</i> esecuzioni)
+            </th>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td colspan="2">Risposta prodotta
+            </td>
+        </tr>
+        <tr>
+            <td>Risposta<br />corretta
+            </td>
+            <td>SÌ
+            </td>
+            <td>NO
+            </td>
+        </tr>
+        <tr>
+            <td>SÌ
+            </td>
+            <td>&gt; 1 − 2<sup>−<i>ck</i></sup>
+            </td>
+            <td>&lt; 2<sup>−<i>ck</i></sup>
+            </td>
+        </tr>
+        <tr>
+            <td>NO
+            </td>
+            <td>&lt; 2<sup>−<i>ck</i></sup>
+            </td>
+            <td>&gt; 1 − 2<sup>−<i>ck</i></sup>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" style="font-size:85%">per una qualche costante <i>c</i> &gt; 0
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+In pratica, una probabilità di errore di 1/3 potrebbe non essere accettabile, tuttavia, la scelta di 1/3 nella definizione è arbitraria. Può essere qualsiasi costante c fra 0 e 1/2 (esclusiva). Il limite di 1/2 è importante perchè ci permette di eseguire l'algoritmo molte volte, riducendo progressivamente la probabilità di errore. Per creare un algoritmo estremamente accurato basterà semplicemente eseguire l'algoritmo molte volte. In pratica si può decidere a piacere il grado di sicurezza della soluzione aumentando o diminuendo il tempo di calcolo.
+
+Un analisi dettagliata (ma che trascuriamo per la sua complessità) mostra che variando il numero di esecuzioni è possibile ottenere un errore elevato fino a $1/2 − n^{−c}$ da un lato, o un errore piccolo fino a $2^{−n^c}$ dall'altro, dove c è una qualsiasi costante positiva, ed n è la lunghezza dell'input.
+
+La definizione della classe BPP è quasi identica a quella della **classe PP** che è la classe di problemi risolvibili in tempo polinomiale da un una macchina di Turing probabilistica con una probabilità di meno di 1/2 per tutte le istanze. In pratica PP è la generica classe dei problemi risolti con algoritmi probabilistici (algoritmi Monte Carlo). La differenza è sottile e non ci addentreremo in questa questione, diremo solo che questo ci permette di avere algoritmi efficienti poichè il vincolo (il valore c) ci permette di ridurre abbastanza velocemente l'errore all'aumentare del numero di esecuzioni.
+
+#### Relazione con altre classi di complessità
+
+BPP è una delle più grandi classi "pratiche" di problemi, vale a dire che la maggior parte dei problemi di interesse in BPP hanno algoritmi probabilistici efficienti che possono essere eseguiti su macchine moderne reali. Per questa ragione è di grande interesse pratico quali problemi e classi di problemi siano all'interno di BPP. BPP contiene anche P, la classe dei problemi risolvibili in tempo polinomiale con una macchina deterministica, dal momento che una macchina deterministica è un caso speciale di una macchina probabilistica.
+
+Oltre ai problemi in P, che sono ovviamente in BPP, si conoscevano molti problemi che erano in BPP ma non in P. Il numero di tali problemi sta diminuendo, e si congettura che P = BPP.
+
+Per molto tempo, uno dei problemi più famosi che si conosceva essere in BPP ma non essere in P era il problema di determinare se un numero dato è primo. Tuttavia, nel 2002 è stato trovato un algoritmo deterministico in tempo polinomiale per questo problema, dimostrando così che è in P.
+
+Un esempio importante di un problema in BPP che ancora non si conosce in P è la verifica dell'identità dei polinomi, il problema di determinare se un polinomio è identicamente uguale al polinomio zero. In altre parole, c'è un'assegnazione di variabili tale che quando si calcola il polinomio il risultato è diverso da zero? È sufficiente scegliere il valore di ciascuna variabile uniformemente a caso da un sottoinsieme finito di almeno d valori per ottenere una probabilità di errore vincolato, dove d è il grado totale del polinomio. Questo problema è un problema NP.
+
+Possiamo quindi dire che $P \subseteq ZPP \subseteq BPP \subseteq PP$ ma non sappiamo che relazione abbia BPP con NP
+
+Nella definizione della classe, se sostituiamo la macchina di Turing (io ho fin qui semplificato parlando genericamente di algoritmo deterministico) comune con un computer quantistico, otteniamo la classe BQP.
+
+### Classe BQP
+
+<!-- thumbnail -->
+<div class="thumbnail tright mb-2">
+  <img src="{{site.baseurl}}/assets/images/complessita/BQP_complexity_class_diagram.svg" class="modal__opener" aprire="#img-BQP_complexity_class_diagram">
+  <p>La presunta relazione di BQP con gli spazi di altri problemi.</p>
+</div>
+<!-- modal -->
+<div id="img-BQP_complexity_class_diagram" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-BQP_complexity_class_diagram">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/complessita/BQP_complexity_class_diagram.svg">
+    </div>
+    <p>La presunta relazione di BQP con gli spazi di altri problemi.</p>
+  </div>
+</div>
+
+Nella teoria della complessità computazionale, BQP (*Bounded-error Quantum Polynomial-time*, "tempo polinomiale quantistico con errore limitato") è una classe di complessità a cui appartengono quei problemi che richiedono un tempo polinomiale da parte di un computer quantistico per avere una soluzione corretta con probabilità maggiore o uguale a 2/3 e quindi, corrispondentemente, con una probabilità di errore minore o uguale a 1/3. È l'analogo quantistico della classe BPP.
+
+In altre parole, c'è un algoritmo per un computer quantistico (un algoritmo quantistico) che risolve il problema decisionale con un'alta probabilità ed è garantito che si esegue in tempo polinomiale. In qualsiasi esecuzione data dell'algoritmo, ha una probabilità al massimo di 1/3 di dare la risposta sbagliata. Analogamente ai gli algoritmi BPP è possibile aumentare il numero di esecuzioni per ridurre a piacere l'errore fino a $2^{−n^c}$.
+
+#### Computazione quantistica
+
+Il numero di qubit nel computer può essere una funzione polinomiale della dimensione dell'istanza. Ad esempio, è noto che alcuni algoritmi fattorizzano un intero di n bit usando poco più di 2n qubit (algoritmo di Shor).
+
+Solitamente, la computazione su un computer quantistico finisce con una misurazione. Questo conduce a un collasso dello stato quantistico a uno degli stati fondamentali. Si può dire che si misura che lo stato quantico è nello stato corretto con un'alta probabilità.
+
+I computer quantistici hanno ottenuto interesse diffuso perché è noto che alcuni problemi di interesse pratico sono in BQP, ma si sospetta che siano fuori da P. Alcuni esempi rilevanti sono:
+
+- Fattorizzazione degli interi (vedi l'[algoritmo di Shor](https://it.wikipedia.org/wiki/Algoritmo_di_fattorizzazione_di_Shor))
+- Logaritmo discreto
+- Simulazione di sistemi quantistici (vedi simulatore universale quantico)
+- Calcolo del polinomio di Jones in certe radici unitarie
+
+#### Relazione con altre classi di complessità
+
+BQP contiene P e BPP ma non è nota la sua relazione con NP anche perchè questo significherebbere conoscere anche la relazione tra P e NP.
+
+Esiste una classe chiamata QMA che è in relazione a BQP così come NP lo è con P, in pratica è quella classe di problemi per cui data una soluzione è possibile valutarla in tempo polinomiale con un computer quantistico. Come per P vs NP non è noto se i due insiemi sono uguali o no.
+
+$P \subseteq BPP \subseteq BQP \subseteq QMA \subseteq PP \subseteq PSPACE \subseteq EXP$
+
+### Classe ZPP
+
+Nella teoria della complessità computazionale, ZPP (*Zero-error Probabilistic Polynomial time*, "tempo polinomiale probabilistico con errore zero") è la classe di complessità dei problemi per i quali esiste una macchina di Turing probabilistica (algoritmo probabilistico) con queste proprietà:
+
+- Restituisce sempre la risposta corretta SÌ o NO.
+- Il tempo di esecuzione è polinomiale in termini di aspettativa per ogni input.
+  
+In altre parole, se l'algoritmo può lanciare una moneta veramente casuale mentre è in esecuzione, restituirà sempre la risposta corretta e, per un problema di dimensione n, c'è un qualche polinomio *p(n)* tale che il tempo medio di esecuzione sarà minore di *p(n)*, anche se potrebbe essere occasionalmente molto più lungo. Tale algoritmo è chiamato algoritmo Las Vegas.
+
+### Altre classi di complessità
+
+Le classi di complessità in cui sono stati suddivisi i problemi sono moltissime e non riguardano solo la complessità di tempo. [Qui](https://it.wikipedia.org/wiki/Glossario_delle_classi_di_complessit%C3%A0) puoi trovarne un elenco. 
+
+Siccome le classi sono moltissime e non sono note le relazioni tra molte di esse, fornire un diagramma esaustivo che rappresenti correttamente e contemporaneamente tutte le classi di complessità è impossibile. Di seguito sono riportati alcuni diagrammi.
+
+<!-- flex container -->
+<div class="fila-di-thumbnail">
+
+<!-- thumbnail -->
+<div class="thumbnail--33">
+  <img src="{{site.baseurl}}/assets/images/complessita/Randomised_Complexity_Classes_2.svg" class="modal__opener" aprire="#img-Randomised_Complexity_Classes_2">
+  <p></p>
+</div>
+<!-- modal -->
+<div id="img-Randomised_Complexity_Classes_2" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-Randomised_Complexity_Classes_2">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/complessita/Randomised_Complexity_Classes_2.svg">
+    </div>
+    <p></p>
+  </div>
+</div>
+
+<!-- thumbnail -->
+<div class="thumbnail--33">
+  <img src="{{site.baseurl}}/assets/images/complessita/diagramma-complessita-1.jpg" class="modal__opener" aprire="#img-diagramma-complessita-1">
+  <p></p>
+</div>
+<!-- modal -->
+<div id="img-diagramma-complessita-1" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-diagramma-complessita-1">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/complessita/diagramma-complessita-1.jpg">
+    </div>
+    <p></p>
+  </div>
+</div>
+
+<!-- thumbnail -->
+<div class="thumbnail--33">
+  <img src="{{site.baseurl}}/assets/images/complessita/diagramma-complessita-2.jpg" class="modal__opener" aprire="#img-diagramma-complessita-2">
+  <p></p>
+</div>
+<!-- modal -->
+<div id="img-diagramma-complessita-2" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-diagramma-complessita-2">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/complessita/diagramma-complessita-2.jpg">
+    </div>
+    <p></p>
+  </div>
+</div>
+
+</div>
 
 
 ## Riferimenti esterni
@@ -503,3 +765,16 @@ A scanso di errori (che gli studenti fanno molto spesso) è importante ricordare
 - [Problema computazionale su Wikipedia](https://it.wikipedia.org/wiki/Problema_computazionale)
 - [Problema della terminazione su Wikipedia](https://it.wikipedia.org/wiki/Problema_della_terminazione)
 - [Legge di Moore su Wikipedia](https://it.wikipedia.org/wiki/Legge_di_Moore)
+- [Lorenzo Repetto - Dai giochi agli algoritmi, un'introduzione non convenzionale all'informatica - Edizioni Kangarou Italia 2019 - ISBN 978-88-89249-62-8](https://www.kangourou.it/images/documenti/restocasa/giochiealgoritmi.pdf)
+- ["P vs. NP and the Computational Complexity Zoo" su Youtube](https://www.youtube.com/watch?v=YX40hbAHx3s)
+- [Dispense per il corso "Insegnamento di algoritmi avanzati" di Roberto Posenato](http://profs.sci.univr.it/~posenato/home/en/courses/algavanzati)
+- [Dispense per il corso "Algoritmi e strutture dati" di Alberto Montresor, Università di Trento](http://disi.unitn.it/~montreso/asd/slides/17-prob.pdf)
+- [BPP su Wikipedia](https://it.wikipedia.org/wiki/BPP_(complessit%C3%A0))
+- [PP su Wikipedia](https://en.wikipedia.org/wiki/PP_(complexity))
+- [BQP su Wikipedia](https://it.wikipedia.org/wiki/BQP_(complessit%C3%A0))
+- [ZPP su Wikipedia](https://it.wikipedia.org/wiki/ZPP_(complessit%C3%A0))
+- [Glossario delle classi di complessità su Wikipedia](https://it.wikipedia.org/wiki/Glossario_delle_classi_di_complessit%C3%A0)
+
+## Altro materiale da guardare
+
+- [Appunti di Calcolabilità](https://www.dsi.unive.it/~salibra/Appunti-Calcolabilita-RPrendin.pdf)
