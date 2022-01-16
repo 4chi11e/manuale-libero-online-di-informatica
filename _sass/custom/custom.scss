@@ -326,8 +326,19 @@ code {
   @media (max-width: 992px) {
     .thumbnail {
       &--33 {
-        width: 100%;
         flex: 0 0 100%;
+      }
+    }
+  }
+}
+
+@media print {
+  .fila-di-thumbnail {
+    display: block;
+    .thumbnail {
+      float: left;
+      &--33 {
+        width: 33%;
       }
     }
   }
@@ -435,6 +446,8 @@ code {
   *:last-child {
     margin-bottom: 0;
   }
+
+  clear: both;
 }
 
 .importante {
@@ -444,6 +457,7 @@ code {
   border: 2px solid $border-color-2;
   border-radius: $border-radius;
   @include fs-5;
+  clear: both;
 }
 
 // ---------------- Esercizi subnetting -------------------------------------------
@@ -882,6 +896,16 @@ a {
     max-width: auto;
     // margin: 1em;
     margin: 0;
+  }
+
+  h1, h2, h3, h4, .table-wrapper {
+    page-break-inside: avoid;
+  }
+  h1::after, h2::after, h3::after, h4::after {
+    content: "";
+    display: block;
+    height: 100px;
+    margin-bottom: -100px;
   }
 }
 
