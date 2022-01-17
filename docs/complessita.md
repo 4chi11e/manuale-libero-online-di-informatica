@@ -474,6 +474,8 @@ Bisogna poi ricordare che l'umento della potenza di calcolo x avviene in modo es
 
 Non si può fare la stessa osservazione per quanto riguarda i problemi esponenziali, per cui l'umento delle prestazioni esponenziale viene annullato dal logaritmo che è proprio la funzione inversa dell'esponenziale.
 
+Se si ragionasse in termini di aumento del tempo di esecuzione dell'algoritmo invece che di aumento della potenza di calcolo si avrebbero gli stessi identici risultati, infatti dividere *tepb* per x (aumento delle prestazioni) o moltiplicare il tempo di calcolo (60s nell'esempio) per x (in questo caso aumento del tempo di calcolo) produce esattamente lo stesso risultato.
+
 Possiamo quindi concludere che:
 
 la distinzione tra problemi trattabili e intrattabili corrisponde alla distinzione tra problemi con complessità polinomiale e problemi con complessità esponenziale.
