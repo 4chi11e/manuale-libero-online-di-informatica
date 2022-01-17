@@ -549,6 +549,26 @@ La complessità della singola chiamata alla funzione è $O(1)$ poichè non ci so
 
 $$ T(n) = O(log_2(n)) $$
 
+###### Esempio 6
+{: .no_toc}
+
+Consideriamo il problema di calcolare l'ennesimo numero della successione di fibonacci e studiamo la complessità di un algoritmo ricorsivo che lo risolve. Il codice in linguaggio C è:
+
+```c
+int fibonacci(int i) {
+  if (i < 0) return -1; // F(i) non e' definito per interi i negativi! */
+  if (i == 0) return 0;
+  else if (i == 1) return 1;
+  else return fibonacci(i-1) + fibonacci(i-2);
+}
+```
+
+La singola chiamata della funzione ha complessità $O(1)$ poichè non ci sono cicli e il numero di operazioni fatte non dipende da *n*. La complessità è data quindi dal numero di chiamate della funzione. Siccome la funzione richiama sè stessa due volte, il numero di chiamate è 2<sup>n</sup>. La complessità totale dell'algoritmo è quindi
+
+$$ T(n) = O(2^n) $$
+
+Questo algoritmo è particolarmente poco efficiente poichè la funzione viene richiamata molte volte per gli stessi valori di i. Per risolvere tale problema è necessario trasformare la funzione nella sua versione iterativa oppure ricorrere ad una memoria che ci permette di salvare il valore calcolato dalla funzione per un certo valore di i e fare in modo che la funzione restituisca direttamente tale valore senza dover richiamare se stessa per i valori i-1 e i-2. Questo tipo di ragionamento è valido in generale per tutte quelle funzioni ricorsive che richiamano se stesse più di una volta comportando solitamente un numero di chiamate esponenziale.
+
 ###### Casi complessi
 {: .no_toc}
 
