@@ -169,9 +169,115 @@ La funzione T(n) può quindi essere definita nel seguente modo:
 La funzione *T(n)* esprime il numero di passi base necessari affinchè l'algoritmo *A* possa produrre la soluzione di un'istanza di dimensione *n*.
 {: .importante}
 
-##### Esempi ed esercizi
+##### Esempi di calcolo della complessità di un algoritmo
 
-ancora da inserire
+###### Esempio 1
+{: .no_toc}
+
+Consideriamo un algoritmo che stampa i primi n numeri interi:
+
+```c
+i = 1;                // 1 passo base
+while (i <= n)        // n + 1 passi base
+  printf("%d ", i)    // 1 * n passi base
+  i = i + 1;          // 1 * n passi base
+```
+
+Totale passi base = $ 1 + n + 1 + 2·n = 2 + 2·n $
+
+###### Esempio 2
+{: .no_toc}
+
+Consideriamo un algoritmo che stampa i numeri interi multipli di 2 e 3 minori di n:
+
+```c
+for (i = 1; i <= n; i++)          // 1 pb per l'inizializzazione
+                                  // n+1 pb per il test
+                                  // n pb per l'incremento
+  if (i % 2 == 0 && i % 3 == 0)   // 2 * n pb
+    printf("%d ", i);             // 1 * n / x pb
+```
+Quando un'istruzione si trova all'interno di un if può essere complicato dire quante volte essa venga eseguita. Come vedremo più avanti bisogna considerare il caso peggiore cioè che l'istanza che stiamo valutando ci costringa ad entrare nell'if il massimo numero di volte possibile. In questo semplice caso possiamo facilmente calcolare che *x* vale 6. Vedremo poi che la presenza di un coefficiente come 1/6 è del tutto irrilevante nel calcolo della complessità, sarebbe diverso se dovessi moltiplicare o dividere per una funzione di n.
+
+Totale passi base = 
+
+$$ 1+n+1+n + (2 + 1/6)·n = $$
+
+$$ = 2 + (1 + 1 + 2 + 1/6)·n = $$
+
+$$ = 2 + 25/6·n $$
+
+###### Esempio 3
+{: .no_toc}
+
+Consideriamo un algoritmo che stampa tutti gli elementi di una matrice *n·m*:
+
+```c
+for (i = 0; i < n; i++)             // 2 + 2 * n pb
+  for (j = 1; j < m; j++)           // (2 + 2 * m) * n pb
+    printf("%d ", matrice[i][j]);   // 1 * n * m pb
+```
+
+Totale passi base = 
+
+$$ 2+2·n + (2+2·m)·n + n·m = $$ 
+
+$$ 2 + 2·n + 2·n + 2·n·m + n·m = $$
+
+$$ 2 + 4·n + 3·n·m $$
+
+Nel valutare la complessità solitamente non è rilevante la distinzione tra n e m, in particolare se non sappiamo nulla a priori dei valori di n e m. Possiamo quindi valutare la complessità come:
+
+$$ 2 + 4·n + 3·n^2 $$
+
+###### Esempio 4
+{: .no_toc}
+
+Consideriamo l'algoritmo bubble sort:
+
+```c
+void bubblesort(int a[], int n){
+  int i, j;
+  // N.B. n-1 è l'ultima componente dell'array.
+  for(i = 0; i < n - 1; i++) //scansiona tutto l'array tranne l'ultima componente: n - 1 escluso. Quindi fino al penultimo elemento.
+    for (j = n - 1; j > i; j--) //j settato all'ultima componente e decresce ad ogni iterazione. Esce dal ciclo solo se j <= i
+      if (a[j] < a[j-1])  //se la componente corrente è più piccola della precedente, li scambia.
+        scambia(&a[j],&a[j-1]);                   
+}
+ 
+//la funzione scambia è così composta:
+void scambia(int *a, int *b){ //richiede due indirizzi di memoria in entrata che verranno memorizzati in 2 puntatori.
+  int temp; //la variabile d'appoggio che memorizza temporaneamente il valore di a.
+  temp = *a;
+  *a = *b;
+  *b = temp;
+}
+```
+
+Questo algoritmo è decisiamente più complesso dei precedenti e introduce anche la chiamata a funzione. Anche il tempo di chiamata a funzione viene semplificato, come tutte le altre operazioni, e si considerano semplicemente i passi base necessari ai passaggi di valore dei parametri della funzione.
+
+Riprendiamo il codice ripulito da commenti di spiegazione e inseriamo il costo di ogni riga di codice:
+
+```c
+void bubblesort(int a[], int n){      // 2
+  int i, j;                           // 2 
+  for(i = 0; i < n - 1; i++)          // 1 + n + n - 1 = 2 * n 
+    for (j = n - 1; j > i; j--)       // (1 + n-i + n-i-1) * (n-1) = 2*(n-i)*(n-1)  (variabile in funzione di i !!!) 
+                                      // mediamente n-i vale n/2
+      if (a[j] < a[j-1])              // (n-i)*(n-1)
+        scambia(&a[j],&a[j-1]);       // (n-i)*(n-1)  nel caso peggiore           
+}
+ 
+//la funzione scambia è così composta:
+void scambia(int *a, int *b){         // 2
+  int temp;                           // 1
+  temp = *a;                          // 1
+  *a = *b;                            // 1
+  *b = temp;                          // 1
+}
+```
+
+Quello che notiamo subito è che già con un algoritmo non troppo complesso come il bubble sort, questo metodo di contare ogni singola operazione per valutare la complessità è troppo complicato. È necessario quindi introdurre un metodo più comodo. Nel prossimo capitolo vedremo come lo studio della complessità asintotica può semplificare di molto il calcolo della complessità.
 
 ### Complessità asintotica
 
@@ -333,6 +439,120 @@ Per caso medio, a differenza degli altri due, non ci si riferisce ad un caso o a
 Non è detto che in applicazioni reali venga scelto di utilizzare l'algoritmo che abbia la complessità minore che è vautata nel caso peggiore. Un esempio noto è il quick sort, il più usato algoritmo di ordinamento di vettori che ha complessità $Θ(n^2)$ nel caso peggiore e $Θ(n·log(n))$ nel caso medio. Quick sort infatti è preferibile ad altri algoritmi come merge sort che hanno complessità $Θ(n·log(n))$ anche nel caso peggiore e questo a causa di una serie di altri fattori come la complessità spaziale o altri dettagli legati a dettagli implementativi.
 
 Può essere molto interessante approfondire lo studio delle complessità degli algoritmi di ordinamento a partire da [qui](https://it.wikipedia.org/wiki/Algoritmo_di_ordinamento).
+
+### Esempi di calcolo della complessità di un algoritmo con le notazioni di complessità asintotica
+
+Riprendiamo gli esempi visti prima di introdurre le notazioni di complessità asintotica. Vedremo che sfruttando il nuovo metodo il calcolo della complessità risulta molto più semplice e in molti casi (con algoritmi polinomiali senza logaritmi o radici) praticamente immediato.
+
+###### Esempio 1
+{: .no_toc}
+
+Consideriamo un algoritmo che stampa i primi n numeri interi:
+
+```c
+i = 1;                // 1 passo base
+while (i <= n)        // n + 1 passi base
+  printf("%d ", i)    // 1 * n passi base
+  i = i + 1;          // 1 * n passi base
+```
+
+Possiamo direttamente tralasciare coefficienti e termini noti e dire immediatamente che la complessità totale dell'algoritmo è data dalla presenza di un ciclo che comporta l'esecuzione di alcuni passi base per *n* volte. La complessità è quindi:
+
+$$ T(n) = O(n) $$
+
+###### Esempio 2
+{: .no_toc}
+
+Consideriamo un algoritmo che stampa i numeri interi multipli di 2 e 3 minori di n:
+
+```c
+for (i = 1; i <= n; i++)          // 1 pb per l'inizializzazione
+                                  // n+1 pb per il test
+                                  // n pb per l'incremento
+  if (i % 2 == 0 && i % 3 == 0)   // 2 * n pb
+    printf("%d ", i);             // 1 * n / x pb
+```
+Anche in questo caso non ci interessano i coefficienti e i termini noti e siccome la presenza dell'"if" comporta solo l'aggiunta di un coefficiente che possiamo trascurare, anche in questo caso il calcolo della complessità è pressochè immediato. La complessità è:
+
+$$ T(n) = O(n) $$
+
+###### Esempio 3
+{: .no_toc}
+
+Consideriamo un algoritmo che stampa tutti gli elementi di una matrice *n·m*:
+
+```c
+for (i = 0; i < n; i++)             // 2 + 2 * n pb
+  for (j = 1; j < m; j++)           // (2 + 2 * m) * n pb
+    printf("%d ", matrice[i][j]);   // 1 * n * m pb
+```
+Il calcolo della complessità è anche in questo caso molto semplice. Siccome abbiamo due cicli innestati, possiamo sfruttare il teorema del prodotto che ci dice che la complessità di due blocchi di codice innestati è data dal prodotto delle complessità. La complessità è quindi:
+
+$$ T(n) = O(n^2) $$
+
+###### Esempio 4
+{: .no_toc}
+
+Consideriamo l'algoritmo bubble sort:
+
+```c
+void bubblesort(int a[], int n){      // 2
+  int i, j;                           // 2 
+  for(i = 0; i < n - 1; i++)          // 1 + n + n - 1 = 2 * n 
+    for (j = n - 1; j > i; j--)       // (1 + n-i + n-i-1) * (n-1) = 2*(n-i)*(n-1)  (variabile in funzione di i !!!)
+                                      // mediamente n-i vale n/2
+      if (a[j] < a[j-1])              // (n-i)*(n-1)
+        scambia(&a[j],&a[j-1]);       // (n-i)*(n-1)  nel caso peggiore           
+}
+ 
+//la funzione scambia è così composta:
+void scambia(int *a, int *b){         // 2
+  int temp;                           // 1
+  temp = *a;                          // 1
+  *a = *b;                            // 1
+  *b = temp;                          // 1
+}
+```
+
+Senza introdurre le notazioni di complessità asintotica il calcolo della complessità di questo algoritmo era molto complesso, ma ora la cosa risulta relativamente semplice. Abbiamo un blocco di codice, la funzione bubble sort, che contiene due cicli innestati, il primo di complessità n il secondo di complessità n, a meno di un coefficiente, 1/2, poichè il ciclo su j avviene ogni volta un numero diverso di volte che è mediamente 1/2·(n-1), questo coefficiente è però trascurabile. La complessità dei due cicli insieme è quindi $O(n^2)$.
+
+Bisogna poi considerare che la funzione "scambia" richiede un certo tempo di calcolo che è un tempo $O(1)$. Siccome questo blocco di codice è innestato nei due cicli precedentemente descritti, bisogna  calcolare $O(n^2) · O(1) = O(n^2)$.
+
+La complessità totale è quindi: 
+
+$$ T(n) = O(n^2) $$
+
+###### Esempio 5
+{: .no_toc}
+
+Consideriamo l'algoritmo di ricerca dicotomica, un algoritmo che cerca la posizione di un numero in un vettore ordinato di numeri. Chiaramente la ricerca può riguardare qualsiasi tipo di variabile ordinabile. Di seguito è riportata una versione ricorsiva dell'algoritmo in linguaggio C. L'algoritmo può restituire la posizione dell'elemento trovato all'interno dell'array A, oppure -1 se l'elemento non è stato trovato.
+
+```c
+int binarySearch (int[] A, int primo, int ultimo, int val) {  
+    int medio, ris = -1;
+        if (val < A[primo] || val > A[ultimo] ) 
+            return ris;
+        if (primo <= ultimo) {
+            medio = (primo + ultimo) / 2;
+            if (val < A[medio])
+                ris = binarySearch(A, primo, medio-1, val);
+            else if (val > A[medio])
+                ris = binarySearch(A, medio+1, ultimo, val);
+            else if (val == A[medio])
+                ris = medio;
+	}
+	return ris;
+}
+```
+
+La complessità della singola chiamata alla funzione è $O(1)$ poichè non ci sono cicli e il numero di operazioni fatte non dipende da *n*. Bisogna quindi valutare quante volte la funzione viene chiamata. La funzione può richiamare sè stessa solamente una volta e ad ogni chiamata la distanza tra primo e ultimo si dimezza. Siccome il numero di chiamate affinchè la condizione "primo <= ultimo" diventi falsa è $log_2(n)$, Il numero di chiamate totali è $log_2(n)$. Per calcolare la complessità basta moltiplicare il numero di chiamate che è $O(log_2(n))$ per il peso di ogni chiamata che è $O(1)$ per ottenere la complessità:
+
+$$ T(n) = O(log_2(n)) $$
+
+###### Casi complessi
+{: .no_toc}
+
+Ci sono algoritmi per cui il calcolo della complessità richiede lo studio di teoremi complessi come il "[teorema principale](https://it.wikipedia.org/wiki/Teorema_principale)" necessario per calcolare la complessità di molti algoritmi ricorsivi in particolare quelli con complessità pseudolineare, un esempio famoso è il [merge sort](https://it.wikipedia.org/wiki/Merge_sort). Vista l'eccessiva complessità di tali argomenti essi non verranno trattati.
 
 
 ## La complessità dei problemi
