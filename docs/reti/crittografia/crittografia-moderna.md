@@ -162,31 +162,7 @@ Tanto più grandi sono questi parametri, tanto maggiore la sicurezza, ma a scapi
 
 La decifratura avviene con la stessa procedura utilizzando le sottochiavi in ordine inverso come illustrato nella figura accanto. In sostanza l'algoritmo di decifratura è identico a quello di cifratura e questo semplifica la realizzazione del software o addirittura dell'hardware dedicato, in fondo la rete di Feistel è un semplice circuito elettronico.
 
-In realtà quella qui descritta è una funzione di feistel semplificata che non è in grado così com'è di rispettare i criteri per un crittosistema robusto. Diversi crittosistemi ispirati alle reti di feistel possono implementare funzioni differenti.
-
-
-#### DES (Data Encryption Standard)
-
-IBM che era allora leader mondiale nella produzione di computer nel 1973 presentò Lucifer che era di fatto un'implementazione del cifrario di Feistel; Lucifer è oggi quasi dimenticato perché fu quasi subito soppiantato dal DES (Data Encryption System) che nel 1977 fu certificato dal NIST (National Institute of Standards and Technology = istituto nazionale degli standard e della tecnica degli USA), diventando l'algoritmo di cifratura più usato fino agli anni '90.
-
-Anche DES è basato sul cifrario di Feistel e utilizza blocchi di 64 bit, chiave di 64 bit (dei quali otto di controllo, per cui in effetti la chiave è di 56 bit) e 16 cicli (round) di Feistel, ai quali si aggiungono una trasposizione iniziale ed una finale. (vedi tabelle a fianco)
-
-In pratica il messaggio alfanumerico è rappresentato in una codifica binaria, e quindi suddiviso in blocchi B di 64 bit, mentre la chiave K è un blocco di 56 bit.
-
-A questo punto ogni blocco viene cifrato in tre passi:
-
-1. Il blocco B è sottoposto a una trasposizione iniziale T<sub>i</sub> producendo il blocco B<sub>1</sub>;
-2. B<sub>1</sub> è cifrato con 16 cicli di Feistel producendo alla fine il blocco B<sub>2</sub>;
-3. B<sub>2</sub> è sottoposto alla trasposizione finale T<sub>f</sub> inversa della T<sub>i</sub>.
-
-
-
-
-
-
-
-
-La rete di Feistel è stata considerata per moltissimi anni (dagli anni 70 agli anni 90) un ottimo sistema di cifratura poichè basato su due principi indicati da Claude Shannon, padre della teoria dell'informazine e quindi della crittografia moderna, come essenziali per un sistema di crittografia robusto: i principi di *[confusione e diffusione](https://it.wikipedia.org/wiki/Confusione_e_diffusione)*. Nel suo lavoro "*La teoria della comunicazione nei sistemi crittografici*" pubblicato nel 1949, Shannon definisce:
+La rete di Feistel è stata la base di partenza di molti sistemi di crittografia dagli anni 70 agli anni 90 poichè basato su due principi indicati da Claude Shannon, padre della teoria dell'informazine e quindi della crittografia moderna, come essenziali per un sistema di crittografia robusto: i principi di *[confusione e diffusione](https://it.wikipedia.org/wiki/Confusione_e_diffusione)*. Nel suo lavoro "*La teoria della comunicazione nei sistemi crittografici*" pubblicato nel 1949, Shannon definisce:
 
 - la *confusione* è il fatto che la relazione tra la chiave e il testo cifrato sia quanto più complessa e non correlata possibile in modo tale che non si possa risalire ad essa a partire dal testo cifrato.
 - la *diffusione* è la capacità dell'algoritmo di distribuire le correlazioni statistiche del testo lungo tutto l'alfabeto utilizzato dall'algoritmo di cifratura rendendo quanto più difficile possibile un attacco statistico.
@@ -197,7 +173,144 @@ La sostituzione è la tecnica più utilizzata per eliminare le predominanze stat
 
 Puoi trovare altri dettagli [qui](https://it.wikipedia.org/wiki/Data_Encryption_Standard)
 
+In realtà quella qui descritta è una funzione di feistel semplificata che non è in grado così com'è di rispettare a dovere i principi di confusione e diffusione, la permutazione infatti non dovrebbe consistere semplicemente in un left shift. Diversi crittosistemi ispirati alle reti di feistel possono implementare funzione differenti come vedremo col DES.
+
+
+#### DES (Data Encryption Standard)
+
+<!-- thumbnail -->
+<div class="thumbnail--33 float-right">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/DES-main-network.png" class="modal__opener" aprire="#img-DES-main-network">
+  <p>Struttura generale della rete di Feistel del DES. </p>
+</div>
+<!-- modal -->
+<div id="img-DES-main-network" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-DES-main-network">&times;</span>
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/DES-main-network.png">
+    </div>
+    <p>Struttura generale della rete di Feistel del DES</p>
+  </div>
+</div>
+
+IBM che era allora leader mondiale nella produzione di computer nel 1973 presentò Lucifer che era di fatto un'implementazione del cifrario di Feistel; Lucifer è oggi quasi dimenticato perché fu quasi subito soppiantato dal DES (Data Encryption System) che nel 1977 fu certificato dal NIST (National Institute of Standards and Technology = istituto nazionale degli standard e della tecnica degli USA), diventando l'algoritmo di cifratura più usato fino agli anni '90.
+
+<!-- thumbnail -->
+<div class="thumbnail--33 float-right clear-both">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/DES_TraspI.png" class="modal__opener" aprire="#img-DES_TraspI">
+  <br>
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/DES_TraspI.png" class="modal__opener" aprire="#img-DES_TraspI">
+  <p>Trasposizione iniziale T<sub>i</sub> e trasposizione finale T<sub>f</sub></p>
+</div>
+<!-- modal -->
+<div id="img-DES_TraspI" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-DES_TraspI">&times;</span>
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/DES_TraspI.png" style="width: 50%">
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/DES_TraspF.png" style="width: 50%">
+    </div>
+    <p>Trasposizione iniziale T<sub>i</sub> e trasposizione finale T<sub>f</sub></p>
+  </div>
+</div>
+
+##### Struttura generale
+
+Anche DES è basato sul cifrario di Feistel e utilizza blocchi di 64 bit, chiave di 64 bit (dei quali otto di controllo, per cui in effetti la chiave è di 56 bit) e 16 cicli (round) di Feistel, ai quali si aggiungono una trasposizione iniziale ed una finale. (vedi tabelle a fianco)
+
+In pratica il messaggio alfanumerico è rappresentato in una codifica binaria, e quindi suddiviso in blocchi B di 64 bit, mentre la chiave K è un blocco di 56 bit.
+
+A questo punto ogni blocco viene cifrato in tre passi:
+
+1. Il blocco B è sottoposto a una trasposizione iniziale T<sub>i</sub> (o IP, *initial permutation*) producendo il blocco B<sub>1</sub>;
+2. B<sub>1</sub> è cifrato con 16 cicli di Feistel producendo alla fine il blocco B<sub>2</sub>;
+3. B<sub>2</sub> è sottoposto alla trasposizione finale T<sub>f</sub> (o FP, *final permutation*) inversa della T<sub>i</sub>.
+
+Nella figura a fianco il simbolo ⊕ denota l'operazione XOR e F è la funzione di Feistel (F-function) che nel paragrafo precedente era semplificata in una sequenza XOR - left shift - XOR. In questo caso, per rispettare a dovere i principi di confusione e diffusione è stata implementata una funzione più complessa.
+
+<!-- thumbnail -->
+<div class="thumbnail--33 float-right clear-both">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/DES_F_function.svg" class="modal__opener" aprire="#img-DES_F_function">
+  <p>Struttura della funzione di Feistel o F-function</p>
+</div>
+<!-- modal -->
+<div id="img-DES_F_function" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-DES_F_function">&times;</span>
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/DES_F_function.svg">
+    </div>
+    <p>Struttura della funzione di Feistel o F-function</p>
+  </div>
+</div>
+
+##### Funzione di Feistel
+
+La funzione Feistel, opera su mezzo blocco (32 bit) per volta e consiste di quattro passi:
+
+1. Espansione: il mezzo blocco di 32 bit è espanso fino a 48 bit utilizzando la permutazione di espansione contraddistinta con E nello schema, che duplica alcuni bit.
+2. Miscelazione con la chiave: il risultato è combinato con una sottochiave usando un'operazione di XOR. Sedici sottochiavi di 48 bit — una per ogni ciclo — sono derivate dalla chiave principale usando il gestore della chiave (descritto più avanti).
+3. Sostituzione: dopo la miscelazione con la sottochiave, il blocco viene diviso in otto parti di sei bit prima del processamento con le S-box o substitution box ("scatole di sostituzione"). Ognuna delle otto S-box sostituisce sei bit in input con quattro bit in output mediante una trasformazione non lineare effettuata attraverso una tabella. Le S-box forniscono il cuore della sicurezza del DES — senza di esse, la cifratura sarebbe lineare e quindi facilmente violabile.
+4. Permutazione: infine, i 32 bit risultanti dalle S-box sono riordinati in base alle permutazioni fisse della P-box o permutation box.
+
+L'alternanza di sostituzioni mediante le S-box, le permutazioni con la P-box e le espansioni garantiscono il rispetto dei principi di confusione e diffusione.
+
+##### Gestore della chiave
+
+<!-- thumbnail -->
+<div class="thumbnail--33 float-right clear-both">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/DES-key-schedule.png" class="modal__opener" aprire="#img-DES-key-schedule">
+
+  <p>Schema generale del triplo DES</p>
+</div>
+<!-- modal -->
+<div id="img-DES-key-schedule" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-DES-key-schedule">&times;</span>
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/DES-key-schedule.png">
+    </div>
+    <p>Schema generale del triplo DES</p>
+  </div>
+</div>
+
+La chiave in DES ha una lunghezza di 64 bit ma in ogni round viene utilizzata una sottochiave di 48 bit che varia ad ogni round sulla base di un algoritmo. Inizialmente vengono scartati 8 bit che possono essere usati come bit di controllo della parità (PC1 nella figura). I rimanenti 56 bit vengono ad ogni round separati in due parti (28 bit ciascuna) e su ognuna di queste parti viene applicato un left shift di 1 o 2 posizioni. Dei 56 bit così modificati ad ogni round vengono scelti solo 48 bit da usare nella funzione di Feiestel secondo una apposita tabella di permutazione (PC2 nella figura, in realtà sono due una per ogni metà).
+
+Durante la fase di decifratura il procedimento è lo stesso ma si applicano dei right shift.
+
+Se vuoi vedere in dettaglio il funzionamento del DES puoi trovare la descrizione completa [qui](https://it.wikipedia.org/wiki/Data_Encryption_Standard) e gli schemi dei singoli componenti [qui](https://it.wikipedia.org/wiki/Informazioni_aggiuntive_su_DES).
+
+#### Sicurezza e crittanalisi
+
+Nonostante siano state pubblicate più informazioni sulla crittanalisi del DES che per ogni altro algoritmo di cifratura a blocchi, il tipo più pratico di attacco a tutt'oggi è quello con forza bruta.
+
+Nonostante il sistema su cui si basa rispetti i principi teorici di un buon sistema di crittografia, la sicurezza del DES è stata messa in discussione fin da subito; con una chiave di 56 bit le chiavi possibili sono 256 numero enorme, assolutamente fuori della portata per un essere umano, ma non di quella dei moderni computer.
+
+In altre parole il DES non è affatto al sicuro dal più semplice degli attacchi crittanalitici, quello esaustivo (in inglese: brute-force) che semplicemente prova una per una tutte le chiavi.
+
+Nel 1993 Wiener presentò un progetto di computer dedicato in grado di decrittare il DES, unico difetto il costo stimato in un milione di dollari! Nel 1998 un gruppo di tre aziende Cryptographic Research, Advanced wireless technologies, Electronic Frontier Foundation comunicò di aver realizzato DES Cracker una macchina per la ricerca delle chiavi dal costo di 250000 $ in grado di forzare la chiave del DES in 56 ore. Comunicazione che mostrò definitivamente che la chiave di 56 bit era troppo corta.
+
+La fragilità del DES non risiede quindi nella natura del sistema su cui si basa, la rete di Feistel, ma nella dimensione della chiave. Il DES a 64 bit ha dovuto così cedere il passo a un DES a 128 bit e al triplo DES, Nel 2001 è stato presentato il nuovo protocollo AES destinato a sostituire progessivamente il DES.
+
 #### 3DES (Triple DES)
+
+<!-- thumbnail -->
+<div class="thumbnail float-right clear-both">
+  <img src="{{site.baseurl}}/assets/images/reti/crittografia/3des-overall-view-810px.png" class="modal__opener" aprire="#img-3des-overall-view">
+
+  <p>Schema generale del triplo DES</p>
+</div>
+<!-- modal -->
+<div id="img-3des-overall-view" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-3des-overall-view">&times;</span>
+    <div class="modal__content__img-container"> 
+      <img src="{{site.baseurl}}/assets/images/reti/crittografia/3des-overall-view.png">
+    </div>
+    <p>Schema generale del triplo DES</p>
+  </div>
+</div>
 
 Quando DES non fu più sicuro, si cercò un metodo che mantenesse le meccaniche del DES ma che permettesse di avere una chiave più lunga. In questo algoritmo si esegue una tripla crittazione impiegando 3 chiavi DES standard, a 56 bit, ottenendo una chiave a 168 bit. È possibile anche invertire il secondo passaggio, ovvero eseguire una crittazione e una decrittazione. Tuttavia non modifica la sicurezza generale dell'algoritmo.
 
@@ -207,11 +320,51 @@ Puoi trovare altri dettagli [qui](https://it.wikipedia.org/wiki/Triple_DES)
 
 #### AES (Advanced Encryption Standard)
 
-Nel 1999 si presentarono vari algoritmi candidati a diventare lo standard di crittografia simmetrica. Questi candidati furono MARS proposto dalla IBM, RC6, Serpent, Twofish e Rijndael. Tutti questi algoritmi furono testati per efficienza e sicurezza su varie architetture, sia hardware che software. Tra questi ricevette un feedback positivo Rijndael ([ˈrɛindaːl]) che nel 2000 divenne il nuovo standard con il nome di AES. Fu dapprima impiegato dal governo degli USA e dopodiché il suo successo divenne globale.
+Il 2 gennaio 1997 l'americano NIST (National Institute of Standards and Technology) lanciò un concorso per un nuovo cifrario simmetrico (a chiave segreta) denominato Advanced Encryption System che potesse prendere il posto del DES e avesse una sicurezza almeno pari al Triplo DES. Dopo aver esaminato molti cifrari proposti da crittologi di tutto il mondo il 2 ottobre 2000 il NIST annunciò di aver scelto il cifrario Rijndael ([ˈrɛindaːl]) progettato da due crittologi belgi Joan Daemen e Vincent Rijmen; l'AES-Rijndael fu certificato nel 2001 come nuovo standard di cifratura. Il nome Rijndael è una sintesi dei nomi dei suoi inventori.
 
 AES lavora su blocchi a dimensione fissa di 128 bit. Inizialmente la lunghezza standard per la chiave era di 128 bit ma è stata prevista la possibilità di impiegate chiavi più lunghe da 192 e 256 bit, cosa che con l'aumentare della potenza di calcolo disponibile risulta ormai necessario per buoni livelli di sicurenzza.
 
-Puoi trovare altri dettagli [qui](https://it.wikipedia.org/wiki/Advanced_Encryption_Standard)
+<div class="tbl-fr" markdown="1">
+  
+  **Chiave da 128 bit**
+  {: .ta-c .mb-1}
+
+  |k<sub>0</sub>|k<sub>4</sub>|k<sub>8</sub>|k<sub>12</sub>|
+  |k<sub>1</sub>|k<sub>5</sub>|k<sub>9</sub>|k<sub>13</sub>|
+  |k<sub>2</sub>|k<sub>6</sub>|k<sub>10</sub>|k<sub>14</sub>|
+  |k<sub>3</sub>|k<sub>7</sub>|k<sub>11</sub>|k<sub>15</sub>|
+  {: .ta-c .tab--p-1 .w-150 .tl-f}
+
+  **Blocco da 128 bit**
+  {: .ta-c .mb-1}
+
+  |b<sub>0</sub>|b<sub>4</sub>|b<sub>8</sub>|b<sub>12</sub>|
+  |b<sub>1</sub>|b<sub>5</sub>|b<sub>9</sub>|b<sub>13</sub>|
+  |b<sub>2</sub>|b<sub>6</sub>|b<sub>10</sub>|b<sub>14</sub>|
+  |b<sub>3</sub>|b<sub>7</sub>|b<sub>11</sub>|b<sub>15</sub>|
+  {: .ta-c .tab--p-1 .w-150 .tl-f}
+
+</div>
+
+Come il DES, AES prevede la ripetizione di numerosi cicli identici. Per l'AES a 128 bit, sono previste 10 ripetizioni del ciclo base. Ogni blocco di 128 bit è diviso in 16 bytes, che dobbiamo immaginare disposti su una matrice 4x4.
+
+Ogni ciclo di Rijndael è una funzione del blocco in ingresso e della chiave, che denoteremo con Round(blocco, chiave) e consiste delle seguenti 4 funzioni:
+
+- Round(blocco, chiave)
+  - SubBytes(blocco): applica ad ogni byte x del blocco in entrata la trasformazione Ax<sup>-1</sup> + b dove A e b sono una matrice e un vettore prefissati e x<sup>-1</sup> è l'inverso moltiplicativo di x nell'aritmetica finita definita campo di Rijndael; essendo presente x<sup>-1</sup>, la funzione SubBytes(_) non è lineare così che non è lineare nemmeno la Round(_,_) cosa importante perché mette al riparo dagli attacchi della [crittanalisi differenziale](http://www.crittologia.eu/critto/cr_differenziale.htm).
+  - ShiftRows(blocco): applica al blocco in entrata uno scorrimento a sinistra (L-shift) riga per riga: la riga 0 resta invariata, la riga 1 scorre a sinistra di 1 posizione, la riga 2 di 2 posizioni, la riga 3 di 3 posizioni.
+  - MixColumns(blocco): ogni colonna della matrice in entrata è moltiplicata per una data matrice con lo scopo di diffondere e confondere i bit.
+  - AddRoundKey(blocco, chiave): effettua una semplice addizione-XOR tra i bit del blocco in ingresso e quelli della chiave.
+- ...
+- FinalRound(blocco, chiave): l'ultimo ciclo è uguale ai precedenti, ma senza la funzione MixColumns.
+
+##### La sicurezza di AES
+
+Dal 2001 sono stati pubblicati diversi progetti di attacco ad AES basati su metodi esaustivi o nel migliore dei casi su algoritmi 4 volte più veloci degli esaustivi. I tempi richiesti per recuperare la chiave sono comunque elevatissimi; nel 2011 è stato pubblicato "Andrey Bogdanov, Dmitry Khovratovich, and Christian Rechberger (2011). *Biclique Cryptanalysis of the Full AES*" che richiede qualcosa come 2<sup>126</sup>. operazioni per forzare una chiave AES a 128 bit, 2<sup>190</sup> per AES 192 bit e 2<sup>254</sup> per AES a 256 bit.
+
+Il livello di sicurezza di AES sembra quindi molto elevato; per i documenti del governo USA AES 128 bit è considerato sufficiente per i documenti classificati “Secret”, mentre per i “Top secret” occorre AES 192 o meglio ancora 256 bit.
+
+Puoi trovare altri dettagli su AES [qui](https://it.wikipedia.org/wiki/Advanced_Encryption_Standard).
 
 ### Cifrari a flusso
 
