@@ -130,7 +130,7 @@ Va ricordato che tutte le interfacce utente sono componenti a sè del sistema op
 
 ## Esecuzione del Sistema Operativo
 
-Il sistema operativo è il software che gestisce tutto l'hardware e permette l'esecuzione di tutti i programmi. Quando accendiamo il computer però sappiamo che la memoria centrale è vuota poichè è una memoria volatile, il sistema operativo non è quindi in esecuzione. All'accensione del computer devono quindi avvenire dei processi particolari che permettano di avviare l'esecuzione del sistema operativo per poter poi continuare con il normale utilizzo del computer. Questa fase di aviamento del computer prende il nome di ***boot** o ***bootstrap***.
+Il sistema operativo è il software che gestisce tutto l'hardware e permette l'esecuzione di tutti i programmi. Quando accendiamo il computer però sappiamo che la memoria centrale è vuota poichè è una memoria volatile, il sistema operativo non è quindi in esecuzione. All'accensione del computer devono quindi avvenire dei processi particolari che permettano di avviare l'esecuzione del sistema operativo per poter poi continuare con il normale utilizzo del computer. Questa fase di aviamento del computer prende il nome di ***boot*** o ***bootstrap***.
 
 Il bootstrap indica l'insieme dei processi che vengono eseguiti da un computer durante la fase di avvio, in particolare dall'accensione fino al completo caricamento in memoria primaria del kernel del sistema operativo a partire dalla memoria secondaria.
 {:importante}
