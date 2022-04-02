@@ -335,18 +335,18 @@ Per chi conosce la matematica il concetto di andamento asintotico dovrebbe esser
 
 La funzione O-grande (leggi o grande) è utilizzata per indicare un limite asintotico superiore della nostra funzione T(n) infatti è definita in questo modo:
 
-$$ f(x) \in O(g(n)) \text{ per } n \to \infty $$
+$$ f(n) \in O(g(n)) \text{ per } n \to \infty $$
 
 se e solo se
 
-$$ \exists x_0 \in \Bbb{R}, \; c > 0 \quad : \quad f(n) ≤ c · g(x) \ ∀ x > x_0 $$
+$$ \exists n_0 \in \Bbb{R}, \; c > 0 \quad : \quad f(n) ≤ c · g(n) \ ∀ n > n_0 $$
 
 Prendiamo ad esempio due funzioni:
 
 - $f(n) = 6n^4-2n^3+5$
 - $g(n) = n^4$
 
-possiamo dire che $ f(n) \in O(g(n)) $ per $ x \to \infty $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ ha solamente un coefficiente (6) che la rende superiore a $g(n)$ ma la definizione ci consente di scegliere un opportuno coefficiente $c$ per cui moltiplicare $g(n)$ che permette a $g(n)$ di essere superiore a $f(n)$  da un certo valore di n in poi.
+possiamo dire che $ f(n) \in O(g(n)) $ per $ n \to \infty $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ ha solamente un coefficiente (6) che la rende superiore a $g(n)$ ma la definizione ci consente di scegliere un opportuno coefficiente $c$ per cui moltiplicare $g(n)$ che permette a $g(n)$ di essere superiore a $f(n)$  da un certo valore di n in poi.
 
 In pratica stiamo dicendo che la funzione $f(n)$ ha un andamento asintotico limitato superiormente dalla funzione $g(n)$, senza considerare i coefficienti che come abbiamo visto analizzando [questa](#tabella-tempi-di-calcolo) tabella non sono rilevanti nel considerare gli andamenti asintotici. In altre parole $f(n)$ cresce al massimo come $g(n)$.
 
@@ -358,11 +358,10 @@ In pratica stiamo dicendo che la funzione $f(n)$ ha un andamento asintotico limi
 |$7+3log(n)$    |$O(log(n))$|logaritmico    |
 |$7n+12$        |$O(n)$     |lineare        |
 |$2n+5 log(n)$  |$O(n)$     |lineare        |
-|$2n · 5log(n)$ |$O(n)$     |pseudolineare  |
+|$2n · 5log(n)$ |$O(n · log(n))$     |pseudolineare  |
 |$3n^2+5n$      |$O(n^2)$   |quadratico     |
 |$2n+5 n·m$     |$O(n^2)$   |quadratico     |
-|$2n+5 n·m$     |$O(n^2)$   |quadratico     |
-|$3^n+5n^3$     |$O(2^n)$   |esponenziale   |
+|$3^n+5n^3$     |$O(3^n)$   |esponenziale   |
 |$3^n+5n^3 + n!$|$O(n!)$    |fattoriale     |
 
 Conoscendo la matematica si può arrivare a conclusioni piuttosto semplici ma importanti che nel loro insieme possono essere chiamate ***algebra degli O-grandi***:
