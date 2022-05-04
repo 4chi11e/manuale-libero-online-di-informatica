@@ -628,7 +628,7 @@ Si supponga per assurdo che esista un algoritmo che prende in ingresso un qualsi
 ```java
 // halts() restituisce true se il suo input termina, false altrimenti
 boolean C(a, d):
-    return halts(a(d));
+  return halts(a(d));
 ```
 
 Essendo per la macchina sia a sia d sequenze indistinte di simboli, è possibile passare come secondo parametro di C lo stesso algoritmo a, ovvero eseguire C(a,a).
@@ -638,8 +638,10 @@ Sia ora loop un programma che non termina mai (ad esempio while true do done): �
 ```java
 // loop() è una funzione che non termina
 boolean K(a):
-  if C(a,a) loop();
-    return true;
+  if C(a,a)
+    loop();       // non termina
+  else  
+    return true;  // termina
 ```
 
 Quindi K termina restituendo il valore true solo se l'algoritmo a con ingresso a non termina, altrimenti K continua a eseguire loop ciclando all'infinito senza restituire alcun valore.
