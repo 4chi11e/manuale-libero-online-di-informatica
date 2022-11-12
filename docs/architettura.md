@@ -8,7 +8,6 @@ has_children: False
 # Architettura dei computer
 {: .no_toc}
 
-Qui posso scrivere una breve intro
 
 ## Indice
 {: .no_toc .text-delta }
@@ -19,24 +18,26 @@ Qui posso scrivere una breve intro
 ## Il computer
 Il termine computer è un termine un po' generico e con esso ci si può riferire a molti dispositivi anche molto diversi tra loro come notebook, smartphone, server... La parola computer deriva dal verbo inglese "to compute" che significa "elaborare". Tutti i dispositivi elettronici in grado di eseguire calcoli o comunque in generale eseguire delle operazioni potremmo chiamarli quindi computer.
 
-## Hardware e software
+### Hardware e software
 
 Per capire meglio come sia fatto un computer è bene partire innanzitutto dal definire due concetti fondamentali, quelli di hardware e software.
 Col termine **hardware** ci si riferisce alle componenti fisiche (hard in inglese significa duro) di un computer, come ad esempio un processore, un hard disk, una tastiera o una stampante.
 Col termine **software** ci si riferisce alle componenti immateriali che possiamo trovare in un computer come i programmi o i dati. Il software per poter esistere deve poter essere memorizzato in un componente hardware provvisto di memoria.
 
-Solitamente i compomenti hardware di un computer, ad eccezione di alcuni componenti molto semplici, sono gestiti da appositi software che prendono il nome di driver o di firmware. I **driver** sono i software dedicati alla gestione delle periferiche di un computer e servono al sistema operativo di un computer per poter interagire correttamente con la specifica periferica. Il **firmware** è invece un software che gestisce in autonomia una determinato dispositivo hardware che può essere un dispositivo completamente autonomo o una parte di un computer. Un esempio importante è il firmware della scheda madre chiamato anche BIOS o più recentemente UEFI (vedi sezione "Esecuzione del sistema operativo").
+Solitamente i compomenti hardware di un computer, ad eccezione di alcuni componenti molto semplici, sono gestiti da appositi software che prendono il nome di driver o di firmware. I **driver** sono i software dedicati alla gestione delle periferiche di un computer e servono al sistema operativo di un computer per poter interagire correttamente con la specifica periferica. Il **firmware** è invece un software che gestisce in autonomia un determinato dispositivo hardware che può essere un dispositivo completamente autonomo o una parte di un computer. Un esempio importante è il firmware della scheda madre chiamato anche BIOS o più recentemente UEFI (vedi sezione "Esecuzione del sistema operativo").
 
-## Modelli su cui sono basati i computer, architettura di Von Neumann
+## La struttura di un computer
+
+### Architettura di Von Neumann
 
 Negli anni '40 del novecento diversi scienziati hanno ideato dei dispositivi elettronici che sono stati presi a modello per i successivi computer. Esistono due modelli molto importanti nella storia dei computer:
 
 - **la macchina di Turing**
 - **l'architettura di Von Neumann**
 
-Turing è considerato uno dei più grandi matematici moderni e teorici dell'informatica moderni. La teoria dell'informazione su cui è basata gran parte dell'informatica si basa sul lavoro di Turing e il modello di computer da lui ideato detta comunemente "macchina di Turing" è alla base di gran parte di quella teoria. 
+Turing è considerato uno dei più grandi matematici moderni e uno dei più importanti teorici dell'informatica. Turing è forse lo scenziato che maggiormante ha contribuito allo sviluppo della teoria della computazione e elemento fondamentale di tale teoria è il modello di computer da lui ideato detto comunemente "macchina di Turing". 
 
-Nonostante l'importanza che ricopre questo modello di computer, i computer moderni si basano su un'architettura differente ideata dal matematico e informatico ungherese John von Neumann. La maggior parte dei primissimi computer costruiti verso la fine degli anni '40 è basata sull'architettura di Von Neumann.
+Nonostante l'importanza che ricopre questo modello di computer, i computer moderni si basano su un'architettura differente ideata dal matematico e informatico ungherese John von Neumann (leggi *fon noiman*). La maggior parte dei primissimi computer costruiti verso la fine degli anni '40 è basata sull'architettura di Von Neumann.
 
 Lo schema si basa sui seguenti componenti fondamentali:
 
@@ -46,7 +47,7 @@ Lo schema si basa sui seguenti componenti fondamentali:
 - Memoria di massa che serve a memorizzare permanentemente grandi quantità di dati;
 - Periferiche di input/output, tramite le quali i dati vengono inseriti nel calcolatore per essere elaborati e infine restituiti all'utente;
 
-## Componenti di un computer
+Di seguito sono trattati in dettaglio i vari componenti
 
 ### CPU
 
