@@ -49,7 +49,7 @@ footer_content: "Dispensa di Informatica per il Liceo Scientifico delle Scienze 
 # #color_scheme: dark
 
 # Build settings
-remote_theme: pmarsceill/just-the-docs
+# remote_theme: pmarsceill/just-the-docs
 # theme: just-the-docs
 plugins:
   - jekyll-feed
