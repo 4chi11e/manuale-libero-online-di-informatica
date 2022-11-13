@@ -99,7 +99,13 @@ La memoria centrale viene quindi chiamata anche RAM (Random Access Memory). Per 
 
 Le principali caratteristiche delle memorie ram sono:
 - la capienza misurata in byte poichè la memoria è formata da una lunghissima sequenza di byte e ogni byte è numerato per potervi accedere; attualmente le memorie di un PC contengono normalmente 8 o 16 GB;
-- la frequenza del clock della memoria; anche la memoria ha un suo clock che scandisce il tempo per sincronizzare le operazioni da fare e la frequenza di clock ci indica indirettamente il tempo di accesso alla memoria; anche per le RAM attualmente le frequenze sono dell'ordine dei GHz anche se normalmente sono più basse di quelle del processore, ma un'operazione del processore richiede più cicli di clock rispetto alla semplice lettura da parte della memoria; il processore non viene quindi rallentato.
+- la frequenza del clock della memoria; anche la memoria ha un suo clock che scandisce il tempo per sincronizzare le operazioni da fare e la frequenza di clock ci indica indirettamente il tempo di accesso alla memoria. 
+ 
+Anche per le RAM attualmente le frequenze del clock sono dell'ordine dei GHz anche se normalmente sono più basse di quelle del processore, inoltre anche le memorie possono impiegare parecchi cicli di clock per effettuare una lettura o una scrittura. Le memorie RAM risultano quindi normalmente più lente del processore e questo è un problema poichè la CPU deve accedervi continuamente. Per questo motivo i processori sono dotati di piccole memorie RAM interne chiamate ***chache*** (dal francese nascosto, pronunciato normalmente all'inglese ˈkæʃ/). La chache è più veloce di una normale RAM per la memoria centrale ma è anche più costosa (se no si potrebbe fare tutta la RAM così, c'è anche da considerare che per motivi tecnologici una memoria piccola ha tempi di accesso più repidi, ma i motivi sono complicati). La sua velocità permette al processore di mantenervi i dati (o operazioni) a cui deve accedere più di frequente e farlo molto velocemente. Spesso nei processori sono presenti due o addirittura tre livelli di cache, cioè diverse memorie progressivamente più veloci ma anche più piccole. Se si cerca tra le specifiche dei processori questi livelli sono spesso indicati come L2 e L3 (Nel processore AMD Ryzen 7 5800X si ha L2 di 4MB e L3 di 32MB) 
+
+
+
+
 
 ### BUS di sistema
 
@@ -138,7 +144,7 @@ La scheda madre è il componente più importante non citato nella architettura d
 
 Alla scheda madre sono anche collegati i vari "banchi" di memoria RAM (si possono solitamente collegare 2 o 4 memorie RAM che vanno a formare insieme la memoria centrale).
 
-Sulla scheda madre sono presenti un gran numero di connettori per collegare vari tipi di periferica. Sono inoltre presenti diverse periferiche ritenute utili e sufficientemente piccole da poter essere integrate direttamente nella scheda madre, come ad esempio il chip di rete o quello per l'elaborazione audio. In alcuni casi sono presenti anche chip per l'elaborazione video (chiaramente meno complessi e potenti rispetto ad una scheda video dedicata). Chip o schede dedicate sono essenzialmente dei minicomputer dedicati a svolgere un determinato compito che comunicano con la CPU. La trattazione di questi componenti, in particolare la scheda video sarebbe interessante ma troppo lunga e complessa.
+Sulla scheda madre sono presenti un gran numero di connettori per collegare vari tipi di periferica. Sono inoltre presenti diverse periferiche ritenute utili e sufficientemente piccole da poter essere integrate direttamente nella scheda madre, come ad esempio il chip di rete o quello per l'elaborazione audio. In alcuni casi sono presenti anche chip per l'elaborazione video (chiaramente meno complessi e potenti rispetto ad una scheda video dedicata, inoltre questi sono normalmente integrati all'interno del processore e non nella scheda madre). Chip o schede dedicate sono essenzialmente dei minicomputer dedicati a svolgere un determinato compito che comunicano con la CPU. La trattazione di questi componenti, in particolare la scheda video sarebbe interessante ma troppo lunga e complessa.
 
 #### Alimentatore
 Ogni computer deve essere alimentato con corrente continua per funzionare, per questo motivo ogni computer è provvisto di un alimentatore che oltre a convertire la corrente alternata della linea elettrica in una corrente continua stabile senza sbalzi di tensione, fornisce tutti i diversi cavi e connettori per alimentare ogni componente del computer. Alcuni componenti, principalmente le periferiche, sono collegati direttamente all'alimentatore, mentre altri come la CPU e la RAM sono alimentati dalla scheda madre la quale è collegata all'alimentatore.
