@@ -116,19 +116,19 @@ Di seguito sono riportate le operazioni da effettuare per installare e configura
 3. Una volta installato il programma aprilo e vai nella sezione dedicata alle estensioni cliccando sull'icona corretta a sinistra (vedi immagine sotto). Le estensioni da installare sono:
    1. C/C++, estensione che permette a VSCode di gestire correttamente i linguaggi C e C++ nell editor del codice (durante la scrittura del codice in C, VSCode ti propone di installare questa estensione se non l'hai ancora fatto)
    2. Code Runner, estensione che aggiunge un pulsante "play" in alto a destra per compilare ed eseguire in automatico il codice che hai scritto.
-    <!-- thumbnail -->
-    <div class="thumbnail--w100 mt-4 mb-4">
-        <img src="{{site.baseurl}}/assets/images/eserciziario_C/installazione/estensioni_vscode.png" class="modal__opener" aprire="#img-estensioni_vscode">
-    </div>
-    <!-- modal -->
-    <div id="img-estensioni_vscode" class="modal">
-    <div class="modal__content">
-        <span class="modal__closer modal__closer--topright" chiudere="#img-estensioni_vscode">&times;</span>
-        <div class="modal__content__img-container">   
-            <img src="{{site.baseurl}}/assets/images/eserciziario_C/installazione/estensioni_vscode.png">
+        <!-- thumbnail -->
+        <div class="thumbnail--w100 mt-4 mb-4">
+            <img src="{{site.baseurl}}/assets/images/eserciziario_C/installazione/estensioni_vscode.png" class="modal__opener" aprire="#img-estensioni_vscode">
         </div>
-    </div>
-    </div>
+        <!-- modal -->
+        <div id="img-estensioni_vscode" class="modal">
+        <div class="modal__content">
+            <span class="modal__closer modal__closer--topright" chiudere="#img-estensioni_vscode">&times;</span>
+            <div class="modal__content__img-container">   
+                <img src="{{site.baseurl}}/assets/images/eserciziario_C/installazione/estensioni_vscode.png">
+            </div>
+        </div>
+        </div>
    3. C/C++ Compile Run, estensione alternativa a Code Runner che offre maggiori funzionalità (ad es. eseguire su una console esterna, inserire file di output in una sottocartella) ma può dare problemi se non la si sa utilizzare.
 4. Una volta installate le estensioni vanno modificate alcune impostazioni. Il menù impostazioni è velocemente accessibile dal tasto in basso a sinistra;
     <!-- thumbnail -->
@@ -147,33 +147,33 @@ Di seguito sono riportate le operazioni da effettuare per installare e configura
 
    Le impostazioni da modificare sono:
    1. “run in terminal” da spuntare nelle impostazioni e trovabile velocemente inserendo la voce nella barra di ricerca e cliccando sull’estensione interessata come nella seguente immagine:  
-    <!-- thumbnail -->
-    <div class="thumbnail--w100 mt-4 mb-4">
-        <img src="{{site.baseurl}}/assets/images/eserciziario_C/installazione/run_in_terminal.png" class="modal__opener" aprire="#img-run_in_terminal">
-    </div>
-    <!-- modal -->
-    <div id="img-run_in_terminal" class="modal">
-    <div class="modal__content">
-        <span class="modal__closer modal__closer--topright" chiudere="#img-run_in_terminal">&times;</span>
-        <div class="modal__content__img-container">   
-            <img src="{{site.baseurl}}/assets/images/eserciziario_C/installazione/run_in_terminal.png">
+        <!-- thumbnail -->
+        <div class="thumbnail--w100 mt-4 mb-4">
+            <img src="{{site.baseurl}}/assets/images/eserciziario_C/installazione/run_in_terminal.png" class="modal__opener" aprire="#img-run_in_terminal">
         </div>
-    </div>
-    </div>
+        <!-- modal -->
+        <div id="img-run_in_terminal" class="modal">
+        <div class="modal__content">
+            <span class="modal__closer modal__closer--topright" chiudere="#img-run_in_terminal">&times;</span>
+            <div class="modal__content__img-container">   
+                <img src="{{site.baseurl}}/assets/images/eserciziario_C/installazione/run_in_terminal.png">
+            </div>
+        </div>
+        </div>
    2. “Mouse Wheel Zoom” da spuntare come fatto per l’impostazione precedente
-    <!-- thumbnail -->
-    <div class="thumbnail--w100 mt-4 mb-4">
-        <img src="{{site.baseurl}}/assets/images/eserciziario_C/installazione/wheel_zoom.png" class="modal__opener" aprire="#img-wheel_zoom">
-    </div>
-    <!-- modal -->
-    <div id="img-wheel_zoom" class="modal">
-    <div class="modal__content">
-        <span class="modal__closer modal__closer--topright" chiudere="#img-wheel_zoom">&times;</span>
-        <div class="modal__content__img-container">   
-            <img src="{{site.baseurl}}/assets/images/eserciziario_C/installazione/wheel_zoom.png">
+        <!-- thumbnail -->
+        <div class="thumbnail--w100 mt-4 mb-4">
+            <img src="{{site.baseurl}}/assets/images/eserciziario_C/installazione/wheel_zoom.png" class="modal__opener" aprire="#img-wheel_zoom">
         </div>
-    </div>
-    </div>
+        <!-- modal -->
+        <div id="img-wheel_zoom" class="modal">
+        <div class="modal__content">
+            <span class="modal__closer modal__closer--topright" chiudere="#img-wheel_zoom">&times;</span>
+            <div class="modal__content__img-container">   
+                <img src="{{site.baseurl}}/assets/images/eserciziario_C/installazione/wheel_zoom.png">
+            </div>
+        </div>
+        </div>
 5. È possibile modificare a piacere altre impostazioni come:
    1. Save file before run
    2. Save all files before run
