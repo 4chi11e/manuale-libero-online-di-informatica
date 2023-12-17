@@ -283,6 +283,11 @@ code {
     min-width: 100%;
   }
 
+  .wauto {
+    min-width: unset;
+    width: auto
+  }
+
   &--testo {
     @extend .thumbnail;
     line-height: normal;
