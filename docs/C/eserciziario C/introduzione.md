@@ -26,11 +26,12 @@ int main() {
 }
 ```
 
-La prima cosa da dire è che un programma in C deve sempre avere una funzione principale che si chiama *main* e che contiene il codice da eseguire. In seguito si vedrà come inserire altre funzioni oltre a main.
-
-La seconda cosa è che per stampare qualcosa sullo schermo, in questo caso sulla console, bisogna usare una funzione che si chiama *printf* (che sta per "print formatted") e che riceve come parametro la stringa da stampare. In seguito vedremo come stampare cose più elaborate.
-
-Infine va detto che per poter usare la funzione printf bisogna importare all'inizio del programma la libreria che la contiene. Una libreria è una raccolta di funzioni già fatte che possiamo inserire nei nostri programmi. La libreria che contiene le funzioni per l'input e l'output si chiama *stdio* (standard input output). Per importare la libreria si usa la direttiva per il compilatore *#include* seguita dal nome del file che contiene le intestazioni (per ora accontentati di sapere che sono le indicazioni generali sul loro funzionamento) di tutte le funzioni della libreria.
+Ci sono diverse cose da spiegare di questo semplice codice:
+1. Un programma in C deve sempre avere una funzione principale che si chiama *main* e che contiene il codice da eseguire. In seguito si vedrà come inserire altre funzioni oltre a main. Non entriamo qui nel dettaglio della spiegazione della sintassi legata all'uso delle funzioni in C, nota però che prima del nome della funzione è scritto int e subito dopo sono presenti due parentesi tonde che indicano la natura di funzione del main (all'interno delle parentesi vanno i parametri, come in matematica, ad es. f(x)). Tutto il codice della funzione main è racchiuso tra parentesi graffe. Racchiudere il codice tra parentesi graffe indica al computer che esso costituisce un unico blocco di codice che in questo caso appartiene a main.
+2. Ogni comando all'interno del main termina con ; che indica che il comando è finito. Il fatto che andiamo a capo prima di scrivere un altro comando è solo una questione di ordine.
+3. Ogni volta che si aprono delle parentesi e si va a capo è buona norma *indentare* il codice ovvero aggiungere una tabulazione che sposta il testo a destra di 4 spazi (non premere spazio 4 volte ma premi tab). Il codice deve sempre essere ben ordinato!
+4. Per stampare qualcosa sullo schermo, in questo caso sulla console, bisogna usare una funzione che si chiama *printf* (che sta per "print formatted") e che riceve come parametro la stringa da stampare. In seguito vedremo come stampare cose più elaborate.
+5. Per poter usare la funzione printf bisogna importare all'inizio del programma la libreria che la contiene. Una libreria è una raccolta di funzioni già fatte che possiamo inserire nei nostri programmi. La libreria che contiene le funzioni per l'input e l'output si chiama *stdio* (standard input output). Per importare la libreria si usa la direttiva per il compilatore *#include* seguita dal nome del file che contiene tutte le funzioni della libreria (in realtà i file con estensione .h contengono le intestazioni delle funzioni ma è un discorso troppo complesso per essere trattato ora).
 
 
 ### Variabili
@@ -124,3 +125,211 @@ che produce il seguente output
     Ciao a tutti 
 
 
+Nel seguente esempio invece è mostrato come funziona la funzione scanf (scan formatted) che serve a leggere dati dalla tastiera:
+
+#include <stdio.h>
+
+```c
+int main() {
+    int a;
+    char nome[50];
+
+    printf("Come ti chiami? ");
+    scanf("%s", &nome);
+    printf("Piacere %s, quanti anni hai? ");
+    scanf("%d", &a);
+    printf("Davvero? anche io ho %d anni!", a);
+}
+```
+
+che produce il seguente output (sono incluse anche le cose scritte con la tastiera)
+
+    Come ti chiami? Francesco
+    Piacere Francesco, quanti anni hai? 16
+    Davvero? anche io ho 16 anni!
+
+Il funzionamento di scanf è analogo a quello di printf, è però presente una differenza importante, le variabili da passare alla funzione perchè vengano modificate vanno scritte precedute dal simbolo **&**. Questo operatore che approfondirai più avanti è indispensabile per la funzione scanf che altrimenti non sarebbe in grado di modificare il valore della variabile. In realtà le stringhe fanno eccezione e possono essere passate anche senza usare la &. Il motivo verrà approfondito in seguito con lo studio delle stringhe e dei puntatori.
+
+### La selezione e gli operatori if - else
+
+I programmi visti finora sono semplici sequenze di istruzioni che vengono eseguite sempre allo stesso modo. I programmi però devono spesso prendere delle decisioni e decidere se eseguire sequenze alternative di istruzioni. Questa operazione che possiamo chiamare selezione richiede l'istruzione condizionale *if-else*. Di seguito è riportato un esempio di utilizzo di tale istruzione.
+
+```c
+#include <stdio.h>
+
+int main() {
+    int num, den1, den2;
+
+    num = 5;
+    den1 = 2;
+    den2 = 0;
+
+    if (den1 != 0) {
+        printf("%d / %d = %g \n", num, den1, (float)num/(float)den1);
+    } else {
+        printf("%d / %d = impossibile! \n", num, den1);
+    }
+
+    if (den2 != 0) {
+        printf("%d / %d = %g \n", num, den2, (float)num/(float)den2);
+    } else {
+        printf("%d / %d = impossibile! \n", num, den2);
+    }
+}
+```
+
+La sintassi di questo operatore è piuttosto semplice: if è seguito da una espressione a cui è possibile solo rispondere sì o no (espressioni che restituiscono un valore booleano true o false). Queste domande possono contenere una domanda semplice come un confronto tra due valori (ad esempio *den == 0* che signignifica: den è uguale a 0?) o una espressione logica più complessa che può contenere uguaglianze, disuguaglianze, operatori logici come and, or, not... Di seguito è riportato un esempio con un espressione logica un po' più complessa.
+
+```c
+#include <stdio.h>
+
+int main() {
+    int a = 12;
+
+    if ((a > 10 && a % 2 != 0) || a % 3 == 0) {
+        printf("%d e' maggiore di 10 e dispari, oppure è multiplo di 3", a);
+    } else {
+        printf("%d non rispetta le condizioni date.");
+    }
+}
+```
+
+gli operatori possibili sono: 
+
+<!-- | operatore | significato       |
+|-----------| ------------------|
+| <         | minore di         |
+| <=        | minore o uguale a |
+| \>        | maggiore di | -->
+
+- <  : minore di
+- <= : minore o uguale a
+- \> : maggiore di
+- \>= : maggiore o uguale a
+- == : uguale a
+- != : diverso da
+- \|\| : or (in italiano o)
+- && : and (in italiano e)
+- !  : non, nega l'espressione successiva
+
+Possono essere indicate direttamente delle variabili il cui valore significa vero o falso, come:
+- 1    : indica vero
+- 0    : indica falso
+- NULL : indica falso
+
+Tutti i valori interpretati come falso vengono detti falsy.
+
+Possono anche essere indicate delle funzioni che restituiscono un certo valore che possa essere interpretato come vero o falso. Può anche essere inserito un assegnamento (=) che verrà eseguito e poi considerato falso se si assegna un valore falsy, vero altrimenti.
+
+C'è un'ultima cosa importante da dire riguardo alle strutture di controllo if-else, cioè che la presenza del comando else non è obbligatoria, sono infatti lecite le seguenti righe di codice:
+
+```c
+if (a == 1) {
+    printf("a == 1\n");
+}
+if (a == 2) {
+    printf("a == 2\n");
+}
+
+if (a != 1) {
+
+} else {
+    printf("a == 1\n");
+}
+
+```
+
+Notare inoltre che l'ultimo if-else è lecito ed equivale al primo if anche se è dacisamente da preferirsi il primo if.
+
+
+
+### Cicli while e for
+
+Spesso nei programmi capita di dover ripetere le stesse operazioni tante volte, in questo caso si dice che si è in presenza di un ciclo o iterazione (ripetizione). Le istruzioni necessaei a creare i cicli sono il **while** e il **for**. Queste istruzioni permettono di ripetere l'esecuzione di uno stesso blocco di codice fintanto che continua ad essere vera una certa condizione. Di seguito è riportato un esempio:
+
+```c
+#include <stdio.h>
+
+int main() {
+    int i;
+    int n = 10;
+
+    printf("Esempio col while:\n");
+    i = 0;
+    while (i < n) {
+        printf("%d ", i);
+        i += 1;
+    }
+
+    printf("\n");
+
+    printf("\n\nEsempio equivalente col for:\n");
+    for (i = 0; i < n; i += 1) {
+        printf("%d ", i);
+    }
+}
+```
+
+    Esempio col while:
+    0 1 2 3 4 5 6 7 8 9 
+
+    Esempio equivalente col for:
+    0 1 2 3 4 5 6 7 8 9 
+
+
+in questo esempio sono stati utilizzati il while e il for per fare la stessa cosa cioè stampare tutti i numeri da 0 a 9. Dopo aver assegnato alla variabile *i* il valore 0 si sono ripetute le operazioni di stampare *i* e incrementare di 1 il valore di *i*. La condizione che deve essere soddisfatta per entrare nel ciclo è che *i* sia minore di *n* (a cui è stato assegnato il valore 10).
+
+While e for sono del tutto equivalenti ma il for è molto comodo nelle situazioni come questa in cui deve essere fatto un assegnamento iniziale (solitamente un contatore o un indice che ci permette di scorrere un elenco di dati), e un incremento (o decremento) alla fine di ogni ciclo. La sintassi del for ci permette di mettere in un unico posto, assegnamento iniziale, condizione e incremento, cosa molto comoda in molti contesti.
+
+Il while rimane comunque utilizzato in tutti gli altri generici contesti in cui si ha un ciclo, solitamente quando la condizione non dipende dallo scorrere di un contatore o indice.
+
+Il C prevede anche un altro tipo di ciclo: il *do-while* che permette di eseguire le operazioni del ciclo prima del controllo. Questa istruzione però non è così utile tanto che molti linguaggi non la implementano. Per non confondervi troppo all'inizio del vostro percorso di studio della programmazione, lo saltiamo.
+
+In alcuni casi può essere comodo modificare il flusso di esecuzione dei cicli while e for con due nuovi operatori: break e continue
+
+```c
+#include <stdio.h>
+
+int main() {
+    int i;
+
+    printf("Esempio col while:\n");
+    i = 0;
+    while (1) {
+        if (i >= 10) {
+            break;
+        } else {
+            printf("%d ", i);
+        }
+        i++;
+
+        continue;
+        printf("Questo non viene eseguito\n");
+    }
+
+    printf("\n\nEsempio equivalente col for:\n");
+    for (i = 0; 1; i++) {
+        if (i >= 10) {
+            break;
+        } else {
+            printf("%d ", i);
+        }
+    }
+}
+```
+
+Questo codice produce esattamente lo stesso output di quello precedente ma è scritto con una logica differente. la condizione del while e del for contengono un valore sempre vero per cui si entrerebbe e si rimarrebbe per sempre all'interno del ciclo. All'interno del ciclo però viene inserito il comando *break* che fa in modo che non appena viene eseguito, il programma esce dal ciclo.
+
+Un altro comando un po meno usato è il comando continue che permette di terminare l'esecuzione del ciclo corrente e di passare al successivo (motivo per cui nel codice di esempio il printf della riga seguente al continue non viene mai eseguito).
+
+Sebbene l'esistenza di questi due comandi non sia strettamente necessaria piochè si possono fare le stesse cose con un corretto uso delle strutture di controllo while, for e if-else, in alcuni contesti questi comandi sono molto comodi (specialmente in un contesto ad eventi, ad esempio un gioco in cui succede sempre la stessa cosa finchè non viene premuto qualcosa).
+
+## Esercizi
+
+### 1
+
+Data in input l’area del cerchio, stampare la circonferenza
+
+### 2
+
+Data la base e l’altezza di un triangolo, scrivere l’area 
