@@ -73,3 +73,6 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+
+# For copy button on code
+enable_copy_code_button: true
