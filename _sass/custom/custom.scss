@@ -148,6 +148,35 @@ code {
   letter-spacing: 0.1em;
 }
 
+// -------------------- Numerazione Titoli ----------------------------------------
+
+body {
+  counter-reset: h1;
+}
+h1.numerato::before {
+  counter-increment: h1;
+  content: counter(h1) ". ";
+}
+h1.numerato {
+  counter-reset: h2;
+}
+h2.numerato::before {
+  counter-increment: h2;
+  content: counter(h1) "." counter(h2) ". ";
+}
+h2.numerato,
+h2.azzera_numerazione_h3 {
+  counter-reset: h3;
+}
+h3.numerato::before {
+  counter-increment: h3;
+  content: counter(h1) "." counter(h2) "." counter(h3) ". ";
+}
+h3.numerato_da_h3::before {
+  counter-increment: h3;
+  content: counter(h3) ". ";
+}
+
 // -------------------- Elementi specifici ----------------------------------------
 
 .formula {
@@ -465,7 +494,7 @@ code {
   clear: both;
 }
 
-// ---------------- Esercizi subnetting -------------------------------------------
+// ---------------- Soluzioni Esercizi ------------------------------------------------
 
 .soluzione-container {
   overflow-y: hidden;
@@ -501,6 +530,7 @@ code {
   img {
     max-width: 100%;
   }
+
 }
 
 .soluzione__visibile {
@@ -510,6 +540,21 @@ code {
   padding-top: 6px;
   padding-bottom: 6px;
 }
+
+.my-code {
+  * {
+    line-height: 1.5;
+  }
+
+  &--fs2 * {
+    @include fs-2;
+  }
+}
+
+code * {
+  line-height: 1.5;
+}
+
 
 // ---------------- Sistema di incolonnamento --------------------------------------
 

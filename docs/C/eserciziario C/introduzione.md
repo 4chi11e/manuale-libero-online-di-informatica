@@ -270,11 +270,14 @@ int main() {
 }
 ```
 
-    Esempio col while:
-    0 1 2 3 4 5 6 7 8 9 
 
-    Esempio equivalente col for:
-    0 1 2 3 4 5 6 7 8 9 
+```
+Esempio col while:
+0 1 2 3 4 5 6 7 8 9 
+
+Esempio equivalente col for:
+0 1 2 3 4 5 6 7 8 9 
+```
 
 
 in questo esempio sono stati utilizzati il while e il for per fare la stessa cosa cioè stampare tutti i numeri da 0 a 9. Dopo aver assegnato alla variabile *i* il valore 0 si sono ripetute le operazioni di stampare *i* e incrementare di 1 il valore di *i*. La condizione che deve essere soddisfatta per entrare nel ciclo è che *i* sia minore di *n* (a cui è stato assegnato il valore 10).
@@ -325,11 +328,107 @@ Un altro comando un po meno usato è il comando continue che permette di termina
 Sebbene l'esistenza di questi due comandi non sia strettamente necessaria piochè si possono fare le stesse cose con un corretto uso delle strutture di controllo while, for e if-else, in alcuni contesti questi comandi sono molto comodi (specialmente in un contesto ad eventi, ad esempio un gioco in cui succede sempre la stessa cosa finchè non viene premuto qualcosa).
 
 ## Esercizi
+{: .azzera_numerazione_h3}
 
-### 1
+### Circonferenza 
+{: .numerato_da_h3}
 
 Data in input l’area del cerchio, stampare la circonferenza
 
-### 2
+<div class="soluzione-container">
+<p class="soluzione-toggler" totoggle="#sol-Circonferenza">Visualizza la soluzione</p>
+<div class="soluzione" id="sol-Circonferenza" markdown="1">
+
+```c
+#include <math.h>
+#include <stdio.h>
+
+int main() {
+    float cerchio, circonferenza, raggio;
+
+    printf("Scrivi quanto misura l'area del cerchio: ");
+    scanf("%f", &cerchio);
+
+    raggio = sqrt(cerchio / 3.14);
+    circonferenza = 2 * 3.14 * raggio;
+
+    printf("Il cerchio con area %.2f ha un raggio che misura %.2f e una circonferenza che misura %.2f \n",
+           cerchio, raggio, circonferenza);
+}
+```
+
+</div>
+</div>
+
+### Area del triangolo 
+{: .numerato_da_h3}
 
 Data la base e l’altezza di un triangolo, scrivere l’area 
+
+<div class="soluzione-container">
+<p class="soluzione-toggler" totoggle="#sol-area_del_triangolo">Visualizza la soluzione</p>
+<div class="soluzione" id="sol-area_del_triangolo" markdown="1">
+
+```c
+#include <stdio.h>
+
+int main() {
+    float base, altezza, area;
+
+    printf("Scrivi la base: ");
+    scanf("%f", &base);
+    printf("Scrivi l'altezza: ");
+    scanf("%f", &altezza);
+
+    area = base * altezza / 2;
+
+    printf("L'area misura %.2f", area);
+}
+```
+
+</div>
+</div>
+
+### Operazioni 
+{: .numerato_da_h3}
+
+Dati in input due numeri, scrivi il risultato di tutte le operazioni che è possibile fare con i due numeri (somma, sottrazione, moltiplicazione, divisione, resto della divisione)
+
+### Approssimazioni 
+{: .numerato_da_h3}
+
+Dato un numero decimale, ottieni e stampa:
+
+1. valore intero approssimato per difetto;
+2. valore intero approssimato per eccesso;
+3. valore intero approssimato in maniera intelligente;
+4. approssimazione del numero al secondo decimale;
+5. valore assoluto del numero.
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<div class="soluzione-container">
+<p class="soluzione-toggler" totoggle="#sol-area_del_triangolo">Visualizza la soluzione</p>
+<div class="soluzione" id="sol-area_del_triangolo" markdown="1">
+
+```c
+
+```
+
+</div>
+</div> 
+
+-->
+
+
+
+<script src="{{site.baseurl}}/assets/js/esercizi-subnetting.js"></script>
