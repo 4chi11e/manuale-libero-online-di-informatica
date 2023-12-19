@@ -528,6 +528,15 @@ h3.numerato_da_h3::before {
   color: $link-color;
 }
 
+.highlighter-rouge,
+.highlighter-rouge * {
+  background-color: white !important;
+}
+.highlighter-rouge {
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+}
+
 #esercizi-subnetting {
   .soluzione-container {
     overflow-y: hidden;

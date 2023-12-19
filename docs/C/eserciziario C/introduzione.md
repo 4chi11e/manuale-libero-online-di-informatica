@@ -77,6 +77,8 @@ int main() {
 }
 ```
 
+Che produce il seguente output:
+
     12 + 5 = 17 
     5 - 12 = -7 
     12 * 5 = 60 
@@ -283,6 +285,8 @@ int main() {
     }
 }
 ```
+
+Che produce il seguente output:
 
 
 ```
