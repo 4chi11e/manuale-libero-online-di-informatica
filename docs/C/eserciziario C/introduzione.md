@@ -10,12 +10,23 @@ has_children: False
 # Introduzione e Strutture di Controllo
 {: .no_toc}
   
-* TOC
-{:toc}
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc .toc}
+</details>
+
+
 
 ## Esempi di base
+{: .azzera_numerazione_h3}
 
 ### Hello world
+{: .numerato_da_h3}
+
 Di seguito è riportato il l'esempio che viene sempre proposto come primissimo programma in qualsiasi linguaggio di programmazione. Questo programma che consiste nello stampare sullo schermo una scritta di saluto è utile per capire i primi elementi di base della sintassi del linguaggio. 
 
 ```c
@@ -35,6 +46,7 @@ Ci sono diverse cose da spiegare di questo semplice codice:
 
 
 ### Variabili
+{: .numerato_da_h3}
 
 ```c
 #include <stdio.h>
@@ -151,6 +163,7 @@ che produce il seguente output (sono incluse anche le cose scritte con la tastie
 Il funzionamento di scanf è analogo a quello di printf, è però presente una differenza importante, le variabili da passare alla funzione perchè vengano modificate vanno scritte precedute dal simbolo **&**. Questo operatore che approfondirai più avanti è indispensabile per la funzione scanf che altrimenti non sarebbe in grado di modificare il valore della variabile. In realtà le stringhe fanno eccezione e possono essere passate anche senza usare la &. Il motivo verrà approfondito in seguito con lo studio delle stringhe e dei puntatori.
 
 ### La selezione e gli operatori if - else
+{: .numerato_da_h3}
 
 I programmi visti finora sono semplici sequenze di istruzioni che vengono eseguite sempre allo stesso modo. I programmi però devono spesso prendere delle decisioni e decidere se eseguire sequenze alternative di istruzioni. Questa operazione che possiamo chiamare selezione richiede l'istruzione condizionale *if-else*. Di seguito è riportato un esempio di utilizzo di tale istruzione.
 
@@ -244,6 +257,7 @@ Notare inoltre che l'ultimo if-else è lecito ed equivale al primo if anche se �
 
 
 ### Cicli while e for
+{: .numerato_da_h3}
 
 Spesso nei programmi capita di dover ripetere le stesse operazioni tante volte, in questo caso si dice che si è in presenza di un ciclo o iterazione (ripetizione). Le istruzioni necessaei a creare i cicli sono il **while** e il **for**. Queste istruzioni permettono di ripetere l'esecuzione di uno stesso blocco di codice fintanto che continua ad essere vera una certa condizione. Di seguito è riportato un esempio:
 
@@ -406,6 +420,86 @@ Dato un numero decimale, ottieni e stampa:
 5. valore assoluto del numero.
 
 
+### Divisione con condizione 
+{: .numerato_da_h3}
+
+Dati due numeri calcolare il loro quoziente se il divisore è != 0, ritornare “impossibile” se il divisore = 0
+
+<div class="soluzione-container">
+<p class="soluzione-toggler" totoggle="#sol-divisione_con_condizione">Visualizza la soluzione</p>
+<div class="soluzione" id="sol-divisione_con_condizione" markdown="1">
+
+```c
+#include <stdio.h>
+
+int main() {
+    float a,b,c;
+    printf("Scrivi il primo numero: ");
+    scanf("%f", &a);
+    printf("Scrivi il secondo numero: ");
+    scanf("%f", &b);
+    if (b != 0) {
+        c = a / b;
+        printf("%g", c);
+    } else {
+        printf("Non e' possibile dividere per 0\n");
+    }
+}
+```
+
+</div>
+</div> 
+
+
+### Stampa sequenze 
+{: .numerato_da_h3}
+
+Dato in input un numero:
+1.	Stampa i numeri da 1 a quel numero
+2.	Stampa i numeri da quel numero a 0 (conto alla rovescia)
+
+<div class="soluzione-container">
+<p class="soluzione-toggler" totoggle="#sol-stampa_sequenze">Visualizza la soluzione</p>
+<div class="soluzione" id="sol-stampa_sequenze" markdown="1">
+
+```c
+#include <stdio.h>
+
+int main() {
+    int n, i;
+
+    // input - versione col while
+    printf("Scrivi un numero positivo: ");
+    scanf("%d", &n);
+    while (n <= 0) {
+        printf("Il numero non è positivo, riscrivilo: ");
+        scanf("%d", &n);
+    }
+
+    // input - versione col do-while
+    do {
+        printf("Scrivi un numero positivo: ");
+        scanf("%d", &n);
+    } while (n <= 0);
+
+    // 1.   Stampa i numeri da 1 a quel numero
+    for (i = 1; i <= n; i++) {
+        printf("%d ", i);
+    }
+
+    printf("\n");
+    
+    // 2.   Stampa i numeri da quel numero a 0 (conto alla rovescia)
+    for (i = n; i >= 0; i--) {
+        printf("%d ", i);
+    }
+}
+```
+
+</div>
+</div> 
+
+
 
 
 
@@ -421,7 +515,6 @@ Dato un numero decimale, ottieni e stampa:
 <div class="soluzione" id="sol-area_del_triangolo" markdown="1">
 
 ```c
-
 ```
 
 </div>

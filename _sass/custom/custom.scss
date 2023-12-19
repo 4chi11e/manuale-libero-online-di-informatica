@@ -271,6 +271,34 @@ h3.numerato_da_h3::before {
   }
 }
 
+// -------------------- TOC -------------------------------------------------------
+
+// in realtà questo è il toc per il solo eserciziario che vuole numerazione dal secondo livello
+
+// toc è la prima lista numerata
+.toc {
+  padding-left: 0px !important;
+  list-style-type: none;
+}
+.toc li::before {
+  content: "" !important;
+}
+.toc ol {
+  list-style-type: none;
+  /* initialise counter */
+  counter-reset: toc-counter !important;
+}
+
+// con questo prendo tutti i link tranne quelli del primo livello (toc è il primo livello)
+.toc ol a::before {
+  /* display the counter formatted as our ordinal style */
+  content: counters(toc-counter, ".") " " !important; 
+  counter-increment: toc-counter  !important;
+
+  margin-right: 5px;
+  @extend .fs-3;
+}
+
 // -------------------- Thumbnail -------------------------------------------------
 
 .thumbnail {
