@@ -524,50 +524,56 @@ h3.numerato_da_h3::before {
 
 // ---------------- Soluzioni Esercizi ------------------------------------------------
 
-.soluzione-container {
-  overflow-y: hidden;
-  border: $border $border-color;
-  border-radius: $border-radius;
-  margin: 12px 0px;
-}
-
 .soluzione-toggler {
-  margin: 6px 0px;
   color: $link-color;
-  margin: 0;
-  padding: 4px 4px;
 }
 
-.soluzione {
-  // display: none;
-  height: 0px;
-  overflow-y: hidden;
-  padding: 0px 12px;
-
-  // border: 1px solid red;
-
-  :first-child {
-    margin-top: 0px;
-    padding-top: 0px;
+#esercizi-subnetting {
+  .soluzione-container {
+    overflow-y: hidden;
+    border: $border $border-color;
+    border-radius: $border-radius;
+    margin: 12px 0px;
   }
-  :last-child {
-    margin-bottom: 0px;
-    padding-bottom: 0px;
+  
+  .soluzione-toggler {
+    margin: 6px 0px;
+    color: $link-color;
+    margin: 0;
+    padding: 4px 4px;
   }
-
-  img {
-    max-width: 100%;
+  
+  .soluzione {
+    // display: none;
+    height: 0px;
+    overflow-y: hidden;
+    padding: 0px 12px;
+  
+    // border: 1px solid red;
+  
+    :first-child {
+      margin-top: 0px;
+      padding-top: 0px;
+    }
+    :last-child {
+      margin-bottom: 0px;
+      padding-bottom: 0px;
+    }
+  
+    img {
+      max-width: 100%;
+    }
   }
-
+  
+  .soluzione__visibile {
+    // display: block;
+    height: fit-content;
+    border-top: $border $border-color;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
 }
 
-.soluzione__visibile {
-  // display: block;
-  height: fit-content;
-  border-top: $border $border-color;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
 
 .my-code {
   * {

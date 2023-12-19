@@ -349,9 +349,11 @@ Sebbene l'esistenza di questi due comandi non sia strettamente necessaria pioch�
 
 Data in input l’area del cerchio, stampare la circonferenza
 
-<div class="soluzione-container">
-<p class="soluzione-toggler" totoggle="#sol-Circonferenza">Visualizza la soluzione</p>
-<div class="soluzione" id="sol-Circonferenza" markdown="1">
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
 
 ```c
 #include <math.h>
@@ -371,17 +373,21 @@ int main() {
 }
 ```
 
-</div>
-</div>
+</details> 
+
+
 
 ### Area del triangolo 
 {: .numerato_da_h3}
 
 Data la base e l’altezza di un triangolo, scrivere l’area 
 
-<div class="soluzione-container">
-<p class="soluzione-toggler" totoggle="#sol-area_del_triangolo">Visualizza la soluzione</p>
-<div class="soluzione" id="sol-area_del_triangolo" markdown="1">
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
 
 ```c
 #include <stdio.h>
@@ -400,8 +406,9 @@ int main() {
 }
 ```
 
-</div>
-</div>
+</details> 
+
+
 
 ### Operazioni 
 {: .numerato_da_h3}
@@ -425,9 +432,11 @@ Dato un numero decimale, ottieni e stampa:
 
 Dati due numeri calcolare il loro quoziente se il divisore è != 0, ritornare “impossibile” se il divisore = 0
 
-<div class="soluzione-container">
-<p class="soluzione-toggler" totoggle="#sol-divisione_con_condizione">Visualizza la soluzione</p>
-<div class="soluzione" id="sol-divisione_con_condizione" markdown="1">
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
 
 ```c
 #include <stdio.h>
@@ -447,8 +456,9 @@ int main() {
 }
 ```
 
-</div>
-</div> 
+</details> 
+
+
 
 
 ### Stampa sequenze 
@@ -458,9 +468,12 @@ Dato in input un numero:
 1.	Stampa i numeri da 1 a quel numero
 2.	Stampa i numeri da quel numero a 0 (conto alla rovescia)
 
-<div class="soluzione-container">
-<p class="soluzione-toggler" totoggle="#sol-stampa_sequenze">Visualizza la soluzione</p>
-<div class="soluzione" id="sol-stampa_sequenze" markdown="1">
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
 
 ```c
 #include <stdio.h>
@@ -494,33 +507,29 @@ int main() {
         printf("%d ", i);
     }
 }
-```
+``` 
 
-</div>
-</div> 
-
-
-
-
-
-
-
-
+</details> 
 
 
 <!-- 
 
-<div class="soluzione-container">
-<p class="soluzione-toggler" totoggle="#sol-area_del_triangolo">Visualizza la soluzione</p>
-<div class="soluzione" id="sol-area_del_triangolo" markdown="1">
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
 
 ```c
 ```
 
-</div>
-</div> 
+</details> 
 
 -->
+
+
+
+
 
 
 
