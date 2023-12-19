@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Introduzione
+title: Introduzione e Strutture di Controllo
 nav_order: 1
 parent: Eserciziario C
 grand_parent: Programmazione in C
@@ -306,7 +306,7 @@ Il while rimane comunque utilizzato in tutti gli altri generici contesti in cui 
 
 Il C prevede anche un altro tipo di ciclo: il *do-while* che permette di eseguire le operazioni del ciclo prima del controllo. Questa istruzione però non è così utile tanto che molti linguaggi non la implementano. Per non confondervi troppo all'inizio del vostro percorso di studio della programmazione, lo saltiamo.
 
-In alcuni casi può essere comodo modificare il flusso di esecuzione dei cicli while e for con due nuovi operatori: break e continue
+In alcuni casi può essere comodo modificare il flusso di esecuzione dei cicli while e for con due nuovi operatori: **break** e **continue**
 
 ```c
 #include <stdio.h>

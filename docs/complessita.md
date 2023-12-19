@@ -239,15 +239,15 @@ Consideriamo l'algoritmo bubble sort:
 void bubblesort(int a[], int n){
   int i, j;
   // N.B. n-1 è l'ultima componente dell'array.
-  for(i = 0; i < n - 1; i++) //scansiona tutto l'array tranne l'ultima componente: n - 1 escluso. Quindi fino al penultimo elemento.
+  for(i = 0; i < n - 1; i++)    //scansiona tutto l'array tranne l'ultima componente: n - 1 escluso. Quindi fino al penultimo elemento.
     for (j = n - 1; j > i; j--) //j settato all'ultima componente e decresce ad ogni iterazione. Esce dal ciclo solo se j <= i
-      if (a[j] < a[j-1])  //se la componente corrente è più piccola della precedente, li scambia.
+      if (a[j] < a[j-1])        //se la componente corrente è più piccola della precedente, li scambia.
         scambia(&a[j],&a[j-1]);                   
 }
  
 //la funzione scambia è così composta:
-void scambia(int *a, int *b){ //richiede due indirizzi di memoria in entrata che verranno memorizzati in 2 puntatori.
-  int temp; //la variabile d'appoggio che memorizza temporaneamente il valore di a.
+void scambia(int *a, int *b){   //richiede due indirizzi di memoria in entrata che verranno memorizzati in 2 puntatori.
+  int temp;                     //la variabile d'appoggio che memorizza temporaneamente il valore di a.
   temp = *a;
   *a = *b;
   *b = temp;
@@ -259,21 +259,21 @@ Questo algoritmo è decisiamente più complesso dei precedenti e introduce anche
 Riprendiamo il codice ripulito da commenti di spiegazione e inseriamo il costo di ogni riga di codice:
 
 ```c
-void bubblesort(int a[], int n){      // 2
-  int i, j;                           // 2 
-  for(i = 0; i < n - 1; i++)          // 1 + n + n - 1 = 2 * n 
-    for (j = n - 1; j > i; j--)       // (1 + n-i + n-i-1) * (n-1) = 2*(n-i)*(n-1)  (variabile in funzione di i !!!) 
-                                      // mediamente n-i vale n/2
-      if (a[j] < a[j-1])              // (n-i)*(n-1)
-        scambia(&a[j],&a[j-1]);       // (n-i)*(n-1)  nel caso peggiore           
+void bubblesort(int a[], int n){   // 2
+  int i, j;                        // 2 
+  for(i = 0; i < n - 1; i++)       // 1 + n + n - 1 = 2 * n 
+    for (j = n - 1; j > i; j--)    // (1 + n-i + n-i-1) * (n-1) = 2*(n-i)*(n-1)  (variabile in funzione di i !!!) 
+                                   // mediamente n-i vale n/2
+      if (a[j] < a[j-1])           // (n-i)*(n-1)
+        scambia(&a[j],&a[j-1]);    // (n-i)*(n-1)  nel caso peggiore           
 }
  
 //la funzione scambia è così composta:
-void scambia(int *a, int *b){         // 2
-  int temp;                           // 1
-  temp = *a;                          // 1
-  *a = *b;                            // 1
-  *b = temp;                          // 1
+void scambia(int *a, int *b){      // 2
+  int temp;                        // 1
+  temp = *a;                       // 1
+  *a = *b;                         // 1
+  *b = temp;                       // 1
 }
 ```
 
