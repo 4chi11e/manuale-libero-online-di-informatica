@@ -1831,25 +1831,28 @@ int main() {
 </details> 
 
 
+### Calcolo probabilità dado 2
+{: .numerato_da_h3}
 
+Simula una serie di lanci di un dado a 6 facce (d6) e un dado da 20 facce (d20). Calcola il valore medio che si ottiene lanciando il d6 e quello ottenuto lanciando il d20.
 
+### Calcolo probabilità dadi 2
+{: .numerato_da_h3}
 
+Valuta se è più probabile ottenere 7 oppure ottenere 8 lanciando 2 dadi da 6 e sommando i 2 valori ottenuti.
 
+### Calcolo probabilità dadi 3
+{: .numerato_da_h3}
 
+Voglio valutare la probabilità che tirando due dadi da 6 esca il valore 2. Il valore calcolato deve essere abbastanza preciso e decido di calcolarlo misurando la media di tanti tiri di dado e fermandomi solo quando vedo che facendo uscire un nuovo 2 valore calcolato non varia di più di 0,01%
 
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
 
-
-
-
-
-
-
-
-
-2.1.51	Simula una serie di lanci di un dado a 6 facce (d6) e un dado da 20 facce (d20). Calcola il valore medio che si ottiene lanciando il d6 e quello ottenuto lanciando il d20.
-2.1.52	Valuta se è più probabile ottenere 7 oppure ottenere 8 lanciando 2 dadi da 6 e sommando i 2 valori ottenuti.
-2.1.53	Voglio valutare la probabilità che tirando due dadi da 6 esca il valore 2. Il valore calcolato deve essere abbastanza preciso e decido di calcolarlo misurando la media di tanti tiri di dado e fermandomi solo quando vedo che facendo uscire un nuovo 2 valore calcolato non varia di più di 0,01%
-Soluzione
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -1882,9 +1885,23 @@ int main() {
 
     printf("%f", prob);
 }
+```
 
-2.1.54	Vengono dati in input i valori delle altezze di n persone (n chiesto all'utente). Per ogni persona oltre all'altezza viene indicato anche il sesso. Deve essere stampato il valore medio di altezza separatamente per i maschi e per le femmine. L’utente può decidere di non indicare né maschio né femmina, in quel caso non contare quella persona.
-Soluzione
+</details> 
+
+
+### Input sequenza lunga n, calcolo media condizionale
+{: .numerato_da_h3}
+
+Vengono dati in input i valori delle altezze di n persone (n chiesto all'utente). Per ogni persona oltre all'altezza viene indicato anche il sesso. Deve essere stampato il valore medio di altezza separatamente per i maschi e per le femmine. L’utente può decidere di non indicare né maschio né femmina, in quel caso non contare quella persona.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 
 int main() {
@@ -1920,10 +1937,24 @@ int main() {
     printf("L'altezza media dei maschi e' %.1f.\n", mediam);
     printf("L'altezza media delle femmine e' %.1f.\n", mediaf);
 }
+```
 
-2.1.55	Scrivi il codice di un gioco per 2 persone basato sul lancio di dadi. All’inizio del gioco si decide che tipo di dado usare, si possono scegliere i dadi da 4, 6, 8 o 20 facce. Il gioco consiste nel tirare uno per volta il dado e sommando ogni volta i numeri usciti finchè uno dei due giocatori non supera un valore limite che è 4 volte il valore massimo rappresentato sul dado scelto (ad esempio se si sceglie il dado da 6 il limite è 24). Per rendere il gioco equo si può fare in modo che i due giocatori debbano tirare per forza lo stesso numero di tiri e che entrambi i giocatori possano superare il limite facendo finire il gioco in parità
+</details> 
+
+
+### Gioco coi dadi
+{: .numerato_da_h3}
+
+Scrivi il codice di un gioco per 2 persone basato sul lancio di dadi. All’inizio del gioco si decide che tipo di dado usare, si possono scegliere i dadi da 4, 6, 8 o 20 facce. Il gioco consiste nel tirare uno per volta il dado e sommando ogni volta i numeri usciti finchè uno dei due giocatori non supera un valore limite che è 4 volte il valore massimo rappresentato sul dado scelto (ad esempio se si sceglie il dado da 6 il limite è 24). Per rendere il gioco equo si può fare in modo che i due giocatori debbano tirare per forza lo stesso numero di tiri e che entrambi i giocatori possano superare il limite facendo finire il gioco in parità
 Variante: Scrivi una variante del gioco in cui l’obiettivo è avvicinarsi il più possibile al valore limite senza superarlo. Chi si avvicina di più vince. In ogni momento un giocatore può decidere di accontentarsi del valore ottenuto e smettere di tirare.
-Soluzione
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -1961,11 +1992,24 @@ int main() {
     } else {
         printf("Vince il giocatore 1.\n");
     }
-
 }
+```
 
-2.1.56	Leggi un numero positivo e controlla se esso è divisibile per 2 o divide 3 e non è compreso tra 10 e 20
-Soluzione
+</details> 
+
+
+### If con espressione logica
+{: .numerato_da_h3}
+
+Leggi un numero positivo e controlla se esso è divisibile per 2 o divide 3 e non è compreso tra 10 e 20
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 
 int main() {
@@ -1982,9 +2026,23 @@ int main() {
         printf("No");
     }
 }
+```
 
-2.1.57	Leggi un numero positivo e controlla se esso è divisibile per 2 o è un multiplo di 3 ed è compreso tra 10 e 20
-Soluzione
+</details> 
+
+
+### If con espressione logica 2
+{: .numerato_da_h3}
+
+Leggi un numero positivo e controlla se esso è divisibile per 2 o è un multiplo di 3 ed è compreso tra 10 e 20
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 
 int main() {
@@ -2000,25 +2058,48 @@ int main() {
         printf("No");
     }
 }
+```
 
-2.1.58	dato un numero n stampa tutti i numeri da 1 a n che sono divisibili da 2 o 3 o 5 ma non sono divisibili per 4
-2.1.59	Dato un numero positivo n disegna le figure geometriche riportate di seguito:
-per n = 5
-xxxxx
-xxxx
-xxx
-xx
-x
-	xxxxx
-xxxxx
-xxxxx
-xxxxx
-xxxxx	x
-xx
-xxx
-xxxx
-xxxxx
-Soluzione
+</details> 
+
+
+### Sequenza e if con espressione logica
+{: .numerato_da_h3}
+
+dato un numero n stampa tutti i numeri da 1 a n che sono divisibili da 2 o 3 o 5 ma non sono divisibili per 4
+
+### Figure geometriche
+{: .numerato_da_h3}
+
+
+Dato un numero positivo n disegna le figure geometriche riportate di seguito:
+
+    per n = 5
+    xxxxx
+    xxxx
+    xxx
+    xx
+    x
+
+    xxxxx
+    xxxxx
+    xxxxx
+    xxxxx
+    xxxxx	
+
+    x
+    xx
+    xxx
+    xxxx
+    xxxxx
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 
 int main() {
@@ -2063,15 +2144,30 @@ int main() {
         printf("\n");
     }
 }
+```
 
-2.1.60	Esegui un programma che abbia il seguente output (chiaramente usando dei cicli):
-1 2 3 4 5 6
-2 3 4 5 6 +
-3 4 5 6 + +
-4 5 6 + + +
-5 6 + + + +
-6 + + + + +
-Soluzione
+</details> 
+
+
+### Figure geometriche 2
+{: .numerato_da_h3}
+
+Esegui un programma che abbia il seguente output (chiaramente usando dei cicli):
+
+    1 2 3 4 5 6
+    2 3 4 5 6 +
+    3 4 5 6 + +
+    4 5 6 + + +
+    5 6 + + + +
+    6 + + + + +
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 
 int main() {
@@ -2102,9 +2198,23 @@ int main() {
         printf("\n");
     }
 }
+```
 
-2.1.61	Simula l’esecuzione di un gioco di dadi in cui due persone si scontrano lanciando ognuno un dado. Il gioco è diviso in round. Al primo round i due giocatori lanciano ognuno un dado da venti facce e vince chi fa il numero più alto, in caso di pareggio ritirano i dadi finchè uno dei due non vince. Chi perde il round deve affrontare i round successivi con un dado con una faccia in meno. Perde la partita chi arriva ad avere un dado con 0 facce. Mostra ad ogni round quante facce hanno i dadi dei due giocatori e mostra il risultato di ogni lancio dei dadi. Dichiara infine il vincitore.
-Soluzione
+</details> 
+
+
+### Gioco coi dadi 2
+{: .numerato_da_h3}
+
+Simula l’esecuzione di un gioco di dadi in cui due persone si scontrano lanciando ognuno un dado. Il gioco è diviso in round. Al primo round i due giocatori lanciano ognuno un dado da venti facce e vince chi fa il numero più alto, in caso di pareggio ritirano i dadi finchè uno dei due non vince. Chi perde il round deve affrontare i round successivi con un dado con una faccia in meno. Perde la partita chi arriva ad avere un dado con 0 facce. Mostra ad ogni round quante facce hanno i dadi dei due giocatori e mostra il risultato di ogni lancio dei dadi. Dichiara infine il vincitore.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -2136,15 +2246,30 @@ int main() {
     } else {
         printf("\nVince il giocatore 1!\n");
     }
-
 }
+```
 
-2.1.62	Scrivi un programma che dato un numero n stampi una piramide come nel seguente esempio:
-Con n = 3
-  1  
- 121 
-12321
-Soluzione
+</details> 
+
+
+
+### Figure geometriche 3
+{: .numerato_da_h3}
+
+Scrivi un programma che dato un numero n stampi una piramide come nel seguente esempio:
+
+    Con n = 3
+      1  
+     121 
+    12321
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 
 int main() {
@@ -2171,12 +2296,28 @@ int main() {
         printf("\n");
     }
 }
+```
 
-2.1.63	Scrivere un programma che legga due interi n e m con valori compresi tra 1 e 9, i cui prodotto sia inferiore a 35, e stampi m piramidi di altezza n. L’esempio si riferisce al caso n=3 e m=4.
-  1    1    1    1
- 121  121  121  121
-12321123211232112321
-Soluzione
+</details> 
+
+
+
+### Figure geometriche 4
+{: .numerato_da_h3}
+
+Scrivere un programma che legga due interi n e m con valori compresi tra 1 e 9, i cui prodotto sia inferiore a 35, e stampi m piramidi di altezza n. L’esempio si riferisce al caso n=3 e m=4.
+
+      1    1    1    1
+     121  121  121  121
+    12321123211232112321
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 
 int main() {
@@ -2206,12 +2347,26 @@ int main() {
         printf("\n");
     }
 }
+```
 
-2.1.64	Scrivi un programma che permetta di controllare i dati di input immessi dall’utente:
-se l’utente inserisce un intero N compreso tra 1 e 10, il programma deve stampare a video il valore NN,
+</details> 
+
+
+### Input e condizione
+{: .numerato_da_h3}
+
+Scrivi un programma che permetta di controllare i dati di input immessi dall’utente:
+se l’utente inserisce un intero N compreso tra 1 e 10, il programma deve stampare a video il valore N^N,
 se l’intero N e’ compreso tra 11 e 20, il programma deve stampare a video la somma 1 + 2 + 3 +… + N
 altrimenti deve dare un segnale di errore.
-Soluzione
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 
 int main() {
@@ -2235,11 +2390,27 @@ int main() {
         printf("Valore non valido.");
     }
 }
+```
 
-2.1.65	Si realizzi un programma che legga un intero N da tastiera, e stampi a video il risultato della seguente sommatoria:
- 
+</details> 
+
+
+### Calcolo sommatoria matematica
+{: .numerato_da_h3}
+
+Si realizzi un programma che legga un intero N da tastiera, e stampi a video il risultato della seguente sommatoria:
+
+$$ \sum_{i=0}^N \left[(-1)^i {4 \over 2i + 1}\right] $$
+
 Una volta calcolato e stampato il valore a video, il programma deve chiedere un nuovo numero all’utente e ripetere il calcolo. Il programma deve terminare solo qualora l’utente inserisca un valore negativo.
-Soluzione
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 
 int main() {
@@ -2262,16 +2433,34 @@ int main() {
         printf("%f\n", ris);
     } while (n >= 0);
 }
+```
 
-2.1.66	Si progetti in C un programma che legge un float, rappresentante un ammontare di euro; di seguito il programma deve leggere un tasso d’interesse (in percentuale), ed un numero di anni. Il programma deve stampare, in uscita, per ogni anno, come l’ammontare cresce con gli interessi. Si ricordi che l’interesse si calcola con la seguente formula:
-Cfin = Cin ( 1 + (r/100))N
-dove Cfin è il capitale finale, Cin è quello iniziale, r è l’interesse, e N rappresenta il numero di anni in cui si applicano gli interessi.
+</details> 
+
+
+### Calcolo interesse cumulato
+{: .numerato_da_h3}
+
+Si progetti in C un programma che legge un float, rappresentante un ammontare di euro; di seguito il programma deve leggere un tasso d’interesse (in percentuale), ed un numero di anni. Il programma deve stampare, in uscita, per ogni anno, come l’ammontare cresce con gli interessi. Si ricordi che l’interesse si calcola con la seguente formula:
+
+$$ C_{fin} = C_{in} \left( 1 + (r/100) \right)N $$
+
+dove $C_{fin}$ è il capitale finale, $C_{in}$ è quello iniziale, $r$ è l’interesse, e $N$ rappresenta il numero di anni in cui si applicano gli interessi.
+
 Ad esempio supponiamo che il capitale iniziale sia di 1000.0 €, con un tasso del 3%, per un periodo di 3 anni. L’output stampato deve avere all’incirca questo aspetto: 
-Capitale iniziale: 1000.00€ 
-Dopo 1 anno: 1030.00 € 
-Dopo 2 anni: 1060.90 € 
-Dopo 3 anni: 1092.73 €
-Soluzione
+
+    Capitale iniziale: 1000.00€ 
+    Dopo 1 anno: 1030.00 € 
+    Dopo 2 anni: 1060.90 € 
+    Dopo 3 anni: 1092.73 €
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 #include <math.h>
 
@@ -2294,11 +2483,24 @@ int main() {
         cf =  c * pow(1 + (r/100), i);
         printf("Dopo %d anni: %.2f e\n", i, cf);
     }
-
 }
+```
 
-2.1.67	Realizzare un programma che legga da input un carattere dell’alfabeto e stampi a video il carattere stesso ed il suo valore ASCII. Il programma deve controllare che il carattere inserito sia compreso tra ‘a’ e ‘z’ o tra ‘A’ e ‘Z’ (in caso contrario si stampi un messaggio di errore). Dopo la stampa, il programma deve continuare a chiedere nuovi caratteri, finché l’utente non inserisce il carattere corrispondente al numero zero ( ‘0’ ): in tal caso il programma termina.
-Soluzione
+</details> 
+
+
+### Input sequenza non 0, ASCII code
+{: .numerato_da_h3}
+
+Realizzare un programma che legga da input un carattere dell’alfabeto e stampi a video il carattere stesso ed il suo valore ASCII. Il programma deve controllare che il carattere inserito sia compreso tra ‘a’ e ‘z’ o tra ‘A’ e ‘Z’ (in caso contrario si stampi un messaggio di errore). Dopo la stampa, il programma deve continuare a chiedere nuovi caratteri, finché l’utente non inserisce il carattere corrispondente al numero zero ( ‘0’ ): in tal caso il programma termina.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 
 int main() {
@@ -2315,11 +2517,24 @@ int main() {
             printf("'%c' non e' una lettera.\n\n", c);
         }
     } while (c != '0');
-
 }
+```
 
-2.1.68	Realizzare un programma che prende in input una sequenza di caratteri ‘0’ e ‘1’ e conta la lunghezza della più lunga sotto-sequenza di ‘0’ di fila L’inserimento della sequenza termina quando si inserisce un carattere diverso da ‘0’ e ‘1’ A quel punto, si stampa a video il valore trovato.
-Soluzione
+</details> 
+
+
+### Input sequenza, calcolo più lunga sottosequenza
+{: .numerato_da_h3}
+
+Realizzare un programma che prende in input una sequenza di caratteri ‘0’ e ‘1’ e conta la lunghezza della più lunga sotto-sequenza di ‘0’ di fila. L’inserimento della sequenza termina quando si inserisce un carattere diverso da ‘0’ e ‘1’ A quel punto, si stampa a video il valore trovato.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 
 int main() {
@@ -2342,12 +2557,25 @@ int main() {
 
     printf("\n\n%d", max);
 }
+```
 
-2.1.69	Realizzare un programma che prenda in input una sequenza di cifre (tra 1 e 9) e calcoli la somma massima fra le sottosequenze di cifre non decrescenti Il programma termina quando viene inserito lo 0
+</details> 
+
+
+
+### Input sequenza, calcolo più lunga sottosequenza 2
+{: .numerato_da_h3}
+
+Realizzare un programma che prenda in input una sequenza di cifre (tra 1 e 9) e calcoli la somma massima fra le sottosequenze di cifre non decrescenti Il programma termina quando viene inserito lo 0
 Esempio: 
  
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
 
-Soluzione
+```c
 #include <stdio.h>
 
 int main() {
@@ -2377,9 +2605,23 @@ int main() {
 
     printf("%d", sommamax);
 }
+```
 
-2.1.70	Data in input una sequenza di n numeri (n dato dall’utente), stampare per ognuno il numero di quadrati perfetti minori di quel numero.
-Soluzione
+</details> 
+
+
+### Input sequenza lunga n, quadrati perfetti
+{: .numerato_da_h3}
+
+Data in input una sequenza di n numeri (n dato dall’utente), stampare per ognuno il numero di quadrati perfetti minori di quel numero.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 
 int main() {
@@ -2400,9 +2642,23 @@ int main() {
         printf("esistono %d quadrati perfetti minori o ugali a %d.\n", nquadrati, numero);
     }
 }
+```
 
-2.1.71	Conta quanti tiri di moneta devi fare prima di vedere uscire testa per 10 volte di fila.
-Soluzione
+</details> 
+
+
+### Lancio moneta
+{: .numerato_da_h3}
+
+Conta quanti tiri di moneta devi fare prima di vedere uscire testa per 10 volte di fila.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -2423,9 +2679,23 @@ int main() {
 
     printf("%d", ntiri);
 }
+```
 
-2.1.72	Conta quanti tiri di un dado da 6 devi fare prima di vedere uscire lo stesso numero 5 volte di fila.
-Soluzione
+</details> 
+
+
+### Calcolo probabilità Dado 3
+{: .numerato_da_h3}
+
+Conta quanti tiri di un dado da 6 devi fare prima di vedere uscire lo stesso numero 5 volte di fila.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -2448,9 +2718,23 @@ int main() {
 
     printf("%d", ntiri);
 }
+```
 
-2.1.73	Scrivi un programma che deve indovinare un numero scelto dall’utente (che se lo tiene per sé e non lo dice al computer). Il computer continua a proporre numeri e l’utente deve rispondere se il numero segreto è maggiore o minore di quello proposto.
-Soluzione
+</details> 
+
+
+### Indovina il numero
+{: .numerato_da_h3}
+
+Scrivi un programma che deve indovinare un numero scelto dall’utente (che se lo tiene per sé e non lo dice al computer). Il computer continua a proporre numeri e l’utente deve rispondere se il numero segreto è maggiore o minore di quello proposto.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -2480,9 +2764,23 @@ int main() {
         }
     }
 }
+```
 
-2.1.74	Genera una sequenza di 10 numeri interi casuali e calcolane la media.
-Soluzione
+</details> 
+
+
+### Sequenza casuale, calcolo media
+{: .numerato_da_h3}
+
+Genera una sequenza di 10 numeri interi casuali e calcolane la media.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -2504,9 +2802,23 @@ int main() {
     media /= n;
     printf("\n\n%.2f", media);
 }
+```
 
-2.1.75	Tira due dadi da 12 fino a che non escono due numeri uguali. Calcola la media dei tiri fatti (sommi sempre i due dadi)
-Soluzione
+</details> 
+
+
+### Calcolo probabilità dadi 4
+{: .numerato_da_h3}
+
+Tira due dadi da 12 fino a che non escono due numeri uguali. Calcola la media dei tiri fatti (sommi sempre i due dadi)
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -2532,9 +2844,23 @@ int main() {
     media /= c;
     printf("\n\n%.2f", media);
 }
+```
 
-2.1.76	Leggi due numeri e poi comunica se questi numeri hanno lo stesso segno o se la loro somma è negativa e contemporaneamente sono entrambi minori di 10.
-Soluzione
+</details> 
+
+
+### If con espressione logica 3
+{: .numerato_da_h3}
+
+Leggi due numeri e poi comunica se questi numeri hanno lo stesso segno o se la loro somma è negativa e contemporaneamente sono entrambi minori di 10.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
 #include <stdio.h>
 
 int main() {
@@ -2549,12 +2875,16 @@ int main() {
         printf("No");
     }
 }
+```
+
+</details> 
 
 
 
 
 
-<!-- 
+
+<!-- per una nuova soluzione
 
 <details markdown="block">
   <summary class="soluzione-toggler">
