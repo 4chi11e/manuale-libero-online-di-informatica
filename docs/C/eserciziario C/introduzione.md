@@ -431,6 +431,7 @@ Dato un numero decimale, ottieni e stampa:
 5. valore assoluto del numero.
 
 ### Input e output stringhe
+{: .numerato_da_h3}
 
 Leggi 3 parole e stampale tutte insieme in un'unica volta (solo un parallelogramma di scrittura).
 
@@ -521,6 +522,7 @@ int main() {
 
 
 ### Sequenze pari
+{: .numerato_da_h3}
 
 Dato in input un numero positivo, stampa tutti i numeri pari minori di quel numero
 
@@ -563,6 +565,7 @@ int main() {
 </details> 
 
 ### Trova potenza di 2
+{: .numerato_da_h3}
 
 Dato in input un numero n, stampa la prima potenza di 2 maggiore o uguale a n
 
@@ -593,6 +596,7 @@ int main() {
 </details> 
 
 ### Moltiplicazione con le somme
+{: .numerato_da_h3}
 
 Moltiplicazione di due numeri senza usare l’operatore *
 
@@ -625,6 +629,7 @@ int main() {
 </details> 
 
 ### Divisione con le differenze
+{: .numerato_da_h3}
 
 Divisione di due numeri interi senza usare l’operatore di divisione
 
@@ -665,6 +670,7 @@ int main() {
 </details> 
 
 ### Sequenze crescenti e decrescenti 2
+{: .numerato_da_h3}
 
 dati dall'utente due numeri interi n1 e n2 il programma deve stampare:
 1.	tutti i numeri dal più piccolo dei due al più grande dei due
@@ -739,6 +745,7 @@ int main() {
 </details> 
 
 ### Conta numeri inseriti diversi da 0
+{: .numerato_da_h3}
 
 Inserire n numeri != 0 (0 per finire), contare quanti sono i numeri inseriti
 
@@ -786,10 +793,12 @@ int main() {
 </details> 
 
 ### Triangolo dati i lati
+{: .numerato_da_h3}
 
 Dati tre numeri reali dire che tipo di triangolo essi formano (classificazione dei triangoli in base ai lati).
 
 ### Somma dei pari e prodotto dei dispari
+{: .numerato_da_h3}
 
 Data una sequenza di n numeri interi (valore di n dato dall’utente), calcolare la somma dei pari ed il prodotto dei dispari 
 
@@ -838,14 +847,17 @@ int main() {
 </details> 
 
 ### Confronto due numeri
+{: .numerato_da_h3}
 
 Dati due numeri, determinare il maggiore (verificare anche se sono uguali)
 
 ### Input sequenza non 0 e conteggio numeri inseriti
+{: .numerato_da_h3}
 
 Data una sequenza di numeri terminata da 0, dire quanti sono i numeri inseriti (diversi da 0)
 
 ### Input con controllo e conteggio numeri compresi
+{: .numerato_da_h3}
 
 Con un opportuno ciclo chiedere all’utente di inserire due numeri n1 e n2 compresi tra 1 e 100. Se i numeri non fossero corretti, rimanere nel ciclo e ripetere la richiesta. Stampare quanti sono i numeri pari compresi tra i due numeri
 
@@ -906,6 +918,7 @@ int main() {
 
 
 ### Input sequenza non 0 e stampa massimo e minimo
+{: .numerato_da_h3}
 
 Data una sequenza di numeri terminata dal numero 0 (leggo numeri finchè non mi viene dato il numero 0), stampo il maggiore e il minore
 
@@ -945,6 +958,7 @@ int main() {
 
 
 ### Fattoriale
+{: .numerato_da_h3}
 
 Letto un numero intero positivo n stampare il fattoriale: n! = 1 · 2 · 3 · . . . ·n
 
@@ -1013,10 +1027,12 @@ int main() {
 </details> 
 
 ### Ordinamento 3 numeri
+{: .numerato_da_h3}
 
 Dati in input 3 numeri, stamparli in ordine crescente
 
 ### Calcolatrice
+{: .numerato_da_h3}
 
 Realizzare un programma che, presi in input 2 operandi reali e un operatore (+, -, *, /), esegue l’operazione stampandone il risultato
 
@@ -1054,11 +1070,13 @@ int main() {
 
 
 ### Input sequenza non 0, prodotto positivi e somma negativi
+{: .numerato_da_h3}
 
 Progettare un algoritmo che legga da terminale una sequenza di interi positivi e negativi terminati dal valore 0 (uno su ogni linea) e stampi il prodotto degli interi positivi e la somma dei negativi.
 
 
 ### Input sequenza con domanda, prodotto positivi, somma negativi
+{: .numerato_da_h3}
 
 Progettare un algoritmo che legga da terminale una sequenza di interi positivi e negativi fintanto che l’utente dice di volerne inserire ancora, e stampi il prodotto degli interi positivi e la somma dei negativi.
 
@@ -1141,6 +1159,7 @@ int main() {
 
 
 ### Elevamento a potenza con le moltiplicazioni
+{: .numerato_da_h3}
 
 Dati due numeri in input b ed e, calcola e scrivi b^e senza usare la funzione pow.
 
@@ -1170,6 +1189,7 @@ int main() {
 </details> 
 
 ### Input con controllo e confronto orari
+{: .numerato_da_h3}
 
 Dati in ingresso 4 numeri, che rappresentano gli orari in cui avvengono due diversi eventi della giornata, in modo che i primi 2 numeri siano ore e minuti del primo orario e gli altri 2 numeri siano ore e minuti del secondo orario, stabilire quale evento è avvenuto prima. Inserisci dei controlli durante l’input in modo che le ore possano andare da 0 a 23 e i minuti da 0 a 59.
 
@@ -1222,6 +1242,7 @@ int main() {
 </details> 
 
 ### Input minuti, secondi e conto alla rovescia
+{: .numerato_da_h3}
 
 Dato un numero di minuti e un numero di secondi rappresentare il conto alla rovescia.
 
@@ -1255,6 +1276,7 @@ int main() {
 </details> 
 
 ### Successione di Fibonacci
+{: .numerato_da_h3}
 
 Dato in input un numero intero n, stampa l’ennesimo numero della successione di fibonacci. La successione di fibonacci è quella successione di numeri in cui ogni numero è la somma dei due numeri precedenti. I primi due numeri sono 1 1. La successione inizia così: 1 1 2 3 5 8 13 21 …
 
@@ -1296,6 +1318,7 @@ int main() {
 </details> 
 
 ### Conteggio cifre di un numero
+{: .numerato_da_h3}
 
 2.1.25	Dato in input un numero intero, conta da quante cifre è composto.
 
@@ -1326,10 +1349,12 @@ int main() {
 
 
 ### Stampa cifre di un numero (numero noto di cifre)
+{: .numerato_da_h3}
 
 Dato in input un numero intero n di 3 cifre (in questo caso sarebbe utile mettere un controllo sull’input, cioè continuare a richiedere il numero fintanto che il numero dato non è di 3 cifre), stampa separatamente le sue cifre. Consiglio: usa divisioni per 10 e resti della divisione per 10. Puoi provare anche a generalizzare il programma in modo che funzioni anche con numeri di dimensione diversa da 3 cifre. 
 
 ### Stampa cifre di un numero
+{: .numerato_da_h3}
 
 Dato in input un numero intero qualsiasi, stampa separatamente le sue cifre.
 
@@ -1373,6 +1398,7 @@ int main() {
 
 
 ### Controllo primalità di un numero
+{: .numerato_da_h3}
 
 Dato in input un numero intero n, stabilisci se è primo
 
@@ -1406,6 +1432,7 @@ int main() {
 </details> 
 
 ### Scomposizione in fattori primi
+{: .numerato_da_h3}
 
 Dato in input un numero intero n, stampa la sua scomposizione in fattori primi
 
@@ -1441,6 +1468,7 @@ int main() {
 </details> 
 
 ### Input sequenza lunga n, stampa massimo, minimo, media
+{: .numerato_da_h3}
 
 Data una sequenza di n numeri (n dato dall’utente) stabilire qual è il numero più grande, qual è il più piccolo e calcolare la media.
 
@@ -1488,54 +1516,67 @@ int main() {
 </details> 
 
 ### Input sequenza lunga n, stampa secondo più grande e secondo più piccolo
+{: .numerato_da_h3}
 
 Data una sequenza di n numeri (n dato dall’utente) stabilire qual è il secondo numero più grande, qual è il secondo più piccolo.
 
 ### Input sequenza non 0, stampa maggior differenza numeri consecutivi
+{: .numerato_da_h3}
 
 Data una sequenza di numeri positivi (fai il controllo sull’input) terminati da 0, scrivi qual è la maggior differenza tra due numeri dati consecutivamente
 
 ### Input sequenza non 0, somma multipli di 3
+{: .numerato_da_h3}
 
 Data una sequenza di numeri positivi (fai il controllo sull’input) terminati da 0, scrivi la somma dei numeri divisibili per 3
 
 ### somma e prodotto sequenza
+{: .numerato_da_h3}
 
 Dato un numero n scrivi somma e prodotto di tutti i numeri minori o uguali a n.
 
 ### Conteggio divisibilità per 2
+{: .numerato_da_h3}
 
 Dato un numero n stabilire quante volte è possibile dividerlo per 2. (esempio 20 è divisibile per 2, 2 volte)
 
 ### Calcolo spesa con sconti
+{: .numerato_da_h3}
 
 Data una sequenza di prezzi di prodotti, calcolare la spesa totale sapendo che se un prodotto costa meno di 100€ lo devo scontare del 10% altrimenti del 5%. Decidi tu il metodo per capire quando terminare la lettura della sequenza di prezzi.
 
 ### Promosso, rimandato o bocciato
+{: .numerato_da_h3}
 
 Data una sequenza di 5 numeri che rappresentano i voti presi nelle diverse materie, stabilire se lo studente sarà promosso, bocciato o rimandato a settembre. Lo studente è promosso se non ha insufficienze, è bocciato se ha almeno 3 insufficienze, altrimenti è rimandato. Ricordati di controllare i valori dei voti in input che devono essere voti validi.
 
 ### Stampa sequenze e multipli
+{: .numerato_da_h3}
 
 Dato un numero n positivo stampa tutti i numeri da 1 a n, i primi n multipli di 2 (2 compreso che consideri il primo multiplo) e i primi n multipli di 3
 
 ### Terna pitagorica
+{: .numerato_da_h3}
 
 Dati tre numeri positivi verificare che questi tre numeri siano una terna pitagorica ( una terna pitagorica è un insieme di 3 numeri per cui la somma del quadrato di due numeri sia uguale al quadrato del terzo numero, in altre parole sono le lunghezze dei lati di un triangolo rettangolo)
 
 ### Calcolo spesa con sconti 2
+{: .numerato_da_h3}
 
 Scrivere l’algoritmo per il pagamento della spesa che consiste nel chiedere inizialmente se si è in possesso della carta fedeltà, poi chiedere tutti i prezzi dei prodotti acquistati terminando la sequenza con un prezzo uguale a zero. Il programma deve sommare i prezzi, e se si è in possesso della carta, scontare del 10% i prezzi minori di 50 e del 5% i prezzi maggiori di 50
 
 ### Restituzione in biblioteca
+{: .numerato_da_h3}
 
 Un libro deve essere restituito in biblioteca dopo 15 giorni di prestito altrimenti si è multati di 0,80€ al giorno di ritardo. Ricevuto in ingresso il numero di giorni di un prestito, visualizza se il socio deve essere multato per il ritardo e a quanto ammonta la multa da pagare.
 
 ### Calcolo bolletta
+{: .numerato_da_h3}
 
 Calcolare il costo della bolletta telefonica sapendo che i primi 30 scatti costano 20 centesimi l’uno, gli scatti dal 31 al 100 costano 15 centesimi l’uno, mentre gli ulteriori scatti costano 10 centesimi l’uno. Aggiungere infine una tassa fissa di 2,50€ per le spese telefoniche. In input al programma è dato il numero di scatti effettuati.
 
 ### Indovina il numero segreto
+{: .numerato_da_h3}
 
 Costruire uno schema di flusso che rappresenti l’algoritmo per il seguente gioco: il computer genera un numero segreto (usa la funzione random(100) che genera un numero casuale tra 0 e 99) e il giocatore deve individuarlo seguendo le indicazioni fornite dal computer (ti dice se il numero da trovare è più grande o più piccolo di quello che hai provato); una volta trovato il numero segreto, il numero di tentativi effettuati è visualizzato a video.
 
@@ -1575,7 +1616,8 @@ int main() {
 
 </details> 
 
-### Quoziente e resto con le differenze 
+### Quoziente e resto con le differenze
+{: .numerato_da_h3}
 
 Calcolare il quoziente e il resto della divisione intera di due numeri interi positivi forniti in ingresso chiamati dividendo e divisore, applicando il metodo delle sottrazioni successive. Per esempio, se dividendo=13 e divisore=5, il programma dovrà restituire Quoziente=2 e Resto=3, calcolati sottraendo successivamente il valore di divisore dal valore di dividendo
 
@@ -1612,6 +1654,7 @@ int main() {
 </details> 
 
 ### Successione di Fibonacci 2
+{: .numerato_da_h3}
 
 Visualizza i termini della successione di Fibonacci compresi nell’intervallo tra due interi positivi N1 e N2, entrambi forniti in ingresso, con N2>N1 (controlla bene gli input) 
 
@@ -1659,6 +1702,7 @@ int main() {
 </details> 
 
 ### Calcolo probabilità dado
+{: .numerato_da_h3}
 
 Simula il lancio di un dado per N volte (con N intero e positivo in ingresso e usando la funzione random(7) per il lancio) e verifica che effettivamente la probabilità che esca 6 è 1/6. Per farlo fai tanti tiri e vedi se esce 6 un sesto delle volte (più tiri fai più dovresti avere un risultato positivo).
 
@@ -1694,6 +1738,7 @@ int main() {
 </details> 
 
 ### Calcolo probabilità dadi
+{: .numerato_da_h3}
 
 Simula il lancio di due dadi e verifica le probabilità che escano: una coppia di 6, un valore totale uguale a 7 (due diverse probabilità) 
 
@@ -1741,6 +1786,7 @@ int main() {
 </details> 
 
 ### Sequenza numeri con condizioni
+{: .numerato_da_h3}
 
 Dati in ingresso due numeri positivi x e y, visualizza in ordine decrescente la sequenza di numeri interi compresi tra x e y che sono divisibili per il minore tra x e y. Ad esempio, se x = 7 e y = 35, la sequenza è 35 28 21 14 7.
 
