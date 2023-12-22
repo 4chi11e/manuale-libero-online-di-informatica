@@ -91,7 +91,7 @@ Che produce il seguente output:
 
 
 Si possono fare le seguenti osservazioni:
-1. le variabili si differenziano per tipo e all'inizio del programma bisogna dichiarare tipo e nome delle variabili che si vogliono utilizzare in modo che venga riservato loro l'opportuno spazio in memoria. Indicare il tipo serve poi al programma e ad altre funzioni, come ad esempio printf, per conoscere la loro codifica. Ogni tipo è codificato in modo diverso e se printf cerca di stampare un int pensando che sia un float lo stampa male (puoi provare a farlo). Le variabili fondamentali sono:
+1. le variabili si differenziano per tipo e all'inizio del programma bisogna dichiarare tipo e nome delle variabili che si vogliono utilizzare in modo che venga riservato loro l'opportuno spazio in memoria. Ricorda che in C la dichiarazione delle variabili è la prima cosa che deve essere fatta nel main (se usi un compilatore C++ esso ti permette di farlo anche dopo). Indicare il tipo serve poi al programma e ad altre funzioni, come ad esempio printf, per conoscere la loro codifica. Ogni tipo è codificato in modo diverso e se printf cerca di stampare un int pensando che sia un float lo stampa male (puoi provare a farlo). Le variabili fondamentali sono:
    1. int: numero intero
    2. float: numero con la virgola
    3. double: numero con la virgola più grande, cioè usa il doppio dei bit per essere rappresentato rispetto al float (da cui il nome)
