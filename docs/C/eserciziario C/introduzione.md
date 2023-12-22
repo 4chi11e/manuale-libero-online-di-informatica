@@ -21,7 +21,7 @@ has_children: False
 
 
 
-## Esempi di base
+## Spiegazioni ed Esempi
 {: .azzera_numerazione_h3}
 
 ### Hello world
