@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Array, Stringhe e Matrici - Spiegazioni
+title: Array, Matrici e Stringhe - Spiegazioni
 nav_order: 5
 parent: Programmazione in C
 has_children: False
 ---
 
-# Array Stringhe e Matrici - Spiegazioni ed Esempi
+# Array Matrici e Stringhe - Spiegazioni ed Esempi
 {: .no_toc}
   
 <details open markdown="block">
@@ -18,7 +18,10 @@ has_children: False
 {:toc .toc}
 </details>
 
-In questa pagina vengono fatti molti esempi di utilizzo degli array, delle stringhe e delle matrici. Per tua comodità in fondo alla pagina sono presenti i link per scaricare i codici completi degli esempi spiegati(in questi file sono presenti anche alcuni esempi più complessi).
+In questa pagina vengono spiegati diversi esempi di utilizzo degli array, delle matrici e delle stringhe. Per tua comodità in fondo alla pagina sono presenti i link per scaricare i codici completi degli esempi spiegati(in questi file sono presenti anche alcuni esempi più complessi).
+
+In questa sezione sono spiegati solo gli esempi necessari ad acquisire i concetti base, nella sezione dedicata agli esercizi potrai approfondire l'argomento.
+
 
 ## Gli array
 
@@ -138,7 +141,7 @@ printf("\n");
 
 In questo caso il ciclo for fa scorrere l'indice normalmente in ordine crescente ma poi lo si usa facendo una differenza: *ultima posizione - indice* cioè *N-1 - i*.
 
-Se si volesse stampare solo una porzione dell'array si scrive:
+Se si vuole stampare solo una porzione dell'array si scrive:
 
 ```c
 int a = 2, b = 5;
@@ -222,16 +225,10 @@ Chiaramente vCopia e v devono avere la stessa dimensione N
 Se si volesse usare una funzione già fatta presente nella libreria standard:
 
 ```c
-// funzione C
 memcpy(vCopia, v, sizeof(v));     // la funzione fa parte della libreria string.h
-
-// funzione C++
-std::copy(v, v+N, vCopia);        // la funzione fa parte della libreria algorithm
 ```
 
-la funzione memcpy (abbreviazione di memory copy) copia in vCopia l'array v. è necessario indicare quanti byte copiare con la funzione sizeof(v).
-
-Per comodità ho riportato anche la funzione C++ che in molti casi si può tranquillamente usare poichè in alcuni casi (il nostro) si usano compilatori C++ per compilare il C.
+La funzione memcpy (abbreviazione di memory copy) copia in vCopia l'array v. è necessario indicare quanti byte copiare con la funzione sizeof(v). In realtà dal nome della funzione si può intuire che essa può essere usata in generale per copiare sequenze di byte da un punto all'altro della memoria, ma per capire davvero l'argomento bisognerebbe introdurre i puntatori ed è ancora presto.
 
 ### Ricerca di un elemento nell'array
 
@@ -293,9 +290,6 @@ if(occorrenze) {
     printf("%d non e' contenuto nell'array", daCercare);
 }
 ```
-
-
-
 
 ### Ricerca dei valori massimi e minimi dell'array
 
@@ -365,6 +359,145 @@ Dove:
 
 Questo è sicuramente l'esempio più complicato visto finora e richiede di aver acquisito una certa padronanza con i cicli for applicati agli array.
 
+## Matrici
+
+Per iniziare a capire che cosa sia una matrice, la si può immaginare come una tabella. Mentre un array è solamente una lista di valori e quindi se lo immaginiamo graficamente esso si sviluppa in una sola dimensione, una matrice può svilupparsi in più dimensioni, ad esempio una tabella ha due dimensioni. In realtà le matrici possono avere un numero qualsiasi di dimensioni. Una volta capito il concetto sarà chiaro anche che un array non è altro che un una matrice ad una sola dimensione. Anche nel linguaggio C array e matrici sono la stessa cosa e seguono le stesse regole.
+
+Di seguito verranno mostrati e spiegati esempi di utilizzo delle matrici.
+
+### Istanziare una matrice
+
+Come già detto una matrice si dichiara in maniera analoga a come si dichiarerebbe un array, l'unica differenza è che devono essere indicate più dimensioni. Nell'esempio seguente è dichiarata una matrice 4x6. Sebbene il linguaggio C non preveda espressamente che il primo valore (*N*) indichi le righe, mentre il secondo (*M*) le colonne, è buona norma rispettare le regole generali programmazione che prevedono che si indichino sempre prima le righe e poi le colonne (e poi la profondità...). Ricorda che rispettare le regole di buona scrittura del codice è molto importante, serve a rendere il lavoro più semplice per te e per gli altri!
+
+```c
+#define N 4
+#define M 6
+
+int main() {
+    int matrice[N][M];
+}
+```
+
+Ad una matrice possono essere assegnati subito dei valori come per gli array:
+
+```c
+#define N 3
+#define M 2
+
+int main() {
+    {% raw %}int mat[][M] = {{1,2}, {3,4}, {5,6}};{% endraw %}
+}
+```
+<!-- quelle tra parentesi graffe sono comandi per liquid per non fargli credere che le graffe della matrice siano comandi per lui -->
+
+L'unica cosa un po' strana e complicata da spiegare in questo caso è cosa scrivere all'interno delle parentesi quadre. Non è obbligatorio indicare un valore all'interno della prima parentesi quadra, il compilatore sarà in grado di capire da solo che le righe sono 3. Il compilatore non è però in grado di istanziare la matrice se non sa quanto sarà grande ogni riga, quindi è necessario indicare quanto saranno grandi le altre dimensioni (in questo caso solo una). Di fatto io ti consiglierei di indicare sempre tutti i valori poichè non ti costa nulla ed eviti il problema. In futuro questo problema risalterà fuori, per ora rimandiamolo.
+
+### Riempire una matrice
+
+è molto raro che una matrice venga riempita come fatto nell'esempio precedente, di solito infatti una matrice è troppo grossa per essere scritta a mano oppure non è proprio possibile sapere a priori quali valori dovrà contenere. Quasi sempre quindi le matrici vengono riempite usando cicli for innestati, usanto tanti for quante sono le dimensioni della matrice.
+
+Nell'esempio che segue vengono inseriti valori sulla base di un calcolo, nello specifico la matrice viene riempita coi valori delle tabelline da 1 a 10.
+
+```c
+#define N 4
+#define M 6
+
+int main() {
+    int i, j;
+    int mat[N][M];
+
+    for (i = 0; i < N; i++){
+        for (j = 0; j < M; j++){
+            (i+1) * (j+1);
+        }
+    }
+}
+```
+
+Sono da fare due osservazioni:
+1. Ho usato le i per le righe e j per le colonne. Per evitare di confonderti ti consiglio di usare sempre, quando è possibile, le i per le righe e le j per le colonne. Questo è un esempio semplice ma in casi più complicati questa regola ti può aiutare molto.
+2. Non ho semplicemente moltiplicato i e j perchè esse partono da 0 mentre le tabelline partono da 1, quindi ho aggiunto 1.
+
+A volte può essere utile riempire una matrice di numeri casuali. Il procedimento è analogo a quello usato per gli array.
+
+```c
+#define N 4
+#define M 6
+
+int main() {
+    int i, j;
+    int mat[N][M];
+
+    srand(time(NULL));
+
+    min = 0;
+    max = 99;
+
+    for (i = 0; i < N; i++){
+        for (j = 0; j < M; j++){
+            matrice[i][j] = rand() % (max-min+1) + min;
+        }
+    }
+}
+```
+
+### Stampare una matrice
+
+Se hai capito quello che abbiamo fatto finora, dovrebbe risultarti ovvio come si stampa una matrice.
+
+```c
+for (i = 0; i < N; i++){
+    for (j = 0; j < M; j++){
+        printf("%2d ", matrice[i][j]);
+    }
+    printf("\n");
+}
+```
+
+se usiamo questo codice per stampare la matrice ottenuta inserendo valori casuali nell'esempio precedente otteniamo:
+
+```
+26 69  2 20 96 37 
+10 82 99 91 53 45 
+66 77 98 42 88  7 
+ 8  2 67 63 43 57 
+```
+
+Gli unici dettagli da considerare riguardano il modo in cui si può rendere ordinata la stampa della matrice. Per fare in modo che le colonne siano ben allineate devi fare in modo che tutti i numeri abbiano lo stesso ingombro, per farlo indica espressamente quanti caratteri deve occupare ogni numero che stampi. Nel printf la stringa "%2d " indica che deve essere scritto un intero con ingombro minimo di 2 caratteri seguito da uno spazio. Ricorda che col 2 si indica l'ingombro *minimo* quindi devi scrivere l'ingombro del numero più grande da stampare (seguendo l'esempio precedente in cui ho messo numeri casuali di 2 cifre, il 2 è adatto). I numeri con ingombro minore saranno preceduti da spazi fino ad arrivare all'ingombro indicato.
+
+Bisogna ricordarsi infine di aggiungere un "a capo" alla fine di ogni riga, per farlo basta inserire un `printf("\n")` dopo la fine del ciclo sulle j, cioè la fine di ogni riga.
+
+
+### Stampa di una riga o di una colonna specifica
+
+se si vuole stampare una riga specifica basta fissare un valore i per la riga e poi usare un solo for per scorrerla.
+
+```c
+int i = 2;
+int j;
+for(j = 0; j < M; j++){
+    printf("%d ", matrice[i][j]);
+}
+```
+
+Se invece si vuole stampare una specifica colonna basta fissare la j e far scorrere le i. 
+
+
+```c
+int i;
+int j = 2;
+for(i = 0; i < N; i++){
+    printf("%d\n", matrice[i][j]);
+}
+```
+
+In questo caso ho voluto stampare la colonna in verticale andando a capo alla fine di ogni printf.
+
+Ti faccio notare di nuovo che ho usato sempre le i per le righe e le j per le colonne.
+
+## Stringhe
+
+Una stringa è una sequenza di caratteri e normalmente nei linguaggi di alto livello esiste una variabile specifica per rappresentarle. Il linguaggio C essendo un linguaggio relativamente di basso livello non prevede un tipo di variabile per le stringhe. Per rappresentare le stringhe in C è necessario utilizzare array di caratteri e quindi come array devono essere trattate.
 
 
 

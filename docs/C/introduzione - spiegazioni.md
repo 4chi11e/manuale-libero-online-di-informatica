@@ -102,6 +102,7 @@ Si possono fare le seguenti osservazioni:
 5. la divisione tra due interi produce un risultato intero troncato, per ottenere un float almeno uno dei due numeri coinvolti nella divisione deve essere un float
 6. L'operatore % ci fornisce il resto della divisione, è molto utile quando devo verificare se un numero è pari, dispari, multiplo o divisore di quacun altro.
 7. Esistono dei caratteri speciali, il primo che devi imparare a conoscere è **\n** che indica di andare a capo. Ne esistono altri meno importanti che forse ti capiterà di vedere. Unica cosa utile da sapere per ora è che siccome le stringhe iniziano e finiscono con le virgolette, se vuoi inserire delle virgolette in una stringa devi scrivere **\\"**. In generale se cerchi di stampare un carattere che per il C è un carattere speciale, come le virgolette che indicano l'inizio e la fine di una stringa, devi scriverlo preceduto da \ in modo che il compilatore capisca che non stai scrivendo un carattere speciale ma un comune carattere.
+8. C'è un ultima cosa utile da sapere per il futuro: quando si dichiara una variabile si dice che si crea un'*istanza* di un certo tipo di variabile e spesso viene usato il verbo *istanziare* una variabile. Int o float sono tipi di variabili, mentre le variabili *i1* e *f2* sono istanze di int e float.
 
 ```c
 #include <stdio.h>
