@@ -1,13 +1,12 @@
 ---
 layout: default
-title: Array Stringhe e Matrici
-nav_order: 2
-parent: Eserciziario C
-grand_parent: Programmazione in C
+title: Array, Stringhe e Matrici - Spiegazioni
+nav_order: 5
+parent: Programmazione in C
 has_children: False
 ---
 
-# Array Stringhe e Matrici
+# Array Stringhe e Matrici - Spiegazioni ed Esempi
 {: .no_toc}
   
 <details open markdown="block">
@@ -20,13 +19,11 @@ has_children: False
 </details>
 
 
-## Spiegazioni ed Esempi
-
-### Gli array
+## Gli array
 
 Le variabili possono essere immaginate come dei contenitori in grado di contenere un valore, il cui tipo dipende da come è stata dichiarata la variabile. In moltissimi casi i programmi non agiscono su singoli valori, ma su sequenze di valori (un elenco o una tabella di dati), per questo motivo tutti i linguaggi di programmazione prevedono una struttura dati apposita che nel linguaggio C viene detta array. Un array consiste in una sequenza di valori tutti dello stesso tipo allocati in memoria uno di seguito all'altro.
 
-#### Dichiarazione di un array
+### Dichiarazione di un array
 
 Esistono diversi modi per dichiarare e assegnare valori ad un array:
 
@@ -87,7 +84,7 @@ dove sizeof(a) è una funzione che indica quanta memoria è stata allocata per l
 
 Questo sistema risulta comodo nel caso si voglia modifcare a mano il contenuto dell'array perchè si evita di dimenticarsi di modificare il valore di n (quando capita è poi difficile capire perchè il programma non funziona come vorremmo).
 
-#### Accedere agli elementi di un array
+### Accedere agli elementi di un array
 
 Dopo che si è dichiarato l'array è possibile accedere ad un solo elemento dell'array per volta. Per distinguere ogni elemento dell'array si indica la sua posizione ricordando che il primo elemento si trova in posizione 0. Questa cosa per chi inizia a programmare è poco intuitiva, sarebbe immediato pensare che il primo elemento si trova in posizione 1. Questa regola è comune a tutti i linguaggi di programmazione e ha una motivazione tecnica ben precisa, infatti bisogna pensare che la posizione di un elemento in un array è identificata dalla posizione in memoria del primo elemento + uno scostamento. Il primo elemento è quindi quello con scostamento 0, il secondo quello con scostamento 1 ... fino all'elemento con scostamento N-1. Normalmente però invece di parlare di scostamento si parla di posizione, considerando che la prima è la posizione 0.
 
@@ -164,11 +161,11 @@ for(i = 0; i <= b-a; i++){
 printf("\n\n");
 ```
 
-### Algoritmi classici con gli array
+## Algoritmi classici con gli array
 
 Ci sono alcune operazioni che vengono svolte frequentemente con gli array. Di seguito sono riportate alcune di esse.
 
-#### Stampa di un array
+### Stampa di un array
 
 In questo esempio l'array è stampato all'interno di parentesi graffe con gli elementi separati tra loro da una virgola e uno spazio.
 
@@ -180,7 +177,7 @@ for(int i = 0; i < n - 1; i++){
 printf("%d}", v[n-1]);
 ```
 
-#### Riempire un array di numeri casuali
+### Riempire un array di numeri casuali
 
 ```c
 #include <stdio.h>
@@ -209,7 +206,7 @@ La funzione rand genera un numero intero pseudocasuale compreso tra 0 e il massi
 
 Mettendo insieme le tre considerazioni ottengo `rand() % (5-3+1) + 3` ossia `rand() % (max-min+1) + min`
 
-#### Copiare un array
+### Copiare un array
 
 Se voglio copiare un array le operazioni da fare sono molto semplici.
 
