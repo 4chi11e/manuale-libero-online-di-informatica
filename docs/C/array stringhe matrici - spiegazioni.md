@@ -18,6 +18,7 @@ has_children: False
 {:toc .toc}
 </details>
 
+In questa pagina vengono fatti molti esempi di utilizzo degli array, delle stringhe e delle matrici. Per tua comodità in fondo alla pagina sono presenti i link per scaricare i codici completi degli esempi spiegati(in questi file sono presenti anche alcuni esempi più complessi).
 
 ## Gli array
 
@@ -232,24 +233,11 @@ la funzione memcpy (abbreviazione di memory copy) copia in vCopia l'array v. è 
 
 Per comodità ho riportato anche la funzione C++ che in molti casi si può tranquillamente usare poichè in alcuni casi (il nostro) si usano compilatori C++ per compilare il C.
 
+### Ricerca di un elemento nell'array
 
-
-
-
-
-
-
-
-
-
-
+Per verificare se un numero è presente nell'array scrivo:
 
 ```c
-
-// ---------------------------------------------------------------------------------------------------------------------------
-// Cerco se un numero è presente nell'array
-
-printf("Cerco un numero: 5 e dico se e' presente:\n");
 int daCercare = 5;
 int trovato = 0;
 for(i = 0; i < N && !trovato; i++){    
@@ -262,13 +250,15 @@ if(trovato) {
 } else {
     printf("%d non e' contenuto nell'array", daCercare);
 }
-printf("\n\n");
+printf("\n");
+```
+
+In questo caso uso una variabile per ricordare se ho trovato il numero oppure no. In C non esistono le variabili booleane, quelle variabili che possono contenere solo i valori *vero* o *falso* quindi si usano numeri interi a cui si assegnano i valori 1 per vero e 0 per falso. In realtà nelle versioni più recenti del linguaggio sono state aggiunte le variabili booleane ma solitamente i compilatori attualmente in circolazione non implementano ancora questa funzionalità.
 
 
-// ---------------------------------------------------------------------------------------------------------------------------
-// dico la prima posizione di un numero nell'array
+Per cercare la posizione della prima occorrenza di un numero in un array:
 
-printf("Cerco un numero: 5 e dico se e' presente e dove si trova per la prima volta:\n");
+```c
 daCercare = 5;
 int pos = -1;
 for(i = 0; i < N && pos < 0; i++){   // se non metto "&& pos" mi stampa l'ultima posizione di 5 nell'array 
@@ -281,16 +271,18 @@ if(pos >= 0) {
 } else {
     printf("%d non e' contenuto nell'array", daCercare);
 }
-printf("\n\n");
+printf("\n");
 
+```
 
-// ---------------------------------------------------------------------------------------------------------------------------
-// conto quante volte è presente un numero nell'array
+In questo caso uso la variabile pos per indicare la posizione ed essa sostituisce la variabile booleana. Uso il valore -1 per indicare che non è ancora stata trovata nessuna posizione. Questo è un trucco usato in molti contesti.
 
-printf("Cerco un numero: 5, e dico se e' presente. Se e' presente dico anche quante volte e' contenuto:\n");
+Per contare quante volte è presente un numero nell'array:
+
+```c
 daCercare = 5;
 int occorrenze = 0;
-for(i = 0; i < N; i++){   // se non metto "&& pos" mi stampa l'ultima posizione di 5 nell'array 
+for(i = 0; i < N; i++){
     if(v[i] == daCercare){
         occorrenze += 1;
     }
@@ -300,13 +292,16 @@ if(occorrenze) {
 } else {
     printf("%d non e' contenuto nell'array", daCercare);
 }
+```
 
-printf("\n\n");
 
 
-// ---------------------------------------------------------------------------------------------------------------------------
-// cercare i valori massimi e minimi di un array
-printf("Ricerco il massimo e il minimo:\n");
+
+### Ricerca dei valori massimi e minimi dell'array
+
+Per cercare i valori massimi e minimi contenuti in un array:
+
+```c
 int min = v[0];
 int max = v[0];
 for (i = 1; i < N; i++){
@@ -318,73 +313,32 @@ for (i = 1; i < N; i++){
     }
 }
 printf("min: %d\nmax: %d\n\n", min, max);
+```
+
+Ogni volta che si cerca il valore massimo o il valore minimo in un array, il modo migliore di procedere è:
+1. segnare che il valore massimo è il primo elemento dell'array
+2. scorrere tutto l'array a partire dalla seconda posizione (la posizione 1)
+   1. se il valore in posizione i è maggiore di quello trovato finora esso diventa il nuovo max. 
 
 
-// ---------------------------------------------------------------------------------------------------------------------------
-// calcolare la media
+### Calcolo della media
+
+```c
 float media = 0;
 for (i = 1; i < N; i++){
     media += v[i];
 }
 media /= N;
 printf("La media vale: %.2f\n\n", media);
+```
 
+Ricorda che media deve essere un valore float (o double) anche se gli elementi dell'array sono interi, altrimenti viene calcolato un valore troncato.
 
-// ---------------------------------------------------------------------------------------------------------------------------
-// calcolo la mediana
-// per farlo prima devo ordinare l'array, ma siccome non voglio perdere l'originale uso una delle copie che mi sono fatto
-// per ordinare o uso un mio algoritmo o uso quello della libreria algorithm
-std::sort(vCopia, vCopia+N);
-printf("Stampo l'array ordinato:\n");
-stampaArray(vCopia, N);
+### Ricerca di una sequenza di numeri in una sequenza più grande
 
-float mediana;
-if(N % 2 == 1){
-    mediana = vCopia[N/2];
-}
-else{
-    mediana = (vCopia[N/2 - 1] + vCopia[N/2]) / 2.0;    // ricordarsi di dividere per 2.0 e non 2 se no ho una divisione tra interi che viene troncata (3/2 diventa 1, 3/2.0 diventa 1.5)
-}
+Per cercare la prima posizione di una sequenza di numeri v_x in un array più grande v_y
 
-printf("\nLa mediana vale: %.2f\n\n", mediana);
-
-
-// ---------------------------------------------------------------------------------------------------------------------------
-// moda di un array
-// in realtà se ci fossero più valori che compaiono con la massima frequenza si dovrebbe dire che la moda non esiste
-// per semplicità nel seguente esempio considereremo moda il numero più piccolo che compare con la massima frequenza
-// anche qui mi serve avere l'array ordinato, uso quello di prima. 
-// dò per scontato che N > 0
-int cont, maxCont = 0, moda;
-for(i = 0; i < N; i++){
-    cont = 1;
-    while(v[i] == v[i+1]){
-        cont++;
-        i++;
-    }
-    if(cont > maxCont){
-        maxCont = cont;
-        moda = v[i];
-    }
-}
-printf("La moda vale: %d\n\n", moda);
-
-
-// ---------------------------------------------------------------------------------------------------------------------------
-// cerco la posizione (la prima, vedi commenti sotto) di una sequenza di numeri vx in un array più grande vy
-int dimvy = 30;
-int vy[dimvy];
-riempiCasualmente(vy, dimvy, 0, 4);
-
-int dimvx = 2;
-int vx[] = {1,2};
-
-printf("Array in cui cercare: ");
-stampaArray(vy, dimvy);
-printf("\nArray da cercare: ");
-stampaArray(vx, dimvx);
-printf("\n");
-
+```c
 int posvx = -1;
 for(i = 0; i < dimvy; i++){
     for(j = 0; j < dimvx && vx[j] == vy[i+j]; j++){
@@ -405,10 +359,20 @@ if(posvx == -1){
     
 ```
 
+Dove:
+1. posvx indica la posizione in cui trovo v_x
+2. dimvx e dimvy sono le dimensioni di v_x e di v_y
+
+Questo è sicuramente l'esempio più complicato visto finora e richiede di aver acquisito una certa padronanza con i cicli for applicati agli array.
 
 
 
 
+## Archivio codici di esempio
+
+Qui puoi scaricare l'archivio completo degli esempi che ho scritto.
+
+- [Archivio esempi C]({{site.baseurl}}/assets/codice/C/Esempi-C.zip)
 
 
 
