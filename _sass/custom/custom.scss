@@ -177,6 +177,18 @@ h3.numerato_da_h3::before {
   content: counter(h3) ". ";
 }
 
+h3.azzera_numerazione_h4 {
+  counter-reset: h4;
+}
+h4.numerato::before {
+  counter-increment: h4;
+  content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) ". ";
+}
+h4.numerato_da_h3::before {
+  counter-increment: h4;
+  content: counter(h3) "." counter(h4) ". ";
+}
+
 // -------------------- Elementi specifici ----------------------------------------
 
 .formula {

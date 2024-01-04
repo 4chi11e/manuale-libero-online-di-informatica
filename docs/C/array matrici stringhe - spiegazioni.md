@@ -499,6 +499,8 @@ Ti faccio notare di nuovo che ho usato sempre le i per le righe e le j per le co
 
 Una stringa è una sequenza di caratteri e normalmente nei linguaggi di alto livello esiste una variabile specifica per rappresentarle. Il linguaggio C essendo un linguaggio relativamente di basso livello non prevede un tipo di variabile per le stringhe. Per rappresentare le stringhe in C è necessario utilizzare array di caratteri e quindi come array devono essere trattate.
 
+Qui aggiungerò gli esempi e le spiegazioni, per ora puoi scaricare l'archivio completo degli esempi dal link in fondo alla pagina.
+
 
 
 ## Archivio codici di esempio
