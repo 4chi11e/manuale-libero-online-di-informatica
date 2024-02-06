@@ -59,28 +59,52 @@ Variante: Conta le lettere, non i caratteri.
 ```c
 #include <stdio.h>
 
-int main() {
-    FILE *fp;
-    int nchar;
-    char lettera;
-
-    fp = fopen("6-1-2.txt", "r");
+int contachar(char nomefile[]) {
+    char carattere;
+    int numchar = 0;
+    FILE *fp = fopen(nomefile, "r");
     if (fp == NULL) {
-        printf("File non trovato\n");
+        printf("File \"%s\" non trovato\n", nomefile);
         return 1;
     }
 
-    nchar = 0;
     while(!feof(fp)) {
-        fscanf(fp ,"%c", &lettera);
-        // variante
-        if ((lettera >= 'a' && lettera <= 'z') || (lettera >= 'A' && lettera <= 'Z'))
-            nchar++;
+        fscanf(fp, "%c ", &carattere);
+        numchar++;
+    }
+    fclose(fp);
+    return numchar;
+}
+
+int contalettere(nomefile) {
+    char carattere;
+    int numlettere = 0;
+    FILE *fp = fopen(nomefile, "r");
+    if (fp == NULL) {
+        printf("File \"%s\" non trovato\n", nomefile);
+        return 1;
     }
 
-    printf("%d", nchar);
-    
-    return 0;
+    while(!feof(fp)) {
+        fscanf(fp, "%c ", &carattere);
+        if ((carattere >= 'a' && carattere <= 'z') || (carattere >= 'A' && carattere <= 'Z')) {
+            numlettere++;
+        }
+    }
+    fclose(fp);
+    return numlettere;
+}
+
+int main() {
+    FILE *fp;
+    char nomefileinput[] = "1-2.txt";
+    int numchar;
+    int numlettere;
+
+    numchar = contachar(nomefileinput);
+    numlettere = contalettere(nomefileinput);
+    printf("Il numero di caratteri contenuti nel file: %d\n", numchar);
+    printf("Il numero di lettere contenute nel file: %d\n", numlettere);
 }
 ```
 
