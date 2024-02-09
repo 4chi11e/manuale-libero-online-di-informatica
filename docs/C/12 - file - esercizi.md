@@ -331,7 +331,7 @@ int main() {
 
 
 
-#### 
+#### Da un file ad un altro ordinato
 {: .numerato_da_h3}
 
 Scrivi e usa una funzione che legga un file e scriva in un altro file tutte le parole del primo file in ordine alfabetico
