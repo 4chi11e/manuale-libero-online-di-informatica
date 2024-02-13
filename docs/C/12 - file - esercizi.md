@@ -21,10 +21,7 @@ has_children: False
 ## Esercizi
 {: .azzera_numerazione_h3}
 
-### Esercizi che non richiedono le struct
-{: .numerato_da_h3 .azzera_numerazione_h4}
-
-#### Lettura e scrittura
+### Lettura e scrittura
 {: .numerato_da_h3}
 
 Scrivi un programma che scriva su un file un elenco di nomi, chiuda il file, lo riapra in lettura lo legga tutto e stampi ciò che ha letto.
@@ -43,7 +40,7 @@ Scrivi un programma che scriva su un file un elenco di nomi, chiuda il file, lo 
 
 
 
-#### Conteggio caratteri o lettere
+### Conteggio caratteri o lettere
 {: .numerato_da_h3}
 
 Scrivi e usa una funzione che conta il numero di caratteri contenuti in un file.
@@ -112,7 +109,7 @@ int main() {
 
 
 
-#### Numero di righe e numero di caratteri o lettere per riga
+### Numero di righe e numero di caratteri o lettere per riga
 {: .numerato_da_h3}
 
 Scrivi una funzione che conta e restituisce il numero di righe di un file.	 
@@ -170,7 +167,7 @@ int main() {
 
 
 
-#### Numero di parole
+### Numero di parole
 {: .numerato_da_h3}
 
 Scrivi e usa una funzione che conta il numero di parole contenute in un file.
@@ -218,7 +215,7 @@ int main() {
 
 
 
-#### 
+### Modifica file e ordina parole
 {: .numerato_da_h3}
 
 Scrivi e usa una funzione che legga un file e scriva in un altro file tutte le parole del primo file in ordine alfabetico
@@ -286,7 +283,7 @@ int main() {
 
 
 
-#### Lettura e scrittura modificata
+### Lettura e scrittura modificata
 {: .numerato_da_h3}
 
 Scrivi un programma che legga un file di testo e che scriva in un secondo file, lo stesso testo modificato in modo che tutte le lettere siano minuscole. Il file di testo iniziale generalo tu come vuoi.
@@ -334,7 +331,7 @@ int main() {
 
 
 
-#### Lettura e aggiunta
+### Lettura e aggiunta
 {: .numerato_da_h3}
 
 Scrivi un programma che legga un file di testo e che aggiunga alla fine di tale file, dopo un paio di righe vuote, lo stesso testo modificato in modo che tutte le lettere siano minuscole. Il file di testo iniziale generalo tu come vuoi. Attento a fare in modo che se il programma viene eseguito più volte, le righe da considerare sono solo quelle iniziali.
@@ -352,7 +349,7 @@ Scrivi un programma che legga un file di testo e che aggiunga alla fine di tale 
 </details> 
 
 
-#### Modifica file
+### Modifica file
 {: .numerato_da_h3}
 
 Scrivi una funzione parametrica in grado di modificare un file di testo di nome "miofile.txt" letto da disco in modo tale che, se l'ultimo elemento della linea è una virgola, la linea successiva venga eliminata
@@ -371,7 +368,7 @@ Scrivi una funzione parametrica in grado di modificare un file di testo di nome 
 
 
 
-#### Scrittura e ricerca
+### Scrittura e ricerca
 {: .numerato_da_h3}
 
 Scrivi un programma che scriva su un file un elenco di nomi (o numeri se preferisci), chieda poi all'utente un nome da cercare nel file e stampi sullo schermo l'esito della ricerca (trovato o no). Le operazioni di scrittura su file devono essere eseguite da una funzione che riceve come parametro la stringa contenente il nome del file. Le operazioni di ricerca devono essere svolte da una funzione che riceve come parametro la stringa contenente il nome del file e la stringa da cercare.
@@ -507,12 +504,7 @@ int main() {
 
 
 
-
-### Esercizi che non richiedono le struct
-{: .numerato_da_h3 .azzera_numerazione_h4}
-
-
-#### Esploratori 1
+### Esploratori 1
 {: .numerato_da_h3}
 
 Leggi i dati contenuti nel seguente file di testo. Dopo averli salvati in un’opportuna struttura dati, scrivi due funzioni:
@@ -551,7 +543,7 @@ Ernest Shakleton 1874 1922
 
 
 
-#### Voti studenti 1
+### Voti studenti 1
 {: .numerato_da_h3}
 
 Scrivi un programma che legga i dati contenuti in un file di testo (testo riportato di seguito) e li inserisca in opportune strutture dati (richiesta la conoscenza delle struct o delle classi). Di questi dati il programma deve fare le seguenti cose:
@@ -604,7 +596,7 @@ Varisco	8.00
 
 
 
-#### Voti studenti 2
+### Voti studenti 2
 {: .numerato_da_h3}
 
 Scrivi un programma che legga i dati contenuti in un file di testo (testo riportato di seguito) e li inserisca in opportune strutture dati che rappresentino il registro dei voti per una materia. Il programma deve poi calcolare la media dei voti per ogni singolo studente e aggiungerla alla struttura dati (che quindi conterrà anche una variabile media). Il programma deve mostrare tutti i dati raccolti e calcolati sullo schermo e salvarli in un secondo file di testo.
@@ -683,7 +675,7 @@ int main() {
 
 
 
-#### Voti studenti 3
+### Voti studenti 3
 {: .numerato_da_h3}
 
 Scrivi un programma che legga i dati contenuti in un file di testo (testo riportato di seguito) e li inserisca in opportune strutture dati che rappresentino il registro dei voti per una materia. Il programma deve poi calcolare la media dei voti per ogni singolo studente e aggiungerla alla struttura dati (che quindi conterrà anche una variabile media). Il programma deve mostrare tutti i dati raccolti e calcolati sullo schermo e salvarli in un secondo file di testo. Questa versione del programma è più difficile della precedente perché si può notare che i cognomi possono essere formati da più parole e sono separati dai voti da un “:”, inoltre il numero di voti varia per ogni studente.
@@ -896,7 +888,7 @@ int main() {
 
 
 
-#### Libri
+### Libri
 {: .numerato_da_h3}
 
 Leggi le informazioni riguardanti una serie di libri da un file (testo di seguito) e:
@@ -1057,7 +1049,7 @@ int main() {
 
 
 
-#### Punti e triangoli
+### Punti e triangoli
 {: .numerato_da_h3}
 
 Scrivi un programma che sia in grado di leggere da file i dati riportati di seguito e salvarli in opportune strutture dati (punto e triangolo). Il programma deve poi stampare sia su schermo che in un altro file i dati riguardanti ogni triangolo e se esso è scaleno, isoscele o equilatero. Per decidere il tipo di triangolo devono essere usate tre diverse funzioni che controllano ognuna se il triangolo passato come parametro è di uno dei tre tipi richiesti.
@@ -1094,7 +1086,7 @@ Output
 
 
 
-#### Virologi
+### Virologi
 {: .numerato_da_h3}
 
 Il seguente testo (che devi inserire in un file di testo) descrive i più celebri virologi Italiani nell'epoca covid
@@ -1210,7 +1202,7 @@ int main() {
 
 
 
-#### Esploratori 2
+### Esploratori 2
 {: .numerato_da_h3}
 
 Un file di testo contiene i seguenti dati:
@@ -1337,7 +1329,7 @@ int main() {
 
 
 
-#### Autostrade
+### Autostrade
 {: .numerato_da_h3}
 
 Dato il seguente file di dati in input:
@@ -1451,7 +1443,7 @@ int main() {
 
 
 
-#### Squadre di calcio
+### Squadre di calcio
 {: .numerato_da_h3}
 
 Dato il file contenente le seguenti informazioni:
@@ -1597,7 +1589,7 @@ int main() {
 
 
 
-#### Codici studenti
+### Codici studenti
 {: .numerato_da_h3}
 
 Devi assegnare ad ogni persona della classe un identificativo univoco formato dalle prime tre consonanti del nome seguite dalle prime tre consonanti del cognome seguito da una serie di 3 caratteri alfanumerici casuali. Se i nomi o i cognomi non contengono 3 consonanti aggiungi vocali a caso per arrivare alle 3 lettere richieste sia per il nome che per il cognome. Nel seguente file di testo è riportato l’elenco dei nomi. In un secondo file riscrivi i nomi seguiti dal codice identificativo.
@@ -1720,7 +1712,7 @@ int main() {
 
 
 
-#### Brobabilità dei dadi
+### Brobabilità dei dadi
 {: .numerato_da_h3}
 
 Sei un giocatore di giochi di ruolo e ti serve avere delle tabelle che ti indichino le probabilità di ottenere i vari punteggi con dei tiri di diversi dadi. Non conosci molto la matematica e il calcolo combinatorio (e oltretutto calcolare tutto a mano è lungo) ma sai programmare bene, pensi quindi di stimare le probabilità con un programma e di scrivere dei file ognuno che idica le diverse probabilità ottenibili con un diverso dado. I dadi che usi sono: d4 (dado a quattro facce), d6, d8, d10, d12, d20. Per ogni dado vuoi sapere le probabilità di ottenere ogni diverso risultato possibile tirando il dado una volta, o 2, o 3… fino a 10 volte.
@@ -1788,7 +1780,7 @@ int main() {
 
 
 
-#### Agenda
+### Agenda
 {: .numerato_da_h3}
 
 Crea un programma di gestione di una agenda. L’agenda deve permettere di visualizzare e inserire i dati riguardanti i propri contatti. Per ogni persona devono essere memorizzati nome cognome e numero di telefono. La visualizzazione dei dati deve avvenire in ordine alfabetico per nome o cognome (scegli tu). Tutti i dati devono essere salvati in un file in modo da poterli caricare ogni volta che si apre il programma.
@@ -1809,7 +1801,7 @@ Variante: L’agenda è ordinata per cognome e la funzione di ricerca cerca il c
 
 
 
-#### Tabella di lavoro
+### Tabella di lavoro
 {: .numerato_da_h3}
 
 Il seguenti dati, che dovrai inserire in un file di testo, descrivono quante ore hanno lavorato in una settimana, una serie di dipendenti: ad esempio Mr White ha lavorato 8 ore il lunedì, 9 ore il martedì, 8 ore il mercoledì, 9 ore il giovedì e 4 ore il venerdì
@@ -1915,7 +1907,7 @@ int main() {
 
 
 
-#### Regioni e province
+### Regioni e province
 {: .numerato_da_h3}
 
 Il seguente file di testo contiene le informazioni riguardanti le provincie d’Italia raggruppate per regione:
@@ -2065,7 +2057,7 @@ int main() {
 
 <!-- per una nuova soluzione
 
-#### 
+### 
 {: .numerato_da_h3}
 
 
