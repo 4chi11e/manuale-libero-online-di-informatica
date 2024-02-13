@@ -119,7 +119,7 @@ Variante complicata che prevede l’uso di strtok: invece dei caratteri conta il
 
 <details markdown="block">
   <summary class="soluzione-toggler">
-    Soluzione senza variante
+    Soluzione semplificata con funzioni che ricevono singole righe
   </summary>
   {: .text-delta }
 
@@ -160,6 +160,119 @@ int main() {
     }
 
     fclose(fp);
+}
+```
+
+</details> 
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione completa ma senza variante
+  </summary>
+  {: .text-delta }
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int contarighe(char nomefile[]) {
+    FILE *fp;
+    char riga[100];
+    int ris = 0;
+
+    fp = fopen(nomefile, "r");
+    if (fp == NULL) {
+        printf("%s non trovato.", nomefile);
+        return 1;
+    }
+
+    while(!feof(fp)) {
+        fgets(riga, 100, fp);
+        printf("%s", riga);
+        ris++;
+    }
+
+    fclose(fp);
+    return ris;
+}
+
+void caratteriPerRiga(char nomefile[], int ris[], int *nrighe, int maxrighe) {
+    FILE *fp;
+    char riga[100];
+
+
+    fp = fopen(nomefile, "r");
+    if (fp == NULL) {
+        printf("%s non trovato.", nomefile);
+        return;
+    }
+
+    *nrighe = 0;
+    while(!feof(fp) && *nrighe < maxrighe) {
+        fgets(riga, 100, fp);   // con fgets legge anche l'a capo \n
+        
+        riga[strcspn(riga, "\n")] = 0; 
+        // strcspn(riga, "\n") trova la posizione del carattere \n in riga, 
+        // lo uso per sostituirlo con 0, il carattere di terminazione
+
+        // printf("%s", riga);
+        ris[*nrighe] = strlen(riga);
+        (*nrighe) += 1;
+    }
+
+    fclose(fp);
+}
+
+void letterePerRiga(char nomefile[], int ris[], int *nrighe, int maxrighe) {
+    FILE *fp;
+    char riga[100];
+    int i, nlettere;
+
+    fp = fopen(nomefile, "r");
+    if (fp == NULL) {
+        printf("%s non trovato.", nomefile);
+        return;
+    }
+
+    *nrighe = 0;
+    while(!feof(fp) && *nrighe < maxrighe) {
+        fgets(riga, 100, fp);   // con fgets legge anche l'a capo \n
+        
+        nlettere = 0;
+        for (i = 0; riga[i] != 0; i++) {
+            if ((riga[i] >= 'a' && riga[i] <= 'z') || (riga[i] >= 'A' && riga[i] <= 'Z')) {
+                nlettere++;
+            }
+        }
+        ris[*nrighe] = nlettere;
+        (*nrighe) += 1;
+    }
+
+    fclose(fp);
+}
+
+
+
+int main() {
+    char nomefile[] = "1-3.txt";
+    int ncar[1000];
+    int nlet[1000];
+    int n = 1000;
+    int nrighe;
+
+    printf("Il file %s contiene %d righe.\n\n", nomefile, contarighe(nomefile));
+
+    caratteriPerRiga(nomefile, ncar, &nrighe, n);
+    printf("Caratteri per riga:\n");
+    for (int i = 0; i < nrighe; i++) {
+        printf("%d ", ncar[i]);
+    }
+
+    letterePerRiga(nomefile, nlet, &nrighe, n);
+    printf("\n\nLettere per riga:\n");
+    for (int i = 0; i < nrighe; i++) {
+        printf("%d ", nlet[i]);
+    }
 }
 ```
 
