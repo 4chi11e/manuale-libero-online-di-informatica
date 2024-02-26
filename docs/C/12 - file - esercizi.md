@@ -818,12 +818,6 @@ Russell: 7.50 4.50
 Sogos: 4.00 3.50 3.50 2.00
 Tezza: 7.00 5.50 5.50
 Varisco: 8.00 9.00 8.50
-Pirovano: 6.50 7.50 7.50
-Rudi: 9.50 10.00 10.00
-Russell: 7.50 4.50 5.50
-Sogos: 4.00 3.50 3.50
-Tezza: 7.00 5.50 5.50
-Varisco: 8.00 9.00 8.50
 ```
 
 <details markdown="block">
@@ -854,7 +848,7 @@ int main() {
     int ntoken;
     int i, j;
 
-    fp = fopen("6-2-4.txt", "r");
+    fp = fopen("studenti3.txt", "r");
     if (fp == NULL) {
         printf("errore");
         return 1;
@@ -890,7 +884,7 @@ int main() {
     }
 
     // scrivo in un secondo file
-    fp = fopen("6-2-4-out.txt", "w");
+    fp = fopen("studenti3-out.txt", "w");
     if (fp == NULL) {
         printf("Apertura in scrittura del file fallita.\n");
         return 2;
@@ -937,7 +931,7 @@ int main() {
     int nvoti;
     int i, j;
 
-    fp = fopen("6-2-4.txt", "r");
+    fp = fopen("studenti3.txt", "r");
     if (fp == NULL) {
         printf("errore");
         return 1;
@@ -980,7 +974,7 @@ int main() {
     }
 
     // scrivo in un secondo file
-    fp = fopen("6-2-4-out.txt", "w");
+    fp = fopen("studenti3-out.txt", "w");
     if (fp == NULL) {
         printf("Apertura in scrittura del file fallita.\n");
         return 2;
