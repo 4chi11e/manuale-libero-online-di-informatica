@@ -1007,14 +1007,14 @@ Leggi le informazioni riguardanti una serie di libri da un file (testo di seguit
 ```
 Divina Commedia;Dante Alighieri;1321
 Promessi Sposi;Alessandro Manzoni;1840
-Il Decamerone;Alessandro Boccaccio;1350
+Il Decamerone;Giovanni Boccaccio;1350
 L'Orlando Furioso;Ludovico Ariosto;1516
 Il fu Mattia Pascal;Luigi Pirandello;1904
-Ultime lettere di Jacopo Ortis,Ugo Foscolo;1802
+Ultime lettere di Jacopo Ortis;Ugo Foscolo;1802
 Se questo è un uomo;Primo Levi;1947
 Il barone rampante;Italo Calvino;1957
 I Malavoglia;Giovanni Verga;1881
-Il Principe; Niccolò Macchiavelli;1532
+Il Principe; Niccolò Machiavelli;1532
 La Gerusalemme Liberata;Torquato Tasso;1581
 Cuore;Edmondo De Amicis;1886
 Il deserto dei Tartari;Dino Buzzati;1940
@@ -1039,116 +1039,104 @@ Mastro don Gesualdo;Giovanni Verga;1889
 
 ```c
 #include <stdio.h>
+#include <stdlib.h>
 
-# define N 100
+#define N 100
+#define M 50
 
 typedef struct {
-    char titolo[N];
-    char autore[N];
+    char titolo[M];
+    char nome[M];
     int anno;
-} libro;
+} Libro;
 
-void stampaElenco(libro elenco[], int nlibri) {
-    int i;
-    for (i = 0; i < nlibri; i++) {
-        printf("%s;%s;%d\n", elenco[i].titolo, elenco[i].autore, elenco[i].anno);
-    }
+int confronto(const void *a, const void *b) {
+    Libro *x = (Libro *) a;
+    Libro *y = (Libro *) b;
+    return x->anno - y->anno;
 }
 
-void ordina(libro elenco[], int nlibri) {
-    int i, j;
-    libro tmp;
-    for (i = 0; i < nlibri-1; i++) {
-        for (j = 0; j < nlibri - 1 - i; j++) {
-            if (elenco[j].anno > elenco[j+1].anno) {
-                tmp = elenco[j];
-                elenco[j] = elenco[j+1];
-                elenco[j+1] = tmp;
-            }
-        }
-    }
+Libro piuRecente(Libro lista[], int n) {
+    qsort(lista, n, sizeof(Libro), confronto);
+    return lista[n-1];
 }
 
-void scriviSuFile(libro elenco[], int nlibri, char nomefile[]) {
-    FILE *fp;
-    int i;
-    fp = fopen(nomefile, "w");
-    if (fp == NULL) {
-        printf("Errore scrittura");
-        return;
-    }
-
-    for (i = 0; i < nlibri; i++) {
-        fprintf(fp, "%s;%s;%d\n", elenco[i].titolo, elenco[i].autore, elenco[i].anno);
-    }
-    printf("Scrittura completata\n");
-}
-
-libro piuRecente(libro elenco[], int nlibri) {
-    int i, imax;
-    imax = 0;
-    for (i = 1; i < nlibri; i++) {
-        if (elenco[i].anno > elenco[imax].anno) {
-            imax = i;
-        }
-    }
-    return elenco[imax];
-}
-
-int secoloConPiuLibri(libro elenco[], int nlibri) {
+int secoloPiuLibri(Libro lista[], int n) {
     int secoli[21];
-    int i, secolo, imax;
+    int i, j, imax;
 
+    // azzero i secoli
     for (i = 0; i < 21; i++) {
         secoli[i] = 0;
     }
 
-    for (i = 0; i < nlibri; i++) {
-        secolo = elenco[i].anno / 100;
-        secoli[secolo]++;
+    // conto i libri per secolo
+    for (i = 0; i < n; i++) {
+        j = lista[i].anno / 100;
+        secoli[j] += 1;
     }
 
+    // trovo il secolo col massimo
     imax = 0;
     for (i = 0; i < 21; i++) {
         if (secoli[i] > secoli[imax]) {
             imax = i;
         }
     }
-    return imax*100; 
+
+    return imax * 100;
 }
 
 int main() {
+    Libro lista[N], recente;
+    int n, i;
     FILE *fp;
-    char riga[200];
-    libro elenco[N], recente;
-    int nlibri;
-    int i, j;
+    char riga[N];
 
-    fp = fopen("6-2-5.txt", "r");
+
+    // carica i dati in un array di libri (definisci un’apposita struttura libro)
+
+    fp = fopen("14.txt", "r");
     if (fp == NULL) {
-        printf("Errore");
+        printf("Errore nell'apertura del file.");
         return 1;
     }
 
-    for (nlibri = 0; !feof(fp); nlibri++) {
-        fgets(riga, 200, fp);
-        sscanf(riga, "%[^;];%[^;];%d", elenco[nlibri].titolo, elenco[nlibri].autore, &elenco[nlibri].anno);
+    for (i = 0; !feof(fp); i++) {
+        fgets(riga, N, fp);
+        sscanf(riga, "%49[^;];%49[^;];%d", lista[i].titolo, lista[i].nome, &lista[i].anno);
+        // sscanf(riga, "%s;%s;%d", lista[i].titolo, lista[i].nome, &lista[i].anno);
+
+        // printf("%s - %s - %d\n", lista[i].titolo, lista[i].nome, lista[i].anno);
+    }
+    n = i;
+
+    fclose(fp);
+
+
+    // ordina i libri per data di scrittura e riscrivili in un altro file nello stesso formato del file originale
+
+    qsort(lista, n, sizeof(Libro), confronto);
+
+    fp = fopen("14-out.txt", "w");
+    if (fp == NULL) {
+        printf("Errore nell'apertura del file.");
+        return 2;
     }
 
-    // stampa di controllo di tutti i dati
-    printf("Elenco originale:\n");
-    stampaElenco(elenco, nlibri);
+    for (i = 0; i < n; i++) {
+        printf("%30s %30s %d\n", lista[i].titolo, lista[i].nome, lista[i].anno);
+        fprintf(fp, "%s;%s;%d\n", lista[i].titolo, lista[i].nome, lista[i].anno);
+    }
 
-    ordina(elenco, nlibri);
-    printf("\n\nElenco ordinato:\n");
-    stampaElenco(elenco, nlibri);
 
-    scriviSuFile(elenco, nlibri, "6-2-5-out.txt");
+    // scrivi e usa una funzione che riceve i dati già caricati e che restituisce il libro più recente
+    recente = piuRecente(lista, n);
+    printf("\n\nIl libro piu' recente: %s - %s - %d\n", recente.titolo, recente.nome, recente.anno);
 
-    recente = piuRecente(elenco, nlibri);
-    printf("\n\nIl libro piu' recente: %s;%s;%d\n", recente.titolo, recente.autore, recente.anno);
-
-    printf("\n\nIl secolo con piu' libri e' il %d", secoloConPiuLibri(elenco, nlibri));
+    // scrivi e usa una funzione che restituisca il secolo in cui sono stati scritti più libri
+    printf("\n\nIl secolo in cui sono stati scritti piu' libri e' il %d\n", secoloPiuLibri(lista, n));
+}
 }
 ```
 
