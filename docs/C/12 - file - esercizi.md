@@ -2005,7 +2005,7 @@ int main() {
 ### Regioni e province
 {: .numerato_da_h3}
 
-Il seguente file di testo contiene le informazioni riguardanti le provincie d’Italia raggruppate per regione:
+Il seguente file di testo contiene le informazioni riguardanti le province d’Italia raggruppate per regione:
 
 ```
 Valle d'Aosta: Aosta
@@ -2032,9 +2032,9 @@ Sardegna: Cagliari, Nuoro, Oristano, Sassari, Sud Sardegna
 
 La prima provincia indicata per ogni regione è il capoluogo di regione.
 Scrivi un programma che memorizzi opportunamente tutti i dati, poi:
-1.	Scrivi e usa una funzione che calcola quante provincie sono presenti mediamente in ogni regione
-2.	Ordina le regioni per numero di provincie
-3.	Scrivi i nomi delle regioni con più provincie e con meno provincie
+1.	Scrivi e usa una funzione che calcola quante province sono presenti mediamente in ogni regione
+2.	Ordina le regioni per numero di province
+3.	Scrivi i nomi delle regioni con più province e con meno province
 
 <details markdown="block">
   <summary class="soluzione-toggler">
@@ -2047,99 +2047,84 @@ Scrivi un programma che memorizzi opportunamente tutti i dati, poi:
 #include <string.h>
 #include <stdlib.h>
 
-#define N 50
-#define M 200
+#define N 30
+#define M 20
+#define K 300
+#define L 50
 
 typedef struct {
-    char nome[N];
-    char province[N][N];
+    char nome[L];
+    char capoluogo[L];
+    char province[M][L];
     int nprovince;
 } Regione;
 
-void stampaRegioni(Regione elenco[], int nregioni) {
-    int i, j;
-    for (i = 0; i < nregioni; i++) {
-        printf("%s: ", elenco[i].nome);
-        for (j = 0; j < elenco[i].nprovince; j++) {
-            printf("%s, ", elenco[i].province[j]);
-        }
-        printf("%d\n", elenco[i].nprovince);
-    }
-}
-
-float mediaprovince(Regione elenco[], int nregioni) {
-    float ris = 0;
+float numMedioProvince(Regione regioni[N], int nregioni) {
+    float media = 0;
     int i;
+
     for (i = 0; i < nregioni; i++) {
-        ris += elenco[i].nprovince;
+        media += regioni[i].nprovince;
     }
-    ris /= nregioni;
-    return ris;
+    media /= nregioni;
+    return media;
 }
 
-int confrontaRegioniPerNprovince(void *a, void *b) {
-    return ((Regione *)a)->nprovince > ((Regione *)b)->nprovince;
+int confronto(const void *a, const void *b) {
+    Regione *x = (Regione *) a;
+    Regione *y = (Regione *) b;
+    return x->nprovince - y->nprovince;
 }
 
 int main() {
     FILE *fp;
-    int i, ntoken, j;
-    char riga[M], *token;
-    Regione elenco[N];
+    char riga[K], *token;
+    int i, j;
+    Regione regioni[N];
     int nregioni;
 
-    fp = fopen("6-2-15.txt", "r");
+    fp = fopen("24.txt", "r");
     if (fp == NULL) {
-        printf("errore lettura\n");
+        printf("Errore nell'apertura del file.");
         return 1;
     }
 
-    for (i = 0; !feof(fp); i++) {
-        fgets(riga, M, fp);
-        if (riga[strlen(riga) - 1] == '\n') {
-            riga[strlen(riga) - 1] = 0;
+    for (i = 0; i < N && !feof(fp); i++) {
+        fgets(riga, K, fp);
+        if (strlen(riga) > 0 && riga[strlen(riga)-1] == '\n') {
+            riga[strlen(riga)-1] = 0;
         }
-
-        // if (strlen(riga) > 1) {
-        //     ntoken = sscanf(riga,
-        //                     "%[^:]: %[^,], %[^,], %[^,], %[^,], %[^,], %[^,], "
-        //                     "%[^,], %[^,], %[^,], %[^,], %[^,], %[^,], %[^,]",
-        //                     elenco[i].nome, elenco[i].province[0],
-        //                     elenco[i].province[0], elenco[i].province[1],
-        //                     elenco[i].province[2], elenco[i].province[3],
-        //                     elenco[i].province[4], elenco[i].province[5],
-        //                     elenco[i].province[6], elenco[i].province[7],
-        //                     elenco[i].province[8], elenco[i].province[9],
-        //                     elenco[i].province[10], elenco[i].province[11],
-        //                     elenco[i].province[12]);
-        //     elenco[i].nprovince = ntoken - 1;
-        // }
-
-        if (strlen(riga) > 1) {
-            token = strtok(riga, ": ");
-            strcpy(elenco[i].nome, token);
-
-            token = strtok(NULL, ", ");
-            for (j = 0; token != NULL; j++) {
-                strcpy(elenco[i].province[j], token);
-                token = strtok(NULL, ", ");
-            }
-            elenco[i].nprovince = j;
+        token = strtok(riga, ":");
+        strcpy(regioni[i].nome, token);
+        token = strtok(NULL, ",");
+        if (token[0] == ' ') token++; // trucco per togliere uno spazio all'inizio del token (in alternativa se non vuoi usare questo trucco cancella gli spazi prima dei nomi delle province nel file di input)
+        strcpy(regioni[i].capoluogo, token);
+        
+        for (j = 0; j < M && token != NULL; j++) {
+            if (token[0] == ' ') token++;
+            strcpy(regioni[i].province[j], token);
+            token = strtok(NULL, ",");
         }
-
+        regioni[i].nprovince = j;
     }
     nregioni = i;
 
-    stampaRegioni(elenco, nregioni);
+    for (i = 0; i < nregioni; i++) {
+        printf("%s: ", regioni[i].nome);
+        for (j = 0; j < regioni[i].nprovince; j++) {
+            printf("%s", regioni[i].province[j]);
+            if (j < regioni[i].nprovince-1) {
+                printf(", ");
+            }
+        }
+        printf("\n");
+    }
 
-    printf("Media province per regione: %g\n\n",
-           mediaprovince(elenco, nregioni));
+    printf("\nNumero medio di province per regione: %g\n\n", numMedioProvince(regioni, nregioni));
 
-    qsort(elenco, nregioni, sizeof(Regione), confrontaRegioniPerNprovince);
-    printf("Regione con piu' province: %s\n", elenco[nregioni-1].nome);
-    printf("Regione con meno province: %s\n", elenco[0].nome);
-
-    // stampaRegioni(elenco, nregioni);
+    qsort(regioni, nregioni, sizeof(Regione), confronto);
+    printf("La regione con meno province: %s\n", regioni[0].nome);
+    printf("La regione con piu' province: %s\n", regioni[nregioni-1].nome);
 }
 ```
 
