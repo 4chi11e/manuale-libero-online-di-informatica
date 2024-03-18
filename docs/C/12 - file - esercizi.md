@@ -2131,6 +2131,97 @@ int main() {
 </details> 
 
 
+### Classi e studenti
+{: .numerato_da_h3}
+
+Leggi i dati riguardanti le classi della scuola, poi ordina le classi per 
+numero di studenti. infine stampa tutti i dati con le classi ordinate in 
+ordine decrescente.
+
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define N 100
+#define M 50
+#define K 5
+#define Q 1000
+
+typedef struct {
+    char nome[K];
+    char studenti[M][M];
+    int n;
+} Classe;
+
+int confronto(const void *a, const void *b) {
+    Classe *x = (Classe *)a;
+    Classe *y = (Classe *)b;
+    return y->n - x->n;
+}
+
+int main() {
+    FILE *fp;
+    int i, j, n;
+    Classe classi[N];
+    char riga[Q];
+    char *token;
+
+    // apro il file
+    fp = fopen("25.txt", "r");
+    if (fp == NULL) {
+        printf("Errore nell'apertura del file.\n");
+        return 1;
+    }
+
+    // leggo dal file
+    for (i = 0; i < N && !feof(fp); i++) {
+        fgets(riga, Q, fp);
+        token = strtok(riga, " ");
+        strcpy(classi[i].nome, token);
+
+        token = strtok(NULL, ",");
+        for (j = 0; token != NULL && j < M; j++) {
+            strcpy(classi[i].studenti[j], token);
+            token = strtok(NULL, ",");
+        }
+        classi[i].n = j;
+        printf("[%s]\n", riga);
+    }
+    n = i;
+    fclose(fp);
+    // fine lettura
+
+    // stampo i dati letti
+    for (i = 0; i < n; i++) {
+        printf("%s:\n", classi[i].nome);
+        for (j = 0; j < classi[i].n; j++) {
+            printf(" - %s\n", classi[i].studenti[j]);
+        }
+    }
+
+    qsort(classi, n, sizeof(Classe), confronto);
+
+    // stampo le classi ordinate per numero studenti
+    printf("\n\nClassi ordinate per numero di studenti.\n");
+    for (i = 0; i < n; i++) {
+        printf("%s:\n", classi[i].nome);
+        for (j = 0; j < classi[i].n; j++) {
+            printf(" - %s\n", classi[i].studenti[j]);
+        }
+    }
+}
+```
+
+</details> 
+
 
 
 
