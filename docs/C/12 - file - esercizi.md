@@ -2138,6 +2138,12 @@ Leggi i dati riguardanti le classi della scuola, poi ordina le classi per
 numero di studenti. infine stampa tutti i dati con le classi ordinate in 
 ordine decrescente.
 
+```
+2Q Alessandro Rossi,Bianca Verdi,Carlo Neri, Chiara Bianchi,Daniele Esposito,Elena Romano,Francesco Martini,Giulia Bruno,Luca Conte,Maria De Luca
+3A Anna Ferrari,Andrea Colombo,Beatrice Mazzoni,Davide Coppola,Emma Marini,Federico Salvini
+4B Alice Baroni,Gabriele Esposito,Giulia Costa,Leonardo Rossi,Marco Gallo,Matilde Romano,Michele Esposito,Sara Lombardi
+5C Alessandro Russo,Andrea Moretti,Anna Bellucci,Antonio Di Matteo,Chiara Esposito,Elena Rossi,Francesco Bianchi,Giorgia Lombardi,Luca Colombo
+```
 
 <details markdown="block">
   <summary class="soluzione-toggler">
