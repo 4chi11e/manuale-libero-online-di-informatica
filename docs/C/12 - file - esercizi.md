@@ -2223,7 +2223,88 @@ int main() {
 </details> 
 
 
+### Scrivi e leggi Matrici
+{: .numerato_da_h3}
 
+Scrivi su un file di testo una matrice di numeri casuali, la matrice deve avere un gran numero di righe e di colonne (ad esempio 20x30). Dopo aver scritto il file, rileggilo e con i numeri letti riempi una matrice. Stampa infine la matrice.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define N 20
+#define M 30
+
+int main() {
+    FILE *fp;
+    int i, j;
+    int mat[N][M];
+    char riga[1000];
+    char *token;
+
+    srand(time(NULL));
+
+    // apro il file in scrittura
+    fp = fopen("26.txt", "w");
+    if (fp == NULL) {
+        printf("File non trovato!\n");
+        return 1;
+    }
+
+    // scrittura del file
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < M; j++) {
+            fprintf(fp, "%3d ", rand() % 100);
+        }
+        fprintf(fp, "\n");
+    }
+
+    fclose(fp);
+
+
+    // apro il file in lettura 
+    // (prima devo chiudere il file aperto in scrittura)
+    fp = fopen("26.txt", "r");
+    if (fp == NULL) {
+        printf("File non trovato!\n");
+        return 1;
+    }
+
+    // lettura del file
+    for (i = 0; i < N && !feof(fp); i++) {
+        fgets(riga, 1000, fp);
+        // printf("%s\n", riga);
+
+        // il numero di colonne è troppo grande e addirittura modificabile 
+        // se cambio M quindi uso strtok e non sscanf
+        token = strtok(riga, " ");
+        for (j = 0; j < M; j++) {
+            sscanf(token, "%d", &mat[i][j]);
+            token = strtok(NULL, " ");
+        }
+    }
+    fclose(fp);
+
+    // stampa matrice
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < M; j++) {
+            printf("%3d ", mat[i][j]);
+        }
+        printf("\n");
+    }
+
+}
+```
+
+</details> 
 
 
 <!-- per una nuova soluzione
