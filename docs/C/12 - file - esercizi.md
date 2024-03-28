@@ -2005,7 +2005,7 @@ int main() {
 ### Regioni e province
 {: .numerato_da_h3}
 
-Il seguente file di testo contiene le informazioni riguardanti le provincie d’Italia raggruppate per regione:
+Il seguente file di testo contiene le informazioni riguardanti le province d’Italia raggruppate per regione:
 
 ```
 Valle d'Aosta: Aosta
@@ -2032,9 +2032,9 @@ Sardegna: Cagliari, Nuoro, Oristano, Sassari, Sud Sardegna
 
 La prima provincia indicata per ogni regione è il capoluogo di regione.
 Scrivi un programma che memorizzi opportunamente tutti i dati, poi:
-1.	Scrivi e usa una funzione che calcola quante provincie sono presenti mediamente in ogni regione
-2.	Ordina le regioni per numero di provincie
-3.	Scrivi i nomi delle regioni con più provincie e con meno provincie
+1.	Scrivi e usa una funzione che calcola quante province sono presenti mediamente in ogni regione
+2.	Ordina le regioni per numero di province
+3.	Scrivi i nomi delle regioni con più province e con meno province
 
 <details markdown="block">
   <summary class="soluzione-toggler">
@@ -2047,107 +2047,270 @@ Scrivi un programma che memorizzi opportunamente tutti i dati, poi:
 #include <string.h>
 #include <stdlib.h>
 
-#define N 50
-#define M 200
+#define N 30
+#define M 20
+#define K 300
+#define L 50
 
 typedef struct {
-    char nome[N];
-    char province[N][N];
+    char nome[L];
+    char capoluogo[L];
+    char province[M][L];
     int nprovince;
 } Regione;
 
-void stampaRegioni(Regione elenco[], int nregioni) {
-    int i, j;
-    for (i = 0; i < nregioni; i++) {
-        printf("%s: ", elenco[i].nome);
-        for (j = 0; j < elenco[i].nprovince; j++) {
-            printf("%s, ", elenco[i].province[j]);
-        }
-        printf("%d\n", elenco[i].nprovince);
-    }
-}
-
-float mediaprovince(Regione elenco[], int nregioni) {
-    float ris = 0;
+float numMedioProvince(Regione regioni[N], int nregioni) {
+    float media = 0;
     int i;
+
     for (i = 0; i < nregioni; i++) {
-        ris += elenco[i].nprovince;
+        media += regioni[i].nprovince;
     }
-    ris /= nregioni;
-    return ris;
+    media /= nregioni;
+    return media;
 }
 
-int confrontaRegioniPerNprovince(void *a, void *b) {
-    return ((Regione *)a)->nprovince > ((Regione *)b)->nprovince;
+int confronto(const void *a, const void *b) {
+    Regione *x = (Regione *) a;
+    Regione *y = (Regione *) b;
+    return x->nprovince - y->nprovince;
 }
 
 int main() {
     FILE *fp;
-    int i, ntoken, j;
-    char riga[M], *token;
-    Regione elenco[N];
+    char riga[K], *token;
+    int i, j;
+    Regione regioni[N];
     int nregioni;
 
-    fp = fopen("6-2-15.txt", "r");
+    fp = fopen("24.txt", "r");
     if (fp == NULL) {
-        printf("errore lettura\n");
+        printf("Errore nell'apertura del file.");
         return 1;
     }
 
-    for (i = 0; !feof(fp); i++) {
-        fgets(riga, M, fp);
-        if (riga[strlen(riga) - 1] == '\n') {
-            riga[strlen(riga) - 1] = 0;
+    for (i = 0; i < N && !feof(fp); i++) {
+        fgets(riga, K, fp);
+        if (strlen(riga) > 0 && riga[strlen(riga)-1] == '\n') {
+            riga[strlen(riga)-1] = 0;
         }
-
-        // if (strlen(riga) > 1) {
-        //     ntoken = sscanf(riga,
-        //                     "%[^:]: %[^,], %[^,], %[^,], %[^,], %[^,], %[^,], "
-        //                     "%[^,], %[^,], %[^,], %[^,], %[^,], %[^,], %[^,]",
-        //                     elenco[i].nome, elenco[i].province[0],
-        //                     elenco[i].province[0], elenco[i].province[1],
-        //                     elenco[i].province[2], elenco[i].province[3],
-        //                     elenco[i].province[4], elenco[i].province[5],
-        //                     elenco[i].province[6], elenco[i].province[7],
-        //                     elenco[i].province[8], elenco[i].province[9],
-        //                     elenco[i].province[10], elenco[i].province[11],
-        //                     elenco[i].province[12]);
-        //     elenco[i].nprovince = ntoken - 1;
-        // }
-
-        if (strlen(riga) > 1) {
-            token = strtok(riga, ": ");
-            strcpy(elenco[i].nome, token);
-
-            token = strtok(NULL, ", ");
-            for (j = 0; token != NULL; j++) {
-                strcpy(elenco[i].province[j], token);
-                token = strtok(NULL, ", ");
-            }
-            elenco[i].nprovince = j;
+        token = strtok(riga, ":");
+        strcpy(regioni[i].nome, token);
+        token = strtok(NULL, ",");
+        if (token[0] == ' ') token++; // trucco per togliere uno spazio all'inizio del token (in alternativa se non vuoi usare questo trucco cancella gli spazi prima dei nomi delle province nel file di input)
+        strcpy(regioni[i].capoluogo, token);
+        
+        for (j = 0; j < M && token != NULL; j++) {
+            if (token[0] == ' ') token++;
+            strcpy(regioni[i].province[j], token);
+            token = strtok(NULL, ",");
         }
-
+        regioni[i].nprovince = j;
     }
     nregioni = i;
 
-    stampaRegioni(elenco, nregioni);
+    for (i = 0; i < nregioni; i++) {
+        printf("%s: ", regioni[i].nome);
+        for (j = 0; j < regioni[i].nprovince; j++) {
+            printf("%s", regioni[i].province[j]);
+            if (j < regioni[i].nprovince-1) {
+                printf(", ");
+            }
+        }
+        printf("\n");
+    }
 
-    printf("Media province per regione: %g\n\n",
-           mediaprovince(elenco, nregioni));
+    printf("\nNumero medio di province per regione: %g\n\n", numMedioProvince(regioni, nregioni));
 
-    qsort(elenco, nregioni, sizeof(Regione), confrontaRegioniPerNprovince);
-    printf("Regione con piu' province: %s\n", elenco[nregioni-1].nome);
-    printf("Regione con meno province: %s\n", elenco[0].nome);
-
-    // stampaRegioni(elenco, nregioni);
+    qsort(regioni, nregioni, sizeof(Regione), confronto);
+    printf("La regione con meno province: %s\n", regioni[0].nome);
+    printf("La regione con piu' province: %s\n", regioni[nregioni-1].nome);
 }
 ```
 
 </details> 
 
 
+### Classi e studenti
+{: .numerato_da_h3}
+
+Leggi i dati riguardanti le classi della scuola, poi ordina le classi per 
+numero di studenti. infine stampa tutti i dati con le classi ordinate in 
+ordine decrescente.
+
+```
+2Q Alessandro Rossi,Bianca Verdi,Carlo Neri, Chiara Bianchi,Daniele Esposito,Elena Romano,Francesco Martini,Giulia Bruno,Luca Conte,Maria De Luca
+3A Anna Ferrari,Andrea Colombo,Beatrice Mazzoni,Davide Coppola,Emma Marini,Federico Salvini
+4B Alice Baroni,Gabriele Esposito,Giulia Costa,Leonardo Rossi,Marco Gallo,Matilde Romano,Michele Esposito,Sara Lombardi
+5C Alessandro Russo,Andrea Moretti,Anna Bellucci,Antonio Di Matteo,Chiara Esposito,Elena Rossi,Francesco Bianchi,Giorgia Lombardi,Luca Colombo
+```
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define N 100
+#define M 50
+#define K 5
+#define Q 1000
+
+typedef struct {
+    char nome[K];
+    char studenti[M][M];
+    int n;
+} Classe;
+
+int confronto(const void *a, const void *b) {
+    Classe *x = (Classe *)a;
+    Classe *y = (Classe *)b;
+    return y->n - x->n;
+}
+
+int main() {
+    FILE *fp;
+    int i, j, n;
+    Classe classi[N];
+    char riga[Q];
+    char *token;
+
+    // apro il file
+    fp = fopen("25.txt", "r");
+    if (fp == NULL) {
+        printf("Errore nell'apertura del file.\n");
+        return 1;
+    }
+
+    // leggo dal file
+    for (i = 0; i < N && !feof(fp); i++) {
+        fgets(riga, Q, fp);
+        token = strtok(riga, " ");
+        strcpy(classi[i].nome, token);
+
+        token = strtok(NULL, ",");
+        for (j = 0; token != NULL && j < M; j++) {
+            strcpy(classi[i].studenti[j], token);
+            token = strtok(NULL, ",");
+        }
+        classi[i].n = j;
+        printf("[%s]\n", riga);
+    }
+    n = i;
+    fclose(fp);
+    // fine lettura
+
+    // stampo i dati letti
+    for (i = 0; i < n; i++) {
+        printf("%s:\n", classi[i].nome);
+        for (j = 0; j < classi[i].n; j++) {
+            printf(" - %s\n", classi[i].studenti[j]);
+        }
+    }
+
+    qsort(classi, n, sizeof(Classe), confronto);
+
+    // stampo le classi ordinate per numero studenti
+    printf("\n\nClassi ordinate per numero di studenti.\n");
+    for (i = 0; i < n; i++) {
+        printf("%s:\n", classi[i].nome);
+        for (j = 0; j < classi[i].n; j++) {
+            printf(" - %s\n", classi[i].studenti[j]);
+        }
+    }
+}
+```
+
+</details> 
 
 
+### Scrivi e leggi Matrici
+{: .numerato_da_h3}
+
+Scrivi su un file di testo una matrice di numeri casuali, la matrice deve avere un gran numero di righe e di colonne (ad esempio 20x30). Dopo aver scritto il file, rileggilo e con i numeri letti riempi una matrice. Stampa infine la matrice.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define N 20
+#define M 30
+
+int main() {
+    FILE *fp;
+    int i, j;
+    int mat[N][M];
+    char riga[1000];
+    char *token;
+
+    srand(time(NULL));
+
+    // apro il file in scrittura
+    fp = fopen("26.txt", "w");
+    if (fp == NULL) {
+        printf("File non trovato!\n");
+        return 1;
+    }
+
+    // scrittura del file
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < M; j++) {
+            fprintf(fp, "%3d ", rand() % 100);
+        }
+        fprintf(fp, "\n");
+    }
+
+    fclose(fp);
+
+
+    // apro il file in lettura 
+    // (prima devo chiudere il file aperto in scrittura)
+    fp = fopen("26.txt", "r");
+    if (fp == NULL) {
+        printf("File non trovato!\n");
+        return 1;
+    }
+
+    // lettura del file
+    for (i = 0; i < N && !feof(fp); i++) {
+        fgets(riga, 1000, fp);
+        // printf("%s\n", riga);
+
+        // il numero di colonne è troppo grande e addirittura modificabile 
+        // se cambio M quindi uso strtok e non sscanf
+        token = strtok(riga, " ");
+        for (j = 0; j < M; j++) {
+            sscanf(token, "%d", &mat[i][j]);
+            token = strtok(NULL, " ");
+        }
+    }
+    fclose(fp);
+
+    // stampa matrice
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < M; j++) {
+            printf("%3d ", mat[i][j]);
+        }
+        printf("\n");
+    }
+
+}
+```
+
+</details> 
 
 
 <!-- per una nuova soluzione
