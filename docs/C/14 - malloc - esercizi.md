@@ -411,6 +411,320 @@ int main() {
 
 </details> 
 
+
+### Genera matrice dinamica random
+{: .numerato_da_h3}
+
+Genera una matrice di numeri casuali di massimo due cifre. Anche la
+dimensione della matrice deve essere casuale: il numero di righe e di colonne
+deve essere compreso tra 2 e 10. 
+Ordina poi separatamente ogni riga in ordine crescente.
+
+Leggi i numeri contenuti nel file di input e inseriscili in una matrice dinamica.
+Dai per scontato che ogni riga contenga la stessa quantità di numeri.
+
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int cmpfunc (const void * a, const void * b) {
+   return ( *(int*)a - *(int*)b );
+}
+
+int main() {
+    int i, j;
+    int N, M;
+    int **mat;
+
+    srand(time(NULL));
+
+    N = rand() % (10-2+1) + 2;
+    M = rand() % (10-2+1) + 2;
+    mat = malloc(N * sizeof(int*));
+    if (mat == NULL) {
+        printf("Memoria insufficiente.");
+        return 1;
+    }
+    for (i = 0; i < N; i++) {
+        mat[i] = malloc(M * sizeof(int));
+        if (mat[i] == NULL) {
+            printf("Memoria insufficiente.");
+            return 1;
+        }
+        for (j = 0; j < M; j++) {
+            mat[i][j] = rand() % 100;
+        }
+    }
+
+    // stampo separatamente (potevo farlo prima)
+    for (i = 0; i < N; i++) {
+        qsort(mat[i], M, sizeof(int), cmpfunc);
+        for (j = 0; j < M; j++) {
+            printf("%2d ", mat[i][j]);
+        }
+        printf("\n");
+    }
+}
+```
+
+</details> 
+
+## Array e Matrici di Stringhe
+
+La gestione delle stringhe all'interno di array o matrici dinamiche è difficile da gestire in maniera del tutto dinamica, per semplicità almeno le stringhe è comodo gestirle in maniera classica. In ogni caso solitamente non chiedo in verifica questi argomenti. 
+
+### Lettura lista stringhe da file e ordinamento
+{: .numerato_da_h3}
+
+Leggi l'elenco di nomi dal file di input e inseriscili in un array
+dinamico. Ordina poi l'elenco in ordine alfabetico.
+
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define M 20
+
+int main() {
+    FILE *fp;
+    int i, j, N, n;
+    char (*nomi)[M];
+
+    fp = fopen("09-lista-nomi.txt", "r");
+    if (fp == NULL) {
+        printf("File non trovato\n");
+        return 1;
+    }
+
+    N = 4;
+    nomi = malloc(N * sizeof(char) * M);
+    if (nomi == NULL) {
+        printf("Non riesco ad allocare abbastanza memoria!");
+        return 1;
+    }
+
+    for (i = 0; !feof(fp); i++) {
+        if (i >= N) {
+            nomi = realloc(nomi, N * sizeof(char) * M * 2);
+            if (nomi == NULL) {
+                printf("Non riesco ad allocare abbastanza memoria!");
+                return 1;
+            }
+            N *= 2;
+        }
+        fscanf(fp, "%s", nomi[i]);
+    }
+    n = i;
+
+    printf("Nomi non ordinati:\n");
+    for (i = 0; i < n; i++) {
+        printf("- %s\n", nomi[i]);
+    }
+
+    qsort(nomi, n, sizeof(char) * M, strcmp);
+    // si lamenta un po' (warnings) perchè strcmp non ha esattamente il formato
+    // che vorrebbe ma funziona
+
+    printf("Nomi ordinati:\n");
+    for (i = 0; i < n; i++) {
+        printf("- %s\n", nomi[i]);
+    }
+}
+```
+
+</details> 
+
+
+### Matrice di stringhe e ordinamenti
+{: .numerato_da_h3}
+
+Leggi l'elenco di nomi dal file di input e inseriscili in un array
+dinamico. Inserisci poi i nomi in una lista di liste di nomi in cui in ogni
+riga ci sono nomi che iniziano con la stessa lettera. Ordina poi ogni riga in
+ordine alfabetico.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define M 20
+
+int main() {
+    FILE *fp;
+    int i, j, N, n, p, matcap, matsize;
+    char (*nomi)[M];
+    char (**mat)[M];
+    int *sizes, *caps;
+
+    fp = fopen("09-lista-nomi.txt", "r");
+    if (fp == NULL) {
+        printf("File non trovato\n");
+        return 1;
+    }
+
+    N = 4;
+    nomi = malloc(N * sizeof(char) * M);
+
+    for (i = 0; !feof(fp); i++) {
+        if (i >= N) {
+            nomi = realloc(nomi, N * sizeof(char) * M * 2);
+            if (nomi == NULL) {
+                printf("Non riesco ad allocare abbastanza memoria!");
+                return 1;
+            }
+            N *= 2;
+        }
+        fscanf(fp, "%s", nomi[i]);
+    }
+    n = i;
+
+    printf("Nomi letti:\n");
+    for (i = 0; i < n; i++) {
+        printf("- %s\n", nomi[i]);
+    }
+
+    // qsort(nomi, n, sizeof(char) * M, strcmp);
+    // si lamenta un po (warnings) perchè strcmp non ha esattamente il formato
+    // che vorrebbe ma funziona
+
+    mat = malloc(1 * sizeof(char**));
+    if (mat == NULL) {
+        printf("Non riesco ad allocare abbastanza memoria!");
+        return 1;
+    }
+    matcap = 1;
+    matsize = 1;
+
+    sizes = malloc(matcap * sizeof(int));
+    caps = malloc(matcap * sizeof(int));
+    for (i = 0; i < matcap; i++) {
+        sizes[i] = 0;
+        caps[i] = 0;
+    }
+
+    for (p = 0; p < n; p++) {
+        i = 0;
+        // printf("%d %s %s - ", sizes[i], nomi[p], mat[i][0]);
+        while (sizes[i] != 0 && nomi[p][0] != mat[i][0][0]) {
+            i++;
+            if (i >= matcap) {
+                mat = realloc(mat, matcap * 2 * sizeof(char**));
+                if (mat == NULL) {
+                    printf("Non riesco ad allocare abbastanza memoria!");
+                    return 1;
+                }
+                matcap *= 2;
+                sizes = realloc(sizes, matcap * sizeof(int));
+                caps = realloc(caps, matcap * sizeof(int));
+                for (j = matsize; j < matcap; j++) {
+                    sizes[j] = 0;
+                    caps[j] = 0;
+                }
+            }
+            if (i >= matsize) {
+                matsize++;
+            }
+        }
+        // printf("matcap:%d matsize:%d - ", matcap, matsize);
+        if (caps[i] == 0) {
+            mat[i] = malloc(4 * sizeof(char) * M);
+            if (mat[i] == NULL) {
+                printf("Non riesco ad allocare abbastanza memoria!");
+                return 1;
+            }
+            caps[i] = 4;
+        }
+        if (sizes[i] >= caps[i]) {
+            mat[i] = realloc(mat[i], caps[i] * 2 * sizeof(char) * M);
+            if (mat[i] == NULL) {
+                printf("Non riesco ad allocare abbastanza memoria!");
+                return 1;
+            }
+            caps[i] *= 2;
+        }
+        // printf("Scrivo %s in mat[%d][%d]\n", nomi[p], i, sizes[i]);
+        strcpy(mat[i][sizes[i]], nomi[p]);
+        sizes[i] += 1;
+    }
+
+    printf("\n\nStampa matrice:\n");
+    for (i = 0; i < matsize; i++) {
+        printf(" %c: ", mat[i][0][0]);
+        for (j = 0; j < sizes[i]; j++) {
+            printf("%s ", mat[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\n\nRistampa matrice ordinata riga per riga:\n");
+    for (i = 0; i < matsize; i++) {
+        qsort(mat[i], sizes[i], sizeof(char)*M, strcmp);
+        printf(" %c: ", mat[i][0][0]);
+        for (j = 0; j < sizes[i]; j++) {
+            printf("%s ", mat[i][j]);
+        }
+        printf("\n");
+    }
+
+    // per ordinare le righe fra loro il qsort non va bene perchè dovrei ordinare anche l'array sizes
+    // per usarlo dovevo fare una struttura per ogni riga contenente sia l'array che la dimensione
+}
+```
+
+</details> 
+
+Per curiosità riporto la soluzione di questo esercizio in Python, un linguaggio di alto livello che nasconde la gestione della memoria e delle strutture dati dinamiche.
+Come è evidente questo rende la scrittura e la comprensione del codice molto più semplice. Di contro si perde il controllo delle operazioni di basso livello e la possibiiltà di ottimizzare tali operazioni per compiti specifici.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione in Python
+  </summary>
+  {: .text-delta }
+
+```c
+with open("09-lista-nomi.txt", encoding='utf-8') as f:
+    nomi = [riga.strip() for riga in f]
+
+mat = {}
+for nome in nomi:
+    if nome[0] in mat:
+        mat[nome[0]].append(nome)
+    else:
+        mat[nome[0]] = [nome]
+
+mat = [val for key,val in mat.items()]
+mat.sort()
+for nomi in mat:
+    print(nomi)
+```
+
+</details> 
+
 <!-- per una nuova soluzione
 
 ### 
