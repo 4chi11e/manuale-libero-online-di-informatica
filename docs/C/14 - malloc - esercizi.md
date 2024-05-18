@@ -21,7 +21,10 @@ has_children: False
 ## Esercizi
 {: .azzera_numerazione_h3}
 
-### Memorizzazione sequenza numeri di lunghezza casuale 1
+### Array e Matrici numerici
+{: .numerato_da_h3 .azzera_numerazione_h4}
+
+##### Memorizzazione sequenza numeri di lunghezza casuale 1
 {: .numerato_da_h3}
 
 Riempi un array di numeri casuali minori di 100, fermati quando estrai 0
@@ -97,7 +100,7 @@ int main() {
 
 </details> 
 
-### Memorizzazione sequenza numeri di lunghezza casuale 2
+#### Memorizzazione sequenza numeri di lunghezza casuale 2
 {: .numerato_da_h3}
 
 Genera e memorizza una sequenza di numeri casuali. La sequenza deve
@@ -155,7 +158,7 @@ int main() {
 </details> 
 
 
-### Input sequenza numeri in unica riga
+#### Input sequenza numeri in unica riga
 {: .numerato_da_h3}
 
 Chiedi all'utente di inserire in un'unica riga una serie di numeri interi. il
@@ -206,7 +209,7 @@ int main() {
 
 </details> 
 
-### Definizione Vettore
+#### Definizione Vettore
 {: .numerato_da_h3}
 
 Definisci una struttura che chiamerai VettoreInt. Questa struttura deve contenere un'array dinamico di interi e i relativi valori di e capacità (quanti numeri può contenere) e dimensione (quanti elementi sono effettivamente contenuti). Implementa poi le seguenti funzioni:
@@ -276,7 +279,7 @@ int pop(VettoreInt *v, int pos) {
 </details> 
 
 
-### Memorizzazione sequenza numeri di lunghezza casuale 1 - col vettore
+#### Memorizzazione sequenza numeri di lunghezza casuale 1 - col vettore
 {: .numerato_da_h3}
 
 Dopo aver definito una struttura VettoreInt e le funzioni per usarla come vettore,
@@ -320,7 +323,7 @@ int main() {
 </details> 
 
 
-### Memorizzazione sequenza numeri di lunghezza casuale 2 - col vettore
+#### Memorizzazione sequenza numeri di lunghezza casuale 2 - col vettore
 {: .numerato_da_h3}
 
 Dopo aver definito una struttura VettoreInt e le funzioni per usarla come vettore,
@@ -366,7 +369,7 @@ int main() {
 </details> 
 
 
-### Input sequenza numeri in unica riga - col vettore
+#### Input sequenza numeri in unica riga - col vettore
 {: .numerato_da_h3}
 
 Dopo aver definito una struttura VettoreInt e le funzioni per usarla come vettore,
@@ -412,7 +415,7 @@ int main() {
 </details> 
 
 
-### Genera matrice dinamica random
+#### Genera matrice dinamica random
 {: .numerato_da_h3}
 
 Genera una matrice di numeri casuali di massimo due cifre. Anche la
@@ -477,11 +480,12 @@ int main() {
 
 </details> 
 
-## Array e Matrici di Stringhe
+### Array e Matrici di Stringhe
+{: .numerato_da_h3 .azzera_numerazione_h4}
 
-La gestione delle stringhe all'interno di array o matrici dinamiche è difficile da gestire in maniera del tutto dinamica, per semplicità almeno le stringhe è comodo gestirle in maniera classica. In ogni caso solitamente non chiedo in verifica questi argomenti. 
+La gestione delle stringhe in maniera del tutto dinamica è piuttosto complessa ed è utile solo in casi particolari. Per questo motivo almeno le stringhe continueremo a gestirle in maniera classica.
 
-### Lettura lista stringhe da file e ordinamento
+#### Lettura lista stringhe da file e ordinamento
 {: .numerato_da_h3}
 
 Leggi l'elenco di nomi dal file di input e inseriscili in un array
@@ -552,7 +556,7 @@ int main() {
 </details> 
 
 
-### Matrice di stringhe e ordinamenti
+#### Matrice di stringhe e ordinamenti
 {: .numerato_da_h3}
 
 Leggi l'elenco di nomi dal file di input e inseriscili in un array
@@ -727,7 +731,7 @@ for nomi in mat:
 
 <!-- per una nuova soluzione
 
-### 
+#### 
 {: .numerato_da_h3}
 
 
