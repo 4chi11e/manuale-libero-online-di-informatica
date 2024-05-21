@@ -24,11 +24,11 @@ has_children: False
 ### Array e Matrici numerici
 {: .numerato_da_h3 .azzera_numerazione_h4}
 
-##### Memorizzazione sequenza numeri di lunghezza casuale 1
+#### Memorizzazione sequenza numeri di lunghezza casuale 1
 {: .numerato_da_h3}
 
 Riempi un array di numeri casuali minori di 100, fermati quando estrai 0
-// (non aggiungere lo 0)
+(non aggiungere lo 0)
 
 <details markdown="block">
   <summary class="soluzione-toggler">
@@ -168,7 +168,7 @@ stampa poi l'array.
 
 <details markdown="block">
   <summary class="soluzione-toggler">
-    Soluzione
+    Soluzione 1
   </summary>
   {: .text-delta }
 
@@ -208,6 +208,51 @@ int main() {
 ```
 
 </details> 
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione 2
+  </summary>
+  {: .text-delta }
+
+```c
+#include <stdio.h>
+#include <string.h>
+#include <malloc.h>
+
+int main() {
+    char riga[1000], copia[1000], *token;
+    int *a, n, i;
+
+    printf("Scrivi una sequenza di numeri interi in una sola riga separati da spazi:\n > ");
+    scanf("%[^\n]", riga);
+    strcpy(copia, riga);
+
+    token = strtok(copia, " ");
+    for (n = 0; token != NULL; n++) {
+        token = strtok(NULL, " ");
+    }
+
+    a = malloc(n*sizeof(int));
+    if (a == NULL) {
+        printf("Non sono riuscito ad allocare abbastanza memoria!\n");
+        return 1;
+    }
+
+    token = strtok(riga, " ");
+    for (i = 0; token != NULL && i < n; i++) {
+        sscanf(token, "%d", &a[i]);
+        token = strtok(NULL, " ");
+    }
+
+    for (i = 0; i < n; i++) {
+        printf("%d ", a[i]);
+    }
+}
+```
+
+</details> 
+
 
 #### Definizione Vettore
 {: .numerato_da_h3}
@@ -297,7 +342,7 @@ dichiara e riempi un VettoreInt di numeri casuali minori di 100. Fermati quando 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "vettore.c" // vedi esercizio sulla definizione di VettoreInt
+#include "1-04-vettore.c" // vedi esercizio sulla definizione di VettoreInt
 
 int main() {
     int i, numero;
@@ -341,7 +386,7 @@ terminare quando la media dei numeri è 50 +- 0.01
 #include <time.h>
 #include <stdlib.h>
 #include <malloc.h>
-#include "vettore.c"
+#include "1-04-vettore.c"
 
 int main() {
     int num, i;
@@ -387,7 +432,7 @@ Stampali infine al contrario.
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
-#include "vettore.c"
+#include "1-04-vettore.c"
 
 int main() {
     char riga[1000], *token;
@@ -480,6 +525,460 @@ int main() {
 
 </details> 
 
+
+#### Lettura matrice da file
+{: .numerato_da_h3}
+
+Leggi i numeri contenuti nel file di input e inseriscili in una matrice dinamica.
+Dai per scontato che ogni riga contenga la stessa quantità di numeri.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    File di input
+  </summary>
+  {: .text-delta }
+
+```
+ 53 15 43 42 24 22 10 82 22  6 68 46 90 60 70  2 14 36 39 53  9 44 38 36 38 45 75 42 98 67
+ 41 50 86 79 88 64 17 51 68 25  3 84 93 65 99 67 36 70 43 58 42  7 69 68  0 94 83 63 23 74
+ 63  1 40 15 84 73 19 91 45 67 91 49 91 11 33 20 13 22 34 50 83 82 42 37 38 31  3 22 35  9
+  9 49 34 92 44 80 94 21 94 35 90 47 45 95 30 82 28 89 25  7 49 42 69  4 51 77 13 73 85 68
+ 74 67  7 82  2 64 31  5 69 88 39 15 92 30 36 87 35 70 15 17 85 25 83 62  7 97 42 97 77 31
+ 96 68 88 34 52 55  9 74 94 65  0 53 45 85 16 12 62 69 98 61 96 56  1 48 89 81  9 76 21 34
+ 43 32  6 10 35 17 79 18 59 37 78 58 56 72 67 67 50 58 30 40 84 18 72 26  4 41 68 88 32 38
+ 93 95 74  4 98 33 22 68 90 60 81 65 73 34 12 82 27 22  5 87 63 49 33 82 11 82 83 59 66 27
+ 36 89 98 94 63 64 72 66 55 52 52 73 23 31 21 29 17 57 80 46 50 19 39 36 24  7 14 86 17 90
+ 53 62 56 15  5 45 58 62 39 89 18 12 97 17 96 34  8  1 58 92 10 39 80 63 77 89 42 24 11 32
+ 11 83 40  8 37 12 16 65 62 41  1 70 68 64 89 92 29 38 44 25  0 88  5 69 44 93 17 88 50 41
+  0 53 25 13 22  3 94 54 33 42  8  2  1 61 37 76 60 29 13 32 80 64 47 91 13 43 18 80 79 92
+ 49 79 11 85 10 52 81 33 84 27 90 32 11 47 35 69 96 25 70  1 61 35 19 99 42 28 86 34 33 17
+ 31 55 15 37  6 67 75 33  8 43 74 63 85 30 52 35 47 55 90 98 83 80 76 59 15 34 38  0 72 58
+ 77 30 61 11 63 59 79 41 51 14 83 61  1 36 85 34 30 55 98 31 74 60 59 78 55 80 35 57 26 89
+ 19 27 31 38  1 17 82 65 24 17 31 54 62 35 45  0 85 42 38 21 26 97 73 21 23  7 82 35 95 43
+  7 89  8 60 31 53 36 49 39 24  0 12 58 66 21 68 25 54 83 59 91 83 92 37 23  7  1 50 32 19
+ 27 22 20 36 49 79 40 88 96  2 35 12 63 10 41 64 48 13 69 43  6 89 94  9  0 58 63 82 51 92
+ 38 61 79 72 14 80 56 74  7 10 94 58 85 19 73 99 71 55 51 46 79 18 82 75 47 69 43 86 78 56
+ 27 26 91 12 15 30 76 47  3 74 43 84 31 87  6 79 50  2 69 39 18 27 28 47 39 31  1 25 87 31
+ 23 23 87 41 40 88 48 16  3 77 68 75 13  4 49 10 25 39 82 80 79 45 17 72 67 42 33 71 37  1
+ 54 94 94 83 17 68 88 65  4 37 63 52 57 13  9 92 78 67 43 87 25 66  0 32 69 13 86 24 56 16
+ 54 15 14 22 97 14 71 38 64 84 96 55 99  2 80 55 42 64 92 21 68 60 63 90 89 17 76  5 13 28
+ 65 86 81 81 17 25 42 42 99 86 55 76 49 16 96 99  8 10 85 62 53 54 15 37 49 56 61 82 19 21
+ 21 99 82 73 34 75 98 89 13  2 23 17 71  1 37 21 45 93 80 54 33 60  0 32  5 43 65  6 57  1
+```
+
+</details> 
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define K 1000
+
+int main() {
+    FILE *fp;
+    int i, j;
+    // le maiuscole indicano la capacità della matrice, le minuscole  la
+    // quantità di valori effettivamente contenuti
+    int N, M, n, m;
+    int **mat;
+    char riga[K];
+    char *token;
+
+    fp = fopen("1-09-leggi-matrice-input.txt", "r");
+    if (fp == NULL) {
+        printf("File non trovato\n");
+        return 1;
+    }
+
+    N = 2;
+    M = 2;
+    // qui alloco un array dinamico di puntatori, ognuno a sua volta è un
+    // array dinamico. Per ora ogni puntatore non punta a nulla.
+    mat = malloc(N * sizeof(int *));
+    n = 0;
+    m = 0;
+    for (i = 0; !feof(fp); i++) {
+        if (i >= N) {
+            N *= 2;
+            // aggiungo puntatori cioè nuove righe
+            mat = realloc(mat, N * sizeof(int *));
+        }
+        // è qui che alloco memoria per la riga i-esima (puntata dal puntatore
+        // i-esimo)
+        mat[i] = malloc(M * sizeof(int));
+        fgets(riga, K, fp);
+        token = strtok(riga, " ");
+        for (j = 0; token != NULL; j++) {
+            if (j >= M) {
+                M *= 2;
+                mat[i] = realloc(mat[i], M * sizeof(int));
+                // qui va considerato che le righe devo essere tutte lunghe
+                // uguali se no bisognerebbe fare una cosa più complicata.
+                // Qui la realloc viene fatta solo riempiendo la prima riga.
+            }
+            sscanf(token, "%d", &mat[i][j]);
+            token = strtok(NULL, " ");
+
+            printf("%3d", mat[i][j]);
+        }
+        printf("\n");
+    }
+    n = i;
+    m = j;
+}
+```
+
+</details> 
+
+
+
+#### Lettura matrice da file e ordinamenti 
+{: .numerato_da_h3}
+
+Leggi i numeri contenuti nel file di input e inseriscili in una matrice dinamica.
+Dai per scontato che ogni riga contenga la stessa quantità di numeri.
+Dopo aver letto la matrice ordina ogni riga in ordine crescente. Ordina poi tra loro
+le righe in modo che siano ordnate in ordine crescente secondo il primo numero della
+riga.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    File di input
+  </summary>
+  {: .text-delta }
+
+```
+ 53 15 43 42 24 22 10 82 22  6 68 46 90 60 70  2 14 36 39 53  9 44 38 36 38 45 75 42 98 67
+ 41 50 86 79 88 64 17 51 68 25  3 84 93 65 99 67 36 70 43 58 42  7 69 68  0 94 83 63 23 74
+ 63  1 40 15 84 73 19 91 45 67 91 49 91 11 33 20 13 22 34 50 83 82 42 37 38 31  3 22 35  9
+  9 49 34 92 44 80 94 21 94 35 90 47 45 95 30 82 28 89 25  7 49 42 69  4 51 77 13 73 85 68
+ 74 67  7 82  2 64 31  5 69 88 39 15 92 30 36 87 35 70 15 17 85 25 83 62  7 97 42 97 77 31
+ 96 68 88 34 52 55  9 74 94 65  0 53 45 85 16 12 62 69 98 61 96 56  1 48 89 81  9 76 21 34
+ 43 32  6 10 35 17 79 18 59 37 78 58 56 72 67 67 50 58 30 40 84 18 72 26  4 41 68 88 32 38
+ 93 95 74  4 98 33 22 68 90 60 81 65 73 34 12 82 27 22  5 87 63 49 33 82 11 82 83 59 66 27
+ 36 89 98 94 63 64 72 66 55 52 52 73 23 31 21 29 17 57 80 46 50 19 39 36 24  7 14 86 17 90
+ 53 62 56 15  5 45 58 62 39 89 18 12 97 17 96 34  8  1 58 92 10 39 80 63 77 89 42 24 11 32
+ 11 83 40  8 37 12 16 65 62 41  1 70 68 64 89 92 29 38 44 25  0 88  5 69 44 93 17 88 50 41
+  0 53 25 13 22  3 94 54 33 42  8  2  1 61 37 76 60 29 13 32 80 64 47 91 13 43 18 80 79 92
+ 49 79 11 85 10 52 81 33 84 27 90 32 11 47 35 69 96 25 70  1 61 35 19 99 42 28 86 34 33 17
+ 31 55 15 37  6 67 75 33  8 43 74 63 85 30 52 35 47 55 90 98 83 80 76 59 15 34 38  0 72 58
+ 77 30 61 11 63 59 79 41 51 14 83 61  1 36 85 34 30 55 98 31 74 60 59 78 55 80 35 57 26 89
+ 19 27 31 38  1 17 82 65 24 17 31 54 62 35 45  0 85 42 38 21 26 97 73 21 23  7 82 35 95 43
+  7 89  8 60 31 53 36 49 39 24  0 12 58 66 21 68 25 54 83 59 91 83 92 37 23  7  1 50 32 19
+ 27 22 20 36 49 79 40 88 96  2 35 12 63 10 41 64 48 13 69 43  6 89 94  9  0 58 63 82 51 92
+ 38 61 79 72 14 80 56 74  7 10 94 58 85 19 73 99 71 55 51 46 79 18 82 75 47 69 43 86 78 56
+ 27 26 91 12 15 30 76 47  3 74 43 84 31 87  6 79 50  2 69 39 18 27 28 47 39 31  1 25 87 31
+ 23 23 87 41 40 88 48 16  3 77 68 75 13  4 49 10 25 39 82 80 79 45 17 72 67 42 33 71 37  1
+ 54 94 94 83 17 68 88 65  4 37 63 52 57 13  9 92 78 67 43 87 25 66  0 32 69 13 86 24 56 16
+ 54 15 14 22 97 14 71 38 64 84 96 55 99  2 80 55 42 64 92 21 68 60 63 90 89 17 76  5 13 28
+ 65 86 81 81 17 25 42 42 99 86 55 76 49 16 96 99  8 10 85 62 53 54 15 37 49 56 61 82 19 21
+ 21 99 82 73 34 75 98 89 13  2 23 17 71  1 37 21 45 93 80 54 33 60  0 32  5 43 65  6 57  1
+```
+
+</details> 
+
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define K 1000
+
+int confrontoint(const void *arg1, const void *arg2) {
+    int* a = (int*)arg1;
+    int* b = arg2;
+    return *a - *b;
+}
+
+int confrontorighe(const void *arg1, const void *arg2) {
+    int* a = *(int**)arg1;
+    int* b = *(int**)arg2;
+    return a[0] - b[0];
+}
+
+int main() {
+    FILE *fp;
+    int i, j;
+    // le maiuscole indicano la capacità della matrice, le minuscole  la
+    // quantità di valori effettivamente contenuti
+    int N, M, n, m;
+    int **mat;
+    char riga[K];
+    char *token;
+
+    fp = fopen("1-10-leggi-matrice-ordinamenti-input.txt", "r");
+    if (fp == NULL) {
+        printf("File non trovato\n");
+        return 1;
+    }
+
+    N = 2;
+    M = 2;
+    // qui alloco un array dinamico di puntatori, ognuno a sua volta è un
+    // array dinamico. Per ora ogni puntatore non punta a nulla.
+    mat = malloc(N * sizeof(int*));
+    n = 0;
+    m = 0;
+    for (i = 0; !feof(fp); i++) {
+        if (i >= N) {
+            N *= 2;
+            // aggiungo puntatori cioè nuove righe
+            mat = realloc(mat, N * sizeof(int *));
+        }
+        // è qui che alloco memoria per la riga i-esima (puntata dal puntatore
+        // i-esimo)
+        mat[i] = malloc(M * sizeof(int));
+        fgets(riga, K, fp);
+        token = strtok(riga, " ");
+        for (j = 0; token != NULL; j++) {
+            if (j >= M) {
+                M *= 2;
+                mat[i] = realloc(mat[i], M * sizeof(int));
+                // qui va considerato che le righe devo essere tutte lunghe
+                // uguali se no bisognerebbe fare una cosa più complicata.
+                // Qui la realloc viene fatta solo riempiendo la prima riga.
+            }
+            sscanf(token, "%d", &mat[i][j]);
+            token = strtok(NULL, " ");
+        }
+        
+    }
+    n = i;
+    m = j;
+
+    // stampa della matrice normale
+    printf("Stampa della matrice letta:\n");
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < m; j++) {
+            printf("%3d", mat[i][j]);
+        }
+        printf("\n");
+    }
+
+
+    printf("\n\nStampa della matrice ordinata riga per riga:\n");
+    for (i = 0; i < n; i++) {
+        qsort(mat[i], m, sizeof(int), confrontoint);
+        for (j = 0; j < m; j++) {
+            printf("%3d", mat[i][j]);
+        }
+        printf("\n");
+    }
+
+
+    printf("\n\nStampa della matrice ordinata anche per righe:\n");
+    qsort(mat, n, sizeof(int*), confrontorighe);
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < m; j++) {
+            printf("%3d", mat[i][j]);
+        }
+        printf("\n");
+    }
+}
+```
+
+</details> 
+
+
+#### Voti studenti
+{: .numerato_da_h3}
+
+Scrivi un programma che legga i dati contenuti in un file di testo (testo
+riportato di seguito) e li inserisca in opportune strutture dati che
+rappresentino il registro dei voti per una materia. Il programma deve poi
+calcolare la media dei voti per ogni singolo studente e aggiungerla alla
+struttura dati (che quindi conterrà anche una variabile media). Il programma
+deve mostrare tutti i dati raccolti e calcolati sullo schermo e salvarli in
+un secondo file di testo. Nota che i cognomi possono essere formati da più
+parole e sono separati dai voti da un “:”, inoltre il numero di voti varia
+per ogni studente.
+L'array contenente i dati di ogni studente deve essere dinamico in modo
+che il programma funzioni per un qualsiasi numero di studenti.
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    File di input
+  </summary>
+  {: .text-delta }
+
+```
+Amici: 7.00 8.00 7.00
+Biella: 8.00 9.50 7.00
+Brescia: 5.00 7.50 9.00
+Carolla: 7.00 8.50 8.50
+Cunegatti: 7.00 7.00
+De Bella: 4.00 4.00 4.50 5.00
+De Vecchi: 8.00 10.00 6.00
+Fumagalli: 8.50 6.00 4.50
+Galimberti: 9.00 9.00 9.00
+Germanò: 8.50 9.00 7.50
+Gubellini: 8.00 10.00 7.00
+Lepore: 5.50 4.00 3.00 5.00
+Maconi: 7.50 5.00
+Mariani: 8.00 8.00 7.00
+Mattavelli: 9.00 9.50 8.50
+Oggiano: 5.00 3.00 3.00 2.00
+Passoni: 5.00 6.00 6.00 7.50
+Pastori: 3.50 5.00 7.00 2.00
+Pirovano: 6.50 7.50 7.50
+Rudi: 9.50 10.00 10.00
+Russell: 7.50 4.50
+Sogos: 4.00 3.50 3.50 2.00
+Tezza: 7.00 5.50 5.50
+Varisco: 8.00 9.00 8.50
+```
+
+</details> 
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Output della soluzione
+  </summary>
+  {: .text-delta }
+
+```
+Amici: 7.00 8.00 7.00 - 7.33 
+Biella: 8.00 9.50 7.00 - 8.17 
+Brescia: 5.00 7.50 9.00 - 7.17 
+Carolla: 7.00 8.50 8.50 - 8.00 
+Cunegatti: 7.00 7.00 - 7.00 
+De Bella: 4.00 4.00 4.50 5.00 - 4.38 
+De Vecchi: 8.00 10.00 6.00 - 8.00 
+Fumagalli: 8.50 6.00 4.50 - 6.33 
+Galimberti: 9.00 9.00 9.00 - 9.00 
+Germanò: 8.50 9.00 7.50 - 8.33 
+Gubellini: 8.00 10.00 7.00 - 8.33 
+Lepore: 5.50 4.00 3.00 5.00 - 4.38 
+Maconi: 7.50 5.00 - 6.25 
+Mariani: 8.00 8.00 7.00 - 7.67 
+Mattavelli: 9.00 9.50 8.50 - 9.00 
+Oggiano: 5.00 3.00 3.00 2.00 - 3.25 
+Passoni: 5.00 6.00 6.00 7.50 - 6.13 
+Pastori: 3.50 5.00 7.00 2.00 - 4.38 
+Pirovano: 6.50 7.50 7.50 - 7.17 
+Rudi: 9.50 10.00 10.00 - 9.83 
+Russell: 7.50 4.50 - 6.00 
+Sogos: 4.00 3.50 3.50 2.00 - 3.25 
+Tezza: 7.00 5.50 5.50 - 6.00 
+Varisco: 8.00 9.00 8.50 - 8.50 
+```
+
+</details> 
+
+<details markdown="block">
+  <summary class="soluzione-toggler">
+    Soluzione
+  </summary>
+  {: .text-delta }
+
+```c
+#include <malloc.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define M 20
+#define K 200
+
+typedef struct {
+    char cognome[M];
+    float voti[M];
+    float media;
+    int nvoti;
+} Studente;
+
+int main() {
+    FILE *fp;
+    Studente *elenco;
+    char riga[K];
+    int ntoken;
+    int i, j, n, N = 4;
+
+    fp = fopen("1-11-voti3.txt", "r");
+    if (fp == NULL) {
+        printf("errore nell'apertura del file.\n");
+        return 1;
+    }
+
+    elenco = malloc(N * sizeof(Studente));
+    if (elenco == NULL) {
+        printf("Errore nell'allocazione della memoria.\n");
+        return 1;
+    }
+
+    for (i = 0; !feof(fp); i++) {
+        fgets(riga, K, fp);
+
+        if (i >= N) {
+            N *= 2;
+            elenco = realloc(elenco, N * sizeof(Studente));
+            if (elenco == NULL) {
+                printf("Errore nell'allocazione della memoria.\n");
+                return 1;
+            }
+        }
+        ntoken = sscanf(riga, "%[^:]: %f %f %f %f", elenco[i].cognome,
+                        &elenco[i].voti[0], &elenco[i].voti[1],
+                        &elenco[i].voti[2], &elenco[i].voti[3]);
+        elenco[i].nvoti = ntoken - 1;
+    }
+    n = i;
+    fclose(fp);
+
+    // calcolo della media
+    for (i = 0; i < n; i++) {
+        elenco[i].media = 0;
+        for (j = 0; j < elenco[i].nvoti; j++) {
+            elenco[i].media += elenco[i].voti[j];
+        }
+        elenco[i].media /= elenco[i].nvoti;
+    }
+
+    // stampo tutto con una funzione
+    for (i = 0; i < n; i++) {
+        printf("Studente: %12s - Media: %5.2f - Voti: ", elenco[i].cognome,
+               elenco[i].media);
+        for (j = 0; j < elenco[i].nvoti; j++) {
+            printf("%3.1f ", elenco[i].voti[j]);
+        }
+        printf("\n");
+    }
+
+    // scrivo in un secondo file
+    fp = fopen("1-11-voti3-out.txt", "w");
+    if (fp == NULL) {
+        printf("Apertura in scrittura del file fallita.\n");
+        return 2;
+    }
+    for (i = 0; i < n; i++) {
+        fprintf(fp, "%s: ", elenco[i].cognome);
+        for (j = 0; j < elenco[i].nvoti; j++) {
+            fprintf(fp, "%.2f ", elenco[i].voti[j]);
+        }
+        fprintf(fp, "- %.2f ", elenco[i].media);
+        fprintf(fp, "\n");
+    }
+    fclose(fp);
+}
+```
+
+</details> 
+
+
 ### Array e Matrici di Stringhe
 {: .numerato_da_h3 .azzera_numerazione_h4}
 
@@ -511,7 +1010,7 @@ int main() {
     int i, j, N, n;
     char (*nomi)[M];
 
-    fp = fopen("09-lista-nomi.txt", "r");
+    fp = fopen("2-01-lista-nomi.txt", "r");
     if (fp == NULL) {
         printf("File non trovato\n");
         return 1;
@@ -584,7 +1083,7 @@ int main() {
     char (**mat)[M];
     int *sizes, *caps;
 
-    fp = fopen("09-lista-nomi.txt", "r");
+    fp = fopen("2-02-lista-nomi-to-matrice-ordinata.txt", "r");
     if (fp == NULL) {
         printf("File non trovato\n");
         return 1;
@@ -711,7 +1210,7 @@ Come è evidente questo rende la scrittura e la comprensione del codice molto pi
   {: .text-delta }
 
 ```c
-with open("09-lista-nomi.txt", encoding='utf-8') as f:
+with open("2-02-lista-nomi-to-matrice-ordinata.txt", encoding='utf-8') as f:
     nomi = [riga.strip() for riga in f]
 
 mat = {}
