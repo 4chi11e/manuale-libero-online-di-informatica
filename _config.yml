@@ -73,3 +73,13 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+
+# For copy button on code
+enable_copy_code_button: true
+
+# per rendere fico il codice C o altri
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge

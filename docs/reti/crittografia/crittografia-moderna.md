@@ -285,7 +285,7 @@ Se vuoi vedere in dettaglio il funzionamento del DES puoi trovare la descrizione
 
 Nonostante siano state pubblicate più informazioni sulla crittanalisi del DES che per ogni altro algoritmo di cifratura a blocchi, il tipo più pratico di attacco a tutt'oggi è quello con forza bruta.
 
-Nonostante il sistema su cui si basa rispetti i principi teorici di un buon sistema di crittografia, la sicurezza del DES è stata messa in discussione fin da subito; con una chiave di 56 bit le chiavi possibili sono 256 numero enorme, assolutamente fuori della portata per un essere umano, ma non di quella dei moderni computer.
+Nonostante il sistema su cui si basa rispetti i principi teorici di un buon sistema di crittografia, la sicurezza del DES è stata messa in discussione fin da subito; con una chiave di 56 bit le chiavi possibili sono 2<sup>56</sup>, numero enorme, assolutamente fuori della portata per un essere umano, ma non di quella dei moderni computer.
 
 In altre parole il DES non è affatto al sicuro dal più semplice degli attacchi crittanalitici, quello esaustivo (in inglese: brute-force) che semplicemente prova una per una tutte le chiavi.
 
