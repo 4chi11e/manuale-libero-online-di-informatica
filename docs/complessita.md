@@ -618,7 +618,9 @@ La domanda che ci si pone è: i due sottoinsiemi appena identificati sono entram
 
 #### Problema della terminazione
 
-Il problema della terminazione (dall'inglese Halting problem, tradotto anche con problema dell'arresto o problema della fermata) chiede se sia sempre possibile, descritto un algoritmo e un determinato ingresso finito, stabilire se l'algoritmo in questione termina o continua la sua esecuzione all'infinito. È stato dimostrato che non può esistere un algoritmo generale in grado di risolvere il problema per tutti i possibili ingressi. La versione più nota del problema è quella proposta nel 1936 dal matematico Alan Turing, insieme alla dimostrazione della sua indecidibilità.
+Il problema della terminazione (dall'inglese Halting problem, tradotto anche con problema dell'arresto o problema della fermata) è così definito: dato un algoritmo e un input per quell'algoritmo stabilire se la computazione di tale input da parte dell'algoritmo terminerà. La domanda che si è fatto Turing è: esiste un algoritmo che risolve tale problema, cioè che è in grado di dare la soluzione corretta in tempo finito? Turing dimostra che non può esistere un algoritmo generale in grado di risolvere il problema per tutti i possibili ingressi. La versione più nota del problema è quella proposta nel 1936 dal matematico Alan Turing, insieme alla dimostrazione della sua indecidibilità.
+
+La dimostrazione di Turing ci porta a concludere che non sia possibile stabilire a priori se una computazione terminerà, l'unica cosa che possiamo fare è eseguire la computazione sperando prima o poi di raggiungere il termine. Ci saranno sempre possibili input del problema per cui non sapremo prevedere se e quando la computazione terminerà o andrà avanti per sempre, questo sia a priori sia durante l'esecuzione. 
 
 ##### Dimostrazione
 
