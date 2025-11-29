@@ -335,7 +335,7 @@ Per chi conosce la matematica il concetto di andamento asintotico dovrebbe esser
 
 La funzione O-grande (leggi o grande) è utilizzata per indicare un limite asintotico superiore della nostra funzione T(n) infatti è definita in questo modo:
 
-$$ f(n) \in O(g(n)) \text{ per } n \to \infty $$
+$$ f(n) \in O(g(n)) $$
 
 se e solo se
 
@@ -346,7 +346,7 @@ Prendiamo ad esempio due funzioni:
 - $f(n) = 6n^4-2n^3+5$
 - $g(n) = n^4$
 
-possiamo dire che $ f(n) \in O(g(n)) $ per $ n \to \infty $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ ha solamente un coefficiente (6) che la rende superiore a $g(n)$ ma la definizione ci consente di scegliere un opportuno coefficiente $c$ per cui moltiplicare $g(n)$ che permette a $g(n)$ di essere superiore a $f(n)$ da un certo valore di n in poi.
+possiamo dire che $ f(n) \in O(g(n)) $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ ha solamente un coefficiente (6) che la rende superiore a $g(n)$ ma la definizione ci consente di scegliere un opportuno coefficiente $c$ per cui moltiplicare $g(n)$ che permette a $g(n)$ di essere superiore a $f(n)$ da un certo valore di n in poi.
 
 In pratica stiamo dicendo che la funzione $f(n)$ ha un andamento asintotico limitato superiormente dalla funzione $g(n)$, senza considerare i coefficienti che come abbiamo visto analizzando [questa](#tabella-tempi-di-calcolo) tabella non sono rilevanti nel considerare gli andamenti asintotici. In altre parole $f(n)$ cresce al massimo come $g(n)$.
 
@@ -385,7 +385,7 @@ Nonostante la notazione O-grande sia quella più comunemente usata non è nè l'
 
 La funzione Ω-grande (leggi omega grande) è una funzione piuttosto simile alla funzione O-grande ma è utilizzata per indicare un limite asintotico inferiore della nostra funzione T(n) infatti è definita in questo modo:
 
-$$ f(x) \in Ω(g(n)) \text{ per } n \to \infty $$
+$$ f(x) \in Ω(g(n)) $$
 
 se e solo se
 
@@ -396,7 +396,7 @@ Prendiamo anche in questo caso le due funzioni:
 - $f(n) = 6n^4-2n^3+5$
 - $g(n) = n^4$
 
-possiamo dire che $ f(n) \in Ω(g(n)) $ per $ x \to \infty $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ e secondo la definizione possiamo scegliere un opportuno coefficiente $c$ per cui moltiplicare $g(n)$ che permette a $g(n)$ di essere inferiore a $f(n)$ da un certo valore di n in poi.
+possiamo dire che $ f(n) \in Ω(g(n)) $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ e secondo la definizione possiamo scegliere un opportuno coefficiente $c$ per cui moltiplicare $g(n)$ che permette a $g(n)$ di essere inferiore a $f(n)$ da un certo valore di n in poi.
 
 In pratica stiamo dicendo che la funzione $f(n)$ ha un andamento asintotico limitato inferiormente dalla funzione $g(n)$, senza considerare i coefficienti che sono irrilevanti. In altre parole $f(n)$ cresce almeno come $g(n)$.
 
@@ -406,7 +406,7 @@ Anche in questo caso è necessario fare una precisazione: è vero che $f(n) \in 
 
 La notazione Θ-grande (leggi teta grande) è una funzione che permette di unire in un'unica notazione le caratteristiche delle due funzioni precedenti, essa indica infatti in modo preciso l'andamento asintotico della funzione T(n). Θ-grande è definita come:
 
-$$ f(x) \in Θ(g(n)) \text{ per } n \to \infty $$
+$$ f(x) \in Θ(g(n)) $$
 
 se e solo se
 
@@ -417,7 +417,7 @@ Prendiamo anche in questo caso le due funzioni:
 - $f(n) = 6n^4-2n^3+5$
 - $g(n) = n^4$
 
-possiamo dire che $ f(n) \in Θ(g(n)) $ per $ x \to \infty $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ e secondo la definizione possiamo scegliere due opportuni coefficienti $c_1$ e $c_2$ per cui moltiplicare $g(n)$ e ottenere due valori uno inferiore e uno superiore a $f(n)$ da un certo valore di n in poi.
+possiamo dire che $ f(n) \in Θ(g(n)) $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ e secondo la definizione possiamo scegliere due opportuni coefficienti $c_1$ e $c_2$ per cui moltiplicare $g(n)$ e ottenere due valori uno inferiore e uno superiore a $f(n)$ da un certo valore di n in poi.
 
 In pratica stiamo dicendo che la funzione $f(n)$ ha un andamento asintotico uguale a quello della funzione $g(n)$, senza considerare i coefficienti che sono irrilevanti. In altre parole $f(n)$ cresce asintoticamente come $g(n)$, nè più nè meno.
 

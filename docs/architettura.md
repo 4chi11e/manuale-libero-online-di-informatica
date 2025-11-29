@@ -39,6 +39,22 @@ Turing è considerato uno dei più grandi matematici moderni e uno dei più impo
 
 Nonostante l'importanza che ricopre questo modello di computer, i computer moderni si basano su un'architettura differente ideata dal matematico e informatico ungherese John von Neumann (leggi *fon noiman*). La maggior parte dei primissimi computer costruiti verso la fine degli anni '40 è basata sull'architettura di Von Neumann.
 
+<!-- thumbnail -->
+<div class="thumbnail--w100 mt-4 mb-4">
+  <img src="{{site.baseurl}}/assets/images/architettura/schema-von-neumann.jpg" class="modal__opener" aprire="#schema-von-neumann">
+  <p>Schema dell'architettura di Von Neumann con dettagli aggiuntivi</p>
+</div>
+<!-- modal -->
+<div id="schema-cpu" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#schema-von-neumann">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/architettura/schema-von-neumann.jpg">
+    </div>
+    <p>Schema dell'architettura di Von Neumann con dettagli aggiuntivi</p>
+  </div>
+</div>
+
 Lo schema si basa sui seguenti componenti fondamentali:
 
 - Unità centrale di elaborazione (CPU) o processore, che si occupa di svolgere tutte le operazioni;
