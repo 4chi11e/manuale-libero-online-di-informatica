@@ -45,7 +45,7 @@ Nonostante l'importanza che ricopre questo modello di computer, i computer moder
   <p>Schema dell'architettura di Von Neumann con dettagli aggiuntivi</p>
 </div>
 <!-- modal -->
-<div id="schema-cpu" class="modal">
+<div id="#schema-von-neumann" class="modal">
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#schema-von-neumann">&times;</span>
     <div class="modal__content__img-container">   
