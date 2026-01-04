@@ -100,14 +100,6 @@ L'insieme delle operazioni disponibili e il modo in cui vengono eseguite cambia 
 
 Per quanto le operazioni possano essere diverse l'una dall'altra, il processore continua a ripetere sempre la stessa sequenza di operazioni detto ciclo di fetch-decode-execute. Questo ciclo è composto da 3 fasi fondamentali:
 
-1. il processore preleva (fetch) un istruzione dalla memoria nella posizione indicata dall'instruction pointer e la scrive nell'instruction register;
-2. l'unità di controllo decodifica (decode) o interpreta l'istruzione da eseguire e manda gli opportuni segnali agli altri componenti del processore, ad esempio dice alla ALU che operazione deve fare, da quali registri leggere i dati e su quale altro registro scrivere il risultato;
-3. viene incrementato l'instruction pointer per puntare alla prossima istruzione da eseguire; in realtà l'istruzione eseguita dalla ALU potrebbe essere quella di modificare il valore dell'IP per "saltare" ad un altra istruzione e questo permette di poter fare delle scelte in un programma, per questo motivo e per risparmiare tempo questa operazione viene in realtà fatta alla fine del punto 1.
-
-## Fetch–Decode–Execute Cycle
-
-Il **fetch–decode–execute cycle** è il processo con cui la **CPU** esegue un programma, un’istruzione alla volta.
-
 ##### 1. Fetch
 Il processore preleva (*fetch*) un’istruzione dalla **memoria principale** all’indirizzo indicato dall’**Instruction Pointer (IP)** e la carica nell’**Instruction Register (IR)**.  
 Durante questa fase, l’**Instruction Pointer viene incrementato** per puntare all’istruzione successiva.
