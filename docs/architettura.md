@@ -93,16 +93,40 @@ Una CPU (Central Processing Unit) o processore è il componente del computer che
 - bus interno che serve a trasmettere i dati tra le diverse componenti; è formato da un fascio di cavi il cui numero è uguale alla dimensione dei registri in modo da trasmettere il valore di ogni bit di un registro;
 - clock, dall'inglese orologio, che emette un segnale ad intervalli regolari e serve per coordinare temporalmente il lavoro di tutte le componenti della CPU in modo che ogni componente sappia l'esatto momento in cui deve effettuare ogni operazione. La frequenza a cui viene emesso il segnale viene comunemente detto frequenza di clock o più brevemente solo clock e ci dà un'indicazione generale della velocità a cui lavora il processore, i processori moderni hanno frequenze dell'ordine dei GHz (spesso tra 1 e 5 GHz).
 
-#### Ciclo fondamentale o ciclo di fetch-execute
-La CPU è in grado di eseguire un gran numero di operazioni anche molto diverse tra loro. Il genere di operazioni che vengono svolte sono: le operazioni aritmetiche, le operazioni logiche, lettura o scrittura di dati da o verso specifici registri o posizioni in memoria centrale... Le diverse operazioni possono essere più o meno complesse e richiederanno più o meno tempo per essere eseguite, una somma ad esempio richiede meno tempo di una divisione. Siccome ogni operazione singola delle componenti del processore avviene quando il clock manda un segnale a tutti, il tempo di esecuzione delle istruzioni da parte del processore viene misurato in numero di segnali del clock; una istruzione potrà quindi richiedere uno o più clock (diciamo per semplicità da 2 o 3 a una decina). Per avere un'idea di quanto tempo richieda l'esecuzione di una istruzione basta sapere il numero di clock e la frequenza del clock, se la frequenza è di 3GHz e un istruzione richiede 3 clock, l'operazione richiede 1 miliardesimo di secondo per essere eseguita ((1 / 3 miliardi) * 3). 
+#### Ciclo fondamentale o ciclo di fetch-decode-execute
+La CPU è in grado di eseguire un gran numero di operazioni anche molto diverse tra loro. Il genere di operazioni che vengono svolte sono: le operazioni aritmetiche, le operazioni logiche, lettura o scrittura di dati da o verso specifici registri o posizioni in memoria centrale... Le diverse operazioni possono essere più o meno complesse e richiederanno più o meno tempo per essere eseguite, una somma ad esempio richiede meno tempo di una divisione. Siccome ogni operazione singola delle componenti del processore avviene quando il clock manda un segnale a tutti, il tempo di esecuzione delle istruzioni da parte del processore viene misurato in numero di segnali del clock; una istruzione potrà quindi richiedere uno o più clock (diciamo per semplicità da 2 o 3 a una decina). Per avere un'idea di quanto tempo richieda l'esecuzione di una istruzione basta sapere il numero di clock e la frequenza del clock, se la frequenza è di 3GHz e un istruzione richiede 3 clock, l'operazione richiede 1 miliardesimo di secondo (1ns) per essere eseguita ((1 / 3 miliardi) * 3). 
 
 L'insieme delle operazioni disponibili e il modo in cui vengono eseguite cambia da processore a processore e costituisce il linguaggio dello specifico processore detto anche linguaggio macchina. (In realtà solitamente famiglie di processori condividono lo stesso linguaggio poichè basate su un'architettura comune)
 
-Per quanto le operazioni possano essere diverse l'una dall'altra, il processore continua a ripetere sempre la stessa sequenza di operazioni detto ciclo di fetch-execute o ciclo di prelievo ed esecuzione. Questo ciclo è composto da 3 fasi fondamentali:
+Per quanto le operazioni possano essere diverse l'una dall'altra, il processore continua a ripetere sempre la stessa sequenza di operazioni detto ciclo di fetch-decode-execute. Questo ciclo è composto da 3 fasi fondamentali:
 
 1. il processore preleva (fetch) un istruzione dalla memoria nella posizione indicata dall'instruction pointer e la scrive nell'instruction register;
 2. l'unità di controllo decodifica (decode) o interpreta l'istruzione da eseguire e manda gli opportuni segnali agli altri componenti del processore, ad esempio dice alla ALU che operazione deve fare, da quali registri leggere i dati e su quale altro registro scrivere il risultato;
 3. viene incrementato l'instruction pointer per puntare alla prossima istruzione da eseguire; in realtà l'istruzione eseguita dalla ALU potrebbe essere quella di modificare il valore dell'IP per "saltare" ad un altra istruzione e questo permette di poter fare delle scelte in un programma, per questo motivo e per risparmiare tempo questa operazione viene in realtà fatta alla fine del punto 1.
+
+## Fetch–Decode–Execute Cycle
+
+Il **fetch–decode–execute cycle** è il processo con cui la **CPU** esegue un programma, un’istruzione alla volta.
+
+##### 1. Fetch
+Il processore preleva (*fetch*) un’istruzione dalla **memoria principale** all’indirizzo indicato dall’**Instruction Pointer (IP)** e la carica nell’**Instruction Register (IR)**.  
+Durante questa fase, l’**Instruction Pointer viene incrementato** per puntare all’istruzione successiva.
+
+##### 2. Decode
+L’**Unità di Controllo (Control Unit)** decodifica (*decode*) l’istruzione, cioè la interpreta, e invia i segnali di controllo agli altri componenti del processore.  
+In particolare indica alla **ALU**:
+- quale operazione deve essere eseguita;
+- da quali **registri** leggere i dati;
+- in quale **registro** scrivere il risultato.
+
+##### 3. Execute
+L’istruzione viene eseguita (*execute*).  
+L’operazione può essere:
+- un calcolo aritmetico o logico eseguito dalla **ALU**;
+- un accesso alla **memoria**;
+- un’operazione di **input/output**.
+
+Se l’istruzione è un **salto** (*jump* o *branch*), il valore dell’**Instruction Pointer** viene modificato, permettendo al programma di eseguire scelte e cicli.
 
 Il processore non fa altro che ripetere questa sequenza all'infinito.
 
