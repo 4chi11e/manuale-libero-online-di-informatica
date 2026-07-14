@@ -601,13 +601,15 @@ Sono valide le seguenti proprietà: \
 <span class="overline">a</span> + <span class="overline">b</span> = <span class="overline">a + b</span>  
 <span class="overline">a</span> · <span class="overline">b</span> = <span class="overline">a · b</span> 
 
-<div class="esempio" markdown=1>
-  **Esempio**  
-  Operazioni in Z<sub>5</sub>
-  {: .mb-0 .mt-0}
+<div class="esempio">
 
-  ![addizioni e moltiplicazioni in Z5](/manuale-libero-online-di-informatica/assets/images/reti/crittografia/operazioni-in-Z5.jpg)
-  {: .ta-c .mb-0 .mt-0}
+**Esempio**  
+Operazioni in Z<sub>5</sub>
+
+<div class="thumbnail--centrato mt-3 mb-0">
+  <img src="/manuale-libero-online-di-informatica/assets/images/reti/crittografia/operazioni-in-Z5.jpg" alt="addizioni e moltiplicazioni in Z5">
+</div>
+
 </div>
 
 #### Il cifrario di Cesare “generalizzato” con l’aritmetica modulo n
@@ -618,18 +620,19 @@ Consideriamo l’insieme delle classi di resto modulo 26, e associamo ad ogni le
 
 <span class="overline">y</span> = <span class="overline">a · x + b</span>
 
-<div class="code-example" markdown="1">
+<div class="code-example">
 
-  Esempio
+**Esempio**
 
-  |CHIARO|a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|
-  | |1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|
-  |<span class="overline">y</span>=<span class="overline">5·*x*+1</span> |6|11|16|21|0|5|10|15|20|25|4|9|14|19|24|3|8|13|18|23|2|7|12|17|22|1|
-  |CIFRATO|F|K|P|U|Z|E|J|O|T|Y|D|I|N|S|X|C|H|M|R|W|B|G|L|Q|V|A|
-  {: .fs-4}
+|CHIARO|a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| |1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|
+|<span class="overline">y</span>=<span class="overline">5·*x*+1</span> |6|11|16|21|0|5|10|15|20|25|4|9|14|19|24|3|8|13|18|23|2|7|12|17|22|1|
+|CIFRATO|F|K|P|U|Z|E|J|O|T|Y|D|I|N|S|X|C|H|M|R|W|B|G|L|Q|V|A|
 
 Testo chiaro: veni, vidi, vici  
 Testo cifrato: gzst, gtut, gtpt
+
 </div>
 
 Risulta evidente che non tutte le scelte dei numeri *a* e *b* possono portare a una corretta cifratura e decifratura del messaggio: in particolare, è necessario che ogni lettera dell’alfabeto chiaro sia cifrata con una lettera differente, per evitare ambiguità nell’operazione di decrittazione. 
@@ -710,17 +713,22 @@ Le funzioni di cui si servirono derivano dall'[aritmetica dei moduli](#aritmetic
 
 La funzione unidirezionale che fu scelta dai tre ricercatori era del tipo: 
 
-***Y<sup>x</sup>* mod(*p*)** 
-{: .ta-c}
+$$
+Y^x \bmod p
+$$
 
 Dove *p* è un numero primo e *Y* è un generatore ossia un numero che elevato a potenza possa generare tutti i numeri che sono primi con *p*, e siccome *p* è primo allora *Y* genera tutti i numeri minori di *p*. Chiaramente *Y* deve essere minore di *p*.
 
 Prendiamo ad esempio due valori *Y* = 5 e *p* = 3. Dalla tabella che segue sono riportati i valori calcolati con la normale funzione esponenziale e con l'esponenziale in algebra modulare.
 
+<div class="code-example">
+
 |*x*|1|2|3|4|5|6|7|8|9|10|
+|---|---|---|---|---|---|---|---|---|---|---|
 |3<sup>*x*</sup>|3|9|27|81|243|729|2187|6561|19683|59049|
 |3<sup>*x*</sup> mod(5)|3|4|2|1|3|4|2|1|3|4|
-{: .ta-r}
+
+</div>
 
 Notiamo per prima cosa che i due numeri sono stati scelti correttamente infatti 5 è primo e 3 è un generatore in modulo 5 poichè genera tutti i numeri da 1 a 4.
 

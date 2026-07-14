@@ -427,7 +427,6 @@ Lista dei comandi definiti nella RFC-959.
 |System|`SYST`| |Ritorna tipo di sistema operativo.|
 |Representation type|`TYPE`|`<type>`|Imposta la modalità di trasferimento (A=ASCII, E=EBCDIC, I=Binary, L=Local). Il valore di default è A. EBCDIC e Local sono raramente usati (esempio: unicamente su sistemi mainframe).|
 |User Name|`USER`|`<username>`|Specifica nome utente.|
-{: .code-size-smaller}
 
 
 ### Codici di risposta

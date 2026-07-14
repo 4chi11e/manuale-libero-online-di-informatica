@@ -161,13 +161,83 @@ import Default from "@astrojs/starlight/components/Head.astro";
     }
   }
 
+  function detectHomepage() {
+    const path = window.location.pathname;
+    const isHome = path === '/' || 
+                   path === '/index.html' || 
+                   path.endsWith('/manuale-libero-online-di-informatica/') || 
+                   path.endsWith('/manuale-libero-online-di-informatica/index.html');
+    if (isHome) {
+      document.documentElement.classList.add('is-homepage');
+    } else {
+      document.documentElement.classList.remove('is-homepage');
+    }
+  }
+
+  function setupSidebarGroupLinks() {
+    const sidebar = document.querySelector('nav');
+    if (!sidebar) return;
+
+    const summaries = sidebar.querySelectorAll('summary');
+    summaries.forEach(summary => {
+      if (summary.hasAttribute('data-group-link-active')) return;
+      summary.setAttribute('data-group-link-active', 'true');
+
+      const details = summary.parentElement;
+      if (details && details.tagName === 'DETAILS') {
+        const firstLink = details.querySelector('ul a') as HTMLAnchorElement | null;
+        if (firstLink) {
+          const firstLinkLabel = firstLink.querySelector('span')?.textContent?.trim().toLowerCase();
+          const groupLabelSpan = summary.querySelector('.group-label span') as HTMLElement | null;
+          const groupLabelText = groupLabelSpan?.textContent?.trim().toLowerCase();
+
+          // Se l'etichetta del primo link corrisponde a quella del gruppo, o è "spiegazione", o uniamo "modello iso/osi" con "iso/osi"
+          const isMatch = groupLabelText === firstLinkLabel || 
+                          firstLinkLabel === 'spiegazione' ||
+                          (groupLabelText === 'modello iso/osi' && firstLinkLabel === 'iso/osi');
+          if (groupLabelSpan && isMatch) {
+            const href = firstLink.getAttribute('href');
+            if (href) {
+              const a = document.createElement('a');
+              a.href = href;
+              a.className = 'group-link-header';
+              a.style.display = 'inline-block';
+              a.style.color = 'inherit';
+              a.style.textDecoration = 'none';
+
+              if (firstLink.getAttribute('aria-current') === 'page') {
+                a.setAttribute('aria-current', 'page');
+              }
+
+              groupLabelSpan.parentNode?.replaceChild(a, groupLabelSpan);
+              a.appendChild(groupLabelSpan);
+
+              a.addEventListener('click', (e) => {
+                e.stopPropagation();
+              });
+
+              const li = firstLink.closest('li');
+              if (li) {
+                li.style.display = 'none';
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
   // Eseguiamo i setup al caricamento e ad ogni navigazione di Starlight
+  detectHomepage();
   setupCollapsibles();
   setupCryptoTool();
   setupModals();
+  setupSidebarGroupLinks();
   document.addEventListener('astro:page-load', () => {
+    detectHomepage();
     setupCollapsibles();
     setupCryptoTool();
     setupModals();
+    setupSidebarGroupLinks();
   });
 </script>

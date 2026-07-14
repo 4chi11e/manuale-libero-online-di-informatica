@@ -18,22 +18,17 @@ Diverse versioni del protocollo sono ampiamente utilizzate in applicazioni come 
 ### Storia
 Lo stack protocollare TCP/IP di Internet, diversamente dal modello ISO/OSI, non prevede di per sé funzionalità di sicurezza per motivi storici legati all'uso principale della rete ai suoi primordi (semplice scambio di dati tra ricercatori nella comunità scientifica), e solo successivamente con l'apertura della Rete a fini pubblici le problematiche di sicurezza sono diventate via via sempre più importanti da cui la necessità di inserire degli strati aggiuntivi che si occupino appunto di sicurezza.
 
-<div id="versioni-tls-ssl" markdown=1>
-  
-  **Protocolli SSL e TLS**
-  {: .mb-0 .pb-0 .ta-c}
+**Protocolli SSL e TLS**
 
-  |Protocollo | Pubblicato | Status
-  |-|-|-|
-  |**SSL 1.0** | Non pubblicato | Non pubblicato
-  |**SSL 2.0** | 1995 | Deprecato nel 2011 (RFC 6176)
-  |**SSL 3.0** | 1996 | Deprecato nel 2015 (RFC 7568)
-  |**TLS 1.0** | 1999 | Deprecazione pianificata per il 2020
-  |**TLS 1.1** | 2006 | Deprecazione pianificata per il 2020
-  |**TLS 1.2** | 2008 | |
-  |**TLS 1.3** | 2018 | |
-
-</div>
+| Protocollo | Pubblicato | Status |
+|---|---|---|
+| **SSL 1.0** | Non pubblicato | Non pubblicato |
+| **SSL 2.0** | 1995 | Deprecato nel 2011 (RFC 6176) |
+| **SSL 3.0** | 1996 | Deprecato nel 2015 (RFC 7568) |
+| **TLS 1.0** | 1999 | Deprecazione pianificata per il 2020 |
+| **TLS 1.1** | 2006 | Deprecazione pianificata per il 2020 |
+| **TLS 1.2** | 2008 | | |
+| **TLS 1.3** | 2018 | | |
 
 Le prime implementazioni di SSL erano limitate a cifratura a chiave simmetrica di soli 40 bit a causa delle restrizioni imposte dal governo statunitense sull'esportazione di tecnologie crittografiche, per motivi di sicurezza nazionale. In altri termini, la limitazione della dimensione delle chiavi a 40 bit è stata esplicitamente imposta per rendere la cifratura abbastanza debole da potere essere forzata (tramite l'uso di tecniche di ricerca brute force) dalle autorità giudiziarie che volessero decifrare il traffico cifrato, ma sufficientemente resistente agli attacchi da parte di entità con minori disponibilità di risorse tecnologico-finanziarie. Dopo diversi anni di controversie pubbliche, cause e l'ammissione da parte del governo statunitense di disponibilità sul mercato di prodotti per la cifratura migliori (sia all'interno che al di fuori degli Stati Uniti), alcuni aspetti delle restrizioni sono stati modificati. Le implementazioni moderne utilizzano chiavi per la cifratura simmetrica a 128 (o più) bit.
 

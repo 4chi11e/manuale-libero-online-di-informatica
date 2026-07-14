@@ -1,9 +1,15 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 export default defineConfig({
   site: 'https://4chi11e.github.io',
   base: '/manuale-libero-online-di-informatica',
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
+  },
   integrations: [
     starlight({
       title: 'Manuale Libero di Informatica',
@@ -13,12 +19,11 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: 'Introduzione',
+          label: 'Concetti di Base e Fondamenti',
           items: [
             { label: 'Reti per la classe prima', link: '/reti-prima/' },
             { label: 'Architettura dei calcolatori', link: '/architettura/' },
             { label: 'Sistemi Operativi', link: '/sistemi-operativi/' },
-            { label: 'Complessità computazionale', link: '/complessita/' },
             { label: 'Copyright e licenze', link: '/copyright/' },
           ]
         },
@@ -29,6 +34,10 @@ export default defineConfig({
         {
           label: 'Programmazione in Python',
           link: '/python/programmazione-in-python/'
+        },
+        {
+          label: 'Complessità computazionale',
+          link: '/complessita/'
         },
         {
           label: 'Reti di Calcolatori',

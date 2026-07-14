@@ -27,7 +27,7 @@ Nonostante l'importanza che ricopre questo modello di computer, i computer moder
 
 <!-- thumbnail -->
 <div class="thumbnail--w100 mt-4 mb-4">
-  <img src="/manuale-libero-online-di-informatica/assets/images/architettura/schema-von-neumann.jpg" class="modal__opener" aprire="#schema-von-neumann">
+  <img src="/manuale-libero-online-di-informatica/assets/images/architettura/schema-von-neumann.png" class="modal__opener" aprire="#schema-von-neumann">
   <p>Schema dell'architettura di Von Neumann con dettagli aggiuntivi</p>
 </div>
 <!-- modal -->
@@ -35,7 +35,7 @@ Nonostante l'importanza che ricopre questo modello di computer, i computer moder
   <div class="modal__content">
     <span class="modal__closer modal__closer--topright" chiudere="#schema-von-neumann">&times;</span>
     <div class="modal__content__img-container">   
-      <img src="/manuale-libero-online-di-informatica/assets/images/architettura/schema-von-neumann.jpg">
+      <img src="/manuale-libero-online-di-informatica/assets/images/architettura/schema-von-neumann.png">
     </div>
     <p>Schema dell'architettura di Von Neumann con dettagli aggiuntivi</p>
   </div>

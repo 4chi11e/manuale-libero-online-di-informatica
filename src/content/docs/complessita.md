@@ -188,11 +188,18 @@ Quando un'istruzione si trova all'interno di un if può essere complicato dire q
 
 Totale passi base = 
 
-$$ 1+n+1+n + (2 + 1/6)·n = $$
 
-$$ = 2 + (1 + 1 + 2 + 1/6)·n = $$
+$$
+1+n+1+n + (2 + 1/6)·n =
+$$
 
-$$ = 2 + 25/6·n $$
+$$
+= 2 + (1 + 1 + 2 + 1/6)·n =
+$$
+
+$$
+= 2 + 25/6·n
+$$
 
 ###### Esempio 3
 
@@ -207,15 +214,25 @@ for (i = 0; i < n; i++)             // 2 + 2 * n pb
 
 Totale passi base = 
 
-$$ 2+2·n + (2+2·m)·n + n·m = $$ 
 
-$$ 2 + 2·n + 2·n + 2·n·m + n·m = $$
+$$
+2+2·n + (2+2·m)·n + n·m =
+$$
 
-$$ 2 + 4·n + 3·n·m $$
+$$
+2 + 2·n + 2·n + 2·n·m + n·m =
+$$
+
+$$
+2 + 4·n + 3·n·m
+$$
 
 Nel valutare la complessità solitamente non è rilevante la distinzione tra n e m, in particolare se non sappiamo nulla a priori dei valori di n e m. Possiamo quindi valutare la complessità come:
 
-$$ 2 + 4·n + 3·n^2 $$
+
+$$
+2 + 4·n + 3·n^2
+$$
 
 ###### Esempio 4
 
@@ -273,6 +290,7 @@ Una volta che è stata definita correttamente la complessità di tempo in termin
 Immaginiamo di aver trovato una serie di algoritmi con diversi tempi di calcolo e volerli confrontare tra loro. Supponendo che un passo base richieda 1 microsecondo (10<sup>-6</sup> s) per essere eseguito è possibile costruire la seguente tabella che rappresenta i tempi di esecuzione in secondi dei diversi algoritmi al crescere della dimensione dell'input
 
 |                   | n = 10                | n=100                     | n=1000                | n=10<sup>6</sup>              |
+|---|---|---|---|---|
 | log(n)            | 10<sup>-6</sup>       | 2·10<sup>-6</sup>         | 3·10<sup>-6</sup>     | 6·10<sup>-6</sup>             |
 | √n                | 3·10<sup>-6</sup>     | 10<sup>-5</sup>           | 3·10<sup>-5</sup>     | 10<sup>-3</sup>               |
 | n+5               | 15·10<sup>-6</sup>    | 10<sup>-4</sup>           | 10<sup>-3</sup>       | 1 s                           |
@@ -282,7 +300,6 @@ Immaginiamo di aver trovato una serie di algoritmi con diversi tempi di calcolo 
 | n<sup>2</sup>+n   | 1,1·10<sup>-4</sup>   | 1,01·10<sup>-2</sup>      | 1 s                   | 10<sup>6</sup> (~12 gg)       |
 | n<sup>3</sup>     | 10<sup>-3</sup>       | 1 s                       | 10<sup>3</sup> (~1 g) | 10<sup>12</sup> (~30 secoli)  |
 | 2<sup>n</sup>     | 10<sup>-3</sup>       | 10<sup>14</sup> secoli    | 10<sup>285</sup> secoli | ----                        |
-{: #tabella-tempi-di-calcolo}
 
 Guardando i risultati si possono subito fare due importanti considerazioni:
 
@@ -322,11 +339,17 @@ Per chi conosce la matematica il concetto di andamento asintotico dovrebbe esser
 
 La funzione O-grande (leggi o grande) è utilizzata per indicare un limite asintotico superiore della nostra funzione T(n) infatti è definita in questo modo:
 
-$$ f(n) \in O(g(n)) $$
+
+$$
+f(n) \in O(g(n))
+$$
 
 se e solo se
 
-$$ \exists n_0 \in \Bbb{R}, \; c > 0 \quad : \quad f(n) ≤ c · g(n) \ ∀ n > n_0 $$
+
+$$
+\exists n_0 \in \Bbb{R}, \; c > 0 \quad : \quad f(n) ≤ c · g(n) \ ∀ n > n_0
+$$
 
 Prendiamo ad esempio due funzioni:
 
@@ -340,7 +363,7 @@ In pratica stiamo dicendo che la funzione $f(n)$ ha un andamento asintotico limi
 È necessario fare una precisazione sulla notazione O-grande: è vero che $f(n) \in O(g(n))$ ma è anche vero che $f(n) \in O(n^5)$ e che $f(n) \in O(2^n)$ poichè entrambe queste relazioni soddisfano la definizione di O-grande e sia $n^5$ che $2^n$ rappresentano un limite oltre il quale $f(n)$ non potrà mai andare asintoticamente. Nonostante sia possibile quindi individuare infinite funzioni superiori a $f(n)$ ha senso individuare solo la funzione più piccola e semplice che indichi il limite superiore di crescita asintotica di $f(n)$.
 
 |$T(n)$         |O-grande   |andamento      |
-|-              |-          |-              |
+|---|---|---|
 |$34$           |$O(1)$     |costante       |
 |$7+3log(n)$    |$O(log(n))$|logaritmico    |
 |$7n+12$        |$O(n)$     |lineare        |
@@ -372,11 +395,17 @@ Nonostante la notazione O-grande sia quella più comunemente usata non è nè l'
 
 La funzione Ω-grande (leggi omega grande) è una funzione piuttosto simile alla funzione O-grande ma è utilizzata per indicare un limite asintotico inferiore della nostra funzione T(n) infatti è definita in questo modo:
 
-$$ f(x) \in Ω(g(n)) $$
+
+$$
+f(x) \in Ω(g(n))
+$$
 
 se e solo se
 
-$$ \exists x_0 \in \Bbb{R}, \; c > 0 \quad : \quad f(n) ≥ c·g(x) \ ∀ x > x_0 $$
+
+$$
+\exists x_0 \in \Bbb{R}, \; c > 0 \quad : \quad f(n) ≥ c·g(x) \ ∀ x > x_0
+$$
 
 Prendiamo anche in questo caso le due funzioni:
 
@@ -393,11 +422,17 @@ Anche in questo caso è necessario fare una precisazione: è vero che $f(n) \in 
 
 La notazione Θ-grande (leggi teta grande) è una funzione che permette di unire in un'unica notazione le caratteristiche delle due funzioni precedenti, essa indica infatti in modo preciso l'andamento asintotico della funzione T(n). Θ-grande è definita come:
 
-$$ f(x) \in Θ(g(n)) $$
+
+$$
+f(x) \in Θ(g(n))
+$$
 
 se e solo se
 
-$$ \exists x_0 \in \Bbb{R}, \; c_1 > 0, c_2 > 0  \quad : \quad c_1·g(x) ≤ f(n) ≤ c_2·g(x)  \ ∀ x > x_0 $$
+
+$$
+\exists x_0 \in \Bbb{R}, \; c_1 > 0, c_2 > 0  \quad : \quad c_1·g(x) ≤ f(n) ≤ c_2·g(x)  \ ∀ x > x_0
+$$
 
 Prendiamo anche in questo caso le due funzioni:
 
@@ -444,7 +479,10 @@ while (i <= n)        // n + 1 passi base
 
 Possiamo direttamente tralasciare coefficienti e termini noti e dire immediatamente che la complessità totale dell'algoritmo è data dalla presenza di un ciclo che comporta l'esecuzione di alcuni passi base per *n* volte. La complessità è quindi:
 
-$$ T(n) = O(n) $$
+
+$$
+T(n) = O(n)
+$$
 
 ###### Esempio 2
 
@@ -460,7 +498,10 @@ for (i = 1; i <= n; i++)          // 1 pb per l'inizializzazione
 ```
 Anche in questo caso non ci interessano i coefficienti e i termini noti e siccome la presenza dell'"if" comporta solo l'aggiunta di un coefficiente che possiamo trascurare, anche in questo caso il calcolo della complessità è pressochè immediato. La complessità è:
 
-$$ T(n) = O(n) $$
+
+$$
+T(n) = O(n)
+$$
 
 ###### Esempio 3
 
@@ -474,7 +515,10 @@ for (i = 0; i < n; i++)             // 2 + 2 * n pb
 ```
 Il calcolo della complessità è anche in questo caso molto semplice. Siccome abbiamo due cicli innestati, possiamo sfruttare il teorema del prodotto che ci dice che la complessità di due blocchi di codice innestati è data dal prodotto delle complessità. La complessità è quindi:
 
-$$ T(n) = O(n^2) $$
+
+$$
+T(n) = O(n^2)
+$$
 
 ###### Esempio 4
 
@@ -506,7 +550,10 @@ Bisogna poi considerare che la funzione "scambia" richiede un certo tempo di cal
 
 La complessità totale è quindi: 
 
-$$ T(n) = O(n^2) $$
+
+$$
+T(n) = O(n^2)
+$$
 
 ###### Esempio 5
 
@@ -533,7 +580,10 @@ int binarySearch (int[] A, int primo, int ultimo, int val) {
 
 La complessità della singola chiamata alla funzione è $O(1)$ poichè non ci sono cicli e il numero di operazioni fatte non dipende da *n*. Bisogna quindi valutare quante volte la funzione viene chiamata. La funzione può richiamare sè stessa solamente una volta e ad ogni chiamata la distanza tra primo e ultimo si dimezza. Siccome il numero di chiamate affinchè la condizione "primo <= ultimo" diventi falsa è $log_2(n)$, Il numero di chiamate totali è $log_2(n)$. Per calcolare la complessità basta moltiplicare il numero di chiamate che è $O(log_2(n))$ per il peso di ogni chiamata che è $O(1)$ per ottenere la complessità:
 
-$$ T(n) = O(log_2(n)) $$
+
+$$
+T(n) = O(log_2(n))
+$$
 
 ###### Esempio 6
 
@@ -551,7 +601,10 @@ int fibonacci(int i) {
 
 La singola chiamata della funzione ha complessità $O(1)$ poichè non ci sono cicli e il numero di operazioni fatte non dipende da *n*. La complessità è data quindi dal numero di chiamate della funzione. Siccome la funzione richiama sè stessa due volte, il numero di chiamate è 2<sup>n</sup>. La complessità totale dell'algoritmo è quindi
 
-$$ T(n) = O(2^n) $$
+
+$$
+T(n) = O(2^n)
+$$
 
 Questo algoritmo è particolarmente poco efficiente poichè la funzione viene richiamata molte volte per gli stessi valori di i. Per risolvere tale problema è necessario trasformare la funzione nella sua versione iterativa oppure ricorrere ad una memoria che ci permette di salvare il valore calcolato dalla funzione per un certo valore di i e fare in modo che la funzione restituisca direttamente tale valore senza dover richiamare se stessa per i valori i-1 e i-2. Questo tipo di ragionamento è valido in generale per tutte quelle funzioni ricorsive che richiamano se stesse più di una volta comportando solitamente un numero di chiamate esponenziale.
 
@@ -644,6 +697,7 @@ Nell'analizzare la complessità degli algoritmi sono state identificate diverse 
 Di seguito sono riportati i tempi di esecuzione di algoritmi con diverse complessità di calcolo al variare della dimensione dell'input dando come tempo di esecuzione di un passo base 1 microsecondo (10<sup>-6</sup> s)
 
 |                   | n = 10                | n=100                     | n=1000                | n=10<sup>6</sup>              |
+|---|---|---|---|---|
 | log(n)            | 10<sup>-6</sup>       | 2·10<sup>-6</sup>         | 3·10<sup>-6</sup>     | 6·10<sup>-6</sup>             |
 | √n                | 3·10<sup>-6</sup>     | 10<sup>-5</sup>           | 3·10<sup>-5</sup>     | 10<sup>-3</sup>               |
 | n                 | 10<sup>-5</sup>       | 10<sup>-4</sup>           | 10<sup>-3</sup>       | 1 s                           |
@@ -651,7 +705,6 @@ Di seguito sono riportati i tempi di esecuzione di algoritmi con diverse comples
 | n<sup>2</sup>     | 10<sup>-4</sup>       | 10<sup>-2</sup>           | 1 s                   | 10<sup>6</sup> (~12 gg)       |
 | n<sup>3</sup>     | 10<sup>-3</sup>       | 1 s                       | 10<sup>3</sup> (~1 g) | 10<sup>12</sup> (~30 secoli)  |
 | 2<sup>n</sup>     | 10<sup>-3</sup>       | 10<sup>14</sup> secoli    | 10<sup>285</sup> secoli | ----                        |
-{: #tabella-tempi-di-calcolo-2}
 
 Guardando i risultati si può intuire che è possibile suddividere ulteriormente i problemi in problemi risolvibili velocimente e problemi trattabili ma trattabili solo quando n non cresce eccessivamente. Per un programmatore questa distinzione è importante poichè nella realtà passare da un tempo di calcolo quadratico ad uno pseudolineare rappresenta un salto di qualità decisamente notevole. Effettivamente i tempi polinomiali con esponente maggiore di 1 non sono particolarmente efficienti e ci si chiede se non sia opportuno ritenere anche i problemi con tale complessità intrattabili.
 
@@ -666,39 +719,63 @@ Nella seguente tabella sono riportati i miglioramenti ottenibili, in termini di 
 | $n^5$ |$x_4$              |$2,5·x_4$                      |$6,3·x_4$                          |
 | $2^n$ |$x_5$              |$x_5+6,6$                      |$x_5+13,2$                         |
 | $3^n$ |$x_6$              |$x_6+4,2$                      |$x_6+8,4$                          |
-{: .ta-c}
 
 Osservando i risultati riportati in tabella e considerando che, come indicato dalla [legge di Moore](https://it.wikipedia.org/wiki/Legge_di_Moore), la potenza di calcolo dei calcolatori aumenta esponenzialmente raddoppiando ogni anno (anche se ci volesse più di un anno sarebbe comunque una crescita esponenziale), è lecito aspettarsi che un problema di complessità polinomiale oggi ritenuto intrattabile perchè presenta una dimensione dell'input troppo grande, diventerà trattabile in futuro con l'aumento delle capacità computazionali dei computer. Non si può dire la stessa cosa per i problemi esponenziali. Guardando il modo in cui sono stati ottenuti i risultati si può capire meglio quale sia l'entità dei miglioramenti ottenibili.
 
 Considerando che:
 
-$$ \text{tempo di esecuzione} = \text{tempo esecuzione passo base} · \text{numero passi base} $$
 
-$$ 60s = tepb · T(n) $$
+$$
+\text{tempo di esecuzione} = \text{tempo esecuzione passo base} · \text{numero passi base}
+$$
 
-$$ T(n) = \frac{60s}{tepb} $$
+$$
+60s = tepb · T(n)
+$$
+
+$$
+T(n) = \frac{60s}{tepb}
+$$
 
 Se indichiamo con $n$ la dimensione dell'input per cui l'esecuzione dell'algoritmo richiede 1 minuto con un computer di riferimento, e con $n_x$ la dimensione dell'input per cui l'esecuzione dell'algoritmo richiede 1 minuto con un computer x volte più potente otteniamo che:  
 
 - algoritmo polinomiale di esponente k: 
 
-$$n^k = \frac{60s}{tepb} $$
 
-$$n_x^k = \frac{60s}{tepb/x} $$
+$$
+n^k = \frac{60s}{tepb}
+$$
 
-$$n_x = \sqrt[k]{x}·\sqrt[k]{\frac{60s}{tepb}}$$
+$$
+n_x^k = \frac{60s}{tepb/x}
+$$
 
-$$n_x = \sqrt[k]{x}·n$$
+$$
+n_x = \sqrt[k]{x}·\sqrt[k]{\frac{60s}{tepb}}
+$$
+
+$$
+n_x = \sqrt[k]{x}·n
+$$
 
 - algoritmo esponenziale di base k:
 
-$$k^n = \frac{60s}{tepb} $$
 
-$$k^{n_x} = \frac{60s}{tepb/x} $$
+$$
+k^n = \frac{60s}{tepb}
+$$
 
-$$n_x=log_k\biggl(\frac{60s}{tepb}\biggr)+log_k(x)$$
+$$
+k^{n_x} = \frac{60s}{tepb/x}
+$$
 
-$$n_x=n+log_k(x)$$
+$$
+n_x=log_k\biggl(\frac{60s}{tepb}\biggr)+log_k(x)
+$$
+
+$$
+n_x=n+log_k(x)
+$$
 
 Bisogna poi ricordare che l'umento della potenza di calcolo x avviene in modo esponenziale. Per i problemi con complessità polinomiale significa quindi un miglioramento più che lineare nella dimensione dell'input infatti l'esponenziale domina la radice. Si può dire quindi che problemi di complessità polinomiale sono di per sè trattabili e il limite della dimensione dell'input che siamo in grado di gestire è puramente tecnologico.
 

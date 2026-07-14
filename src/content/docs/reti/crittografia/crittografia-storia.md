@@ -144,14 +144,15 @@ Inoltre puoi fare tutti gli esperimenti che desideri e preparare i tuoi esercizi
 
 ### Polibio (200 ca. -118 a.C.)
 
-<div class="tbl-fr" markdown="1">
-  | |1|2|3|4|5|
-  |1|A|B|C|D|E|
-  |2|F|G|H|I|J|
-  |3|KQ|L|M|N|O|
-  |4|P|R|S|T|U|
-  |5|V|W|X|Y|Z|
+<div class="tbl-fr">
 
+| |1|2|3|4|5|
+|---|---|---|---|---|---|
+|1|A|B|C|D|E|
+|2|F|G|H|I|J|
+|3|KQ|L|M|N|O|
+|4|P|R|S|T|U|
+|5|V|W|X|Y|Z|
 
 </div>
 
@@ -230,19 +231,23 @@ Blaise de Vigenère propose, in un trattato di cifrari pubblicato nel 1586, un c
 
 Risulta evidente dall’esempio seguente che la stessa lettera nel testo in chiaro può essere cifrata con lettere diverse: ad esempio la “a” è stata cifrata con le lettere “s” “e” “l” “o”: è dunque impossibile utilizzare un metodo di analisi delle frequenze per decrittare il messaggio (i crittoanalisti svilupparono però altre tecniche e riuscirono ad aver ragione anche della cifratura di Vigenère).
 
-<div class="code-example" markdown="1">
-  **Esempio:**
+<div class="code-example">
+
+**Esempio:**
 
 |Testo in chiaro: |Attacco all'alba |
+|---|---|
 |Testo cifrato: |sheeuqzedzlpto |
 
 |a|t|t|a|c|c|o|a|l|l|a|l|b|a|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |S|O|L|E|S|O|L|E|S|O|L|E|S|O|
 |s|h|e|e|u|q|z|e|d|z|l|p|t|o|
 
 </div>
 
 | | | | |E| | | | | | |L| | |O| | | |S| | | | | | | |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|
 |b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|a|
 |c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|a|b|
@@ -296,19 +301,21 @@ Rappresenta il primo metodo di cifratura a digrammi (in altre parole, ogni lette
 
 Vediamo con una applicazione come veniva utilizzato il Playfair cipher.
 
-<div class="float-left mr-4" markdown="1">
-  |S|E|G|R|T|
-  |I/J|A|B|C|D|
-  |F|H|K|L|M|
-  |N|O|P|Q|U|
-  |V|W|X|Y|Z|
+<div class="float-left mr-4">
+
+|S|E|G|R|T|
+|---|---|---|---|---|
+|I/J|A|B|C|D|
+|F|H|K|L|M|
+|N|O|P|Q|U|
+|V|W|X|Y|Z|
 
 </div>
 
 Costruzione della matrice di 25 elementi:
 
 |Chiave: |SEGRETI|
-|||
+|---|---|
 |Messaggio: |Domani nella battaglia pensa a me|
 | |DO MA NI NE LX LA BA TX TA GL IA PE NS AM EX|
 
@@ -318,12 +325,14 @@ E’ possibile a questo punto che si presenti uno dei seguenti casi: lettere su 
 
 Caso 1: lettere su righe e colonne diverse
 
-<div class="float-left mr-4 mb-4" markdown="1">
-  |.|.|.|.|.|
-  |.|A|.|.|D|
-  |.|.|.|.|.|
-  |.|O|.|.|U|
-  |.|.|.|.|.|
+<div class="float-left mr-4 mb-4">
+
+|.|.|.|.|.|
+|---|---|---|---|---|
+|.|A|.|.|D|
+|.|.|.|.|.|
+|.|O|.|.|U|
+|.|.|.|.|.|
 
 </div>
 
@@ -331,12 +340,14 @@ Le lettere sono sostituite da quelle corrispondenti ai vertici opposti del retta
 
 Caso 2: lettere sulla stessa riga
 
-<div class="float-left mr-4 mb-4" markdown="1">
-  |.|.|.|.|.|
-  |I/J|A|B|C|D|
-  |.|.|.|.|.|
-  |.|.|.|.|.|
-  |.|.|.|.|.|
+<div class="float-left mr-4 mb-4">
+
+|.|.|.|.|.|
+|---|---|---|---|---|
+|I/J|A|B|C|D|
+|.|.|.|.|.|
+|.|.|.|.|.|
+|.|.|.|.|.|
 
 </div>
 
@@ -344,12 +355,14 @@ Le lettere sono sostituite da quelle contenute nelle celle adiacenti, alla destr
 
 Caso 3: lettere sulla stessa colonna
 
-<div class="float-left mr-4 mb-4" markdown="1">
-  |S|.|.|.|.|
-  |I/J|.|.|.|.|
-  |F|.|.|.|.|
-  |N|.|.|.|.|
-  |V|.|.|.|.|
+<div class="float-left mr-4 mb-4">
+
+|S|.|.|.|.|
+|---|---|---|---|---|
+|I/J|.|.|.|.|
+|F|.|.|.|.|
+|N|.|.|.|.|
+|V|.|.|.|.|
 
 </div>
 
@@ -379,19 +392,21 @@ DEUTSCHLANBFGIJKMOPQRVWXYZ
 Si inseriscono i numeri da 0 a 9 dopo le lettere della chiave con la seguente corrispondenza:
 
 |A|B|C|D|E|F|G|H|I|J|
+|---|---|---|---|---|---|---|---|---|---|
 |1|2|3|4|5|6|7|8|9|0|
 
 D4E5UT SC3H8L A1NB2F 6G7I9J 0KMOPQ RVWXYZ
 
-<div class="tbl-fl" markdown="1">
-  | |A|D|F|G|V|X|
-  |A|D|4|E|5|U|T|
-  |D|S|C|3|H|8|L|
-  |F|A|1|N|B|2|F|
-  |G|6|G|7|I|9|J|
-  |V|0|K|M|O|P|Q|
-  |X|R|V|W|X|Y|Z|
+<div class="tbl-fl">
 
+| |A|D|F|G|V|X|
+|---|---|---|---|---|---|---|
+|A|D|4|E|5|U|T|
+|D|S|C|3|H|8|L|
+|F|A|1|N|B|2|F|
+|G|6|G|7|I|9|J|
+|V|0|K|M|O|P|Q|
+|X|R|V|W|X|Y|Z|
 
 </div>
 
@@ -402,22 +417,25 @@ Messaggio: Questo è un segreto
 
 Ogni lettera del messaggio è sostituita dalle lettere corrispondenti rispettivamente alla riga e alla colonna della lettera del testo chiaro:
 
-<div class="clear-both mb-4" markdown="1">
-  |q|u|e|s|t|o|e|u|n|s|e|g|r|e|t|o|
-  |VX|AV|AF|DA|AX|VG|AF|AV|FF|DA|AF|GD|XA|AF|AX|VG|
+<div class="clear-both mb-4">
+
+|q|u|e|s|t|o|e|u|n|s|e|g|r|e|t|o|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|VX|AV|AF|DA|AX|VG|AF|AV|FF|DA|AF|GD|XA|AF|AX|VG|
 
 </div>
 
-<div class="tbl-fl" markdown="1">
-  |P|A|N|Z|E|R|
-  |4|1|3|6|2|5|
-  |V|X|A|V|A|F|
-  |D|A|A|X|V|G|
-  |A|F|A|V|F|F|
-  |D|A|A|F|G|D|
-  |X|A|A|F|A|X|  
-  |V|G| | | | |
+<div class="tbl-fl">
 
+|P|A|N|Z|E|R|
+|---|---|---|---|---|---|
+|4|1|3|6|2|5|
+|V|X|A|V|A|F|
+|D|A|A|X|V|G|
+|A|F|A|V|F|F|
+|D|A|A|F|G|D|
+|X|A|A|F|A|X|
+|V|G| | | | |
 
 </div>
 
@@ -558,7 +576,10 @@ Combinando insieme tutti gli elementi fin qui osservati si può calcolare il num
 - all’interno dell’**unità cifratrice** i tre scambiatori potevano essere inseriti in diverse posizioni reciproche, così riassumibili: 123, 132, 213, 231, 312, 321. Erano quindi ammesse 3! = 6 diverse posizioni reciproche dei rotori;
 - con il **pannello a prese multiple** i possibili abbinamenti di 12 (6x2) lettere su 26 sono moltissimi, per l’esattezza 100.391.791.500, che si ottiene dalla formula seguente dove p rappresenta il numero di chiavi ed è pari a 6:
 
-$$ \binom{26}{2p} \cdot (2p-1) \cdot (2p-3) \cdot (2p-5) \cdot ... \cdot 1 = \frac{26!}{(26-2p)! \cdot p! \cdot 2^p} $$
+
+$$
+\binom{26}{2p} \cdot (2p-1) \cdot (2p-3) \cdot (2p-5) \cdot ... \cdot 1 = \frac{26!}{(26-2p)! \cdot p! \cdot 2^p}
+$$
 
 - il numero totale di chiavi si ottiene moltiplicando tra loro le suddette possibilità:
 
