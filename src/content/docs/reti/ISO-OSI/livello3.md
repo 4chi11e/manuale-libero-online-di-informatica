@@ -1,17 +1,9 @@
 ---
 title: Livello 3 - Rete
 ---
-
-# Livello 3: Rete (Network Layer)
-{: .no_toc}
-
 _Obiettivo: rendere i livelli superiori indipendenti dai meccanismi e dalle tecnologie di trasmissione usate per la connessione e prendersi carico della consegna a destinazione dei pacchetti._
 
-## Indice
-{: .no_toc .text-delta }
 
-- TOC
-{:toc}
 
 ## Funzionalità
 Il livello di rete è responsabile di:

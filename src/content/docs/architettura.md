@@ -1,17 +1,6 @@
 ---
 title: Architettura dei computer
 ---
-
-# Architettura dei computer
-{: .no_toc}
-
-
-## Indice
-{: .no_toc .text-delta }
-
-- TOC
-{:toc}
-
 ## Il computer
 Il termine computer è un termine un po' generico e con esso ci si può riferire a molti dispositivi anche molto diversi tra loro come notebook, smartphone, server... La parola computer deriva dal verbo inglese "to compute" che significa "elaborare". Tutti i dispositivi elettronici in grado di eseguire calcoli o comunque in generale eseguire delle operazioni potremmo chiamarli quindi computer.
 

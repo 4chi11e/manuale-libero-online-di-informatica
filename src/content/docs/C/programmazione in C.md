@@ -1,9 +1,6 @@
 ---
 title: Programmazione in C
 ---
-
-# Programmazione in linguaggio C
-
 In questa sezione è trattata la programmazione in linguaggio C. Dopo una lunga riflessione ho scelto di insegnare questo linguaggio come primo linguaggio di programmazione per la sua valenza didattica. Rispetto ad altri linguaggi di programmazione di più "alto livello", il C costringe il programmatore a concentrarsi, e quindi conoscere, molti meccanismi fondamentali di funzionamento del computer, in questo linguaggio infatti è necessario occuparsi della gestione della memoria e della codifica dei dati in essa, aspetto spesso nascosto almeno parzialmente in altri linguaggi.
 
 Il materiale e il percorso di programmazione in C sono consultabili al seguente link esterno:

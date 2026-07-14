@@ -1,11 +1,7 @@
 ---
 title: Copyright e licenze
 ---
-
-# Copyright e licenze
-
-
-## Definizione
+## Diritto d'autore e copyright
 
 Il diritto d'autore è un istituto giuridico, all'interno del diritto privato, che ha lo scopo di tutelare i frutti dell'attività intellettuale di carattere creativo (ovvero le opere devono essere nuove ed originali), attraverso il riconoscimento all'autore originario (o agli autori in caso di collaborazione creativa) dell'opera di una serie di diritti di carattere sia morale, sia patrimoniale. Il diritto d'autore si applica ad arti figurative, architettura, teatro, cinematografia, programmi per elaboratore e banche dati, ma alcune opere non sono tutelate, ad esempio le leggi o i testi degli atti ufficiali dello Stato o delle amministrazioni pubbliche.
 
@@ -223,12 +219,12 @@ Vi sono diversi tipi di Creative Commons. Le licenze differiscono per numerose c
 Queste licenze si ispirano al modello copyleft già diffuso negli anni precedenti in ambito informatico e possono essere applicate a tutti i tipi di opere dell'ingegno. In sostanza rappresentano una via di mezzo tra copyright completo (full-copyright) e pubblico dominio (public domain): da una parte la protezione totale realizzata dal modello all rights reserved ("tutti i diritti riservati") e dall'altra no rights reserved ("assenza totale di diritti"), basandosi dunque sul concetto some rights reserved ("alcuni diritti riservati"): in questo senso è quindi l'autore di un'opera che decide quali diritti riservarsi e quali concedere liberamente.
 
 ##### Le licenze
-{: .no_toc }
+
 
 Le licenze Creative Commons, giunte nel novembre 2013 alla versione 4.0, sono idealmente strutturate in due parti: la prima parte indica le libertà concesse dall'autore per la propria opera; la seconda, invece, espone le condizioni di utilizzo dell'opera stessa.
 
 ###### Le libertà
-{: .no_toc }
+
 
 Le libertà sono:
 
@@ -239,7 +235,7 @@ Le libertà sono:
 {: .tbl-creative-commons}
 
 ###### Le condizioni di utilizzo dell'opera
-{: .no_toc }
+
 
 Le condizioni di utilizzo dell'opera, anche dette clausole, sono quattro e a ognuna è associato un simbolo grafico allo scopo di renderne più facile il riconoscimento:
 
@@ -252,7 +248,7 @@ Le condizioni di utilizzo dell'opera, anche dette clausole, sono quattro e a ogn
 {: .tbl-creative-commons}
 
 ###### Combinazioni: le sei licenze CC
-{: .no_toc }
+
 
 Ognuna di queste quattro clausole individua una condizione particolare a cui il fruitore dell'opera deve sottostare per poterne usufruire liberamente. Combinandole si ottengono sedici possibili combinazioni, di cui undici sono licenze CC valide, mentre le altre cinque non lo sono. Di queste ultime, quattro includono sia la clausola ND (No Derivative Works) sia quella SA (Share-Alike) che sono mutuamente esclusive, mentre una non è valida perché non contiene né la ND né la SA.
 
@@ -271,7 +267,7 @@ Quindi le licenze Creative Commons in uso sono sei più la CC0 (o pubblico domin
 {: .tbl-creative-commons}
 
 ###### CC0: pubblico dominio
-{: .no_toc }
+
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">

@@ -1,16 +1,6 @@
 ---
 title: Complessità computazionale
 ---
-
-# Teoria della Complessità Computazionale
-{: .no_toc }
-
-## Indice
-{: .no_toc .text-delta }
-
-- TOC
-{:toc}
-
 ## I problemi e la loro complessità
 
 La **teoria della complessità computazionale** si pone come obiettivo quello di analizzare la complessità dei problemi in modo da poterli catalogare e confrontare in base alla loro difficoltà. In questo capitolo verranno trattate le modalità con cui è possibile valutare la complessità dei problemi. Per poterlo fare è necessario iniziare a definire alcuni concetti fondamentali.
@@ -169,7 +159,7 @@ La funzione *T(n)* esprime il numero di passi base necessari affinchè l'algorit
 ##### Esempi di calcolo della complessità di un algoritmo
 
 ###### Esempio 1
-{: .no_toc}
+
 
 Consideriamo un algoritmo che stampa i primi n numeri interi:
 
@@ -183,7 +173,7 @@ while (i <= n)        // n + 1 passi base
 Totale passi base = $ 1 + n + 1 + 2·n = 2 + 2·n $
 
 ###### Esempio 2
-{: .no_toc}
+
 
 Consideriamo un algoritmo che stampa i numeri interi multipli di 2 e 3 minori di n:
 
@@ -205,7 +195,7 @@ $$ = 2 + (1 + 1 + 2 + 1/6)·n = $$
 $$ = 2 + 25/6·n $$
 
 ###### Esempio 3
-{: .no_toc}
+
 
 Consideriamo un algoritmo che stampa tutti gli elementi di una matrice *n·m*:
 
@@ -228,7 +218,7 @@ Nel valutare la complessità solitamente non è rilevante la distinzione tra n e
 $$ 2 + 4·n + 3·n^2 $$
 
 ###### Esempio 4
-{: .no_toc}
+
 
 Consideriamo l'algoritmo bubble sort:
 
@@ -441,7 +431,7 @@ Può essere molto interessante approfondire lo studio delle complessità degli a
 Riprendiamo gli esempi visti prima di introdurre le notazioni di complessità asintotica. Vedremo che sfruttando il nuovo metodo il calcolo della complessità risulta molto più semplice e in molti casi (con algoritmi polinomiali senza logaritmi o radici) praticamente immediato.
 
 ###### Esempio 1
-{: .no_toc}
+
 
 Consideriamo un algoritmo che stampa i primi n numeri interi:
 
@@ -457,7 +447,7 @@ Possiamo direttamente tralasciare coefficienti e termini noti e dire immediatame
 $$ T(n) = O(n) $$
 
 ###### Esempio 2
-{: .no_toc}
+
 
 Consideriamo un algoritmo che stampa i numeri interi multipli di 2 e 3 minori di n:
 
@@ -473,7 +463,7 @@ Anche in questo caso non ci interessano i coefficienti e i termini noti e siccom
 $$ T(n) = O(n) $$
 
 ###### Esempio 3
-{: .no_toc}
+
 
 Consideriamo un algoritmo che stampa tutti gli elementi di una matrice *n·m*:
 
@@ -487,7 +477,7 @@ Il calcolo della complessità è anche in questo caso molto semplice. Siccome ab
 $$ T(n) = O(n^2) $$
 
 ###### Esempio 4
-{: .no_toc}
+
 
 Consideriamo l'algoritmo bubble sort:
 
@@ -519,7 +509,7 @@ La complessità totale è quindi:
 $$ T(n) = O(n^2) $$
 
 ###### Esempio 5
-{: .no_toc}
+
 
 Consideriamo l'algoritmo di ricerca dicotomica, un algoritmo che cerca la posizione di un numero in un vettore ordinato di numeri. Chiaramente la ricerca può riguardare qualsiasi tipo di variabile ordinabile. Di seguito è riportata una versione ricorsiva dell'algoritmo in linguaggio C. L'algoritmo può restituire la posizione dell'elemento trovato all'interno dell'array A, oppure -1 se l'elemento non è stato trovato.
 
@@ -546,7 +536,7 @@ La complessità della singola chiamata alla funzione è $O(1)$ poichè non ci so
 $$ T(n) = O(log_2(n)) $$
 
 ###### Esempio 6
-{: .no_toc}
+
 
 Consideriamo il problema di calcolare l'ennesimo numero della successione di fibonacci e studiamo la complessità di un algoritmo ricorsivo che lo risolve. Il codice in linguaggio C è:
 
@@ -566,7 +556,7 @@ $$ T(n) = O(2^n) $$
 Questo algoritmo è particolarmente poco efficiente poichè la funzione viene richiamata molte volte per gli stessi valori di i. Per risolvere tale problema è necessario trasformare la funzione nella sua versione iterativa oppure ricorrere ad una memoria che ci permette di salvare il valore calcolato dalla funzione per un certo valore di i e fare in modo che la funzione restituisca direttamente tale valore senza dover richiamare se stessa per i valori i-1 e i-2. Questo tipo di ragionamento è valido in generale per tutte quelle funzioni ricorsive che richiamano se stesse più di una volta comportando solitamente un numero di chiamate esponenziale.
 
 ###### Casi complessi
-{: .no_toc}
+
 
 Ci sono algoritmi per cui il calcolo della complessità richiede lo studio di teoremi complessi come il "[teorema principale](https://it.wikipedia.org/wiki/Teorema_principale)" necessario per calcolare la complessità di molti algoritmi ricorsivi in particolare quelli con complessità pseudolineare, un esempio famoso è il [merge sort](https://it.wikipedia.org/wiki/Merge_sort). Vista l'eccessiva complessità di tali argomenti essi non verranno trattati.
 

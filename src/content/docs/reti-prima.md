@@ -1,17 +1,9 @@
 ---
 title: Reti per la classe prima
 ---
-
-# Le reti di computer
-{: .no_toc}
-
 Lo studio approfondito del funzionaemnto delle reti di calcolatori è argomento di quinta e verrà trattato nell'[apposita sezione](reti/reti/). Per poter affrontare lo studio della programmazione e più in generale per poter utilizzare opportunamente il computer nell'era delle reti e di internet, è necessario avere almeno alcune conoscenze di base sul funzionamento delle reti di computer.
 
-## Indice
-{: .no_toc .text-delta }
 
-- TOC
-{:toc}
 
 ## Che cos'è una rete
 

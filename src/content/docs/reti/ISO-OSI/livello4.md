@@ -1,16 +1,6 @@
 ---
 title: Livello 4 - Trasporto
 ---
-
-# Livello 4: Trasporto (Transport Layer)
-{: .no_toc}
-
-## Indice
-{: .no_toc .text-delta }
-
-- TOC
-{:toc}
-
 _Obiettivo: permettere un trasferimento di dati trasparente e affidabile (implementando anche un controllo degli errori e delle perdite) tra due host. È il primo livello realmente end-to-end, cioè da host sorgente a host destinatario._
 
 Il livello di trasporto è il livello che separa i livelli inferiori, che si occupano della gestione della rete, dai livelli superiori i quali non si devono preoccupare della natura della rete usata per stabilire la comunicazione. Nessun dispositivo di rete opera a questo livello (solo in parte i router) ma solo gli host che non si occupano di ciò che avviene nei canali di comunicazione e nei nodi lungo il percorso fatto dai pacchetti. In questo senso il livello di trasporto si occupa quindi di offrire alle applicazioni un canale di comunicazione *trasparente* (non importa cosa avviene ai livelli inferiori) e *affidabile* (ci si occupa dell'effettiva integrità dei dati).

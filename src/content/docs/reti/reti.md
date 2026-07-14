@@ -3,20 +3,12 @@ title: Reti di calcolatori
 sidebar:
   order: 1
 ---
-
-# Rete di computer
-{: .no_toc }
-
 Una <b>rete di computer</b>, è un insieme di dispositivi (*host* e *nodi di commutazione*), collegati l'uno con l'altro da appositi canali di comunicazione (*link*), che per mezzo di opportuni protocolli di comunicazione hanno la possibilità di condividere risorse che possono essere materiali, cioè dispositivi fisici come una stampante, o immateriali come dati, informazioni o servizi di ogni genere.
 
 Le reti possono essere realizzate con un gran numero di tecnologie e modelli differenti. Di seguito verranno descritte le principali tecniche usate, soprattutto quelle legate alla rete internet.
 
 
-## Indice
-{: .no_toc .text-delta }
 
-- TOC
-{:toc}
 
 ## Caratteristiche generali
 

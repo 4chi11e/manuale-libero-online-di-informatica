@@ -1,17 +1,9 @@
 ---
 title: Sistemi Operativi
 ---
-
-# Sistemi Operativi
-{: .no_toc}
-
 Un **sistema operativo** (abbreviato in SO, OS in inglese), in informatica, è un software di base, composto normalmente da più sottosistemi o componenti software: kernel, scheduler, file system, gestore della memoria, gestore delle periferiche, interfaccia utente, che gestisce le risorse hardware e software della macchina, fornendo servizi di base ai software applicativi. Tra i sistemi operativi per computer desktop si citano Microsoft Windows, MacOS, le distribuzioni Linux, sistemi Unix-like, BSD e Chrome OS, mentre per i dispositivi mobili, quali smartphone e tablet, vi sono iOS, Android, Windows Phone, Sailfish OS, Symbian OS e KaiOS.
 
-## Indice
-{: .no_toc .text-delta }
 
-- TOC
-{:toc}
 
 ## Descrizione
 

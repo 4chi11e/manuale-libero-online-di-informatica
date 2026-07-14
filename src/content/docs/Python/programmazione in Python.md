@@ -1,9 +1,6 @@
 ---
 title: Programmazione in Python
 ---
-
-# Programmazione in linguaggio Python
-
 In questa sezione è trattata la programmazione in linguaggio Python. Python è un linguaggio di programmazione di alto livello, orientato agli oggetti, noto per la sua sintassi pulita, leggibile ed estremamente espressiva, che lo rende uno dei linguaggi più diffusi e apprezzati sia in ambito educativo sia professionale.
 
 Il materiale e il percorso di programmazione in Python sono consultabili al seguente link esterno:

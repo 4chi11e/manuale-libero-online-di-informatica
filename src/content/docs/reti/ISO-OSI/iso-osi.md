@@ -1,10 +1,6 @@
 ---
 title: ISO/OSI
 ---
-
-# Modello ISO/OSI
-{: .no_toc}
-
 <!-- thumbnail -->
 <div class="thumbnail float-right">
   <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/OSI_Model_v1-ita.png" class="modal__opener" aprire="#img-modello-ISO-OSI">
@@ -32,11 +28,7 @@ modello stabilisce per l'architettura logica di rete, una struttura a strati com
 
 A livello implementativo lo standard _[de facto](https://it.wikipedia.org/wiki/De_facto "De facto")_ affermatosi per architetture di rete a livelli è invece il [TCP/IP](https://it.wikipedia.org/wiki/TCP/IP "TCP/IP"), che riprende in parte il modello OSI. Nella [sezione dedicata al modello TCP/IP](#) verranno analizzati nel dettaglio i protocolli specifici utilizzati e le loro funzionalità.
 
-## Indice
-{: .no_toc .text-delta }
 
-- TOC
-{:toc}
 
 ## Caratteristiche
 

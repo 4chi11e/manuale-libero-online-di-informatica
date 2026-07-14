@@ -3,12 +3,8 @@ title: Crittografia
 # has_toc: false
 has_toc: true
 ---
-
-# Crittografia
-{: .no_toc}
-
 * TOC
-{:toc}
+
 
 ## Introduzione
 {: .titolo-3}
