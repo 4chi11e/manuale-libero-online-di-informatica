@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* Personalizzazione Tematica di Astro Starlight */
+:root {
+  /* Font Families */
+  --sl-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sl-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Palette Colori Viola/Indaco - Dark Mode (Default) */
+  --sl-color-accent: #a38cf4;
+  --sl-color-accent-low: #231b46;
+  --sl-color-accent-high: #d1c7ff;
+
+  --sl-color-text: #f3f4f6;
+  --sl-color-background: #0f0b21;
+}
+
+:root[data-theme='light'] {
+  /* Palette Colori Viola/Indaco - Light Mode */
+  --sl-color-accent: #6343df;
+  --sl-color-accent-low: #ebe7ff;
+  --sl-color-accent-high: #3b20ab;
+
+  --sl-color-text: #1f2937;
+  --sl-color-background: #faf9ff;
+}
+
+/* Stili Generali di Layout e Tipografia */
+p, li {
+  text-align: justify;
+  line-height: 1.6;
+}
+
+/* Classi di Compatibilità per Immagini e Thumbnail */
+.thumbnail {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 6px;
+  padding: 8px;
+  background-color: var(--sl-color-background);
+  display: inline-block;
+  max-width: 100%;
+  width: 40%;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.thumbnail img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.thumbnail p {
+  margin: 0;
+  font-size: 0.85em;
+  color: var(--sl-color-gray-3);
+  text-align: left;
+  line-height: 1.4;
+}
+
+.thumbnail--centrato {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: auto;
+  max-width: 80%;
+}
+
+.thumbnail--w100 {
+  display: block;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.thumbnail--50 {
+  width: 50%;
+}
+
+.thumbnail--33 {
+  width: 33%;
+}
+
+.thumbnail--25 {
+  width: 25%;
+}
+
+/* Allineamento Float */
+.tright {
+  float: right;
+  clear: right;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.tleft {
+  float: left;
+  clear: left;
+  margin-right: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .thumbnail {
+    width: 100% !important;
+    float: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 1.5rem !important;
+  }
+}
+
+.ta-c {
+  text-align: center;
+}
+
+/* Tabelle */
+.tbl-fr {
+  float: right;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 1050px) {
+  .tbl-fr {
+    float: none;
+    margin-left: 0;
+  }
+}
+
+/* Soluzioni Esercizi (Quiz/Collapse) */
+.soluzione-container {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: var(--sl-color-accent-low);
+}
+
+.soluzione-header {
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: var(--sl-color-gray-6);
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.soluzione-header:hover {
+  background-color: var(--sl-color-gray-5);
+}
+
+.soluzione-content {
+  padding: 16px;
+  border-top: 1px solid var(--sl-color-gray-5);
+  display: none;
+}
+
+.soluzione-content.visible {
+  display: block;
+}
+
+/* Evidenziazione Tabelle di Crittografia (Polibio, Campale) */
+#polibio1 td:first-child,
+#campale1 td:first-child {
+  border-right: 2px solid var(--sl-color-text) !important;
+  font-weight: bold;
+}
+
+#polibio1 tr:first-child td,
+#campale1 tr:first-child td {
+  border-bottom: 2px solid var(--sl-color-text) !important;
+  font-weight: bold;
+}
+
+#campale2 tr:nth-child(2) td {
+  border-bottom: 2px solid var(--sl-color-text) !important;
+}
+
+.tbl-cifratura td {
+  text-align: center;
+  padding: 6px 12px;
+}
+
+/* Stili per la Home Page (Titolone) */
+.titolone {
+  background: linear-gradient(135deg, var(--sl-color-accent-low) 0%, rgba(20, 15, 45, 0.4) 100%);
+  border-radius: 16px;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--sl-color-accent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.titolone h1 {
+  font-size: 2rem !important;
+  color: var(--sl-color-text) !important;
+  margin: 0 0 1rem 0 !important;
+  line-height: 1.3 !important;
+}
+
+.titolone h2 {
+  font-size: 1.25rem !important;
+  color: var(--sl-color-accent-high) !important;
+  margin: 0 !important;
+  font-weight: 500 !important;
+}
+
+#peril, #acuradi {
+  font-size: 0.9rem;
+  text-transform: lowercase;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* Contenitore Video Responsivo (YouTube, ecc.) */
+.video-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 1.5rem 0;
+}
+
+.video-container::after {
+  padding-top: 56.25%;
+  display: block;
+  content: "";
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Stili di compatibilità per vecchie soluzioni */
+.soluzione-container {
+  overflow: hidden;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 6px;
+  margin: 12px 0;
+}
+
+.soluzione-toggler {
+  color: var(--sl-color-accent);
+  cursor: pointer;
+  padding: 8px 12px;
+  margin: 0;
+  font-weight: 600;
+  background-color: var(--sl-color-gray-6);
+  user-select: none;
+  display: block;
+}
+
+.soluzione-toggler:hover {
+  background-color: var(--sl-color-gray-5);
+}
+
+.soluzione {
+  height: 0;
+  overflow: hidden;
+  padding: 0 12px;
+  transition: padding 0.2s ease, border-top 0.2s ease;
+}
+
+.soluzione__visibile {
+  height: auto !important;
+  padding: 12px;
+  border-top: 1px solid var(--sl-color-gray-5);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+
+/* Centratura simmetrica dell'intero layout del sito per schermi ampi (layout classico a 3 colonne) */
+@media (min-width: 92rem) {
+  :root {
+    --layout-max-width: 92rem; /* ~1472px per dare più respiro a tutte e 3 le colonne */
+    --sl-sidebar-width: 22rem;  /* Barra sinistra allargata a 352px */
+    --sl-content-width: 52rem;  /* Area contenuto allargata a 832px */
+  }
+
+  .page {
+    max-width: var(--layout-max-width);
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* La barra in alto rimane a schermo intero visivamente */
+  .header {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  /* Ma il suo contenuto interno viene centrato con la pagina sotto */
+  .header > div {
+    max-width: var(--layout-max-width) !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding-inline: var(--sl-content-pad-x) !important;
+  }
+
+  /* La barra di sinistra si posiziona allineata al contenitore delle 3 colonne */
+  .sidebar, #starlight__sidebar {
+    left: calc((100vw - var(--layout-max-width)) / 2) !important;
+    width: var(--sl-sidebar-width) !important;
+  }
+
+  /* Allinea il contenuto immediatamente adiacente alla barra di sinistra senza spazi vuoti */
+  .content-panel {
+    margin-inline: 0 !important;
+    max-width: var(--sl-content-width) !important;
+  }
+
+  /* Forza la colonna dell'indice destro (ToC) a essere proporzionata */
+  @media (min-width: 72rem) {
+    .main-frame {
+      grid-template-columns: 1fr 18rem !important; /* Indice destro a 288px */
+    }
+  }
+}
+
+
+
+
+

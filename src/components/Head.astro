@@ -1,0 +1,169 @@
+---
+import Default from "@astrojs/starlight/components/Head.astro";
+---
+<Default {...Astro.props} />
+
+<script>
+  // Script globale per gestire le soluzioni collassabili (subnetting ed esercizi)
+  function setupCollapsibles() {
+    const containers = document.querySelectorAll('.soluzione-container');
+    containers.forEach(container => {
+      const header = container.querySelector('.soluzione-header, .soluzione-toggler');
+      const content = container.querySelector('.soluzione-content, .soluzione');
+      const icon = container.querySelector('.soluzione-icon');
+      const titleSpan = header;
+
+      if (!header || !content || header.hasAttribute('data-quiz-active')) return;
+      header.setAttribute('data-quiz-active', 'true');
+
+      header.addEventListener('click', () => {
+        const isVisible = content.classList.toggle('soluzione__visibile');
+        content.classList.toggle('visible', isVisible);
+        
+        if (icon) {
+          icon.textContent = isVisible ? '▲' : '▼';
+        }
+        
+        if (titleSpan) {
+          const text = titleSpan.textContent || '';
+          if (text.startsWith('Visualizza')) {
+            titleSpan.textContent = text.replace('Visualizza', 'Nascondi');
+          } else if (text.startsWith('Nascondi')) {
+            titleSpan.textContent = text.replace('Nascondi', 'Visualizza');
+          }
+        }
+      });
+    });
+  }
+
+  // Script per lo strumento di crittografia antica (Atbash, Albam, Atbah)
+  function setupCryptoTool() {
+    const clearTextEl = document.getElementById('clear-text') as HTMLTextAreaElement;
+    const cipherTextEl = document.getElementById('cipher-text') as HTMLTextAreaElement;
+    const btnEncrypt = document.getElementById('btn-encrypt');
+    const btnDecrypt = document.getElementById('btn-decrypt');
+    const btnClear = document.getElementById('btn-clear');
+
+    if (!clearTextEl || !cipherTextEl || !btnEncrypt || !btnDecrypt || !btnClear) return;
+    if (btnEncrypt.hasAttribute('data-crypto-active')) return;
+    btnEncrypt.setAttribute('data-crypto-active', 'true');
+
+    const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const ALPHABET_ALBAM = 'NOPQRSTUVWXYZABCDEFGHIJKLM';
+    const ALPHABET_ATBAH = 'IHGFNDCBARQPOEMLKJZYXWVUTS';
+
+    function atbash(text: string) {
+      return text.toUpperCase().split('').map(char => {
+        const idx = ALPHABET.indexOf(char);
+        return idx > -1 ? ALPHABET.charAt(25 - idx) : char;
+      }).join('');
+    }
+
+    function albam(text: string) {
+      return text.toUpperCase().split('').map(char => {
+        const idx = ALPHABET.indexOf(char);
+        return idx > -1 ? ALPHABET_ALBAM.charAt(idx) : char;
+      }).join('');
+    }
+
+    function atbah(text: string) {
+      return text.toUpperCase().split('').map(char => {
+        const idx = ALPHABET.indexOf(char);
+        return idx > -1 ? ALPHABET_ATBAH.charAt(idx) : char;
+      }).join('');
+    }
+
+    function getSelectedCipher() {
+      const activeRadio = document.querySelector('input[name="cipher-type"]:checked') as HTMLInputElement;
+      return activeRadio ? activeRadio.value : 'atbash';
+    }
+
+    function processText(isEncryption: boolean) {
+      const sourceText = isEncryption ? clearTextEl.value : cipherTextEl.value;
+      const cipher = getSelectedCipher();
+      let result = '';
+
+      if (cipher === 'atbash') {
+        result = atbash(sourceText);
+      } else if (cipher === 'albam') {
+        result = albam(sourceText);
+      } else if (cipher === 'atbah') {
+        result = atbah(sourceText);
+      }
+
+      if (isEncryption) {
+        cipherTextEl.value = result;
+      } else {
+        clearTextEl.value = result;
+      }
+    }
+
+    btnEncrypt.addEventListener('click', () => processText(true));
+    btnDecrypt.addEventListener('click', () => processText(false));
+    btnClear.addEventListener('click', () => {
+      clearTextEl.value = '';
+      cipherTextEl.value = '';
+    });
+  }
+
+  // Script globale per gestire i popups modali delle immagini
+  function setupModals() {
+    const openers = document.querySelectorAll('.modal__opener');
+    openers.forEach(opener => {
+      if (opener.hasAttribute('data-modal-active')) return;
+      opener.setAttribute('data-modal-active', 'true');
+      opener.addEventListener('click', (event) => {
+        const target = event.currentTarget as HTMLElement;
+        const targetId = target.getAttribute('aprire');
+        if (targetId) {
+          const modal = document.querySelector(targetId);
+          if (modal) {
+            modal.classList.add('modal--visibile');
+          }
+        }
+      });
+    });
+
+    const closers = document.querySelectorAll('.modal__closer, .modal__close');
+    closers.forEach(closer => {
+      if (closer.hasAttribute('data-modal-active')) return;
+      closer.setAttribute('data-modal-active', 'true');
+      closer.addEventListener('click', (event) => {
+        const target = event.currentTarget as HTMLElement;
+        const targetId = target.getAttribute('chiudere');
+        if (targetId) {
+          const modal = document.querySelector(targetId);
+          if (modal) {
+            modal.classList.remove('modal--visibile');
+          }
+        } else {
+          const modal = target.closest('.modal');
+          if (modal) {
+            modal.classList.remove('modal--visibile');
+          }
+        }
+      });
+    });
+
+    // Chiudi il modal cliccando all'esterno del contenuto
+    if (!(window as any).hasModalOutsideClickRegistered) {
+      (window as any).hasModalOutsideClickRegistered = true;
+      window.addEventListener('click', (event) => {
+        const target = event.target as HTMLElement;
+        if (target && target.classList.contains('modal')) {
+          target.classList.remove('modal--visibile');
+        }
+      });
+    }
+  }
+
+  // Eseguiamo i setup al caricamento e ad ogni navigazione di Starlight
+  setupCollapsibles();
+  setupCryptoTool();
+  setupModals();
+  document.addEventListener('astro:page-load', () => {
+    setupCollapsibles();
+    setupCryptoTool();
+    setupModals();
+  });
+</script>

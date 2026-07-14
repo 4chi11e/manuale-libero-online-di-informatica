@@ -2,5 +2,10 @@
   "rubyLsp.rubyVersionManager": "none",
   "[ruby]": {
     "editor.defaultFormatter": "Shopify.ruby-lsp"
+  },
+  "files.watcherExclude": {
+    "**/dist/**": true,
+    "**/.astro/**": true,
+    "**/node_modules/**": true
   }
 }

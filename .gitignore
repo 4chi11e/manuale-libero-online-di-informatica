@@ -1,9 +1,25 @@
-_site
+# Astro build output
+dist/
+
+# Dependencies
+node_modules/
+
+# Astro temp files and cache
+.astro/
+
+# VS Code / Ruby LSP / Editor caches
+.ruby-lsp/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Old Jekyll leftovers
+_site/
+.Ta-cache/
+.jekyll-cache/
+.jekyll-metadata/
+_posts/
 _site.zip
-_posts
-.sass-cache
-.jekyll-cache
-.jekyll-metadata
 mie-prove.html
-docs/JTD-Originali
 prove.html
+docs/JTD-Originali
