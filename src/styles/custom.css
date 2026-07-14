@@ -26,7 +26,8 @@
 }
 
 /* Stili Generali di Layout e Tipografia */
-p, li {
+p,
+li {
   text-align: justify;
   line-height: 1.6;
 }
@@ -213,7 +214,8 @@ p, li {
   font-weight: 500 !important;
 }
 
-#peril, #acuradi {
+#peril,
+#acuradi {
   font-size: 0.9rem;
   text-transform: lowercase;
   font-style: italic;
@@ -286,9 +288,12 @@ p, li {
 /* Centratura simmetrica dell'intero layout del sito per schermi ampi (layout classico a 3 colonne) */
 @media (min-width: 92rem) {
   :root {
-    --layout-max-width: 92rem; /* ~1472px per dare più respiro a tutte e 3 le colonne */
-    --sl-sidebar-width: 22rem;  /* Barra sinistra allargata a 352px */
-    --sl-content-width: 52rem;  /* Area contenuto allargata a 832px */
+    --layout-max-width: 92rem;
+    /* ~1472px per dare più respiro a tutte e 3 le colonne */
+    --sl-sidebar-width: 22rem;
+    /* Barra sinistra allargata a 352px */
+    --sl-content-width: 52rem;
+    /* Area contenuto allargata a 832px */
   }
 
   .page {
@@ -307,7 +312,7 @@ p, li {
   }
 
   /* Ma il suo contenuto interno viene centrato con la pagina sotto */
-  .header > div {
+  .header>div {
     max-width: var(--layout-max-width) !important;
     width: 100% !important;
     margin: 0 auto !important;
@@ -315,7 +320,8 @@ p, li {
   }
 
   /* La barra di sinistra si posiziona allineata al contenitore delle 3 colonne */
-  .sidebar, #starlight__sidebar {
+  .sidebar,
+  #starlight__sidebar {
     left: calc((100vw - var(--layout-max-width)) / 2) !important;
     width: var(--sl-sidebar-width) !important;
   }
@@ -326,15 +332,16 @@ p, li {
     max-width: var(--sl-content-width) !important;
   }
 
-  /* Forza la colonna dell'indice destro (ToC) a essere proporzionata */
-  @media (min-width: 72rem) {
-    .main-frame {
-      grid-template-columns: 1fr 18rem !important; /* Indice destro a 288px */
-    }
+  /* Rende la barra di destra (ToC) sticky anziché fixed per vincolarla alla sua colonna */
+  .right-sidebar {
+    position: sticky !important;
+    top: var(--sl-nav-height) !important;
+    height: calc(100vh - var(--sl-nav-height)) !important;
+    width: 100% !important;
+  }
+
+  /* Allinea a destra le icone social e la scelta del tema nell'header */
+  .right-group {
+    justify-content: flex-end !important;
   }
 }
-
-
-
-
-
