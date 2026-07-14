@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Complessità computazionale
-nav_order: 6
+nav_order: 7
 has_children: false
 ---
 
@@ -239,15 +239,15 @@ Consideriamo l'algoritmo bubble sort:
 void bubblesort(int a[], int n){
   int i, j;
   // N.B. n-1 è l'ultima componente dell'array.
-  for(i = 0; i < n - 1; i++) //scansiona tutto l'array tranne l'ultima componente: n - 1 escluso. Quindi fino al penultimo elemento.
+  for(i = 0; i < n - 1; i++)    //scansiona tutto l'array tranne l'ultima componente: n - 1 escluso. Quindi fino al penultimo elemento.
     for (j = n - 1; j > i; j--) //j settato all'ultima componente e decresce ad ogni iterazione. Esce dal ciclo solo se j <= i
-      if (a[j] < a[j-1])  //se la componente corrente è più piccola della precedente, li scambia.
+      if (a[j] < a[j-1])        //se la componente corrente è più piccola della precedente, li scambia.
         scambia(&a[j],&a[j-1]);                   
 }
  
 //la funzione scambia è così composta:
-void scambia(int *a, int *b){ //richiede due indirizzi di memoria in entrata che verranno memorizzati in 2 puntatori.
-  int temp; //la variabile d'appoggio che memorizza temporaneamente il valore di a.
+void scambia(int *a, int *b){   //richiede due indirizzi di memoria in entrata che verranno memorizzati in 2 puntatori.
+  int temp;                     //la variabile d'appoggio che memorizza temporaneamente il valore di a.
   temp = *a;
   *a = *b;
   *b = temp;
@@ -259,21 +259,21 @@ Questo algoritmo è decisiamente più complesso dei precedenti e introduce anche
 Riprendiamo il codice ripulito da commenti di spiegazione e inseriamo il costo di ogni riga di codice:
 
 ```c
-void bubblesort(int a[], int n){      // 2
-  int i, j;                           // 2 
-  for(i = 0; i < n - 1; i++)          // 1 + n + n - 1 = 2 * n 
-    for (j = n - 1; j > i; j--)       // (1 + n-i + n-i-1) * (n-1) = 2*(n-i)*(n-1)  (variabile in funzione di i !!!) 
-                                      // mediamente n-i vale n/2
-      if (a[j] < a[j-1])              // (n-i)*(n-1)
-        scambia(&a[j],&a[j-1]);       // (n-i)*(n-1)  nel caso peggiore           
+void bubblesort(int a[], int n){   // 2
+  int i, j;                        // 2 
+  for(i = 0; i < n - 1; i++)       // 1 + n + n - 1 = 2 * n 
+    for (j = n - 1; j > i; j--)    // (1 + n-i + n-i-1) * (n-1) = 2*(n-i)*(n-1)  (variabile in funzione di i !!!) 
+                                   // mediamente n-i vale n/2
+      if (a[j] < a[j-1])           // (n-i)*(n-1)
+        scambia(&a[j],&a[j-1]);    // (n-i)*(n-1)  nel caso peggiore           
 }
  
 //la funzione scambia è così composta:
-void scambia(int *a, int *b){         // 2
-  int temp;                           // 1
-  temp = *a;                          // 1
-  *a = *b;                            // 1
-  *b = temp;                          // 1
+void scambia(int *a, int *b){      // 2
+  int temp;                        // 1
+  temp = *a;                       // 1
+  *a = *b;                         // 1
+  *b = temp;                       // 1
 }
 ```
 
@@ -335,7 +335,7 @@ Per chi conosce la matematica il concetto di andamento asintotico dovrebbe esser
 
 La funzione O-grande (leggi o grande) è utilizzata per indicare un limite asintotico superiore della nostra funzione T(n) infatti è definita in questo modo:
 
-$$ f(n) \in O(g(n)) \text{ per } n \to \infty $$
+$$ f(n) \in O(g(n)) $$
 
 se e solo se
 
@@ -346,7 +346,7 @@ Prendiamo ad esempio due funzioni:
 - $f(n) = 6n^4-2n^3+5$
 - $g(n) = n^4$
 
-possiamo dire che $ f(n) \in O(g(n)) $ per $ n \to \infty $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ ha solamente un coefficiente (6) che la rende superiore a $g(n)$ ma la definizione ci consente di scegliere un opportuno coefficiente $c$ per cui moltiplicare $g(n)$ che permette a $g(n)$ di essere superiore a $f(n)$  da un certo valore di n in poi.
+possiamo dire che $ f(n) \in O(g(n)) $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ ha solamente un coefficiente (6) che la rende superiore a $g(n)$ ma la definizione ci consente di scegliere un opportuno coefficiente $c$ per cui moltiplicare $g(n)$ che permette a $g(n)$ di essere superiore a $f(n)$ da un certo valore di n in poi.
 
 In pratica stiamo dicendo che la funzione $f(n)$ ha un andamento asintotico limitato superiormente dalla funzione $g(n)$, senza considerare i coefficienti che come abbiamo visto analizzando [questa](#tabella-tempi-di-calcolo) tabella non sono rilevanti nel considerare gli andamenti asintotici. In altre parole $f(n)$ cresce al massimo come $g(n)$.
 
@@ -385,7 +385,7 @@ Nonostante la notazione O-grande sia quella più comunemente usata non è nè l'
 
 La funzione Ω-grande (leggi omega grande) è una funzione piuttosto simile alla funzione O-grande ma è utilizzata per indicare un limite asintotico inferiore della nostra funzione T(n) infatti è definita in questo modo:
 
-$$ f(x) \in Ω(g(n)) \text{ per } n \to \infty $$
+$$ f(x) \in Ω(g(n)) $$
 
 se e solo se
 
@@ -396,7 +396,7 @@ Prendiamo anche in questo caso le due funzioni:
 - $f(n) = 6n^4-2n^3+5$
 - $g(n) = n^4$
 
-possiamo dire che $ f(n) \in Ω(g(n)) $ per $ x \to \infty $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ e secondo la definizione possiamo scegliere un opportuno coefficiente $c$ per cui moltiplicare $g(n)$ che permette a $g(n)$ di essere inferiore a $f(n)$ da un certo valore di n in poi.
+possiamo dire che $ f(n) \in Ω(g(n)) $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ e secondo la definizione possiamo scegliere un opportuno coefficiente $c$ per cui moltiplicare $g(n)$ che permette a $g(n)$ di essere inferiore a $f(n)$ da un certo valore di n in poi.
 
 In pratica stiamo dicendo che la funzione $f(n)$ ha un andamento asintotico limitato inferiormente dalla funzione $g(n)$, senza considerare i coefficienti che sono irrilevanti. In altre parole $f(n)$ cresce almeno come $g(n)$.
 
@@ -406,7 +406,7 @@ Anche in questo caso è necessario fare una precisazione: è vero che $f(n) \in 
 
 La notazione Θ-grande (leggi teta grande) è una funzione che permette di unire in un'unica notazione le caratteristiche delle due funzioni precedenti, essa indica infatti in modo preciso l'andamento asintotico della funzione T(n). Θ-grande è definita come:
 
-$$ f(x) \in Θ(g(n)) \text{ per } n \to \infty $$
+$$ f(x) \in Θ(g(n)) $$
 
 se e solo se
 
@@ -417,7 +417,7 @@ Prendiamo anche in questo caso le due funzioni:
 - $f(n) = 6n^4-2n^3+5$
 - $g(n) = n^4$
 
-possiamo dire che $ f(n) \in Θ(g(n)) $ per $ x \to \infty $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ e secondo la definizione possiamo scegliere due opportuni coefficienti $c_1$ e $c_2$ per cui moltiplicare $g(n)$ e ottenere due valori uno inferiore e uno superiore a $f(n)$ da un certo valore di n in poi.
+possiamo dire che $ f(n) \in Θ(g(n)) $, infatti le due funzioni hanno lo stesso grado e $ f(n) $ e secondo la definizione possiamo scegliere due opportuni coefficienti $c_1$ e $c_2$ per cui moltiplicare $g(n)$ e ottenere due valori uno inferiore e uno superiore a $f(n)$ da un certo valore di n in poi.
 
 In pratica stiamo dicendo che la funzione $f(n)$ ha un andamento asintotico uguale a quello della funzione $g(n)$, senza considerare i coefficienti che sono irrilevanti. In altre parole $f(n)$ cresce asintoticamente come $g(n)$, nè più nè meno.
 
@@ -618,7 +618,9 @@ La domanda che ci si pone è: i due sottoinsiemi appena identificati sono entram
 
 #### Problema della terminazione
 
-Il problema della terminazione (dall'inglese Halting problem, tradotto anche con problema dell'arresto o problema della fermata) chiede se sia sempre possibile, descritto un algoritmo e un determinato ingresso finito, stabilire se l'algoritmo in questione termina o continua la sua esecuzione all'infinito. È stato dimostrato che non può esistere un algoritmo generale in grado di risolvere il problema per tutti i possibili ingressi. La versione più nota del problema è quella proposta nel 1936 dal matematico Alan Turing, insieme alla dimostrazione della sua indecidibilità.
+Il problema della terminazione (dall'inglese Halting problem, tradotto anche con problema dell'arresto o problema della fermata) è così definito: dato un algoritmo e un input per quell'algoritmo stabilire se la computazione di tale input da parte dell'algoritmo terminerà. La domanda che si è fatto Turing è: esiste un algoritmo che risolve tale problema, cioè che è in grado di dare la soluzione corretta in tempo finito? Turing dimostra che non può esistere un algoritmo generale in grado di risolvere il problema per tutti i possibili ingressi. La versione più nota del problema è quella proposta nel 1936 dal matematico Alan Turing, insieme alla dimostrazione della sua indecidibilità.
+
+La dimostrazione di Turing ci porta a concludere che non sia possibile stabilire a priori se una computazione terminerà, l'unica cosa che possiamo fare è eseguire la computazione sperando prima o poi di raggiungere il termine. Ci saranno sempre possibili input del problema per cui non sapremo prevedere se e quando la computazione terminerà o andrà avanti per sempre, questo sia a priori sia durante l'esecuzione. 
 
 ##### Dimostrazione
 

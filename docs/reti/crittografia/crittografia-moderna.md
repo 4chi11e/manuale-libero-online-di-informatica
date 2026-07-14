@@ -285,7 +285,7 @@ Se vuoi vedere in dettaglio il funzionamento del DES puoi trovare la descrizione
 
 Nonostante siano state pubblicate più informazioni sulla crittanalisi del DES che per ogni altro algoritmo di cifratura a blocchi, il tipo più pratico di attacco a tutt'oggi è quello con forza bruta.
 
-Nonostante il sistema su cui si basa rispetti i principi teorici di un buon sistema di crittografia, la sicurezza del DES è stata messa in discussione fin da subito; con una chiave di 56 bit le chiavi possibili sono 256 numero enorme, assolutamente fuori della portata per un essere umano, ma non di quella dei moderni computer.
+Nonostante il sistema su cui si basa rispetti i principi teorici di un buon sistema di crittografia, la sicurezza del DES è stata messa in discussione fin da subito; con una chiave di 56 bit le chiavi possibili sono 2<sup>56</sup>, numero enorme, assolutamente fuori della portata per un essere umano, ma non di quella dei moderni computer.
 
 In altre parole il DES non è affatto al sicuro dal più semplice degli attacchi crittanalitici, quello esaustivo (in inglese: brute-force) che semplicemente prova una per una tutte le chiavi.
 
@@ -346,9 +346,15 @@ AES lavora su blocchi a dimensione fissa di 128 bit. Inizialmente la lunghezza s
 
 </div>
 
-Come il DES, AES prevede la ripetizione di numerosi cicli identici. Per l'AES a 128 bit, sono previste 10 ripetizioni del ciclo base. Ogni blocco di 128 bit è diviso in 16 bytes, che dobbiamo immaginare disposti su una matrice 4x4.
+Come il DES, AES prevede la ripetizione di numerosi cicli o round identici. Il numero di round dipende dalla lunghezza della chiave:
 
-Ogni ciclo di Rijndael è una funzione del blocco in ingresso e della chiave, che denoteremo con Round(blocco, chiave) e consiste delle seguenti 4 funzioni:
+- 10 giri per una chiave a 128 bit
+- 12 giri per una chiave a 192 bit
+- 14 giri per una chiave a 256 bit
+
+Ogni ciclo di Rijndael possiamo descriverlo come la funzione Round(blocco, chiave) che prende in input il blocco in ingresso e la chiave. Ogni blocco di 128 bit è diviso in 16 bytes, che dobbiamo immaginare disposti su una matrice 4x4. 
+
+Un round è composto a sua volta dalle seguenti 4 funzioni:
 
 - Round(blocco, chiave)
   - SubBytes(blocco): applica ad ogni byte x del blocco in entrata la trasformazione Ax<sup>-1</sup> + b dove A e b sono una matrice e un vettore prefissati e x<sup>-1</sup> è l'inverso moltiplicativo di x nell'aritmetica finita definita campo di Rijndael; essendo presente x<sup>-1</sup>, la funzione SubBytes(_) non è lineare così che non è lineare nemmeno la Round(_,_) cosa importante perché mette al riparo dagli attacchi della [crittanalisi differenziale](http://www.crittologia.eu/critto/cr_differenziale.htm).
@@ -365,6 +371,28 @@ Dal 2001 sono stati pubblicati diversi progetti di attacco ad AES basati su meto
 Il livello di sicurezza di AES sembra quindi molto elevato; per i documenti del governo USA AES 128 bit è considerato sufficiente per i documenti classificati “Secret”, mentre per i “Top secret” occorre AES 192 o meglio ancora 256 bit.
 
 Puoi trovare altri dettagli su AES [qui](https://it.wikipedia.org/wiki/Advanced_Encryption_Standard).
+
+##### Perchè AES
+
+Il passaggio da 3DES (Triple DES) a AES (Advanced Encryption Standard) è stato deciso principalmente per migliorare la sicurezza e le prestazioni della crittografia. Ecco i motivi principali:
+
+1. Sicurezza
+    - 3DES è una versione estesa dell'algoritmo DES (Data Encryption Standard), che utilizza una lunghezza di chiave a 168 bit (usando tre applicazioni di DES su ciascun blocco di dati). Sebbene 3DES abbia migliorato la sicurezza rispetto al DES originale, il suo design presenta vulnerabilità, senza entrare in dettagli troppo complessi, è possibile effettuare un attacco che riduce il numero di chiavi da provare da 2<sup>168</sup> a 2<sup>112</sup>, numero che rende 3DES ormai non particolarmente sicuro.
+    - AES è stato progettato per essere più sicuro e resistente agli attacchi moderni. AES supporta lunghezze di chiave di 128, 192 e 256 bit, offrendo una sicurezza superiore rispetto a 3DES, che è vulnerabile a attacchi di forza bruta. La chiave a 168 bit di 3DES che come visto nel punto precedente si riduce di fatto a 112, non è considerata abbastanza lunga per le esigenze moderne, mentre le chiavi più lunghe di AES (soprattutto quelle da 256 bit) offrono una protezione molto più robusta.
+
+2. Prestazioni
+    - 3DES è più lento rispetto ad AES, principalmente perché applica l'algoritmo DES tre volte su ciascun blocco di dati. Questo rende 3DES inefficiente, soprattutto su hardware moderno.
+    - AES, progettato per essere più efficiente nelle implementazioni hardware e software, è molto più veloce di 3DES, garantendo prestazioni superiori con la stessa potenza di calcolo. In particolare, AES è progettato per sfruttare le istruzioni hardware moderne (come quelle presenti nelle CPU moderne), il che lo rende molto più veloce di 3DES.
+
+3. Standardizzazione e Supporto
+    - AES è stato adottato come standard dal NIST (National Institute of Standards and Technology) nel 2001, dopo una gara internazionale per selezionare il miglior algoritmo di crittografia simmetrica.
+    - 3DES è stato introdotto nei tardi anni '70 e non è stato progettato per affrontare le minacce di sicurezza moderne, quindi è stato progressivamente rimpiazzato da AES in molte applicazioni, incluse quelle in ambito bancario, VPN, e crittografia di massa.
+
+4. Efficienza su Sistemi Moderni
+    - AES è ottimizzato per l'uso con processori moderni, che spesso includono istruzioni dedicate per l'elaborazione di AES (come le istruzioni AES-NI in Intel e AMD). Ciò consente di cifrare e decifrare i dati molto rapidamente senza un impatto significativo sulle prestazioni del sistema.
+    - 3DES, essendo più complesso, non ha lo stesso livello di ottimizzazione hardware e soffre maggiormente in termini di velocità.
+
+In sintesi il passaggio da 3DES a AES è stato motivato principalmente da una maggiore sicurezza e una migliore efficienza. 3DES, pur essendo stato utile negli anni passati, non è più considerato sufficientemente sicuro per i requisiti di crittografia moderni, mentre AES offre un'architettura più robusta e performante per proteggere i dati.
 
 ### Cifrari a flusso
 

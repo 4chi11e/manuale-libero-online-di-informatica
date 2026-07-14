@@ -39,6 +39,22 @@ Turing è considerato uno dei più grandi matematici moderni e uno dei più impo
 
 Nonostante l'importanza che ricopre questo modello di computer, i computer moderni si basano su un'architettura differente ideata dal matematico e informatico ungherese John von Neumann (leggi *fon noiman*). La maggior parte dei primissimi computer costruiti verso la fine degli anni '40 è basata sull'architettura di Von Neumann.
 
+<!-- thumbnail -->
+<div class="thumbnail--w100 mt-4 mb-4">
+  <img src="{{site.baseurl}}/assets/images/architettura/schema-von-neumann.jpg" class="modal__opener" aprire="#schema-von-neumann">
+  <p>Schema dell'architettura di Von Neumann con dettagli aggiuntivi</p>
+</div>
+<!-- modal -->
+<div id="#schema-von-neumann" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#schema-von-neumann">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="{{site.baseurl}}/assets/images/architettura/schema-von-neumann.jpg">
+    </div>
+    <p>Schema dell'architettura di Von Neumann con dettagli aggiuntivi</p>
+  </div>
+</div>
+
 Lo schema si basa sui seguenti componenti fondamentali:
 
 - Unità centrale di elaborazione (CPU) o processore, che si occupa di svolgere tutte le operazioni;
@@ -77,16 +93,32 @@ Una CPU (Central Processing Unit) o processore è il componente del computer che
 - bus interno che serve a trasmettere i dati tra le diverse componenti; è formato da un fascio di cavi il cui numero è uguale alla dimensione dei registri in modo da trasmettere il valore di ogni bit di un registro;
 - clock, dall'inglese orologio, che emette un segnale ad intervalli regolari e serve per coordinare temporalmente il lavoro di tutte le componenti della CPU in modo che ogni componente sappia l'esatto momento in cui deve effettuare ogni operazione. La frequenza a cui viene emesso il segnale viene comunemente detto frequenza di clock o più brevemente solo clock e ci dà un'indicazione generale della velocità a cui lavora il processore, i processori moderni hanno frequenze dell'ordine dei GHz (spesso tra 1 e 5 GHz).
 
-#### Ciclo fondamentale o ciclo di fetch-execute
-La CPU è in grado di eseguire un gran numero di operazioni anche molto diverse tra loro. Il genere di operazioni che vengono svolte sono: le operazioni aritmetiche, le operazioni logiche, lettura o scrittura di dati da o verso specifici registri o posizioni in memoria centrale... Le diverse operazioni possono essere più o meno complesse e richiederanno più o meno tempo per essere eseguite, una somma ad esempio richiede meno tempo di una divisione. Siccome ogni operazione singola delle componenti del processore avviene quando il clock manda un segnale a tutti, il tempo di esecuzione delle istruzioni da parte del processore viene misurato in numero di segnali del clock; una istruzione potrà quindi richiedere uno o più clock (diciamo per semplicità da 2 o 3 a una decina). Per avere un'idea di quanto tempo richieda l'esecuzione di una istruzione basta sapere il numero di clock e la frequenza del clock, se la frequenza è di 3GHz e un istruzione richiede 3 clock, l'operazione richiede 1 miliardesimo di secondo per essere eseguita ((1 / 3 miliardi) * 3). 
+#### Ciclo fondamentale o ciclo di fetch-decode-execute
+La CPU è in grado di eseguire un gran numero di operazioni anche molto diverse tra loro. Il genere di operazioni che vengono svolte sono: le operazioni aritmetiche, le operazioni logiche, lettura o scrittura di dati da o verso specifici registri o posizioni in memoria centrale... Le diverse operazioni possono essere più o meno complesse e richiederanno più o meno tempo per essere eseguite, una somma ad esempio richiede meno tempo di una divisione. Siccome ogni operazione singola delle componenti del processore avviene quando il clock manda un segnale a tutti, il tempo di esecuzione delle istruzioni da parte del processore viene misurato in numero di segnali del clock; una istruzione potrà quindi richiedere uno o più clock (diciamo per semplicità da 2 o 3 a una decina). Per avere un'idea di quanto tempo richieda l'esecuzione di una istruzione basta sapere il numero di clock e la frequenza del clock, se la frequenza è di 3GHz e un istruzione richiede 3 clock, l'operazione richiede 1 miliardesimo di secondo (1ns) per essere eseguita ((1 / 3 miliardi) * 3). 
 
 L'insieme delle operazioni disponibili e il modo in cui vengono eseguite cambia da processore a processore e costituisce il linguaggio dello specifico processore detto anche linguaggio macchina. (In realtà solitamente famiglie di processori condividono lo stesso linguaggio poichè basate su un'architettura comune)
 
-Per quanto le operazioni possano essere diverse l'una dall'altra, il processore continua a ripetere sempre la stessa sequenza di operazioni detto ciclo di fetch-execute o ciclo di prelievo ed esecuzione. Questo ciclo è composto da 3 fasi fondamentali:
+Per quanto le operazioni possano essere diverse l'una dall'altra, il processore continua a ripetere sempre la stessa sequenza di operazioni detto ciclo di fetch-decode-execute. Questo ciclo è composto da 3 fasi fondamentali:
 
-1. il processore preleva (fetch) un istruzione dalla memoria nella posizione indicata dall'instruction pointer e la scrive nell'instruction register;
-2. l'unità di controllo decodifica (decode) o interpreta l'istruzione da eseguire e manda gli opportuni segnali agli altri componenti del processore, ad esempio dice alla ALU che operazione deve fare, da quali registri leggere i dati e su quale altro registro scrivere il risultato;
-3. viene incrementato l'instruction pointer per puntare alla prossima istruzione da eseguire; in realtà l'istruzione eseguita dalla ALU potrebbe essere quella di modificare il valore dell'IP per "saltare" ad un altra istruzione e questo permette di poter fare delle scelte in un programma, per questo motivo e per risparmiare tempo questa operazione viene in realtà fatta alla fine del punto 1.
+##### 1. Fetch
+Il processore preleva (*fetch*) un’istruzione dalla **memoria principale** all’indirizzo indicato dall’**Instruction Pointer (IP)** e la carica nell’**Instruction Register (IR)**.  
+Durante questa fase, l’**Instruction Pointer viene incrementato** per puntare all’istruzione successiva.
+
+##### 2. Decode
+L’**Unità di Controllo (Control Unit)** decodifica (*decode*) l’istruzione, cioè la interpreta, e invia i segnali di controllo agli altri componenti del processore.  
+In particolare indica alla **ALU**:
+- quale operazione deve essere eseguita;
+- da quali **registri** leggere i dati;
+- in quale **registro** scrivere il risultato.
+
+##### 3. Execute
+L’istruzione viene eseguita (*execute*).  
+L’operazione può essere:
+- un calcolo aritmetico o logico eseguito dalla **ALU**;
+- un accesso alla **memoria**;
+- un’operazione di **input/output**.
+
+Se l’istruzione è un **salto** (*jump* o *branch*), il valore dell’**Instruction Pointer** viene modificato, permettendo al programma di eseguire scelte e cicli.
 
 Il processore non fa altro che ripetere questa sequenza all'infinito.
 
@@ -100,11 +132,18 @@ Per poter avere queste caratteristiche la RAM è molto costosa e quindi se ne ut
 
 I principali parametri con cui possiamo valutare una memoria RAM sono:
 
-- la capienza misurata in byte poichè la memoria è formata da una lunghissima sequenza di byte e ogni byte è numerato per potervi accedere; quando la CPU vuole accedere ad una certa posizione della RAM comunica l'indirizzo per mezzo del BUS indirizzi e la memoria predisporrà l'accesso (lettura o scrittura) al byte indicato; attualmente le memorie di un PC contengono normalmente 8 o 16 GB;
-- la frequenza del clock della memoria; anche la memoria ha un suo clock che scandisce il tempo per sincronizzare le operazioni da fare e la frequenza di clock ci indica indirettamente il tempo di accesso alla memoria.
-- la latenza ovvero il tempo che ci mette la RAM ad accedere effettivamente ad un certo byte una volta conosciuto l'indirizzo, questo tempo è espresso in numero di cicli di clock (lo si trova indicato con i termini "latency" o "CAS" Column Access Strobe, ha solitamente un valore variabile tra circa 10 e 20); insieme alla frequenza di clock indica l'effettiva velocità della RAM (attenti se volete comprare una memoria RAM, potreste trovare memorie con clock più alti ma anche latenze più alte che quindi non sono di fatto migliori di altre, infatti la latnza reale in secondi o nanosecondi è il prodotto tra CAS e clock, puoi approfondire [qui](https://prosetup.it/come-funziona/frequenza-e-latenza-delle-memorie-ram-un-po-di-chiarezza/#:~:text=La%20latenza%20di%20una%20RAM,CAS%2C%20minore%20sar%C3%A0%20la%20latenza)).
+- la **capienza** misurata in byte poichè la memoria è formata da una lunghissima sequenza di byte e ogni byte è numerato per potervi accedere; quando la CPU vuole accedere ad una certa posizione della RAM comunica l'indirizzo per mezzo del BUS indirizzi e la memoria predisporrà l'accesso (lettura o scrittura) al byte indicato; attualmente le memorie di un PC contengono normalmente dagli 8 ai 32 GB;
+  
+- la **frequenza** del clock della memoria; anche la memoria ha un suo clock che scandisce il tempo per sincronizzare le operazioni da fare. La frequenza della RAM, misurata in Hz (o i suoi multipli MHz e GHz), indica in pratica quante operazioni di lettura o scrittura la RAM può compiere in un secondo. Maggiore è la frequenza, più velocemente la RAM può scambiare dati con la CPU. Una RAM con alta frequenza è in grado di trasferire informazioni a una velocità maggiore, migliorando quindi le performance nei carichi di lavoro intensivi, come giochi o applicazioni che richiedono molta memoria.
 
-Anche per le RAM attualmente le frequenze del clock sono dell'ordine dei GHz anche se normalmente sono più basse di quelle del processore, inoltre anche le memorie possono impiegare parecchi cicli di clock per effettuare una lettura o una scrittura. Le memorie RAM risultano quindi normalmente più lente del processore e questo è un problema poichè la CPU deve accedervi continuamente. Per questo motivo i processori sono dotati di piccole memorie RAM interne chiamate ***cache*** (dal francese nascosto, pronunciato normalmente all'inglese ˈkæʃ/). La cache è più veloce di una normale RAM per la memoria centrale ma è anche più costosa (se no si potrebbe fare tutta la RAM così, c'è anche da considerare che per motivi tecnologici una memoria piccola ha tempi di accesso più rapidi, ma i motivi sono complicati). La sua velocità permette al processore di mantenervi i dati (o operazioni) a cui deve accedere più di frequente e farlo molto velocemente. Spesso nei processori sono presenti due o addirittura tre livelli di cache, cioè diverse memorie progressivamente più veloci ma anche più piccole. Se si cerca tra le specifiche dei processori questi livelli sono spesso indicati come L2 e L3 (Nel processore AMD Ryzen 7 5800X si ha L2 di 4MB e L3 di 32MB) 
+- la **latenza** ovvero il ritardo che intercorre tra la richiesta di un dato dalla CPU e il momento in cui il dato viene effettivamente fornito dalla RAM. Questo tempo è espresso in numero di cicli di clock (lo si trova indicato con i termini "latency" o "CAS" Column Access Strobe, ha solitamente un valore variabile tra circa 10 e 20); una latenza bassa significa che la RAM può iniziare a restituire i dati richiesti in modo rapido ed è molto utile in applicazioni che richiedono frequenti accessi a piccole quantità di dati.
+
+Quando si acquista una memoria RAM è importante scegliere la memoria sulla base delle proprie esigenze e al proprio portafogli. L'elemento più importante è sicuramente la capienza ma anche la rapidità della memoria è imporante sebbene sia più difficile da valutare. Frequenza e latenza insieme indicano l'effettiva velocità della RAM ma è possibile trovare memorie con clock più alti ma anche latenze più alte che quindi non sono di fatto migliori di altre, infatti la latnza reale in secondi o nanosecondi è il prodotto tra CAS e clock, puoi approfondire [qui](https://prosetup.it/come-funziona/frequenza-e-latenza-delle-memorie-ram-un-po-di-chiarezza/#:~:text=La%20latenza%20di%20una%20RAM,CAS%2C%20minore%20sar%C3%A0%20la%20latenza)).
+
+
+#### Memorie Cache
+
+Anche per le RAM attualmente le frequenze del clock sono dell'ordine dei GHz anche se normalmente sono più basse di quelle del processore o comunque non sono le stesse, inoltre le memorie possono impiegare parecchi cicli di clock per effettuare una lettura o una scrittura (latenza). Siccome la CPU deve continuamente leggere e scrivere sulla RAM tutto questo rappresenta un rallentamento. Per questo motivo i processori sono dotati di piccole memorie RAM interne chiamate ***cache*** (dal francese *nascosto*, pronunciato normalmente all'inglese ˈkæʃ/). La cache è più veloce di una normale RAM per la memoria centrale, in particolare dal punto di vista delle latenze, ma è anche più costosa (se no si potrebbe fare tutta la RAM così, c'è anche da considerare che per motivi tecnologici una memoria piccola ha tempi di accesso più rapidi, ma i motivi sono complicati). La sua velocità permette al processore di mantenervi i dati (o operazioni) a cui deve accedere più di frequente e farlo molto velocemente. Spesso nei processori sono presenti due o addirittura tre livelli di cache, cioè diverse memorie progressivamente più veloci ma anche più piccole. Se si cerca tra le specifiche dei processori questi livelli sono spesso indicati come L2 e L3 (Nel processore AMD Ryzen 7 5800X si ha L2 di 4MB e L3 di 32MB) 
 
 
 ### BUS di sistema
