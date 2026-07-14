@@ -19,20 +19,48 @@ export default defineConfig({
             { label: 'Architettura dei calcolatori', link: '/architettura/' },
             { label: 'Sistemi Operativi', link: '/sistemi-operativi/' },
             { label: 'Complessità computazionale', link: '/complessita/' },
+            { label: 'Copyright e licenze', link: '/copyright/' },
           ]
         },
         {
           label: 'Programmazione in C',
-          autogenerate: { directory: 'C' }
+          link: '/c/programmazione-in-c/'
+        },
+        {
+          label: 'Programmazione in Python',
+          link: '/python/programmazione-in-python/'
         },
         {
           label: 'Reti di Calcolatori',
-          autogenerate: { directory: 'reti' }
-        },
-        {
-          label: 'Informazioni',
           items: [
-            { label: 'Copyright e Licenza', link: '/copyright/' }
+            { label: 'Reti di calcolatori', link: '/reti/reti/' },
+            {
+              label: 'Modello ISO/OSI',
+              items: [
+                { label: 'ISO/OSI', link: '/reti/iso-osi/iso-osi/' },
+                { label: 'Livello 1 - Fisico', link: '/reti/iso-osi/livello1/' },
+                { label: 'Livello 2 - Collegamento', link: '/reti/iso-osi/livello2/' },
+                {
+                  label: 'Livello 3 - Rete',
+                  items: [
+                    { label: 'Spiegazione', link: '/reti/iso-osi/livello3/' },
+                    { label: 'Esercizi Subnetting', link: '/reti/iso-osi/esercizi-subnetting/' }
+                  ]
+                },
+                { label: 'Livello 4 - Trasporto', link: '/reti/iso-osi/livello4/' },
+                { label: 'Livello 5 - Sessione', link: '/reti/iso-osi/livello5/' },
+                { label: 'Livello 6 - Presentazione', link: '/reti/iso-osi/livello6/' },
+                { label: 'Livello 7 - Applicazione', link: '/reti/iso-osi/livello7/' }
+              ]
+            },
+            {
+              label: 'Crittografia',
+              items: [
+                { label: 'Crittografia', link: '/reti/crittografia/crittografia/' },
+                { label: 'Storia della Crittografia', link: '/reti/crittografia/crittografia-storia/' },
+                { label: 'Crittografia Moderna', link: '/reti/crittografia/crittografia-moderna/' }
+              ]
+            }
           ]
         }
       ],

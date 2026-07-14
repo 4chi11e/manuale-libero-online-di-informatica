@@ -1,15 +1,9 @@
 ---
-title: Diritto d'autore
+title: Copyright e licenze
 ---
 
-# Il diritto d'autore
-{: .no_toc }
+# Copyright e licenze
 
-## Indice
-{: .no_toc .text-delta }
-
-- TOC
-{:toc}
 
 ## Definizione
 

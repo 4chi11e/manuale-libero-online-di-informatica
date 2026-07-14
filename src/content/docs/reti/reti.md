@@ -1,5 +1,7 @@
 ---
-title: Reti
+title: Reti di calcolatori
+sidebar:
+  order: 1
 ---
 
 # Rete di computer
