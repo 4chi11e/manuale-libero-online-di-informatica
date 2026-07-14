@@ -1,0 +1,6 @@
+{
+  "rubyLsp.rubyVersionManager": "none",
+  "[ruby]": {
+    "editor.defaultFormatter": "Shopify.ruby-lsp"
+  }
+}
