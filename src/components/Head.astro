@@ -116,8 +116,12 @@ import Default from "@astrojs/starlight/components/Head.astro";
         const target = event.currentTarget as HTMLElement;
         const targetId = target.getAttribute('aprire');
         if (targetId) {
-          const modal = document.querySelector(targetId);
+          const modal = document.querySelector(targetId) as HTMLElement;
           if (modal) {
+            // Spostiamo il modal sotto il body per uscire dal contesto isolato (stacking context) di Starlight
+            if (modal.parentElement !== document.body) {
+              document.body.appendChild(modal);
+            }
             modal.classList.add('modal--visibile');
           }
         }

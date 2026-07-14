@@ -42,6 +42,7 @@ li {
   max-width: 100%;
   width: 40%;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
 }
 
 .thumbnail img {
@@ -60,56 +61,65 @@ li {
   line-height: 1.4;
 }
 
-.thumbnail--centrato {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  width: auto;
-  max-width: 80%;
+/* Classi per il posizionamento e allineamento (float) */
+.tright, .float-right {
+  float: right !important;
+  margin-inline-start: 1.5rem !important;
+  margin-block-end: 1rem !important;
+  clear: right;
 }
 
-.thumbnail--w100 {
-  display: block;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+.tleft, .float-left {
+  float: left !important;
+  margin-inline-end: 1.5rem !important;
+  margin-block-end: 1rem !important;
+  clear: left;
 }
 
-.thumbnail--50 {
-  width: 50%;
+.clear-both {
+  clear: both !important;
+}
+
+/* Modificatori di dimensione per le miniature */
+.thumbnail--25 {
+  width: 25% !important;
 }
 
 .thumbnail--33 {
-  width: 33%;
+  width: 33% !important;
 }
 
-.thumbnail--25 {
-  width: 25%;
+.thumbnail--50 {
+  width: 50% !important;
 }
 
-/* Allineamento Float */
-.tright {
-  float: right;
-  clear: right;
-  margin-left: 1.5rem;
-  margin-bottom: 1rem;
+.thumbnail--75 {
+  width: 75% !important;
 }
 
-.tleft {
-  float: left;
-  clear: left;
-  margin-right: 1.5rem;
-  margin-bottom: 1rem;
+.thumbnail--w100 {
+  width: 100% !important;
+  display: block !important;
+  float: none !important;
+  margin: 1.5rem 0 !important;
 }
 
+.thumbnail--centrato {
+  width: auto !important;
+  max-width: 80% !important;
+  display: block !important;
+  margin: 1.5rem auto !important;
+  float: none !important;
+  text-align: center;
+}
+
+/* Media query per la responsività delle miniature su mobile */
 @media (max-width: 768px) {
-  .thumbnail {
+  .thumbnail, .thumbnail--33, .thumbnail--50, .thumbnail--75, .thumbnail--25 {
     width: 100% !important;
     float: none !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
-    margin-bottom: 1.5rem !important;
   }
 }
 
@@ -338,10 +348,151 @@ li {
     top: var(--sl-nav-height) !important;
     height: calc(100vh - var(--sl-nav-height)) !important;
     width: 100% !important;
+    padding-top: 1.5rem !important;
   }
 
   /* Allinea a destra le icone social e la scelta del tema nell'header */
   .right-group {
     justify-content: flex-end !important;
+  }
+}
+
+/* Stili per la galleria immagini e i popup modali */
+.modal {
+  display: none; /* Nascosto di default */
+  position: fixed;
+  z-index: 9999; /* Superiore a tutto lo schermo (spostato sotto body via JS) */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9); /* Sfondo oscurato semitrasparente */
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.modal--visibile {
+  display: flex !important; /* Mostra come flex per centrare verticalmente e orizzontalmente */
+}
+
+.modal__content {
+  position: relative;
+  background-color: var(--sl-color-background);
+  margin: auto;
+  padding: 24px;
+  border: 1px solid var(--sl-color-gray-5);
+  width: 95%;
+  max-width: 95vw;
+  max-height: 95vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.75);
+  animation: modalzoom 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: var(--sl-color-text);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.modal__content img {
+  max-width: 100%;
+  max-height: 78vh;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 16px auto;
+  border-radius: 4px;
+  border: 1px solid var(--sl-color-gray-5);
+}
+
+.modal__content p {
+  margin: 0;
+  font-size: 0.95em;
+  color: var(--sl-color-gray-3);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Pulsante per chiudere il modal */
+.modal__closer {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  color: var(--sl-color-gray-3);
+  font-size: 32px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+  line-height: 1;
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+}
+
+.modal__closer:hover {
+  color: #fff;
+  background-color: var(--sl-color-accent);
+}
+
+@keyframes modalzoom {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Rende cliccabili le thumbnail */
+.thumbnail img.modal__opener {
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.thumbnail img.modal__opener:hover {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+/* Stili per contenitori di doppie immagini affiancate nei modal */
+.modal__content__img-container--double {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.modal__content__img-container--double img {
+  max-width: 48% !important; /* Forza ciascuna immagine a prendere al massimo metà dello spazio */
+  max-height: 75vh !important;
+  object-fit: contain;
+  margin: 0 !important;
+}
+
+/* Su schermi piccoli o verticali, impila le immagini l'una sull'altra per usabilità */
+@media (max-width: 60rem) {
+  .modal__content__img-container--double {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .modal__content__img-container--double img {
+    max-width: 100% !important;
+    max-height: 40vh !important;
   }
 }
