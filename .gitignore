@@ -7,19 +7,7 @@ node_modules/
 # Astro temp files and cache
 .astro/
 
-# VS Code / Ruby LSP / Editor caches
-.ruby-lsp/
+# Editor and OS files
 .vscode/
 .DS_Store
 Thumbs.db
-
-# Old Jekyll leftovers
-_site/
-.Ta-cache/
-.jekyll-cache/
-.jekyll-metadata/
-_posts/
-_site.zip
-mie-prove.html
-prove.html
-docs/JTD-Originali

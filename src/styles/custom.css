@@ -28,11 +28,33 @@
 }
 
 /* Stili Generali di Layout e Tipografia */
-p,
-li {
+p {
   text-align: justify;
   line-height: 1.6;
+  text-wrap: pretty;
 }
+
+li {
+  text-align: left;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* Protezione formattazione formule inline KaTeX da a capo sgradevoli */
+.katex {
+  white-space: nowrap;
+}
+
+.katex-display {
+  white-space: normal;
+}
+
+.math-no-break {
+  white-space: nowrap !important;
+  display: inline-block !important;
+}
+
+
 
 /* Classi di Compatibilità per Immagini e Thumbnail */
 .thumbnail {
@@ -525,7 +547,7 @@ li {
 }
 
 /* Nasconde il pannello del titolo nativo di Starlight ("Home") solo sulla homepage */
-.is-homepage main > .content-panel:first-of-type {
+.is-homepage main>.content-panel:first-of-type {
   display: none !important;
 }
 
@@ -534,7 +556,8 @@ li {
   text-align: center !important;
   margin: 1.5rem auto !important;
   padding: 0.5rem 0;
-  overflow-x: auto; /* Aggiunge scrollbar orizzontale su schermi stretti se la formula è molto lunga */
+  overflow-x: auto;
+  /* Aggiunge scrollbar orizzontale su schermi stretti se la formula è molto lunga */
   overflow-y: hidden;
   max-width: 100%;
 }

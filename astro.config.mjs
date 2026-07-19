@@ -71,6 +71,15 @@ export default defineConfig({
               ]
             }
           ]
+        },
+        {
+          label: 'Machine Learning e Reti Neurali',
+          items: [
+            { label: '1. Introduzione e Dati', link: '/machine-learning/introduzione-dati/' },
+            { label: '2. Regressione e Classificazione', link: '/machine-learning/regressione-classificazione/' },
+            { label: '3. Il Percettore e Reti Neurali', link: '/machine-learning/percettore-reti-neurali/' },
+            { label: '4. Addestramento e Valutazione', link: '/machine-learning/addestramento-valutazione/' }
+          ]
         }
       ],
       components: {

@@ -3,9 +3,80 @@ import Default from "@astrojs/starlight/components/Head.astro";
 ---
 <Default {...Astro.props} />
 
+<script is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="window.triggerRenderMath && window.triggerRenderMath()"></script>
+
 <script>
+  // Funzione per unire parentesi e punteggiatura adiacenti alle formule inline evitando a capo sgradevoli
+  function wrapInlineMathPunctuation() {
+    const katexNodes = document.querySelectorAll('.katex:not(.katex-display)');
+    katexNodes.forEach(katex => {
+      const parent = katex.parentNode as HTMLElement | null;
+      if (!parent || parent.classList.contains('math-no-break')) return;
+
+      const prev = katex.previousSibling;
+      const next = katex.nextSibling;
+
+      let prevMatchText = '';
+      let nextMatchText = '';
+
+      if (prev && prev.nodeType === Node.TEXT_NODE && prev.nodeValue) {
+        const match = prev.nodeValue.match(/([\(\[\{]\s*)$/);
+        if (match) {
+          prevMatchText = match[1];
+        }
+      }
+
+      if (next && next.nodeType === Node.TEXT_NODE && next.nodeValue) {
+        const match = next.nodeValue.match(/^(\s*[\)\]\}:,\.]+)/);
+        if (match) {
+          nextMatchText = match[1];
+        }
+      }
+
+      if (prevMatchText || nextMatchText) {
+        const wrapper = document.createElement('span');
+        wrapper.className = 'math-no-break';
+
+        if (prevMatchText && prev && prev.nodeValue) {
+          prev.nodeValue = prev.nodeValue.slice(0, -prevMatchText.length);
+          wrapper.appendChild(document.createTextNode(prevMatchText));
+        }
+
+        parent.insertBefore(wrapper, katex);
+        wrapper.appendChild(katex);
+
+        if (nextMatchText && next && next.nodeValue) {
+          next.nodeValue = next.nodeValue.slice(nextMatchText.length);
+          wrapper.appendChild(document.createTextNode(nextMatchText));
+        }
+      }
+    });
+  }
+
+  // Funzione per il rendering dinamico delle formule matematiche KaTeX (anche nei blocchi HTML come le soluzioni)
+  function renderMath() {
+    if (typeof (window as any).renderMathInElement === 'function') {
+      (window as any).renderMathInElement(document.body, {
+        delimiters: [
+          {left: '$$', right: '$$', display: true},
+          {left: '$', right: '$', display: false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ],
+        throwOnError: false
+      });
+    }
+    wrapInlineMathPunctuation();
+    setTimeout(wrapInlineMathPunctuation, 50);
+  }
+
+  (window as any).triggerRenderMath = renderMath;
+
+
   // Script globale per gestire le soluzioni collassabili (subnetting ed esercizi)
   function setupCollapsibles() {
+    renderMath();
     const containers = document.querySelectorAll('.soluzione-container');
     containers.forEach(container => {
       const header = container.querySelector('.soluzione-header, .soluzione-toggler');
@@ -19,6 +90,9 @@ import Default from "@astrojs/starlight/components/Head.astro";
       header.addEventListener('click', () => {
         const isVisible = content.classList.toggle('soluzione__visibile');
         content.classList.toggle('visible', isVisible);
+        if (isVisible) {
+          renderMath();
+        }
         
         if (icon) {
           icon.textContent = isVisible ? '▲' : '▼';
@@ -233,11 +307,19 @@ import Default from "@astrojs/starlight/components/Head.astro";
   setupCryptoTool();
   setupModals();
   setupSidebarGroupLinks();
+  renderMath();
+
   document.addEventListener('astro:page-load', () => {
     detectHomepage();
     setupCollapsibles();
     setupCryptoTool();
     setupModals();
     setupSidebarGroupLinks();
+    renderMath();
+  });
+
+  // Se i file JS CDN caricano asincronamente
+  window.addEventListener('load', () => {
+    renderMath();
   });
 </script>
