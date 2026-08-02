@@ -591,3 +591,178 @@ summary:has(a.group-link-header[aria-current='page']) a.group-link-header {
   font-weight: normal !important;
   color: inherit !important;
 }
+
+/* ==========================================
+   STILI DI STAMPA (PRINT MEDIA QUERY)
+   ========================================== */
+@media print {
+  /* Forzatura del tema chiaro (colori adatti alla carta e risparmio inchiostro) */
+  :root {
+    --sl-color-background: #ffffff !important;
+    --sl-color-text: #000000 !important;
+    --sl-color-accent: #000000 !important;
+    --sl-color-accent-low: #f8f9fa !important;
+    --sl-color-accent-high: #000000 !important;
+    --sl-color-gray-1: #000000 !important;
+    --sl-color-gray-2: #111111 !important;
+    --sl-color-gray-3: #333333 !important;
+    --sl-color-gray-4: #555555 !important;
+    --sl-color-gray-5: #dddddd !important;
+    --sl-color-gray-6: #f0f0f0 !important;
+  }
+
+  /* Nascondi l'intestazione e il piè di pagina predefiniti del browser (URL, titolo, data) */
+  @page {
+    margin: 0 !important;
+  }
+
+  /* Nascondi elementi di navigazione, barre laterali, header, footer e controlli interattivi */
+  header,
+  .header,
+  aside,
+  footer,
+  .sidebar,
+  .right-sidebar,
+  #starlight__sidebar,
+  .pagination-links,
+  .mobile-preferences,
+  button,
+  .theme-toggle,
+  .soluzione-toggler,
+  #starlight__mobile-toc,
+  .print-hidden {
+    display: none !important;
+  }
+
+  /* Rimuovi vincoli di larghezza per usare l'intero foglio */
+  :root {
+    --sl-content-width: 100% !important;
+    --sl-sidebar-width: 0rem !important;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 10pt !important;
+    line-height: 1.45 !important;
+    margin: 0.4cm !important; /* Margine minimo per lasciare il controllo alla finestra di stampa del browser */
+  }
+
+  /* Adatta i contenitori principali del layout Starlight alla stampa a piena pagina */
+  .page, 
+  .main-frame,
+  .main-pane,
+  main,
+  .content-panel,
+  .content-panel > div {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Testo scuro per la stampa. Nota: NON forziamo font-size su span per non rompere la formattazione KaTeX (frazioni, esponenti, indici) */
+  p, li, td, th, a {
+    color: #000000 !important;
+  }
+
+  /* Dimensioni e spaziature titoli ottimizzate per mantenere la corretta gerarchia (usando em rispetto ai 10pt del body) */
+  h1 {
+    font-size: 1.8em !important;
+    margin-top: 0 !important;
+    margin-bottom: 8pt !important;
+  }
+
+  h2 {
+    font-size: 1.4em !important;
+    margin-top: 14pt !important;
+    margin-bottom: 6pt !important;
+  }
+
+  h3 {
+    font-size: 1.25em !important;
+    margin-top: 12pt !important;
+    margin-bottom: 5pt !important;
+  }
+
+  h4 {
+    font-size: 1.1em !important;
+    margin-top: 10pt !important;
+    margin-bottom: 4pt !important;
+  }
+
+  h5, h6 {
+    font-size: 1em !important;
+    margin-top: 10pt !important;
+    margin-bottom: 4pt !important;
+  }
+
+  /* Impedisci interruzioni di pagina subito dopo i titoli */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  img, table, pre, blockquote, .soluzione-container, .thumbnail, .katex-display {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Gestione delle miniature per la stampa */
+  .thumbnail {
+    border: 1px solid #cccccc !important;
+    background-color: #ffffff !important;
+    width: 45% !important;
+  }
+
+  /* Estetica blocchi di codice pulita (sfondo grigio chiaro, testo scuro) */
+  pre, code, kbd, samp, var, tt {
+    background-color: #f8f9fa !important;
+    color: #111111 !important;
+    border: 1px solid #e1e4e6 !important;
+    font-size: 8.5pt !important;
+    font-family: var(--sl-font-mono) !important;
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+  }
+
+  /* Rendi a contrasto pieno le scritte dentro ai blocchi di codice, preservando però la formattazione di KaTeX */
+  pre code span {
+    color: inherit !important;
+    background-color: transparent !important;
+  }
+
+  /* Link semplici senza sottolineature colorate o URL stampati */
+  a {
+    color: #000000 !important;
+    text-decoration: underline !important;
+  }
+  
+  a::after {
+    content: "" !important;
+  }
+
+  /* Mostra i contenitori delle risposte solo se l'utente le ha espanse a schermo */
+  .soluzione-container {
+    display: none !important;
+  }
+
+  .soluzione-container:has(.soluzione__visibile) {
+    display: block !important;
+    border: 1px dashed #777777 !important;
+    background-color: #fafafa !important;
+    padding: 0 !important;
+    margin: 12px 0 !important;
+  }
+
+  .soluzione {
+    border-top: none !important;
+  }
+
+  .soluzione__visibile {
+    height: auto !important;
+    padding: 10px !important;
+    background-color: transparent !important;
+  }
+}
