@@ -135,7 +135,7 @@ L'apprendimento è terminato con successo!
 
 ---
 
-## 📝 Materiale per la Verifica scritta (Unità 3)
+## 📝 Esercizi
 
 ### Esercizi Teorici e Pratici
 

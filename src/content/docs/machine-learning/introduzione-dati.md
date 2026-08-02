@@ -165,7 +165,7 @@ print(f"Test set: {len(X_test)} righe")
 
 ---
 
-## 📝 Materiale per la Verifica scritta (Unità 1)
+## 📝 Esercizi
 
 ### Domande Teoriche
 

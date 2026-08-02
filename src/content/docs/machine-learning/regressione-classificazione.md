@@ -138,7 +138,7 @@ La matrice ha questa struttura:
 
 ---
 
-## 📝 Materiale per la Verifica scritta (Unità 2)
+## 📝 Esercizi
 
 ### Domande Teoriche e di Calcolo
 

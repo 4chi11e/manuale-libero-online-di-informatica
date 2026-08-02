@@ -110,7 +110,7 @@ plt.show()
 
 ---
 
-## 📝 Materiale per la Verifica scritta (Unità 4)
+## 📝 Esercizi
 
 ### Domande Teoriche
 
