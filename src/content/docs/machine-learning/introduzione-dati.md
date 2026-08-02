@@ -90,7 +90,14 @@ Quando apri il file per la prima volta:
 
 ### Esecuzione del Laboratorio
 
+:::tip[Download Notebook dell'Esercitazione]
+Puoi scaricare direttamente il file Jupyter Notebook (`.ipynb`) già pronto, contenente tutte le spiegazioni e il codice eseguibile di questo laboratorio:  
+<a href="/manuale-libero-online-di-informatica/assets/codice/python/unita1_introduzione_dati.ipynb" download="unita1_introduzione_dati.ipynb">📥 <strong>Scarica unita1_introduzione_dati.ipynb</strong></a>
+:::
+
+
 Nei Jupyter Notebook, il codice è diviso in **Celle**. Puoi inserire il codice di ogni passaggio in una cella separata. Per eseguire il codice di una cella, clicca sull'icona **Play** a sinistra della cella, oppure premi la combinazione di tasti **`Shift + Invio`**.
+
 
 ### Passaggio 1: Caricamento e Ispezione dei Dati
 Creiamo un piccolo dataset fittizio con dati scolastici di alcuni studenti.
