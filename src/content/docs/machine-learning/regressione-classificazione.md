@@ -13,7 +13,9 @@ Il modello più semplice e intuitivo per fare regressione è la **Regressione Li
 
 L'equazione matematica di una retta con una sola feature è:
 
-$$y = w \cdot x + b$$
+$$
+y = w \cdot x + b
+$$
 
 Dove:
 *   $w$ (in matematica chiamato coefficiente angolare $m$) rappresenta il **peso** (weight) assegnato alla feature. Determina la pendenza della retta.
@@ -22,7 +24,9 @@ Dove:
 ### La Funzione di Costo: Mean Squared Error (MSE)
 Come fa l'algoritmo a capire qual è la "retta migliore"? Cerca di minimizzare l'errore commesso. Per misurare questo errore, si calcola l'**Errore Quadratico Medio (Mean Squared Error - MSE)**:
 
-$$MSE = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2$$
+$$
+MSE = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2
+$$
 
 Dove:
 *   $N$ è il numero totale di campioni nel dataset.
@@ -39,7 +43,9 @@ Sebbene contenga il termine "regressione" nel nome, la **Regressione Logistica**
 Se usassimo la regressione lineare per la classificazione, potremmo ottenere valori di output esterni all'intervallo $[0, 1]$ (ad esempio $-0.5$ o $1.8$), che non hanno senso come probabilità.
 La regressione logistica risolve questo problema applicando all'output lineare una funzione matematica chiamata **funzione Sigmoide** (o logistica):
 
-$$\sigma(z) = \frac{1}{1 + e^{-z}}$$
+$$
+\sigma(z) = \frac{1}{1 + e^{-z}}
+$$
 
 Dove $z = w \cdot x + b$. La curva sigmoidea ha una forma a "S" che mappa qualsiasi valore reale in un intervallo compreso strettamente tra $0$ e $1$:
 
@@ -50,7 +56,9 @@ Dove $z = w \cdot x + b$. La curva sigmoidea ha una forma a "S" che mappa qualsi
 ### Soglia Decisionale
 Il valore restituito dalla sigmoide rappresenta la **probabilità** che il campione appartenga alla classe $1$. Per prendere la decisione finale (classe $0$ o $1$), si definisce una soglia decisionale (di solito $0.5$):
 
-$$\text{Classe prevista} = \begin{cases} 1 & \text{se } \sigma(z) \ge 0.5 \\ 0 & \text{se } \sigma(z) < 0.5 \end{cases}$$
+$$
+\text{Classe prevista} = \begin{cases} 1 & \text{se } \sigma(z) \ge 0.5 \\ 0 & \text{se } \sigma(z) < 0.5 \end{cases}
+$$
 
 ---
 
@@ -166,7 +174,9 @@ Per quale motivo per i problemi di classificazione binaria si preferisce la Regr
     <p class="soluzione-toggler" totoggle="#sol-unita2-teoria2">Visualizza la risposta corretta</p>
     <div class="soluzione" id="sol-unita2-teoria2">
         <p><strong>Risposta:</strong> La regressione lineare può produrre in output qualsiasi valore numerico reale (anche negativo o superiore a $1$), il che rende impossibile interpretare l'output come una probabilità di appartenenza a una classe binaria ($0$ o $1$). La regressione logistica risolve questo problema introducendo la funzione <strong>Sigmoide</strong> (o logistica):
-        $$\sigma(z) = \frac{1}{1 + e^{-z}}$$
+        $$
+        \sigma(z) = \frac{1}{1 + e^{-z}}
+        $$
         Questa funzione "schiaccia" qualsiasi valore di input $z$ in un intervallo compreso strettamente tra $0$ e $1$, permettendo di interpretare il risultato come la probabilità che il dato appartenga alla classe target.</p>
     </div>
 </div>
@@ -183,7 +193,9 @@ Un modello diagnostico è stato testato su $100$ pazienti per rilevare una patol
 
 *   **A)** Identifica il numero di Veri Negativi (TN), Falsi Positivi (FP), Falsi Negativi (FN) e Veri Positivi (VP).
 *   **B)** Calcola l'**Accuratezza** del modello, definita come la frazione di previsioni corrette sul totale dei casi:
-$$\text{Accuratezza} = \frac{VP + TN}{VP + TN + FP + FN}$$
+$$
+\text{Accuratezza} = \frac{VP + TN}{VP + TN + FP + FN}
+$$
 *   **C)** Se fossi un medico, saresti più preoccupato dei $5$ falsi positivi o degli $8$ falsi negativi? Giustifica la risposta basandoti sul significato clinico.
 
 <div class="soluzione-container">
@@ -200,7 +212,9 @@ $$\text{Accuratezza} = \frac{VP + TN}{VP + TN + FP + FN}$$
                 </ul>
             </li>
             <li><strong>B)</strong> Calcoliamo l'accuratezza:
-                $$\text{Accuratezza} = \frac{12 + 75}{12 + 75 + 5 + 8} = \frac{87}{100} = 0.87 \text{ (ovvero 87.0\%)}$$
+                $$
+                \text{Accuratezza} = \frac{12 + 75}{12 + 75 + 5 + 8} = \frac{87}{100} = 0.87 \text{ (ovvero 87.0\%)}
+                $$
             </li>
             <li><strong>C)</strong> In campo medico, i <strong>falsi negativi (8 pazienti)</strong> sono molto più preoccupanti. Un falso negativo rappresenta un paziente effettivamente malato che il modello classifica come sano, con il rischio che non riceva le cure necessarie. Un falso positivo comporta esami di controllo aggiuntivi, ma non mette direttamente a rischio la vita del paziente per mancata diagnosi.</li>
         </ul>

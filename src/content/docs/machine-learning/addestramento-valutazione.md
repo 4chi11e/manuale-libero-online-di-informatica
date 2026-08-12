@@ -26,7 +26,9 @@ Nelle reti neurali facciamo esattamente lo stesso:
 *   Il **Gradiente** ($\nabla L$) è un vettore matematico che indica la direzione di massima salita della funzione di costo rispetto ai parametri.
 *   Per minimizzare il costo, aggiorniamo ogni peso $w$ muovendoci nella direzione **opposta** al gradiente:
 
-$$w \leftarrow w - \eta \cdot \frac{\partial L}{\partial w}$$
+$$
+w \leftarrow w - \eta \cdot \frac{\partial L}{\partial w}
+$$
 
 Dove:
 *   $\frac{\partial L}{\partial w}$ è la derivata parziale della funzione di costo rispetto al peso $w$. Indica la pendenza della curva di errore.
@@ -48,7 +50,9 @@ La **Retropropagazione** (Backpropagation) risolve questo problema applicando in
 
 L'algoritmo calcola i gradienti partendo dall'errore sull'output e li propaga a ritroso strato dopo strato:
 
-$$\frac{\partial L}{\partial w_{nascosto}} = \frac{\partial L}{\partial \text{Output}} \cdot \frac{\partial \text{Output}}{\partial \text{Nascosto}} \cdot \frac{\partial \text{Nascosto}}{\partial w_{nascosto}}$$
+$$
+\frac{\partial L}{\partial w_{nascosto}} = \frac{\partial L}{\partial \text{Output}} \cdot \frac{\partial \text{Output}}{\partial \text{Nascosto}} \cdot \frac{\partial \text{Nascosto}}{\partial w_{nascosto}}
+$$
 
 Grazie a questo metodo, la rete calcola in modo estremamente efficiente la derivata dell'errore rispetto a ciascun singolo peso e bias presente nel modello.
 

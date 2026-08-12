@@ -11,17 +11,23 @@ Benvenuti nel mondo dell'**Intelligenza Artificiale**. In questa prima unità ca
 
 Nella **programmazione tradizionale (classica)**, il programmatore scrive le regole (gli algoritmi) e le fornisce al computer insieme ai dati di partenza. Il computer esegue queste regole passo dopo passo e produce un risultato.
 
-$$\text{Dati} + \text{Regole} \longrightarrow \text{Risultati}$$
+$$
+\text{Dati} + \text{Regole} \longrightarrow \text{Risultati}
+$$
 
 > **Esempio**: Se vuoi calcolare l'area di un cerchio, scrivi la regola matematica $A = \pi \cdot r^2$. Fornisci il raggio (dato) e il computer calcola l'area (risultato).
 
 Nel **Machine Learning (ML)**, il processo si inverte. Spesso non conosciamo la regola matematica o logica complessa che lega i dati ai risultati (ad esempio, come distinguere la foto di un cane da quella di un gatto). Forniamo quindi al computer i dati e i risultati attesi (esempi). Sarà l'algoritmo di ML a trovare la regola (ovvero il **"modello"**).
 
-$$\text{Dati} + \text{Risultati} \longrightarrow \text{Regole (Modello)}$$
+$$
+\text{Dati} + \text{Risultati} \longrightarrow \text{Regole (Modello)}
+$$
 
 Una volta che il modello è stato addestrato, possiamo fornirgli nuovi dati di cui non conosciamo il risultato e usarlo per fare previsioni:
 
-$$\text{Nuovi Dati} + \text{Modello} \longrightarrow \text{Previsioni}$$
+$$
+\text{Nuovi Dati} + \text{Modello} \longrightarrow \text{Previsioni}
+$$
 
 ---
 

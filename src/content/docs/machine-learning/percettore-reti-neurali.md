@@ -18,16 +18,22 @@ Le reti neurali artificiali traggono ispirazione dalla struttura del cervello um
 Il modello matematico del singolo neurone artificiale riceve un vettore di input $x = [x_1, x_2, \dots, x_n]^T$ e produce un output $a$ attraverso due passaggi principali:
 
 1.  **Combinazione Lineare (Somma Pesata $z$):**
-    $$z = w_1 \cdot x_1 + w_2 \cdot x_2 + \dots + w_n \cdot x_n + b = \sum_{j=1}^{n} w_j \cdot x_j + b$$
+    $$
+    z = w_1 \cdot x_1 + w_2 \cdot x_2 + \dots + w_n \cdot x_n + b = \sum_{j=1}^{n} w_j \cdot x_j + b
+    $$
     Dove $w_j$ sono i **pesi** (weights) associati a ciascun input, e $b$ è il **bias**.
 
 2.  **Applicazione della Funzione di Attivazione $f(z)$:**
-    $$a = f(z)$$
+    $$
+    a = f(z)
+    $$
     L'output $a$ (attivazione del neurone) viene inviato come input ai neuroni successivi.
 
 Nel Percettore originale di Rosenblatt, la funzione di attivazione era una **funzione a gradino di Heaviside**:
 
-$$f(z) = \begin{cases} 1 & \text{se } z \ge 0 \\ 0 & \text{se } z < 0 \end{cases}$$
+$$
+f(z) = \begin{cases} 1 & \text{se } z \ge 0 \\ 0 & \text{se } z < 0 \end{cases}
+$$
 
 ---
 
@@ -37,9 +43,13 @@ $$f(z) = \begin{cases} 1 & \text{se } z \ge 0 \\ 0 & \text{se } z < 0 \end{cases
 Se non utilizzassimo funzioni di attivazione non lineari, l'intera rete neurale (anche con milioni di strati) si comporterebbe esattamente come un singolo modello lineare. 
 
 In matematica, la composizione di funzioni lineari è ancora una funzione lineare. Ad esempio, se abbiamo due funzioni lineari:
-$$f(x) = \alpha \cdot x + \beta \quad \text{e} \quad g(x) = \gamma \cdot x + \delta$$
+$$
+f(x) = \alpha \cdot x + \beta \quad \text{e} \quad g(x) = \gamma \cdot x + \delta
+$$
 Componendole si ottiene:
-$$f(g(x)) = \alpha(\gamma \cdot x + \delta) + \beta = (\alpha \cdot \gamma) \cdot x + (\alpha \cdot \delta + \beta)$$
+$$
+f(g(x)) = \alpha(\gamma \cdot x + \delta) + \beta = (\alpha \cdot \gamma) \cdot x + (\alpha \cdot \delta + \beta)
+$$
 La funzione risultante ha sempre la struttura lineare $A \cdot x + B$. Di conseguenza, una rete neurale lineare non potrebbe mai apprendere relazioni complesse (come curve, cerchi, o pattern complessi).
 
 ### Funzioni di Attivazione Moderne
@@ -151,14 +161,22 @@ Un neurone artificiale ha due ingressi $x_1 = 1.0$ e $x_2 = 0.5$. I pesi associa
         <p><strong>Soluzione:</strong>
         <ul>
             <li><strong>A) Calcolo di $z$:</strong>
-                $$z = w_1 \cdot x_1 + w_2 \cdot x_2 + b = 0.8 \cdot 1.0 + (-1.2) \cdot 0.5 + (-0.1)$$
-                $$z = 0.8 - 0.6 - 0.1 = 0.1$$
+                $$
+                z = w_1 \cdot x_1 + w_2 \cdot x_2 + b = 0.8 \cdot 1.0 + (-1.2) \cdot 0.5 + (-0.1)
+                $$
+                $$
+                z = 0.8 - 0.6 - 0.1 = 0.1
+                $$
             </li>
             <li><strong>B) Con funzione di attivazione ReLU:</strong>
-                $$a = \max(0, z) = \max(0, 0.1) = 0.1$$
+                $$
+                a = \max(0, z) = \max(0, 0.1) = 0.1
+                $$
             </li>
             <li><strong>C) Con funzione di attivazione Sigmoide:</strong>
-                $$a = \sigma(z) = \frac{1}{1 + e^{-0.1}} \approx \frac{1}{1 + 0.905} = \frac{1}{1.905} \approx 0.525$$
+                $$
+                a = \sigma(z) = \frac{1}{1 + e^{-0.1}} \approx \frac{1}{1 + 0.905} = \frac{1}{1.905} \approx 0.525
+                $$
             </li>
         </ul>
         </p>

@@ -527,10 +527,11 @@ Denotiamo la successione dei primi in ordine ascendente con p<sub>1</sub> , p<su
 Avremo allora: p<sub>1</sub> = 2, p<sub>2</sub> = 3, p<sub>3</sub> = 5, ...  
 E inoltre: p<sub>10</sub> = 29, p<sub>100</sub> = 541, p<sub>1000</sub> = 7979, p<sub>10000</sub> = 104709
 
-Una funzione di importanza fondamentale è la [funzione enumerativa dei numeri primi](https://it.wikipedia.org/wiki/Funzione_enumerativa_dei_primi) indicata con π(x):
+Una funzione di importanza fondamentale è la [funzione enumerativa dei numeri primi](https://it.wikipedia.org/wiki/Funzione_enumerativa_dei_primi) indicata con $\pi(x)$:
 
-$$\pi(x)$$ = numero dei primi minori o uguali a x
-{: .importante .ta-c}
+$$
+\pi(x) = \text{numero dei primi minori o uguali a } x
+$$
 
 Si ha quindi: π(10) = 4 perché ci sono 4 primi (2,3,5,7) minori di 10. \
 Alcuni valori di π(x) sono: \
@@ -547,13 +548,15 @@ Sulla [pagina](https://en.wikipedia.org/wiki/Prime-counting_function) in inglese
 
 Calcolare il valore esatto della funzione π(n) per valori così grandi di n richiede una quantità di calcoli inimmaginabile. Fortunatamente è possibile calcolare un valore approssimato di π(n) per mezzo del **Teorema dei numeri primi** il quale afferma che: 
 
-$$\pi(x) \approx \frac{x}{log(x)}$$
-{: .ta-c} 
+$$
+\pi(x) \approx \frac{x}{\log(x)}
+$$ 
 
 Tra le altre, una conseguenza del teorema dei numeri primi è che la probabilità che un numero x preso a caso sia primo è circa:
 
-$$\frac{1}{log(x)}$$
-{: .ta-c}
+$$
+\frac{1}{\log(x)}
+$$
 
 **Esempio** 
 La probabilità che un intero casuale di 1000 cifre sia primo è circa 1 / log(10<sup>1000</sup>). Tenendo presente che nel Teorema dei numeri primi il logaritmo è in base *e*: log(10<sup>1000</sup>) = 1000 · log(10) = 2302,59. Quindi, in media, troveremo un numero primo ogni 2302 interi presi a caso.
@@ -645,27 +648,27 @@ Se *d* = MCD(*a, b*) allora esistono degli interi *x* e *y* tali che *d* = *a ·
 
 #### Funzione e Teorema di Eulero
 
-La funzione di Eulero *$$\phi$$(n)* **indica il numero di elementi invertibile in *Z<sub>n</sub>***, e può essere anche interpretato come **il numero di interi minori di *n* e relativamente primi con esso.** Poiché contare le classi invertibili in ***Z***<sub>*n*</sub> è come contare i numeri tra 1 e *n*-1 che sono coprimi con *n*, si può affermare che: 
+La funzione di Eulero $\phi(n)$ **indica il numero di elementi invertibili in $\mathbb{Z}_n$**, e può essere anche interpretata come **il numero di interi minori di $n$ e relativamente primi con esso.** Poiché contare le classi invertibili in $\mathbb{Z}_n$ è come contare i numeri tra 1 e $n-1$ che sono coprimi con $n$, si può affermare che: 
 
-  se *n = p* è primo, si ha *$$\phi$$(p) = *p* - 1
-  {: .ml-4}
+  se $n = p$ è primo, si ha $\phi(p) = p - 1$
 
 Si ha inoltre: 
 
-  se *n = p<sup>r</sup>* con *p* primo, si ha *$$\phi$$(n) = $$\phi$$(p<sup>r</sup>) = p<sup>r-1</sup> · (p - 1)*  
-  se *n = p<sub>1</sub><sup>r1</sup> · ... · p<sub>k</sub><sup>rk</sup>* con *p<sub>1</sub>,..., p<sub>k</sub>* primi diversi tra loro, si ha 
-  {: .ml-4}
+  se $n = p^r$ con $p$ primo, si ha $\phi(n) = \phi(p^r) = p^{r-1} \cdot (p - 1)$  
+  se $n = p_1^{r_1} \cdot \dots \cdot p_k^{r_k}$ con $p_1, \dots, p_k$ primi diversi tra loro, si ha:
 
-  *$$\phi$$(n) = p<sub>1</sub><sup>r1-1</sup> (p<sub>1</sub>-1) ... p<sub>k</sub><sup>rk-1</sup> (p<sub>k</sub>-1)*
-  {: .ta-c}
+$$
+\phi(n) = p_1^{r_1-1} (p_1-1) \dots p_k^{r_k-1} (p_k-1)
+$$
 
 La funzione di Eulero è alla base dell’importantissimo **Teorema di Eulero**:
 
 <div class="importante" markdown="1">
   Siano *a* e *n* due numeri interi positivi primi tra loro. Allora:    
   
-  ***a<sup>$$\phi$$(n)</sup>* ≡ 1 mod(*n*)**
-  {: .ta-c .fs-5}
+$$
+a^{\phi(n)} \equiv 1 \pmod{n}
+$$
 
 </div>
 
@@ -681,11 +684,11 @@ Vediamo come si sarebbe potuto ottenere lo stesso risultato con la funzione e il
 
 - x = 13<sup>5</sup> = 3<sup>5</sup>
 
-- per il Teorema di Eulero avremo: *a* = 3; *n* = 10; $$\phi$$(10) = $$\phi$$(2 · 5) = (2 - 1) · (5 - 1) = 4 
-
-- 3<sup>*$$\phi$$*(10)</sup> = 3<sup>4</sup> ≡ 1  mod(10)  (infatti: 3<sup>4</sup> = 81 ≡ 1 mod(10)) 
-
-- x = 3<sup>5</sup> = 3<sup>4</sup> · 3 = 1<sup>4</sup> · 3 = 3 
+- per il Teorema di Eulero avremo: $a = 3$; $n = 10$; $\phi(10) = \phi(2 \cdot 5) = (2 - 1) \cdot (5 - 1) = 4$
+ 
+- $3^{\phi(10)} = 3^4 \equiv 1 \pmod{10}$ (infatti: $3^4 = 81 \equiv 1 \pmod{10}$)
+ 
+- $x = 3^5 = 3^4 \cdot 3 \equiv 1^4 \cdot 3 = 3$ 
 
 La cifra finale (il numero di unità) di 13<sup>5</sup> è quindi 3, come risultava dal calcolo diretto.
 
@@ -700,8 +703,8 @@ La cifra finale (il numero di unità) di 13<sup>5</sup> è quindi 3, come risult
 
   - 203 ≡ 3 mod(100)
   - <span class="overline">*x*</span> = <span class="overline">203<sup>327</sup></span> = <span class="overline">3</span><sup>327</sup>
-  - *a* = 3; *n* = 100; *$$\phi$$*(100) = *$$\phi$$*(2<sup>2</sup> · 5<sup>2</sup>) = 2<sup>2-1</sup> · (2 - 1) · 5<sup>2-1</sup> · (5 - 1) = 40  
-  quindi: 3<sup>40</sup> ≡ 1 mod(100)
+  - $a = 3$; $n = 100$; $\phi(100) = \phi(2^2 \cdot 5^2) = 2^{2-1} \cdot (2 - 1) \cdot 5^{2-1} \cdot (5 - 1) = 40$  
+  quindi: $3^{40} \equiv 1 \pmod{100}$
   - <span class="overline">3</span><sup>327</sup> = <span class="overline">3</span><sup>8·40+7</sup> = (<span class="overline">3</span><sup>40</sup>)<sup>8</sup> · <span class="overline">3</span><sup>7</sup> = <span class="overline">1</span> · <span class="overline">3</span><sup>7</sup> = <span class="overline">2187</span> = <span class="overline">87</span>
 </div>
 
@@ -844,7 +847,7 @@ Il funzionamento del metodo RSA si può schematizzare con i seguenti punti:
 
 - si scelgono due numeri primi, *p* e *q* ; 
 - si calcola il loro prodotto *N* = *p* · *q* , chiamato *modulo* (dato che tutta l'aritmetica seguente è in *modulo n*
-- si sceglie poi un numero *e* (chiamato *esponente pubblico*), più piccolo di *N* e primo rispetto a $$ {\phi(N) = (p-1)\cdot(q-1)} $$, dove $${\phi}$$ è la funzione di Eulero; 
+- si sceglie poi un numero *e* (chiamato *esponente pubblico*), più piccolo di *N* e primo rispetto a ${\phi(N) = (p-1)\cdot(q-1)}$, dove ${\phi}$ è la funzione di Eulero; 
 - si calcola il numero d (chiamato *esponente privato*) tale che *e* · *d* ≡ 1 mod((*p*-1)·(*q*-1))
 
 La chiave pubblica è rappresentata dalla coppia di numeri (*N, e*), mentre la chiave privata è rappresentata da (*N, d*). 
@@ -855,27 +858,39 @@ Un messaggio *m* viene cifrato attraverso l'operazione *m<sup>e</sup>* mod(*N*),
 
 La decifratura del messaggio è assicurata grazie ad alcuni teoremi matematici; infatti dal calcolo si ottiene:  
 
-$$c^d \pmod{N} = (m^e)^d \pmod{N} = m^{e·d} \pmod{N}$$  
+$$
+c^d \pmod{N} = (m^e)^d \pmod{N} = m^{e\cdot d} \pmod{N}
+$$  
 
 Ma sappiamo che  
 
-$$e·d ≡ 1 \pmod{(p-1)·(q-1)}$$  
+$$
+e\cdot d \equiv 1 \pmod{(p-1)\cdot(q-1)}
+$$  
 
 di conseguenza abbiamo che  
 
-$$ e · d ≡ 1 \pmod{p-1}, \qquad e · d ≡ 1 \pmod{q-1}$$  
+$$
+e \cdot d \equiv 1 \pmod{p-1}, \qquad e \cdot d \equiv 1 \pmod{q-1}
+$$  
 
 quindi, per il [piccolo teorema di Fermat](https://it.wikipedia.org/wiki/Piccolo_teorema_di_Fermat):  
 
-$$m^{e · d} ≡ m \pmod{p}, \qquad m^{e · d} ≡ m \pmod{q}$$  
+$$
+m^{e \cdot d} \equiv m \pmod{p}, \qquad m^{e \cdot d} \equiv m \pmod{q}
+$$  
 
 Siccome *p* e *q* sono numeri diversi e primi, possiamo applicare il [teorema cinese del resto](https://it.wikipedia.org/wiki/Teorema_cinese_del_resto), ottenendo che  
 
-$$m^{e · d} ≡ m \pmod{p · q}$$  
+$$
+m^{e \cdot d} \equiv m \pmod{p \cdot q}
+$$  
 
 e quindi che  
 
-$$c^{d} ≡ m \pmod{N}$$
+$$
+c^{d} \equiv m \pmod{N}
+$$
 
 
 #### Esempio di utilizzo (singola cifratura)
@@ -1025,19 +1040,25 @@ Abbiamo visto che per attaccare RSA è necessario effettuare la fattorizzazione 
 A prima vista, sapendo che si usano numeri primi vicini a 2<sup>128</sup>, si potrebbe pensare di costruirsi una tabella dei numeri che sono prodotto di due tali primi. Ma quanti sono?  
 In base al teorema dei numeri primi sappiamo che: 
 
-$$ {\lim\limits_{n \to 1} \frac{\pi(n)}{\frac{n}{log(n)}} = 1 \quad \implies \quad \pi(n) \approx \frac{n}{log(n)}} $$
+$$
+\lim\limits_{n \to 1} \frac{\pi(n)}{\frac{n}{\log(n)}} = 1 \quad \implies \quad \pi(n) \approx \frac{n}{\log(n)}
+$$
 
-dove *$$\pi(n)$$* rappresenta il numero di primi minori o uguali a *n*.
+dove $\pi(n)$ rappresenta il numero di primi minori o uguali a $n$.
 
-Dunque possiamo rozzamente valutare $$ {\pi(2^{128})} $$ come: 
+Dunque possiamo rozzamente valutare $\pi(2^{128})$ come:
 
-$$ {\frac{2^{128}}{log(2^{128})} \approx 3 · 10^{36}} $$
+$$
+\frac{2^{128}}{\log(2^{128})} \approx 3 \cdot 10^{36}
+$$
 
-e $$ {\pi(2^{127})} $$ come: 
+e $\pi(2^{127})$ come:
 
-  $$ {\frac{2^{127}}{log(2^{127})} \approx 2 · 10^{36}} $$ 
+  $$
+  \frac{2^{127}}{\log(2^{127})} \approx 2 \cdot 10^{36}
+  $$
   
-e quindi $$ {\pi(2^{128})-\pi(2^{127}) \approx 10^{36}} $$. Stiamo cauti nella stima e diciamo che ne abbiamo almeno 10<sup>30</sup> (in realtà potremmo anche dire con sicurezza 10<sup>35</sup> ). I prodotti di due numeri di questa forma sono allora dell’ordine di 10<sup>60</sup>. Immagazzinarli in forma binaria richiede allora $$ {2^{256} \cdot 10^{60} \approx 2^{256} \cdot 2^{199} = 2^{455}} $$ bit, quindi $$ {2^{452} \approx 10^{136} } $$ byte. Un terabyte è circa 10<sup>12</sup> byte, quindi servirebbe qualcosa come 10<sup>124</sup> terabyte. Troppi anche solo da immaginare: il diametro della Galassia in metri è 10<sup>21</sup>.
+e quindi $\pi(2^{128})-\pi(2^{127}) \approx 10^{36}$. Stiamo cauti nella stima e diciamo che ne abbiamo almeno $10^{30}$ (in realtà potremmo anche dire con sicurezza $10^{35}$). I prodotti di due numeri di questa forma sono allora dell'ordine di $10^{60}$. Immagazzinarli in forma binaria richiede allora $2^{256} \cdot 10^{60} \approx 2^{256} \cdot 2^{199} = 2^{455}$ bit, quindi $2^{452} \approx 10^{136}$ byte. Un terabyte è circa $10^{12}$ byte, quindi servirebbe qualcosa come $10^{124}$ terabyte. Troppi anche solo da immaginare: il diametro della Galassia in metri è $10^{21}$.
 
 Più sensato è pensare di fattorizzare N, ma l’unico modo conosciuto è di dividerlo successivamente per 2, 3, e così via. E’ probabile che, nel momento in cui si è ottenuta la fattorizzazione richiesta, la chiave pubblica sia cambiata da parecchi mesi , si faccia un conto approssimativo del tempo richiesto. 
 
