@@ -52,18 +52,18 @@ Per far apprendere un computer, i dati devono essere organizzati in forma tabell
 
 Il Machine Learning si divide principalmente in due grandi famiglie, a seconda della presenza o meno del target nel dataset:
 
-### 1. Apprendimento Supervisionato (Supervised Learning)
+### Apprendimento Supervisionato (Supervised Learning)
 Il dataset di partenza contiene sia le feature sia il target (conosciamo già la risposta corretta per i dati storici). Il modello impara a mappare gli input negli output. Si divide in:
 *   **Classificazione:** Il target è una categoria discreta (es. "Sì/No", "Gatto/Cane", "Email di Spam / Email Sicura").
 *   **Regressione:** Il target è un valore numerico continuo (es. il prezzo di una casa, la temperatura di domani).
 
-### 2. Apprendimento Non Supervisionato (Unsupervised Learning)
+### Apprendimento Non Supervisionato (Unsupervised Learning)
 Il dataset contiene solo le feature, senza alcun target associato. L'algoritmo deve trovare autonomamente dei pattern o raggruppare i dati simili.
 *   **Clustering:** Raggruppamento di dati in gruppi (cluster) basandosi sulla loro similarità (es. segmentazione dei clienti con abitudini d'acquisto affini).
 
 ---
 
-## 💻 Laboratorio Python (VS Code offline)
+## 1.4 Laboratorio Python (VS Code offline)
 
 Per svolgere questa esercitazione offline sul tuo computer, utilizzeremo **Visual Studio Code (VS Code)** e i **Jupyter Notebook** (documenti con estensione `.ipynb` che consentono di alternare testo scritto e celle di codice Python eseguibili singolarmente).
 
@@ -171,7 +171,7 @@ print(f"Test set: {len(X_test)} righe")
 
 ---
 
-## 📝 Esercizi
+## 1.5 Esercizi
 
 ### Domande Teoriche
 

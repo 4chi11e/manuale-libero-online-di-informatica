@@ -27,6 +27,43 @@
   --sl-color-background: #faf9ff;
 }
 
+/* Gerarchia e Stile delle Intestazioni (H2, H3, H4) */
+main h2 {
+  font-size: 1.7rem !important;
+  color: var(--sl-color-text) !important;
+  font-weight: 600 !important; /* Meno grassettoso per coerenza con il titolo principale */
+  margin-top: 2.5rem !important;
+  margin-bottom: 1rem !important;
+  border-bottom: 1px solid var(--sl-color-gray-6) !important; /* Bordo più sottile e discreto */
+  padding-bottom: 0.4rem !important;
+}
+
+main h3 {
+  font-size: 1.35rem !important;
+  color: #c5c2d9 !important; /* Grigio con una leggera sfumatura viola in dark mode */
+  font-weight: 600 !important;
+  margin-top: 2rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+main h4 {
+  font-size: 1.125rem !important;
+  color: #a8a5bd !important; /* Grigio ancora più discreto per H4 in dark mode */
+  font-weight: 600 !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+:root[data-theme='light'] main h3 {
+  color: #5a5575 !important; /* Grigio con sfumatura viola scura in light mode */
+}
+
+
+:root[data-theme='light'] main h4 {
+  color: #767194 !important; /* Grigio medio in light mode */
+}
+
+
 /* Stili Generali di Layout e Tipografia */
 p {
   text-align: justify;
@@ -569,16 +606,24 @@ li {
 }
 
 /* Quando una voce di gruppo della barra laterale è attiva */
-summary:has(a.group-link-header[aria-current='page']) {
+#starlight__sidebar summary:has(a.group-link-header[aria-current='page']) {
   background-color: var(--sl-color-text-accent) !important;
   border-radius: 0.25rem;
 }
 
-summary:has(a.group-link-header[aria-current='page']) .large,
-summary:has(a.group-link-header[aria-current='page']) .caret,
-summary:has(a.group-link-header[aria-current='page']) a.group-link-header {
+#starlight__sidebar summary:has(a.group-link-header[aria-current='page']) .large,
+#starlight__sidebar summary:has(a.group-link-header[aria-current='page']) .caret,
+#starlight__sidebar summary:has(a.group-link-header[aria-current='page']) a.group-link-header {
   color: var(--sl-color-text-invert) !important;
 }
+
+/* Rende in grassetto la voce attiva della barra laterale (sia essa link o titolo di gruppo) */
+#starlight__sidebar a[aria-current="page"],
+#starlight__sidebar summary:has(a.group-link-header[aria-current='page']) .large,
+#starlight__sidebar summary:has(a.group-link-header[aria-current='page']) a.group-link-header {
+  font-weight: bold !important;
+}
+
 
 /* Rende la riga di intestazione delle tabelle crittografiche (matrici, esempi) normale (non in grassetto) */
 .code-example table thead th,
@@ -591,6 +636,39 @@ summary:has(a.group-link-header[aria-current='page']) a.group-link-header {
   font-weight: normal !important;
   color: inherit !important;
 }
+
+/* Rende i titoli dei gruppi con sottopagine graficamente identici ai link singoli della barra laterale */
+#starlight__sidebar summary,
+#starlight__sidebar summary .large,
+#starlight__sidebar details summary {
+  font-size: var(--sl-text-sm) !important;
+  font-weight: normal !important;
+  color: var(--sl-color-gray-2) !important; /* Grigio chiaro in dark mode */
+}
+
+/* Rende tutti i link non attivi della barra laterale di grigio a contrasto più alto (gray-2) */
+#starlight__sidebar a:not([aria-current="page"]) {
+  color: var(--sl-color-gray-2) !important;
+}
+
+/* Override in Light Mode: usiamo gray-1 (grigio molto scuro/quasi nero) per massimo contrasto su fondo bianco */
+:root[data-theme='light'] #starlight__sidebar summary,
+:root[data-theme='light'] #starlight__sidebar summary .large,
+:root[data-theme='light'] #starlight__sidebar details summary,
+:root[data-theme='light'] #starlight__sidebar a:not([aria-current="page"]) {
+  color: var(--sl-color-gray-1) !important;
+}
+
+#starlight__sidebar summary:hover,
+#starlight__sidebar summary:hover .large,
+#starlight__sidebar details summary:hover,
+#starlight__sidebar a:not([aria-current="page"]):hover {
+  color: var(--sl-color-text-accent) !important;
+}
+
+
+
+
 
 /* ==========================================
    STILI DI STAMPA (PRINT MEDIA QUERY)
