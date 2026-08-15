@@ -1,0 +1,104 @@
+---
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
+let wordCount = 0;
+let charCount = 0;
+let lineCount = 0;
+let imageCount = 0;
+
+async function countStats(dir) {
+    const files = await fs.readdir(dir, { withFileTypes: true });
+    for (const file of files) {
+        const fullPath = path.join(dir, file.name);
+        if (file.isDirectory()) {
+            if (file.name === 'C' || file.name === 'Python') continue;
+            await countStats(fullPath);
+        } else if (file.name.endsWith('.md') || file.name.endsWith('.mdx')) {
+            const content = await fs.readFile(fullPath, 'utf-8');
+            charCount += content.length;
+            lineCount += content.split('\n').length;
+            
+            const words = content.trim().split(/\s+/);
+            if (words && words.length > 0 && words[0] !== "") {
+                wordCount += words.length;
+            }
+
+            const imagesMd = content.match(/!\[.*?\]\(.*?\)/g);
+            if (imagesMd) imageCount += imagesMd.length;
+            const imagesHtml = content.match(/<img[^>]+>/g);
+            if (imagesHtml) imageCount += imagesHtml.length;
+        }
+    }
+}
+
+try {
+    const docsDir = path.join(process.cwd(), 'src', 'content', 'docs');
+    await countStats(docsDir);
+} catch (e) {
+    console.error("Errore durante il conteggio delle statistiche:", e);
+}
+
+const formatNumber = (num) => new Intl.NumberFormat('it-IT').format(num);
+---
+<div class="site-stats-card">
+    <h3>📊 Statistiche del Manuale</h3>
+    <p>Questi dati sono aggiornati automaticamente a ogni build del sito (sono esclusi i manuali di C e Python, attualmente gestiti come documenti esterni):</p>
+    <ul>
+        <li><strong>Parole totali</strong> {formatNumber(wordCount)}</li>
+        <li><strong>Caratteri totali</strong> {formatNumber(charCount)}</li>
+        <li><strong>Righe di codice</strong> {formatNumber(lineCount)}</li>
+        <li><strong>Immagini</strong> {formatNumber(imageCount)}</li>
+    </ul>
+</div>
+
+<style>
+.site-stats-card {
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.site-stats-card h3 {
+    margin-top: 0 !important;
+    font-size: 1.25rem !important;
+    color: var(--sl-color-white);
+}
+.site-stats-card p {
+    font-size: 0.9rem;
+    color: var(--sl-color-gray-3);
+    margin-bottom: 1.5rem;
+}
+.site-stats-card ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+}
+.site-stats-card li {
+    background: var(--sl-color-black);
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--sl-color-hairline);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--sl-color-accent);
+}
+.site-stats-card li strong {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--sl-color-gray-3);
+    margin-bottom: 0.25rem;
+    font-weight: normal;
+}
+</style>
