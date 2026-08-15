@@ -1,104 +1,312 @@
 ---
-import fs from 'node:fs/promises';
-import path from 'node:path';
+import { getAllStats } from '../utils/stats.js';
 
-let wordCount = 0;
-let charCount = 0;
-let lineCount = 0;
-let imageCount = 0;
+const allStats = await getAllStats();
+const { site, c, python } = allStats;
 
-async function countStats(dir) {
-    const files = await fs.readdir(dir, { withFileTypes: true });
-    for (const file of files) {
-        const fullPath = path.join(dir, file.name);
-        if (file.isDirectory()) {
-            if (file.name === 'C' || file.name === 'Python') continue;
-            await countStats(fullPath);
-        } else if (file.name.endsWith('.md') || file.name.endsWith('.mdx')) {
-            const content = await fs.readFile(fullPath, 'utf-8');
-            charCount += content.length;
-            lineCount += content.split('\n').length;
-            
-            const words = content.trim().split(/\s+/);
-            if (words && words.length > 0 && words[0] !== "") {
-                wordCount += words.length;
-            }
+const totalWords = site.words + c.words + python.words;
+const totalChars = site.chars + c.chars + python.chars;
+const totalPages = site.pages + c.pages + python.pages;
+const totalImages = site.images + c.images + python.images;
 
-            const imagesMd = content.match(/!\[.*?\]\(.*?\)/g);
-            if (imagesMd) imageCount += imagesMd.length;
-            const imagesHtml = content.match(/<img[^>]+>/g);
-            if (imagesHtml) imageCount += imagesHtml.length;
-        }
-    }
-}
-
-try {
-    const docsDir = path.join(process.cwd(), 'src', 'content', 'docs');
-    await countStats(docsDir);
-} catch (e) {
-    console.error("Errore durante il conteggio delle statistiche:", e);
-}
-
-const formatNumber = (num) => new Intl.NumberFormat('it-IT').format(num);
+const formatNumber = (num: number) => new Intl.NumberFormat('it-IT').format(num);
 ---
-<div class="site-stats-card">
-    <h3>📊 Statistiche del Manuale</h3>
-    <p>Questi dati sono aggiornati automaticamente a ogni build del sito (sono esclusi i manuali di C e Python, attualmente gestiti come documenti esterni):</p>
-    <ul>
-        <li><strong>Parole totali</strong> {formatNumber(wordCount)}</li>
-        <li><strong>Caratteri totali</strong> {formatNumber(charCount)}</li>
-        <li><strong>Righe di codice</strong> {formatNumber(lineCount)}</li>
-        <li><strong>Immagini</strong> {formatNumber(imageCount)}</li>
-    </ul>
+
+<div class="site-stats-wrapper not-content">
+    <!-- Intestazione fuori dal riquadro: descrizione e data unica -->
+    <div class="stats-intro-bar">
+        <p class="stats-description">
+            Dati calcolati ed estratti automaticamente analizzando i file sorgente del sito web e i documenti originali su Google Drive:
+        </p>
+        <div class="stats-date-badge">
+            <span>📅 Aggiornato al {allStats.lastUpdated}</span>
+        </div>
+    </div>
+
+    <!-- Elenco sequenziale dei blocchi -->
+    <div class="stats-sections-stack">
+        <!-- Sezione 1: Sito Web Online -->
+        <div class="stats-section-block">
+            <div class="section-title-row">
+                <span class="section-icon">🌐</span>
+                <div class="section-titles">
+                    <span class="section-name">Sito Web Online</span>
+                    <span class="section-tag">Moduli teorici e laboratori del portale</span>
+                </div>
+            </div>
+            <div class="section-metrics-grid">
+                <div class="metric-box">
+                    <span class="m-label">Parole</span>
+                    <span class="m-val">{formatNumber(site.words)}</span>
+                </div>
+                <div class="metric-box">
+                    <span class="m-label">Caratteri</span>
+                    <span class="m-val">{formatNumber(site.chars)}</span>
+                </div>
+                <div class="metric-box">
+                    <span class="m-label">Pagine</span>
+                    <span class="m-val">{formatNumber(site.pages)}</span>
+                </div>
+                <div class="metric-box">
+                    <span class="m-label">Immagini</span>
+                    <span class="m-val">{formatNumber(site.images)}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sezione 2: Manuale C -->
+        <div class="stats-section-block">
+            <div class="section-title-row">
+                <span class="section-icon">📄</span>
+                <div class="section-titles">
+                    <span class="section-name">Manuale di Programmazione in C</span>
+                    <span class="section-tag">Documento originale su Google Drive</span>
+                </div>
+            </div>
+            <div class="section-metrics-grid">
+                <div class="metric-box">
+                    <span class="m-label">Parole</span>
+                    <span class="m-val">{formatNumber(c.words)}</span>
+                </div>
+                <div class="metric-box">
+                    <span class="m-label">Caratteri</span>
+                    <span class="m-val">{formatNumber(c.chars)}</span>
+                </div>
+                <div class="metric-box">
+                    <span class="m-label">Pagine</span>
+                    <span class="m-val">{formatNumber(c.pages)}</span>
+                </div>
+                <div class="metric-box">
+                    <span class="m-label">Immagini</span>
+                    <span class="m-val">{formatNumber(c.images)}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sezione 3: Eserciziario Python -->
+        <div class="stats-section-block">
+            <div class="section-title-row">
+                <span class="section-icon">🐍</span>
+                <div class="section-titles">
+                    <span class="section-name">Eserciziario di Programmazione in Python</span>
+                    <span class="section-tag">Documento originale su Google Drive</span>
+                </div>
+            </div>
+            <div class="section-metrics-grid">
+                <div class="metric-box">
+                    <span class="m-label">Parole</span>
+                    <span class="m-val">{formatNumber(python.words)}</span>
+                </div>
+                <div class="metric-box">
+                    <span class="m-label">Caratteri</span>
+                    <span class="m-val">{formatNumber(python.chars)}</span>
+                </div>
+                <div class="metric-box">
+                    <span class="m-label">Pagine</span>
+                    <span class="m-val">{formatNumber(python.pages)}</span>
+                </div>
+                <div class="metric-box">
+                    <span class="m-label">Immagini</span>
+                    <span class="m-val">{formatNumber(python.images)}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Totale Complessivo -->
+    <div class="total-summary-bar">
+        <span class="total-label">✨ Totale complessivo dell'opera:</span>
+        <div class="total-values">
+            <span><strong>{formatNumber(totalWords)}</strong> parole</span>
+            <span class="separator">•</span>
+            <span><strong>{formatNumber(totalChars)}</strong> caratteri</span>
+            <span class="separator">•</span>
+            <span><strong>{formatNumber(totalPages)}</strong> pagine</span>
+            <span class="separator">•</span>
+            <span><strong>{formatNumber(totalImages)}</strong> immagini</span>
+        </div>
+    </div>
 </div>
 
 <style>
-.site-stats-card {
-    background: var(--sl-color-bg-nav);
-    border: 1px solid var(--sl-color-hairline);
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-top: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+.site-stats-wrapper {
+    margin: 1.25rem 0 2rem 0 !important;
+    box-sizing: border-box;
 }
-.site-stats-card h3 {
-    margin-top: 0 !important;
-    font-size: 1.25rem !important;
-    color: var(--sl-color-white);
-}
-.site-stats-card p {
-    font-size: 0.9rem;
-    color: var(--sl-color-gray-3);
-    margin-bottom: 1.5rem;
-}
-.site-stats-card ul {
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1rem;
-}
-.site-stats-card li {
-    background: var(--sl-color-black);
-    padding: 1rem;
-    border-radius: 6px;
-    border: 1px solid var(--sl-color-hairline);
-    text-align: center;
+
+.stats-intro-bar {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--sl-color-accent);
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0 0 1.25rem 0 !important;
 }
-.site-stats-card li strong {
-    display: block;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+
+.stats-description {
+    font-size: 0.92rem;
+    color: var(--sl-color-gray-2);
+    margin: 0 !important;
+    line-height: 1.5 !important;
+    flex: 1;
+    min-width: 240px;
+}
+
+.stats-date-badge {
+    background: rgba(112, 100, 233, 0.1);
+    border: 1px solid rgba(112, 100, 233, 0.3);
+    color: var(--sl-color-accent-high, #a5b4fc);
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    margin: 0 !important;
+}
+
+/* Elenco sequenziale dei blocchi */
+.stats-sections-stack {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    margin: 0 0 1.25rem 0 !important;
+    padding: 0 !important;
+}
+
+.stats-section-block {
+    background: var(--sl-color-bg-nav) !important;
+    border: 1px solid var(--sl-color-hairline) !important;
+    border-radius: 10px !important;
+    padding: 1.1rem 1.35rem !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15) !important;
+    margin: 0 !important;
+    margin-top: 0 !important;
+}
+
+.section-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.section-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.section-titles {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.section-name {
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--sl-color-white);
+    line-height: 1.2;
+}
+
+.section-tag {
+    font-size: 0.78rem;
     color: var(--sl-color-gray-3);
-    margin-bottom: 0.25rem;
-    font-weight: normal;
+}
+
+/* Griglia a 4 colonne perfettamente uguali e larghe 25% ciascuna */
+.section-metrics-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 0.75rem !important;
+    align-items: stretch !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.metric-box {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid var(--sl-color-hairline) !important;
+    border-radius: 6px !important;
+    padding: 0.6rem 0.85rem !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    margin-top: 0 !important;
+}
+
+.m-label {
+    font-size: 0.72rem;
+    color: var(--sl-color-gray-3);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1.1;
+    margin-bottom: 0.2rem;
+}
+
+.m-val {
+    font-size: 1.15rem;
+    color: var(--sl-color-accent);
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.total-summary-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.9rem 1.35rem;
+    background: rgba(112, 100, 233, 0.08);
+    border: 1px solid rgba(112, 100, 233, 0.25);
+    border-radius: 10px;
+    margin: 0 !important;
+}
+
+.total-label {
+    font-weight: 600;
+    color: var(--sl-color-white);
+    font-size: 0.92rem;
+}
+
+.total-values {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.92rem;
+    color: var(--sl-color-gray-1);
+}
+
+.total-values strong {
+    color: var(--sl-color-accent-high);
+}
+
+.separator {
+    color: var(--sl-color-gray-3);
+}
+
+@media (max-width: 640px) {
+    .section-metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .section-titles {
+        flex-direction: column;
+        gap: 0.15rem;
+    }
+
+    .total-summary-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .total-values {
+        flex-wrap: wrap;
+    }
 }
 </style>

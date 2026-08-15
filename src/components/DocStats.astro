@@ -1,0 +1,160 @@
+---
+import { getAllStats } from '../utils/stats.js';
+
+interface Props {
+    type: 'c' | 'python';
+}
+
+const { type } = Astro.props;
+const allStats = await getAllStats();
+const stats = type === 'c' ? allStats.c : allStats.python;
+const title = type === 'c' ? 'Statistiche del Manuale di C' : 'Statistiche dell\'Eserciziario Python';
+const formatNumber = (num: number) => new Intl.NumberFormat('it-IT').format(num);
+---
+
+<div class="doc-stats-card not-content">
+    <div class="doc-stats-header">
+        <div class="title-with-icon">
+            <span class="header-icon">📊</span>
+            <span class="stats-title">{title}</span>
+        </div>
+        <div class="stats-date-badge">
+            <span>📅 Aggiornato al {stats.updatedAt}</span>
+        </div>
+    </div>
+    <p class="stats-subtitle">Dati estratti automaticamente dal documento originale su Google Drive:</p>
+    
+    <div class="stats-grid">
+        <div class="stat-item">
+            <span class="stat-label">Parole totali</span>
+            <span class="stat-value">{formatNumber(stats.words)}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Caratteri totali</span>
+            <span class="stat-value">{formatNumber(stats.chars)}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Immagini</span>
+            <span class="stat-value">{formatNumber(stats.images)}</span>
+        </div>
+        {stats.pages > 1 && (
+            <div class="stat-item">
+                <span class="stat-label">Pagine</span>
+                <span class="stat-value">{formatNumber(stats.pages)}</span>
+            </div>
+        )}
+    </div>
+</div>
+
+<style>
+/* not-content disattiva i margini automatici di Starlight Markdown */
+.doc-stats-card {
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 10px;
+    padding: 1.4rem 1.5rem;
+    margin: 1.75rem 0 2rem 0 !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.doc-stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0 0 0.35rem 0 !important;
+}
+
+.title-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0 !important;
+}
+
+.header-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    margin: 0 !important;
+}
+
+.stats-title {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 1.15rem !important;
+    font-weight: 600 !important;
+    color: var(--sl-color-white) !important;
+    line-height: 1.2 !important;
+}
+
+.stats-date-badge {
+    background: rgba(112, 100, 233, 0.1);
+    border: 1px solid rgba(112, 100, 233, 0.3);
+    color: var(--sl-color-accent-high, #a5b4fc);
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    margin: 0 !important;
+}
+
+.stats-subtitle {
+    font-size: 0.88rem;
+    color: var(--sl-color-gray-2);
+    margin: 0 0 1.25rem 0 !important;
+    line-height: 1.4 !important;
+}
+
+.stats-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 0.85rem !important;
+    align-items: stretch !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.stat-item {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    padding: 0.75rem 0.85rem !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--sl-color-hairline) !important;
+    box-sizing: border-box !important;
+    margin: 0 !important; /* Disattiva il margin-top: 1.5rem di Starlight tra sibling divs */
+    margin-top: 0 !important;
+    height: 100% !important;
+}
+
+.stat-label {
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    color: var(--sl-color-gray-2) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    line-height: 1.15 !important;
+    min-height: 1.8rem !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    margin: 0 0 0.25rem 0 !important;
+}
+
+.stat-value {
+    font-size: 1.35rem !important;
+    font-weight: 700 !important;
+    color: var(--sl-color-accent) !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+}
+
+@media (max-width: 640px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+</style>
