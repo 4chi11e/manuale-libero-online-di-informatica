@@ -351,6 +351,21 @@ import Default from "@astrojs/starlight/components/Head.astro";
     });
   }
 
+  function setupTocTopLinks() {
+    const topLinks = document.querySelectorAll('a[href="#_top"]');
+    topLinks.forEach(link => {
+      if (link.hasAttribute('data-top-link-active')) return;
+      link.setAttribute('data-top-link-active', 'true');
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        try {
+          history.pushState(null, '', '#_top');
+        } catch (_) {}
+      });
+    });
+  }
+
   // Eseguiamo i setup al caricamento e ad ogni navigazione di Starlight
   detectHomepage();
   setupCollapsibles();
@@ -358,6 +373,7 @@ import Default from "@astrojs/starlight/components/Head.astro";
   setupModals();
   setupSidebarGroupLinks();
   setupSidebarStatePersistence();
+  setupTocTopLinks();
   renderMath();
 
   document.addEventListener('astro:page-load', () => {
@@ -367,6 +383,7 @@ import Default from "@astrojs/starlight/components/Head.astro";
     setupModals();
     setupSidebarGroupLinks();
     setupSidebarStatePersistence();
+    setupTocTopLinks();
     renderMath();
   });
 

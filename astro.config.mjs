@@ -14,6 +14,13 @@ export default defineConfig({
     starlight({
       title: 'Manuale Libero di Informatica',
       description: 'Manuale Libero Online di Informatica per il Liceo Scientifico delle Scienze Applicate',
+      defaultLocale: 'root',
+      locales: {
+        root: {
+          label: 'Italiano',
+          lang: 'it',
+        },
+      },
       social: {
         github: 'https://github.com/4chi11e/manuale-libero-online-di-informatica',
       },
@@ -123,6 +130,8 @@ export default defineConfig({
       ],
       components: {
         Head: './src/components/Head.astro',
+        TableOfContents: './src/components/TableOfContents.astro',
+        MobileTableOfContents: './src/components/MobileTableOfContents.astro',
       },
       customCss: [
         './src/styles/custom.css',

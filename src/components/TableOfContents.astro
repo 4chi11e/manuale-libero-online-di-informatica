@@ -1,0 +1,26 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/TableOfContents.astro';
+
+const { toc, entry, labels } = Astro.props;
+
+const customLabels = {
+  ...labels,
+  'tableOfContents.onThisPage': 'In questa pagina',
+};
+
+let customToc = toc;
+if (toc && toc.items && toc.items.length > 0 && entry?.data?.title) {
+  customToc = {
+    ...toc,
+    items: toc.items.map((item, idx) => {
+      if (idx === 0 || item.slug === '_top') {
+        return { ...item, text: entry.data.title };
+      }
+      return item;
+    }),
+  };
+}
+---
+
+<Default {...Astro.props} labels={customLabels} toc={customToc} />
