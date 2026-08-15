@@ -215,7 +215,6 @@ Prima di tutto trasformiamo in notazione binaria gli indirizzi IP e la maschera 
 
 255.255.255.224 = 11111111.11111111.11111111.11100000
 ```
-{: .fs-3}
 
 Allora il livello IP calcolerà per l'indirizzo sorgente:
 
@@ -225,7 +224,6 @@ Allora il livello IP calcolerà per l'indirizzo sorgente:
 -------------------------------------
 11000000.10101000.00100000.01100000          (192.168.032.096)
 ```
-{: .fs-3}
 
 Ora ripetiamo l'operazione con l'IP di destinazione:
 
@@ -235,7 +233,6 @@ Ora ripetiamo l'operazione con l'IP di destinazione:
 -------------------------------------
 11000000.10101000.00100000.10000000          (192.168.032.128)
 ```
-{: .fs-3}
 
 I risultati `192.168.32.96` e `192.168.32.128` indicano due sottoreti differenti, e quindi le macchine appartengono a sottoreti differenti. I due indirizzi ottenuti inoltre non indicano alcun host ma identificano un'intera sottorete. Esistono due indirizzi particolari in ogni rete che non possono essere utilizzati da nessun host e sono:
 
@@ -249,7 +246,6 @@ Indirizzo di rete:      11000000.10101000.00100000.01100000     (192.168.032.096
 Indirizzo di broadcast: 11000000.10101000.00100000.01111111     (255.255.255.127)
 Subnet mask:            11111111.11111111.11111111.11100000     (255.255.255.224)
 ```
-{: .fs-3}
 
 possiamo quindi calcolare quanti sono gli indirizzi disponibili per gli host all'interno della rete: 2<sup>5</sup> - 2 = 30, questo perchè i bit che compongono l'Host_ID sono 5 e quindi avremmo 2<sup>5</sup> indirizzi possibili, ma il primo e l'ultimo sono l'indirizzo di rete e l'indirizzo di broadcast e non possono essere usati, da cui il -2.
 
@@ -987,7 +983,6 @@ Con il sistema delle classi la divisione tra parte Net_ID e Host_ID doveva sempr
 255.255. 0 . 0  -  11111111.11111111.00000000.00000000  -  Classe B
 255.255.255. 0  -  11111111.11111111.11111111.00000000  -  Classe C
 ```
-{: .fs-3}
 
 CIDR invece permette, in un indirizzo IP, di definire quale parte indichi la sotto rete e quale gli host, in maniera "continua" ovvero senza la suddivisione a blocchi del tipo classfull. In pratica è possibile avere subnet mask come:
 
@@ -995,7 +990,6 @@ CIDR invece permette, in un indirizzo IP, di definire quale parte indichi la sot
 255.240. 0 . 0  - 11111111.11110000.00000000.00000000
 255.255.255.224 - 11111111.11111111.11111111.11100000
 ```
-{: .fs-3}
 
 La notazione usata per esprimere indirizzi CIDR è la seguente: a.b.c.d/x , dove x è il numero di bit (contati partendo dal più significativo a sinistra) che compongono la parte di indirizzo della rete. I rimanenti y = (32 - x) bit consentono di calcolare il numero di host della sottorete pari a 2<sup>y</sup> - 2. Il -2 è dovuto al fatto che il primo e l'ultimo indirizzo di ogni rete non sono assegnabili ad alcun host, in quanto riservati rispettivamente come indirizzo della rete in generale (usato ad esempio nelle tabelle dei router) e come indirizzo di broadcast (ovvero un indirizzo che comprende indistintamente ogni altro indirizzo all'interno di quella rete: viene usato ad esempio in alcuni protocolli di routing).
 
@@ -1034,7 +1028,6 @@ Subnet mask:      1111 1111 . 1111 1111 . 1111 1111 . 0000 0000
 Primo indirizzo:  1100 0000 . 1010 1000 . 0000 0001 . 0000 0000
 Ultimo indirizzo: 1100 0000 . 1010 1000 . 0000 0001 . 1111 1111
 ```
-{: fs-3}
 
 Per ottenere 3 sottoreti è necessario utilizzare i primi 2 bit dell'Host_ID e aggiungerli al Net_ID in modo da poter distinguere le 3 nuove sottoreti. Devo utilizzare 2 bit poichè in binario per poter rappresentare 3 numeri diversi mi servono almeno 2 bit perchè 2<sup>2</sup> = 4 > 3
 
@@ -1045,7 +1038,6 @@ Indirizzo sottorete 2:  1100 0000 . 1010 1000 . 0000 0001 . 0100 0000
 Indirizzo sottorete 3:  1100 0000 . 1010 1000 . 0000 0001 . 1000 0000
 Indirizzo sottorete 4:  1100 0000 . 1010 1000 . 0000 0001 . 1100 0000
 ```
-{: fs-3}
 
 In questo modo in realtà è possibile ottenere 4 sottoreti di cui ne vengono utilizzate solo 3.
 

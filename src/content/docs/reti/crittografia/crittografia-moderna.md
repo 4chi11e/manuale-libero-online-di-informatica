@@ -25,12 +25,10 @@ I crittosistemi moderni utilizzano diverse tecniche, anche molto complicate, per
 In questo genere di algoritmi si suppone che entrambe le parti conoscano già la chiave con cui cifrare e decifrare il messaggio. Il mittente ha un messaggio **P** (PlainText o testo in chiaro). Il mittente critta il messaggio **P** con la chiave **k** usando un algoritmo di crittografia simmetrica chiamato **S**. Il messaggio risultante sarà **C** (CypherText o messaggio cifrato). In formule diventa:
 
 S(P, k) = C
-{: .esempio .ta-c .fs-5}
 
 A questo punto al destinatario arriva un messaggio cifrato che riesce a decrittare poiché è in possesso della chiave privata. Ora il ricevente applica l'algoritmo di decrittazione **D** con la stessa chiave che ha usato il mittente per crittare il testo. Diventa:
 
 D(C, k) = P
-{: .esempio .ta-c .fs-5}
 
 Se un attaccante ha intercettato il messaggio lungo il mezzo di comunicazione, avrà il messaggio crittato ma non la chiave che è stata scambiata in modo sicuro dai due interlocutori. Se l'attaccante vorrà leggere il messaggio crittato potrà solo usare metodi di decrittazione che richiedono elevate capacità di calcolo.
 
@@ -51,10 +49,8 @@ Generalmente la dimensione del blocco scelta è della medesima lunghezza della c
 #### Electronic Code Book (ECB)
 
 <img src="/manuale-libero-online-di-informatica/assets/images/reti/crittografia/Ecb_encryption.png">
-{: .ta-c}
 
 *S(P<sub>i</sub>, k<sub>i</sub>) = C<sub>i</sub>*
-{: .esempio .fs-5 .ta-c}
 
 È l'implementazione più semplice, in cui l'unica cosa che nasconde il testo in chiaro è la chiave (o una parte di essa). Su questo metodo si basano sistemi come il [cifrario di Vigenere](../crittografia-storia/#tavola-di-vigenère) e sappiamo che questo metodo risulta essere tanto semplice quanto insicuro. Infatti è sufficiente per l'attaccante raccogliere un numero sufficiente di campioni per poter eseguire un attacco di tipo statistico come il [metoto Kasiski](../crittografia-storia/#il-metodo-kasiski).
 
@@ -65,15 +61,12 @@ Questa limitazione è inaccettabile poichè per manenere il sistema sicuro dovre
 #### Cipher Block Chaining (CBC)
 
 <img src="/manuale-libero-online-di-informatica/assets/images/reti/crittografia/Cbc_encryption.png">
-{: .ta-c}
 
 <div class="esempio fs-5 ta-c" markdown=1>
 
   *S((IV* ⊕ *P<sub>1</sub>, k<sub>1</sub>) = C<sub>1</sub>*
-  {: .mt-0}
 
   *S((C<sub>i-1</sub>* ⊕ *P<sub>i</sub>, k<sub>i</sub>) = C<sub>i</sub>*
-  {: .mb-0} 
     
 </div>
 
@@ -100,7 +93,6 @@ Il testo chiaro deve essere prima di tutto tradotto in una sequenza di bit secon
 
 Alfabetico | C | h | i | e | d | o | | c | o | n | f | e | r | m | a
 Binario    | 01000011 | 01101000 | 01101001 | 01100101 | 01100100 | 01101111 | 00100000 | 01100011 | 01101111 | 01101110 | 01100110 | 01100101 | 01110010 | 01101101 | 01100001
-{: .fs-3}
 
 È poi necessaria una chiave segreta K di N bit (64, 128, 256 bit o altro); per semplicità, ma senza perdere in generalità, prenderemo come esempio una chiave di soli 8 bit divisa in due sottochiavi da 4 bit: 0100 1110.
 
@@ -319,22 +311,18 @@ AES lavora su blocchi a dimensione fissa di 128 bit. Inizialmente la lunghezza s
 <div class="tbl-fr" markdown="1">
   
   **Chiave da 128 bit**
-  {: .ta-c .mb-1}
 
   |k<sub>0</sub>|k<sub>4</sub>|k<sub>8</sub>|k<sub>12</sub>|
   |k<sub>1</sub>|k<sub>5</sub>|k<sub>9</sub>|k<sub>13</sub>|
   |k<sub>2</sub>|k<sub>6</sub>|k<sub>10</sub>|k<sub>14</sub>|
   |k<sub>3</sub>|k<sub>7</sub>|k<sub>11</sub>|k<sub>15</sub>|
-  {: .ta-c .tab--p-1 .w-150 .tl-f}
 
   **Blocco da 128 bit**
-  {: .ta-c .mb-1}
 
   |b<sub>0</sub>|b<sub>4</sub>|b<sub>8</sub>|b<sub>12</sub>|
   |b<sub>1</sub>|b<sub>5</sub>|b<sub>9</sub>|b<sub>13</sub>|
   |b<sub>2</sub>|b<sub>6</sub>|b<sub>10</sub>|b<sub>14</sub>|
   |b<sub>3</sub>|b<sub>7</sub>|b<sub>11</sub>|b<sub>15</sub>|
-  {: .ta-c .tab--p-1 .w-150 .tl-f}
 
 </div>
 
@@ -460,13 +448,11 @@ Tutto ciò risulta evidente dall’esempio che segue.
 
   |a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z
   |H|F|S|U|G|T|A|K|V|D|E|O|Y|J|B|P|N|X|W|C|Q|R|I|M|Z|L
-  {: .tbl-mini}
   
   Chiave di Bob
 
   |a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z
   |C|P|M|G|A|T|N|O|J|E|F|W|I|Q|B|U|R|Y|H|X|S|D|Z|K|L|V 
-  {: .tbl-mini}
 
   <div class="tbl-nowrapper" markdown=1>
   |MESSAGGIO:|ci vediamo
@@ -474,7 +460,6 @@ Tutto ciò risulta evidente dall’esempio che segue.
   |Ricifrato da Bob:|HD YNSDOLP
   |Decifrato da Alice:|AJ MQCJLZP
   |Decifrato da Bob:|EI CNAIYWB| che non è "ci vediamo"
-  {: .invisible .distanzia-colonne-3}
   </div>
 </div>
 
@@ -490,7 +475,6 @@ Tutti i sistemi di crittografia asimmetrica sono basati su due concetti matemati
 Un intero positivo N si dice **primo** se 
 
 *N è diverso da 1 ed è divisibile esattamente solo per 1 e per se stesso*.
-{: .importante}
 
 Ancora oggi il metodo più veloce per trovare tutti i numeri primi inferiori ad un limite L prefissato è il **crivello di Eratostene**. Tale algoritmo può essere schematizzato con i seguenti punti: 
 - si costruisce un elenco E degli interi compresi tra 2 e L; 
@@ -503,7 +487,6 @@ Chi lo desidera può vedere il crivello in azione [qui](http://britton.disted.ca
 Il **Teorema Fondamentale dell’Aritmetica** stabilisce che: 
 
 ogni numero intero diverso da 0,-1,+1 si decompone nel prodotto di numeri primi e la decomposizione è unica a meno dell'ordine e del segno dei fattori.
-{: .importante}
 
 Dal Secondo Teorema di Euclide sui numeri primi sappiamo che **i numeri primi formano una successione infinita**.
 
@@ -521,7 +504,6 @@ Si aggiunge 7 a Q e si ottiene Q = {2, 3, 7}.
 Al passo seguente si ha n = 2 · 3 · 7 + 1 = 43 , che è primo anch’esso.  
 Lo aggiungo al bottino: Q = {2, 3, 7, 43}.  
 Si prosegue in questo modo: n = 2 · 3 · 7 · 43 + 1 = 1806 che può essere scomposto in fattori primi come 1806 = 13 · 139 , aggiungendo quindi due nuovi numeri all’insieme Q che diventa Q = {2, 3, 7, 43, 13, 139}.
-{: .code-example}
 
 Denotiamo la successione dei primi in ordine ascendente con p<sub>1</sub> , p<sub>2</sub> ,..., p<sub>n</sub>.  
 Avremo allora: p<sub>1</sub> = 2, p<sub>2</sub> = 3, p<sub>3</sub> = 5, ...  
@@ -560,7 +542,6 @@ $$
 
 **Esempio** 
 La probabilità che un intero casuale di 1000 cifre sia primo è circa 1 / log(10<sup>1000</sup>). Tenendo presente che nel Teorema dei numeri primi il logaritmo è in base *e*: log(10<sup>1000</sup>) = 1000 · log(10) = 2302,59. Quindi, in media, troveremo un numero primo ogni 2302 interi presi a caso.
-{: .code-example}
 
 E' possibile, dato un intero *x* casuale, provare velocemente che *x* è primo? \
 Naturalmente esiste un metodo ovvio (di forza bruta): dividerlo per gli interi che lo precedono. Oppure, cosa assai più intelligente, mettere in moto un crivello di Eratostene. Entrambi però richiederebbero tempi proibitivi di calcolo anche con numeri di modesta lunghezza, persino utilizzando supercomputers. 
@@ -582,7 +563,6 @@ Per calcolare 2 + 3 si partirà da 2 e ci si sposterà di 3 numeri, ottenendo 5.
 In pratica:  
 2 + 3 ≡ 5 mod(7)  
 2 + 6 ≡ 1 mod(7)
-{: .code-example}
 
 <div class="thumbnail--centrato mt-4 mb-4">
   <img src="/manuale-libero-online-di-informatica/assets/images/reti/crittografia/Crittografia-congruenza-modulo.jpg">
@@ -697,7 +677,6 @@ La cifra finale (il numero di unità) di 13<sup>5</sup> è quindi 3, come risult
   Si vogliono calcolare le ultime due cifre decimali (decine e unità) del numero 203<sup>327</sup>.  
   Le ultime due cifre decimali corrispondono al resto della divisione per 100.  
   Si procede quindi nel seguente modo:
-  {: .mt-0 .mb-1}
 
 <span class="overline"></span>
 
@@ -974,7 +953,6 @@ Supponiamo allora che Bob le voglia mandare un messaggio costituito da *m* = 688
 1. ricevuto il messaggio Alice ricava *m* mediante la formula *m* = *c<sup>d</sup>* mod(*N*):
 
   *m* = 1570<sup>1019</sup> mod(3337) = 688
-  {: .ta-c}
 
 L’unico modo di decifrare il messaggio è di conoscere *d* e gli unici modi che ha Eva per ottenerlo sono ottenerlo da Alice (che non lo vuole rivelare a nessuno) oppure riuscire a ottenere *p* e *q* dalla fattorizzazione di *N* e quindi riuscire a calcolare *d* a partire da *e* come ha fatto Alice. Come detto precedentemente, il processo di fattorizzazione di un numero nei suoi fattori primi è un processo molto lungo, specialmente se si ha a che fare con numeri molto grandi (attualmente le chiavi considerate sicure sono lunghe 2048 bit). La segretezza nella comunicazioni tra Alice e Bob è quindi assicurata!
 
@@ -1064,35 +1042,26 @@ Più sensato è pensare di fattorizzare N, ma l’unico modo conosciuto è di di
 
 Un numero semiprimo (anche detto biprimo o 2-quasi primo, o pq numero) è un numero naturale che è il prodotto di numeri primi (non necessariamente distinti). I primi numeri semiprimi sono: <span class="fs-2">4, 6, 9, 10, 14, 15, 21, 22, 25, 26, 33, 34, 35, 38, 39, 46, 49, 51, 55, 57, 58, 62, 65, 69, 74, 77, 82, 85, 86, 87, 91, 93, 94, 95, 106.<span>
 <!-- 111, 115, 118, 119, 121, 122, 123, 129, 133, 134, 141, 142, 143, 145, 146, 155, 158, 159, 161, 166, 169, 177, 178, 183, 185, 187. -->
-{: .thumbnail--testo .float-right .mt-0 .fs-3}
 
 La RSA Laboratories fondata dai creatori dell'omonimo sistema di crittografia, ha proposto nel 1991 una sfida, la Factoring Challenge, in cui si offrivano premi in denaro a chi riuscisse a fattorizzare una serie di numeri semiprimi da usare come valori di *N* (semiprimi perchè prodotto dei due primi *p* e *q*). In questa pagina sono riportati i risultati raggiunti finora. Nonostante la gara sia stata dichiarata conclusa nel 2007 la ricerca delle soluzioni è ancora in corso e ad oggi (gennaio 2021) il numero più grande fattorizzato è RSA-250 un numero composto da 250 cifre decimali o 829 bits
 
   RSA-250 =
-  {: .ml-4 .mr-4 .mt-0 .mb-0} 
 
   2140324650240744961264423072839333563008614715144755017797754920881418023447140136643345519095804679610992851872470914587687396261921557363047454770520805119056493106687691590019759405693457452230589325976697471681738069364894699871578494975937497937
-  {: .ml-5 .mr-4 .mt-0 .fs-3} 
 
   RSA-250 =
-  {: .ml-4 .mr-4 .mt-0 .mb-0} 
 
   64135289477071580278790190170577389084825014742943447208116859632024532344630238623598752668347708737661925585694639798853367
-  {: .ml-5 .mr-4 .mt-0 .mb-0 .fs-3}
 
   ×
-  {: .ml-4 .mr-4 .mt-0 .mb-0} 
 
   33372027594978156556226010605355114227940760344767554666784520987023841729210037080257448673296881877565718986258036932062711
-  {: .ml-5 .mr-4 .mt-0 .fs-3}
 
 In matematica, RSA-2048 è il più grande dei numeri RSA (semiprimi grandi che fanno parte del RSA Factoring Challenge). RSA-2048 è un numero con 617 cifre decimali (2048 bits) e probabilmente la sua fattorizzazione non varrà raggiunta ancora per alcuni decenni.
 
   RSA-2048 = 
-  {: .ml-4 .mr-4 .mt-0 .mb-0} 
 
   25195908475657893494027183240048398571429282126204032027777137836043662020707595556264018525880784406918290641249515082189298559149176184502808489120072844992687392807287776735971418347270261896375014971824691165077613379859095700097330459748808428401797429100642458691817195118746121515172654632282216869987549182422433637259085141865462043576798423387184774447920739934236584823824281198163815010674810451660377306056201619676256133844143603833904414952634432190114657544454178424020924616515723350778707749817125772467962926386356373289912154831438167899885040445364023527381951378636564391212010397122822120720357
-  {: .ml-5 .mr-4 .mt-0 .fs-3}
 
 Per un elenco completo dei numeri RSA puoi guardare [qui](https://it.wikipedia.org/wiki/Numeri_RSA)
 
@@ -1205,7 +1174,6 @@ The output size in bits is given by the extension to the "SHA" name, so SHA-224 
 **SHA-1** |	160 |	160 |	512 |	2<sup>64</sup> − 1 |	32 |	80 |	+,and,or,xor, rotl |	Attacco [2<sup>63</sup>](https://it.wikipedia.org/wiki/Funzione_crittografica_di_hash#Algoritmi_di_hash_crittografico)
 **SHA-2** (SHA-256/224) |	256/224 |	256 |	512 |	2<sup>64</sup> − 1 |	32 |	64 |	+,and,or,xor,shr, rotr |	Nessuna
 **SHA-2** (SHA-512/384) |	512/384 |	512	| 1024 |	2<sup>128</sup> − 1 |	64 |	80 |	+,and,or,xor,shr, rotr |	Nessuna
-{: .fs-3 .ta-c}
 
 #### SHA-3
 [SHA-3]() (Secure Hash Algorithm 3) was released by NIST on August 5, 2015. SHA-3 is a subset of the broader cryptographic primitive family Keccak. The Keccak algorithm is the work of Guido Bertoni, Joan Daemen, Michael Peeters, and Gilles Van Assche. Keccak is based on a sponge construction which can also be used to build other cryptographic primitives such as a stream cipher. SHA-3 provides the same output sizes as SHA-2: 224, 256, 384, and 512 bits.

@@ -19,13 +19,11 @@ Problema 1: determinare se un numero è primo.<br>
 Ogni numero che può essere fornito in input al problema rappresenta un istanza del problema, cioè:
 
 I<sub>1</sub> = 3, I<sub>2</sub> = 6, I<sub>3</sub> = 7, ..., I<sub>n</sub> = 127 ...
-{: .ta-c}
 
 Problema 2: Ordinamento di un vettore di n elementi.<br>
 Ogni istanza è rappresentata da un diverso vettore vettore da ordinare, vettore che può variare per cardinalità e valori che contiene:
 
 I<sub>1</sub> = [5, 7, 2, 1], I<sub>2</sub> = [1], I<sub>3</sub> = [1, 2, 3, 4], ..., I<sub>n</sub> = [4, 77, 128, ... 923] ...
-{: .ta-c}
 
 </div>
 
@@ -34,7 +32,6 @@ Il problema numero 2 presenta una caratteristica molto importante per la descriz
 Per poter fornire una soluzione ad ogni istanza del problema è necessario eseguire un algoritmo risolutivo del problema. Se indichiamo con *A* l'algoritmo, con *π* il problema e con *I* l'istanza, possiamo dire che: 
 
 *A* risolve *π* se applicato ad ogni sua istanza *I* ne produce la soluzione corretta
-{: .importante}
 
 ## Analisi della complessità degli algoritmi
 
@@ -154,7 +151,6 @@ In questo modo ogni operazione verrà trattata in egual modo e considerata un'**
 La funzione T(n) può quindi essere definita nel seguente modo:
 
 La funzione *T(n)* esprime il numero di passi base necessari affinchè l'algoritmo *A* possa produrre la soluzione di un'istanza di dimensione *n*.
-{: .importante}
 
 ##### Esempi di calcolo della complessità di un algoritmo
 
@@ -650,7 +646,6 @@ Nonostante questi problemi siano apparentemente di natura molto diversa è in re
 Preso un problema, di qualsiasi tipo esso sia, è possibile fare una prima catalogazione tra problemi risolvibili e problemi non risolvibli o comunque non sempre risolvibili. Preso l'insieme di tutti i possibili problemi immaginabili, il primo sottoinsieme è infatti l'insieme dei problemi **computabili** o **decidibili**. Tutti gli altri problemi saranno quindi chiamati **non computabili** o **indecidibili**
 
 Un problema P si dice computabile quando esiste un algoritmo A che lo risolve, cioè applicando ad A una qualunque istanza I di P ne fornisce l'esatta soluzione in un numero finito di passi.
-{: .importante}
 
 È importante sottolineare che l'algoritmo deve trovare la soluzione per ogni istanza del problema e che lo deve fare in un numero finito di passi, cioè in un tempo finito, impiegare un tempo infinito significherebbe infatti non trovare mai la soluzione.
 
@@ -786,7 +781,6 @@ Se si ragionasse in termini di aumento del tempo di esecuzione dell'algoritmo in
 Possiamo quindi concludere che:
 
 la distinzione tra problemi trattabili e intrattabili corrisponde alla distinzione tra problemi con complessità polinomiale e problemi con complessità esponenziale.
-{: .importante}
 
 A scanso di errori (che gli studenti fanno molto spesso) è importante ricordare che i problemi intrattabili rientrano comunque nella categoria dei problemi computabili infatti i tempi di calcolo sono per noi inaccettabili ma finiti (e sempre risolvibili in tempi accettabili per valori di *n* molto piccoli).
 

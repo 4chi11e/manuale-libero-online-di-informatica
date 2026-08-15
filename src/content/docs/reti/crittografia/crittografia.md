@@ -7,7 +7,6 @@ has_toc: true
 
 
 ## Introduzione
-{: .titolo-3}
 
 La crittografia (dal greco kryptòs=nascosto e graphè=scrittura) sta ad indicare un insieme di procedure ideate allo scopo di nascondere il significato di un messaggio riservato ad altri che non ne fossero il mittente o il destinatario. Non è da confondere quindi con la crittologia che ha come scopo invece quello di nascondere l'esistenza stessa del messaggio.
 
@@ -20,7 +19,6 @@ che potrebbero essere captate e sfruttate a nostro svantaggio.
 Gli studi dei crittografi e dei crittoanalisti sono strettamente connessi all’informatica: la scienza che si occupa della rappresentazione e della elaborazione dell’informazione e del suo trattamento automatico mediante elaboratori elettronici deve il primo elaboratore elettronico (il Colossus) ai tentativi degli studiosi di Bletchey Park di decifrare le comunicazioni cifrate con il sistema Lorenz e scambiate tra Hitler e i suoi capi di stato maggiore durante il secondo conflitto mondiale. Nel corso degli anni che separano il 1943 dall’epoca attuale, la crittografia ha raggiunto notevoli livelli di sicurezza, passando attraverso scoperte rilevanti e attirando l’attenzione di molti studiosi, che concentrarono le loro abilità nella risoluzione dei problemi di fondo che rendevano i sistemi crittografici di utilizzo esclusivo di una ristretta cerchia di persone “fidate” e li esponevano gravemente a intercettazione e decifrazione.
 
 ## Obiettivi della crittografia
-{: .titolo-3}
 
 Una comunicazione per poter essere considerata sicura, deve soddisfare 4 condizioni
 - riservatezza dei dati: solo mittente e destinatario (o destinatari) devono essere in grado di comprendere il contenuto del messaggio;
@@ -32,7 +30,6 @@ Se si guarda alla [storia della crittografia](#) si può notare che la maggior p
 
 
 ## Il problema dello scambio delle chiavi
-{: .titolo-3}
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
@@ -54,11 +51,9 @@ Uno dei problemi più complessi nell’evoluzione della crittografia, era costit
 Questo problema riguarda tutti i sistemi di cifratura simmetrici, quelli cioè in cui si usa la stessa chiave sia per cifrare che per decifrare, ed è stato risolto soltanto negli anni 1970 con l'invenzione della crittografia asimmetrica.
 
 ## Il principio di Kerckhoffs
-{: .titolo-3}
 
 Risulterà strano, ma uno dei principi fondamentali della crittografia, utilizzato ancora nei moderni sistemi crittografici è stato individuato nel lontano 1883 dal linguista francoolandese August Kerckhoffs nel suo celebre articolo “La cryptographie militaire” apparso nel Journal des sciences militaires.
 
 “La sicurezza di un sistema crittografico è basata esclusivamente sulla segretezza della chiave, in pratica si presuppone noto a priori l’algoritmo di cifratura e decifrazione”
-{: .fs-5 .importante}
 
 Nella crittografia antica la sicurezza della comunicazione era affidata principalmente alla segretezza del sistema adottato, e per questo motivo tali sistemi non erano davvero sicuri. Spesso questi sistemi erano utilizzati in contesti bellici in cui bastava scoprire il sistema utilizzato dal nemico per poter decifrare per sempre tutti i suoi messaggi. Creare un nuovo sistema di crittografia valido è molto complesso e non può essere fatto continuamente. Per questo motivo è molto più conveniente avere un sistema per cui non importa se il nemico conosce la tecnica di crittografia adottata perchè mi basta sostituire frequentemente la chiave utilizzata per mantenere segrete le mie comunicazioni. Inventare nuove chiavi non richiede nessun impegno, ma nel caso della crittografia simmetrica rimane il problema di dover condividere continuamente le nuove chiavi.

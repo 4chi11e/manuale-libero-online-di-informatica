@@ -36,7 +36,6 @@ Esistono moltissimi protocolli utilizzati dalle applicazioni per svolgere svaria
 - TFTP
 - NNTP
 - Modbus TCP
-{: #elenco-protocolli}
 
 Prima di trattare nello specifico le funzionalità offerte dai vari protocolli è necessario conoscere alcuni aspetti generali della comunicazione a livello applicazione.
 
@@ -67,7 +66,6 @@ esempi di url sono:
 I protocolli di livello applicazione usano normalmente gli URL, ma è stato detto in precedenza che per creare un canale di comunicazione tra due host si crea una socket che è formata da indirizzo IP e porta. In questo caso l'indirizzo IP non è indicato, si identifica invece l'host contenente la risorsa per mezzo di un _nome di dominio_, indicato nella struttura dell'url come _domain_. Per instaurare una comunicazione è necessario quindi l'utilizzo di un servizio che converta i nomi di dominio in indirizzi IP, questo servizio è il Domain Name System (DNS).
 
 ## DNS
-{: .titolo-3}
 
 il sistema dei nomi di dominio (in inglese: Domain Name System, DNS), è un sistema utilizzato per assegnare nomi ai nodi della rete (host). Questi nomi sono utilizzabili, mediante una traduzione, di solito chiamata "risoluzione", al posto degli indirizzi IP originali. Il servizio è realizzato tramite un database distribuito, costituito dai server DNS. Il DNS ha una struttura gerarchica ad albero rovesciato ed è diviso in domini (com, org, it, ecc.). Ad ogni dominio o nodo corrisponde un nameserver, che conserva un database con le informazioni di alcuni domini di cui è responsabile e si rivolge ai nodi successivi quando deve trovare informazioni che appartengono ad altri domini.
 
@@ -133,7 +131,6 @@ Esistono alcuni nameserver che non gestiscono uno spazio di dominio particolare 
 
 
 ## HTTP
-{: .titolo-3}
 
 HTTP (HyperText Transfer Protocol - protocollo di trasferimento di un ipertesto) è un protocollo a livello applicativo usato come principale sistema per la trasmissione d'informazioni sul web in una architettura client-server. Le specifiche del protocollo sono gestite dal World Wide Web Consortium (W3C). Un server HTTP generalmente resta in ascolto delle richieste dei client sulla porta 80 usando il protocollo TCP a livello di trasporto.
 
@@ -277,7 +274,6 @@ D'altro canto, le connessioni persistenti precludono il parallelismo nelle comun
 La fruizione nelle pagine WEB di materiale multimediale, quale audio o video viene gestito in modo del tutto analogo al download dei file, tramite un caricamento progressivo o distribuzione progressiva, in cui il file viene scaricato in modo progressivo dall'inizio alla fine (tramite i protocolli Real Time Streaming Protocol e Real-time Transport Protocol) e nel caso il bit-rate sia eccessivo per la rete che lo trasporta può verificarsi un continuo ricaricamento del buffer
 
 ### Cookies
-{: .titolo-4}
 
 Il protocollo HTTP è un protocollo _stateless_ cioè non tiene traccia dello stato della connessione. Se la comunicazione si limitasse all'uso delle funzionalità offerte da HTTP quindi ad ogni richiesta di un client il server risponderebbe come se fosse la prima volta che il client comunica con lui. Per tenere traccia dello stato della comunicazione sono quindi stati introdotti i cookies che funzionano come dei gettoni identificativi che i server rilasciano ai client e in cui memorizzano informazioni a lungo termine.
 
@@ -311,7 +307,6 @@ Esistono molti altri tipi di cookie, se vuoi approfondire l'argomento puoi farlo
 
 
 ### HTTPS
-{: .titolo-4}
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
@@ -342,7 +337,6 @@ Le URL del protocollo HTTPS iniziano con https:// e utilizzano la porta 443 di d
 Per comprendere meglio le funzionalità offerte da HTTPS è necessario studiare il funzionamento di TLS nella [sezione](#transport-layer-security-tls) ad esso dedicata. è anche possibile approfondire l'argomento sulla [pagina Wikipedia](https://it.wikipedia.org/wiki/HTTPS) dedicata a HTTPS
 
 ## FTP 
-{: .titolo-3}
 
 File Transfer Protocol (FTP) (protocollo di trasferimento file), in informatica e nelle telecomunicazioni, è un protocollo di livello applicazioni per la trasmissione di dati tra host basato su TCP e con architettura di tipo client-server.
 
@@ -473,7 +467,6 @@ Alcuni server FTP popolari sono:
 - ProFTPd (Unix)
 
 ## Posta elettronica
-{: .titolo-3}
 
 La posta elettronica, in inglese e-mail (abbreviazione di electronic mail), è un servizio Internet grazie al quale ogni utente abilitato può inviare e ricevere dei messaggi utilizzando un computer o altro dispositivo elettronico (come palmare, smartphone, tablet) connesso in rete attraverso un proprio account di posta registrato presso un fornitore del servizio.
 

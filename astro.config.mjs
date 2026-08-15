@@ -14,6 +14,7 @@ export default defineConfig({
     starlight({
       title: 'Manuale Libero di Informatica',
       description: 'Manuale Libero Online di Informatica per il Liceo Scientifico delle Scienze Applicate',
+      favicon: '/favicon.svg',
       defaultLocale: 'root',
       locales: {
         root: {

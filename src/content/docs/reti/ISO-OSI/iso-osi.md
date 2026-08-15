@@ -357,7 +357,6 @@ Il router, per la realtà complessa nella quale può trovarsi ad operare, può i
 - Proxy
 
 ## Link e riferimenti esterni
-{: .clear-both}
 
 - [ISO/OSI su Wikipedia](https://it.wikipedia.org/wiki/Modello_OSI)
 - [Incapsulamento su Wikipedia](https://it.wikipedia.org/wiki/Imbustamento)
