@@ -259,44 +259,94 @@ import Default from "@astrojs/starlight/components/Head.astro";
 
       const details = summary.parentElement;
       if (details && details.tagName === 'DETAILS') {
-        const firstLink = details.querySelector('ul a') as HTMLAnchorElement | null;
-        if (firstLink) {
-          const firstLinkLabel = firstLink.querySelector('span')?.textContent?.trim().toLowerCase();
-          const groupLabelSpan = summary.querySelector('.group-label span') as HTMLElement | null;
-          const groupLabelText = groupLabelSpan?.textContent?.trim().toLowerCase();
+        // Trova il primissimo link a prescindere dal livello di annidamento
+        const anyFirstLink = details.querySelector(':scope > ul a') as HTMLAnchorElement | null;
+        if (!anyFirstLink) return;
 
-          // Se l'etichetta del primo link corrisponde a quella del gruppo, o è "spiegazione", o uniamo "modello iso/osi" con "iso/osi"
-          const isMatch = groupLabelText === firstLinkLabel || 
-                          firstLinkLabel === 'spiegazione' ||
-                          (groupLabelText === 'modello iso/osi' && firstLinkLabel === 'iso/osi');
-          if (groupLabelSpan && isMatch) {
-            const href = firstLink.getAttribute('href');
-            if (href) {
-              const a = document.createElement('a');
-              a.href = href;
-              a.className = 'group-link-header';
-              a.style.display = 'inline-block';
-              a.style.color = 'inherit';
-              a.style.textDecoration = 'none';
+        const href = anyFirstLink.getAttribute('href');
+        if (!href) return;
 
-              if (firstLink.getAttribute('aria-current') === 'page') {
-                a.setAttribute('aria-current', 'page');
-              }
+        const groupLabelSpan = summary.querySelector('.group-label span') as HTMLElement | null;
+        if (!groupLabelSpan) return;
 
-              groupLabelSpan.parentNode?.replaceChild(a, groupLabelSpan);
-              a.appendChild(groupLabelSpan);
+        // Seleziona il primo link DIRETTO per verificare se c'è un match di testo (es. "Spiegazione")
+        const directFirstLink = details.querySelector(':scope > ul > li > a') as HTMLAnchorElement | null;
+        let isMatch = false;
 
-              a.addEventListener('click', (e) => {
-                e.stopPropagation();
-              });
+        if (directFirstLink) {
+          const firstLinkLabel = directFirstLink.querySelector('span')?.textContent?.trim().toLowerCase();
+          const groupLabelText = groupLabelSpan.textContent?.trim().toLowerCase();
 
-              const li = firstLink.closest('li');
-              if (li) {
-                li.style.display = 'none';
-              }
-            }
+          isMatch = groupLabelText === firstLinkLabel || 
+                    firstLinkLabel === 'spiegazione' ||
+                    (groupLabelText === 'modello iso/osi' && firstLinkLabel === 'iso/osi');
+        }
+
+        const a = document.createElement('a');
+        a.href = href;
+        a.className = 'group-link-header';
+        a.style.display = 'inline-block';
+        a.style.color = 'inherit';
+        a.style.textDecoration = 'none';
+
+        // Applica l'evidenziazione 'active' al gruppo SOLO se stiamo per nascondere la prima voce (isMatch),
+        // altrimenti i gruppi padre verrebbero evidenziati assieme ai gruppi figli
+        if (isMatch && directFirstLink && directFirstLink.getAttribute('aria-current') === 'page') {
+          a.setAttribute('aria-current', 'page');
+        }
+
+        groupLabelSpan.parentNode?.replaceChild(a, groupLabelSpan);
+        a.appendChild(groupLabelSpan);
+
+        a.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
+
+        // Se è un match diretto, nascondi la voce duplicata
+        if (isMatch && directFirstLink) {
+          const li = directFirstLink.closest('li');
+          if (li) {
+            li.style.display = 'none';
           }
         }
+      }
+    });
+  }
+
+  function setupSidebarStatePersistence() {
+    const sidebar = document.querySelector('nav');
+    if (!sidebar) return;
+
+    const detailsList = sidebar.querySelectorAll('details');
+    detailsList.forEach(details => {
+      const summary = details.querySelector('summary');
+      if (!summary) return;
+      
+      const labelText = summary.textContent?.trim() || '';
+      if (!labelText) return;
+
+      const key = 'starlight-sidebar-state-' + labelText;
+
+      // Ripristina lo stato dal localStorage
+      const savedState = localStorage.getItem(key);
+      const hasActiveLink = details.querySelector('a[aria-current="page"]');
+
+      // Se il gruppo contiene la pagina attiva, deve restare aperto per mostrare dov'è l'utente.
+      // Altrimenti applichiamo la preferenza salvata (se esiste).
+      if (!hasActiveLink) {
+        if (savedState === 'open') {
+          details.setAttribute('open', '');
+        } else if (savedState === 'closed') {
+          details.removeAttribute('open');
+        }
+      }
+
+      // Salva lo stato ogni volta che l'utente apre/chiude il gruppo
+      if (!details.hasAttribute('data-state-listener')) {
+        details.setAttribute('data-state-listener', 'true');
+        details.addEventListener('toggle', () => {
+          localStorage.setItem(key, details.hasAttribute('open') ? 'open' : 'closed');
+        });
       }
     });
   }
@@ -307,6 +357,7 @@ import Default from "@astrojs/starlight/components/Head.astro";
   setupCryptoTool();
   setupModals();
   setupSidebarGroupLinks();
+  setupSidebarStatePersistence();
   renderMath();
 
   document.addEventListener('astro:page-load', () => {
@@ -315,6 +366,7 @@ import Default from "@astrojs/starlight/components/Head.astro";
     setupCryptoTool();
     setupModals();
     setupSidebarGroupLinks();
+    setupSidebarStatePersistence();
     renderMath();
   });
 

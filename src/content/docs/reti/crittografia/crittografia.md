@@ -3,7 +3,7 @@ title: Crittografia
 # has_toc: false
 has_toc: true
 ---
-* TOC
+
 
 
 ## Introduzione

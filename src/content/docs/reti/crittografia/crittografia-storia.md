@@ -1,7 +1,7 @@
 ---
 title: Storia della Crittografia
 ---
-* TOC
+
 
 ## Crittografia antica
 

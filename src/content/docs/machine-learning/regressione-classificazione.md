@@ -432,3 +432,15 @@ Partendo da questi 4 valori, calcoliamo le tre metriche fondamentali:
     $$
     \text{Sensibilità} = \frac{TP}{TP + FN}
     $$
+
+---
+
+## 2.7 Esercizi e Laboratorio Pratico
+
+Per mettere in pratica le conoscenze teoriche acquisite in questa unità sulla regressione, sulla classificazione e sulla valutazione dei modelli, consulta la sezione pratica del manuale:
+
+*   **Teoria e Calcolo (Carta e Penna)**:
+    *   [Esercizi Teorici: Regressione, Classificazione e Valutazione](file:///f:/Progetti%20Github/Manuale_Libero_Online_di_Informatica/Repository-manuale/src/content/docs/machine-learning/esercizi-teorici-regressione-classificazione.md)
+*   **Esercitazione in Python (Scikit-Learn)**:
+    *   [Laboratorio: Regressione e Classificazione](file:///f:/Progetti%20Github/Manuale_Libero_Online_di_Informatica/Repository-manuale/src/content/docs/machine-learning/laboratorio-regressione-classificazione.md)
+    *   [Download Dataset Studenti (CSV): studenti_voti.csv](/manuale-libero-online-di-informatica/assets/documenti/studenti_voti.csv)

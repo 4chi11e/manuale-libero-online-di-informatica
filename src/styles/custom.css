@@ -31,16 +31,19 @@
 main h2 {
   font-size: 1.7rem !important;
   color: var(--sl-color-text) !important;
-  font-weight: 600 !important; /* Meno grassettoso per coerenza con il titolo principale */
+  font-weight: 600 !important;
+  /* Meno grassettoso per coerenza con il titolo principale */
   margin-top: 2.5rem !important;
   margin-bottom: 1rem !important;
-  border-bottom: 1px solid var(--sl-color-gray-6) !important; /* Bordo più sottile e discreto */
+  border-bottom: 1px solid var(--sl-color-gray-6) !important;
+  /* Bordo più sottile e discreto */
   padding-bottom: 0.4rem !important;
 }
 
 main h3 {
   font-size: 1.35rem !important;
-  color: #c5c2d9 !important; /* Grigio con una leggera sfumatura viola in dark mode */
+  color: #c5c2d9 !important;
+  /* Grigio con una leggera sfumatura viola in dark mode */
   font-weight: 600 !important;
   margin-top: 2rem !important;
   margin-bottom: 0.75rem !important;
@@ -48,19 +51,22 @@ main h3 {
 
 main h4 {
   font-size: 1.125rem !important;
-  color: #a8a5bd !important; /* Grigio ancora più discreto per H4 in dark mode */
+  color: #a8a5bd !important;
+  /* Grigio ancora più discreto per H4 in dark mode */
   font-weight: 600 !important;
   margin-top: 1.5rem !important;
   margin-bottom: 0.5rem !important;
 }
 
 :root[data-theme='light'] main h3 {
-  color: #5a5575 !important; /* Grigio con sfumatura viola scura in light mode */
+  color: #5a5575 !important;
+  /* Grigio con sfumatura viola scura in light mode */
 }
 
 
 :root[data-theme='light'] main h4 {
-  color: #767194 !important; /* Grigio medio in light mode */
+  color: #767194 !important;
+  /* Grigio medio in light mode */
 }
 
 
@@ -605,7 +611,7 @@ li {
   text-decoration: none;
 }
 
-/* Quando una voce di gruppo della barra laterale è attiva */
+/* Quando una voce di gruppo della barra laterale è attiva (riquadro viola) */
 #starlight__sidebar summary:has(a.group-link-header[aria-current='page']) {
   background-color: var(--sl-color-text-accent) !important;
   border-radius: 0.25rem;
@@ -619,6 +625,7 @@ li {
 
 /* Rende in grassetto la voce attiva della barra laterale (sia essa link o titolo di gruppo) */
 #starlight__sidebar a[aria-current="page"],
+#starlight__sidebar summary:has(a.group-link-header[aria-current='page']) span,
 #starlight__sidebar summary:has(a.group-link-header[aria-current='page']) .large,
 #starlight__sidebar summary:has(a.group-link-header[aria-current='page']) a.group-link-header {
   font-weight: bold !important;
@@ -637,33 +644,85 @@ li {
   color: inherit !important;
 }
 
-/* Rende i titoli dei gruppi con sottopagine graficamente identici ai link singoli della barra laterale */
-#starlight__sidebar summary,
-#starlight__sidebar summary .large,
-#starlight__sidebar details summary {
-  font-size: var(--sl-text-sm) !important;
-  font-weight: normal !important;
-  color: var(--sl-color-gray-2) !important; /* Grigio chiaro in dark mode */
+/* ==========================================
+   GERARCHIA VISIVA BARRA LATERALE (SIDEBAR HIERARCHY)
+   ========================================== */
+
+/* 1. PRIMO LIVELLO (Voci principali, es. Programmazione in C, Reti di Calcolatori, Machine Learning...) */
+#starlight__sidebar>ul>li>a:not([aria-current='page']),
+#starlight__sidebar>ul>li>details>summary,
+#starlight__sidebar>ul>li>details>summary .large,
+#starlight__sidebar>ul>li>details>summary a.group-link-header {
+  font-size: var(--sl-text-lg) !important;
+  font-weight: 600 !important;
+  /* Semibold */
+  color: var(--sl-color-white) !important;
 }
 
-/* Rende tutti i link non attivi della barra laterale di grigio a contrasto più alto (gray-2) */
-#starlight__sidebar a:not([aria-current="page"]) {
-  color: var(--sl-color-gray-2) !important;
-}
-
-/* Override in Light Mode: usiamo gray-1 (grigio molto scuro/quasi nero) per massimo contrasto su fondo bianco */
-:root[data-theme='light'] #starlight__sidebar summary,
-:root[data-theme='light'] #starlight__sidebar summary .large,
-:root[data-theme='light'] #starlight__sidebar details summary,
-:root[data-theme='light'] #starlight__sidebar a:not([aria-current="page"]) {
+:root[data-theme='light'] #starlight__sidebar>ul>li>a:not([aria-current='page']),
+:root[data-theme='light'] #starlight__sidebar>ul>li>details>summary,
+:root[data-theme='light'] #starlight__sidebar>ul>li>details>summary .large,
+:root[data-theme='light'] #starlight__sidebar>ul>li>details>summary a.group-link-header {
   color: var(--sl-color-gray-1) !important;
+  /* Nero in light mode */
 }
 
+/* 2. SECONDO LIVELLO (Sotto-moduli, es. Introduzione e Dati, Modello ISO/OSI, Architettura dei calcolatori) */
+#starlight__sidebar>ul>li>details>ul>li>a:not([aria-current='page']),
+#starlight__sidebar details details summary,
+#starlight__sidebar details details summary span,
+#starlight__sidebar details details summary a.group-link-header {
+  font-size: var(--sl-text-sm) !important;
+  font-weight: 500 !important;
+  /* Peso intermedio (Medium) */
+  color: var(--sl-color-white) !important;
+  /* Sempre nero/bianco a contrasto pieno */
+}
+
+:root[data-theme='light'] #starlight__sidebar>ul>li>details>ul>li>a:not([aria-current='page']),
+:root[data-theme='light'] #starlight__sidebar details details summary,
+:root[data-theme='light'] #starlight__sidebar details details summary span,
+:root[data-theme='light'] #starlight__sidebar details details summary a.group-link-header {
+  color: var(--sl-color-gray-1) !important;
+  /* Nero in light mode */
+}
+
+/* 3. TERZO LIVELLO E OLTRE (Pagine finali, es. Spiegazione, Esercizi, sotto-gruppi di terzo livello e oltre) */
+#starlight__sidebar details details ul a:not([aria-current='page']),
+#starlight__sidebar details details ul a:not([aria-current='page']) span,
+#starlight__sidebar details details details summary,
+#starlight__sidebar details details details summary span,
+#starlight__sidebar details details details summary a.group-link-header {
+  font-size: var(--sl-text-sm) !important;
+  font-weight: 400 !important;
+  /* Peso normale (Regular) per il terzo livello e oltre */
+  color: var(--sl-color-white) !important;
+  /* Chiara e nitida */
+}
+
+:root[data-theme='light'] #starlight__sidebar details details ul a:not([aria-current='page']),
+:root[data-theme='light'] #starlight__sidebar details details ul a:not([aria-current='page']) span,
+:root[data-theme='light'] #starlight__sidebar details details details summary,
+:root[data-theme='light'] #starlight__sidebar details details details summary span,
+:root[data-theme='light'] #starlight__sidebar details details details summary a.group-link-header {
+  color: var(--sl-color-gray-1) !important;
+  /* Nera e nitida in light mode */
+}
+
+/* Hover States per tutti i livelli della barra laterale */
 #starlight__sidebar summary:hover,
 #starlight__sidebar summary:hover .large,
 #starlight__sidebar details summary:hover,
 #starlight__sidebar a:not([aria-current="page"]):hover {
   color: var(--sl-color-text-accent) !important;
+}
+
+/* Colore testo per le voci attive (aria-current) a qualsiasi livello della sidebar */
+#starlight__sidebar a[aria-current="page"],
+#starlight__sidebar a[aria-current="page"] span {
+  color: var(--sl-color-text-invert) !important;
+  background-color: var(--sl-color-text-accent) !important;
+  border-radius: 0.25rem;
 }
 
 
@@ -674,6 +733,7 @@ li {
    STILI DI STAMPA (PRINT MEDIA QUERY)
    ========================================== */
 @media print {
+
   /* Forzatura del tema chiaro (colori adatti alla carta e risparmio inchiostro) */
   :root {
     --sl-color-background: #ffffff !important;
@@ -723,16 +783,17 @@ li {
     color: #000000 !important;
     font-size: 10pt !important;
     line-height: 1.45 !important;
-    margin: 0.4cm !important; /* Margine minimo per lasciare il controllo alla finestra di stampa del browser */
+    margin: 0.4cm !important;
+    /* Margine minimo per lasciare il controllo alla finestra di stampa del browser */
   }
 
   /* Adatta i contenitori principali del layout Starlight alla stampa a piena pagina */
-  .page, 
+  .page,
   .main-frame,
   .main-pane,
   main,
   .content-panel,
-  .content-panel > div {
+  .content-panel>div {
     max-width: 100% !important;
     width: 100% !important;
     margin: 0 !important;
@@ -741,7 +802,11 @@ li {
   }
 
   /* Testo scuro per la stampa. Nota: NON forziamo font-size su span per non rompere la formattazione KaTeX (frazioni, esponenti, indici) */
-  p, li, td, th, a {
+  p,
+  li,
+  td,
+  th,
+  a {
     color: #000000 !important;
   }
 
@@ -770,19 +835,31 @@ li {
     margin-bottom: 4pt !important;
   }
 
-  h5, h6 {
+  h5,
+  h6 {
     font-size: 1em !important;
     margin-top: 10pt !important;
     margin-bottom: 4pt !important;
   }
 
   /* Impedisci interruzioni di pagina subito dopo i titoli */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     page-break-after: avoid !important;
     break-after: avoid !important;
   }
 
-  img, table, pre, blockquote, .soluzione-container, .thumbnail, .katex-display {
+  img,
+  table,
+  pre,
+  blockquote,
+  .soluzione-container,
+  .thumbnail,
+  .katex-display {
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }
@@ -795,7 +872,12 @@ li {
   }
 
   /* Estetica blocchi di codice pulita (sfondo grigio chiaro, testo scuro) */
-  pre, code, kbd, samp, var, tt {
+  pre,
+  code,
+  kbd,
+  samp,
+  var,
+  tt {
     background-color: #f8f9fa !important;
     color: #111111 !important;
     border: 1px solid #e1e4e6 !important;
@@ -816,7 +898,7 @@ li {
     color: #000000 !important;
     text-decoration: underline !important;
   }
-  
+
   a::after {
     content: "" !important;
   }

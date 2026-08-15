@@ -1,7 +1,7 @@
 ---
 title: Crittografia Moderna
 ---
-* TOC
+
 
 
 La crittografia moderna si differenzia notevolmente dalla crittografia di cui si è parlato fin ora; l’avvento dei computer infatti ha rivoluzionato profondamente sia i sistemi crittografici sia il modo di vedere e utilizzare la crittografia.
