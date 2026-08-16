@@ -8,6 +8,12 @@
   --sl-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --sl-font-mono: 'Cascadia Code', Consolas, Menlo, Monaco, 'DejaVu Sans Mono', 'Courier New', monospace;
 
+  /* Larghezze Layout Ottimizzate (Calibrazione Esatta Full HD 1920x1080) */
+  --sl-sidebar-width: 21.5rem;
+  /* ~344px per la barra di navigazione sinistra */
+  --sl-content-width: 76rem;
+  /* ~1216px per il contenuto centrale (pieno utilizzo dello schermo) */
+
   /* Palette Colori Viola/Indaco - Dark Mode (Default) */
   --sl-color-accent: #a38cf4;
   --sl-color-accent-high: #c4b5fd;
@@ -38,12 +44,22 @@ samp {
   --sl-color-background: #faf9ff;
 }
 
-/* Fix per il sommario di destra (TOC / "In questa pagina"): evita il troncamento dei testi */
+/* Fix e larghezza per il sommario di destra (TOC / "In questa pagina") */
 starlight-toc,
 .right-sidebar,
 .right-sidebar-panel,
 aside.right-sidebar {
   overflow-x: hidden !important;
+}
+
+@media (min-width: 72rem) {
+
+  .right-sidebar,
+  .right-sidebar-panel,
+  aside.right-sidebar {
+    width: 21.5rem !important;
+    /* ~344px di larghezza per il sommario destro */
+  }
 }
 
 starlight-toc a,
@@ -101,7 +117,7 @@ main h4 {
 }
 
 
-/* Stili Generali di Layout e Tipografia */
+/* Stili Generali di Layout e Tipografia Ibrida (Editorial Breakout) */
 p {
   text-align: left;
   line-height: 1.7;
@@ -110,6 +126,31 @@ p {
 li {
   text-align: left;
   line-height: 1.6;
+}
+
+/* Larghezza di lettura ottimale a schermo per i testi discorsivi ed elenchi */
+.sl-markdown-content>p,
+.sl-markdown-content>ul,
+.sl-markdown-content>ol,
+.sl-markdown-content>blockquote {
+  max-width: 84ch;
+  /* Circa 80-85 caratteri per riga per non affaticare gli occhi */
+  margin-right: auto;
+}
+
+/* Tutti gli elementi ricchi e tecnici sfruttano il 100% della colonna a tutta larghezza (~1216px) */
+.sl-markdown-content>table,
+.sl-markdown-content>.expressive-code,
+.sl-markdown-content>pre,
+.sl-markdown-content>.starlight-aside,
+.sl-markdown-content>.soluzione-container,
+.sl-markdown-content>details,
+.sl-markdown-content>.katex-display,
+.sl-markdown-content>.thumbnail,
+.sl-markdown-content>.tabella-conversioni,
+.sl-markdown-content>img,
+.sl-markdown-content>svg {
+  max-width: 100% !important;
 }
 
 
@@ -162,6 +203,14 @@ li {
 
 .clear-both {
   clear: both !important;
+}
+
+.mr-4 {
+  margin-right: 1rem !important;
+}
+
+.mb-4 {
+  margin-block-end: 1rem !important;
 }
 
 /* Modificatori di dimensione per le miniature */
@@ -224,6 +273,73 @@ li {
   float: right;
   margin-left: 1.5rem;
   margin-bottom: 1rem;
+}
+
+/* Stile compatto per la tavola di cifratura di Vigenere */
+.tbl-vigenere {
+  margin: 2rem 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  text-align: center !important;
+}
+
+.sl-markdown-content .tbl-vigenere table,
+.tbl-vigenere table {
+  display: table !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  border-collapse: collapse !important;
+  font-family: var(--sl-font-mono) !important;
+  font-size: 0.95rem !important;
+  table-layout: fixed !important;
+}
+
+.sl-markdown-content .tbl-vigenere th,
+.sl-markdown-content .tbl-vigenere td,
+.tbl-vigenere th,
+.tbl-vigenere td {
+  padding: 6px 0 !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  line-height: 1.4 !important;
+  border: 1px solid var(--sl-color-gray-5) !important;
+  min-width: 0 !important;
+  width: 3.84% !important;
+  font-size: 0.95rem !important;
+}
+
+.sl-markdown-content .tbl-vigenere th,
+.tbl-vigenere th {
+  background-color: var(--sl-color-gray-6) !important;
+  font-weight: 700 !important;
+}
+
+/* Evidenziazione colonne chiave SOLE */
+.sl-markdown-content .tbl-vigenere th:nth-child(5),
+.sl-markdown-content .tbl-vigenere td:nth-child(5),
+.sl-markdown-content .tbl-vigenere th:nth-child(12),
+.sl-markdown-content .tbl-vigenere td:nth-child(12),
+.sl-markdown-content .tbl-vigenere th:nth-child(15),
+.sl-markdown-content .tbl-vigenere td:nth-child(15),
+.sl-markdown-content .tbl-vigenere th:nth-child(19),
+.sl-markdown-content .tbl-vigenere td:nth-child(19) {
+  background-color: rgba(99, 67, 223, 0.2) !important;
+  font-weight: 700 !important;
+  color: var(--sl-color-accent-high) !important;
+}
+
+:root[data-theme='light'] .sl-markdown-content .tbl-vigenere th:nth-child(5),
+:root[data-theme='light'] .sl-markdown-content .tbl-vigenere td:nth-child(5),
+:root[data-theme='light'] .sl-markdown-content .tbl-vigenere th:nth-child(12),
+:root[data-theme='light'] .sl-markdown-content .tbl-vigenere td:nth-child(12),
+:root[data-theme='light'] .sl-markdown-content .tbl-vigenere th:nth-child(15),
+:root[data-theme='light'] .sl-markdown-content .tbl-vigenere td:nth-child(15),
+:root[data-theme='light'] .sl-markdown-content .tbl-vigenere th:nth-child(19),
+:root[data-theme='light'] .sl-markdown-content .tbl-vigenere td:nth-child(19) {
+  background-color: rgba(99, 67, 223, 0.12) !important;
+  color: #3b20ab !important;
 }
 
 @media (max-width: 1050px) {
@@ -811,9 +927,9 @@ li {
     --sl-color-gray-6: #f0f0f0 !important;
   }
 
-  /* Nascondi l'intestazione e il piè di pagina predefiniti del browser (URL, titolo, data) */
+  /* Margini di pagina A4 standard ed eleganti per la stampa (stile manuale/dispensa) */
   @page {
-    margin: 0 !important;
+    margin: 1.6cm 1.8cm !important;
   }
 
   /* Nascondi elementi di navigazione, barre laterali, header, footer e controlli interattivi */
@@ -830,6 +946,7 @@ li {
   .theme-toggle,
   .soluzione-toggler,
   #starlight__mobile-toc,
+  .modal,
   .print-hidden {
     display: none !important;
   }
@@ -843,13 +960,13 @@ li {
   body {
     background-color: #ffffff !important;
     color: #000000 !important;
-    font-size: 10pt !important;
-    line-height: 1.45 !important;
-    margin: 0.4cm !important;
-    /* Margine minimo per lasciare il controllo alla finestra di stampa del browser */
+    font-size: 10.5pt !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  /* Adatta i contenitori principali del layout Starlight alla stampa a piena pagina */
+  /* Adatta i contenitori principali del layout Starlight alla stampa a piena pagina A4 con paginazione naturale */
   .page,
   .main-frame,
   .main-pane,
@@ -863,6 +980,14 @@ li {
     box-shadow: none !important;
   }
 
+  .sl-markdown-content>p,
+  .sl-markdown-content>ul,
+  .sl-markdown-content>ol,
+  .sl-markdown-content>blockquote {
+    max-width: 76ch !important;
+    margin-right: auto !important;
+  }
+
   /* Testo scuro per la stampa. Nota: NON forziamo font-size su span per non rompere la formattazione KaTeX (frazioni, esponenti, indici) */
   p,
   li,
@@ -874,9 +999,10 @@ li {
 
   /* Dimensioni e spaziature titoli ottimizzate per mantenere la corretta gerarchia (usando em rispetto ai 10pt del body) */
   h1 {
-    font-size: 1.8em !important;
+    font-size: 2.3em !important;
+    font-weight: 700 !important;
     margin-top: 0 !important;
-    margin-bottom: 8pt !important;
+    margin-bottom: 12pt !important;
   }
 
   h2 {
@@ -926,11 +1052,54 @@ li {
     break-inside: avoid !important;
   }
 
-  /* Gestione delle miniature per la stampa */
+  /* Gestione delle miniature e degli elementi flottati per la stampa */
+  .tright,
+  .float-right,
+  .thumbnail.float-right {
+    float: right !important;
+    margin-left: 14pt !important;
+    margin-bottom: 10pt !important;
+    margin-top: 4pt !important;
+    clear: none !important;
+    display: block !important;
+  }
+
+  .tleft,
+  .float-left,
+  .thumbnail.float-left {
+    float: left !important;
+    margin-right: 14pt !important;
+    margin-bottom: 10pt !important;
+    margin-top: 4pt !important;
+    clear: none !important;
+    display: block !important;
+  }
+
+  .clear-both {
+    clear: both !important;
+  }
+
   .thumbnail {
     border: 1px solid #cccccc !important;
     background-color: #ffffff !important;
-    width: 45% !important;
+    width: 42% !important;
+    max-width: 42% !important;
+    box-sizing: border-box !important;
+  }
+
+  .thumbnail--50 {
+    width: 48% !important;
+    max-width: 48% !important;
+  }
+
+  .thumbnail--33 {
+    width: 32% !important;
+    max-width: 32% !important;
+  }
+
+  .thumbnail--25 {
+    width: 24% !important;
+    max-width: 24% !important;
   }
 
   /* Estetica blocchi di codice pulita (sfondo grigio chiaro, testo scuro) */
@@ -986,6 +1155,24 @@ li {
     height: auto !important;
     padding: 10px !important;
     background-color: transparent !important;
+  }
+
+  /* Gestione schede conversioni nella stampa: mostra svolgimenti puliti e nascondi i pulsanti */
+  details.conversione-item {
+    border: none !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin: 6pt 0 !important;
+  }
+
+  details.conversione-item .conv-soluzione {
+    display: block !important;
+    padding: 4pt 0 !important;
+  }
+
+  details.conversione-item summary .conv-btn {
+    display: none !important;
   }
 }
 
