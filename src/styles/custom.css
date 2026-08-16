@@ -36,44 +36,41 @@ code, pre, pre code, kbd, samp {
 
 /* Gerarchia e Stile delle Intestazioni (H2, H3, H4) */
 main h2 {
-  font-size: 1.7rem !important;
+  font-size: 1.6rem !important;
   color: var(--sl-color-text) !important;
   font-weight: 600 !important;
-  /* Meno grassettoso per coerenza con il titolo principale */
-  margin-top: 2.5rem !important;
-  margin-bottom: 1rem !important;
+  margin-top: 2.25rem !important;
+  margin-bottom: 0.85rem !important;
   border-bottom: 1px solid var(--sl-color-gray-6) !important;
-  /* Bordo più sottile e discreto */
-  padding-bottom: 0.4rem !important;
+  padding-bottom: 0.35rem !important;
 }
 
 main h3 {
-  font-size: 1.35rem !important;
-  color: #c5c2d9 !important;
-  /* Grigio con una leggera sfumatura viola in dark mode */
+  font-size: 1.28rem !important;
+  color: #dcd7f5 !important;
+  /* Chiaro e leggibile con una delicata sfumatura viola del tema in dark mode */
   font-weight: 600 !important;
-  margin-top: 2rem !important;
-  margin-bottom: 0.75rem !important;
+  margin-top: 1.85rem !important;
+  margin-bottom: 0.7rem !important;
 }
 
 main h4 {
-  font-size: 1.125rem !important;
-  color: #a8a5bd !important;
-  /* Grigio ancora più discreto per H4 in dark mode */
+  font-size: 1.08rem !important;
+  color: #bfb7e6 !important;
+  /* Lilla chiaro morbido, non grigio spento */
   font-weight: 600 !important;
-  margin-top: 1.5rem !important;
-  margin-bottom: 0.5rem !important;
+  margin-top: 1.35rem !important;
+  margin-bottom: 0.45rem !important;
 }
 
 :root[data-theme='light'] main h3 {
-  color: #5a5575 !important;
-  /* Grigio con sfumatura viola scura in light mode */
+  color: #3b2c7d !important;
+  /* Viola indaco profondo e nitido in light mode */
 }
 
-
 :root[data-theme='light'] main h4 {
-  color: #767194 !important;
-  /* Grigio medio in light mode */
+  color: #534591 !important;
+  /* Viola medio elegante e leggibile in light mode */
 }
 
 

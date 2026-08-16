@@ -100,7 +100,7 @@ Sommiamo solo i valori corrispondenti ai bit **1**:
 $$(110101)_2 = 32 + 16 + 4 + 1 = 53_{10}$$
 :::
 
-#### Da Decimale a Binario (Metodo delle Divisioni Successive)
+#### Da Decimale a Binario (Metodo 1: Divisioni Successive)
 Per convertire un numero intero da decimale a binario:
 1. Si divide il numero decimale per $2$.
 2. Si annota il **resto** (che sarà sempre $0$ o $1$).
@@ -108,7 +108,7 @@ Per convertire un numero intero da decimale a binario:
 4. Si prosegue fino a quando il quoziente diventa $0$.
 5. **Si leggono i resti in ordine inverso (dall'ultimo ottenuto al primo, cioè dal basso verso l'alto).**
 
-:::note[Esempio: Convertire 45 in binario]
+:::note[Esempio: Convertire 45 in binario con le divisioni]
 Eseguiamo le divisioni successive per 2:
 
 | Divisione | Quoziente | Resto | Cifra binaria |
@@ -122,6 +122,36 @@ Eseguiamo le divisioni successive per 2:
 
 Raccogliendo i resti dal basso verso l'alto otteniamo:
 $$45_{10} = (101101)_2$$
+:::
+
+#### Da Decimale a Binario (Metodo 2: Metodo Intuitivo per Sottrazione di Potenze)
+Per numeri non eccessivamente grandi (fino a qualche centinaio), esiste un metodo molto più rapido che si può svolgere **in gran parte a mente**.
+
+Si basa su una semplice domanda: *«Qual è la potenza di 2 più grande contenuta nel mio numero?»*.
+
+**Come procedere:**
+1. Trova la **potenza di 2 più alta** che sia minore o uguale al numero di partenza.
+2. Scrivi **$1$** come prima cifra e calcola quanto **rimane** sottraendo quella potenza.
+3. Passa in rassegna in ordine decrescente **tutte le potenze successive fino a $2^0 = 1$**:
+   - Se la potenza considerata **ci sta** nel valore rimasto: scrivi **$1$** e sottrai il suo valore dal totale rimanente.
+   - Se la potenza **non ci sta** (è più grande di quanto rimasto): scrivi **$0$** e mantieni inalterato il valore rimanente.
+4. **Le cifre si leggono direttamente in ordine naturale, dall'alto verso il basso (da sinistra a destra).**
+
+:::note[Esempio: Convertire 100 in binario con la sottrazione di potenze]
+La potenza di 2 più grande contenuta in 100 è $2^6 = 64$. Scorriamo tutte le potenze a scendere fino a $2^0$:
+
+| Potenza di 2 | Valore Rimanente | Ci sta? | Operazione / Resto | Cifra Binaria |
+| :---: | :---: | :---: | :---: | :---: |
+| $2^6 = 64$ | $100$ | **Sì** ($100 \ge 64$) | $100 - 64 = 36$ | **1** |
+| $2^5 = 32$ | $36$ | **Sì** ($36 \ge 32$) | $36 - 32 = 4$ | **1** |
+| $2^4 = 16$ | $4$ | No ($4 < 16$) | $4$ | **0** |
+| $2^3 = 8$ | $4$ | No ($4 < 8$) | $4$ | **0** |
+| $2^2 = 4$ | $4$ | **Sì** ($4 \ge 4$) | $4 - 4 = 0$ | **1** |
+| $2^1 = 2$ | $0$ | No ($0 < 2$) | $0$ | **0** |
+| $2^0 = 1$ | $0$ | No ($0 < 1$) | $0$ | **0** |
+
+Leggendo le cifre dall'alto verso il basso otteniamo direttamente:
+$$100_{10} = (1100100)_2$$
 :::
 
 ---
@@ -140,8 +170,8 @@ Basta moltiplicare ciascuna cifra per il valore della sua colonna (ricordando di
 
 :::note[Esempio: Convertire 2A7 (esadecimale) in decimale]
 Ricordando che $\text{A} = 10$:
-$$(2\text{A}7)_{16} = 2 \cdot 16^2 + 10 \cdot 16^1 + 7 \cdot 16^0$$
-$$(2\text{A}7)_{16} = (2 \times 256) + (10 \times 16) + (7 \times 1) = 512 + 160 + 7 = 679_{10}$$
+
+$$\begin{aligned} (2\text{A}7)_{16} &= 2 \cdot 16^2 + 10 \cdot 16^1 + 7 \cdot 16^0 \\ &= (2 \times 256) + (10 \times 16) + (7 \times 1) \\ &= 512 + 160 + 7 = 679_{10} \end{aligned}$$
 :::
 
 #### Da Decimale a Esadecimale (Divisioni Successive per 16)
@@ -160,11 +190,31 @@ Raccogliendo i resti dal basso verso l'alto:
 $$3019_{10} = (\text{BCB})_{16}$$
 :::
 
+:::tip[E se provassimo con il Metodo Intuitivo delle Potenze?]
+Possiamo convertire lo stesso numero $3019_{10}$ cercando le potenze di 16 ($1, 16, 256, 4096 \dots$). Noteremo però che **a mente è molto più faticoso**!
+
+Nel sistema binario una potenza può starci solo $0$ o $1$ volta. In esadecimale, invece, dobbiamo calcolare **quante volte** (da 0 a 15) la potenza è contenuta nel valore rimanente:
+
+| Potenza di 16 | Valore Rimanente | Quante volte ci sta? | Operazione e Resto | Cifra Esadecimale |
+| :---: | :---: | :---: | :---: | :---: |
+| $16^2 = 256$ | $3019$ | **11 volte** | $3019 - (11 \times 256) = 3019 - 2816 = 203$ | **B** ($11$) |
+| $16^1 = 16$ | $203$ | **12 volte** | $203 - (12 \times 16) = 203 - 192 = 11$ | **C** ($12$) |
+| $16^0 = 1$ | $11$ | **11 volte** | $11 - (11 \times 1) = 0$ | **B** ($11$) |
+
+Risultato: $3019_{10} = (\text{BCB})_{16}$.
+
+**Conclusione:**
+- Il **metodo intuitivo delle potenze** è **spesso più veloce** in **base 2** (specialmente per numeri piccoli o medi), dove basta verificare se una potenza è presente o assente.
+- In **base 16**, il **metodo delle divisioni successive** (oppure la conversione diretta a blocchi di 4 bit) è molto più semplice e sicuro, poiché evita di dover calcolare moltiplicazioni pesanti a mente come $11 \times 256$.
+:::
+
 ---
 
 ### 3.3. Conversioni tra Basi Generiche Qualsiasi (Metodo del Ponte in Base 10)
 
-Quando dobbiamo convertire un numero tra due basi generiche (ad esempio da base 5 a base 7), la strada più semplice è usare la nostra cara **Base 10 come "ponte"**:
+Quando dobbiamo convertire un numero tra due basi generiche qualsiasi (ad esempio da base 5 a base 7), il metodo universale è utilizzare la nostra cara **Base 10 come "ponte"**.
+
+Poiché siamo abituati a eseguire tutte le operazioni aritmetiche (somme, moltiplicazioni e divisioni) in base 10, passare per il sistema decimale è il procedimento standard per collegare due basi arbitrarie:
 
 ```text
 ┌─────────────┐             Passo 1                     ┌──────────────┐
@@ -178,8 +228,10 @@ Quando dobbiamo convertire un numero tra due basi generiche (ad esempio da base 
 ```
 
 :::note[Esempio: Convertire 342 (base 5) in base 7]
-**Passo 1: Da Base 5 a Base 10** (le colonne in base 5 valgono $1, 5, 25 \dots$)
-$$(342)_5 = (3 \times 25) + (4 \times 5) + (2 \times 1) = 75 + 20 + 2 = 97_{10}$$
+**Passo 1: Da Base 5 a Base 10** (le colonne in base 5 valgono $1, 5, 25 \dots$):
+
+$$(342)_5 = (3 \times 25) + (4 \times 5) + (2 \times 1)$$
+$$= 75 + 20 + 2 = 97_{10}$$
 
 **Passo 2: Da Base 10 a Base 7** (divisioni successive per 7)
 
@@ -322,21 +374,35 @@ Raccogliendo le cifre dall'alto verso il basso:
 $$0.6875_{10} = (0.1011)_2$$
 :::
 
-:::warning[I numeri periodici nel passaggio di base: il caso di 0.1]
-Un numero che ha una rappresentazione finita in decimale può diventare **periodico infinito** in binario!  
-Ad esempio, il numero decimale $0.1_{10}$ (un decimo) convertito in binario:
+#### I Numeri Periodici nel Passaggio di Base: il caso di 0.1
 
-- $0.1 \times 2 = \mathbf{0}.2 \implies 0$
-- $0.2 \times 2 = \mathbf{0}.4 \implies 0$
-- $0.4 \times 2 = \mathbf{0}.8 \implies 0$
-- $0.8 \times 2 = \mathbf{1}.6 \implies 1$
-- $0.6 \times 2 = \mathbf{1}.2 \implies 1$
-- $0.2 \times 2 = \mathbf{0}.4 \implies 0$ *(la sequenza $0011$ si ripete all'infinito)*
+Un numero che possiede una rappresentazione finita in decimale (come $0.1 = \frac{1}{10}$) può diventare **periodico infinito** quando viene convertito in binario!
+
+##### Come si identifica il periodo?
+> **Regola fondamentale:** Le moltiplicazioni si interrompono non appena **la parte decimale ottenuta ricompare identica a una già calcolata in un passaggio precedente**. Da quel momento in poi, infatti, l'algoritmo non farebbe altro che ripetere all'infinito la stessa sequenza di calcoli.
+
+Proviamo ad applicare le moltiplicazioni successive per 2 al numero $0.1_{10}$:
+
+| Passo | Moltiplicazione | Risultato | Cifra Binaria | Analisi del Periodo |
+| :---: | :---: | :---: | :---: | :--- |
+| **1** | $0.1 \times 2$ | $\mathbf{0}.2$ | **0** | **Antiperiodo** (1ª cifra dopo la virgola) |
+| **2** | $\mathbf{0.2} \times 2$ | $\mathbf{0}.4$ | **0** | 🟡 **Inizio del periodo:** entra la frazione **$0.2$** |
+| **3** | $0.4 \times 2$ | $\mathbf{0}.8$ | **0** | 2ª cifra del periodo |
+| **4** | $0.8 \times 2$ | $\mathbf{1}.6$ | **1** | 3ª cifra del periodo |
+| **5** | $0.6 \times 2$ | $\mathbf{1}.\mathbf{2}$ | **1** | 4ª cifra del periodo $\to$ avanza di nuovo la frazione **$\mathbf{0.2}$**! |
+| **6** | $\mathbf{0.2} \times 2$ | $\mathbf{0}.4$ | **0** | 🛑 **STOP:** abbiamo ritrovato **$0.2$** (già calcolato al Passo 2). |
+
+Poiché il ciclo si ripete a partire dal Passo 2, le quattro cifre binarie ottenute nei passi 2, 3, 4 e 5 formano il **periodo `0011`**:
 
 $$0.1_{10} = (0.0\overline{0011})_2 = 0.00011001100110011\dots_2$$
 
-Questo fenomeno spiega perché nei linguaggi di programmazione (come C, Java o Python) i calcoli con i numeri decimali possono presentare minuscoli errori di arrotondamento (ad esempio `0.1 + 0.2` che produce `0.30000000000000004`).
+:::caution[Perché i calcolatori sbagliano 0.1 + 0.2?]
+Poiché i registri del computer hanno una dimensione limitata (es. 32 o 64 bit per i tipi `float` e `double`), la sequenza periodica infinita deve essere **troncata e arrotondata**.
+
+Questo fenomeno fondamentale spiega perché in quasi tutti i linguaggi di programmazione (come C, Java, Python o JavaScript) calcolare `0.1 + 0.2` produce il celebre risultato `0.30000000000000004`!
 :::
+
+---
 
 ### 4.3. Conversioni Dirette con la Virgola (Binario ed Esadecimale)
 Quando si convertono numeri con la virgola tra binario ed esadecimale (o ottale), la regola è:
@@ -421,29 +487,53 @@ $$\text{Regola: } \quad C_2(x) = \overline{x} + 1$$
 Quindi, su 8 bit: $-43_{10} = 11010101_2$.
 :::
 
-#### Scorciatoia Pratica "Da Destra a Sinistra"
-Per calcolare il complemento a 2 a mente o rapidamente su carta:
-1. Prendi il numero positivo binario e **leggilo da destra verso sinistra**.
-2. **Ricopia inalterati tutti i bit fino al primo '1' compreso**.
-3. Da quel punto in poi verso sinistra, **inverti tutti i rimanenti bit** ($0 \to 1$, $1 \to 0$).
+#### Scorciatoia Pratica: Il Metodo "Da Destra a Sinistra"
+Per calcolare il complemento a 2 di un numero negativo senza dover eseguire l'inversione e la successiva addizione $+1$ in colonna, esiste una regola visiva immediata:
 
-- Numero di partenza ($+43_{10}$): `0 0 1 0 1 0 1` **`1`**
-- Invertiamo tutto a sinistra del primo '1': **`1 1 0 1 0 1 0`** **`1`** $\implies 11010101_2$
+> **Regola:**
+> 1. Prendi il numero positivo binario e **leggilo partendo da destra verso sinistra ($\leftarrow$)**.
+> 2. **Ricopia identici tutti gli eventuali zeri e il primo bit `1` che incontri**.
+> 3. Da quel punto in poi, procedendo sempre verso sinistra, **inverti tutti i bit rimanenti** ($0 \to 1$ e $1 \to 0$).
+
+:::note[Esempio 1: Calcolare -40 su 8 bit]
+Partiamo dal numero positivo $+40_{10} = 00101000_2$:
+
+| Bit (da sinistra a destra) | $b_7$ | $b_6$ | $b_5$ | $b_4$ | $b_3$ | $b_2$ | $b_1$ | $b_0$ | Azione da destra ($\leftarrow$) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| **Numero positivo ($+40$)** | `0` | `0` | `1` | `0` | **`1`** | **`0`** | **`0`** | **`0`** | Leggi da destra |
+| **Passo 1: Copia invariata** | - | - | - | - | **`1`** | **`0`** | **`0`** | **`0`** | Ricopia fino al 1° bit `1` |
+| **Passo 2: Inverti a sinistra** | **`1`** | **`1`** | **`0`** | **`1`** | - | - | - | - | Inverti tutti i bit rimasti |
+| **Risultato finale ($-40$)** | **`1`** | **`1`** | **`0`** | **`1`** | **`1`** | **`0`** | **`0`** | **`0`** | **$11011000_2$** |
+:::
+
+:::note[Esempio 2: Calcolare -43 su 8 bit]
+Partiamo dal numero positivo $+43_{10} = 00101011_2$:
+- Il primo bit a destra è già un `1`: ricopiamo solo quello (**`1`**).
+- Invertiamo tutti i 7 bit posti a sinistra: `0010101` $\to$ **`1101010`**.
+- Risultato: $-43_{10} = \mathbf{11010101}_2$.
+:::
 
 ---
 
 ### 5.4. Proprietà Straordinarie del Complemento a 2
 
-#### 1. Il Peso del Bit di Segno
-Nel complemento a 2 a $n$ bit, la formula della notazione posizionale rimane valida con una sola fondamentale modifica: **il bit più a sinistra ($b_{n-1}$) ha peso NEGATIVO pari a $-2^{n-1}$**, mentre tutti gli altri bit conservano i consueti pesi positivi:
+#### 1. Il Peso del Bit di Segno (Lettura Diretta del Valore)
+Normalmente, per scoprire quale numero decimale negativo corrisponde a una sequenza binaria in complemento a 2 (ad esempio `11010101`), bisognerebbe eseguire un lungo procedimento inverso: ri-applicare il complemento a due (invertire i bit e sommare $1$ per trovare il modulo positivo), calcolare il valore decimale e infine rimettere il segno "$-$".
+
+Esiste però una proprietà straordinaria che ci **risparmia completamente di dover riconvertire il numero**: la consueta formula della notazione posizionale rimane valida per calcolare il valore all'istante, con un'unica fondamentale regola:
+
+> **Il bit più a sinistra ($b_{n-1}$, il bit di segno) ha un peso NEGATIVO pari a $-2^{n-1}$**, mentre tutti gli altri bit conservano i consueti pesi positivi.
 
 $$V = -b_{n-1} \cdot 2^{n-1} + \sum_{k=0}^{n-2} b_k \cdot 2^k$$
 
-:::note[Verifica del valore 11010101 a 8 bit]
-I pesi a 8 bit sono: $-128, +64, +32, +16, +8, +4, +2, +1$.
+:::note[Esempio di Calcolo Diretto: Leggere 11010101 a 8 bit]
+I pesi delle colonne a 8 bit sono: $\mathbf{-128}, +64, +32, +16, +8, +4, +2, +1$.
 
-$$V = \mathbf{-128} \cdot 1 + 64 \cdot 1 + 32 \cdot 0 + 16 \cdot 1 + 8 \cdot 0 + 4 \cdot 1 + 2 \cdot 0 + 1 \cdot 1$$
-$$V = -128 + 64 + 16 + 4 + 1 = -128 + 85 = \mathbf{-43}_{10}$$
+Basta sommare direttamente i pesi delle colonne con bit `1`:
+
+$$\begin{aligned} V &= \mathbf{-128} \cdot 1 + 64 \cdot 1 + 32 \cdot 0 + 16 \cdot 1 + 8 \cdot 0 + 4 \cdot 1 + 2 \cdot 0 + 1 \cdot 1 \\ &= -128 + 64 + 16 + 4 + 1 \\ &= -128 + 85 = \mathbf{-43}_{10} \end{aligned}$$
+
+Otteniamo direttamente $-43_{10}$ in un solo passaggio, senza dover riconvertire o ri-complementare nulla!
 :::
 
 #### 2. Intervallo di Rappresentazione (Range) con $n$ bit
@@ -487,11 +577,53 @@ Il risultato a 8 bit è $00010000_2 = 16_{10}$, che è esattamente il risultato 
 :::
 
 #### Il Concetto di Overflow
-L'**overflow** (o traboccamento) si verifica quando il risultato di un'operazione tra interi con segno supera il valore massimo o minimo rappresentabile nel numero di bit a disposizione.
+L'**overflow** (o traboccamento) si verifica quando il risultato di un'operazione tra interi con segno eccede l'intervallo di valori rappresentabili nel registro (ad esempio tra $-128$ e $+127$ su 8 bit).
 
-- Se sommiamo due numeri positivi e il risultato ha bit di segno `1` (negativo), si è verificato un **overflow positivo**.
-- Se sommiamo due numeri negativi e il risultato ha bit di segno `0` (positivo), si è verificato un **overflow negativo**.
-- La somma di due numeri di segno opposto non può mai generare overflow.
+La regola per rilevare l'overflow è immediata:
+- **Overflow Positivo:** Somma di due numeri **positivi** che produce un risultato con bit di segno `1` (**negativo**).
+- **Overflow Negativo:** Somma di due numeri **negativi** che produce un risultato con bit di segno `0` (**positivo**).
+- *(Nota: la somma di due numeri di segno opposto non può **mai** generare overflow, poiché il risultato si avvicina sempre allo zero).*
+
+:::warning[Esempi Pratici di Overflow su 8 bit (Range: da -128 a +127)]
+**1. Esempio di Overflow Positivo (+70 + +80 = +150):**  
+Il valore teorico $+150$ supera il limite massimo rappresentabile ($+127$):
+
+```text
+    01000110   (+70)  +
+    01010000   (+80)  =
+  ──────────
+    10010110   (Bit di segno 1: la CPU legge -106!)
+```
+*Sommando due numeri positivi la CPU ottiene un numero con bit di segno `1`, producendo l'assurdo risultato $-106_{10}$ anziché $+150$!*
+
+---
+
+**2. Esempio di Overflow Negativo (-70 + -80 = -150):**  
+Il valore teorico $-150$ scende al di sotto del valore minimo rappresentabile ($-128$):
+
+```text
+    10111010   (-70)  +
+    10110000   (-80)  =
+  ──────────
+  (1)01101010   (Bit di segno 0: la CPU legge +106!)
+```
+*Sommando due numeri negativi, scartando il nono bit di riporto, la CPU ottiene un numero a 8 bit che inizia con `0`, producendo $+106_{10}$ anziché $-150$!*
+:::
+
+:::tip[Perché la somma di due numeri di segno opposto non può MAI causare overflow?]
+**Spiegazione intuitiva:**  
+L'overflow si verifica soltanto quando il risultato cresce eccessivamente in valore assoluto, finendo per "sfondare" i limiti dell'intervallo (oltre $+127$ o sotto $-128$).
+
+Quando sommiamo un numero positivo $A$ e un numero negativo $-B$, stiamo in realtà effettuando una **differenza**:
+$$A + (-B) = A - B$$
+
+Il risultato finale sarà **sempre più vicino allo zero** (e quindi più piccolo in valore assoluto) rispetto all'operando di partenza più grande. Poiché entrambi i numeri iniziali si trovano già all'interno dei limiti validi, il loro risultato rimarrà obbligatoriamente compreso nell'intervallo.
+
+**Verifica sul caso più estremo a 8 bit:**
+Prendiamo il massimo numero positivo ($+127$) e il minimo numero negativo ($-128$):
+$$+127 + (-128) = \mathbf{-1}_{10}$$
+Il risultato ($-1$) è pienamente valido e compreso nell'intervallo $[-128, +127]$. È dunque **matematicamente impossibile** generare overflow con segni opposti.
+:::
 
 ---
 
