@@ -78,6 +78,30 @@ const isHomepage = Astro.props.entry?.slug === '' || Astro.props.entry?.id === '
     });
   }
 
+  // Gestione delle singole conversioni espandibili: solo il pulsante laterale espande
+  function setupConversionItems() {
+    const items = document.querySelectorAll('details.conversione-item summary');
+    items.forEach(summary => {
+      if (summary.hasAttribute('data-conv-active')) return;
+      summary.setAttribute('data-conv-active', 'true');
+
+      summary.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const btn = target.closest('.conv-btn');
+        if (!btn) {
+          // Cliccato sul testo normale: non espandere/chiudere il details
+          e.preventDefault();
+        } else {
+          // Cliccato il pulsante "Soluzione": ricalcola formule KaTeX se in apertura
+          const details = summary.parentElement as HTMLDetailsElement;
+          if (details && !details.open) {
+            setTimeout(() => renderMath(), 10);
+          }
+        }
+      });
+    });
+  }
+
   // Script per lo strumento di crittografia antica (Atbash, Albam, Atbah)
   function setupCryptoTool() {
     const clearTextEl = document.getElementById('clear-text') as HTMLTextAreaElement;
@@ -392,6 +416,7 @@ const isHomepage = Astro.props.entry?.slug === '' || Astro.props.entry?.id === '
     setupSidebarStatePersistence();
     setupSidebarGroupLinks();
     setupCollapsibles();
+    setupConversionItems();
     setupCryptoTool();
     setupModals();
     setupTocTopLinks();

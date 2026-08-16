@@ -29,7 +29,13 @@ export default defineConfig({
         {
           label: 'Concetti di Base e Fondamenti',
           items: [
-            { label: 'Conversioni numeriche', link: '/conversioni-numeriche/' },
+            {
+              label: 'Conversioni numeriche',
+              items: [
+                { label: 'Spiegazione', link: '/conversioni-numeriche/' },
+                { label: 'Esercizi sulle conversioni', link: '/conversioni-numeriche/esercizi/' },
+              ]
+            },
             { label: 'Architettura dei calcolatori', link: '/architettura/' },
             { label: 'Sistemi Operativi', link: '/sistemi-operativi/' },
             { label: 'Reti per la classe prima', link: '/reti-prima/' },

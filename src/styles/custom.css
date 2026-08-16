@@ -18,7 +18,11 @@
   --sl-color-background: #0f0b21;
 }
 
-code, pre, pre code, kbd, samp {
+code,
+pre,
+pre code,
+kbd,
+samp {
   font-family: var(--sl-font-mono) !important;
   letter-spacing: 0 !important;
   font-variant-east-asian: normal !important;
@@ -960,4 +964,128 @@ li {
     padding: 10px !important;
     background-color: transparent !important;
   }
+}
+
+/* Stile pulito per le singole conversioni: elenco naturale con solo il pulsante a destra cliccabile */
+details.conversione-item {
+  border: none;
+  border-bottom: 1px solid var(--sl-color-gray-6);
+  border-radius: 0;
+  margin: 0;
+  background-color: transparent;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+details.conversione-item:hover {
+  background-color: transparent;
+}
+
+details.conversione-item[open] {
+  background-color: rgba(163, 140, 244, 0.04);
+  border: 1px solid rgba(163, 140, 244, 0.22);
+  border-radius: 6px;
+  margin: 0.5rem 0;
+}
+
+details.conversione-item summary {
+  padding: 0.45rem 0.1rem !important;
+  font-size: 0.96rem;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  user-select: text;
+  font-weight: normal;
+  list-style: none !important;
+  cursor: default;
+}
+
+details.conversione-item summary::before,
+details.conversione-item summary::marker,
+details.conversione-item summary::-webkit-details-marker {
+  display: none !important;
+  content: "" !important;
+}
+
+details.conversione-item[open] summary {
+  padding: 0.5rem 0.75rem !important;
+  border-bottom: 1px solid rgba(163, 140, 244, 0.15);
+}
+
+details.conversione-item summary .conv-testo {
+  flex: 1 1 auto;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: text;
+  user-select: text;
+}
+
+details.conversione-item summary .conv-btn {
+  flex: 0 0 auto;
+  margin-left: 1rem;
+  font-size: 0.78rem;
+  color: var(--sl-color-accent);
+  background-color: rgba(163, 140, 244, 0.1);
+  border: 1px solid rgba(163, 140, 244, 0.22);
+  border-radius: 4px;
+  padding: 0.2rem 0.6rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+details.conversione-item summary .conv-btn:hover {
+  background-color: rgba(163, 140, 244, 0.25);
+  border-color: var(--sl-color-accent);
+}
+
+details.conversione-item[open] summary .conv-btn {
+  background-color: var(--sl-color-accent);
+  color: #ffffff;
+  border-color: var(--sl-color-accent);
+}
+
+details.conversione-item summary .conv-arrow {
+  font-size: 0.7rem;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+details.conversione-item[open] summary .conv-arrow {
+  transform: rotate(180deg);
+}
+
+details.conversione-item .conv-soluzione {
+  padding: 0.65rem 0.85rem;
+  font-size: 0.92rem;
+  background-color: transparent;
+}
+
+details.conversione-item .conv-soluzione p {
+  margin: 0.25rem 0;
+}
+
+:root[data-theme='light'] details.conversione-item {
+  border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme='light'] details.conversione-item[open] {
+  background-color: rgba(110, 67, 217, 0.03);
+  border-color: rgba(110, 67, 217, 0.2);
+}
+
+:root[data-theme='light'] details.conversione-item summary .conv-btn {
+  background-color: rgba(110, 67, 217, 0.06);
+  border-color: rgba(110, 67, 217, 0.2);
+  color: var(--sl-color-accent-high);
+}
+
+:root[data-theme='light'] details.conversione-item[open] summary .conv-btn {
+  background-color: var(--sl-color-accent);
+  color: #ffffff;
 }

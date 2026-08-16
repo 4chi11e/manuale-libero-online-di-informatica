@@ -641,65 +641,12 @@ Il risultato ($-1$) è pienamente valido e compreso nell'intervallo $[-128, +127
 
 ---
 
-## Esercizi di Autovalutazione
+## 7. Mettiti alla Prova: Esercizi ed Esercitazioni Pratiche
 
-Mettiti alla prova con questi esercizi riassuntivi. Puoi verificare tutte le risposte utilizzando lo [Strumento Interattivo per le Conversioni](https://4chi11e.github.io/conversioni-numeriche/).
+Per consolidare tutti i concetti appresi e verificare la tua preparazione:
 
-<div class="soluzione-container">
-  <div class="soluzione-header">
-    <span>Esercizio 1: Conversione Interi (Binario, Decimale, Esadecimale)</span>
-    <span class="soluzione-icon">▼</span>
-  </div>
-  <div class="soluzione-content">
-    <p><strong>Domanda:</strong> Converti il numero decimale $158_{10}$ in binario e in esadecimale.</p>
-    <hr />
-    <p><strong>Svolgimento:</strong></p>
-    <ol>
-      <li><strong>In Esadecimale (divisioni per 16):</strong><br />
-        $158 : 16 = 9$ con resto $14 \implies \text{E}$<br />
-        $9 : 16 = 0$ con resto $9 \implies 9$<br />
-        Risultato: $158_{10} = (\text{9E})_{16}$.
-      </li>
-      <li><strong>In Binario (espansione diretta da esadecimale):</strong><br />
-        $9 \implies 1001$, $\text{E} \implies 1110$<br />
-        Risultato: $158_{10} = (10011110)_2$.
-      </li>
-    </ol>
-  </div>
-</div>
+👉 **[Vai alla raccolta completa degli Esercizi sulle Conversioni Numeriche](/manuale-libero-online-di-informatica/conversioni-numeriche/esercizi/)**
 
-<div class="soluzione-container">
-  <div class="soluzione-header">
-    <span>Esercizio 2: Conversione Frazionaria</span>
-    <span class="soluzione-icon">▼</span>
-  </div>
-  <div class="soluzione-content">
-    <p><strong>Domanda:</strong> Converti il numero binario $(110.011)_2$ in decimale.</p>
-    <hr />
-    <p><strong>Svolgimento:</strong></p>
-    <p>Parte intera: $1\cdot 2^2 + 1\cdot 2^1 + 0\cdot 2^0 = 4 + 2 + 0 = 6$.</p>
-    <p>Parte frazionaria: $0\cdot 2^{-1} + 1\cdot 2^{-2} + 1\cdot 2^{-3} = 0 + 0.25 + 0.125 = 0.375$.</p>
-    <p>Risultato finale: $(110.011)_2 = 6.375_{10}$.</p>
-  </div>
-</div>
+Troverai tantissimi esercizi guidati suddivisi in 3 tipologie (Interi Positivi, Numeri con la Virgola, Interi con Segno in Complemento a 2) con soluzioni espandibili a scomparsa e passaggi dettagliati.
 
-<div class="soluzione-container">
-  <div class="soluzione-header">
-    <span>Esercizio 3: Complemento a 2 e Sottrazione</span>
-    <span class="soluzione-icon">▼</span>
-  </div>
-  <div class="soluzione-content">
-    <p><strong>Domanda:</strong> Rappresenta $-85_{10}$ in complemento a 2 su 8 bit e verifica il risultato calcolando la forma polinomiale pesata.</p>
-    <hr />
-    <p><strong>Svolgimento:</strong></p>
-    <ol>
-      <li>$+85_{10} = 64 + 16 + 4 + 1 = 01010101_2$.</li>
-      <li>Inversione dei bit: $10101010$.</li>
-      <li>Aggiunta di 1: $10101010 + 1 = 10101011_2$.</li>
-      <li><strong>Verifica con i pesi:</strong><br />
-        $-128\cdot 1 + 64\cdot 0 + 32\cdot 1 + 16\cdot 0 + 8\cdot 1 + 4\cdot 0 + 2\cdot 1 + 1\cdot 1$<br />
-        $= -128 + 32 + 8 + 2 + 1 = -128 + 43 = -85_{10}$. Corretto!
-      </li>
-    </ol>
-  </div>
-</div>
+Puoi inoltre generare infiniti nuovi esercizi e verificare tutti i passaggi matematici in tempo reale con lo **[Strumento Interattivo per le Conversioni Numeriche](https://4chi11e.github.io/conversioni-numeriche/)**.
