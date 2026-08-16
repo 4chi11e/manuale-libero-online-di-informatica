@@ -246,6 +246,16 @@ Risulta evidente dall’esempio seguente che la stessa lettera nel testo in chia
 
 </div>
 
+Per cifrare una lettera si segue il seguente metodo: si trova la riga corrispondente alla lettera in chiaro da cifrare e ci si sposta fino alla colonna della lettera della chiave, la lettera all'intersezione è la lettera cifrata.
+
+Il procedimento per le prime due lettere è:
+- in chiaro **`a`** → nella riga che inizia con a mi sposto nella colonna **S** → cifrata: **`s`**
+- in chiaro **`t`** → nella riga che inizia con t mi sposto nella colonna **O** → cifrata: **`h`**
+
+<details>
+<summary>▸ Mostra la Tavola di Vigenère (26×26)</summary>
+<div class="tbl-vigenere">
+
 | | | | |E| | | | | | |L| | |O| | | |S| | | | | | | |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|
@@ -275,15 +285,9 @@ Risulta evidente dall’esempio seguente che la stessa lettera nel testo in chia
 |y|z|a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|
 |z|a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|
 
-<script>
-  bordiColonna("vigenere-table",5);
-  bordiColonna("vigenere-table",12);
-  bordiColonna("vigenere-table",15);
-  bordiColonna("vigenere-table",19);
+</div>
 
-  evidenziaRiga("vigenere-table",2);
-  evidenziaRiga("vigenere-table",21);
-</script>
+</details>
 
 ## La crittografia dal XIX secolo alla Grande Guerra
 
@@ -299,7 +303,7 @@ Divulgato da Lyon Playfair doveva essere utilizzato durante la guerra di Crimea 
 
 Rappresenta il primo metodo di cifratura a digrammi (in altre parole, ogni lettera del testo viene crittata con gruppi di due lettere). Si usa una matrice 5x5 di 25 lettere che viene riempita nelle prime caselle con la parola chiave, abolendo le eventuali lettere ripetute, ed è completata con le rimanenti lettere nel loro ordine alfabetico.
 
-Vediamo con una applicazione come veniva utilizzato il Playfair cipher.
+Vediamo con una applicazione pratica come veniva utilizzato il **Playfair cipher**.
 
 <div class="float-left mr-4">
 
@@ -312,18 +316,23 @@ Vediamo con una applicazione come veniva utilizzato il Playfair cipher.
 
 </div>
 
-Costruzione della matrice di 25 elementi:
+**Costruzione della matrice di 25 elementi:**  
+Si sceglie la parola chiave `SEGRETI`: eliminando i duplicati si ottiene la sequenza **`S E G R T`**, che viene inserita nella prima riga. Le restanti caselle completano l'alfabeto in ordine alfabetico (con **`I/J`** unite nella stessa cella per ottenere esattamente 25 lettere).
 
-|Chiave: |SEGRETI|
+<div class="clear-both"></div>
+
+**Preparazione del messaggio in digrammi (coppie):**
+
+| **Chiave:** | SEGRETI |
 |---|---|
-|Messaggio: |Domani nella battaglia pensa a me|
-| |DO MA NI NE LX LA BA TX TA GL IA PE NS AM EX|
+| **Messaggio in chiaro:** | Domani nella battaglia pensa a me |
+| **Scomposizione in digrammi:** | `DO` `MA` `NI` `NE` `LX` `LA` `BA` `TX` `TA` `GL` `IA` `PE` `NS` `AM` `EX` |
 
-Le lettere doppie sono separate per mezzo dell’inserimento di una X; inoltre, se l’ultima lettera rimane spaiata, viene a sua volta affiancata da una X.
+Le lettere doppie consecutive sono separate inserendo una **X** (es. `LL` $\to$ `LX LA`, `TT` $\to$ `TX TA`); inoltre, se l'ultima lettera rimane spaiata, viene affiancata da una **X** finale (`EX`).
 
-E’ possibile a questo punto che si presenti uno dei seguenti casi: lettere su righe e colonne diverse, lettere sulla stessa riga o lettere sulla stessa colonna.
+Per cifrare ciascuna coppia, si individua la posizione delle due lettere nella matrice verificando quale dei seguenti tre casi si presenta:
 
-Caso 1: lettere su righe e colonne diverse
+#### Caso 1: Lettere su righe e colonne diverse (Rettangolo)
 
 <div class="float-left mr-4 mb-4">
 
@@ -336,9 +345,11 @@ Caso 1: lettere su righe e colonne diverse
 
 </div>
 
-Le lettere sono sostituite da quelle corrispondenti ai vertici opposti del rettangolo formato dall’incrocio di righe e colonne delle lettere del testo in chiaro.
+Le lettere sono sostituite da quelle corrispondenti ai vertici orizzontalmente opposti del rettangolo formato dall'incrocio di righe e colonne delle lettere del testo in chiaro (es. `DO` $\to$ `AU`).
 
-Caso 2: lettere sulla stessa riga
+<div class="clear-both"></div>
+
+#### Caso 2: Lettere sulla stessa riga
 
 <div class="float-left mr-4 mb-4">
 
@@ -351,9 +362,11 @@ Caso 2: lettere sulla stessa riga
 
 </div>
 
-Le lettere sono sostituite da quelle contenute nelle celle adiacenti, alla destra delle celle contenenti le lettere del testo chiaro.
+Le lettere sono sostituite da quelle contenute nelle celle immediatamente a **destra** delle celle del testo chiaro (se si è a fine riga, si riparte dall'inizio della riga, es. `BA` $\to$ `CB`).
 
-Caso 3: lettere sulla stessa colonna
+<div class="clear-both"></div>
+
+#### Caso 3: Lettere sulla stessa colonna
 
 <div class="float-left mr-4 mb-4">
 
@@ -366,13 +379,16 @@ Caso 3: lettere sulla stessa colonna
 
 </div>
 
-Le lettere sono sostituite da quelle contenute nelle celle adiacenti, sotto le celle contenenti le lettere del testo chiaro.
+Le lettere sono sostituite da quelle contenute nelle celle immediatamente **sotto** alle celle del testo chiaro (se si è in fondo alla colonna, si riparte dall'alto, es. `NI` $\to$ `VF`).
 
-Il nostro messaggio viene dunque crittato come:  
-DO MA NI NE LX LA BA TX TA GL IA PE NS AM EX AU HD VF OS KY HC CB GZ ED RK AB OG VI BW DH GW
+<div class="clear-both"></div>
 
-E poi raggruppato in gruppi di cinque lettere:  
-AUHDV FOSKY HCCBG ZEDRK ABOGV IBWDH GW
+#### Risultato finale della cifratura
+
+- **Testo in chiaro a coppie:**  
+  `DO MA NI NE LX LA BA TX TA GL IA PE NS AM EX`
+- **Testo cifrato ottenuto:**  
+  `AU HD VF OS KY HC CB GZ ED RK AB OG VI DH GW`
 
 ### Cifra campale germanica o ADFGVX
 
