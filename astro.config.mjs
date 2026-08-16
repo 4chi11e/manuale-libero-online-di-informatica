@@ -28,11 +28,11 @@ export default defineConfig({
       sidebar: [
         {
           label: 'Concetti di Base e Fondamenti',
-          collapsed: true,
           items: [
-            { label: 'Reti per la classe prima', link: '/reti-prima/' },
+            { label: 'Conversioni numeriche', link: '/conversioni-numeriche/' },
             { label: 'Architettura dei calcolatori', link: '/architettura/' },
             { label: 'Sistemi Operativi', link: '/sistemi-operativi/' },
+            { label: 'Reti per la classe prima', link: '/reti-prima/' },
             { label: 'Copyright e licenze', link: '/copyright/' },
           ]
         },
@@ -50,19 +50,16 @@ export default defineConfig({
         },
         {
           label: 'Reti di Calcolatori',
-          collapsed: true,
           items: [
             { label: 'Reti di calcolatori', link: '/reti/reti/' },
             {
               label: 'Modello ISO/OSI',
-              collapsed: true,
               items: [
                 { label: 'ISO/OSI', link: '/reti/iso-osi/iso-osi/' },
                 { label: 'Livello 1 - Fisico', link: '/reti/iso-osi/livello1/' },
                 { label: 'Livello 2 - Collegamento', link: '/reti/iso-osi/livello2/' },
                 {
                   label: 'Livello 3 - Rete',
-                  collapsed: true,
                   items: [
                     { label: 'Spiegazione', link: '/reti/iso-osi/livello3/' },
                     { label: 'Esercizi Subnetting', link: '/reti/iso-osi/esercizi-subnetting/' }
@@ -76,7 +73,6 @@ export default defineConfig({
             },
             {
               label: 'Crittografia',
-              collapsed: true,
               items: [
                 { label: 'Crittografia', link: '/reti/crittografia/crittografia/' },
                 { label: 'Storia della Crittografia', link: '/reti/crittografia/crittografia-storia/' },
@@ -87,12 +83,10 @@ export default defineConfig({
         },
         {
           label: 'Machine Learning e Reti Neurali',
-          collapsed: true,
           items: [
             { label: 'Machine Learning e Reti Neurali', link: '/machine-learning/machine-learning/' },
             {
               label: 'Introduzione e Dati',
-              collapsed: true,
               items: [
                 { label: 'Spiegazione', link: '/machine-learning/introduzione-dati/' },
                 { label: 'Esercizi Teorici', link: '/machine-learning/esercizi-teorici-dati/' },
@@ -101,7 +95,6 @@ export default defineConfig({
             },
             {
               label: 'Regressione, Classificazione e Valutazione',
-              collapsed: true,
               items: [
                 { label: 'Spiegazione', link: '/machine-learning/regressione-classificazione/' },
                 { label: 'Esercizi Teorici', link: '/machine-learning/esercizi-teorici-regressione-classificazione/' },
@@ -110,7 +103,6 @@ export default defineConfig({
             },
             {
               label: 'Alberi di Decisione e Random Forest',
-              collapsed: true,
               items: [
                 { label: 'Spiegazione', link: '/machine-learning/alberi-decisione/' },
                 { label: 'Esercizi Teorici', link: '/machine-learning/esercizi-teorici-alberi-decisione/' },
@@ -119,7 +111,6 @@ export default defineConfig({
             },
             {
               label: 'Il Percettore e Reti Neurali',
-              collapsed: true,
               items: [
                 { label: 'Spiegazione', link: '/machine-learning/percettore-reti-neurali/' },
                 { label: 'Esercizi Teorici', link: '/machine-learning/esercizi-teorici-percettore-reti-neurali/' },

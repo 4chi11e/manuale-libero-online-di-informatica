@@ -1,25 +1,25 @@
 {
   "site": {
-    "words": 109432,
-    "chars": 836040,
-    "lines": 10258,
+    "words": 113938,
+    "chars": 864057,
+    "lines": 10832,
     "images": 161,
-    "pages": 409,
-    "updatedAt": "15 agosto 2026"
+    "pages": 426,
+    "updatedAt": "16 agosto 2026"
   },
   "c": {
     "words": 70762,
     "chars": 340779,
     "images": 12,
     "pages": 303,
-    "updatedAt": "15 agosto 2026"
+    "updatedAt": "16 agosto 2026"
   },
   "python": {
     "words": 60317,
     "chars": 303396,
     "images": 22,
     "pages": 180,
-    "updatedAt": "15 agosto 2026"
+    "updatedAt": "16 agosto 2026"
   },
-  "lastUpdated": "15 agosto 2026"
+  "lastUpdated": "16 agosto 2026"
 }

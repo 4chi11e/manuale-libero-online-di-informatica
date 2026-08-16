@@ -2,8 +2,17 @@
 import Default from "@astrojs/starlight/components/Head.astro";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const isHomepage = Astro.props.entry?.slug === '' || Astro.props.entry?.id === 'index.mdx' || Astro.props.slug === '';
 ---
 <Default {...Astro.props} />
+
+{isHomepage && (
+  <style is:global>
+    main > .content-panel:first-of-type {
+      display: none !important;
+    }
+  </style>
+)}
 
 <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
 <link rel="icon" type="image/png" sizes="128x128" href={`${base}/favicon.png`} />
@@ -13,54 +22,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <script is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="window.triggerRenderMath && window.triggerRenderMath()"></script>
 
 <script>
-  // Funzione per unire parentesi e punteggiatura adiacenti alle formule inline evitando a capo sgradevoli
-  function wrapInlineMathPunctuation() {
-    const katexNodes = document.querySelectorAll('.katex:not(.katex-display)');
-    katexNodes.forEach(katex => {
-      const parent = katex.parentNode as HTMLElement | null;
-      if (!parent || parent.classList.contains('math-no-break')) return;
-
-      const prev = katex.previousSibling;
-      const next = katex.nextSibling;
-
-      let prevMatchText = '';
-      let nextMatchText = '';
-
-      if (prev && prev.nodeType === Node.TEXT_NODE && prev.nodeValue) {
-        const match = prev.nodeValue.match(/([\(\[\{]\s*)$/);
-        if (match) {
-          prevMatchText = match[1];
-        }
-      }
-
-      if (next && next.nodeType === Node.TEXT_NODE && next.nodeValue) {
-        const match = next.nodeValue.match(/^(\s*[\)\]\}:,\.]+)/);
-        if (match) {
-          nextMatchText = match[1];
-        }
-      }
-
-      if (prevMatchText || nextMatchText) {
-        const wrapper = document.createElement('span');
-        wrapper.className = 'math-no-break';
-
-        if (prevMatchText && prev && prev.nodeValue) {
-          prev.nodeValue = prev.nodeValue.slice(0, -prevMatchText.length);
-          wrapper.appendChild(document.createTextNode(prevMatchText));
-        }
-
-        parent.insertBefore(wrapper, katex);
-        wrapper.appendChild(katex);
-
-        if (nextMatchText && next && next.nodeValue) {
-          next.nodeValue = next.nodeValue.slice(nextMatchText.length);
-          wrapper.appendChild(document.createTextNode(nextMatchText));
-        }
-      }
-    });
-  }
-
-  // Funzione per il rendering dinamico delle formule matematiche KaTeX (anche nei blocchi HTML come le soluzioni)
+  // Funzione per il rendering dinamico delle formule matematiche KaTeX
   function renderMath() {
     if (typeof (window as any).renderMathInElement === 'function') {
       (window as any).renderMathInElement(document.body, {
@@ -73,11 +35,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         throwOnError: false
       });
     }
-    wrapInlineMathPunctuation();
-    setTimeout(wrapInlineMathPunctuation, 50);
   }
 
   (window as any).triggerRenderMath = renderMath;
+  document.addEventListener('DOMContentLoaded', renderMath);
+  document.addEventListener('astro:page-load', renderMath);
 
 
   // Script globale per gestire le soluzioni collassabili (subnetting ed esercizi)
@@ -241,12 +203,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     }
   }
 
+  const SITE_BASE = (import.meta.env.BASE_URL || '/manuale-libero-online-di-informatica').replace(/\/$/, '');
+
   function detectHomepage() {
-    const path = window.location.pathname;
-    const isHome = path === '/' || 
-                   path === '/index.html' || 
-                   path.endsWith('/manuale-libero-online-di-informatica/') || 
-                   path.endsWith('/manuale-libero-online-di-informatica/index.html');
+    const rawPath = window.location.pathname.replace(/\/$/, '');
+    const isHome = rawPath === '' || 
+                   rawPath === '/index.html' || 
+                   rawPath === SITE_BASE || 
+                   rawPath === `${SITE_BASE}/index.html`;
     if (isHome) {
       document.documentElement.classList.add('is-homepage');
     } else {
@@ -319,42 +283,93 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     });
   }
 
-  function setupSidebarStatePersistence() {
-    const sidebar = document.querySelector('nav');
-    if (!sidebar) return;
+  const SIDEBAR_STATE_KEY = 'starlight-sidebar-user-states-v3';
+  let isRestoringSidebar = false;
 
-    const detailsList = sidebar.querySelectorAll('details');
-    detailsList.forEach(details => {
-      const summary = details.querySelector('summary');
-      if (!summary) return;
-      
-      const labelText = summary.textContent?.trim() || '';
-      if (!labelText) return;
-
-      const key = 'starlight-sidebar-state-' + labelText;
-
-      // Ripristina lo stato dal localStorage
-      const savedState = localStorage.getItem(key);
-      const hasActiveLink = details.querySelector('a[aria-current="page"]');
-
-      // Se il gruppo contiene la pagina attiva, deve restare aperto per mostrare dov'è l'utente.
-      // Altrimenti applichiamo la preferenza salvata (se esiste).
-      if (!hasActiveLink) {
-        if (savedState === 'open') {
-          details.setAttribute('open', '');
-        } else if (savedState === 'closed') {
-          details.removeAttribute('open');
+  function getDetailsKey(details: HTMLElement): string {
+    const labels: string[] = [];
+    let current: HTMLElement | null = details;
+    while (current && current !== document.body) {
+      if (current.tagName === 'DETAILS') {
+        const summary = current.querySelector(':scope > summary');
+        if (summary) {
+          const label = summary.querySelector('.group-label') || summary;
+          const text = label.textContent?.replace(/\s+/g, ' ').trim() || '';
+          if (text) labels.unshift(text);
         }
       }
+      current = current.parentElement;
+    }
+    return labels.join(' > ');
+  }
 
-      // Salva lo stato ogni volta che l'utente apre/chiude il gruppo
-      if (!details.hasAttribute('data-state-listener')) {
-        details.setAttribute('data-state-listener', 'true');
-        details.addEventListener('toggle', () => {
-          localStorage.setItem(key, details.hasAttribute('open') ? 'open' : 'closed');
-        });
-      }
-    });
+  function getStoredSidebarStates(): Record<string, boolean> {
+    try {
+      const raw = localStorage.getItem(SIDEBAR_STATE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (_) {
+      return {};
+    }
+  }
+
+  function saveStoredSidebarStates(states: Record<string, boolean>) {
+    try {
+      localStorage.setItem(SIDEBAR_STATE_KEY, JSON.stringify(states));
+    } catch (_) {}
+  }
+
+  function setupSidebarStatePersistence() {
+    const sidebar = document.querySelector('#starlight__sidebar') || document.querySelector('nav');
+    if (!sidebar) return;
+
+    const detailsList = Array.from(sidebar.querySelectorAll('details')) as HTMLDetailsElement[];
+    if (detailsList.length === 0) return;
+
+    const states = getStoredSidebarStates();
+
+    isRestoringSidebar = true;
+    try {
+      detailsList.forEach(details => {
+        const key = getDetailsKey(details);
+        if (!key) return;
+
+        const hasActive = details.querySelector('a[aria-current="page"]');
+
+        if (hasActive) {
+          details.open = true;
+          details.setAttribute('open', '');
+          states[key] = true;
+        } else if (key in states) {
+          const shouldBeOpen = Boolean(states[key]);
+          details.open = shouldBeOpen;
+          if (shouldBeOpen) {
+            details.setAttribute('open', '');
+          } else {
+            details.removeAttribute('open');
+          }
+        } else {
+          states[key] = details.open;
+        }
+
+        if (!details.hasAttribute('data-state-listener')) {
+          details.setAttribute('data-state-listener', 'true');
+          details.addEventListener('toggle', () => {
+            if (isRestoringSidebar) return;
+            const currentKey = getDetailsKey(details);
+            if (!currentKey) return;
+            const curStates = getStoredSidebarStates();
+            curStates[currentKey] = details.open;
+            saveStoredSidebarStates(curStates);
+          });
+        }
+      });
+
+      saveStoredSidebarStates(states);
+    } finally {
+      setTimeout(() => {
+        isRestoringSidebar = false;
+      }, 50);
+    }
   }
 
   function setupTocTopLinks() {
@@ -372,26 +387,24 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     });
   }
 
-  // Eseguiamo i setup al caricamento e ad ogni navigazione di Starlight
-  detectHomepage();
-  setupCollapsibles();
-  setupCryptoTool();
-  setupModals();
-  setupSidebarGroupLinks();
-  setupSidebarStatePersistence();
-  setupTocTopLinks();
-  renderMath();
-
-  document.addEventListener('astro:page-load', () => {
+  function initAll() {
     detectHomepage();
+    setupSidebarStatePersistence();
+    setupSidebarGroupLinks();
     setupCollapsibles();
     setupCryptoTool();
     setupModals();
-    setupSidebarGroupLinks();
-    setupSidebarStatePersistence();
     setupTocTopLinks();
     renderMath();
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
+
+  document.addEventListener('astro:page-load', initAll);
 
   // Se i file JS CDN caricano asincronamente
   window.addEventListener('load', () => {
