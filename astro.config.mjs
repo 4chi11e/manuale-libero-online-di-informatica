@@ -45,10 +45,41 @@ export default defineConfig({
                 { label: 'Esercizi', link: '/rappresentazione-informazione/esercizi/' },
               ]
             },
-            { label: 'Architettura dei calcolatori', link: '/architettura/' },
-            { label: 'Sistemi Operativi', link: '/sistemi-operativi/' },
-            { label: 'Reti per la classe prima', link: '/reti-prima/' },
-            { label: 'Copyright e licenze', link: '/copyright/' },
+            {
+              label: 'Foglio di Calcolo',
+              items: [
+                { label: 'Foglio di Calcolo', link: '/foglio-di-calcolo/foglio-di-calcolo/' },
+                { label: 'Esercizi', link: '/foglio-di-calcolo/esercizi/' },
+              ]
+            },
+            {
+              label: 'Architettura dei calcolatori',
+              collapsed: true,
+              items: [
+                { label: 'Architettura dei calcolatori', link: '/architettura/' },
+              ]
+            },
+            {
+              label: 'Sistemi Operativi',
+              collapsed: true,
+              items: [
+                { label: 'Sistemi Operativi', link: '/sistemi-operativi/' },
+              ]
+            },
+            {
+              label: 'Reti per la classe prima',
+              collapsed: true,
+              items: [
+                { label: 'Reti per la classe prima', link: '/reti-prima/' },
+              ]
+            },
+            {
+              label: 'Copyright e licenze',
+              collapsed: true,
+              items: [
+                { label: 'Copyright e licenze', link: '/copyright/' },
+              ]
+            },
           ]
         },
         {

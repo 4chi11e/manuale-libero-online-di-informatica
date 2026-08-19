@@ -822,6 +822,15 @@ li {
   color: inherit !important;
 }
 
+/* Nasconde la freccia caret e la lista espandibile per i gruppi della sidebar
+   che contengono un unico elemento figlio (es. Architettura, Sistemi Operativi…).
+   Il JS di setupSidebarGroupLinks() rende già il summary cliccabile come link
+   e nasconde il figlio duplicato — qui eliminiamo solo l'indicatore visivo. */
+#starlight__sidebar details:has(> ul > li:only-child) > summary .caret,
+#starlight__sidebar details:has(> ul > li:only-child) > summary svg {
+  display: none !important;
+}
+
 /* ==========================================
    GERARCHIA VISIVA BARRA LATERALE (SIDEBAR HIERARCHY)
    ========================================== */
