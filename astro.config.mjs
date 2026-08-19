@@ -36,6 +36,15 @@ export default defineConfig({
                 { label: 'Esercizi sulle conversioni', link: '/conversioni-numeriche/esercizi/' },
               ]
             },
+            {
+              label: 'Rappresentazione dell\'Informazione',
+              items: [
+                { label: 'Rappresentazione dell\'Informazione', link: '/rappresentazione-informazione/rappresentazione-informazione/' },
+                { label: 'Codifiche e caratteri', link: '/rappresentazione-informazione/codifiche/' },
+                { label: 'Codifiche multimediali', link: '/rappresentazione-informazione/multimedia/' },
+                { label: 'Esercizi', link: '/rappresentazione-informazione/esercizi/' },
+              ]
+            },
             { label: 'Architettura dei calcolatori', link: '/architettura/' },
             { label: 'Sistemi Operativi', link: '/sistemi-operativi/' },
             { label: 'Reti per la classe prima', link: '/reti-prima/' },
