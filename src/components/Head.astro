@@ -14,6 +14,8 @@ const isHomepage = Astro.props.entry?.slug === '' || Astro.props.entry?.id === '
   </style>
 )}
 
+<meta name="google" content="notranslate" />
+
 <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
 <link rel="icon" type="image/png" sizes="128x128" href={`${base}/favicon.png`} />
 <link rel="apple-touch-icon" href={`${base}/favicon.png`} />
@@ -22,6 +24,14 @@ const isHomepage = Astro.props.entry?.slug === '' || Astro.props.entry?.id === '
 <script is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="window.triggerRenderMath && window.triggerRenderMath()"></script>
 
 <script>
+  // Funzione per proteggere gli elementi tecnici e matematici dalla corruzione causata dalla traduzione automatica del browser
+  function protectFromTranslation() {
+    document.querySelectorAll('.katex, .katex-display, math, pre, code').forEach(el => {
+      el.setAttribute('translate', 'no');
+      el.classList.add('notranslate');
+    });
+  }
+
   // Funzione per il rendering dinamico delle formule matematiche KaTeX
   function renderMath() {
     if (typeof (window as any).renderMathInElement === 'function') {
@@ -35,6 +45,7 @@ const isHomepage = Astro.props.entry?.slug === '' || Astro.props.entry?.id === '
         throwOnError: false
       });
     }
+    protectFromTranslation();
   }
 
   (window as any).triggerRenderMath = renderMath;
