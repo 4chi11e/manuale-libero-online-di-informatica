@@ -201,40 +201,60 @@ Il **Subnetting** è la tecnica con cui una singola rete IP viene suddivisa logi
 
 #### Come si calcola una suddivisione (Prestito di Bit)
 
-Per creare nuove sottoreti si "prendono in prestito" $k$ bit dalla parte Host ID e li si aggregano alla parte Net ID:
-- Il numero di sottoreti ottenute è pari a **$2^k$**.
-- I bit rimanenti per gli host diventano $h' = h - k$.
-- Il numero di host utilizzabili per ogni sottorete scende a **$2^{h - k} - 2$** (ovvero **$2^{h'} - 2$**).
+Cosa significa esattamente "prendere in prestito dei bit"?  
+Per distinguere e "numerare" più sottoreti diverse, dobbiamo estendere la parte di rete rubando cifre binarie alla parte host. In informatica, per contare $N$ oggetti distinti servono $k$ bit, dove:
+- Con **$k$ bit** a disposizione possiamo generare esattamente **$2^k$ combinazioni binarie uniche** (che fungono da "targhe" o identificatori delle singole sottoreti).
+- I bit rimanenti per gli host diminuiscono: **$h' = h - k$**.
+- Di conseguenza, il numero di host utilizzabili per ogni sottorete scende a **$2^{h'} - 2$**.
+
+---
 
 #### Esempio Guidato: Dividere una `/24` in 4 sottoreti
 
 Partiamo dalla rete `192.168.1.0/24` (maschera `255.255.255.0`, 8 bit di host) e supponiamo di voler ottenere **4 sottoreti**:
 
-1. Per ottenere 4 sottoreti servono $k = 2$ bit (poiché $2^2 = 4$).
-2. La nuova maschera passa da `/24` a `/26` ($24 + 2 = 26$ bit a 1):
+##### 1. Calcolo dei bit di prestito e della nuova maschera
+1. Per ottenere 4 sottoreti ci chiediamo: *quanti bit binari servono per contare fino a 4?*  
+   Servono **$k = 2$ bit**, poiché $2^2 = 4$ (le 4 combinazioni binarie saranno `00`, `01`, `10`, `11`).
+2. La maschera di sottorete si allunga di 2 bit, passando da `/24` a **/26** ($24 + 2 = 26$ bit a 1):
    - In binario: `11111111.11111111.11111111.11000000`
    - In decimale puntato: **`255.255.255.192`**
-3. I bit rimasti per gli host sono $8 - 2 = 6$. Ciascuna sottorete conterrà $2^6 - 2 = \mathbf{62}$ host utilizzabili.
-4. **Come si individuano gli intervalli delle 4 sottoreti? (La dimensione del blocco o "passo")**:  
-   Avendo 6 bit per la parte host, ciascuna sottorete deve contenere esattamente **$2^6 = 64$ indirizzi totali** consecutivi (inclusi rete e broadcast).  
-   I 256 indirizzi disponibili nell'ultimo byte ($0 \dots 255$) vengono quindi suddivisi in 4 blocchi da 64 indirizzi ciascuno. Il valore **64** rappresenta il **"passo"** da sommare per saltare dall'inizio di una sottorete all'inizio della successiva:
-   - **1ª sottorete**: parte da **0** $\to$ copre gli indirizzi da `0` a `63`
-   - **2ª sottorete**: parte da $0 + 64 =$ **64** $\to$ copre gli indirizzi da `64` a `127`
-   - **3ª sottorete**: parte da $64 + 64 =$ **128** $\to$ copre gli indirizzi da `128` a `191`
-   - **4ª sottorete**: parte da $128 + 64 =$ **192** $\to$ copre gli indirizzi da `192` a `255`
+3. I bit rimasti per identificare gli host in ciascuna sottorete sono $8 - 2 = 6$.  
+   Ciascuna sottorete conterrà $2^6 - 2 = 64 - 2 = \mathbf{62}$ host utilizzabili.
 
-   **Come trovare velocemente il passo?**
-   - **Metodo binario (il più intuitivo)**: basta osservare il **peso posizionale dell'ultimo bit a 1** della subnet mask nell'ottetto interessato. Nell'ottetto `11000000`, i pesi dei bit sono `128, 64, 32, 16, 8, 4, 2, 1`: l'ultimo bit a `1` cade sulla colonna che vale **64**, che è esattamente il passo cercato!
-   - **Metodo decimale**: si sottrae a 256 il valore decimale dell'ottetto di maschera ($256 - 192 = 64$).
+##### 2. Come i 2 bit contano le 4 sottoreti (La visione binaria)
+Osserviamo da vicino l'ultimo byte degli indirizzi. I suoi 8 bit sono ora divisi in due zone:
+$$\underbrace{\mathbf{b_7 \quad b_6}}_{\text{2 bit di Sottorete}} \quad \underbrace{\mathbf{b_5 \quad b_4 \quad b_3 \quad b_2 \quad b_1 \quad b_0}}_{\text{6 bit di Host}}$$
 
-In ciascun blocco di 64 indirizzi, il **primo numero** è l'indirizzo di rete, l'**ultimo numero** è l'indirizzo di broadcast, e tutti i numeri intermedi rappresentano gli **host utilizzabili**:
+I pesi posizionali dei primi due bit nell'ottetto sono **128** (per $b_7$) e **64** (per $b_6$).  
+I 2 bit presi in prestito assumono le 4 combinazioni possibili (`00`, `01`, `10`, `11`), determinando l'indirizzo di ciascuna sottorete quando i restanti 6 bit di host sono tutti a 0:
 
-| Sottorete | Indirizzo di Rete | Primo Host Valido | Ultimo Host Valido | Indirizzo di Broadcast | Host Utili |
+| Sottorete | 2 bit di Rete | 6 bit di Host | Ultimo Byte Binario | Calcolo Decimale | Indirizzo di Rete Risultante |
+| :---: | :---: | :---: | :---: | :---: | :--- |
+| **1ª Rete** | `0 0` | `000000` | `00000000` | $0 + 0 = \mathbf{0}$ | **`192.168.1.0/26`** |
+| **2ª Rete** | `0 1` | `000000` | `01000000` | $0 + 64 = \mathbf{64}$ | **`192.168.1.64/26`** |
+| **3ª Rete** | `1 0` | `000000` | `10000000` | $128 + 0 = \mathbf{128}$ | **`192.168.1.128/26`** |
+| **4ª Rete** | `1 1` | `000000` | `11000000` | $128 + 64 = \mathbf{192}$ | **`192.168.1.192/26`** |
+
+##### 3. Come variano i bit all'interno di ciascuna sottorete
+All'interno di ogni singola sottorete, i primi 2 bit rimangono **fissi**, mentre i 6 bit di host variano da tutti 0 fino a tutti 1 (da 0 a $2^6-1 = 63$ in decimale):
+- **Tutti 0** (`000000`): è l'indirizzo della **sottorete**.
+- **Da `000001` a `111110`** (da 1 a 62): sono i **62 host validi**.
+- **Tutti 1** (`111111`, pari a $+63$): è l'indirizzo di **broadcast** della sottorete.
+
+Ecco il quadro completo dei 4 intervalli:
+
+| Sottorete | Indirizzo di Rete (Host tutti 0) | Primo Host Valido | Ultimo Host Valido | Broadcast (Host tutti 1) | Host Utili |
 | :---: | :--- | :--- | :--- | :--- | :---: |
-| **1ª** | `192.168.1.0/26` | `192.168.1.1` | `192.168.1.62` | `192.168.1.63` | 62 |
-| **2ª** | `192.168.1.64/26` | `192.168.1.65` | `192.168.1.126` | `192.168.1.127` | 62 |
-| **3ª** | `192.168.1.128/26` | `192.168.1.129` | `192.168.1.190` | `192.168.1.191` | 62 |
-| **4ª** | `192.168.1.192/26` | `192.168.1.193` | `192.168.1.254` | `192.168.1.255` | 62 |
+| **1ª** | `192.168.1.0` (`00 000000`) | `192.168.1.1` | `192.168.1.62` | `192.168.1.63` (`00 111111`) | 62 |
+| **2ª** | `192.168.1.64` (`01 000000`) | `192.168.1.65` | `192.168.1.126` | `192.168.1.127` (`01 111111`) | 62 |
+| **3ª** | `192.168.1.128` (`10 000000`) | `192.168.1.129` | `192.168.1.190` | `192.168.1.191` (`10 111111`) | 62 |
+| **4ª** | `192.168.1.192` (`11 000000`) | `192.168.1.193` | `192.168.1.254` | `192.168.1.255` (`11 111111`) | 62 |
+
+##### 4. La regola rapida del "passo" di incremento
+Come si vede chiaramente dalla tabella, gli indirizzi di rete saltano sempre di **64** ($0, 64, 128, 192$). Questo valore **64** è la dimensione del blocco ($2^6 = 64$) ed è chiamato il **passo** di incremento:
+- **Metodo binario (immediato)**: corrisponde al **peso dell'ultimo bit a 1 della subnet mask**. Nella maschera `11000000`, l'ultimo bit a 1 ha peso posizionale **64**.
+- **Metodo decimale**: si sottrae il valore dell'ottetto della maschera a 256 ($256 - 192 = 64$).
 
 ---
 
@@ -279,10 +299,29 @@ Chiaramente, **all'interno della stessa rete privata ogni indirizzo deve essere 
 | **Classe B Privata** | `172.16.0.0/12` | `172.16.0.0` – `172.31.255.255` | 1.048.576 | Medie aziende e campus scolastici |
 | **Classe C Privata** | `192.168.0.0/16` | `192.168.0.0` – `192.168.255.255` | 65.536 | Reti casalinghe e piccoli uffici (SOHO) |
 
+#### Applicazione pratica: Suddividere i blocchi privati
+Sebbene lo standard RFC 1918 definisca questi blocchi come spazi continui enormi (ad esempio oltre 16 milioni di indirizzi nella classe `10.0.0.0/8` o 65.000 nella `192.168.0.0/16`), **nessuna organizzazione li utilizza mai come un'unica gigantesca rete piatta**.
+
+**La scelta classica per eccellenza nelle LAN è la maschera `/24` (`255.255.255.0`)**:  
+È la configurazione di gran lunga più diffusa e usata al mondo perché coincide comodamente con i confini dei byte. Partendo ad esempio dal blocco `192.168.0.0/16`, basta incrementare il terzo numero per creare decine di sottoreti indipendenti da 254 dispositivi ciascuna (`192.168.0.x` per i laboratori, `192.168.1.x` per la segreteria, `192.168.2.x` per il Wi-Fi).
+
+Tuttavia, grazie alla flessibilità del CIDR, gli amministratori non sono vincolati a `/24` e possono ritagliare sottoreti più piccole o più grandi in base alle reali necessità:
+
+| Scenario | Maschera CIDR | Blocco Padre | Esempio Sottoreti Ricavate | Host Utili / Rete | Perché si sceglie? |
+| :--- | :---: | :--- | :--- | :---: | :--- |
+| **La Scelta Classica** *(standard LAN)* | **/24** | `192.168.0.0/16` | `192.168.0.0/24`<br>`192.168.1.0/24`<br>`192.168.2.0/24` | **254** | **È lo standard de facto**: immediata da leggere (varia solo il 3° byte), perfetta per la stragrande maggioranza di scuole e uffici. |
+| **Reti Piccole** *(ottimizzazione bit)* | **/26** | `192.168.1.0/24` | `192.168.1.0/26`<br>`192.168.1.64/26`<br>`192.168.1.128/26` | **62** | **Evita sprechi**: ideale quando i reparti o le aule contano solo poche decine di postazioni. |
+| **Grandi Reti** *(campus/ospedali)* | **/20** | `172.16.0.0/12` | `172.16.0.0/20`<br>`172.16.16.0/20`<br>`172.16.32.0/20` | **4.094** | **Grandi dimensioni**: permette a campus universitari e ospedali di accogliere migliaia di host per plesso. |
+
+In tutti i casi, i motivi per cui si segmenta la rete rimangono gli stessi:
+- **Sicurezza**: il router o firewall intermedio impedisce accessi non autorizzati tra le diverse sottoreti (es. gli studenti connessi al Wi-Fi non possono accedere ai server della segreteria).
+- **Isolamento del traffico**: i pacchetti di broadcast restano confinati nella propria sottorete, senza intasare la banda dell'intero edificio.
+- **Semplicità di gestione**: leggendo l'indirizzo IP si riconosce al volo a quale reparto o plesso appartiene il dispositivo.
+
 ### Altri Indirizzi Speciali Notevoli
 
 - **Loopback (`127.0.0.0/8`)**: tipicamente `127.0.0.1` (`localhost`). È l'indirizzo con cui un computer fa riferimento a se stesso; i pacchetti inviati a questo IP non escono mai sulla scheda fisica di rete, ma vengono rigirati internamente nello stack software (utilissimo per testare server web o database in locale).
-- **Link-Local / APIPA (`169.254.0.0/16`)**: indirizzi auto-assegnati dal sistema operativo quando il computer è configurato per ricevere l'IP via DHCP ma nessun server DHCP risponde nella rete locale.
+- **Link-Local / APIPA (`169.254.0.0/16`)**: intervallo riservato per l'auto-assegnazione da parte del sistema operativo in caso di mancata risposta del server DHCP (il funzionamento dettagliato, il significato del "triangolino giallo" e la diagnosi sono spiegati nella [Sezione 6.2 - DHCP](#2-dhcp-dynamic-host-configuration-protocol)).
 - **Rotta di Default (`0.0.0.0/0`)**: usata nelle tabelle di instradamento per indicare la destinazione per "tutto il resto del mondo".
 
 ---
@@ -407,21 +446,9 @@ Il protocollo **ARP** (RFC 826) è l'anello di congiunzione tra Livello 3 e Live
 2. **ARP Reply**: tutti i nodi scartano la richiesta tranne l'host proprietario di quell'IP, che risponde direttamente in unicast a Host A con il proprio indirizzo MAC.
 3. **Tabella ARP (ARP Cache)**: per non ripetere questa procedura prima di ogni singolo pacchetto, i calcolatori memorizzano le coppie (IP, MAC) scoperte in una tabella temporanea nella RAM (*ARP Cache*), con un tempo di scadenza tipico di qualche minuto.
 
-### 2. ICMP (*Internet Control Message Protocol*)
-
-**ICMP** (RFC 792) è il protocollo di servizio di Livello 3 utilizzato da router e computer per segnalare condizioni di errore, anomalie o informazioni diagnostiche sullo stato della rete.
-
-I due strumenti di diagnostica più usati su qualsiasi sistema operativo poggiano su ICMP:
-
-- **ping**: invia un pacchetto ICMP di tipo **Echo Request** verso l'host di destinazione. Se il nodo è attivo e raggiungibile, risponde con un messaggio di **Echo Reply**. Misura il tempo di andata e ritorno (*Round Trip Time* - RTT) e l'eventuale percentuale di pacchetti persi.
-- **traceroute (o `tracert` su Windows)**: identifica la catena di tutti i router attraversati per raggiungere una destinazione. Funziona inviando pacchetti con TTL progressivo:
-  - Primo pacchetto con $TTL = 1$: scade sul primo router, che risponde con ICMP *Time Exceeded* (rivelando il suo IP).
-  - Secondo pacchetto con $TTL = 2$: supera il primo router e scade sul secondo router.
-  - Il processo prosegue fino al raggiungimento del server di destinazione.
-
 ---
 
-### 3. DHCP (*Dynamic Host Configuration Protocol*)
+### 2. DHCP (*Dynamic Host Configuration Protocol*)
 
 <!-- thumbnail -->
 <div class="thumbnail float-right clear-both mb-2">
@@ -459,6 +486,35 @@ L'assegnazione automatica avviene tramite uno scambio in 4 fasi noto con l'acron
 
 L'indirizzo viene concesso con un tempo limitato, detto **Lease Time** (tempo di noleggio). A metà scadenza, il client richiede un rinnovo; se il dispositivo si scollega senza rinnovare, l'IP torna libero nella riserva (*pool*) del server per essere riassegnato ad altri.
 
+#### Cosa succede se il DHCP non risponde? (APIPA e il "Triangolino Giallo")
+
+Cosa accade se un computer collegato alla rete invia il pacchetto `DHCPDISCOVER` ma **nessun server DHCP risponde** (ad esempio perché il router è spento, il cavo è collegato a uno switch isolato o il server DHCP ha esaurito gli IP)?
+
+Per non lasciare la scheda di rete completamente disattivata e muta, il sistema operativo (Windows, macOS o Linux) attiva un meccanismo di emergenza chiamato **APIPA** (*Automatic Private IP Addressing*, standardizzato in RFC 3927 come *IPv4 Link-Local*):
+1. **Auto-assegnazione**: il computer sceglie autonomamente un indirizzo casuale all'interno del blocco riservato **`169.254.0.0/16`** (da `169.254.1.0` a `169.254.254.255`, con maschera `255.255.0.0`).
+2. **Controllo anti-conflitto con ARP**: prima di impostarlo definitivamente, il computer invia una richiesta ARP in broadcast chiedendo a tutta la rete locale se quell'indirizzo sia già occupato (*"C'è qualcuno con questo IP?"*). Se nessuno risponde entro breve tempo, lo fa proprio; se invece un altro dispositivo risponde, ne estrae immediatamente un altro a caso per evitare conflitti di indirizzo.
+3. **Cosa permette di fare**: tutti i dispositivi che hanno un IP `169.254.x.x` possono comunicare tra loro all'interno dello stesso segmento locale (ad esempio per scambiare file tra due PC collegati con cavo diretto o inviare una stampa a una stampante di rete).
+4. **Perché non c'è Internet**: il computer **non ha ricevuto né il Default Gateway né il server DNS**, e i router per norma scartano sempre questi pacchetti. È esattamente la situazione in cui i sistemi operativi mostrano l'avviso **"Connessione limitata"** o **"Nessun accesso a Internet"** (il classico triangolino giallo di Windows).
+
+> **Regola diagnostica per tecnici e sistemisti:**  
+> Se eseguendo `ipconfig` da terminale si legge un indirizzo IPv4 che inizia per **`169.254...`**, la diagnosi è immediata e certa: *la scheda di rete fisica funziona regolarmente, ma il computer non riesce a dialogare con il server DHCP*.
+
+---
+
+### 3. ICMP (*Internet Control Message Protocol*)
+
+**ICMP** (RFC 792) è il protocollo di servizio di Livello 3 utilizzato da router e computer per segnalare condizioni di errore, anomalie o informazioni diagnostiche sullo stato della rete.
+
+I due strumenti di diagnostica più famosi e utilizzati al mondo su qualsiasi sistema operativo poggiano direttamente su ICMP:
+
+- **ping**: invia un pacchetto ICMP di tipo **Echo Request** verso l'host di destinazione. Se il nodo è attivo e raggiungibile, risponde con un messaggio di **Echo Reply**. Misura il tempo di andata e ritorno (*Round Trip Time* - RTT) e l'eventuale percentuale di pacchetti persi.
+- **traceroute (o `tracert` su Windows)**: identifica la catena di tutti i router intermedi attraversati per raggiungere una destinazione remota. Funziona inviando pacchetti con TTL progressivo:
+  - Primo pacchetto con $TTL = 1$: scade sul primo router, che risponde con un messaggio ICMP *Time Exceeded* (rivelando il proprio indirizzo IP).
+  - Secondo pacchetto con $TTL = 2$: supera il primo router e scade sul secondo router.
+  - Il processo prosegue fino al raggiungimento del server di destinazione.
+
+Questi meccanismi di segnalazione e diagnostica, uniti ai comandi per esaminare ARP e DHCP, costituiscono la "cassetta degli attrezzi" fondamentale utilizzabile da qualsiasi riga di comando:
+
 ---
 
 ### Laboratorio Pratico: Comandi di Rete da Terminale
@@ -468,9 +524,10 @@ La tabella seguente mette a confronto i comandi fondamentali di amministrazione 
 | Operazione | Microsoft Windows | Linux / macOS | Cosa mostra / Cosa fa |
 | :--- | :--- | :--- | :--- |
 | **Configurazione IP** | `ipconfig /all` | `ip a` *(o `ifconfig`)* | Mostra IP, Subnet Mask, Gateway, DNS e MAC address |
+| **Rinnovo DHCP** | `ipconfig /release`<br>`ipconfig /renew` | `sudo dhclient -r`<br>`sudo dhclient` | Rilascia l'IP corrente e forza una nuova richiesta DHCP da zero |
 | **Tabella ARP locale** | `arp -a` | `ip neigh` *(o `arp -n`)* | Visualizza le coppie (IP, MAC) memorizzate nella cache |
-| **Test Connettività** | `ping www.google.it` | `ping www.google.it` | Invia ICMP Echo Request misurando latenza e perdita pacchetti |
-| **Tracciamento Rotta** | `tracert www.google.it` | `traceroute www.google.it` | Mostra tutti i router intermedi attraversati nel percorso |
+| **Test Connettività (ICMP)** | `ping www.google.it` | `ping www.google.it` | Invia ICMP Echo Request misurando latenza e pacchetti persi |
+| **Tracciamento Rotta (ICMP)** | `tracert www.google.it` | `traceroute www.google.it` | Mostra tutti i router intermedi sfruttando il TTL e ICMP |
 | **Svuotamento cache DNS** | `ipconfig /flushdns` | `resolvectl flush-caches` | Cancella i record di risoluzione nomi salvati in locale |
 
 ---
