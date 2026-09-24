@@ -1,10 +1,21 @@
 ---
-title: ISO/OSI
+title: Il Modello ISO/OSI
 ---
+
+Agli albori dell'informatica, negli anni '70, ogni grande costruttore di calcolatori (come IBM, DEC, Xerox) sviluppava la propria architettura di rete proprietaria e chiusa. Il risultato era un'intrinseca incompatibilità: due sistemi di marche diverse non potevano comunicare tra loro se non attraverso costosi e complessi apparati di adattamento.
+
+Per superare questa frammentazione, nel 1984 l'**ISO** (*International Organization for Standardization*) definì lo standard **ISO 7498**, noto come modello **OSI** (*Open Systems Interconnection*): un'architettura di riferimento aperta, modulare e indipendente dai produttori hardware, concepita per consentire l'interoperabilità tra sistemi eterogenei in tutto il mondo.
+
+---
+
+## 1. Architettura modulare a strati
+
+Il modello ISO/OSI affronta la straordinaria complessità della comunicazione di rete applicando il principio del *divide et impera*: scompone il processo di trasmissione in una pila (*stack*) gerarchica di **7 livelli logici** (detti *layer*).
+
 <!-- thumbnail -->
 <div class="thumbnail float-right">
   <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/OSI_Model_v1-ita.png" class="modal__opener" aprire="#img-modello-ISO-OSI">
-  <p>Il modello di riferimento OSI</p>
+  <p>I 7 livelli del modello di riferimento ISO/OSI</p>
 </div>
 <!-- modal -->
 <div id="img-modello-ISO-OSI" class="modal">
@@ -18,52 +29,31 @@ title: ISO/OSI
   </div>
 </div>
 
-Il **modello OSI** (acronimo di
-[Open Systems Interconnection](https://it.wikipedia.org/wiki/Open_Systems_Interconnection "Open Systems Interconnection"),
-conosciuto anche come **modello ISO/OSI**), in
-telecomunicazioni e informatica, è uno standard stabilito nel 1984 dall'[International Organization for Standardization](https://it.wikipedia.org/wiki/International_Organization_for_Standardization "International Organization for Standardization") (ISO), il principale ente di standardizzazione internazionale, il quale sentì la necessità di avviare il progetto per la definizione di un
-modello di riferimento a formato aperto per l'interconnessione di sistemi di
-computer (_Basic Reference Model_ o standard ISO 7498). Tale
-modello stabilisce per l'architettura logica di rete, una struttura a strati composta da una pila di [protocolli di comunicazione di rete](https://it.wikipedia.org/wiki/Protocollo_di_rete "Protocollo di rete") suddivisa in 7 livelli, seguendo un modello logico-gerarchico.
+Ciascun livello:
+1. **Ha un compito specifico e ben delimitato** (ad esempio: determinare il percorso migliore, controllare gli errori di trasmissione o convertire i bit in segnali fisici).
+2. **Fornisce un insieme ben definito di servizi al livello superiore**, mettendogli a disposizione funzionalità pronte all'uso.
+3. **Si appoggia al livello inferiore considerandolo come una "scatola nera"**: al livello superiore non interessa *come* il livello sottostante svolga il proprio lavoro né con quale tecnologia. Ad esempio, a un browser web (livello Applicazione) non importa se i bit viaggiano su un cavo in rame, su onde radio Wi-Fi o su fibra ottica; gli basta richiedere al livello inferiore di recapitare i dati.
 
-A livello implementativo lo standard _[de facto](https://it.wikipedia.org/wiki/De_facto "De facto")_ affermatosi per architetture di rete a livelli è invece il [TCP/IP](https://it.wikipedia.org/wiki/TCP/IP "TCP/IP"), che riprende in parte il modello OSI. Nella [sezione dedicata al modello TCP/IP](#) verranno analizzati nel dettaglio i protocolli specifici utilizzati e le loro funzionalità.
+Questo approccio conferisce una fondamentale **indipendenza modulare (astrazione)**: è possibile modificare, aggiornare o sostituire completamente il protocollo o la tecnologia adottata a un determinato livello senza dover toccare in alcun modo i livelli sovrastanti o le applicazioni usate dagli utenti.
 
+:::note[L'indipendenza è sempre assoluta?]
+Sebbene nella teoria dei modelli a strati i livelli siano concepiti come moduli indipendenti, nella pratica ingegneristica reale delle reti esistono alcune eccezioni significative:
+- **Protocolli cerniera:** alcuni protocolli nascono specificamente per raccordare due livelli contigui ben precisi, come **ARP** (*Address Resolution Protocol*), che traduce gli indirizzi logici IP (Livello 3) nei corrispondenti indirizzi fisici MAC (Livello 2) all'interno delle reti Ethernet.
+- **Interdipendenze prestazionali e di controllo:** per garantire la massima efficienza e sicurezza, alcuni protocolli di livello superiore "sbirciano" nei campi del livello inferiore. L'esempio più noto è il protocollo di trasporto **TCP** (Livello 4), che include gli indirizzi IP sorgente e destinatario (campi propri del Livello 3) all'interno del calcolo del proprio codice di controllo errore (*checksum*).
+:::
 
+---
 
-## Caratteristiche
+## 2. Comunicazione logica e incapsulamento
 
-<!-- thumbnail -->
-<div class="thumbnail float-right">
-  <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/ISO-OSI-parallelo_posta.svg" class="modal__opener" aprire="#img-ISO-OSI-parallelo_posta">
-  <p>Parallelo tra sistema di gestione della posta fisica e rete informatica basata sul modello ISO-OSI. Il parallelo mostra anche la divisione tra i livelli superiori e i livelli inferiori</p>
-</div>
-<!-- modal -->
-<div id="img-ISO-OSI-parallelo_posta" class="modal">
-  <div class="modal__content">
-    <span class="modal__closer modal__closer--topright" chiudere="#img-ISO-OSI-parallelo_posta">&times;</span>
-    <div class="modal__content__img-container">   
-      <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/ISO-OSI-parallelo_posta.svg">
-    </div>
-    <p>Parallelo tra sistema di gestione della posta fisica e rete informatica basata sul modello ISO-OSI. Il parallelo mostra anche la divisione tra i livelli superiori e i livelli inferiori</p>
-  </div>
-</div>
+Il modello realizza una **comunicazione virtuale orizzontale**: il livello $N$ sul computer trasmittente dialoga idealmente con il corrispondente livello $N$ sul computer ricevente (*peer-to-peer layer*), rispettando le regole del protocollo di quel livello.
 
-Il modello ISO/OSI, concepito per reti a [commutazione di pacchetto](#), è costituito da una pila (o stack) di protocolli attraverso i quali viene ridotta la complessità implementativa del sistema. In particolare ISO/OSI è costituito da  strati (o livelli), i cosiddetti _**layer**_, che definiscono e racchiudono in sé a livello logico uno o più aspetti fra loro correlati della comunicazione fra due nodi di una rete. I layer sono in totale 7 e vanno dal livello fisico, ossia quello del mezzo fisico, del cavo, delle onde radio o qualsiasi altro sistema trasmissivo tra cui la fibra ottica, fino al livello delle applicazioni, attraverso cui si realizza la comunicazione di _alto livello_. I livelli vengono anche divisi in due gruppi: i primi tre considerati _media layers_ perchè legati alla gestione dei dispositivi di rete_ e gli ultimi quattro chiamati _host layers_ perchè si occupano delle operazioni che avvengono solo sugli host.
-
-Il modello ISO/OSI è solo un **modello astratto** che non prevede un protocollo specifico per ogni livello. Esistono invece modelli reali come ad esempio TCP/IP che specificano ad ogni livello il protocollo di comunicazione da usare. 
-
-ISO/OSI realizza una **comunicazione per livelli**, cioè dati due nodi A e B, il livello n del nodo A può scambiare informazioni col livello n del nodo B, ma non con gli altri. Ogni livello in trasmissione realizza la comunicazione col livello corrispondente sui nodi di transito o destinatari usando i servizi offerti dal livello immediatamente sottostante. Sicché ISO/OSI **incapsula** i messaggi di livello n in messaggi del livello n-1,  così se A deve inviare, ad esempio, una e-mail a B, l'applicazione (liv. 7) di A propagherà il messaggio usando il layer sottostante (liv. 6) che a sua volta userà i servizi del layer inferiore, fino ad arrivare alla comunicazione ovvero alla trasmissione sul canale o mezzo fisico trasmissivo. Il messaggio, una volta raggiunto il computer di B a livello fisico, verrà propagato verso i livelli superiori fino a raggiungere il livello di applicazione. Possiamo quindi dire che ogni livello opera per offrire dei servizi ai livelli superiori e per farlo utilizza i servizi dei livelli inferiori, ad eccezione del livello 1 (fisico) che non ha livelli inferiori, e del livello 7 (applicazione) che offre servizi all'utente.
-
-Questa comunicazione multilivello conferisce modularità al sistema permettendo una maggiore semplicità di progettazione e gestione della rete e la possibilità di migliorare, sviluppare o sostituire il protocollo utlizzato ad un determinato livello senza dover modificare i protocolli degli altri livelli.
-
-Lo sviluppo di questo modello nasce negli anni '80 dalla necessità di creare un modello standard per la creazione di reti di calcolatori che proprio in quegli anni stavano vivendo la loro prima rapida diffusione. Fino a quel momento ogni sistema e quindi ogni rete era sviluppata in maniera autonoma da ogni organizzazione e ciò rendeva difficile interfacciare tra loro i diversi sistemi. ISO/OSI risolve questo problema offrendo uno standard da seguire, in particolare la divisione per livelli ha permesso di interfacciare tra loro sistemi anche molto diversi.
-
-### Incapsulamento
+Fisicamente, tuttavia, i dati non possono "saltare" direttamente da un'applicazione all'altra: devono scendere verticalmente lungo la pila del mittente, attraversare il mezzo fisico sotto forma di segnali, e risalire la pila del ricevitore.
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
   <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/incapsulamento.png" class="modal__opener" aprire="#img-ISO-OSI-incapsulamento">
-  <p>Percorso dei dati e incapsulamento durante una comunicazione.</p>
+  <p>Processo di incapsulamento (discesa) e decapsulamento (risalita) dei dati</p>
 </div>
 <!-- modal -->
 <div id="img-ISO-OSI-incapsulamento" class="modal">
@@ -72,25 +62,86 @@ Lo sviluppo di questo modello nasce negli anni '80 dalla necessità di creare un
     <div class="modal__content__img-container">   
       <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/incapsulamento.png">
     </div>
-    <p>Percorso dei dati e incapsulamento durante una comunicazione.</p>
-    <p>Sul lato sinistro è indicato il percorso dei dati dal livello 7 al livello 1 durante il quale ai dati vengono aggiunti ad ogni livello le intestazioni del livello (ad es. AH, application header, al livello 7, poi PH, presentation header, al livello 6..., al livello datalink si aggiunge anche un tail). Sul lato destro è mostrato il percorso inverso durante il quale vengono "spacchettati" i dati ad ogni livello</p>
+    <p>Processo di incapsulamento e decapsulamento attraverso i livelli</p>
   </div>
 </div>
 
-Formalmente l'**Iincapsulamento** (o _imbustamento_), nelle [reti di calcolatori](https://it.wikipedia.org/wiki/Reti_di_calcolatori "Reti di calcolatori"), è un termine che indica l'operazione, spesso ripetuta più volte, di inserimento di un [payload](https://it.wikipedia.org/wiki/Carico_utile_(informatica) "Carico utile (informatica)") di un certo livello N dello [strato architetturale](https://it.wikipedia.org/wiki/Architettura_di_rete "Architettura di rete") tra dati di controllo (intestazioni o [header](/wiki/Header "Header")) di livello N-1\. Il risultato è un [pacchetto](https://it.wikipedia.org/wiki/Pacchetto_(reti) "Pacchetto (reti)") di livello N-1, che diventa quindi il carico utile per il [protocollo di rete](https://it.wikipedia.org/wiki/Protocollo_di_rete "Protocollo di rete") di livello N-2, e così via.
+### Il meccanismo dell'incapsulamento
 
-Come esempio pratico si può pensare ad un sistema per la spedizione della posta. La busta incapsula la lettera da spedire e su di essa è scritto l'indirizzo di destinazione. A sua volta il postino terrà le buste in un contenitore che a sua volta sarà contenuto in un mezzo di trasporto.
+Questo passaggio avviene tramite l'**incapsulamento** (o *imbustamento*):
 
-Come mostrato nella figura a fianco, i dati che viaggiano dal livello n di un host al livello n di un altro host, scendono verso il livello fisico del primo host e ad ogni livello vengono incapsulati con l'aggiunta dell'header del livello raggiunto. A livello fisico avviene la comunicazione bit a bit del pacchetto ricevuto dal livello di collegamento, al dispositivo fisico del secondo host. Da lì i dati vengono spediti ai livelli superiori e ad ogni livello viene eliminata l'intestazione (o header) più esterno e tenuto il payload del livello raggiunto.
+1. **In trasmissione (discesa lungo lo stack):**
+   - L'applicazione genera un messaggio o flusso dati.
+   - Ogni livello riceve i dati dal livello superiore (che rappresentano il suo carico utile o **Payload**) e vi antepone la propria **Intestazione** (**Header**), contenente le informazioni di controllo necessarie per quel livello (es. numeri di porta, indirizzi IP, codici di stato).
+   - Il Livello 2 (Collegamento) aggiunge solitamente anche una **Coda** (**Trailer**), contenente codici di controllo ridondanza (come il *CRC / Frame Check Sequence*) per verificare l'assenza di errori di trasmissione.
+   - Giunti al Livello 1 (Fisico), l'intero blocco viene convertito in una sequenza continua di bit elettrici, ottici o elettromagnetici sul canale.
+2. **In ricezione (risalita lungo lo stack):**
+   - Il ricevitore riceve i bit a livello fisico, ricostruisce il blocco e lo passa verso l'alto (**decapsulamento** o *sbustamento*).
+   - Ciascun livello legge e interpreta l'header a lui destinato, esegue le opportune verifiche, scarta l'header ed estrae il payload, passandolo intatto al livello superiore fino a giungere all'applicazione.
 
-## ISO/OSI e TCP/IP
+<!-- thumbnail -->
+<div class="thumbnail float-right">
+  <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/ISO-OSI-parallelo_posta.svg" class="modal__opener" aprire="#img-ISO-OSI-parallelo_posta">
+  <p>Analogia tra il sistema postale e il modello ISO/OSI</p>
+</div>
+<!-- modal -->
+<div id="img-ISO-OSI-parallelo_posta" class="modal">
+  <div class="modal__content">
+    <span class="modal__closer modal__closer--topright" chiudere="#img-ISO-OSI-parallelo_posta">&times;</span>
+    <div class="modal__content__img-container">   
+      <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/ISO-OSI-parallelo_posta.svg">
+    </div>
+    <p>Parallelo tra la spedizione postale tradizionale e la comunicazione a livelli ISO/OSI</p>
+  </div>
+</div>
 
-<!-- ISO/OSI è il modello teorico su cui sono state sviluppate le reti moderne. Nello sviluppo della rete internet si è però sviluppato uno standard di fatto che viene normalmente chiamata, per sineddoche, suite di protocolli TCP/IP o più brevemente modello TCP/IP. Nella [prossima sezione](/manuale-libero-online-di-informatica/docs/reti/ISO-OSI/tcp-ip/) saranno analizzati nel dettaglio questa suite di protocolli e le loro funzionalità. -->
+:::tip[L'analogia del servizio postale]
+Pensa a quando scrivi una lettera:
+- Tu componi il testo della lettera (**Dati / Livello Applicativo**).
+- La inserisci in una busta con l'indirizzo del destinatario (**Header di Livello Rete**).
+- Il postino raggruppa le buste in un sacco postale contrassegnato per il centro di smistamento locale (**Header di Livello Collegamento**).
+- Il sacco viene caricato su un furgone o su un aereo che percorre la strada fisica (**Livello Fisico**).
+- All'arrivo il sacco viene aperto, la busta estratta e consegnata all'ufficio, e il destinatario apre la busta per leggere il messaggio originario.
+:::
+
+---
+
+### Unità di dati nei diversi livelli (PDU)
+
+Nelle reti ogni blocco dati formattato a un determinato livello prende il nome formale di **PDU** (*Protocol Data Unit*). Sebbene colloquialmente si usi spesso la parola generica "pacchetto", la terminologia tecnica rigorosa è la seguente:
+
+- **Livelli 7, 6, 5 (Applicazione, Presentazione, Sessione):** **Dati** (*Message / Data*)
+- **Livello 4 (Trasporto):** **Segmento** (per il protocollo TCP) o **Datagramma** (per il protocollo UDP)
+- **Livello 3 (Rete):** **Pacchetto** (in ambito IP spesso detto *Datagramma IP*)
+- **Livello 2 (Collegamento dati):** **Frame** (o *Trama*)
+- **Livello 1 (Fisico):** **Bit** (flusso continuo di 0 e 1)
+
+---
+
+## 3. Panoramica dei 7 Livelli ISO/OSI
+
+I sette livelli vengono concettualmente ripartiti in due grandi categorie:
+- **Media Layers (Livelli inferiori 1, 2, 3):** gestiscono il transito dei dati attraverso l'infrastruttura di rete e sono implementati anche dagli apparati intermedi (switch, router).
+- **Host Layers (Livelli superiori 4, 5, 6, 7):** operano da capo a capo (*end-to-end*) esclusivamente tra i nodi terminali (i computer mittente e destinatario), garantendo l'integrità della comunicazione e l'interfaccia con i programmi utente.
+
+| # | Livello | PDU | Funzione principale | Esempi di tecnologie e protocolli |
+|---|---|---|---|---|
+| **7** | **Applicazione** | Dati | Offre servizi di rete direttamente ai processi e alle applicazioni dell'utente. | HTTP, HTTPS, DNS, SMTP, FTP, SSH, DHCP |
+| **6** | **Presentazione** | Dati | Gestisce la sintassi e la semantica dei dati: codifica caratteri, compressione e cifratura. | TLS/SSL, ASCII, UTF-8, JPEG, MPEG, JSON |
+| **5** | **Sessione** | Dati | Instaura, mantiene, sincronizza e termina le sessioni di dialogo tra applicazioni. | NetBIOS, RPC, checkpoint e gestione token |
+| **4** | **Trasporto** | Segmento / Datagramma | Consegna affidabile *end-to-end*, controllo del flusso, correzione errori, multiplexing su porte. | TCP, UDP |
+| **3** | **Rete** | Pacchetto | Indirizzamento logico globale (IP) e instradamento (*routing*) attraverso reti eterogenee. | IPv4, IPv6, ICMP, router |
+| **2** | **Collegamento** | Frame | Trasferimento affidabile su collegamento diretto tra nodi adiacenti, indirizzi fisici (MAC), framing. | Ethernet, Wi-Fi (802.11), switch |
+| **1** | **Fisico** | Bit | Trasmissione di segnali non strutturati (tensioni, impulsi luminosi, onde radio) sul canale fisico. | Cavi in rame (UTP), fibra ottica, onde radio, connettori RJ-45 |
+
+---
+
+## 4. ISO/OSI e TCP/IP: Teoria vs Realtà
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
   <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-layers.png" class="modal__opener" aprire="#img-ISO-OSI-TCP-IP-layers">
-  <p>Il modello TCP-IP (dx) in confronto al modello ISO/OSI (sx)</p>
+  <p>Confronto tra i livelli ISO/OSI e la pila TCP/IP</p>
 </div>
 <!-- modal -->
 <div id="img-ISO-OSI-TCP-IP-layers" class="modal">
@@ -99,18 +150,21 @@ Come mostrato nella figura a fianco, i dati che viaggiano dal livello n di un ho
     <div class="modal__content__img-container">   
       <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-layers.png">
     </div>
-    <p>Il modello TCP-IP (dx) in confronto al modello ISO/OSI (sx)</p>
+    <p>Confronto tra la struttura a 7 livelli OSI e la struttura a 4 livelli TCP/IP</p>
   </div>
 </div>
 
-TCP/IP è il nome comunemente usato per riferirsi ad un modello costituito da un insieme di protocolli organizzati in livelli utilizzato nella rete internet. Il suo nome deriva dai due protocolli più uitilizzati, il Transmission Control Protocol (TCP) e l'Internet Protocol (IP). Questo modello, a differenza del modello ISO/OSI, che è un modello teorico, costituisce l'evoluzione delle prime reti locali, disomogenee tra loro, che col tempo hanno avuto la necessità di unirsi gradualmente fino a formare internet. In tale processo, ISO/OSI ha costituito solo un modello teorico per TCP/IP, che conserva alcune sostanziali differenze. Le differenze principali e più evidenti sono costituite dalla riduzione del numero dei livelli adottati da 7 a 4 unificando i tre livelli superiori e i due inferiori. L'unificazione dei livelli superiori è dovuta al fatto che questo modello riguarda la gestione delle funzionalità di rete e non gli aspetti applicativi. L'unione dei due livelli inferiori ci mostra invece la concretezza di questo modello che rispecchia la necessità di unificare le funzionalità dei livelli fisico e collegamento in un unico protocollo, come nei casi dei protocolli ethernet e wifi. 
+Una delle domande più frequenti è: *se il modello ISO/OSI è così dettagliato e ben strutturato, perché Internet utilizza il modello TCP/IP?*
 
-Di seguito è riportata una lista che associa ad ogni livello della pila TCP/IP molti protocolli che operano a tale livello. Per ogni elemento è fornito un link esterno alla pagina wikipedia dedicata ad esso.
+- **Il Modello ISO/OSI è un modello concettuale di riferimento (*de jure*):** fu progettato a tavolino da commissioni di esperti con l'obiettivo di definire in modo rigoroso e astratto ogni singolo aspetto della comunicazione. La sua suddivisione a 7 strati è ideale per lo studio e la progettazione, ma nella realtà pratica si è visto che mantenere livelli separati per ogni singola funzione (come Sessione e Presentazione) introduceva inutili sovraccarichi di elaborazione.
+- **La Suite TCP/IP è uno standard di fatto (*de facto*):** nacque sul campo con lo sviluppo di ARPANET seguendo un principio pragmatico (*"Rough consensus and running code"*). Per semplicità ed efficienza implementativa, molti protocolli reali preferiscono incorporare direttamente al loro interno funzionalità afferenti a più livelli teorici: ad esempio, i moderni protocolli applicativi (come HTTPS, SSH o le API web) gestiscono autonomamente la sessione, la formattazione dei dati e la cifratura (TLS), senza bisogno di attraversare livelli intermedi dedicati.
+
+Internet ha adottato universalmente la pila **TCP/IP**. Tuttavia, il modello ISO/OSI rimane il vocabolario e il punto di riferimento concettuale imprescindibile: ancora oggi, nel mondo professionale, si parla comunemente di "apparato di Livello 2" o "filtro di Livello 4".
 
 <!-- thumbnail -->
 <div class="thumbnail float-right">
   <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-protocolli.jpg" class="modal__opener" aprire="#img-ISO-OSI-TCP-IP-protocolli">
-  <p>Il modello TCP-IP (dx) in confronto al modello ISO/OSI (sx)</p>
+  <p>Protocolli principali nei vari livelli dello stack</p>
 </div>
 <!-- modal -->
 <div id="img-ISO-OSI-TCP-IP-protocolli" class="modal">
@@ -119,109 +173,36 @@ Di seguito è riportata una lista che associa ad ogni livello della pila TCP/IP 
     <div class="modal__content__img-container">   
       <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/ISO-OSI-TCP-IP-protocolli.jpg">
     </div>
-    <p>Il modello TCP-IP (dx) in confronto al modello ISO/OSI (sx)</p>
+    <p>Principali protocolli associati ai livelli TCP/IP e ISO/OSI</p>
   </div>
 </div>
 
-* **[Livello di applicazione](https://it.wikipedia.org/wiki/Livello_di_applicazione "Livello di applicazione")** con i protocolli:<br>
-  [BGP](/wiki/Border_Gateway_Protocol "Border Gateway Protocol"), [DHCP](/wiki/Dynamic_Host_Configuration_Protocol "Dynamic Host Configuration Protocol"), [DNS](/wiki/Domain_Name_System "Domain Name System"), [FTP](/wiki/File_Transfer_Protocol "File Transfer Protocol"), [HTTP](/wiki/Hypertext_Transfer_Protocol "Hypertext Transfer Protocol"), [HTTPS](/wiki/HTTPS "HTTPS"), [IMAP](/wiki/Internet_Message_Access_Protocol "Internet Message Access Protocol"), [LDAP](/wiki/Lightweight_Directory_Access_Protocol "Lightweight Directory Access Protocol"), [MGCP](/wiki/Media_Gateway_Control_Protocol "Media Gateway Control Protocol"), [MQTT](/wiki/MQTT "MQTT"), [NNTP](/wiki/Network_News_Transfer_Protocol "Network News Transfer Protocol"), [NTP](/wiki/Network_Time_Protocol "Network Time Protocol"), [POP](/wiki/Post_Office_Protocol "Post Office Protocol"), [ONC/RPC](/wiki/Open_Network_Computing_Remote_Procedure_Call "Open Network Computing Remote Procedure Call"), [RTP](/wiki/Real-time_Transport_Protocol "Real-time Transport Protocol"), [RTSP](/wiki/Real_Time_Streaming_Protocol "Real Time Streaming Protocol"), [RIP](/wiki/Routing_Information_Protocol "Routing Information Protocol"), [SIP](/wiki/Session_Initiation_Protocol "Session Initiation Protocol"), [SMTP](/wiki/Simple_Mail_Transfer_Protocol "Simple Mail Transfer Protocol"), [SNMP](/wiki/Simple_Network_Management_Protocol "Simple Network Management Protocol"), [SSH](/wiki/Secure_Shell "Secure Shell"), [Telnet](/wiki/Telnet "Telnet"), [TLS/SSL](/wiki/Transport_Layer_Security "Transport Layer Security"), [XMPP](/wiki/XMPP "XMPP"), [_altri..._](/wiki/Category:Application_layer_protocols "Category:Application layer protocols")
-* **[Livello di trasporto](https://it.wikipedia.org/wiki/Livello_di_trasporto "Livello di trasporto")** con i protocolli:<br>
-  [TCP](/wiki/Transmission_Control_Protocol "Transmission Control Protocol"), [UDP](/wiki/User_Datagram_Protocol "User Datagram Protocol"), [DCCP](/wiki/Datagram_Congestion_Control_Protocol "Datagram Congestion Control Protocol"), [SCTP](/wiki/Stream_Control_Transmission_Protocol "Stream Control Transmission Protocol"), [RSVP](/wiki/Resource_Reservation_Protocol "Resource Reservation Protocol"), [_altri..._](/wiki/Category:Transport_layer_protocols "Category:Transport layer protocols")
-* **[Livello di rete](https://it.wikipedia.org/wiki/Livello_di_rete "Livello di rete")** con i protocolli:<br>
-  [IP](/wiki/Internet_Protocol "Internet Protocol") ([IPv4](/wiki/IPv4 "IPv4"), [IPv6](/wiki/IPv6 "IPv6")), [ICMP](/wiki/Internet_Control_Message_Protocol "Internet Control Message Protocol"), [ICMPv6](/wiki/Internet_Control_Message_Protocol_for_IPv6 "Internet Control Message Protocol for IPv6"), [ECN](/wiki/Explicit_Congestion_Notification "Explicit Congestion Notification"), [IGMP](/wiki/Internet_Group_Management_Protocol "Internet Group Management Protocol"), [IPsec](/wiki/IPsec "IPsec"), [_altri..._](/wiki/Category:Internet_layer_protocols "Category:Internet layer protocols")
-* **[Livello di accesso alla rete](https://it.wikipedia.org/wiki/Livello_di_accesso_alla_rete "Livello di accesso alla rete")** con i protocolli:<br>
-  [ARP](/wiki/Address_Resolution_Protocol "Address Resolution Protocol"), [NDP](/wiki/Neighbor_Discovery_Protocol "Neighbor Discovery Protocol"), [OSPF](/wiki/Open_Shortest_Path_First "Open Shortest Path First"), [Tunnels](/wiki/Tunneling_protocol "Tunneling protocol") ([L2TP](/wiki/Layer_2_Tunneling_Protocol "Layer 2 Tunneling Protocol")), [PPP](/wiki/Point-to-Point_Protocol "Point-to-Point Protocol"), [MAC](https://it.wikipedia.org/wiki/Media_Access_Control "Medium access control") ([Ethernet](/wiki/Ethernet "Ethernet"), [Wi-Fi](/wiki/Wi-Fi "Wi-Fi"), [DSL](/wiki/Digital_subscriber_line "Digital subscriber line"), [ISDN](/wiki/Integrated_Services_Digital_Network "Integrated Services Digital Network"), [FDDI](/wiki/Fiber_Distributed_Data_Interface "Fiber Distributed Data Interface"), [_altri..._](/wiki/Category:Link_protocols "Category:Link protocols")
+### La corrispondenza tra i due modelli
 
-<!-- versione a lista
-* [Livello di applicazione](https://it.wikipedia.org/wiki/Livello_di_applicazione "Livello di applicazione") con i protocolli:
-  * [BGP](/wiki/Border_Gateway_Protocol "Border Gateway Protocol")
-  * [DHCP](/wiki/Dynamic_Host_Configuration_Protocol "Dynamic Host Configuration Protocol")
-  * [DNS](/wiki/Domain_Name_System "Domain Name System")
-  * [FTP](/wiki/File_Transfer_Protocol "File Transfer Protocol")
-  * [HTTP](/wiki/Hypertext_Transfer_Protocol "Hypertext Transfer Protocol")
-  * [HTTPS](/wiki/HTTPS "HTTPS")
-  * [IMAP](/wiki/Internet_Message_Access_Protocol "Internet Message Access Protocol")
-  * [LDAP](/wiki/Lightweight_Directory_Access_Protocol "Lightweight Directory Access Protocol")
-  * [MGCP](/wiki/Media_Gateway_Control_Protocol "Media Gateway Control Protocol")
-  * [MQTT](/wiki/MQTT "MQTT")
-  * [NNTP](/wiki/Network_News_Transfer_Protocol "Network News Transfer Protocol")
-  * [NTP](/wiki/Network_Time_Protocol "Network Time Protocol")
-  * [POP](/wiki/Post_Office_Protocol "Post Office Protocol")
-  * [ONC/RPC](/wiki/Open_Network_Computing_Remote_Procedure_Call "Open Network Computing Remote Procedure Call")
-  * [RTP](/wiki/Real-time_Transport_Protocol "Real-time Transport Protocol")
-  * [RTSP](/wiki/Real_Time_Streaming_Protocol "Real Time Streaming Protocol")
-  * [RIP](/wiki/Routing_Information_Protocol "Routing Information Protocol")
-  * [SIP](/wiki/Session_Initiation_Protocol "Session Initiation Protocol")
-  * [SMTP](/wiki/Simple_Mail_Transfer_Protocol "Simple Mail Transfer Protocol")
-  * [SNMP](/wiki/Simple_Network_Management_Protocol "Simple Network Management Protocol")
-  * [SSH](/wiki/Secure_Shell "Secure Shell")
-  * [Telnet](/wiki/Telnet "Telnet")
-  * [TLS/SSL](/wiki/Transport_Layer_Security "Transport Layer Security")
-  * [XMPP](/wiki/XMPP "XMPP")
-  * [_altri..._](/wiki/Category:Application_layer_protocols "Category:Application layer protocols")
-* [Livello di trasporto](https://it.wikipedia.org/wiki/Livello_di_trasporto "Livello di trasporto")
-  * [TCP](/wiki/Transmission_Control_Protocol "Transmission Control Protocol")
-  * [UDP](/wiki/User_Datagram_Protocol "User Datagram Protocol")
-  * [DCCP](/wiki/Datagram_Congestion_Control_Protocol "Datagram Congestion Control Protocol")
-  * [SCTP](/wiki/Stream_Control_Transmission_Protocol "Stream Control Transmission Protocol")
-  * [RSVP](/wiki/Resource_Reservation_Protocol "Resource Reservation Protocol")
-  * [_altri..._](/wiki/Category:Transport_layer_protocols "Category:Transport layer protocols")
-* [Livello di rete](https://it.wikipedia.org/wiki/Livello_di_rete "Livello di rete")
-  * [IP](/wiki/Internet_Protocol "Internet Protocol")
-    * [IPv4](/wiki/IPv4 "IPv4")
-    * [IPv6](/wiki/IPv6 "IPv6")
-  * [ICMP](/wiki/Internet_Control_Message_Protocol "Internet Control Message Protocol")
-  * [ICMPv6](/wiki/Internet_Control_Message_Protocol_for_IPv6 "Internet Control Message Protocol for IPv6")
-  * [ECN](/wiki/Explicit_Congestion_Notification "Explicit Congestion Notification")
-  * [IGMP](/wiki/Internet_Group_Management_Protocol "Internet Group Management Protocol")
-  * [IPsec](/wiki/IPsec "IPsec")
-  * [_altri..._](/wiki/Category:Internet_layer_protocols "Category:Internet layer protocols")
-* [Livello di accesso alla rete](https://it.wikipedia.org/wiki/Livello_di_accesso_alla_rete "Livello di accesso alla rete")
-  * [ARP](/wiki/Address_Resolution_Protocol "Address Resolution Protocol")
-  * [NDP](/wiki/Neighbor_Discovery_Protocol "Neighbor Discovery Protocol")
-  * [OSPF](/wiki/Open_Shortest_Path_First "Open Shortest Path First")
-  * [Tunnels](/wiki/Tunneling_protocol "Tunneling protocol")
-    * [L2TP](/wiki/Layer_2_Tunneling_Protocol "Layer 2 Tunneling Protocol")
-  * [PPP](/wiki/Point-to-Point_Protocol "Point-to-Point Protocol")
-  * [MAC](/wiki/Medium_access_control "Medium access control")
-    * [Ethernet](/wiki/Ethernet "Ethernet")
-    * [Wi-Fi](/wiki/Wi-Fi "Wi-Fi")
-    * [DSL](/wiki/Digital_subscriber_line "Digital subscriber line")
-    * [ISDN](/wiki/Integrated_Services_Digital_Network "Integrated Services Digital Network")
-    * [FDDI](/wiki/Fiber_Distributed_Data_Interface "Fiber Distributed Data Interface")
-  * [_altri..._](/wiki/Category:Link_protocols "Category:Link protocols")
--->
+Il modello TCP/IP originale (RFC 1122) riduce la pila a **4 livelli**:
 
-[Link](https://it.wikipedia.org/wiki/Suite_di_protocolli_Internet "Suite di protocolli Internet") alla pagina wikipedia dedicata a TCP/IP.
+1. **Livello di Applicazione:** raggruppa le funzioni dei livelli 5 (Sessione), 6 (Presentazione) e 7 (Applicazione) di OSI. I programmatori di applicazioni web o di rete gestiscono direttamente codifiche, crittografia e sessioni.
+2. **Livello di Trasporto:** corrisponde esattamente al Livello 4 OSI. È dominato da due protocolli complementari: **TCP** (affidabile e orientato alla connessione) e **UDP** (veloce, senza connessione e best-effort).
+3. **Livello Internet (o Rete):** corrisponde al Livello 3 OSI. Definisce l'indirizzamento e l'instradamento globale attraverso il protocollo **IP** (IPv4 e IPv6), coadiuvato da protocolli di controllo come **ICMP**.
+4. **Livello di Accesso alla Rete (Link / Network Interface):** raggruppa le funzioni dei livelli 1 (Fisico) e 2 (Collegamento) di OSI. L'architettura TCP/IP non vincola alcun protocollo specifico a questo livello, permettendo a IP di operare indifferentemente sopra cavi Ethernet, ponti Wi-Fi, fibre ottiche o connessioni mobili 4G/5G.
 
-Nelle pagine successive sono descritte le funzionalità offerte da ogni livello mantenendo la suddivisione in sette livelli del modello ISO/OSI. Per i livelli inferiori saranno anche descritti i principali dispositivi di rete che operano a tale livello. É importante sottolineare il fatto che un dispositivo di livello N opera su tutti i livelli fino al livello N poichè ogni protocollo per funzionare necessita delle funzionalità offerte dai livelli inferiori come visto nella sezione dedicata all'[incapsulamento](#incapsulamento).
+*(Didatticamente, molti testi moderni adottano il cosiddetto **modello a 5 livelli**, mantenendo separati il livello di Collegamento Dati e il livello Fisico sotto il livello Rete per maggiore chiarezza didattica).*
 
-## Dispositivi e livelli
+---
 
-Esistono molti tipi di dispositivi che operano a diversi livelli della pila ISO/OSI fornendo quindi ognuno diverse funzionalità. Di seguito sono riportati e brevemente descritti i dispositivi più comuni.
+## 5. Corrispondenza tra apparati di rete e livelli
 
-### Livello 1 - Fisico
+Una regola fondamentale delle architetture a livelli afferma che:
+> **Un apparato che opera al livello $N$ deve necessariamente implementare ed elaborare tutti i livelli inferiori da $1$ fino ad $N$.**
+
+In base a quale livello della pila riescono a "leggere" e interpretare per prendere decisioni di inoltro, gli apparati di rete si classificano come segue:
+
+### 1. Dispositivi di Livello 1 (Fisico): Hub e Ripetitori
 
 <!-- thumbnail -->
-<div class="thumbnail tright mb-2">
-  <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/Schema_ripetitore.jpg" class="modal__opener" aprire="#img-schema_ripetitore">
-  <p>Schema di comunicazione tra host per mezzo di un ripetitore</p>
-</div>
-<!-- modal -->
-<div id="img-schema_ripetitore" class="modal">
-  <div class="modal__content">
-    <span class="modal__closer modal__closer--topright" chiudere="#img-schema_ripetitore">&times;</span>
-    <div class="modal__content__img-container">   
-      <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/Schema_ripetitore.jpg">
-    </div>
-    <p>Schema di comunicazione tra host per mezzo di un ripetitore</p>
-  </div>
-</div>
-
-<!-- thumbnail -->
-<div class="thumbnail tright  mb-2">
+<div class="thumbnail float-right clear-both mb-2">
   <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/ethernet_hub.jpg" class="modal__opener" aprire="#img-ethernet_hub">
-  <p>Foto di un hub</p>
+  <p>Hub Ethernet a 4 porte (Livello 1)</p>
 </div>
 <!-- modal -->
 <div id="img-ethernet_hub" class="modal">
@@ -230,47 +211,20 @@ Esistono molti tipi di dispositivi che operano a diversi livelli della pila ISO/
     <div class="modal__content__img-container">   
       <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/ethernet_hub.jpg">
     </div>
-    <p>Foto di un hub. Il basso numero di porte è dovuto all'incapacità di risolvere il problema delle collisioni</p>
+    <p>Hub Ethernet: dispositivo privo di logica che ripete i segnali elettrici su tutte le porte</p>
   </div>
 </div>
 
-- Modem
-- Repeater
-- Hub
+- Operano esclusivamente sui singoli **bit grezzi**.
+- Non sanno cosa sia un indirizzo né che formato abbiano i dati: si limitano a rigenerare e amplificare il segnale elettrico in ingresso e a ritrasmetterlo su tutte le altre porte (*flooding* o diffusione cieca).
+- Creano un unico **dominio di collisione**: sono apparati obsoleti, sostituiti stabilmente dagli switch.
 
-Sono dispositivi attivi, componenti di reti telematiche: il repeater connette fra loro due reti, mentre l'hub consente connessioni di più host.
-
-L'appartenenza al livello 1 del modello ISO/OSI implica che il traffico si considera per bit, cioè per semplice sequenza di stati logici uno e zero, non raggruppati in nessun modo. Operando a livello 1, inoltre, repeater e hub non gestiscono l'arbitraggio dell'accesso al mezzo trasmissivo, e lasciano che gli host collegati lo facciano tramite l'algoritmo CSMA/CD. Quindi la connessione di un host a un hub non può che essere half-duplex. Operano nell'ambito del medesimo dominio di collisione, per cui il traffico di qualsiasi nodo, le collisioni ed i frame ritrasmessi vengono replicati su tutte le porte dell'hub, sottraendo quindi banda passante in egual misura ad ogni utenza della rete.
-
-L'hub è un componente ormai obsoleto e viene sostituito dallo switch.
-
-### Livello 2 - Collegamento
+### 2. Dispositivi di Livello 2 (Collegamento): Switch e Bridge
 
 <!-- thumbnail -->
-<div class="thumbnail tright  mb-2">
-  <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/schema_bridge.jpg" class="modal__opener" aprire="#img-schema_bridge">
-  <p>Schema di comunicazione tra host per mezzo di un bridge</p>
-</div>
-<!-- modal -->
-<div id="img-schema_bridge" class="modal">
-  <div class="modal__content">
-    <span class="modal__closer modal__closer--topright" chiudere="#img-schema_bridge">&times;</span>
-    <div class="modal__content__img-container">   
-      <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/schema_bridge.jpg">
-    </div>
-    <p>Schema di comunicazione tra host per mezzo di un bridge</p>
-  </div>
-</div>
-
-- Bridge
-- Switch
-
-I due dispositivi suddetti sono molto simili e operano al livello 2 del modello OSI. Sono dispositivi "intelligenti" che operano mediante "auto-apprendimento" e sono, quindi, plug-and-play e non si limitano a replicare il segnale, ma agiscono sui frame ricevuti instradandoli verso la destinazione esatta. Mediante queste loro capacità essi tengono i domini di collisione separati, col vantaggio di occupare banda passante solo sulle porte effettivamente interessate dal traffico, lasciando libere le altre. Operano anche sulla gestione dei frame per cui se trovano la rete occupata utilizzano un buffer per immagazzinare i frame attendendo che la rete si liberi. Lo switch, rispetto al bridge, ha interfacce multiple per cui consente il collegamento diretto di più host e fornisce prestazioni migliori grazie ad algoritmi di gestione dei frame più sofisticati.
-
-<!-- thumbnail -->
-<div class="thumbnail tright  mb-2">
+<div class="thumbnail float-right clear-both mb-2">
   <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/switch.jpg" class="modal__opener" aprire="#img-switch">
-  <p>Foto di unp switch</p>
+  <p>Switch di rete a 24 porte (Livello 2)</p>
 </div>
 <!-- modal -->
 <div id="img-switch" class="modal">
@@ -279,22 +233,20 @@ I due dispositivi suddetti sono molto simili e operano al livello 2 del modello 
     <div class="modal__content__img-container">   
       <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/switch.jpg">
     </div>
-    <p>Foto di uno switch. L'alto numero di porte (24) è permesso dalla risoluzione del problema delle collisioni</p>
+    <p>Switch di rete: isola i domini di collisione leggendo gli indirizzi MAC di Livello 2</p>
   </div>
 </div>
 
-Operando a livello 2 del modello ISO/OSI, lo switch è in grado di identificare l'Indirizzo MAC del mittente e del destinatario del frame; lo switch dispone di una memoria volatile (MAC table), che viene riempita con le associazioni fra le porte ed i MAC osservati su di esse, in modo da poter tracciare istantaneamente le connessioni fra porte in funzione dei frame stessi. L'isolamento fra i domini di collisione permette di non impiegare il CSMA/CD, adottando la modalità full-duplex sulle porte e raddoppiando la banda passante aggregata delle stesse; ciò inoltre evita la propagazione di collisioni e di frame non inerenti alla specifica porta.
+- Operano sui **frame** e sono in grado di interpretare gli **indirizzi fisici (MAC)**.
+- Grazie a una tabella di apprendimento dinamico (*MAC table*), lo switch inoltra il frame esclusivamente sulla porta verso cui risiede l'host destinatario.
+- Separano i domini di collisione su ogni singola porta, permettendo comunicazioni simultanee in Full-Duplex ad alta velocità.
 
-L'operatività a livello di frame, inoltre, permette di intervenire sulla distribuzione degli stessi; gli switch di tipo managed (gestiti) possono essere configurati in modo da supportare (ad esempio) VLAN port-based, aggregazione (802.3ad/LACP), controllo d'accesso basato sugli indirizzi MAC o su autenticazione (802.1x), STP (802.1D), RSTP (802.1w), QoS MAC-based (802.1p). Caratteristica importante di uno switch è la sua banda passante aggregata, indicata come la capacità effettiva del suo hardware di gestire un determinato traffico e si esprime in bps (bit per secondo); altra caratteristica importante è il forward rate, cioè la capacità di instradare frames al netto del tempo di processo, e si esprime in pps (pacchetti per secondo).
-
-è molto comune imbattersi in dispositivi che vengono chiamati switch ma che in realtà offrono funzionalità di livello più elevato e che sono quindi di fatto dei router.
-
-### Livello 3 - Rete
+### 3. Dispositivi di Livello 3 (Rete): Router
 
 <!-- thumbnail -->
-<div class="thumbnail tright mb-2">
+<div class="thumbnail float-right clear-both mb-2">
   <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/schema_router.jpg" class="modal__opener" aprire="#img-schema_router">
-  <p>Schema di comunicazione tra host per mezzo di un router</p>
+  <p>Schema di funzionamento di un router (Livello 3)</p>
 </div>
 <!-- modal -->
 <div id="img-schema_router" class="modal">
@@ -303,62 +255,29 @@ L'operatività a livello di frame, inoltre, permette di intervenire sulla distri
     <div class="modal__content__img-container">   
       <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/schema_router.jpg">
     </div>
-    <p>Schema di comunicazione tra host per mezzo di un router</p>
+    <p>Il router esamina l'indirizzo IP di destinazione (Livello 3) per instradare il pacchetto verso la rete corretta</p>
   </div>
 </div>
 
-<!-- thumbnail -->
-<div class="thumbnail tright mb-2">
-  <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/gateway_firewall.svg" class="modal__opener" aprire="#img-gateway_firewall">
-  <p>Schema di un firewall</p>
-</div>
-<!-- modal -->
-<div id="img-gateway_firewall" class="modal">
-  <div class="modal__content">
-    <span class="modal__closer modal__closer--topright" chiudere="#img-gateway_firewall">&times;</span>
-    <div class="modal__content__img-container">   
-      <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/gateway_firewall.svg">
-    </div>
-    <p>Schema di un firewall</p>
-  </div>
-</div>
+- Operano sui **pacchetti** e leggono gli **indirizzi logici globali (indirizzi IP)**.
+- Collegano tra loro reti locali differenti (inter-networking) e consultano tabelle di instradamento (*routing tables*) per decidere il cammino ottimale dei pacchetti verso la destinazione.
+- Delimitano e isolano anche i **domini di broadcast** (un messaggio inviato in broadcast non attraversa mai un router).
 
-<!-- thumbnail -->
-<div class="thumbnail tright mb-2">
-  <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/proxy_concept_it.svg" class="modal__opener" aprire="#img-proxy_concept_it">
-  <p>Schema di funzionamento di un proxy</p>
-</div>
-<!-- modal -->
-<div id="img-proxy_concept_it" class="modal">
-  <div class="modal__content">
-    <span class="modal__closer modal__closer--topright" chiudere="#img-proxy_concept_it">&times;</span>
-    <div class="modal__content__img-container">   
-      <img src="/manuale-libero-online-di-informatica/assets/images/reti/ISO-OSI/proxy_concept_it.svg">
-    </div>
-    <p>Schema di funzionamento di un proxy</p>
-  </div>
-</div>
+### 4. Dispositivi di Livello Superiore (L4 – L7): Firewall, Proxy e Gateway
 
-- Router
-- Firewall (lavora anche a livello di trasporto e di applicazione)
+- **Firewall di trasporto / ispezione di stato (Livello 4):** esaminano le intestazioni TCP/UDP e i numeri di porta (es. porta 80/443 per web, porta 22 per SSH), bloccando o autorizzando il traffico in base a regole di sicurezza.
+- **Proxy e Firewall applicativi / WAF (Livello 7):** analizzano il contenuto vero e proprio delle richieste applicative (es. ispezione di URL HTTP, filtraggio di contenuti, scansione antivirus, autenticazione utenti).
+- **Gateway applicativi:** apparati che traducono interi protocolli tra sistemi completamente incompatibili.
 
-Il router opera al livello 3 ed oltre della gerarchia di protocolli ISO/OSI, gestendo le informazioni a livello di packet, con capacità di identificare mittente e destinatario logici (es. indirizzo IP). La capacità di operare a livello di protocollo, permette di definire configurazioni selettive come routing (instradamento), lista di controllo degli accessi basate su IP, VLAN basate su protocollo e gestione della qualità del servizio (prioritizzazione dei pacchetti).
+---
 
-Il router, per la realtà complessa nella quale può trovarsi ad operare, può impiegare protocolli di gestione del traffico di tipo evoluto, come algoritmi di routing (es. RIP, IGRP, EIGRP, OSPF, IS-IS), algoritmi di ricerca del percorso migliore e di risoluzione di errori di percorso.
+## 6. Come proseguire lo studio
 
-### Livello 4 - Trasporto
+Nelle sezioni successive esamineremo in dettaglio le caratteristiche, i protocolli e il funzionamento dei singoli livelli:
 
-- Firewall (lavora anche a livello di rete e di applicazione)
-
-### Livello applicativo
-
-- Gateway
-- Firewall (lavora anche a livello di rete e di trasporto)
-- Proxy
-
-## Link e riferimenti esterni
-
-- [ISO/OSI su Wikipedia](https://it.wikipedia.org/wiki/Modello_OSI)
-- [Incapsulamento su Wikipedia](https://it.wikipedia.org/wiki/Imbustamento)
-- [TCP/IP su Wikipedia](https://it.wikipedia.org/wiki/Suite_di_protocolli_Internet)
-- [Dispositivi di rete su Wikipedia](https://it.wikipedia.org/wiki/Dispositivo_di_rete)
+- **[Livello 1 - Fisico](/manuale-libero-online-di-informatica/reti/iso-osi/livello1/):** mezzi trasmissivi, codifiche di linea, modulazione e connettori.
+- **[Livello 2 - Collegamento](/manuale-libero-online-di-informatica/reti/iso-osi/livello2/):** framing, indirizzamento MAC, controllo di flusso ed errore, funzionamento dello switch.
+- **[Livello 3 - Rete](/manuale-libero-online-di-informatica/reti/iso-osi/livello3/):** architettura IP, classi di indirizzi, subnetting pratico e instradamento dei router.
+- **[Livello 4 - Trasporto](/manuale-libero-online-di-informatica/reti/iso-osi/livello4/):** porte logiche, confronto dettagliato TCP vs UDP, affidabilità e controllo di congestione.
+- **[Livelli 5 e 6 - Sessione e Presentazione](/manuale-libero-online-di-informatica/reti/iso-osi/livello5/):** sincronizzazione, codifica e sicurezza (TLS/SSL).
+- **[Livello 7 - Applicazione](/manuale-libero-online-di-informatica/reti/iso-osi/livello7/):** i protocolli del web, della posta elettronica e dei servizi di rete (HTTP/HTTPS, DNS, DHCP).
