@@ -7,8 +7,9 @@ La **Progettazione Concettuale** è la prima vera fase della creazione di un dat
 
 Il risultato di questa fase è uno schema astratto, indipendente dal software che si andrà ad utilizzare. Lo strumento standard in tutto il mondo per rappresentare questo schema è il **Modello Entità-Relazione** (o **Modello E/R**), ideato nel 1976 da Peter Chen. Il Modello E/R utilizza dei simboli grafici molto intuitivi per "disegnare" la struttura dei dati.
 
-> [!NOTE] Una nota sui formalismi grafici
-> Cercando online materiale sui database, ti imbatterai in moltissime varianti e formalismi diversi per disegnare un modello E/R (es. notazione "a zampa di gallina", UML, e stili diversi per attributi e cardinalità). Non spaventarti: per questo manuale e per gli esercizi abbiamo scelto una notazione grafica specifica che riteniamo essere la più pratica e chiara, ma le regole logiche di fondo rimangono sempre le stesse.
+:::note[Una nota sui formalismi grafici]
+Cercando online materiale sui database, ti imbatterai in moltissime varianti e formalismi diversi per disegnare un modello E/R (es. notazione "a zampa di gallina", UML, e stili diversi per attributi e cardinalità). Non spaventarti: per questo manuale e per gli esercizi abbiamo scelto una notazione grafica specifica che riteniamo essere la più pratica e chiara, ma le regole logiche di fondo rimangono sempre le stesse.
+:::
 
 Vediamo quali sono i "mattoni" fondamentali (i costrutti) di questo modello.
 
