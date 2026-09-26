@@ -91,6 +91,17 @@ export default defineConfig({
           link: '/python/programmazione-in-python/'
         },
         {
+          label: 'Database',
+          items: [
+            { label: 'Database', link: '/database/database/' },
+            { label: 'Progettazione Concettuale', link: '/database/progettazione-concettuale/' },
+            { label: 'Progettazione Logica', link: '/database/progettazione-logica/' },
+            { label: 'Normalizzazione', link: '/database/normalizzazione/' },
+            { label: 'Esercizi di Progettazione e Normalizzazione', link: '/database/esercizi-progettazione/' },
+            { label: 'Creazione e Utilizzo con MySQL', link: '/database/mysql/' }
+          ]
+        },
+        {
           label: 'Complessità computazionale',
           link: '/complessita/'
         },
