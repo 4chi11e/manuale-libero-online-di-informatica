@@ -2,12 +2,12 @@
 import { getAllStats } from '../utils/stats.js';
 
 const allStats = await getAllStats();
-const { site, c, python } = allStats;
+const { site, c, python, db } = allStats;
 
-const totalWords = site.words + c.words + python.words;
-const totalChars = site.chars + c.chars + python.chars;
-const totalPages = site.pages + c.pages + python.pages;
-const totalImages = site.images + c.images + python.images;
+const totalWords = site.words + c.words + python.words + (db?.words || 0);
+const totalChars = site.chars + c.chars + python.chars + (db?.chars || 0);
+const totalPages = site.pages + c.pages + python.pages + (db?.pages || 0);
+const totalImages = site.images + c.images + python.images + (db?.images || 0);
 
 const formatNumber = (num: number) => new Intl.NumberFormat('it-IT').format(num);
 ---
@@ -108,6 +108,35 @@ const formatNumber = (num: number) => new Intl.NumberFormat('it-IT').format(num)
                 <div class="metric-box">
                     <span class="m-label">Immagini</span>
                     <span class="m-val">{formatNumber(python.images)}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sezione 4: Eserciziario Database -->
+        <div class="stats-section-block">
+            <div class="section-title-row">
+                <span class="section-icon">🗄️</span>
+                <div class="section-titles">
+                    <span class="section-name">Eserciziario di Progettazione Database</span>
+                    <span class="section-tag">Documento originale su Google Drive</span>
+                </div>
+            </div>
+            <div class="section-metrics-grid">
+                <div class="metric-box">
+                    <span class="m-label">Parole</span>
+                    <span class="m-val">{formatNumber(db?.words || 0)}</span>
+                </div>
+                <div class="metric-box">
+                    <span class="m-label">Caratteri</span>
+                    <span class="m-val">{formatNumber(db?.chars || 0)}</span>
+                </div>
+                <div class="metric-box">
+                    <span class="m-label">Pagine</span>
+                    <span class="m-val">{formatNumber(db?.pages || 0)}</span>
+                </div>
+                <div class="metric-box">
+                    <span class="m-label">Immagini</span>
+                    <span class="m-val">{formatNumber(db?.images || 0)}</span>
                 </div>
             </div>
         </div>

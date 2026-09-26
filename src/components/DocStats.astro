@@ -2,13 +2,13 @@
 import { getAllStats } from '../utils/stats.js';
 
 interface Props {
-    type: 'c' | 'python';
+    type: 'c' | 'python' | 'db';
 }
 
 const { type } = Astro.props;
 const allStats = await getAllStats();
-const stats = type === 'c' ? allStats.c : allStats.python;
-const title = type === 'c' ? 'Statistiche del Manuale di C' : 'Statistiche dell\'Eserciziario Python';
+const stats = type === 'c' ? allStats.c : (type === 'python' ? allStats.python : allStats.db);
+const title = type === 'c' ? 'Statistiche del Manuale di C' : (type === 'python' ? 'Statistiche dell\'Eserciziario Python' : 'Statistiche dell\'Eserciziario Database');
 const formatNumber = (num: number) => new Intl.NumberFormat('it-IT').format(num);
 ---
 
