@@ -46,8 +46,6 @@ async function countSiteMarkdown(dir) {
         for (const entry of entries) {
             const fullPath = path.join(currentDir, entry.name);
             if (entry.isDirectory()) {
-                const lower = entry.name.toLowerCase();
-                if (lower === 'c' || lower === 'python') continue;
                 await scan(fullPath);
             } else if (entry.name.endsWith('.md') || entry.name.endsWith('.mdx')) {
                 const content = await fs.readFile(fullPath, 'utf-8');
