@@ -88,7 +88,15 @@ export default defineConfig({
         },
         {
           label: 'Programmazione in Python',
-          link: '/python/programmazione-in-python/'
+          items: [
+            { label: 'Programmazione in Python', link: '/python/programmazione-in-python/' },
+            { label: 'Elementi di base', link: '/python/elementi-di-base/' },
+            { label: 'Strutture di controllo', link: '/python/strutture-di-controllo/' },
+            { label: 'Funzioni', link: '/python/funzioni/' },
+            { label: 'Liste', link: '/python/liste/' },
+            { label: 'Matrici', link: '/python/matrici/' },
+            { label: 'Dizionari', link: '/python/dizionari/' }
+          ]
         },
         {
           label: 'Database',

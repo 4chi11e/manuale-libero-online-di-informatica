@@ -32,6 +32,9 @@ samp {
   font-family: var(--sl-font-mono) !important;
   letter-spacing: 0 !important;
   font-variant-east-asian: normal !important;
+  /* Disattiva le legature (es. != mostrato come ≠): gli studenti devono vedere i caratteri reali da digitare */
+  font-variant-ligatures: none !important;
+  font-feature-settings: "liga" 0, "calt" 0 !important;
 }
 
 :root[data-theme='light'] {
