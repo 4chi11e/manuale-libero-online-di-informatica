@@ -96,7 +96,8 @@ export default defineConfig({
             { label: 'Liste', link: '/python/liste/' },
             { label: 'Matrici', link: '/python/matrici/' },
             { label: 'Dizionari', link: '/python/dizionari/' },
-            { label: 'Stringhe', link: '/python/stringhe/' }
+            { label: 'Stringhe', link: '/python/stringhe/' },
+            { label: 'Espressioni regolari', link: '/python/espressioni-regolari/' }
           ]
         },
         {
