@@ -1,32 +1,32 @@
 {
   "site": {
-    "words": 157692,
-    "chars": 1158945,
-    "lines": 17057,
+    "words": 163008,
+    "chars": 1196003,
+    "lines": 18044,
     "images": 165,
-    "pages": 590,
-    "updatedAt": "9 ottobre 2026"
+    "pages": 610,
+    "updatedAt": "10 ottobre 2026"
   },
   "c": {
     "words": 71468,
     "chars": 343649,
     "images": 12,
     "pages": 304,
-    "updatedAt": "9 ottobre 2026"
+    "updatedAt": "10 ottobre 2026"
   },
   "python": {
-    "words": 60091,
-    "chars": 302417,
+    "words": 61070,
+    "chars": 307784,
     "images": 22,
     "pages": 263,
-    "updatedAt": "9 ottobre 2026"
+    "updatedAt": "10 ottobre 2026"
   },
   "db": {
     "words": 3269,
     "chars": 17647,
     "images": 13,
     "pages": 17,
-    "updatedAt": "9 ottobre 2026"
+    "updatedAt": "10 ottobre 2026"
   },
-  "lastUpdated": "9 ottobre 2026"
+  "lastUpdated": "10 ottobre 2026"
 }
