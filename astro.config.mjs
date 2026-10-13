@@ -94,7 +94,8 @@ export default defineConfig({
             { label: 'Funzioni', link: '/c/funzioni/' },
             { label: 'Puntatori', link: '/c/puntatori/' },
             { label: 'Struct', link: '/c/struct/' },
-            { label: 'File di testo', link: '/c/file/' }
+            { label: 'File di testo', link: '/c/file/' },
+            { label: 'Allocazione dinamica della memoria', link: '/c/allocazione-dinamica/' }
           ]
         },
         {
