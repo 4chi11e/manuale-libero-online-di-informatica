@@ -96,7 +96,8 @@ export default defineConfig({
             { label: 'Struct', link: '/c/struct/' },
             { label: 'File di testo', link: '/c/file/' },
             { label: 'Allocazione dinamica della memoria', link: '/c/allocazione-dinamica/' },
-            { label: 'Strutture dati dinamiche', link: '/c/strutture-dati-dinamiche/' }
+            { label: 'Strutture dati dinamiche', link: '/c/strutture-dati-dinamiche/' },
+            { label: 'Programmi su più file', link: '/c/programmi-su-piu-file/' }
           ]
         },
         {
