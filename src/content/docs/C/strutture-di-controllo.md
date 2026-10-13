@@ -1,6 +1,6 @@
 ---
 title: Strutture di controllo
-description: Selezione con if, else e switch, condizioni e operatori logici, cicli while, for e do-while, break e continue, schemi algoritmici ricorrenti in C
+description: Selezione con if ed else, condizioni e operatori logici, cicli while, for e do-while, break e continue, schemi algoritmici ricorrenti in C
 ---
 
 I programmi visti finora sono semplici **sequenze** di istruzioni, eseguite sempre tutte e sempre nello stesso ordine. I programmi veri però devono **prendere decisioni** (eseguire certe istruzioni solo se si verifica una condizione) e **ripetere** operazioni (ad esempio leggere cento numeri, o continuare a chiedere un dato finché l'utente non lo inserisce correttamente).
@@ -8,7 +8,7 @@ I programmi visti finora sono semplici **sequenze** di istruzioni, eseguite semp
 Le istruzioni che permettono di modificare il flusso di esecuzione si chiamano **strutture di controllo**. Un importante risultato dell'informatica teorica, il *teorema di Böhm-Jacopini*, afferma che qualsiasi algoritmo può essere scritto usando soltanto tre strutture:
 
 *   la **sequenza**: istruzioni eseguite una dopo l'altra;
-*   la **selezione**: si sceglie quali istruzioni eseguire in base a una condizione (`if`, `switch`);
+*   la **selezione**: si sceglie quali istruzioni eseguire in base a una condizione (`if`, `else`);
 *   l'**iterazione**: un blocco di istruzioni viene ripetuto finché una condizione è vera (`while`, `for`, `do-while`).
 
 ## 1. La selezione: `if` ed `else`
@@ -195,53 +195,7 @@ Il primo `if` è sintatticamente corretto, quindi il compilatore lo accetta (con
 Un altro errore subdolo è il **punto e virgola dopo la condizione**: `if (x > 0);` è un `if` con un blocco vuoto, e il blocco tra graffe che segue viene eseguito sempre.
 :::
 
-## 3. La selezione multipla: `switch`
-
-Quando bisogna confrontare una variabile con tanti **valori precisi**, invece di una lunga catena di `else if` si può usare lo `switch`:
-
-```c
-#include <stdio.h>
-
-int main() {
-    double a, b;
-    char op;
-
-    printf("Scrivi un'operazione (es. 3 + 4): ");
-    scanf("%lf %c %lf", &a, &op, &b);
-
-    switch (op) {
-        case '+':
-            printf("= %g\n", a + b);
-            break;
-        case '-':
-            printf("= %g\n", a - b);
-            break;
-        case '*':
-        case 'x':                      // più casi possono condividere lo stesso codice
-            printf("= %g\n", a * b);
-            break;
-        case '/':
-            if (b != 0) {
-                printf("= %g\n", a / b);
-            } else {
-                printf("Divisione per zero!\n");
-            }
-            break;
-        default:
-            printf("Operatore non valido\n");
-    }
-
-    return 0;
-}
-```
-
-*   Il valore tra parentesi dopo `switch` viene confrontato con i valori dei vari `case`; l'esecuzione salta al `case` corrispondente.
-*   Il `break` fa uscire dallo `switch`. **Se lo si dimentica** l'esecuzione prosegue con le istruzioni dei `case` successivi (si dice che "cade" nel caso seguente, in inglese *fall-through*). È un errore frequente, ma a volte è proprio il comportamento voluto, come per `'*'` e `'x'` nell'esempio.
-*   Il ramo `default` (facoltativo) viene eseguito se nessun `case` corrisponde, come l'`else` finale.
-
-Lo `switch` ha però dei limiti: funziona solo con valori **interi** (quindi anche `char`), i `case` devono essere **costanti** e non si possono esprimere intervalli o condizioni come `voto < 6`. In tutti questi casi si usa la catena di `if`/`else if`.
-
-## 4. Il ciclo `while`
+## 3. Il ciclo `while`
 
 Spesso un programma deve ripetere le stesse operazioni tante volte: si dice che si è in presenza di un **ciclo** o **iterazione**. Il ciclo più semplice è il `while` ("finché"): ripete il blocco di codice **finché la condizione è vera**.
 
@@ -303,7 +257,7 @@ while (i < 10) {
 Se vi capita, interrompete il programma premendo `Ctrl + C` nel terminale.
 :::
 
-## 5. Il ciclo `for`
+## 4. Il ciclo `for`
 
 Moltissimi cicli hanno la stessa struttura: una variabile (il **contatore** o **indice**) viene inizializzata, si controlla una condizione e alla fine di ogni iterazione la variabile viene incrementata. Il `for` permette di scrivere queste tre parti tutte insieme, in un'unica riga:
 
@@ -339,7 +293,7 @@ for (int i = 1; i <= 1000; i *= 2) // 1, 2, 4, 8, ..., 512
 Dichiarando la variabile dentro il `for` (`for (int i = 0; ...)`), questa esiste solo all'interno del ciclo. Se il valore dell'indice serve anche dopo la fine del ciclo, bisogna dichiararla prima: `int i; for (i = 0; ...)`. Nei programmi più vecchi, e nei compilatori che seguono lo standard C89, si trova solo questa seconda forma.
 :::
 
-## 6. Il ciclo `do-while`
+## 5. Il ciclo `do-while`
 
 Il `do-while` è una variante del `while` in cui la condizione viene controllata **alla fine** di ogni iterazione invece che all'inizio. Di conseguenza il blocco viene eseguito **sempre almeno una volta**.
 
@@ -355,7 +309,7 @@ do {
 
 Il `do-while` è meno usato degli altri cicli e alcuni linguaggi (come Python) non lo prevedono nemmeno, ma in casi come questo rende il codice più semplice.
 
-## 7. `break` e `continue`
+## 6. `break` e `continue`
 
 Due istruzioni permettono di modificare il normale flusso di un ciclo:
 
@@ -394,7 +348,7 @@ while (1) {
 
 `break` e `continue` non sono indispensabili (si può sempre ottenere lo stesso risultato con condizioni scritte bene) e un loro uso eccessivo rende i programmi difficili da seguire. In alcuni contesti però semplificano molto il codice.
 
-## 8. Cicli annidati
+## 7. Cicli annidati
 
 Un ciclo può contenere al suo interno un altro ciclo. Per ogni iterazione del ciclo **esterno**, il ciclo **interno** viene eseguito per intero.
 
@@ -427,7 +381,7 @@ for (int i = 1; i <= 10; i++) {
 
 Per convenzione si usa `i` come indice del ciclo esterno (le **righe**) e `j` per quello interno (le **colonne**). Abituatevi fin da subito a rispettare questa regola: con le [matrici](../matrici/) vi eviterà moltissimi errori.
 
-## 9. Schemi algoritmici ricorrenti
+## 8. Schemi algoritmici ricorrenti
 
 Molti problemi, anche diversissimi tra loro, si risolvono con gli stessi "schemi" di base. Conviene impararli bene perché si ritrovano continuamente.
 
@@ -528,7 +482,7 @@ while (n > 0) {
 printf("%d cifre, somma delle cifre: %d\n", cifre, somma);   // 4 cifre, somma 14
 ```
 
-## 10. Errori comuni
+## 9. Errori comuni
 
 | Errore | Conseguenza |
 |---|---|
@@ -539,7 +493,6 @@ printf("%d cifre, somma delle cifre: %d\n", cifre, somma);   // 4 cifre, somma 1
 | Contatore o accumulatore non inizializzato | Risultato casuale |
 | Variabile della condizione mai modificata nel ciclo | Ciclo infinito |
 | `<=` al posto di `<` (o viceversa) nella condizione del `for` | Un'iterazione in più o in meno (errore detto *off by one*) |
-| `break` dimenticato nello `switch` | Vengono eseguiti anche i `case` successivi |
 
 :::tip[Simulare il programma a mano]
 Quando un ciclo non fa quello che vi aspettate, prendete carta e penna e simulatene l'esecuzione: scrivete una tabella con una colonna per ogni variabile e una riga per ogni iterazione, aggiornando i valori passo dopo passo. In alternativa aggiungete temporaneamente delle `printf` dentro il ciclo per vedere come cambiano le variabili. Quasi sempre l'errore salta subito all'occhio.
