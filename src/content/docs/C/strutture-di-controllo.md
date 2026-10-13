@@ -58,7 +58,13 @@ if (x > 0)
     conta++;              // NON fa parte dell'if: viene eseguita sempre!
 ```
 
-L'indentazione inganna l'occhio, ma il compilatore la ignora. Mettete **sempre** le graffe.
+L'indentazione inganna l'occhio, ma il compilatore la ignora. Il consiglio è di mettere **sempre** le graffe. Se proprio non le si vuole mettere, almeno scrivete l'unica istruzione **sulla stessa riga** dell'`if`, invece di andare a capo:
+
+```c
+if (x > 0) conta++;
+```
+
+In questo modo è evidente che l'`if` controlla solo quell'istruzione, ed è molto più difficile aggiungerne per sbaglio una seconda pensando che faccia parte dell'`if`.
 :::
 
 ### Scelte multiple: `else if`
