@@ -95,7 +95,8 @@ export default defineConfig({
             { label: 'Puntatori', link: '/c/puntatori/' },
             { label: 'Struct', link: '/c/struct/' },
             { label: 'File di testo', link: '/c/file/' },
-            { label: 'Allocazione dinamica della memoria', link: '/c/allocazione-dinamica/' }
+            { label: 'Allocazione dinamica della memoria', link: '/c/allocazione-dinamica/' },
+            { label: 'Strutture dati dinamiche', link: '/c/strutture-dati-dinamiche/' }
           ]
         },
         {
