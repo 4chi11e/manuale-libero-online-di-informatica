@@ -342,7 +342,7 @@ Tra `%` e la lettera si possono aggiungere delle indicazioni su **come** stampar
 |---|---|---|---|
 | `%.2f` | 2 cifre decimali | `printf("%.2f", 3.14159)` | `3.14` |
 | `%5d` | intero su almeno 5 caratteri, allineato a destra | `printf("%5d", 42)` | `   42` |
-| `%-5d` | come sopra, ma allineato a sinistra | `printf("%-5d|", 42)` | `42   \|` |
+| `%-5d` | come sopra, ma allineato a sinistra | `printf("%-5d\|", 42)` | `42   \|` |
 | `%05d` | riempie con zeri invece che con spazi | `printf("%05d", 42)` | `00042` |
 | `%8.2f` | almeno 8 caratteri in tutto, di cui 2 decimali | `printf("%8.2f", 3.14159)` | `    3.14` |
 
