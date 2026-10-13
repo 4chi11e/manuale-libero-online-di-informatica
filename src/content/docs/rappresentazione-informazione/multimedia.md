@@ -461,7 +461,262 @@ Il **contenitore** è come una valigia (`.mp4`), mentre i **codec** sono il modo
 
 ---
 
-## 7. Mettiti alla Prova: Esercizi ed Esercitazioni Pratiche
+## 7. Il Metodo Pratico: risolvere gli esercizi con le unità di misura
+
+Abbiamo visto tante formule diverse: una per le immagini, una per l'audio, una per il video, più le conversioni tra bit, byte, MB e MiB. Imparare a memoria tutte le formule (e tutte le loro versioni "inverse") è faticoso e porta facilmente a errori.
+
+Naturalmente, ragionando bene sul significato delle grandezze si riesce sempre a capire cosa moltiplicare e cosa dividere: se ogni pixel occupa 24 bit e i pixel sono 2 milioni, è chiaro che il totale si ottiene con una moltiplicazione. Ma quando le grandezze in gioco diventano tante (frequenza, profondità, canali, tempo, conversioni tra byte e MB…) o quando l'esercizio chiede di trovare un dato "al contrario", il ragionamento si complica e diventa facile confondersi.
+
+Per questo conviene usare un **metodo più semplice e meccanico**: basta sapere **quali grandezze sono in gioco** e **in quale unità di misura si esprimono**. Le unità di misura, se scritte sempre accanto ai numeri, ci dicono da sole cosa moltiplicare e cosa dividere, senza dover ricordare nessuna formula.
+
+:::tip[Un metodo che vale anche in fisica e in scienze]
+Questa tecnica si chiama **analisi dimensionale** e non è un trucco solo informatico: è esattamente lo stesso metodo che si usa in **fisica**, in **chimica** e in tutte le **scienze**. Ad esempio, se un'auto viaggia a $90 \, \text{km/h}$ per $2 \, \text{h}$, moltiplicando le unità si ottiene $\frac{\text{km}}{\cancel{\text{h}}} \times \cancel{\text{h}} = \text{km}$: la distanza percorsa. Imparare a usarla qui ti servirà anche in tutte le altre materie scientifiche!
+:::
+
+### Le abbreviazioni che useremo
+
+Per scrivere le unità di misura in modo compatto useremo questi simboli:
+
+| Simbolo | Significato |
+| :---: | :--- |
+| $\text{b}$ | bit |
+| $\text{B}$ | byte ($1 \, \text{B} = 8 \, \text{b}$) |
+| $\text{px}$ | pixel |
+| $\text{c}$ | campione (audio) |
+| $\text{frame}$ | fotogramma (video) |
+| $\text{s}$ | secondo |
+| $\text{Hz}$ | "al secondo": per la frequenza di campionamento $1 \, \text{Hz} = 1 \, \text{c/s}$ (un campione al secondo) |
+
+### Riepilogo delle grandezze in gioco
+
+Il trucco fondamentale è scrivere ogni grandezza con un'unità di misura "parlante", del tipo **"quanti X per ogni Y"**: ad esempio la profondità di colore non è semplicemente "24 bit", ma **24 bit per ogni pixel**, cioè $24 \, \text{b/px}$; la profondità di campionamento non è "16 bit", ma **16 bit per ogni campione**, cioè $16 \, \text{b/c}$.
+
+#### Immagini
+
+| Grandezza | Come può comparire nel testo | Unità di misura |
+| :--- | :--- | :---: |
+| **Formato** (risoluzione) | "$1920 \times 1080$", "Full HD", "4K", "immagine quadrata di lato…" | larghezza $\times$ altezza (in $\text{px}$) |
+| **Numero totale di pixel** | "12 megapixel" ($1 \, \text{Mpx} = 10^6 \, \text{px}$) | $\text{px}$ |
+| **Numero di colori** | "256 colori", "16,7 milioni di colori" | numero puro |
+| **Profondità di colore** | "24 bpp", "colour depth", "bit per pixel" | $\text{b/px}$ |
+| **Dimensione** | "occupa 6 MB", "pesa…" | $\text{b}$ (oppure B, kB, MB, MiB…) |
+
+Le relazioni tra queste grandezze sono:
+
+$$\text{numero di pixel} \; [\text{px}] = \text{larghezza} \times \text{altezza}$$
+
+$$\text{numero di colori} = 2^{\,\text{profondità di colore}}$$
+
+$$\text{dimensione} \; [\text{b}] = \text{numero di pixel} \; [\text{px}] \times \text{profondità di colore} \; [\text{b/px}]$$
+
+:::note[Formati con un nome e profondità "per canale"]
+- Alcuni formati vengono indicati con un nome: **HD** $= 1280 \times 720$, **Full HD** $= 1920 \times 1080$, **4K UHD** $= 3840 \times 2160$.
+- A volte la profondità di colore è data **per canale** (es. "8 bit per canale RGB"). I canali RGB sono 3, quindi: $8 \, \text{b/canale} \times 3 \, \text{canali/px} = 24 \, \text{b/px}$.
+:::
+
+#### Audio
+
+| Grandezza | Come può comparire nel testo | Unità di misura |
+| :--- | :--- | :---: |
+| **Frequenza di campionamento** | "44,1 kHz", "sample rate", $f_s$ | $\text{Hz} = \text{c/s}$ |
+| **Profondità di campionamento** | "16 bit", "bit depth", "risoluzione" | $\text{b/c}$ |
+| **Numero di canali** | "mono" $= 1$, "stereo" $= 2$ | numero puro |
+| **Tempo** (durata) | "3 min 45 s", "un minuto di musica" | $\text{s}$ |
+| **Bitrate** | "320 kbps", "velocità di trasmissione" | $\text{b/s}$ |
+| **Dimensione** | "occupa 10 MB", "pesa…" | $\text{b}$ (oppure B, kB, MB, MiB…) |
+
+Le relazioni tra queste grandezze sono:
+
+$$\text{bitrate} \; [\text{b/s}] = \text{frequenza} \; [\text{c/s}] \times \text{profondità} \; [\text{b/c}] \times \text{numero di canali}$$
+
+$$\text{dimensione} \; [\text{b}] = \text{bitrate} \; [\text{b/s}] \times \text{tempo} \; [\text{s}]$$
+
+#### Video
+
+Un video è una **sequenza di immagini** (frame), eventualmente accompagnata da una traccia audio. Ritroviamo quindi **tutte le grandezze delle immagini**, riferite al singolo frame, a cui se ne aggiungono di nuove:
+
+| Grandezza | Come può comparire nel testo | Unità di misura |
+| :--- | :--- | :---: |
+| **Formato** di un frame | "$1280 \times 720$", "Full HD", "4K" | larghezza $\times$ altezza (in $\text{px}$) |
+| **Pixel per frame** | numero totale di pixel di un fotogramma | $\text{px/frame}$ |
+| **Numero di colori** | "256 colori" | numero puro |
+| **Profondità di colore** | "24 bpp", "10 bit per canale" | $\text{b/px}$ |
+| **Dimensione di un frame** | peso di un singolo fotogramma | $\text{b/frame}$ |
+| **Frame rate** *(nuova)* | "30 fps", "fotogrammi al secondo" | $\text{frame/s}$ |
+| **Tempo** *(nuova)* | "dura 10 s" | $\text{s}$ |
+| **Bitrate** *(nuova)* | "597 Mbps", "flusso dati" | $\text{b/s}$ |
+| **Dimensione** | "occupa 2 GiB" | $\text{b}$ (oppure B, kB, MB, MiB…) |
+| **Traccia audio** (se presente) | ha tutte le grandezze dell'audio | $\text{b}$, da sommare al video |
+
+Le relazioni tra queste grandezze sono:
+
+$$\text{dimensione di un frame} \; [\text{b/frame}] = \text{pixel per frame} \; [\text{px/frame}] \times \text{profondità di colore} \; [\text{b/px}]$$
+
+$$\text{bitrate} \; [\text{b/s}] = \text{dimensione di un frame} \; [\text{b/frame}] \times \text{frame rate} \; [\text{frame/s}]$$
+
+$$\text{dimensione} \; [\text{b}] = \text{bitrate} \; [\text{b/s}] \times \text{tempo} \; [\text{s}] \qquad (+ \text{ eventuale audio})$$
+
+#### Valida per tutti: il fattore di compressione
+
+| Grandezza | Come può comparire nel testo | Unità di misura |
+| :--- | :--- | :---: |
+| **Fattore di compressione** | "riduce di 25 volte", "1:25" | numero puro |
+
+Si **divide** la dimensione (o il bitrate) del file non compresso per il fattore di compressione.
+
+### La catena delle unità di misura
+
+Mettendo in fila le relazioni si vede che i tre tipi di file seguono **lo stesso schema**: a ogni passaggio si moltiplica per una grandezza "X per ogni Y" e l'unità Y si semplifica. Ecco i passaggi per arrivare alla dimensione del file, scritti solo con le unità di misura:
+
+| Tipo di file | Passaggio | Calcolo con le unità di misura |
+| :--- | :--- | :---: |
+| **Immagine** | pixel $\times$ profondità di colore $=$ dimensione | $\cancel{\text{px}} \times \dfrac{\text{b}}{\cancel{\text{px}}} = \text{b}$ |
+| **Audio** | ① frequenza $\times$ profondità $\times$ canali $=$ bitrate | $\dfrac{\cancel{\text{c}}}{\text{s}} \times \dfrac{\text{b}}{\cancel{\text{c}}} \times \text{canali} = \dfrac{\text{b}}{\text{s}}$ |
+| | ② bitrate $\times$ tempo $=$ dimensione | $\dfrac{\text{b}}{\cancel{\text{s}}} \times \cancel{\text{s}} = \text{b}$ |
+| **Video** | ① pixel per frame $\times$ profondità di colore $=$ dimensione di un frame | $\dfrac{\cancel{\text{px}}}{\text{frame}} \times \dfrac{\text{b}}{\cancel{\text{px}}} = \dfrac{\text{b}}{\text{frame}}$ |
+| | ② dimensione di un frame $\times$ frame rate $=$ bitrate | $\dfrac{\text{b}}{\cancel{\text{frame}}} \times \dfrac{\cancel{\text{frame}}}{\text{s}} = \dfrac{\text{b}}{\text{s}}$ |
+| | ③ bitrate $\times$ tempo $=$ dimensione | $\dfrac{\text{b}}{\cancel{\text{s}}} \times \cancel{\text{s}} = \text{b}$ |
+
+- Negli esercizi **diretti** (trovare la dimensione) si eseguono i passaggi dall'alto in basso **moltiplicando**.
+- Negli esercizi **inversi** (trovare tempo, frequenza, profondità, frame rate…) si parte dalla dimensione e si risale **dividendo**.
+
+In entrambi i casi il **bitrate** ($\text{b/s}$) fa da "ponte" tra audio e video: qualunque sia il tipo di file, $\text{b/s} \times \text{s} = \text{b}$.
+
+### Le conversioni sono frazioni che valgono 1
+
+Anche i cambi di unità si fanno moltiplicando. Ogni equivalenza può essere scritta come una **frazione che vale 1**, che possiamo girare come ci serve:
+
+| Equivalenza | Frazioni utilizzabili |
+| :--- | :---: |
+| $1 \, \text{B} = 8 \, \text{b}$ | $\dfrac{8 \, \text{b}}{1 \, \text{B}}$ oppure $\dfrac{1 \, \text{B}}{8 \, \text{b}}$ |
+| $1 \, \text{MB} = 10^6 \, \text{B}$ | $\dfrac{10^6 \, \text{B}}{1 \, \text{MB}}$ oppure $\dfrac{1 \, \text{MB}}{10^6 \, \text{B}}$ |
+| $1 \, \text{MiB} = 2^{20} \, \text{B}$ | $\dfrac{2^{20} \, \text{B}}{1 \, \text{MiB}}$ oppure $\dfrac{1 \, \text{MiB}}{2^{20} \, \text{B}}$ |
+| $1 \, \text{kb} = 1000 \, \text{b}$ (kbps $\to$ b/s) | $\dfrac{1000 \, \text{b}}{1 \, \text{kb}}$ |
+| $1 \, \text{kHz} = 1000 \, \text{Hz} = 1000 \, \text{c/s}$ | $\dfrac{1000 \, \text{c/s}}{1 \, \text{kHz}}$ |
+| $1 \, \text{min} = 60 \, \text{s}$ | $\dfrac{60 \, \text{s}}{1 \, \text{min}}$ |
+
+Si sceglie sempre la versione della frazione che fa **semplificare l'unità che vogliamo eliminare** (quella che sta sopra si semplifica con una uguale sotto, e viceversa).
+
+### Il metodo in 4 passi
+
+1. **Cosa devo trovare? In che unità?** Scrivi l'unità del risultato (es. "b/px", "s", "MB").
+2. **Elenca i dati con la loro unità "parlante"** (es. $16 \, \text{b/c}$, non solo "16").
+3. **Combina i dati** moltiplicando e dividendo in modo che le unità si semplifichino e **rimanga esattamente l'unità cercata**. Se l'unità finale non torna, l'impostazione è sbagliata!
+4. **Fai i calcoli** e controlla che il risultato sia sensato (una foto da 3000 GB o una canzone da 0,002 secondi indicano un errore).
+
+:::tip[La tabella delle "mosse"]
+Quasi tutti gli esercizi si riducono a una catena di queste operazioni:
+
+| Ho... | e ho... | Voglio... | Operazione |
+| :---: | :---: | :---: | :---: |
+| $\text{b/px}$ | $\text{px}$ | $\text{b}$ | moltiplico |
+| $\text{b}$ | $\text{px}$ | $\text{b/px}$ | divido: $\text{b} \div \text{px}$ |
+| $\text{b}$ | $\text{b/px}$ | $\text{px}$ | divido: $\text{b} \div \text{b/px}$ |
+| $\text{c/s}$ | $\text{b/c}$ | $\text{b/s}$ | moltiplico |
+| $\text{b/s}$ | $\text{b/c}$ | $\text{c/s}$ | divido: $\text{b/s} \div \text{b/c}$ |
+| $\text{px/frame}$ | $\text{b/px}$ | $\text{b/frame}$ | moltiplico |
+| $\text{b/frame}$ | $\text{frame/s}$ | $\text{b/s}$ | moltiplico |
+| $\text{b/s}$ | $\text{b/frame}$ | $\text{frame/s}$ | divido: $\text{b/s} \div \text{b/frame}$ |
+| $\text{b/s}$ | $\text{s}$ | $\text{b}$ | moltiplico |
+| $\text{b}$ | $\text{s}$ | $\text{b/s}$ | divido: $\text{b} \div \text{s}$ |
+| $\text{b}$ | $\text{b/s}$ | $\text{s}$ | divido: $\text{b} \div \text{b/s}$ |
+
+**Regola generale:** se l'unità che ti serve è un **prodotto** delle unità che hai, moltiplica; se è un **rapporto**, dividi.
+:::
+
+### Esempi svolti con le unità di misura
+
+#### Esempio 1 — Immagine: dimensione in MB (calcolo diretto)
+
+*Quanto occupa un'immagine $1920 \times 1080$ px a 24 bpp, in MB?*
+
+Voglio dei **MB**. Ho dei $\text{px}$ e dei $\text{b/px}$: moltiplicando ottengo bit, poi converto con le frazioni che valgono 1.
+
+$$1920 \times 1080 \, \cancel{\text{px}} \times 24 \, \frac{\cancel{\text{b}}}{\cancel{\text{px}}} \times \frac{1 \, \cancel{\text{B}}}{8 \, \cancel{\text{b}}} \times \frac{1 \, \text{MB}}{10^6 \, \cancel{\text{B}}} = \frac{1920 \times 1080 \times 24}{8 \times 10^6} \, \text{MB} \approx \mathbf{6{,}22 \, MB}$$
+
+#### Esempio 2 — Immagine: trovare la profondità di colore (calcolo inverso)
+
+*Un file RAW $4000 \times 3000$ px occupa 36 MB. Qual è la profondità di colore?*
+
+Voglio dei **b/px**: è un **rapporto** tra bit e pixel, quindi devo dividere i bit del file per il numero di pixel. Prima porto i MB in bit:
+
+$$36 \, \cancel{\text{MB}} \times \frac{10^6 \, \cancel{\text{B}}}{1 \, \cancel{\text{MB}}} \times \frac{8 \, \text{b}}{1 \, \cancel{\text{B}}} = 288.000.000 \, \text{b}$$
+
+$$\frac{288.000.000 \, \text{b}}{4000 \times 3000 \, \text{px}} = \frac{288.000.000}{12.000.000} \, \frac{\text{b}}{\text{px}} = \mathbf{24 \, b/px}$$
+
+Da qui, se serve, il numero di colori: $2^{24} \approx 16{,}7$ milioni.
+
+#### Esempio 3 — Audio: trovare la durata (calcolo inverso)
+
+*Un file audio stereo a 44,1 kHz e 16 bit occupa 27,5184 MB. Quanto dura?*
+
+Voglio dei **secondi**. Calcolo prima il bitrate ($\text{b/s}$):
+
+$$44.100 \, \frac{\cancel{\text{c}}}{\text{s}} \times 16 \, \frac{\text{b}}{\cancel{\text{c}}} \times 2 = 1.411.200 \, \frac{\text{b}}{\text{s}}$$
+
+Ho dei **b** (la dimensione) e dei **b/s** (il bitrate): dividendo, i bit si semplificano e rimangono i secondi.
+
+$$\frac{27{,}5184 \times 10^6 \times 8 \, \cancel{\text{b}}}{1.411.200 \, \dfrac{\cancel{\text{b}}}{\text{s}}} = \frac{220.147.200}{1.411.200} \, \text{s} = \mathbf{156 \, s}$$
+
+:::note[Perché dividere per "b/s" dà dei secondi?]
+Dividere per una frazione equivale a moltiplicare per la sua inversa:
+$$\text{b} \div \frac{\text{b}}{\text{s}} = \cancel{\text{b}} \times \frac{\text{s}}{\cancel{\text{b}}} = \text{s}$$
+:::
+
+#### Esempio 4 — Audio compresso: dimensione di un MP3
+
+*Un MP3 a 320 kbps dura 2 min 40 s. Quanto occupa in MB?*
+
+Voglio dei **MB**. Ho un bitrate ($\text{kb/s}$) e una durata: bitrate $\times$ durata dà i bit. Prima trasformo la durata in secondi: $2 \times 60 + 40 = 160 \, \text{s}$.
+
+$$320 \, \frac{\cancel{\text{kb}}}{\cancel{\text{s}}} \times 160 \, \cancel{\text{s}} \times \frac{1000 \, \cancel{\text{b}}}{1 \, \cancel{\text{kb}}} \times \frac{1 \, \cancel{\text{B}}}{8 \, \cancel{\text{b}}} \times \frac{1 \, \text{MB}}{10^6 \, \cancel{\text{B}}} = \mathbf{6{,}4 \, MB}$$
+
+#### Esempio 5 — Video: trovare il frame rate (calcolo inverso)
+
+*Un video non compresso $1280 \times 720$ px, 24 bpp, dura 10 s e occupa 829,44 MB. Qual è il frame rate?*
+
+Voglio dei **frame/s**. Calcolo quanto pesa un fotogramma:
+
+$$1280 \times 720 \, \frac{\cancel{\text{px}}}{\text{frame}} \times 24 \, \frac{\text{b}}{\cancel{\text{px}}} = 22.118.400 \, \frac{\text{b}}{\text{frame}}$$
+
+Porto la dimensione del file in bit e la divido per la durata, ottenendo il bitrate:
+
+$$\frac{829{,}44 \times 10^6 \times 8 \, \text{b}}{10 \, \text{s}} = 663.552.000 \, \frac{\text{b}}{\text{s}}$$
+
+Ho dei **b/s** e dei **b/frame**: dividendo, i bit si semplificano e rimangono i frame al secondo.
+
+$$\frac{663.552.000 \, \dfrac{\cancel{\text{b}}}{\text{s}}}{22.118.400 \, \dfrac{\cancel{\text{b}}}{\text{frame}}} = \mathbf{30 \, frame/s}$$
+
+#### Esempio 6 — Compressione: trovare il fattore
+
+*Il video dell'esempio 5 viene compresso e occupa 16,5888 MB. Di quante volte è stato ridotto?*
+
+Il fattore di compressione è un **numero puro**: si ottiene dividendo due grandezze con la **stessa unità**, che quindi si semplificano completamente.
+
+$$\frac{829{,}44 \, \cancel{\text{MB}}}{16{,}5888 \, \cancel{\text{MB}}} = \mathbf{50} \quad \text{(compressione 1:50)}$$
+
+### Due casi in cui le unità non bastano
+
+Le unità di misura guidano quasi tutti i calcoli, ma ci sono due passaggi da ricordare a parte:
+
+- **Dal numero di colori alla profondità di colore:** colori e b/px sono legati da una potenza di 2, non da un prodotto. Con $N \, \text{b/px}$ si hanno $2^N$ colori; viceversa, per rappresentare un certo numero di colori si cerca la **più piccola potenza di 2** che li contiene (es. 1000 colori $\to$ $2^{10} = 1024 \ge 1000$ $\to$ servono **10 b/px**).
+- **Dal formato al numero di pixel (e viceversa):** il numero di pixel si ottiene moltiplicando larghezza per altezza; se l'immagine è **quadrata** e conosco il numero totale di pixel, il lato si trova con la **radice quadrata**: $\text{lato} = \sqrt{\text{numero di pixel}}$.
+
+### Le trappole più comuni
+
+:::caution[Controlla sempre queste cose prima di consegnare]
+- **Minuti e secondi:** il tempo va sempre portato in **secondi** prima di moltiplicarlo per un bitrate in b/s.
+- **bit e byte:** la "b" minuscola indica i bit, la "B" maiuscola i byte. I bitrate (kbps, Mbps) sono in **bit**, le dimensioni dei file di solito in **byte**: serve il fattore $8$.
+- **MB o MiB?** $1 \, \text{MB} = 10^6 \, \text{B}$, $1 \, \text{MiB} = 2^{20} \, \text{B}$. Leggi bene il simbolo nel testo.
+- **kHz e kbps:** il prefisso "k" vale $1000$ (non $1024$) sia per le frequenze sia per i bitrate.
+- **Bit per canale o bit per pixel?** "10 bit per canale RGB" significa $10 \times 3 = 30 \, \text{b/px}$.
+- **Mono o stereo?** Lo stereo raddoppia tutto ($\times 2$).
+- **Compressione:** un fattore "1:25" o "riduce di 25 volte" **divide** la dimensione; "riduce di un terzo" significa invece che rimangono i $\frac{2}{3}$.
+:::
+
+---
+
+## 8. Mettiti alla Prova: Esercizi ed Esercitazioni Pratiche
 
 Per consolidare tutti i concetti e verificare la tua preparazione:
 
