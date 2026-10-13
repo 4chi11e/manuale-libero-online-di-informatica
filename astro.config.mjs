@@ -92,7 +92,8 @@ export default defineConfig({
             { label: 'Matrici', link: '/c/matrici/' },
             { label: 'Stringhe', link: '/c/stringhe/' },
             { label: 'Funzioni', link: '/c/funzioni/' },
-            { label: 'Puntatori', link: '/c/puntatori/' }
+            { label: 'Puntatori', link: '/c/puntatori/' },
+            { label: 'Struct', link: '/c/struct/' }
           ]
         },
         {
