@@ -84,7 +84,10 @@ export default defineConfig({
         },
         {
           label: 'Programmazione in C',
-          link: '/c/programmazione-in-c/'
+          items: [
+            { label: 'Programmazione in C', link: '/c/programmazione-in-c/' },
+            { label: 'Elementi di base', link: '/c/elementi-di-base/' }
+          ]
         },
         {
           label: 'Programmazione in Python',
