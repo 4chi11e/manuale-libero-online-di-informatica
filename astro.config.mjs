@@ -91,7 +91,8 @@ export default defineConfig({
             { label: 'Array', link: '/c/array/' },
             { label: 'Matrici', link: '/c/matrici/' },
             { label: 'Stringhe', link: '/c/stringhe/' },
-            { label: 'Funzioni', link: '/c/funzioni/' }
+            { label: 'Funzioni', link: '/c/funzioni/' },
+            { label: 'Puntatori', link: '/c/puntatori/' }
           ]
         },
         {

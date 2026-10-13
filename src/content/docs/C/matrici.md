@@ -71,7 +71,7 @@ memoria:   |  1 |  2 |  3 |  4 |  5 |  6 |
            +----+----+----+----+----+----+
 ```
 
-Per trovare l'elemento `mat[i][j]` il computer parte dall'inizio della matrice e salta `i` righe intere più `j` elementi, cioè `i * M + j` posizioni, dove `M` è il numero di colonne. Ecco perché il compilatore ha bisogno di conoscere il numero di colonne: senza, non saprebbe calcolare dove inizia ogni riga. Questo dettaglio tornerà fuori quando passeremo le matrici alle [funzioni](../puntatori/#matrici-come-parametri).
+Per trovare l'elemento `mat[i][j]` il computer parte dall'inizio della matrice e salta `i` righe intere più `j` elementi, cioè `i * M + j` posizioni, dove `M` è il numero di colonne. Ecco perché il compilatore ha bisogno di conoscere il numero di colonne: senza, non saprebbe calcolare dove inizia ogni riga. Questo dettaglio tornerà fuori quando passeremo le matrici alle [funzioni](../puntatori/#7-matrici-come-parametri).
 
 ## 2. Riempire e stampare una matrice
 

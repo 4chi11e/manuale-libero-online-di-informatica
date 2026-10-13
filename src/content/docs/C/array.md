@@ -73,7 +73,7 @@ int b[] = {1, 7, 4, 6, 3};
 int n = sizeof(b) / sizeof(b[0]);   // byte totali / byte di un elemento = 5
 ```
 
-Questo sistema è comodo quando si modifica a mano il contenuto dell'array: aggiungendo o togliendo valori tra le graffe, `n` si aggiorna da solo e non si rischia di dimenticarsene. Attenzione però: funziona solo nella funzione in cui l'array è dichiarato, non quando l'array viene passato a un'altra funzione (vedremo il motivo nella pagina sui [puntatori](../puntatori/#array-come-parametri)).
+Questo sistema è comodo quando si modifica a mano il contenuto dell'array: aggiungendo o togliendo valori tra le graffe, `n` si aggiorna da solo e non si rischia di dimenticarsene. Attenzione però: funziona solo nella funzione in cui l'array è dichiarato, non quando l'array viene passato a un'altra funzione (vedremo il motivo nella pagina sui [puntatori](../puntatori/#5-array-come-parametri)).
 
 ## 2. Accedere agli elementi
 
@@ -425,7 +425,7 @@ Due osservazioni:
 *   la variabile `scambiato` è un'ottimizzazione: se durante una passata non avviene nessuno scambio, l'array è già ordinato ed è inutile continuare.
 
 :::note[Quanto sono veloci?]
-Entrambi gli algoritmi, nel caso peggiore, eseguono un numero di confronti proporzionale a n², cioè hanno complessità O(n²): raddoppiando il numero di elementi il tempo quadruplica. Per array di qualche migliaio di elementi vanno benissimo, ma per milioni di elementi esistono algoritmi molto più efficienti, come il *merge sort* e il *quick sort*, con complessità O(n log n). Approfondimenti nella pagina sulla [complessità computazionale](../../complessita/). La libreria standard del C mette a disposizione la funzione `qsort`, che vedremo nella pagina sui [puntatori](../puntatori/#ordinare-con-qsort).
+Entrambi gli algoritmi, nel caso peggiore, eseguono un numero di confronti proporzionale a n², cioè hanno complessità O(n²): raddoppiando il numero di elementi il tempo quadruplica. Per array di qualche migliaio di elementi vanno benissimo, ma per milioni di elementi esistono algoritmi molto più efficienti, come il *merge sort* e il *quick sort*, con complessità O(n log n). Approfondimenti nella pagina sulla [complessità computazionale](../../complessita/). La libreria standard del C mette a disposizione la funzione `qsort`, che vedremo nella pagina sui [puntatori](../puntatori/#8-ordinare-con-qsort).
 :::
 
 ### Ricerca binaria (dicotomica)

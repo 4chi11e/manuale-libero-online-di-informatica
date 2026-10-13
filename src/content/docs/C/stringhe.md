@@ -382,7 +382,7 @@ Token: quattro
 
 Vediamo i dettagli:
 
-*   `s + i` indica "la stringa `s` a partire dalla posizione `i`": in questo modo `strcspn` comincia a contare dal punto in cui siamo arrivati, invece che dall'inizio. È un esempio di *aritmetica dei puntatori*, che approfondiremo nella [pagina dedicata](../puntatori/#puntatori-e-array).
+*   `s + i` indica "la stringa `s` a partire dalla posizione `i`": in questo modo `strcspn` comincia a contare dal punto in cui siamo arrivati, invece che dall'inizio. È un esempio di *aritmetica dei puntatori*, che approfondiremo nella [pagina dedicata](../puntatori/#4-puntatori-e-array).
 *   Per stampare solo il token, e non tutto il resto della stringa, si usa `%.*s` passando come numero di caratteri la lunghezza `len`.
 *   Il controllo `len > 0` evita di considerare token vuoti, che si incontrano quando ci sono due separatori consecutivi (come `", "` dopo "uno") o un separatore all'inizio della stringa.
 *   L'ultimo `if` salta il separatore, ma solo se non si è già arrivati alla fine della stringa.
