@@ -86,7 +86,8 @@ export default defineConfig({
           label: 'Programmazione in C',
           items: [
             { label: 'Programmazione in C', link: '/c/programmazione-in-c/' },
-            { label: 'Elementi di base', link: '/c/elementi-di-base/' }
+            { label: 'Elementi di base', link: '/c/elementi-di-base/' },
+            { label: 'Strutture di controllo', link: '/c/strutture-di-controllo/' }
           ]
         },
         {
