@@ -72,6 +72,10 @@ I commenti sono parti di testo ignorate dal compilatore, utili a chi legge il co
 int eta = 16;   // anche qui posso scrivere un commento
 ```
 
+:::tip[Commentare velocemente in VS Code]
+In VS Code si possono commentare (o togliere il commento a) una o più righe con la combinazione di tasti **`Ctrl + ù`** (sulle tastiere inglesi è `Ctrl + /`): basta posizionare il cursore sulla riga, oppure selezionare più righe, e premere la combinazione. Viene aggiunto `//` all'inizio di ogni riga; premendola di nuovo il commento viene tolto. È comodissimo per "disattivare" temporaneamente una parte di codice mentre si cerca un errore, senza doverla cancellare.
+:::
+
 ## 2. Le variabili
 
 Per eseguire un qualsiasi calcolo un programma deve poter memorizzare dei dati, come numeri o caratteri. Per farlo si usano le **variabili**: si può immaginare una variabile come una "scatola" in memoria, con un nome, che contiene un valore.
