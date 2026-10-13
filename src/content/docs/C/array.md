@@ -137,7 +137,7 @@ for (int i = da; i <= a; i++) {
 ```
 
 ### Una stampa più elegante
-Spesso si vuole stampare l'array in un formato come `{12, 7, 31, 4, 18}`, con gli elementi separati da una virgola. Il problema è che dopo l'ultimo elemento la virgola non va messa: la soluzione più semplice è stampare tutti gli elementi tranne l'ultimo nel ciclo, e l'ultimo a parte.
+Spesso si vuole stampare l'array in un formato come `{12, 7, 31, 4, 18}`, con gli elementi separati da una virgola. Il problema è che dopo l'ultimo elemento la virgola non va messa: la soluzione più semplice (assumendo che l'array contenga almeno un elemento, cioè $n \ge 1$) è stampare tutti gli elementi tranne l'ultimo nel ciclo, e l'ultimo a parte.
 
 ```c
 printf("{");
