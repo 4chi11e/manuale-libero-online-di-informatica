@@ -582,6 +582,133 @@ Hai scaricato un brano MP3 da **4,5 MB** che dura **3 min 45 s**.
 
 ---
 
+### Trova la profondità di campionamento (da revisionare)
+
+Un registratore professionale registra in **stereo** a **96 kHz**. Una registrazione di **30 secondi**, non compressa, occupa **17,28 MB**. Quanti bit per campione usa il registratore?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-bitdepth">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-bitdepth">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>La dimensione del file si ottiene moltiplicando frequenza, profondità, canali e tempo. Conosco tutto tranne la profondità: quindi la trovo dividendo la dimensione (in bit) per il numero totale di campioni registrati, cioè frequenza $\times$ tempo $\times$ canali.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p>Voglio dei $\text{b/c}$. Ho la dimensione in $\text{MB}$, la frequenza in $\text{c/s}$, il tempo in $\text{s}$ e i canali. Porto la dimensione in bit:</p>
+        $$17{,}28 \, \cancel{\text{MB}} \times \frac{10^6 \, \cancel{\text{B}}}{1 \, \cancel{\text{MB}}} \times \frac{8 \, \text{b}}{1 \, \cancel{\text{B}}} = 138.240.000 \, \text{b}$$
+        <p>Moltiplicando $\text{c/s} \times \text{s}$ ottengo i campioni:</p>
+        $$96.000 \, \frac{\text{c}}{\cancel{\text{s}}} \times 30 \, \cancel{\text{s}} \times 2 = 5.760.000 \, \text{c}$$
+        <p>Dividendo i bit per i campioni ottengo i $\text{b/c}$:</p>
+        $$\frac{138.240.000 \, \text{b}}{5.760.000 \, \text{c}} = \mathbf{24 \, b/c}$$
+    </div>
+</div>
+
+---
+
+### Trova il numero di canali (da revisionare)
+
+Un film ha una traccia audio **surround** non compressa registrata a **48 kHz** e **16 bit**. Un minuto di questa traccia occupa circa **32,96 MiB**. Quanti canali audio ha la traccia?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-canali">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-canali">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>Calcolo quanto occuperebbe un minuto di audio con <strong>un solo canale</strong> (frequenza $\times$ profondità $\times$ tempo). La dimensione reale sarà un multiplo di questo valore: dividendo la dimensione reale per quella di un canale trovo il numero di canali.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p>Il numero di canali è un <strong>numero puro</strong>: devo quindi dividere due grandezze con la stessa unità ($\text{b}$ diviso $\text{b}$). Porto la dimensione in bit (attenzione: MiB!):</p>
+        $$32{,}96 \, \cancel{\text{MiB}} \times \frac{2^{20} \, \cancel{\text{B}}}{1 \, \cancel{\text{MiB}}} \times \frac{8 \, \text{b}}{1 \, \cancel{\text{B}}} \approx 276.488.520 \, \text{b}$$
+        <p>Bit occupati da un singolo canale in un minuto:</p>
+        $$48.000 \, \frac{\cancel{\text{c}}}{\cancel{\text{s}}} \times 16 \, \frac{\text{b}}{\cancel{\text{c}}} \times 60 \, \cancel{\text{s}} = 46.080.000 \, \text{b}$$
+        $$\text{canali} = \frac{276.488.520 \, \cancel{\text{b}}}{46.080.000 \, \cancel{\text{b}}} \approx \mathbf{6}$$
+        <p>Si tratta di un audio <strong>5.1</strong> (5 diffusori più un subwoofer). Il risultato non è esattamente intero perché la dimensione nel testo è arrotondata.</p>
+    </div>
+</div>
+
+---
+
+### La telefonata digitale (da revisionare)
+
+La telefonia digitale tradizionale campiona la voce a **8 kHz** con **8 bit** per campione, in **mono**.
+- **A)** Qual è il bitrate di una telefonata, in kbps?
+- **B)** Quanto occuperebbe la registrazione non compressa di una telefonata di **un'ora**, in MB e in MiB?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-telefono">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-telefono">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>A) Il bitrate è il numero di bit al secondo: si ottiene moltiplicando i campioni al secondo per i bit di ogni campione (e per i canali, qui 1). B) La dimensione è il bitrate moltiplicato per la durata.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p><strong>A)</strong> Voglio dei $\text{b/s}$: moltiplico $\text{c/s}$ per $\text{b/c}$.</p>
+        $$8.000 \, \frac{\cancel{\text{c}}}{\text{s}} \times 8 \, \frac{\text{b}}{\cancel{\text{c}}} \times 1 = 64.000 \, \frac{\text{b}}{\text{s}} = \mathbf{64 \, kbps}$$
+        <p><strong>B)</strong> Voglio dei $\text{b}$ (poi MB e MiB): moltiplico $\text{b/s}$ per $\text{s}$. Un'ora sono $3600 \, \text{s}$.</p>
+        $$64.000 \, \frac{\text{b}}{\cancel{\text{s}}} \times 3600 \, \cancel{\text{s}} = 230.400.000 \, \text{b}$$
+        $$230.400.000 \, \cancel{\text{b}} \times \frac{1 \, \cancel{\text{B}}}{8 \, \cancel{\text{b}}} \times \frac{1 \, \text{MB}}{10^6 \, \cancel{\text{B}}} = \mathbf{28{,}8 \, MB}$$
+        $$28.800.000 \, \cancel{\text{B}} \times \frac{1 \, \text{MiB}}{2^{20} \, \cancel{\text{B}}} \approx \mathbf{27{,}47 \, MiB}$$
+    </div>
+</div>
+
+---
+
+### Quanto dura il podcast? (da revisionare)
+
+Un episodio di un podcast in formato MP3 a **128 kbps** occupa **5 MiB**. Quanto dura l'episodio, in minuti e secondi?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-podcast">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-podcast">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>Il bitrate dice quanti bit vengono usati per ogni secondo. Se divido i bit totali del file per i bit usati in un secondo, ottengo quanti secondi dura il file.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p>Voglio dei $\text{s}$. Ho dei $\text{b}$ (la dimensione) e dei $\text{b/s}$ (il bitrate): $\text{b} \div \text{b/s} = \text{s}$. Porto la dimensione in bit:</p>
+        $$5 \, \cancel{\text{MiB}} \times \frac{2^{20} \, \cancel{\text{B}}}{1 \, \cancel{\text{MiB}}} \times \frac{8 \, \text{b}}{1 \, \cancel{\text{B}}} = 41.943.040 \, \text{b}$$
+        $$\frac{41.943.040 \, \cancel{\text{b}}}{128.000 \, \dfrac{\cancel{\text{b}}}{\text{s}}} = 327{,}68 \, \text{s} \approx \mathbf{5 \, min \; 28 \, s}$$
+        <p>(Infatti $327{,}68 - 5 \times 60 = 27{,}68 \, \text{s}$.)</p>
+    </div>
+</div>
+
+---
+
+### Quante canzoni nella chiavetta? (da revisionare)
+
+Hai una chiavetta USB da **16 GiB** e vuoi riempirla di canzoni in formato MP3 a **192 kbps**. Le canzoni durano in media **4 minuti**. Quante canzoni puoi caricare?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-chiavetta">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-chiavetta">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>Prima calcolo quanto occupa una canzone (bitrate $\times$ durata). Poi divido la capacità della chiavetta per lo spazio occupato da una canzone.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p>Spazio per una canzone: $\text{b/s} \times \text{s} = \text{b}$, cioè bit per ogni canzone. Durata: $4 \times 60 = 240 \, \text{s}$.</p>
+        $$192.000 \, \frac{\text{b}}{\cancel{\text{s}}} \times 240 \, \cancel{\text{s}} = 46.080.000 \, \text{b} \quad \to \quad 46.080.000 \, \cancel{\text{b}} \times \frac{1 \, \text{B}}{8 \, \cancel{\text{b}}} = 5.760.000 \, \frac{\text{B}}{\text{canzone}}$$
+        <p>Capacità della chiavetta (attenzione: GiB!):</p>
+        $$16 \, \cancel{\text{GiB}} \times \frac{2^{30} \, \text{B}}{1 \, \cancel{\text{GiB}}} = 17.179.869.184 \, \text{B}$$
+        <p>Voglio delle canzoni: $\text{B} \div \text{B/canzone} = \text{canzoni}$.</p>
+        $$\frac{17.179.869.184 \, \cancel{\text{B}}}{5.760.000 \, \dfrac{\cancel{\text{B}}}{\text{canzone}}} \approx 2982{,}6 \, \text{canzoni} \quad \to \quad \mathbf{2982 \, canzoni}$$
+        <p>Si arrotonda per difetto: l'ultima canzone non ci starebbe per intero.</p>
+    </div>
+</div>
+
+---
+
+### Qual è il suono più acuto registrato? (da revisionare)
+
+Un file audio **mono** non compresso a **16 bit** dura **1 minuto** e occupa **2,88 MB**.
+- **A)** Qual è la frequenza di campionamento?
+- **B)** Qual è la frequenza sonora più alta che è stato possibile registrare senza aliasing? La registrazione è adatta alla musica?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-fmax">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-fmax">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>A) Se divido la dimensione in bit per i bit di ogni campione, ottengo il numero di campioni registrati; dividendo per la durata, ottengo i campioni al secondo. B) Per il Teorema di Nyquist-Shannon la frequenza di campionamento deve essere almeno il doppio della frequenza massima: quindi la frequenza massima è la metà della frequenza di campionamento.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p><strong>A)</strong> Voglio dei $\text{c/s}$. Porto la dimensione in bit: $2{,}88 \times 10^6 \times 8 = 23.040.000 \, \text{b}$. Poi $\text{b} \div \text{b/c} = \text{c}$, e $\text{c} \div \text{s} = \text{c/s}$:</p>
+        $$\frac{23.040.000 \, \cancel{\text{b}}}{16 \, \dfrac{\cancel{\text{b}}}{\text{c}} \times 60 \, \text{s}} = 24.000 \, \frac{\text{c}}{\text{s}} = \mathbf{24 \, kHz}$$
+        <p><strong>B)</strong> $f_{\text{max}} = \dfrac{f_s}{2} = \dfrac{24.000 \, \text{Hz}}{2} = \mathbf{12 \, kHz}$.</p>
+        <p>La registrazione va bene per la voce, ma non per la musica ad alta qualità: l'orecchio umano sente fino a circa $20 \, \text{kHz}$, quindi i suoni più acuti (tra $12$ e $20 \, \text{kHz}$) sono andati persi.</p>
+    </div>
+</div>
+
+---
+
 ## Tipologia 7: Immagini
 
 :::tip[Formule utili]
@@ -658,6 +785,125 @@ Un'immagine occupa **2,25 MiB**, è **quadrata** e usa **8 bit per pixel**. Quan
 
 ---
 
+### Trova la larghezza di uno screenshot (da revisionare)
+
+Uno schermo "ultrawide" è alto **1080 px**. Uno screenshot non compresso dello schermo, a **24 bpp**, occupa **8100 KiB**. Quanto è largo lo schermo, in pixel?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-ultrawide">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-ultrawide">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>Se divido i bit totali dell'immagine per i bit di ogni pixel, ottengo il numero di pixel. Il numero di pixel è larghezza $\times$ altezza: conoscendo l'altezza, la larghezza si trova dividendo il numero di pixel per l'altezza.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p>Porto la dimensione in bit (attenzione: KiB!):</p>
+        $$8100 \, \cancel{\text{KiB}} \times \frac{1024 \, \cancel{\text{B}}}{1 \, \cancel{\text{KiB}}} \times \frac{8 \, \text{b}}{1 \, \cancel{\text{B}}} = 66.355.200 \, \text{b}$$
+        <p>Voglio dei $\text{px}$: $\text{b} \div \text{b/px} = \text{px}$.</p>
+        $$\frac{66.355.200 \, \cancel{\text{b}}}{24 \, \dfrac{\cancel{\text{b}}}{\text{px}}} = 2.764.800 \, \text{px}$$
+        $$\text{larghezza} = \frac{2.764.800}{1080} = \mathbf{2560 \, px}$$
+        <p>Lo schermo ha risoluzione $2560 \times 1080$.</p>
+    </div>
+</div>
+
+---
+
+### Un'immagine con pochi colori (da revisionare)
+
+Un'immagine di **800×600 pixel** contiene **200 colori** diversi. Usando il minor numero possibile di bit per pixel (con lo stesso numero di bit per tutti i pixel), quanto occupa l'immagine non compressa, in KiB?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-200colori">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-200colori">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>Prima trovo quanti bit servono per distinguere 200 colori: cerco la più piccola potenza di 2 che è almeno 200. Con 7 bit ho $2^7 = 128$ colori (non bastano), con 8 bit ho $2^8 = 256$ colori (bastano). Quindi servono <strong>8 bit per pixel</strong>. Poi la dimensione è il numero di pixel per i bit di ogni pixel.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p>Voglio dei $\text{KiB}$. Ho dei $\text{px}$ e dei $\text{b/px}$: moltiplicando ottengo bit, poi converto.</p>
+        $$800 \times 600 \, \cancel{\text{px}} \times 8 \, \frac{\cancel{\text{b}}}{\cancel{\text{px}}} \times \frac{1 \, \cancel{\text{B}}}{8 \, \cancel{\text{b}}} \times \frac{1 \, \text{KiB}}{1024 \, \cancel{\text{B}}} = \frac{480.000}{1024} \, \text{KiB} = \mathbf{468{,}75 \, KiB}$$
+    </div>
+</div>
+
+---
+
+### Quante foto nella scheda di memoria? (da revisionare)
+
+Una fotocamera scatta foto RAW da **6000×4000 pixel** a **24 bpp** (non compresse). Quante foto si possono salvare in una scheda di memoria da **64 GiB**?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-sd">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-sd">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>Prima calcolo quanto occupa una foto (pixel $\times$ bit per pixel). Poi divido la capacità della scheda per lo spazio occupato da una foto.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p>Spazio per una foto: $\text{px} \times \text{b/px} = \text{b}$, poi in byte.</p>
+        $$6000 \times 4000 \, \cancel{\text{px}} \times 24 \, \frac{\cancel{\text{b}}}{\cancel{\text{px}}} \times \frac{1 \, \text{B}}{8 \, \cancel{\text{b}}} = 72.000.000 \, \frac{\text{B}}{\text{foto}}$$
+        <p>Capacità della scheda (attenzione: GiB!):</p>
+        $$64 \, \cancel{\text{GiB}} \times \frac{2^{30} \, \text{B}}{1 \, \cancel{\text{GiB}}} = 68.719.476.736 \, \text{B}$$
+        <p>Voglio delle foto: $\text{B} \div \text{B/foto} = \text{foto}$.</p>
+        $$\frac{68.719.476.736 \, \cancel{\text{B}}}{72.000.000 \, \dfrac{\cancel{\text{B}}}{\text{foto}}} \approx 954{,}4 \, \text{foto} \quad \to \quad \mathbf{954 \, foto}$$
+    </div>
+</div>
+
+---
+
+### Quanti megapixel ha la fotocamera? (da revisionare)
+
+Una foto in formato JPEG occupa **3,6 MB**. Sai che la compressione JPEG ha ridotto la dimensione di **10 volte** rispetto all'immagine originale a **24 bpp**. Quanti megapixel ha la fotocamera?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-megapixel">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-megapixel">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>La compressione ha diviso la dimensione per 10: per risalire all'immagine originale devo quindi <strong>moltiplicare</strong> per 10. Poi, dividendo i bit dell'immagine originale per i bit di ogni pixel, trovo il numero di pixel.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p>Il fattore di compressione è un numero puro, quindi non cambia l'unità: $3{,}6 \, \text{MB} \times 10 = 36 \, \text{MB}$ (immagine originale). Porto in bit:</p>
+        $$36 \, \cancel{\text{MB}} \times \frac{10^6 \, \cancel{\text{B}}}{1 \, \cancel{\text{MB}}} \times \frac{8 \, \text{b}}{1 \, \cancel{\text{B}}} = 288.000.000 \, \text{b}$$
+        <p>Voglio dei $\text{px}$: $\text{b} \div \text{b/px} = \text{px}$.</p>
+        $$\frac{288.000.000 \, \cancel{\text{b}}}{24 \, \dfrac{\cancel{\text{b}}}{\text{px}}} = 12.000.000 \, \text{px} = \mathbf{12 \, Mpx}$$
+    </div>
+</div>
+
+---
+
+### Trova la risoluzione di un'immagine 16:9 (da revisionare)
+
+Un'immagine non compressa a **24 bpp** occupa **6,2208 MB** e ha proporzioni **16:9** (cioè larghezza e altezza stanno nel rapporto 16 a 9). Qual è la sua risoluzione?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-169">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-169">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>Dividendo i bit dell'immagine per i bit di ogni pixel trovo il numero di pixel. Poi uso le proporzioni: larghezza $= 16 \times k$ e altezza $= 9 \times k$ per un certo numero $k$, quindi il numero di pixel è $16k \times 9k = 144 \, k^2$.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p>Porto la dimensione in bit: $6{,}2208 \times 10^6 \times 8 = 49.766.400 \, \text{b}$. Voglio dei $\text{px}$: $\text{b} \div \text{b/px} = \text{px}$.</p>
+        $$\frac{49.766.400 \, \cancel{\text{b}}}{24 \, \dfrac{\cancel{\text{b}}}{\text{px}}} = 2.073.600 \, \text{px}$$
+        <p>Le proporzioni sono uno dei casi in cui le unità non bastano e serve un passaggio algebrico:</p>
+        $$144 \, k^2 = 2.073.600 \implies k^2 = 14.400 \implies k = 120$$
+        $$\text{larghezza} = 16 \times 120 = 1920 \, \text{px} \qquad \text{altezza} = 9 \times 120 = 1080 \, \text{px}$$
+        <p>La risoluzione è $\mathbf{1920 \times 1080}$ (Full HD).</p>
+    </div>
+</div>
+
+---
+
+### Quanto comprime il PNG? (da revisionare)
+
+Uno screenshot di **1024×768 pixel** a **24 bpp** viene salvato in formato PNG (compressione *lossless*) e occupa **768 KiB**. Qual è il fattore di compressione ottenuto?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-png">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-png">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>Calcolo quanto occuperebbe l'immagine non compressa (pixel $\times$ bit per pixel). Il fattore di compressione indica quante volte il file compresso è più piccolo dell'originale: si trova dividendo la dimensione originale per quella compressa.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p>Dimensione originale, portata in KiB per poterla confrontare con quella del PNG:</p>
+        $$1024 \times 768 \, \cancel{\text{px}} \times 24 \, \frac{\cancel{\text{b}}}{\cancel{\text{px}}} \times \frac{1 \, \cancel{\text{B}}}{8 \, \cancel{\text{b}}} \times \frac{1 \, \text{KiB}}{1024 \, \cancel{\text{B}}} = 2304 \, \text{KiB}$$
+        <p>Il fattore è un numero puro: divido due grandezze con la stessa unità.</p>
+        $$\frac{2304 \, \cancel{\text{KiB}}}{768 \, \cancel{\text{KiB}}} = \mathbf{3} \quad \text{(compressione 1:3)}$$
+        <p>È un valore tipico della compressione <em>lossless</em>, che riduce i file di circa 1,5–3 volte.</p>
+    </div>
+</div>
+
+---
+
 ## Tipologia 8: Video
 
 :::tip[Formule utili]
@@ -710,6 +956,133 @@ Un video non compresso dura **5 secondi**, risoluzione **1920×1080 px**, **60 f
         $$\text{pixel totali} = 1920 \times 1080 \times 60 \times 5 = 622.080.000$$
         $$\text{bpp} = \frac{18.665.076.000}{622.080.000} \approx \mathbf{30 \, \text{bpp}} \implies \text{colori} = 2^{30} \approx \mathbf{10^9}$$
         <p>(10 bit per canale RGB — formato HDR.)</p>
+    </div>
+</div>
+
+---
+
+### Quanto dura il video? (da revisionare)
+
+Un video **Full HD** ($1920 \times 1080$) a **24 bpp** e **25 fps**, non compresso e senza audio, occupa **4,6656 GB**. Quanto dura?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-durata-video">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-durata-video">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>Calcolo il bitrate, cioè quanti bit servono per ogni secondo di video: pixel di un frame $\times$ bit per pixel $\times$ frame al secondo. Poi divido i bit totali del file per il bitrate e ottengo i secondi.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p>Bitrate: $\text{px/frame} \times \text{b/px} \times \text{frame/s} = \text{b/s}$.</p>
+        $$1920 \times 1080 \, \frac{\cancel{\text{px}}}{\cancel{\text{frame}}} \times 24 \, \frac{\text{b}}{\cancel{\text{px}}} \times 25 \, \frac{\cancel{\text{frame}}}{\text{s}} = 1.244.160.000 \, \frac{\text{b}}{\text{s}}$$
+        <p>Dimensione in bit: $4{,}6656 \times 10^9 \times 8 = 37.324.800.000 \, \text{b}$. Voglio dei $\text{s}$: $\text{b} \div \text{b/s} = \text{s}$.</p>
+        $$\frac{37.324.800.000 \, \cancel{\text{b}}}{1.244.160.000 \, \dfrac{\cancel{\text{b}}}{\text{s}}} = \mathbf{30 \, s}$$
+    </div>
+</div>
+
+---
+
+### Il rallentatore (da revisionare)
+
+Uno smartphone registra **2 secondi** di video al rallentatore in risoluzione **1280×720** a **24 bpp**. Il video non compresso occupa **1,327104 GB**.
+- **A)** A quanti fps ha registrato lo smartphone?
+- **B)** Se il video viene riprodotto a **30 fps**, quanto dura la riproduzione?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-slowmo">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-slowmo">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>A) Calcolo quanto pesa un frame (pixel $\times$ bit per pixel). Dividendo la dimensione totale per il peso di un frame trovo il numero di frame registrati; dividendo per la durata trovo i frame al secondo. B) Riproducendo gli stessi frame a una velocità più bassa, il video dura di più: la durata si trova dividendo il numero di frame per il nuovo frame rate.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p><strong>A)</strong> Peso di un frame: $\text{px/frame} \times \text{b/px} = \text{b/frame}$.</p>
+        $$1280 \times 720 \, \frac{\cancel{\text{px}}}{\text{frame}} \times 24 \, \frac{\text{b}}{\cancel{\text{px}}} = 22.118.400 \, \frac{\text{b}}{\text{frame}}$$
+        <p>Dimensione in bit: $1{,}327104 \times 10^9 \times 8 = 10.616.832.000 \, \text{b}$. Numero di frame: $\text{b} \div \text{b/frame} = \text{frame}$.</p>
+        $$\frac{10.616.832.000 \, \cancel{\text{b}}}{22.118.400 \, \dfrac{\cancel{\text{b}}}{\text{frame}}} = 480 \, \text{frame} \qquad \frac{480 \, \text{frame}}{2 \, \text{s}} = \mathbf{240 \, frame/s}$$
+        <p><strong>B)</strong> Voglio dei $\text{s}$: $\text{frame} \div \text{frame/s} = \text{s}$.</p>
+        $$\frac{480 \, \cancel{\text{frame}}}{30 \, \dfrac{\cancel{\text{frame}}}{\text{s}}} = \mathbf{16 \, s}$$
+        <p>I 2 secondi reali vengono mostrati in 16 secondi: il video è rallentato di 8 volte.</p>
+    </div>
+</div>
+
+---
+
+### Un film in streaming (da revisionare)
+
+Una piattaforma di streaming trasmette i film in 4K con un bitrate (già compresso) di **15 Mbps**. Quanto spazio occupa un film di **2 ore**, in GB e in GiB?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-streaming">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-streaming">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>Il bitrate indica quanti bit arrivano ogni secondo: moltiplicandolo per la durata in secondi ottengo i bit totali del film. Non serve conoscere risoluzione, colori o fps, perché sono già "contenuti" nel bitrate.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p>Voglio dei $\text{GB}$: $\text{b/s} \times \text{s} = \text{b}$, poi converto. Durata: $2 \times 3600 = 7200 \, \text{s}$; bitrate: $15 \, \text{Mb/s} = 15.000.000 \, \text{b/s}$.</p>
+        $$15.000.000 \, \frac{\text{b}}{\cancel{\text{s}}} \times 7200 \, \cancel{\text{s}} = 108.000.000.000 \, \text{b}$$
+        $$108 \times 10^9 \, \cancel{\text{b}} \times \frac{1 \, \cancel{\text{B}}}{8 \, \cancel{\text{b}}} \times \frac{1 \, \text{GB}}{10^9 \, \cancel{\text{B}}} = \mathbf{13{,}5 \, GB}$$
+        $$13.500.000.000 \, \cancel{\text{B}} \times \frac{1 \, \text{GiB}}{2^{30} \, \cancel{\text{B}}} \approx \mathbf{12{,}57 \, GiB}$$
+    </div>
+</div>
+
+---
+
+### Quanto comprime lo streaming? (da revisionare)
+
+Un video **Full HD** ($1920 \times 1080$) a **30 fps** e **24 bpp** viene trasmesso in streaming con un bitrate di **8 Mbps**. Di quante volte è stato compresso rispetto al video originale?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-fattore-video">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-fattore-video">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>Calcolo il bitrate del video non compresso (pixel $\times$ bit per pixel $\times$ fps) e lo confronto con quello dello streaming: il fattore di compressione è il rapporto tra i due.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p>Bitrate originale: $\text{px/frame} \times \text{b/px} \times \text{frame/s} = \text{b/s}$.</p>
+        $$1920 \times 1080 \, \frac{\cancel{\text{px}}}{\cancel{\text{frame}}} \times 24 \, \frac{\text{b}}{\cancel{\text{px}}} \times 30 \, \frac{\cancel{\text{frame}}}{\text{s}} = 1.492.992.000 \, \frac{\text{b}}{\text{s}}$$
+        <p>Il fattore è un numero puro: divido due bitrate (entrambi in $\text{b/s}$).</p>
+        $$\frac{1.492.992.000 \, \cancel{\text{b/s}}}{8.000.000 \, \cancel{\text{b/s}}} \approx \mathbf{187}$$
+        <p>Lo streaming trasmette circa 187 volte meno dati del video originale!</p>
+    </div>
+</div>
+
+---
+
+### Video con audio (da revisionare)
+
+Un video di **1 minuto** in risoluzione **1280×720**, **24 bpp** e **25 fps**, non compresso, è accompagnato da una traccia audio non compressa in qualità CD (**44,1 kHz**, **16 bit**, **stereo**).
+- **A)** Quanto occupa in totale il file, in GiB?
+- **B)** Quale percentuale dello spazio è occupata dall'audio?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-video-audio">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-video-audio">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>Video e audio si calcolano separatamente e poi si sommano. Per il video: pixel $\times$ bit per pixel $\times$ fps $\times$ durata. Per l'audio: frequenza $\times$ profondità $\times$ canali $\times$ durata. La percentuale è il rapporto tra audio e totale, moltiplicato per 100.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p><strong>A)</strong> Video: $\text{px/frame} \times \text{b/px} \times \text{frame/s} \times \text{s} = \text{b}$.</p>
+        $$1280 \times 720 \, \frac{\cancel{\text{px}}}{\cancel{\text{frame}}} \times 24 \, \frac{\text{b}}{\cancel{\text{px}}} \times 25 \, \frac{\cancel{\text{frame}}}{\cancel{\text{s}}} \times 60 \, \cancel{\text{s}} = 33.177.600.000 \, \text{b}$$
+        <p>Audio: $\text{c/s} \times \text{b/c} \times \text{canali} \times \text{s} = \text{b}$.</p>
+        $$44.100 \, \frac{\cancel{\text{c}}}{\cancel{\text{s}}} \times 16 \, \frac{\text{b}}{\cancel{\text{c}}} \times 2 \times 60 \, \cancel{\text{s}} = 84.672.000 \, \text{b}$$
+        <p>Totale: $33.177.600.000 + 84.672.000 = 33.262.272.000 \, \text{b}$.</p>
+        $$33.262.272.000 \, \cancel{\text{b}} \times \frac{1 \, \cancel{\text{B}}}{8 \, \cancel{\text{b}}} \times \frac{1 \, \text{GiB}}{2^{30} \, \cancel{\text{B}}} \approx \mathbf{3{,}87 \, GiB}$$
+        <p><strong>B)</strong> La percentuale è un numero puro: divido due grandezze in bit.</p>
+        $$\frac{84.672.000 \, \cancel{\text{b}}}{33.262.272.000 \, \cancel{\text{b}}} \times 100 \approx \mathbf{0{,}25\%}$$
+        <p>L'audio occupa una parte trascurabile del file: quasi tutto lo spazio è occupato dalle immagini.</p>
+    </div>
+</div>
+
+---
+
+### Quanto tempo per scaricare il film? (da revisionare)
+
+Vuoi scaricare il film dell'esercizio "Un film in streaming", che occupa **13,5 GB**. La tua connessione internet ha una velocità di **100 Mbps**. Quanto tempo serve per il download?
+
+<div class="soluzione-container">
+    <p class="soluzione-toggler" totoggle="#sol-nuovo-download">Visualizza la risoluzione</p>
+    <div class="soluzione" id="sol-nuovo-download">
+        <p><strong>1. Ragionamento sulle grandezze</strong></p>
+        <p>La velocità della connessione è anch'essa un bitrate: indica quanti bit si scaricano ogni secondo. Dividendo i bit totali del film per i bit scaricati in un secondo, ottengo i secondi necessari.</p>
+        <p><strong>2. Ragionamento con le unità di misura</strong></p>
+        <p>Voglio dei $\text{s}$: $\text{b} \div \text{b/s} = \text{s}$. Porto il film in bit:</p>
+        $$13{,}5 \, \cancel{\text{GB}} \times \frac{10^9 \, \cancel{\text{B}}}{1 \, \cancel{\text{GB}}} \times \frac{8 \, \text{b}}{1 \, \cancel{\text{B}}} = 108.000.000.000 \, \text{b}$$
+        $$\frac{108.000.000.000 \, \cancel{\text{b}}}{100.000.000 \, \dfrac{\cancel{\text{b}}}{\text{s}}} = 1080 \, \text{s} = \mathbf{18 \, min}$$
+        <p>Attenzione: la velocità delle connessioni è in <strong>bit</strong> al secondo (Mbps), non in byte!</p>
     </div>
 </div>
 
