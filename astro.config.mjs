@@ -84,7 +84,21 @@ export default defineConfig({
         },
         {
           label: 'Programmazione in C',
-          link: '/c/programmazione-in-c/'
+          items: [
+            { label: 'Programmazione in C', link: '/c/programmazione-in-c/' },
+            { label: 'Elementi di base', link: '/c/elementi-di-base/' },
+            { label: 'Strutture di controllo', link: '/c/strutture-di-controllo/' },
+            { label: 'Array', link: '/c/array/' },
+            { label: 'Matrici', link: '/c/matrici/' },
+            { label: 'Stringhe', link: '/c/stringhe/' },
+            { label: 'Funzioni', link: '/c/funzioni/' },
+            { label: 'Puntatori', link: '/c/puntatori/' },
+            { label: 'Struct', link: '/c/struct/' },
+            { label: 'File di testo', link: '/c/file/' },
+            { label: 'Allocazione dinamica della memoria', link: '/c/allocazione-dinamica/' },
+            { label: 'Strutture dati dinamiche', link: '/c/strutture-dati-dinamiche/' },
+            { label: 'Programmi su più file', link: '/c/programmi-su-piu-file/' }
+          ]
         },
         {
           label: 'Programmazione in Python',

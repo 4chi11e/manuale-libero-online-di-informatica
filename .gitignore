@@ -11,3 +11,5 @@ node_modules/
 .vscode/
 .DS_Store
 Thumbs.db
+# Materiale di lavoro locale (eserciziario ed esempi C)
+Materiale C/
