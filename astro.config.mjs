@@ -93,7 +93,8 @@ export default defineConfig({
             { label: 'Stringhe', link: '/c/stringhe/' },
             { label: 'Funzioni', link: '/c/funzioni/' },
             { label: 'Puntatori', link: '/c/puntatori/' },
-            { label: 'Struct', link: '/c/struct/' }
+            { label: 'Struct', link: '/c/struct/' },
+            { label: 'File di testo', link: '/c/file/' }
           ]
         },
         {
