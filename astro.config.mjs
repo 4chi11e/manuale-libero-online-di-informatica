@@ -89,7 +89,8 @@ export default defineConfig({
             { label: 'Elementi di base', link: '/c/elementi-di-base/' },
             { label: 'Strutture di controllo', link: '/c/strutture-di-controllo/' },
             { label: 'Array', link: '/c/array/' },
-            { label: 'Matrici', link: '/c/matrici/' }
+            { label: 'Matrici', link: '/c/matrici/' },
+            { label: 'Stringhe', link: '/c/stringhe/' }
           ]
         },
         {
