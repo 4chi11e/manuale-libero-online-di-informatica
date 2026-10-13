@@ -333,7 +333,7 @@ La dimensione di un'immagine **non compressa** si calcola così:
 $$\text{dimensione} = \text{larghezza} \times \text{altezza} \times \text{bit per pixel}$$
 
 :::note[Esempio: immagine Full HD a 24 bpp]
-$$1920 \times 1080 \times 24 \text{ bit} = 49.766.400 \text{ bit} = 6.220.800 \text{ byte} \approx 5.93 \text{ MB}$$
+$$1920 \times 1080 \times 24 \text{ bit} = 49.766.400 \text{ bit} = 6.220.800 \text{ byte} \approx 6{,}22 \text{ MB} \; (\approx 5{,}93 \text{ MiB})$$
 
 Un singolo fotogramma di un film in alta definizione pesa quasi 6 MB se non viene compresso!
 :::
@@ -360,9 +360,9 @@ Il suono è un'onda continua nel tempo. Per digitalizzarlo, si "fotografa" il li
 $$\text{dimensione} = \text{frequenza} \times \text{bit depth} \times \text{canali} \times \text{durata (secondi)}$$
 
 :::note[Esempio: 1 minuto di CD Audio]
-$$44.100 \times 16 \times 2 \times 60 = 84.672.000 \text{ bit} = 10.584.000 \text{ byte} \approx 10.1 \text{ MB}$$
+$$44.100 \times 16 \times 2 \times 60 = 84.672.000 \text{ bit} = 10.584.000 \text{ byte} \approx 10{,}58 \text{ MB} \; (\approx 10{,}09 \text{ MiB})$$
 
-Un CD può contenere circa 650 MB di dati, corrispondenti a circa **65 minuti** di musica in qualità CD non compressa.
+Un CD può contenere circa 650 MB di dati, corrispondenti a circa **un'ora** di musica in qualità CD non compressa.
 :::
 
 ---
@@ -382,9 +382,9 @@ $$\text{dimensione totale} = \text{dimensione video} + \text{dimensione audio}$$
 
 :::note[Esempio: 10 secondi di video Full HD a 24 fps e 24 bpp]
 Dimensione video:
-$$1920 \times 1080 \times 24 \text{ bit} \times 24 \text{ fps} \times 10 \text{ s} = 1.194.393.600 \text{ bit} \approx 143 \text{ MB}$$
+$$1920 \times 1080 \times 24 \text{ bit} \times 24 \text{ fps} \times 10 \text{ s} = 1.194.393.600 \text{ bit} = 149.299.200 \text{ byte} \approx 149 \text{ MB}$$
 
-Solo 10 secondi di video non compresso pesano più di 140 MB! Ecco perché la **compressione** (H.264, H.265, AV1…) è indispensabile: riduce le dimensioni di 100–1000 volte.
+Solo 10 secondi di video non compresso pesano quasi 150 MB! Ecco perché la **compressione** (H.264, H.265, AV1…) è indispensabile: riduce le dimensioni di 100–1000 volte.
 :::
 
 ---
