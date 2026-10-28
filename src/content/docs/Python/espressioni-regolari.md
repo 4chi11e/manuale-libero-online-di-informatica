@@ -149,9 +149,14 @@ Una regex è composta da caratteri normali (che cercano se stessi) e da **metaca
 | `\` | **Escape**: toglie il significato speciale | `r"\."` | Cerca un vero punto fermo `.` nel testo |
 
 ```python
-# Cercare parole che finiscono con 'are'
+# Senza $: trova tutte le parole che contengono 'are'
+print(re.findall(r"\w+are", "andare a ballare"))   # ['andare', 'ballare']
+
+# Con $: trova solo la parola che chiude la stringa
 print(re.findall(r"\w+are$", "andare a ballare"))  # ['ballare']
 ```
+
+Attenzione: `$` indica la fine dell'**intera stringa**, non la fine di ogni parola. Per questo nel secondo esempio `"andare"` viene ignorata.
 
 ---
 
