@@ -1,0 +1,70 @@
+---
+title: Eserciziario SQL
+description: Raccolta di esercizi di interrogazione SQL su due database - un catalogo di film e un sistema di voli aerei
+---
+import DocStats from '../../../components/DocStats.astro';
+
+## Eserciziario
+
+L'eserciziario raccoglie query di tipo `SELECT` su due database diversi, con le soluzioni. È disponibile per la consultazione e il download tramite Google Drive:
+
+{/* PDF: manca il link di condivisione
+* 📄 **[Eserciziario SQL (versione PDF)](LINK-PDF)**  
+  *Consigliato per la consultazione online e da dispositivi mobili.* È il file impaginato in formato PDF, più comodo da visualizzare o stampare direttamente dal browser (potrebbe non essere sempre aggiornato).
+*/}
+
+* 📝 **[Eserciziario SQL (versione originale DOCX)](https://docs.google.com/document/d/1309ylsHdCVz7_QuTfE3E67hzzbX4EeAl/edit?usp=sharing&ouid=103900457504141139887&rtpof=true&sd=true)**  
+  *Documento di lavoro originale.* È sempre aggiornato all'ultima versione, con ogni modifica ed esercizio aggiunto.  
+  *(Nota: per la migliore resa della formattazione si consiglia di scaricare il file dal menu File > Scarica e aprirlo con Microsoft Word).*
+
+<DocStats type="sql" />
+
+## Come usare l'eserciziario
+
+Gli esercizi sono divisi in due parti, una per database, e all'interno di ciascuna sono in ordine di difficoltà crescente: si parte dalle query su una sola tabella, si passa alle JOIN, poi ai conteggi e ai raggruppamenti, fino alle sottoquery. Conviene affrontarli nell'ordine, dopo aver studiato le pagine corrispondenti di questa sezione:
+
+1. [Interrogazioni di base](../select/)
+2. [JOIN](../join/)
+3. [Funzioni di aggregazione e raggruppamenti](../raggruppamenti/)
+4. [Sottoquery](../sottoquery/), con la tabella finale [*dalla richiesta alla query*](../sottoquery/#riepilogo-dalla-richiesta-alla-query)
+
+Per ogni esercizio conviene **scrivere la query da soli e provarla sul database** prima di guardare la soluzione. Spesso esistono più soluzioni corrette (ad esempio con una JOIN o con una sottoquery): se il risultato è lo stesso su tutti i dati possibili, vanno bene entrambe.
+
+## I database degli esercizi
+
+### Database Film
+
+È il database usato anche in tutti gli esempi di questa sezione: un catalogo di film con attori, sale e proiezioni.
+
+* **ATTORE** (<u>codattore</u>, nome, annonascita, nazionalita)
+* **FILM** (<u>codfilm</u>, titolo, annoproduzione, nazionalita, regista, genere, durata)
+* **RECITA** (<u>codattore\*</u>, <u>codfilm\*</u>)
+* **SALA** (<u>codsala</u>, posti, nome, citta)
+* **PROIEZIONE** (<u>codproiezione</u>, codfilm\*, codsala\*, incasso, dataproiezione)
+
+### Database Voli aerei
+
+Un database più grande e complesso, che gestisce voli, aerei, compagnie, piloti e passeggeri.
+
+* **CITTA** (<u>codcitta</u>, nome, nazione, abitanti, abitanti_agglomerato)
+* **AEROPORTO** (<u>codaeroporto</u>, localita, nome_commerciale, codcitta\*)
+* **COMPAGNIA** (<u>codcompagnia</u>, nome, nazione)
+* **MODELLO** (<u>codmodello</u>, marca, nome, nposti, lunghezza, apertura_alare, peso_vuoto, peso_massimo)
+* **AEREO** (<u>codaereo</u>, codmodello\*, codcompagnia\*, anno_costruzione, anno_acquisto)
+* **PILOTA** (<u>codpilota</u>, cognome, nome, nazionalita, stipendio)
+* **VOLO** (<u>codvolo</u>, aeroportopartenza\*, datapartenza, orapartenza, aeroportoarrivo\*, dataarrivo, oraarrivo, aereo\*, comandante\*)
+* **COPILOTA** (<u>codvolo\*</u>, <u>codpilota\*</u>)
+* **CLIENTE** (<u>codcliente</u>, cognome, nome, data_nascita)
+* **VOLA** (<u>codcliente\*</u>, <u>codvolo\*</u>)
+* **ACCOMPAGNA** (<u>accompagnato\*</u>, <u>accompagnatore\*</u>, <u>volo\*</u>)
+
+Alcune particolarità a cui fare attenzione:
+
+* in **VOLO** ci sono **due** chiavi esterne verso AEROPORTO (partenza e arrivo): per conoscere sia la città di partenza sia quella di arrivo di un volo bisogna collegare **due volte** le tabelle AEROPORTO e CITTA, con alias diversi ([la stessa tabella usata due volte](../join/#la-stessa-tabella-usata-due-volte));
+* il **comandante** di un volo è in VOLO, mentre i **copiloti** sono nella tabella COPILOTA: "i piloti di un volo" sono entrambi;
+* in **ACCOMPAGNA** sia l'accompagnato sia l'accompagnatore sono clienti: anche qui la tabella CLIENTE va usata due volte;
+* molte richieste parlano di "oggi" e "ieri", di età e di minorenni: servono le [funzioni sulle date](../select/#lavorare-con-le-date).
+
+## Altre risorse
+
+Per un riferimento rapido su tutti i comandi del linguaggio, con esempi provabili direttamente nel browser, è molto utile il sito [W3Schools - SQL Tutorial](https://www.w3schools.com/sql/) (in inglese).

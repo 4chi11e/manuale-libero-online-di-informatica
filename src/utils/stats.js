@@ -15,6 +15,7 @@ const DEFAULT_STATS = {
     c: { words: 70762, chars: 340779, images: 12, pages: 303, updatedAt: todayFormatted },
     python: { words: 60074, chars: 303396, images: 22, pages: 180, updatedAt: todayFormatted },
     db: { words: 8500, chars: 45000, images: 10, pages: 25, updatedAt: todayFormatted },
+    sql: { words: 6041, chars: 33476, images: 2, pages: 27, updatedAt: todayFormatted },
     lastUpdated: todayFormatted
 };
 
@@ -139,12 +140,14 @@ export async function getAllStats() {
     const cStats = await fetchDocxStats('16uNuwwTZimF5VL0Mq-jymDLsTfTziG_q', cache.c);
     const pythonStats = await fetchDocxStats('1nhYKZMu_DmVJPh4SHuVg-AZPkNtWAQki', cache.python);
     const dbStats = await fetchDocxStats('10j52Eqv2q17spD2SQFMDKRAxQi5uN-F_', cache.db);
+    const sqlStats = await fetchDocxStats('1309ylsHdCVz7_QuTfE3E67hzzbX4EeAl', cache.sql || DEFAULT_STATS.sql);
 
     const result = {
         site,
         c: cStats,
         python: pythonStats,
         db: dbStats,
+        sql: sqlStats,
         lastUpdated: todayFormatted
     };
 

@@ -86,3 +86,5 @@ Ora che abbiamo chiarito il "vocabolario" e i concetti fondamentali dei database
 2.  **[Progettazione Logica](/database/progettazione-logica/)**: Scopriremo come convertire lo schema E/R nelle vere e proprie tabelle del Modello Relazionale.
 3.  **[Normalizzazione](/database/normalizzazione/)**: Vedremo le regole (fino alla Terza Forma Normale) per analizzare e ottimizzare un database finito.
 4.  **[Creazione e Utilizzo con MySQL](/database/mysql/)**: Infine, metteremo le mani in pasta usando XAMPP e il linguaggio SQL per creare il database, inserire i dati e interrogarlo.
+
+Il linguaggio SQL, con cui si interrogano i database, ha una sezione dedicata: **[Linguaggio SQL](../../sql/sql/)**.

@@ -127,6 +127,18 @@ export default defineConfig({
           ]
         },
         {
+          label: 'Linguaggio SQL',
+          items: [
+            { label: 'Il linguaggio SQL', link: '/sql/sql/' },
+            { label: 'Interrogazioni di base', link: '/sql/select/' },
+            { label: 'JOIN', link: '/sql/join/' },
+            { label: 'Aggregazioni e raggruppamenti', link: '/sql/raggruppamenti/' },
+            { label: 'Sottoquery', link: '/sql/sottoquery/' },
+            { label: 'Creare tabelle e modificare i dati', link: '/sql/modifica-dati/' },
+            { label: 'Eserciziario SQL', link: '/sql/esercizi/' }
+          ]
+        },
+        {
           label: 'Complessità computazionale',
           link: '/complessita/'
         },
